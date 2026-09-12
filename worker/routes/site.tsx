@@ -1,24 +1,30 @@
 import { Hono } from "hono";
 import { and, desc, eq, inArray, isNotNull, isNull, sql } from "drizzle-orm";
+import { zValidator } from "@hono/zod-validator";
+import { z } from "zod";
 
 import type { AppEnv } from "@server/types";
 import { release, releaseAsset } from "@server/schema/release.schema";
 import type { Platform, ReleaseWithAssets } from "@server/schema/release.schema";
+import { issue, issueFormSchema } from "@server/schema/issue.schema";
 import { PLATFORM_INFO } from "@server/content/site";
 
 import { HomePage } from "@views/pages/Home";
 import { FeaturesPage } from "@views/pages/Features";
 import { PricingPage } from "@views/pages/Pricing";
-import { DocsPage } from "@views/pages/Docs";
+import { SecurityPage } from "@views/pages/Security";
 import { DownloadsPage } from "@views/pages/Downloads";
 import { ContactPage } from "@views/pages/Contact";
+import { ReportPage, ReportForm, ReportSuccess } from "@views/pages/Report";
 
 /**
  * Every page a signed-out visitor can reach.
  *
- * No guard on this router — that is the point of it. It is also entirely
- * read-only: contact is `mailto:`, so there is no public write surface on this
- * site at all, and nothing here needs a rate limit or a validator.
+ * No guard on this router — that is the point of it. It accepts exactly one
+ * write, the bug report, which exists because the source repositories are
+ * private and there is therefore no public tracker to send anyone to. That one
+ * endpoint is rate-limited at the edge and honeypotted; everything else here
+ * only reads.
  */
 export const siteRoute = new Hono<AppEnv>();
 
@@ -32,7 +38,7 @@ siteRoute.get("/", (c) =>
     // site name alone rather than a "Home ·" prefix.
     title: undefined,
     description:
-      "One catalogue of the things your team launches. A free, offline-first desktop client, and a self-hosted API for when the work has to be shared.",
+      "Every tool your team uses, one keystroke away. Gather the scripts, links and commands you repeat into one place — free forever, and shareable when you want it to be.",
     type: "website",
   }),
 );
@@ -41,7 +47,7 @@ siteRoute.get("/features", (c) =>
   c.render(<FeaturesPage />, {
     title: "Features",
     description:
-      "Items, actions, offline editing, three-way merge, revision history and plugins — what runs on your machine and what needs a deployment.",
+      "One click instead of eleven steps. What the free app does, what a team adds, and the twelve things a single item can do.",
   }),
 );
 
@@ -49,15 +55,15 @@ siteRoute.get("/pricing", (c) =>
   c.render(<PricingPage app={c.var.app} />, {
     title: "Pricing",
     description:
-      "The Zipr client is free permanently. A self-hosted API licence is $6 per person per month, and this page says what the infrastructure costs too.",
+      "Zipr is free forever for one person. Sharing with a team is $6 per person per month, on servers you control. Full comparison and no surprises.",
   }),
 );
 
-siteRoute.get("/docs", (c) =>
-  c.render(<DocsPage />, {
-    title: "How it works",
+siteRoute.get("/security", (c) =>
+  c.render(<SecurityPage />, {
+    title: "Security",
     description:
-      "Zipr's architecture, the two supported deployment shapes, optional capabilities, and what to know before writing your own client.",
+      "Where your data lives, what leaves your network, and why Zipr never runs your commands on a server. The short answers a security review needs.",
   }),
 );
 
@@ -215,6 +221,75 @@ siteRoute.get("/contact", (c) =>
   c.render(<ContactPage topic={c.req.query("topic")} />, {
     title: "Contact",
     description:
-      "Ask about a Zipr licence, get help with a self-hosted deployment, or report a security issue.",
+      "Ask about a licence, get help with a deployment, or report something privately. Every message reaches a person.",
   }),
+);
+
+// ==========================================
+// BUG REPORTS
+// ==========================================
+
+siteRoute.get("/report", (c) =>
+  c.render(<ReportPage product={c.req.query("product")} />, {
+    title: "Report a bug",
+    description:
+      "Tell us what broke in the Zipr desktop app, a deployment, or this website. No account needed.",
+  }),
+);
+
+siteRoute.post(
+  "/report",
+  /**
+   * The one public write on the site, so it gets the edge throttle the auth
+   * API uses. Skipped when the binding is absent so `npm run dev` and the
+   * tests still work — the binding only exists where Wrangler provides one.
+   */
+  async (c, next) => {
+    const limiter = c.env.RATE_LIMITER;
+    if (!limiter) return next();
+
+    const ip = c.req.header("cf-connecting-ip") || c.req.header("x-forwarded-for") || "unknown";
+    const { success } = await limiter.limit({ key: `report:${ip}` });
+
+    if (!success) {
+      return c.html(
+        <p role="alert" class="text-sm font-medium text-destructive">
+          That is a lot of reports at once. Give it a minute and try again.
+        </p>,
+        429,
+      );
+    }
+
+    await next();
+  },
+  zValidator("form", issueFormSchema, (result, c) => {
+    // Hand back what they typed. Someone who has just described a bug in five
+    // sentences does not write it a second time.
+    if (!result.success) {
+      const values = result.data as unknown as Record<string, string>;
+      return c.html(
+        <ReportForm values={values} errors={z.flattenError(result.error).fieldErrors} />,
+        422,
+      );
+    }
+  }),
+  async (c) => {
+    const data = c.req.valid("form");
+
+    // Honeypot. Answer as though it worked — telling a bot it was caught only
+    // teaches whoever wrote it which field to skip next time.
+    if (data.website) return c.html(<ReportSuccess />);
+
+    await c.var.db.insert(issue).values({
+      product: data.product,
+      summary: data.summary,
+      detail: data.detail,
+      email: data.email,
+      version: data.version || null,
+      platform: data.platform || null,
+      updatedAt: new Date().toISOString(),
+    });
+
+    return c.html(<ReportSuccess />);
+  },
 );

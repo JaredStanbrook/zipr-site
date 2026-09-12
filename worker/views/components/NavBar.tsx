@@ -18,6 +18,7 @@ const menuConfig: Record<string, Array<{ to: string; name: string }>> = {
   admin: [
     ...PUBLIC_NAV,
     { to: "/admin/releases", name: "Releases" },
+    { to: "/admin/issues", name: "Bug reports" },
     { to: "/admin/logs", name: "System Logs" },
   ],
 };

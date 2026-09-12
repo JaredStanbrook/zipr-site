@@ -11,6 +11,7 @@ import { webAuth } from "./routes/web/auth";
 import { logsRoute } from "./routes/admin/logs";
 import { releasesRoute } from "./routes/admin/releases.tsx";
 import { adminHomeRoute } from "./routes/admin/home.tsx";
+import { issuesRoute } from "./routes/admin/issues.tsx";
 import { siteRoute } from "./routes/site.tsx";
 import { seoRoute } from "./routes/seo";
 import devRouter from "./routes/dev.tsx";
@@ -30,6 +31,7 @@ admin.use("*", requireRole("admin"));
 admin.route("/", adminHomeRoute);
 admin.route("/logs", logsRoute);
 admin.route("/releases", releasesRoute);
+admin.route("/issues", issuesRoute);
 
 // ==========================================
 // 2. MAIN APP

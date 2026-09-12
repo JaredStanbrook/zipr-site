@@ -9,6 +9,7 @@ import { drizzle } from "drizzle-orm/d1";
 import { users, credentials, verificationCodes, authLogs } from "../schema/auth.schema";
 import { userRoles, rolePermissions, userPermissions } from "../schema/roles.schema";
 import { release, releaseAsset } from "../schema/release.schema";
+import { issue } from "../schema/issue.schema";
 import { requireRole } from "../middleware/guard.middleware";
 import { AppEnv } from "@server/types";
 
@@ -50,6 +51,7 @@ devRouter.get("/", async (c) => {
     // Feature tables — add yours here.
     fetchTableData(db, release, "release"),
     fetchTableData(db, releaseAsset, "release_asset"),
+    fetchTableData(db, issue, "issue"),
   ]);
 
   // Build HTML response
@@ -353,6 +355,7 @@ devRouter.get("/json", async (c) => {
     fetchTableData(db, userPermissions, "user_permissions"),
     fetchTableData(db, release, "release"),
     fetchTableData(db, releaseAsset, "release_asset"),
+    fetchTableData(db, issue, "issue"),
   ]);
 
   return c.json({

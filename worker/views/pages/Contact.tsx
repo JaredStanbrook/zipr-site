@@ -1,6 +1,6 @@
 import type { FC } from "hono/jsx";
 
-import { CONTACT, REPOS } from "@server/content/site";
+import { CONTACT } from "@server/content/site";
 import {
   Page,
   Section,
@@ -15,16 +15,16 @@ import {
 /**
  * Contact, by email.
  *
- * There is no form. A form would need somewhere to put what it collected, a
- * screen for somebody to read it on, and a reason to trust that anyone
- * actually does — and a mail client already solves all three. What it costs is
- * that we cannot prompt for team size or topic, which is why each link below
- * arrives with a subject line already written, and two of them with the
- * questions we would have asked anyway.
+ * No form here — a mail client already solves this, and a form would need
+ * somewhere to put what it collected plus a reason to believe anyone reads it.
+ * What that costs is the chance to prompt for team size or topic, which is why
+ * each link arrives with a subject line already written and two of them with
+ * the questions we would have asked anyway.
  *
- * All four go to the same address. The routing is the subject line, which is
+ * All four reach the same address. The routing is the subject line, which is
  * honest about there being one inbox rather than implying a support desk with
- * departments in it.
+ * departments in it. Bug reports are the exception and have their own form at
+ * /report, because those need structure and the repositories are private.
  */
 
 /**
@@ -64,13 +64,12 @@ const ROUTES: Route[] = [
     id: "licence",
     icon: "receipt-text",
     title: "Licensing and quotes",
-    blurb:
-      "Trials, seat counts, invoicing, and anything about what a deployment would actually cost you.",
+    blurb: "Trials, team size, invoicing, and what it would actually come to for you.",
     subject: "Zipr licence enquiry",
     body: [
       "Roughly how many people:",
-      "Where you would run it (your own servers, a cloud provider, air-gapped):",
-      "What you are hoping to share as a catalogue:",
+      "Where you'd run it (your own servers, a cloud provider, air-gapped):",
+      "What you're hoping to share:",
       "",
       "",
     ].join("\n"),
@@ -79,23 +78,21 @@ const ROUTES: Route[] = [
   {
     id: "self-hosting",
     icon: "server",
-    title: "Running the deployment",
-    blurb:
-      "Questions about standing the API up, the two identity options, or what the infrastructure needs to be.",
+    title: "Setting it up",
+    blurb: "Questions about putting Zipr on your own servers, before you commit to anything.",
     subject: "Zipr self-hosting question",
     cta: "Ask about self-hosting",
   },
   {
     id: "support",
     icon: "life-buoy",
-    title: "Something is broken",
-    blurb:
-      "For licensed teams: deployment trouble, bugs, and the questions the documentation does not answer.",
+    title: "Help, for teams",
+    blurb: "You're a customer and something isn't behaving. Jump the queue here.",
     subject: "Zipr support request",
     body: [
       "What you were doing:",
       "What happened instead:",
-      "Client version, and the API version if you have one:",
+      "Version, if you know it:",
       "",
       "",
     ].join("\n"),
@@ -105,8 +102,7 @@ const ROUTES: Route[] = [
     id: "security",
     icon: "shield-check",
     title: "A security report",
-    blurb:
-      "Vulnerability reports. Please mail these rather than opening a public issue, and give us a way to reach you.",
+    blurb: "Found a vulnerability? Tell us privately and we'll keep you posted until it's fixed.",
     subject: "Zipr security report",
     cta: "Report privately",
   },
@@ -151,8 +147,8 @@ export const ContactPage: FC<{ topic?: string }> = ({ topic }) => (
           as="h1"
           align="center"
           eyebrow="Contact"
-          title="Tell us what you need"
-          lede="Whether it is a licence, a deployment that will not start, or a question about whether Zipr suits how your team works — pick the one that fits and it opens a message with the subject, and the questions we would have asked, already in it."
+          title="Talk to a person"
+          lede="Pick whichever fits. Each one opens a message with the subject already written — and where it helps, the questions we'd have asked anyway."
         />
 
         <div class="grid gap-5 sm:grid-cols-2">
@@ -162,54 +158,35 @@ export const ContactPage: FC<{ topic?: string }> = ({ topic }) => (
         </div>
 
         <p class="mx-auto mt-8 max-w-2xl text-center text-sm text-muted-foreground text-pretty">
-          All four go to{" "}
+          They all reach{" "}
           <a
             href={`mailto:${CONTACT.address}`}
             class="font-mono font-medium text-primary underline underline-offset-4 wrap-anywhere"
           >
             {CONTACT.address}
           </a>
-          , answered from a real inbox rather than an autoresponder — so give it a working day.
-          There is no form here and no list to be added to: your address is used to reply to you and
-          for nothing else.
+          — a real inbox, not an autoresponder, so give us a working day. No form, no list, no
+          follow-up sequence. We use your address to answer you.
         </p>
       </Container>
     </Section>
 
-    {/* ================= ISSUES ================= */}
-    {REPOS.showRepoLinks ? (
-      <Section tone="muted">
-        <Container size="prose">
-          <Card class="p-7 text-center">
-            <IconTile icon="bug" tone="brand" size="lg" class="mx-auto" />
-            <h2 class="mt-4 text-xl font-bold">Found a bug?</h2>
-            <p class="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted-foreground text-pretty">
-              Issues go in the repository they belong to, so they end up next to the code that has
-              to change. A security problem is the exception — mail that one instead.
-            </p>
-            <div class="mt-6 flex flex-wrap items-center justify-center gap-3">
-              <LinkButton
-                href={`${REPOS.client}/issues`}
-                variant="outline"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                Client issues
-                <i data-lucide="external-link" class="h-4 w-4" aria-hidden="true"></i>
-              </LinkButton>
-              <LinkButton
-                href={`${REPOS.api}/issues`}
-                variant="outline"
-                rel="noopener noreferrer"
-                target="_blank"
-              >
-                API issues
-                <i data-lucide="external-link" class="h-4 w-4" aria-hidden="true"></i>
-              </LinkButton>
-            </div>
-          </Card>
-        </Container>
-      </Section>
-    ) : null}
+    {/* ================= BUGS ================= */}
+    <Section tone="muted">
+      <Container size="prose">
+        <Card class="p-7 text-center">
+          <IconTile icon="bug" tone="brand" size="lg" class="mx-auto" />
+          <h2 class="mt-4 text-xl font-bold">Something's broken?</h2>
+          <p class="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted-foreground text-pretty">
+            There's a form for that, and it takes about thirty seconds. No account, no tracker to
+            sign up for.
+          </p>
+          <LinkButton href="/report" class="mt-6">
+            <i data-lucide="bug" class="h-4 w-4" aria-hidden="true"></i>
+            Report a bug
+          </LinkButton>
+        </Card>
+      </Container>
+    </Section>
   </Page>
 );

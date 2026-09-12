@@ -1,6 +1,6 @@
 import type { FC } from "hono/jsx";
 
-import { PILLARS, JOURNEY, ACTION_TYPES } from "@server/content/features";
+import { PILLARS, JOURNEY, ACTION_TYPES, TEAM_UNLOCKS } from "@server/content/features";
 import {
   Page,
   Section,
@@ -12,31 +12,31 @@ import {
   Badge,
   CtaBand,
   Eyebrow,
+  CheckItem,
 } from "@views/components/Ui";
 
 /**
- * The home page makes one argument, in this order:
+ * The home page has about eight seconds. In order:
  *
- *   1. What Zipr is.
- *   2. That the client is free and complete on its own — said early, because
- *      it is the unusual part and burying it reads as a catch.
- *   3. Where the money is, and why it is there rather than somewhere else.
- *   4. What it does, in detail, for the reader still here.
+ *   1. What it is, in one line anyone can picture.
+ *   2. That it is free — said immediately, because it is the surprising part.
+ *   3. What it feels like to use.
+ *   4. Where the money is, framed as a promise rather than a catch.
  *
- * The diagram earns its place by carrying the one claim the prose cannot make
- * as quickly: which side of the line executes anything.
+ * What it deliberately does not do is explain how any of it works. That was
+ * the old version's failing: it read like a design document, which flatters
+ * the engineer who wrote it and does nothing for the person deciding whether
+ * to spend four minutes installing something.
  */
 
 const HeroPanel: FC = () => (
   <div class="relative">
     <Card class="overflow-hidden p-0">
-      {/* A window chrome, so the panel below reads as the application rather
-          than as decoration. */}
       <div class="flex items-center gap-2 border-b border-border bg-muted/60 px-4 py-3">
         <span class="h-2.5 w-2.5 rounded-full bg-destructive/60"></span>
         <span class="h-2.5 w-2.5 rounded-full bg-warning/60"></span>
         <span class="h-2.5 w-2.5 rounded-full bg-success/60"></span>
-        <span class="ml-2 font-mono text-xs text-muted-foreground">Local workspace</span>
+        <span class="ml-2 text-xs font-medium text-muted-foreground">Platform team</span>
         <Badge tone="brand" class="ml-auto">
           <i data-lucide="hard-drive" class="h-3 w-3" aria-hidden="true"></i>
           On this machine
@@ -45,28 +45,16 @@ const HeroPanel: FC = () => (
 
       <div class="divide-y divide-border">
         {[
-          { name: "Open the on-call runbook", steps: "open_url", icon: "link" },
-          { name: "Start the staging stack", steps: "run_command → open_url", icon: "terminal" },
-          {
-            name: "Rotate my API token",
-            steps: "request_auth → run_exe → copy_to_clipboard",
-            icon: "key-round",
-          },
-          {
-            name: "Reset a customer sandbox",
-            steps: "confirm_prompt → run_command",
-            icon: "rotate-ccw",
-          },
+          { name: "Open the on-call runbook", steps: "1 step", icon: "link" },
+          { name: "Spin up a staging stack", steps: "3 steps", icon: "terminal" },
+          { name: "Rotate my API token", steps: "3 steps, one confirmation", icon: "key-round" },
+          { name: "Reset a customer sandbox", steps: "2 steps, asks first", icon: "rotate-ccw" },
         ].map((item) => (
           <div class="flex items-center gap-4 px-4 py-3.5">
-            <span class="flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--radius-sm)] bg-primary-subtle text-primary-subtle-foreground">
-              <i data-lucide={item.icon} class="h-4 w-4" aria-hidden="true"></i>
-            </span>
+            <IconTile icon={item.icon} class="h-9 w-9" />
             <span class="min-w-0 flex-1">
               <span class="block truncate text-sm font-semibold">{item.name}</span>
-              <span class="block truncate font-mono text-xs text-muted-foreground">
-                {item.steps}
-              </span>
+              <span class="block truncate text-xs text-muted-foreground">{item.steps}</span>
             </span>
             <i
               data-lucide="play"
@@ -78,53 +66,7 @@ const HeroPanel: FC = () => (
       </div>
     </Card>
 
-    <p class="mt-3 text-center text-xs text-muted-foreground">
-      An illustration of the client, not a screenshot.
-    </p>
-  </div>
-);
-
-/** Which side of the line does what. The one claim worth drawing. */
-const BoundaryDiagram: FC = () => (
-  <div class="grid gap-4 lg:grid-cols-[1fr_auto_1fr] lg:items-stretch lg:gap-6">
-    <Card class="p-6">
-      <Badge tone="primary">
-        <i data-lucide="laptop" class="h-3 w-3" aria-hidden="true"></i>
-        Your machine
-      </Badge>
-      <h3 class="mt-4 text-lg font-bold">The client</h3>
-      <ul class="mt-3 space-y-2 text-sm text-muted-foreground">
-        <li>Holds a local workspace no server owns</li>
-        <li>Caches everything the deployment has</li>
-        <li>Chooses the variant for this operating system</li>
-        <li>Resolves variables and prompts</li>
-        <li class="font-semibold text-foreground">Executes every action</li>
-      </ul>
-    </Card>
-
-    <div
-      class="flex items-center justify-center gap-2 text-muted-foreground lg:flex-col"
-      aria-hidden="true"
-    >
-      <i data-lucide="arrow-left-right" class="h-5 w-5 lg:hidden"></i>
-      <i data-lucide="arrow-up-down" class="hidden h-5 w-5 lg:block"></i>
-      <span class="font-mono text-xs whitespace-nowrap">sync</span>
-    </div>
-
-    <Card class="p-6">
-      <Badge tone="brand">
-        <i data-lucide="server" class="h-3 w-3" aria-hidden="true"></i>
-        Your server
-      </Badge>
-      <h3 class="mt-4 text-lg font-bold">The API</h3>
-      <ul class="mt-3 space-y-2 text-sm text-muted-foreground">
-        <li>Stores items, catalogues and workspaces</li>
-        <li>Versions every write and keeps the history</li>
-        <li>Merges concurrent edits</li>
-        <li>Decides who may see what</li>
-        <li class="font-semibold text-foreground">Executes nothing, ever</li>
-      </ul>
-    </Card>
+    <p class="mt-3 text-center text-xs text-muted-foreground">An illustration, not a screenshot.</p>
   </div>
 );
 
@@ -137,32 +79,30 @@ export const HomePage: FC = () => (
           <div>
             <Badge tone="success" class="mb-6">
               <i data-lucide="circle-check" class="h-3 w-3" aria-hidden="true"></i>
-              Free for one person, permanently
+              Free forever, no account
             </Badge>
 
             <h1 class="text-4xl font-extrabold tracking-tight text-balance sm:text-5xl lg:text-6xl">
-              One catalogue of the things your team launches.
+              Every tool your team uses. One keystroke away.
             </h1>
 
             <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-              Zipr turns the scripts, links, commands and half-remembered sequences your team relies
-              on into items anybody can run — kept in one place, versioned, and executed entirely on
-              the machine that clicked.
+              The scripts, links and half-remembered command sequences your team runs on — gathered
+              into one place, ready to launch, and instantly shareable when you want them to be.
             </p>
 
             <div class="mt-8 flex flex-wrap gap-3">
               <LinkButton href="/downloads" size="lg">
                 <i data-lucide="download" class="h-4 w-4" aria-hidden="true"></i>
-                Download the client
+                Download for free
               </LinkButton>
               <LinkButton href="/pricing" variant="outline" size="lg">
-                What it costs
+                See pricing
               </LinkButton>
             </div>
 
             <p class="mt-5 text-sm text-muted-foreground">
-              No account, no card, no network. The client is complete on its own — you only pay when
-              you want other people in it.
+              Windows and macOS. Takes a minute. Nothing to sign up for.
             </p>
           </div>
 
@@ -171,63 +111,14 @@ export const HomePage: FC = () => (
       </Container>
     </Section>
 
-    {/* ================= THE COMMERCIAL SHAPE ================= */}
-    <Section tone="muted">
-      <Container>
-        <SectionHeading
-          eyebrow="How it works commercially"
-          title="Free alone. Paid together."
-          lede="Most tools give you a crippled free tier and hope you outgrow it. Zipr's free client is the whole client — what costs money is the server that lets other people see your work, because that is the part that only matters once there are other people."
-        />
-
-        <ol class="grid gap-5 md:grid-cols-3">
-          {JOURNEY.map((step) => (
-            <li>
-              <Card class="flex h-full flex-col p-6">
-                <div class="flex items-center justify-between">
-                  <span class="font-mono text-sm font-bold text-muted-foreground tabular">
-                    {step.step}
-                  </span>
-                  <Badge tone={step.cost === "Free" ? "success" : "primary"}>{step.cost}</Badge>
-                </div>
-                <h3 class="mt-4 text-lg font-bold text-balance">{step.title}</h3>
-                <p class="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
-                  {step.body}
-                </p>
-              </Card>
-            </li>
-          ))}
-        </ol>
-
-        <p class="mt-8 text-center text-sm text-muted-foreground">
-          Step three costs{" "}
-          <a href="/pricing" class="font-semibold text-primary underline underline-offset-4">
-            $6 per person per month
-          </a>
-          , on a server you run. Steps one and two never expire.
-        </p>
-      </Container>
-    </Section>
-
-    {/* ================= THE BOUNDARY ================= */}
-    <Section>
-      <Container>
-        <SectionHeading
-          eyebrow="The line that shapes everything"
-          title="The server stores your actions. It never runs them."
-          lede="No outbound calls on your behalf, no interpreting a command, no substituting a value into a parameter. A reviewer asking what your catalogue server can reach has a short answer: your database, and nothing else."
-        />
-        <BoundaryDiagram />
-      </Container>
-    </Section>
-
     {/* ================= PILLARS ================= */}
     <Section tone="muted">
       <Container size="wide">
         <SectionHeading
-          eyebrow="What you get"
-          title="Built for the awkward parts"
-          lede="Offline edits, two people on one item, and knowing what changed last Tuesday — the things that are easy to demo and hard to actually get right."
+          align="center"
+          eyebrow="Why people keep it open"
+          title="Built for the boring parts of the job"
+          lede="The ten-step thing you do every fortnight and get wrong every third time. Zipr is where that goes."
         />
 
         <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
@@ -238,32 +129,37 @@ export const HomePage: FC = () => (
               <p class="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
                 {pillar.body}
               </p>
-              <p class="mt-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                {pillar.tier === "client" ? "In the free client" : "Needs a deployment"}
-              </p>
+              {pillar.tier === "api" ? (
+                <p class="mt-4 text-xs font-semibold uppercase tracking-wider text-primary">
+                  With a team
+                </p>
+              ) : (
+                <p class="mt-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
+                  Free
+                </p>
+              )}
             </Card>
           ))}
         </div>
       </Container>
     </Section>
 
-    {/* ================= ACTION TYPES ================= */}
+    {/* ================= ACTIONS ================= */}
     <Section>
       <Container>
         <div class="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
           <div>
-            <Eyebrow>The vocabulary</Eyebrow>
+            <Eyebrow>Twelve verbs</Eyebrow>
             <h2 class="text-3xl font-bold tracking-tight text-balance sm:text-4xl">
-              Twelve verbs, chained however you like.
+              If you can describe it, Zipr can run it.
             </h2>
             <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
-              Each action declares which operating systems it applies to and how its parameters
-              differ between them, so one item can be correct on a Mac and on a Windows laptop
-              without being two items. Need something that is not here? A custom type is stored
-              verbatim and interpreted by your own client.
+              Stack the steps in any order. Ask a question halfway through and use the answer. Do
+              one thing on a Mac and another on Windows, from the same item. And when the twelve are
+              not enough, a plugin picks up where they stop.
             </p>
             <LinkButton href="/features" variant="outline" class="mt-6">
-              All the detail
+              See what it can do
               <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
             </LinkButton>
           </div>
@@ -271,8 +167,8 @@ export const HomePage: FC = () => (
           <ul class="grid gap-x-6 gap-y-3 sm:grid-cols-2">
             {ACTION_TYPES.map((action) => (
               <li class="border-b border-border pb-3">
-                <code class="font-mono text-sm font-semibold text-primary">{action.name}</code>
-                <p class="mt-1 text-sm text-muted-foreground text-pretty">{action.blurb}</p>
+                <span class="text-sm font-semibold">{action.name}</span>
+                <p class="mt-0.5 text-sm text-muted-foreground text-pretty">{action.blurb}</p>
               </li>
             ))}
           </ul>
@@ -280,9 +176,74 @@ export const HomePage: FC = () => (
       </Container>
     </Section>
 
+    {/* ================= THE PROMISE ================= */}
+    <Section tone="muted">
+      <Container>
+        <SectionHeading
+          align="center"
+          eyebrow="The honest version"
+          title="Free alone. Paid together."
+          lede="Most tools hand you a hobbled free tier and wait for you to outgrow it. Zipr's free app is the whole app. You pay the day you want other people in it — and not before."
+        />
+
+        <ol class="grid gap-5 md:grid-cols-3">
+          {JOURNEY.map((step) => (
+            <li>
+              <Card class="flex h-full flex-col p-6">
+                <div class="flex items-center justify-between">
+                  <span class="text-sm font-bold text-muted-foreground tabular">{step.step}</span>
+                  <Badge tone={step.cost === "Free" ? "success" : "primary"}>{step.cost}</Badge>
+                </div>
+                <h3 class="mt-4 text-lg font-bold text-balance">{step.title}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
+                  {step.body}
+                </p>
+              </Card>
+            </li>
+          ))}
+        </ol>
+      </Container>
+    </Section>
+
+    {/* ================= TEAM ================= */}
+    <Section>
+      <Container>
+        <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <Eyebrow>When the team needs it</Eyebrow>
+            <h2 class="text-3xl font-bold tracking-tight text-balance sm:text-4xl">
+              Share it, and it stays shared.
+            </h2>
+            <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
+              Put Zipr on your own servers and a catalogue stops being yours alone. Everyone gets
+              the current version, edits do not overwrite each other, and every change can be
+              undone. Your data stays on your infrastructure the whole time.
+            </p>
+            <div class="mt-7 flex flex-wrap gap-3">
+              <LinkButton href="/pricing">
+                What a team costs
+                <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
+              </LinkButton>
+              <LinkButton href="/security" variant="ghost">
+                How we keep it safe
+              </LinkButton>
+            </div>
+          </div>
+
+          <Card class="p-7">
+            <ul class="space-y-3.5">
+              {TEAM_UNLOCKS.map((unlock) => (
+                <CheckItem>{unlock}</CheckItem>
+              ))}
+            </ul>
+          </Card>
+        </div>
+      </Container>
+    </Section>
+
     <CtaBand
-      title="Start with the free client."
-      body="It installs in a minute, needs no account, and is the same binary a licensed team runs. If it never leaves your machine, it never costs anything."
+      title="Start with the free app."
+      body="No card, no account, no clock counting down. If it never leaves your machine, it never costs a thing."
       primary={{ href: "/downloads", label: "Download Zipr" }}
       secondary={{ href: "/pricing", label: "See pricing" }}
     />

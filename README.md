@@ -23,10 +23,12 @@ Built on [frug-template](https://github.com/JaredStanbrook/frug-template); its
 | `/features`       | The detail, ending with what the free client deliberately cannot do |
 | `/downloads`      | Installers, served from R2 through the worker, with checksums       |
 | `/pricing`        | Three tiers, the full comparison, and what the infrastructure costs |
-| `/docs`           | Architecture, deployment shapes, and notes for client authors       |
+| `/security`       | The short answers a security review wants                           |
 | `/contact`        | Four `mailto:` routes, each with a subject already written          |
+| `/report`         | Bug reports, straight into D1. The site is the tracker              |
 | `/admin`          | Where signing in lands you: what is published, and where to go      |
 | `/admin/releases` | Create a release, upload installers, publish                        |
+| `/admin/issues`   | The bug tracker — triage, reply, close                              |
 | `/admin/logs`     | The authentication audit trail                                      |
 
 ## Accounts
@@ -110,7 +112,7 @@ Copy is data, not markup. Editing the words should never mean editing a layout:
 - `worker/content/pricing.ts` — tiers, the comparison table, running costs, FAQ.
   Money is integer cents; `formatPrice` converts at the edge.
 - `worker/content/features.ts` — the pillars, the twelve action types, the
-  journey, and the local workspace's limits.
+  three-step journey, and what a team adds.
 - `worker/content/site.ts` — the contact address, repository links, platform
   metadata, install notes, the public nav.
 
@@ -118,8 +120,27 @@ The contact page's four routes and their pre-filled subject lines live in
 `worker/views/pages/Contact.tsx`, since each one is a link rather than data
 anything else reads.
 
-Every claim in those files is traceable to something the client or the API
-actually does. If one stops being true it is a bug in the content file.
+### Two rules for anything a visitor reads
+
+**Say what they get, not how it works.** No stack names, no algorithms, no
+internal vocabulary. The site went through one round of this already: it was
+written like a design document, which flattered the people who built it and did
+nothing for anyone deciding whether to spend four minutes installing something.
+It also handed a competitor the blueprint. If a sentence would only impress an
+engineer who already works here, it is the wrong sentence.
+
+**Every claim stays true anyway.** Marketing voice, not marketing fiction — the
+first thing a trial does is check. If a line stops being true, that is a bug in
+the content file.
+
+### Bug reports
+
+Both source repositories are private, so there is no public tracker to link to
+and the site carries its own. `/report` writes to D1; `/admin/issues` is where
+they land. It is the only public write on the site, so it is rate-limited at
+the edge with the same limiter the sign-in API uses, and honeypotted.
+
+Contact stays `mailto:` — a mail client already solves that one.
 
 ## Styling
 

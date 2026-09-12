@@ -1,7 +1,7 @@
 import type { FC } from "hono/jsx";
 
 import type { AppConfig } from "@server/config/app.config";
-import { TIERS, COMPARISON, RUNNING_COSTS, PRICING_FAQ } from "@server/content/pricing";
+import { TIERS, COMPARISON, RUNNING_NOTES, PRICING_FAQ } from "@server/content/pricing";
 import type { PricingTier } from "@server/content/pricing";
 import { formatPrice } from "@views/lib/utils";
 import {
@@ -10,6 +10,7 @@ import {
   Container,
   SectionHeading,
   Card,
+  IconTile,
   Badge,
   LinkButton,
   CheckItem,
@@ -104,7 +105,7 @@ const ComparisonTable: FC = () => (
   <TableFrame>
     <table class="relative w-full min-w-[46rem] border-collapse text-left">
       <caption class="sr-only">
-        Feature comparison between the free client, Team and Enterprise
+        Feature comparison between the Free, Team and Enterprise plans
       </caption>
       <thead>
         <tr class="border-b border-border bg-muted/60">
@@ -173,8 +174,8 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
           as="h1"
           align="center"
           eyebrow="Pricing"
-          title="The client is free. The server is what costs."
-          lede="Everything one person can do on one machine is free permanently — not a trial, not a reduced build. You pay at the moment a second person needs to see your catalogue, because that is the moment the API starts doing work."
+          title="Free for you. Paid for your team."
+          lede="Everything one person can do on one machine is free, permanently. Not a trial, not a cut-down build. You pay the day somebody else needs in."
         />
       </Container>
     </Section>
@@ -189,10 +190,10 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
         </div>
 
         <p class="mt-8 text-center text-sm text-muted-foreground text-pretty">
-          Prices are in {app.currency}, excluding any tax, and cover the licence only — you host the
-          deployment on your own infrastructure.{" "}
+          Prices in {app.currency}, excluding tax. The licence covers the software; the server is
+          yours.{" "}
           <a href="#running-costs" class="font-medium text-primary underline underline-offset-4">
-            What that costs is below.
+            Here's what running it involves.
           </a>
         </p>
       </Container>
@@ -203,8 +204,8 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
       <Container size="wide">
         <SectionHeading
           eyebrow="Line by line"
-          title="What works alone, and what needs a deployment"
-          lede="Every 'no' below is a real consequence of having no server, not a feature withheld. Where a limit has a reason worth knowing, it is written under the row."
+          title="Free versus team, line by line"
+          lede="No asterisks. Everything in the free column works forever on your own machine; the team column is what arrives when you share it."
         />
         <ComparisonTable />
       </Container>
@@ -214,77 +215,35 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
     <Section id="running-costs">
       <Container>
         <SectionHeading
-          eyebrow="The other half of the bill"
-          title="What it costs to run, on top of the licence"
-          lede="Zipr is self-hosted, so the infrastructure is yours and so is its cost. Two of the four components below are optional, and the deployment degrades honestly without them rather than failing."
+          align="center"
+          eyebrow="Running it yourself"
+          title="Less work than you're bracing for"
+          lede="Self-hosted has a reputation, and most of it is earned by other software. This is one server and one command."
         />
 
-        <TableFrame>
-          <table class="w-full min-w-[36rem] border-collapse text-left">
-            <thead>
-              <tr class="border-b border-border bg-muted/60">
-                <th scope="col" class="px-5 py-4 text-sm font-semibold">
-                  Component
-                </th>
-                <th scope="col" class="px-5 py-4 text-sm font-semibold">
-                  Needed?
-                </th>
-                <th scope="col" class="px-5 py-4 text-sm font-semibold">
-                  What happens without it
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              {RUNNING_COSTS.map((item) => (
-                <tr class="border-b border-border last:border-0">
-                  <th scope="row" class="px-5 py-4 align-top font-medium whitespace-nowrap">
-                    {item.component}
-                  </th>
-                  <td class="px-5 py-4 align-top">
-                    <Badge tone={item.requirement === "Required" ? "warning" : "neutral"}>
-                      {item.requirement}
-                    </Badge>
-                  </td>
-                  <td class="px-5 py-4 align-top text-sm leading-relaxed text-muted-foreground text-pretty">
-                    {item.detail}
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </TableFrame>
-
-        <div class="mt-6 grid gap-5 md:grid-cols-2">
-          <Card class="p-6">
-            <h3 class="flex items-center gap-2 font-bold">
-              <i data-lucide="server" class="h-4 w-4 text-brand" aria-hidden="true"></i>
-              It is not a large stack
-            </h3>
-            <p class="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
-              The self-hosted bundle is nine containers including the database, the identity
-              provider and the login pages. A team of twenty fits comfortably on a single modest
-              virtual machine, and the whole thing comes up with one Docker Compose command.
-            </p>
-          </Card>
-          <Card class="p-6">
-            <h3 class="flex items-center gap-2 font-bold">
-              <i data-lucide="key-round" class="h-4 w-4 text-brand" aria-hidden="true"></i>
-              One fewer database, if you prefer
-            </h3>
-            <p class="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
-              Let Ory Network run the identity provider and the stack drops to seven containers and
-              one database, at the cost of identity data living with Ory. Both options serve the
-              same login pages and accept the same client sign-in.
-            </p>
-          </Card>
+        <div class="grid gap-5 md:grid-cols-3">
+          {RUNNING_NOTES.map((note) => (
+            <Card class="flex h-full flex-col p-6 text-center">
+              <IconTile icon={note.icon} tone="brand" class="mx-auto" />
+              <h3 class="mt-4 font-bold">{note.title}</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
+                {note.body}
+              </p>
+            </Card>
+          ))}
         </div>
+
+        <p class="mx-auto mt-8 max-w-2xl text-center text-sm text-muted-foreground text-pretty">
+          The licence covers the software and the support. The server is yours, on whichever cloud
+          or rack you already use — which is the point, because it is also where your data stays.
+        </p>
       </Container>
     </Section>
 
     {/* ================= FAQ ================= */}
     <Section tone="muted">
       <Container size="prose">
-        <SectionHeading align="center" eyebrow="Questions" title="The things people ask first" />
+        <SectionHeading align="center" eyebrow="Questions" title="Before you ask" />
         <div class="border-t border-border">
           {PRICING_FAQ.map((item) => (
             <Disclosure question={item.q}>{item.a}</Disclosure>
@@ -295,8 +254,8 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
 
     <CtaBand
       title="Try it before any of this matters."
-      body="The client is free, needs no account, and is the same binary a licensed team runs. Come back to this page when somebody else needs to see what you built."
-      primary={{ href: "/downloads", label: "Download the client" }}
+      body="The free app needs no account and is the same one licensed teams run. Come back here the day somebody else wants what you built."
+      primary={{ href: "/downloads", label: "Download Zipr" }}
       secondary={{ href: "/contact?topic=licence", label: "Ask about a licence" }}
     />
   </Page>

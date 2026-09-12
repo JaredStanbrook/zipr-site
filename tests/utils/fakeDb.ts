@@ -1,5 +1,6 @@
 import { users, authLogs } from "../../worker/schema/auth.schema";
 import { userRoles } from "../../worker/schema/roles.schema";
+import { issue } from "../../worker/schema/issue.schema";
 import { release, releaseAsset } from "../../worker/schema/release.schema";
 
 /**
@@ -13,6 +14,7 @@ import { release, releaseAsset } from "../../worker/schema/release.schema";
 
 export type MockData = {
   users: any[];
+  issues: any[];
   /** Drives "has an admin been bootstrapped yet" — see the /register route. */
   userRoles: any[];
   releases: any[];
@@ -54,6 +56,8 @@ const resolveSelect = (data: MockData, state: QueryState) => {
       return data.releases;
     case releaseAsset:
       return data.releaseAssets;
+    case issue:
+      return data.issues;
     case userRoles:
       return data.userRoles;
     case authLogs:
@@ -181,6 +185,24 @@ export const createMockData = (overrides: Partial<MockData> = {}): MockData => {
         sizeBytes: 9_437_184,
         sha256: "a".repeat(64),
         downloadCount: 3,
+        createdAt: now,
+        updatedAt: now,
+      },
+    ],
+    issues: [
+      {
+        id: 1,
+        product: "client",
+        summary: "Launching an item does nothing on Windows",
+        detail: "I click it, the row flashes, nothing opens. Every time.",
+        email: "sam@example.com",
+        version: "0.2.0",
+        platform: "Windows 11",
+        status: "new",
+        note: null,
+        triagedBy: null,
+        triagedAt: null,
+        deletedAt: null,
         createdAt: now,
         updatedAt: now,
       },

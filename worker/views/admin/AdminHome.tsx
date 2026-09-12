@@ -16,9 +16,17 @@ interface AdminHomeProps {
   /** Published releases, so the landing page answers the obvious question. */
   publishedCount: number;
   draftCount: number;
+  /** Untriaged bug reports — the thing most likely to be waiting. */
+  newIssueCount: number;
 }
 
 const DESTINATIONS = [
+  {
+    href: "/admin/issues",
+    icon: "bug",
+    title: "Bug reports",
+    body: "Everything the public report form has taken. This is the tracker, since the repositories are private.",
+  },
   {
     href: "/admin/releases",
     icon: "package",
@@ -39,7 +47,12 @@ const DESTINATIONS = [
   },
 ];
 
-export const AdminHome: FC<AdminHomeProps> = ({ email, publishedCount, draftCount }) => (
+export const AdminHome: FC<AdminHomeProps> = ({
+  email,
+  publishedCount,
+  draftCount,
+  newIssueCount,
+}) => (
   <Page>
     <Container class="py-12">
       <div class="mb-10">
@@ -76,9 +89,22 @@ export const AdminHome: FC<AdminHomeProps> = ({ email, publishedCount, draftCoun
             </>
           )}
         </p>
+
+        {newIssueCount > 0 ? (
+          <p class="mt-4">
+            <a
+              href="/admin/issues?status=new"
+              class="clay-press inline-flex items-center gap-2 rounded-[var(--radius-sm)] bg-warning-subtle px-3.5 py-2 text-sm font-semibold text-warning-subtle-foreground no-underline shadow-raised"
+            >
+              <i data-lucide="bug" class="h-4 w-4" aria-hidden="true"></i>
+              <span class="tabular">{newIssueCount}</span> bug report
+              {newIssueCount === 1 ? "" : "s"} waiting
+            </a>
+          </p>
+        ) : null}
       </div>
 
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
         {DESTINATIONS.map((destination) => (
           <Card class="flex h-full flex-col p-6">
             <span class="flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] bg-primary-subtle text-primary-subtle-foreground shadow-raised">

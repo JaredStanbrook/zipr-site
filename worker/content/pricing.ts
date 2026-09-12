@@ -1,21 +1,19 @@
 // worker/content/pricing.ts
 //
-// The commercial shape, in one file.
+// The commercial shape.
 //
-// Zipr's split is unusual enough to be worth stating plainly: the desktop
-// client is free forever and complete on its own, because every install has a
-// local workspace no deployment owns and the client is what executes actions.
-// What costs money is the API — and the API's whole job is letting other
-// people see your work. So the line is not "free tier vs real version", it is
-// **alone vs together**.
+// The line is unusual enough to be worth stating plainly: the app is free
+// forever and complete on its own. What costs money is sharing. So this is not
+// "free tier vs real version" — it is alone vs together, and the page should
+// make that feel like a promise rather than a catch.
 //
-// Money is integer cents, per the house convention. Never do float arithmetic
-// on it; `formatPrice` in views/lib/utils.ts converts at the edge.
+// Money is integer cents. Never do float arithmetic on it; `formatPrice` in
+// views/lib/utils.ts converts at the edge.
 
 export interface PricingTier {
   id: "free" | "team" | "enterprise";
   name: string;
-  /** The one line that says who this is for. */
+  /** One line on who this is for. */
   summary: string;
   /** Null where the price is "talk to us". Cents, per person, per month. */
   monthlyCents: number | null;
@@ -23,75 +21,73 @@ export interface PricingTier {
   annualMonthlyCents: number | null;
   /** Smallest billable team, or null where there is no minimum. */
   minimumSeats: number | null;
-  /** Sits under the price, explaining what the number is per. */
+  /** Sits under the price, saying what the number is per. */
   priceNote: string;
   features: string[];
   cta: { label: string; href: string };
-  /** Renders the card in the brand's primary weight. Exactly one tier. */
+  /** Renders in the brand's primary weight. Exactly one tier. */
   featured?: boolean;
 }
 
 export const TIERS: PricingTier[] = [
   {
     id: "free",
-    name: "Client",
-    summary: "Everything one person needs, on one machine, forever.",
+    name: "Free",
+    summary: "The whole app, on your machine, for as long as you like.",
     monthlyCents: 0,
     annualMonthlyCents: 0,
     minimumSeats: null,
     priceNote: "No account. No card. No expiry.",
     features: [
-      "The desktop client for Windows and macOS",
-      "One local workspace, unlimited catalogues and items",
-      "All twelve built-in action types, plus custom ones",
-      "Chained actions, per-OS variants, conditional steps",
-      "Plugins, installed and run locally",
-      "Launch history for this machine",
-      "Export and import as JSON",
-      "Works offline permanently — it never calls a server",
+      "Windows and macOS",
+      "Unlimited items and catalogues",
+      "All twelve action types, chained however you like",
+      "Steps that differ per operating system",
+      "Plugins",
+      "History of what you've run",
+      "Export everything as one file",
+      "Works offline, permanently",
     ],
     cta: { label: "Download Zipr", href: "/downloads" },
   },
   {
     id: "team",
     name: "Team",
-    summary: "A licence for the API you host, so the work can be shared.",
+    summary: "Everything above, shared — on servers you control.",
     monthlyCents: 700,
     annualMonthlyCents: 600,
     minimumSeats: 5,
     priceNote: "per person, per month, billed yearly",
     features: [
-      "Everything in Client, for everyone on the team",
-      "Workspaces, members and per-workspace roles",
-      "Shared catalogues — publish a local one to the team",
-      "Delta sync, so every client mirrors the catalogue offline",
-      "Live updates over the event stream",
-      "Concurrent edits resolved by a server-side three-way merge",
-      "Per-item revision history and point-in-time restore",
-      "Workspace tags",
-      "Plugin repositories, releases and asset distribution",
-      "Instance variables, so catalogues hold no hardcoded paths",
-      "Audit log and usage analytics",
-      "The instance-admin console",
+      "Everything in Free, for everyone",
+      "Shared catalogues the whole team stays in sync with",
+      "Members, roles, and who-can-see-what",
+      "Edit at the same time without losing work",
+      "Full history and one-click rollback",
+      "Live updates as colleagues make changes",
+      "Tags across the workspace",
+      "Share plugins internally",
+      "Audit trail and usage figures",
+      "An admin console for the whole instance",
     ],
-    cta: { label: "Ask about a licence", href: "/contact?topic=licence" },
+    cta: { label: "Start a trial", href: "/contact?topic=licence" },
     featured: true,
   },
   {
     id: "enterprise",
     name: "Enterprise",
-    summary: "For a deployment that has to answer to somebody.",
+    summary: "For a rollout that has to satisfy somebody else.",
     monthlyCents: null,
     annualMonthlyCents: null,
     minimumSeats: null,
     priceNote: "Priced per deployment",
     features: [
       "Everything in Team",
-      "Ory Network as the identity provider, or your own Kratos",
-      "Managed policy — locked client settings, governed local workspaces",
-      "Support with an agreed response target",
-      "Help standing the deployment up, including air-gapped",
-      "Invoicing, security review, data processing agreement",
+      "Single sign-on",
+      "Settings you can lock down centrally",
+      "Support with an agreed response time",
+      "Help with the rollout, including air-gapped",
+      "Invoicing, security review, DPA",
     ],
     cta: { label: "Talk to us", href: "/contact?topic=licence" },
   },
@@ -100,14 +96,12 @@ export const TIERS: PricingTier[] = [
 /**
  * The comparison table.
  *
- * Deliberately drawn from what the API's `GET /capabilities` actually reports
- * and what the client's local workspace actually refuses, rather than from a
- * marketing wish list — every "no" below is a real, documented limitation of
- * running with no deployment, not a feature held back to sell a tier.
+ * Still honest — every "no" is real — but framed by what the reader gets
+ * rather than by the mechanism that makes it so. The notes explain
+ * consequences, not architecture.
  */
 export interface ComparisonRow {
   feature: string;
-  /** Why the answer is what it is. Shown as help text under the feature. */
   note?: string;
   free: boolean | string;
   team: boolean | string;
@@ -121,44 +115,43 @@ export interface ComparisonGroup {
 
 export const COMPARISON: ComparisonGroup[] = [
   {
-    title: "Building and launching",
+    title: "Building and running things",
     rows: [
       {
-        feature: "Items, catalogues, actions",
-        note: "The client stores and runs them. Nothing here needs a server.",
+        feature: "Items and catalogues",
         free: "Unlimited",
         team: "Unlimited",
         enterprise: "Unlimited",
       },
+      { feature: "All twelve action types", free: true, team: true, enterprise: true },
       {
-        feature: "All twelve built-in action types",
+        feature: "Your own action types",
+        note: "For anything the built-in twelve don't cover.",
         free: true,
         team: true,
         enterprise: true,
       },
       {
-        feature: "Custom action types",
-        note: "Parameters are stored verbatim and interpreted by your client.",
-        free: true,
-        team: true,
-        enterprise: true,
-      },
-      {
-        feature: "Per-OS action variants",
+        feature: "Steps that differ per operating system",
         free: true,
         team: true,
         enterprise: true,
       },
       {
         feature: "Plugins",
-        note: "The plugin host has never needed the API. Installing one by hand works with no deployment.",
-        free: "Local install",
-        team: "Local + repositories",
-        enterprise: "Local + repositories",
+        free: "Install your own",
+        team: "Share with the team",
+        enterprise: "Share with the team",
       },
       {
         feature: "Works with no network",
-        note: "A local item's actions are already on the machine, so launching one touches nothing.",
+        free: true,
+        team: true,
+        enterprise: true,
+      },
+      {
+        feature: "Export everything",
+        note: "One file, yours, whenever you want it.",
         free: true,
         team: true,
         enterprise: true,
@@ -170,46 +163,35 @@ export const COMPARISON: ComparisonGroup[] = [
     rows: [
       {
         feature: "Workspaces",
-        note: "A workspace scopes membership. With nobody to be a member, one local workspace is the whole of it.",
-        free: "One, local",
+        free: "One, private",
         team: "Unlimited",
         enterprise: "Unlimited",
       },
+      { feature: "Members and roles", free: false, team: true, enterprise: true },
+      { feature: "Shared catalogues", free: false, team: true, enterprise: true },
       {
-        feature: "Members and roles",
+        feature: "Publish your work to the team",
+        note: "A copy, so your own version stays exactly where it was.",
         free: false,
         team: true,
         enterprise: true,
       },
       {
-        feature: "Shared catalogues",
-        free: false,
-        team: true,
-        enterprise: true,
-      },
-      {
-        feature: "Publish a local catalogue to the team",
-        note: "A one-way copy that leaves your local one exactly where it was.",
-        free: false,
-        team: true,
-        enterprise: true,
-      },
-      {
-        feature: "Delta sync",
+        feature: "Everyone's copy stays current",
         free: false,
         team: true,
         enterprise: true,
       },
       {
         feature: "Live updates",
-        note: "An event stream telling clients what changed, so they sync less.",
+        note: "Changes appear as colleagues make them.",
         free: false,
         team: true,
         enterprise: true,
       },
       {
-        feature: "Concurrent editing without lost work",
-        note: "Optimistic concurrency and a server-side three-way merge. There is no second writer on one machine, so nothing to merge.",
+        feature: "Editing the same item at once",
+        note: "Both sets of changes survive, and you are told what actually clashed.",
         free: "Not applicable",
         team: true,
         enterprise: true,
@@ -217,52 +199,38 @@ export const COMPARISON: ComparisonGroup[] = [
     ],
   },
   {
-    title: "History and governance",
+    title: "History and oversight",
     rows: [
+      { feature: "Full history and rollback", free: false, team: true, enterprise: true },
+      { feature: "Tags", free: false, team: true, enterprise: true },
       {
-        feature: "Revision history and restore",
-        note: "The revisions a deployment keeps are what a restore reads.",
-        free: false,
-        team: true,
-        enterprise: true,
-      },
-      {
-        feature: "Tags",
-        note: "A tag is a workspace-scoped resource on the API.",
-        free: false,
-        team: true,
-        enterprise: true,
-      },
-      {
-        feature: "Launch history",
-        note: "What you ran on this computer. Kept locally, capped, and erasable.",
+        feature: "What you've run",
         free: "This machine",
         team: "This machine + team",
         enterprise: "This machine + team",
       },
       {
-        feature: "Usage analytics",
-        note: "What everybody in a workspace ran, aggregated on your own server.",
+        feature: "Team usage figures",
+        note: "What people actually run, so you know what matters.",
         free: false,
         team: true,
         enterprise: true,
       },
       {
-        feature: "Audit log",
+        feature: "Audit trail",
         free: false,
         team: "Per workspace",
         enterprise: "Instance-wide",
       },
       {
-        feature: "Instance variables",
-        note: "Values a catalogue should not hardcode, supplied by the deployment.",
+        feature: "Central values your catalogues reuse",
+        note: "Paths and addresses set once, so nothing is hardcoded in an item.",
         free: false,
         team: true,
         enterprise: true,
       },
       {
-        feature: "Managed policy",
-        note: "Locked settings pushed to managed machines, including whether local workspaces are allowed at all.",
+        feature: "Lock settings centrally",
         free: false,
         team: false,
         enterprise: true,
@@ -273,64 +241,47 @@ export const COMPARISON: ComparisonGroup[] = [
     title: "Running it",
     rows: [
       {
-        feature: "Where the data lives",
+        feature: "Where your data lives",
         free: "Your machine",
-        team: "Your server",
-        enterprise: "Your server",
+        team: "Your servers",
+        enterprise: "Your servers",
       },
-      {
-        feature: "Identity provider",
-        note: "Self-hosted Kratos is the architecture; Ory Network is a supported second option.",
-        free: "None needed",
-        team: "Kratos, self-hosted",
-        enterprise: "Kratos or Ory Network",
-      },
-      {
-        feature: "Instance-admin console",
-        free: false,
-        team: true,
-        enterprise: true,
-      },
+      { feature: "Single sign-on", free: false, team: false, enterprise: true },
+      { feature: "Admin console", free: false, team: true, enterprise: true },
       {
         feature: "Support",
         free: "Community",
         team: "Email",
-        enterprise: "Agreed response target",
+        enterprise: "Agreed response time",
       },
     ],
   },
 ];
 
 /**
- * What the licence does *not* cover — the infrastructure the customer pays
- * their own cloud for. Saying this on the pricing page rather than in a sales
- * call is the point: a self-hosted product whose real cost only emerges at
- * deployment time is one nobody trusts twice.
+ * What running it involves.
+ *
+ * The buyer question behind this — "what is the real cost?" — is legitimate
+ * and worth answering, so it stays. What it no longer does is name the
+ * components: which database, which cache, which identity provider is our
+ * business, and printing the parts list on a public page is free research for
+ * anyone considering building the same thing.
  */
-export const RUNNING_COSTS = [
+export const RUNNING_NOTES = [
   {
-    component: "Postgres",
-    requirement: "Required",
-    detail:
-      "The one hard dependency. Everything the API stores lives here, and readiness fails without it.",
+    icon: "server",
+    title: "One modest server",
+    body: "A team of twenty fits comfortably on a small virtual machine. It is not a cluster, and it does not want to be.",
   },
   {
-    component: "Redis",
-    requirement: "Optional",
-    detail:
-      "Backs the live event stream and the analytics queue. Without it clients poll for changes instead, and every other route is unaffected.",
+    icon: "zap",
+    title: "Up in an afternoon",
+    body: "One command brings the whole thing up. Most of the time is your own change control, not the install.",
   },
   {
-    component: "Object storage",
-    requirement: "Optional",
-    detail:
-      "S3-compatible, for plugin release archives. Without it plugin repositories still work; only distribution is absent.",
-  },
-  {
-    component: "Kratos",
-    requirement: "Required",
-    detail:
-      "The identity provider. Run it yourself in the same compose file, or use Ory Network and run one fewer database.",
+    icon: "shield-check",
+    title: "Nothing phones home",
+    body: "Your deployment does not report to us, check in with us, or need us to be online for your team to work.",
   },
 ];
 
@@ -341,35 +292,31 @@ export interface Faq {
 
 export const PRICING_FAQ: Faq[] = [
   {
-    q: "If I host it myself, what am I paying for?",
-    a: "A licence to run the API, and support for it. The server software is what took the work — the concurrency model, the merge, the sync contract, the audit trail — and it is the part that makes a catalogue shareable. You supply and pay for the infrastructure it runs on, which is yours and stays yours.",
+    q: "Why is the app free if the team version isn't?",
+    a: "Because the app is genuinely complete on its own. It stores your work on your machine and runs everything there, so it would keep working whatever we did. Charging for that would be charging for something we cannot take away. Sharing is the part that needs a server, and that is the part you pay for.",
   },
   {
-    q: "Why is the client free if the API is not?",
-    a: "Because the client is genuinely complete alone. It stores items in a workspace no server owns, and it is the thing that executes actions — the API never runs anything. Charging for a client that works offline by itself would be charging for something you could not stop working. The API earns its money the moment a second person needs to see your catalogue.",
+    q: "What am I paying for if I host it myself?",
+    a: "A licence to run the team version, and support for it. You provide the server; we provide the software that makes a catalogue shareable, and the people who answer when it misbehaves.",
   },
   {
     q: "What counts as a person?",
-    a: "Someone with an account on your deployment who has signed in during the billing period. Service accounts that only read do not count. Deactivated members stop counting at the next renewal.",
+    a: "Someone with an account on your deployment who signed in during the billing period. Deactivated members stop counting at the next renewal.",
   },
   {
-    q: "What happens if the licence lapses?",
-    a: "The API keeps running and nothing is deleted or locked — it is your server. What stops is support and the right to upgrade to new versions. Clients keep their local workspaces regardless, because those were never the deployment's.",
+    q: "What happens if we stop paying?",
+    a: "Your server keeps running and nothing is deleted or locked — it is yours. What stops is support and access to new versions. Everything on individual machines is unaffected.",
   },
   {
-    q: "Is there a trial?",
-    a: "Yes. Ask for one and you get a licence long enough to stand a deployment up and put a real team on it. The API ships a compose file that brings the whole stack up in one command, so the trial is the product rather than a sandbox.",
-  },
-  {
-    q: "Can I evaluate it without a licence at all?",
-    a: "Download the client and use it. Every local feature is there permanently, and it is the same binary a licensed team runs — there is no evaluation build and no countdown.",
+    q: "Can we try it first?",
+    a: "Yes. Ask and we will set you up with a trial long enough to put a real team on it. And you can use the free app today without talking to anyone at all.",
   },
   {
     q: "Do you host it for us?",
-    a: "Not today. There is no shared control plane and no multi-tenant instance: each organisation runs its own, with its own database, users and admins. That is the architecture rather than a stage, and it is why your catalogue is not on anybody else's server.",
+    a: "Not today. Every organisation runs its own, which is why your catalogue is not sitting on somebody else's server. If a hosted option would change your mind, tell us — it is the request we are counting.",
   },
   {
-    q: "How do I pay?",
-    a: "Invoice, annually, in USD. Get in touch and we will send one along with the licence key.",
+    q: "How do we pay?",
+    a: "Invoice, annually, in USD. Get in touch and we will send one along with your licence key.",
   },
 ];

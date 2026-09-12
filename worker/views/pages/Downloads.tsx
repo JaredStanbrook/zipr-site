@@ -2,7 +2,7 @@ import type { FC } from "hono/jsx";
 
 import type { AppConfig } from "@server/config/app.config";
 import type { ReleaseWithAssets, Platform } from "@server/schema/release.schema";
-import { PLATFORM_INFO, INSTALL_NOTES, REPOS } from "@server/content/site";
+import { PLATFORM_INFO, INSTALL_NOTES } from "@server/content/site";
 import { formatBytes, formatDateShort } from "@views/lib/utils";
 import {
   Page,
@@ -69,8 +69,8 @@ const PlatformCard: FC<{
       ) : (
         <p class="text-sm leading-relaxed text-muted-foreground text-pretty">
           {info.available
-            ? "No build published for this platform yet."
-            : "There is no installer for Linux. The client builds and runs there — the desktop bundle simply has no Linux target configured, so there is nothing to hand you. Build it from source and it works."}
+            ? "No build up for this one yet."
+            : "No Linux installer yet. It's on the list — tell us you want it and it moves up."}
         </p>
       )}
     </div>
@@ -84,18 +84,11 @@ const PlatformCard: FC<{
       <LinkButton href="/contact?topic=support" variant="outline" class="mt-6 w-full">
         Tell us you need it
       </LinkButton>
-    ) : REPOS.showRepoLinks ? (
-      <LinkButton
-        href={REPOS.client}
-        variant="outline"
-        class="mt-6 w-full"
-        rel="noopener noreferrer"
-        target="_blank"
-      >
-        Build from source
-        <i data-lucide="external-link" class="h-4 w-4" aria-hidden="true"></i>
+    ) : (
+      <LinkButton href="/contact?topic=support" variant="outline" class="mt-6 w-full">
+        Ask us about Linux
       </LinkButton>
-    ) : null}
+    )}
   </Card>
 );
 
@@ -105,27 +98,18 @@ const NoReleases: FC = () => (
     <span class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-muted text-muted-foreground shadow-inset">
       <i data-lucide="package" class="h-6 w-6" aria-hidden="true"></i>
     </span>
-    <h2 class="mt-5 text-2xl font-bold">No build published yet</h2>
+    <h2 class="mt-5 text-2xl font-bold">Not quite yet</h2>
     <p class="mx-auto mt-3 max-w-lg leading-relaxed text-muted-foreground text-pretty">
-      Zipr is early, and the installers are not up here yet. Leave us a note and we will mail you
-      the moment there is something to install — or build it from source today.
+      Zipr is early and the installers aren't up here yet. Leave us a line and we'll tell you the
+      moment there's something to install — no list, no newsletter, just the one email.
     </p>
     <div class="mt-7 flex flex-wrap justify-center gap-3">
       <LinkButton href="/contact?topic=support" size="lg">
-        Tell me when it is ready
+        Tell me when it's ready
       </LinkButton>
-      {REPOS.showRepoLinks ? (
-        <LinkButton
-          href={REPOS.client}
-          variant="outline"
-          size="lg"
-          rel="noopener noreferrer"
-          target="_blank"
-        >
-          Build from source
-          <i data-lucide="external-link" class="h-4 w-4" aria-hidden="true"></i>
-        </LinkButton>
-      ) : null}
+      <LinkButton href="/features" variant="outline" size="lg">
+        See what it does
+      </LinkButton>
     </div>
   </Card>
 );
@@ -139,7 +123,7 @@ export const DownloadsPage: FC<DownloadsProps> = ({ latest, previous, detected, 
           align="center"
           eyebrow="Downloads"
           title="Install Zipr"
-          lede="Free, no account, and no network request until you point it at a deployment. Everything you make stays on this machine until you decide otherwise."
+          lede="Free, no account, about a minute. Everything you make stays on your machine until you decide otherwise."
         />
 
         {latest ? (
@@ -209,7 +193,7 @@ export const DownloadsPage: FC<DownloadsProps> = ({ latest, previous, detected, 
           <SectionHeading
             eyebrow="Archive"
             title="Earlier versions"
-            lede="Kept so a rollback is possible. Run the newest one unless you have a reason not to."
+            lede="In case you need to go back. Run the newest unless you have a reason not to."
           />
 
           <TableFrame>
@@ -268,8 +252,8 @@ export const DownloadsPage: FC<DownloadsProps> = ({ latest, previous, detected, 
     ) : null}
 
     <CtaBand
-      title="Installed it? There is nothing else to do."
-      body="No sign-up, no licence key, no trial clock. When your team needs the same catalogue, that is when the API enters the picture."
+      title="That\u2019s it. Nothing else to do."
+      body="No sign-up, no licence key, no clock counting down. Come back the day your team wants what you\u2019ve built."
       primary={{ href: "/features", label: "What it can do" }}
       secondary={{ href: "/pricing", label: "What a team costs" }}
     />

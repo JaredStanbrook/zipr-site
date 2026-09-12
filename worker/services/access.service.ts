@@ -7,7 +7,7 @@ import type { SafeUser } from "../schema/auth.schema";
  * PERMISSIONS_AVAILABLE var in wrangler.jsonc — the permission strings are
  * `${resource}.${action}` and `${resource}.${action}.any`.
  */
-type Resource = "releases";
+type Resource = "releases" | "issues";
 type Action = "read" | "create" | "update" | "delete";
 
 export class AccessControl {

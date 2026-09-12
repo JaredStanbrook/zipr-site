@@ -47,6 +47,14 @@ const usedIcons = () => {
     for (const [, name] of source.matchAll(/\bicon:\s*"([a-z][a-z0-9-]*)"/g)) {
       if (!found.has(name)) found.set(name, relative);
     }
+    // `<IconTile icon="server" />`, which is how most icons are written now.
+    // Without this the scan misses them and the check passes vacuously — the
+    // exact failure mode the guard below exists to catch.
+    // The lookbehind matters: without it this also matches `data-theme-icon=`,
+    // whose values are theme names rather than icon names.
+    for (const [, name] of source.matchAll(/(?<![\w-])icon=\{?"([a-z][a-z0-9-]*)"/g)) {
+      if (!found.has(name)) found.set(name, relative);
+    }
     for (const [, a, b] of source.matchAll(
       /data-lucide=\{[^}]*\?\s*"([a-z][a-z0-9-]*)"\s*:\s*"([a-z][a-z0-9-]*)"/g,
     )) {

@@ -1,139 +1,133 @@
 // worker/content/features.ts
 //
-// The product, described once. Every claim here is traceable to something the
-// client or the API actually does — if a line stops being true, it is a bug in
-// this file, not a bit of licence.
+// The product, in the customer's words.
+//
+// Two rules for everything in this file:
+//
+// 1. Say what they get, not how we built it. No stack names, no algorithms,
+//    no internal vocabulary. If a sentence would only impress an engineer who
+//    already works here, it is the wrong sentence.
+// 2. Every claim stays true. Marketing voice, not marketing fiction — the
+//    first thing a trial does is check.
 
 export interface Feature {
   /** Lucide icon name. Must also be registered in components/lib/icons.ts. */
   icon: string;
   title: string;
   body: string;
-  /** Which side of the commercial line this sits on. */
+  /** Which side of the line this sits on. */
   tier: "client" | "api";
 }
 
 export const PILLARS: Feature[] = [
   {
-    icon: "box",
-    title: "One catalogue, many launchers",
-    body: "An item is a name, an appearance, some tags and an ordered list of actions. Open a URL, copy a string, ask a question, run a command, open a panel, call a plugin — chained, conditional, and different per operating system where they need to be. Twelve built-in action types are validated on save; custom ones are stored verbatim for your own client to interpret.",
-    tier: "client",
-  },
-  {
-    icon: "shield",
-    title: "The server never runs anything",
-    body: "Zipr's API stores, versions and shares actions. It never executes one, never makes an outbound call on your behalf, and never resolves a variable reference. Everything that happens, happens on the machine of the person who clicked. That is a security property you can hand to a reviewer, not a roadmap item.",
+    icon: "zap",
+    title: "One click, not eleven steps",
+    body: "The runbook, the script, the link, the command nobody remembers — turn each into a single item anyone can run. Chain the steps once and forget them.",
     tier: "client",
   },
   {
     icon: "wifi-off",
-    title: "Offline is the normal case",
-    body: "Every client keeps a local mirror and a write outbox. Lose the network and you carry on: edits queue, and the interface says plainly which ones the server has and which ones it does not. A queued edit is never drawn as though it landed.",
+    title: "Fast because it's local",
+    body: "Everything lives on your machine, so it opens instantly and works on a plane. No spinner, no round trip, no wondering whether the network is having a moment.",
     tier: "client",
+  },
+  {
+    icon: "shield",
+    title: "Your commands never leave your laptop",
+    body: "Zipr runs everything locally. Nothing you build is executed on a server — ours or yours — which is the short answer to the long question your security team is about to ask.",
+    tier: "client",
+  },
+  {
+    icon: "users",
+    title: "Stop pasting scripts into chat",
+    body: "Share a catalogue and the whole team has it. New starters get the good version on day one instead of the copy someone forwarded them in their second week.",
+    tier: "api",
   },
   {
     icon: "git-merge",
     title: "Two people, one item, no lost work",
-    body: "Writes carry the revision they were made against. When two land on the same item the server runs a three-way merge and tells you exactly which fields actually collided, rather than picking a winner or refusing the write. Conflicts are shown as conflicts and resolved by a person.",
+    body: "Edit the same thing at the same time and both changes survive. You are told what actually clashed, rather than discovering on Friday that Tuesday's fix is gone.",
     tier: "api",
   },
   {
     icon: "history",
-    title: "Every change is recoverable",
-    body: "The API keeps a revision per item write and can hand back any point in time. Alongside it is a server-written audit log — who did what, in which workspace — that no client wrote and no client can edit.",
-    tier: "api",
-  },
-  {
-    icon: "radio",
-    title: "Changes arrive, they are not polled for",
-    body: "One event stream per client tells it what changed in the workspaces and catalogues it can see, so it syncs when there is something to sync. Lose the stream and delta sync is still the authority — the stream is the optimisation, never the contract.",
+    title: "Undo, even weeks later",
+    body: 'Every change is kept. Roll any item back to how it was, and see who changed what — so the answer to "who broke this" is a click rather than an investigation.',
     tier: "api",
   },
   {
     icon: "puzzle",
-    title: "Plugins in their own process",
-    body: "A plugin is an operating-system process the host supervises over a pipe, holding named capabilities rather than the run of the host's memory. With a deployment you also get repositories to publish them through, with releases, assets and update checks.",
+    title: "Extend it without waiting for us",
+    body: "Plugins add new kinds of action, sandboxed so a bad one cannot take the app down with it. Build what your team needs and share it with them.",
     tier: "client",
   },
   {
     icon: "server",
-    title: "Your deployment, start to finish",
-    body: "One organisation, one instance, one database, your own instance admins. There is no shared control plane and no multi-tenant instance to be a tenant of. Bring it up with Docker Compose, or on Ory Network if you would rather not operate an identity provider.",
+    title: "Runs on your infrastructure",
+    body: "Your catalogue lives on your servers, in your network, under your backups. There is no shared cloud to be a tenant of and no account of ours holding your data.",
     tier: "api",
   },
 ];
 
-/** The twelve built-in action types, as the API's registry validates them. */
+/**
+ * The action vocabulary, in English.
+ *
+ * Previously this listed the raw type identifiers from the action registry.
+ * Those are an implementation contract — useful to somebody writing a client
+ * against the API, which is exactly who we are not writing for here, and a
+ * neat inventory for anyone thinking of building the same thing. What sells is
+ * the verb.
+ */
 export const ACTION_TYPES = [
-  { name: "open_url", blurb: "Open an address, optionally in a named browser." },
-  {
-    name: "copy_to_clipboard",
-    blurb: "Put text on the clipboard, with or without a notification.",
-  },
-  { name: "confirm_prompt", blurb: "Ask a yes-or-no question and branch on the answer." },
-  { name: "text_prompt", blurb: "Ask for a value and carry it into later steps." },
-  { name: "selector_prompt", blurb: "Offer a list and use what was chosen." },
-  { name: "request_auth", blurb: "Require the person to re-authenticate before continuing." },
-  { name: "run_exe", blurb: "Launch an executable with arguments." },
-  { name: "run_command", blurb: "Run a shell command." },
-  { name: "open_file", blurb: "Open a file with its default application." },
-  { name: "open_folder", blurb: "Reveal a folder in the file manager." },
-  { name: "open_panel", blurb: "Open one of the client's own panels." },
-  { name: "plugin_action", blurb: "Hand off to an installed plugin." },
+  { name: "Open a link", blurb: "A URL, in the browser you choose." },
+  { name: "Run a command", blurb: "Shell command, with whatever arguments you need." },
+  { name: "Launch an app", blurb: "An executable, with arguments." },
+  { name: "Open a file", blurb: "Straight into whatever opens it." },
+  { name: "Reveal a folder", blurb: "Jump to it in Finder or Explorer." },
+  { name: "Copy to clipboard", blurb: "Text ready to paste, with an optional nudge." },
+  { name: "Ask yes or no", blurb: "Confirm before something irreversible." },
+  { name: "Ask for a value", blurb: "Prompt for input and use it further down." },
+  { name: "Offer a list", blurb: "Pick one, carry on." },
+  { name: "Require a re-auth", blurb: "Prove it's you before the risky step." },
+  { name: "Open a panel", blurb: "Jump to a view inside Zipr." },
+  { name: "Hand off to a plugin", blurb: "Anything the twelve don't cover." },
 ];
 
-/**
- * The three-step story the home page tells. Deliberately ends on the paid
- * step, because that is the actual shape of the product rather than a funnel
- * trick: you really can stop after step two and never pay anything.
- */
+/** The three-step story. It really does end at "free" twice. */
 export const JOURNEY = [
   {
     step: "01",
-    title: "Install it and build something",
-    body: "No account, no address, no network. The client opens on a local workspace that belongs to your machine and to nothing else. Make catalogues, make items, launch them.",
+    title: "Install it",
+    body: "No account, no email, no trial clock. It opens on an empty workspace that belongs to your machine and nothing else.",
     cost: "Free",
   },
   {
     step: "02",
-    title: "Keep working, offline, forever",
-    body: "Nothing expires and nothing phones home. Export the lot as one JSON document whenever you like — it is the only copy, so it exports.",
+    title: "Use it forever",
+    body: "Build as much as you like. Nothing expires, nothing phones home, and you can take it all with you as a single file whenever you want.",
     cost: "Free",
   },
   {
     step: "03",
-    title: "Someone else needs it",
-    body: "Stand up the API on your own infrastructure and publish a local catalogue to a workspace. From that point everyone has it, edits are merged rather than overwritten, and every change is recoverable.",
+    title: "Bring the team in",
+    body: "When someone else needs what you built, put Zipr on your own servers and share it. Same app, more people, nothing to relearn.",
     cost: "Licensed",
   },
 ];
 
 /**
- * What the local workspace deliberately cannot do, named so that none of them
- * reads as an oversight. Lifted from the client's own architecture notes,
- * because a prospect who finds this out after downloading is a prospect who
- * stops trusting the rest of the page.
+ * What a paid deployment adds, for the home page.
+ *
+ * Framed as gains rather than as the free tier's shortcomings — the pricing
+ * comparison already does the honest column-by-column version for anyone who
+ * wants it.
  */
-export const LOCAL_LIMITS = [
-  {
-    limit: "No tags",
-    why: "A tag is a workspace-scoped resource on the API, so a local workspace shows the same empty state a synced one with no tags shows.",
-  },
-  {
-    limit: "No revision history or restore",
-    why: "Restoring reads the revisions a deployment keeps. A local delete is a delete, not an archive.",
-  },
-  {
-    limit: "No move or copy between catalogues",
-    why: "Both are API operations. Moving local work to a team is publishing, which works on whole catalogues.",
-  },
-  {
-    limit: "No shared analytics",
-    why: "Ingest is an API route, so a local launch is recorded in launch history on this machine instead and sent nowhere.",
-  },
-  {
-    limit: "One workspace, not many",
-    why: "A workspace scopes membership, and there is no membership on a single machine. Catalogues are the grain instead.",
-  },
+export const TEAM_UNLOCKS = [
+  "Shared catalogues everyone stays in sync with",
+  "Members, roles and who-can-see-what",
+  "Full history, and a one-click rollback",
+  "Live updates as colleagues make changes",
+  "An audit trail you did not have to build",
+  "Usage figures showing what the team actually runs",
 ];

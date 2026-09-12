@@ -98,7 +98,7 @@
     // --- BRANDING ---
     // How the site names itself in the title, nav and footer.
     "APP_NAME": "Zipr",
-    "APP_TAGLINE": "One catalogue of the things your team launches.",
+    "APP_TAGLINE": "Every tool your team uses, one keystroke away.",
     "APP_LOCALE": "en-AU",
     "APP_CURRENCY": "USD",
 
@@ -156,7 +156,7 @@
     // Roles that cannot be self-assigned at registration. Get your first
     // admin with BOOTSTRAP_ADMIN_EMAIL below — no terminal needed.
     "ROLES_RESTRICTED": "admin",
-    "PERMISSIONS_AVAILABLE": "releases.read,releases.create,releases.update,releases.delete",
+    "PERMISSIONS_AVAILABLE": "releases.read,releases.create,releases.update,releases.delete,issues.read,issues.update,issues.delete",
     // `user` is the default role and holds no permissions: signing in grants
     // nothing on its own. Every staff surface is admin-only, and a narrower
     // grant is available per user through the user_permissions table.

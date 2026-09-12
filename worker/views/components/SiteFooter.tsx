@@ -1,6 +1,6 @@
 import { html } from "hono/html";
 
-import { CONTACT, REPOS } from "@server/content/site";
+import { CONTACT } from "@server/content/site";
 
 /**
  * The site footer.
@@ -21,9 +21,9 @@ const COLUMNS: Array<{ heading: string; links: Array<{ to: string; name: string 
   {
     heading: "Learn",
     links: [
-      { to: "/docs", name: "How it works" },
-      { to: "/pricing#compare", name: "Free vs licensed" },
-      { to: "/pricing#running-costs", name: "What it costs to run" },
+      { to: "/security", name: "Security" },
+      { to: "/pricing#compare", name: "Free vs team" },
+      { to: "/report", name: "Report a bug" },
     ],
   },
   {
@@ -52,9 +52,9 @@ export const SiteFooter = ({ appName, tagline }: { appName: string; tagline: str
             ${appName}
           </a>
           <p class="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
-            ${tagline || "One catalogue of the things your team launches."}
+            ${tagline || "Every tool your team uses, one keystroke away."}
           </p>
-          <p class="mt-4 text-sm font-medium text-foreground">The client is free. Always was.</p>
+          <p class="mt-4 text-sm font-medium text-foreground">The app is free. Always will be.</p>
         </div>
 
         ${COLUMNS.map(
@@ -86,28 +86,7 @@ export const SiteFooter = ({ appName, tagline }: { appName: string; tagline: str
       >
         <p>© ${new Date().getFullYear()} ${appName}. All rights reserved.</p>
 
-        ${
-          REPOS.showRepoLinks
-            ? html`
-                <div class="flex flex-wrap gap-5">
-                  <a
-                    href="${REPOS.client}"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    class="no-underline transition-colors hover:text-primary"
-                    >Client source</a
-                  >
-                  <a
-                    href="${REPOS.api}"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    class="no-underline transition-colors hover:text-primary"
-                    >API source</a
-                  >
-                </div>
-              `
-            : ""
-        }
+        <p>Made for people who are tired of pasting scripts into chat.</p>
       </div>
     </div>
   </footer>

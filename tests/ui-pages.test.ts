@@ -89,7 +89,8 @@ describe("UI pages load", () => {
       "/features",
       "/pricing",
       "/downloads",
-      "/docs",
+      "/security",
+      "/report",
       "/contact",
       "/contact?topic=licence",
       "/contact?topic=security",
@@ -102,7 +103,7 @@ describe("UI pages load", () => {
   it("redirects signed-out visitors away from protected pages", async () => {
     const testApp = createTestApp(null);
 
-    for (const path of ["/profile", "/admin", "/admin/logs", "/admin/releases"]) {
+    for (const path of ["/profile", "/admin", "/admin/logs", "/admin/releases", "/admin/issues"]) {
       const res = await get(testApp, path);
       expect(res.status, `GET ${path}`).toBe(302);
       expect(res.headers.get("location"), `GET ${path}`).toBe("/login");
@@ -112,7 +113,15 @@ describe("UI pages load", () => {
   it("serves protected pages to a signed-in admin", async () => {
     const testApp = createTestApp(createMockData().users[0]);
 
-    for (const path of ["/", "/profile", "/admin", "/admin/logs", "/admin/releases"]) {
+    for (const path of [
+      "/",
+      "/profile",
+      "/admin",
+      "/admin/logs",
+      "/admin/releases",
+      "/admin/issues",
+      "/admin/issues?status=new",
+    ]) {
       const res = await get(testApp, path);
       expect(res.status, `GET ${path}`).toBe(200);
     }
@@ -152,6 +161,60 @@ describe("UI pages load", () => {
     expect(html).not.toContain('href="/login"');
     expect(html).not.toContain('href="/register"');
     expect(html).toContain('href="/downloads"');
+  });
+
+  it("takes a bug report, and keeps what was typed when it is short", async () => {
+    const testApp = createTestApp(null);
+
+    const good = await testApp.fetch(
+      new Request("http://localhost/report", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded", "HX-Request": "true" },
+        body: new URLSearchParams({
+          product: "client",
+          summary: "Launching an item does nothing",
+          detail: "I click the item, the row flashes, and nothing opens. Every single time.",
+        }),
+      }),
+      env,
+    );
+    expect(good.status).toBe(200);
+    expect(await good.text()).toContain("Got it");
+
+    const short = await testApp.fetch(
+      new Request("http://localhost/report", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded", "HX-Request": "true" },
+        body: new URLSearchParams({ summary: "bug", detail: "broken" }),
+      }),
+      env,
+    );
+    expect(short.status).toBe(422);
+    const html = await short.text();
+    // A fragment that still holds what they wrote — nobody types it twice.
+    expect(html).not.toContain("<!DOCTYPE html>");
+    expect(html).toContain('value="bug"');
+  });
+
+  it("swallows a honeypot report without storing it", async () => {
+    const testApp = createTestApp(null);
+
+    const res = await testApp.fetch(
+      new Request("http://localhost/report", {
+        method: "POST",
+        headers: { "Content-Type": "application/x-www-form-urlencoded", "HX-Request": "true" },
+        body: new URLSearchParams({
+          summary: "Cheap watches for sale here",
+          detail: "Visit my website for great deals today friend, very good prices",
+          website: "http://spam.example.com",
+        }),
+      }),
+      env,
+    );
+
+    // 200 on purpose: telling a bot it was caught only teaches it.
+    expect(res.status).toBe(200);
+    expect(await res.text()).toContain("Got it");
   });
 
   it("offers contact as mailto only, with no form to post", async () => {
