@@ -1,0 +1,492 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+ * ---------------------------------------------------------------------------
+ * The Zipr clay palette, ported from the desktop client.
+ *
+ * The source of truth is `packages/ui-kit/src/styles/tokens.css` in
+ * zipr-client, and the values below are that file's, verbatim. The site and
+ * the app a visitor downloads should not be two different products, and the
+ * cheapest way to guarantee that is to copy the hexes rather than to
+ * approximate them.
+ *
+ * The look is clay: warm stone surfaces lifted by a paired highlight and
+ * shadow rather than by a border. The depth tokens near the bottom are what
+ * make that a system instead of a per-component guess.
+ *
+ * Two rules came across with the palette:
+ *
+ * 1. Semantic, never literal. A component asks for `--destructive` because of
+ *    what the action means. It never asks for a red.
+ * 2. Organisation-neutral. Nothing here belongs to any organisation.
+ *
+ * Three names differ from the client's on purpose, because this template's
+ * components already consume them with a different meaning:
+ *
+ *   --accent   Here it is the subtle hover fill (`hover:bg-accent`), which is
+ *              what every nav item, menu row and ghost button in this template
+ *              reaches for. The client's brand teal — its `--accent` — is
+ *              `--brand` below, so a hover does not paint a menu row solid.
+ *   --input    Here it is a border colour (`border-input`), so it carries the
+ *              client's `--input-border`, not its `--input` fill.
+ *   --shadow-* The template's scale is mapped onto the clay elevations, so the
+ *              `shadow-sm` / `shadow-md` already written through the template's
+ *              components render as clay instead of as flat drop shadows.
+ * ---------------------------------------------------------------------------
+ */
+
+/* Self-hosted so first paint owes nothing to a third party, and so the site
+   keeps working if fonts.gstatic.com is blocked — which it is, on a good
+   number of the corporate networks this product is sold into. Variable
+   weights, latin and latin-ext only: ~92KB for both families. Both are SIL
+   Open Font License 1.1; see public/fonts/OFL.txt. */
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("/fonts/plus-jakarta-sans-latin.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+  src: url("/fonts/plus-jakarta-sans-latin-ext.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+    U+A720-A7FF;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/jetbrains-mono-latin.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-weight: 400 700;
+  font-display: swap;
+  src: url("/fonts/jetbrains-mono-latin-ext.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+    U+A720-A7FF;
+}
+
+/* ===========================================================================
+   LIGHT — warm stone. The client's `:root`.
+   =========================================================================== */
+:root {
+  /* Renders native controls (checkboxes, scrollbars, date pickers) in the
+     matching scheme. Without it a native checkbox stays light-on-dark. */
+  color-scheme: light;
+
+  /* --- Surfaces ------------------------------------------------------- */
+  --background: #f1ede6;
+  --foreground: #292520;
+  --card: #fbf8f3;
+  --card-foreground: #292520;
+  --popover: #fffdf9;
+  --popover-foreground: #292520;
+  --scrim: #29252099;
+
+  /* --- Brand ----------------------------------------------------------- */
+  --primary: #524bc4;
+  --primary-foreground: #ffffff;
+  --primary-subtle: #e2e0f8;
+  --primary-subtle-foreground: #363092;
+  /* The client's `--accent`: its second brand colour, used for the teal
+     emphases. Renamed so this template's `hover:bg-accent` stays subtle. */
+  --brand: #0e6f76;
+  --brand-foreground: #ffffff;
+  --brand-subtle: #d6ebec;
+  --brand-subtle-foreground: #0a5257;
+
+  /* --- Neutral --------------------------------------------------------- */
+  --secondary: #e4ded3;
+  --secondary-foreground: #3b352e;
+  --muted: #e8e3db;
+  --muted-foreground: #665f56;
+  --accent: #e4ded3;
+  --accent-foreground: #3b352e;
+
+  /* --- Status ---------------------------------------------------------- */
+  --destructive: #b5372f;
+  --destructive-foreground: #ffffff;
+  --destructive-subtle: #f7dedb;
+  --destructive-subtle-foreground: #8a2a24;
+  --success: #2f7350;
+  --success-foreground: #ffffff;
+  --success-subtle: #d9ecdf;
+  --success-subtle-foreground: #22573c;
+  --warning: #8a6008;
+  --warning-foreground: #ffffff;
+  --warning-subtle: #f6e7c8;
+  --warning-subtle-foreground: #6b4a06;
+  --info: #24597f;
+  --info-foreground: #ffffff;
+  --info-subtle: #d8e6f1;
+  --info-subtle-foreground: #1c4562;
+
+  /* --- Lines and fields ------------------------------------------------ */
+  --border: #d9d2c6;
+  --border-strong: #847d70;
+  /* This template's `--input` is consumed as `border-input`, so it carries
+     the client's input *border*, not its field fill. */
+  --input: #8b8478;
+  --ring: #524bc4;
+
+  /* --- Sidebar ---------------------------------------------------------
+     The client has only `--sidebar` and `--sidebar-foreground`; the rest are
+     this template's, derived from the same palette so a sidebar is a dimmer
+     page rather than a second theme. */
+  --sidebar: #e9e4da;
+  --sidebar-foreground: #46403a;
+  --sidebar-primary: #524bc4;
+  --sidebar-primary-foreground: #ffffff;
+  --sidebar-accent: #ded7cb;
+  --sidebar-accent-foreground: #3b352e;
+  --sidebar-border: #d0c8ba;
+  --sidebar-ring: #524bc4;
+
+  /* --- Clay depth -------------------------------------------------------
+     Clay is a light from the upper left: a warm highlight on the lit edge, a
+     soft shadow on the other, and no hard line between them. Both halves are
+     tokens because both invert in dark mode — a highlight that stays white on
+     a dark surface reads as a scratch, not a bevel. */
+  --clay-highlight: #fffdf9;
+  --clay-shadow: #a2927740;
+  --clay-shadow-deep: #6f624d59;
+  --clay-rim: #ffffff59;
+
+  --shadow-raised:
+    0 1px 2px var(--clay-shadow), 0 4px 6px -2px var(--clay-shadow),
+    0 12px 20px -10px var(--clay-shadow-deep), inset 0 1px 0 0 var(--clay-highlight),
+    inset 0 -2px 3px -2px var(--clay-shadow-deep);
+  --shadow-floating:
+    0 2px 4px var(--clay-shadow), 0 12px 20px -6px var(--clay-shadow),
+    0 32px 56px -20px var(--clay-shadow-deep), inset 0 1px 0 0 var(--clay-highlight),
+    inset 0 -2px 4px -2px var(--clay-shadow-deep);
+  --shadow-pressed: inset 0 3px 6px var(--clay-shadow-deep), inset 0 -1px 0 0 var(--clay-rim);
+  --shadow-inset:
+    inset 0 2px 4px var(--clay-shadow), inset 0 8px 12px -8px var(--clay-shadow-deep),
+    inset 0 -1px 0 0 var(--clay-rim);
+
+  /* The template's own scale, mapped onto clay so the `shadow-sm` and
+     `shadow-md` already written through its components read as clay. */
+  --shadow-2xs: 0 1px 1px var(--clay-shadow);
+  --shadow-xs: 0 1px 2px var(--clay-shadow);
+  --shadow-sm: 0 1px 2px var(--clay-shadow), 0 2px 4px -2px var(--clay-shadow);
+  --shadow: var(--shadow-raised);
+  --shadow-md: var(--shadow-raised);
+  --shadow-lg: var(--shadow-floating);
+  --shadow-xl: var(--shadow-floating);
+  --shadow-2xl: var(--shadow-floating);
+
+  /* --- Shape ------------------------------------------------------------
+     Clay is round, but the client is a dense management tool and its scale
+     tops out well short of the 24px the style is usually drawn at. A website
+     has more room than a 28px table row, so `--radius` is the client's `md`
+     and the larger steps are used for the page's own cards. */
+  --radius: 0.75rem;
+
+  /* --- Type ------------------------------------------------------------- */
+  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", monospace;
+  --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+
+  /* --- Charts -----------------------------------------------------------
+     Ordered so neighbours differ in lightness as well as hue: a series read
+     in greyscale, or by someone who cannot separate the hues, is still a
+     series. */
+  --chart-1: #524bc4;
+  --chart-2: #0e6f76;
+  --chart-3: #8a6008;
+  --chart-4: #8d4a86;
+  --chart-5: #2f7350;
+  --chart-grid: #d9d2c6;
+}
+
+/* ===========================================================================
+   DARK — the client's `.dark`. Inverted, not reused.
+   =========================================================================== */
+.dark {
+  color-scheme: dark;
+
+  /* --- Surfaces ------------------------------------------------------- */
+  --background: #191713;
+  --foreground: #eee9e0;
+  --card: #221f1a;
+  --card-foreground: #eee9e0;
+  --popover: #292520;
+  --popover-foreground: #eee9e0;
+  --scrim: #0d0c0acc;
+
+  /* --- Brand ----------------------------------------------------------- */
+  --primary: #a9a4f5;
+  --primary-foreground: #1b1840;
+  --primary-subtle: #302c56;
+  --primary-subtle-foreground: #c5c1fb;
+  --brand: #6cc6cd;
+  --brand-foreground: #06282b;
+  --brand-subtle: #1d3c3f;
+  --brand-subtle-foreground: #97dade;
+
+  /* --- Neutral --------------------------------------------------------- */
+  --secondary: #302c25;
+  --secondary-foreground: #ddd6ca;
+  --muted: #2b2822;
+  --muted-foreground: #a49c8f;
+  --accent: #302c25;
+  --accent-foreground: #ddd6ca;
+
+  /* --- Status ---------------------------------------------------------- */
+  --destructive: #f08b81;
+  --destructive-foreground: #3d100c;
+  --destructive-subtle: #46201c;
+  --destructive-subtle-foreground: #f6b5ae;
+  --success: #74c495;
+  --success-foreground: #0b2618;
+  --success-subtle: #1e3a2a;
+  --success-subtle-foreground: #a2d9b8;
+  --warning: #ddab4b;
+  --warning-foreground: #2e1f02;
+  --warning-subtle: #3c2f14;
+  --warning-subtle-foreground: #ecc887;
+  --info: #86b8dd;
+  --info-foreground: #0b2032;
+  --info-subtle: #1c3243;
+  --info-subtle-foreground: #b0d1ea;
+
+  /* --- Lines and fields ------------------------------------------------- */
+  --border: #36322b;
+  --border-strong: #787264;
+  --input: #736d5f;
+  --ring: #a9a4f5;
+
+  /* --- Sidebar ---------------------------------------------------------- */
+  --sidebar: #211e19;
+  --sidebar-foreground: #c8c1b5;
+  --sidebar-primary: #a9a4f5;
+  --sidebar-primary-foreground: #1b1840;
+  --sidebar-accent: #2b2822;
+  --sidebar-accent-foreground: #ddd6ca;
+  --sidebar-border: #36322b;
+  --sidebar-ring: #a9a4f5;
+
+  /* --- Clay depth --------------------------------------------------------
+     On a dark surface the lit edge is a faint warm white at low alpha and the
+     shadow is near-black; light mode's values would give a plastic sheen and
+     no depth at all. The composite shadows above reference these, so they
+     re-resolve without being restated. */
+  --clay-highlight: #fff4dd1c;
+  --clay-shadow: #00000073;
+  --clay-shadow-deep: #000000bf;
+  --clay-rim: #ffffff12;
+
+  /* --- Charts ------------------------------------------------------------ */
+  --chart-1: #a9a4f5;
+  --chart-2: #6cc6cd;
+  --chart-3: #ddab4b;
+  --chart-4: #d99ad2;
+  --chart-5: #74c495;
+  --chart-grid: #36322b;
+}
+
+/* ===========================================================================
+   The bridge to Tailwind's utility names. A token absent from here has no
+   utility class; a token absent from `.dark` above is wrong in dark mode.
+   Add to :root, .dark and this block together, always.
+   =========================================================================== */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-scrim: var(--scrim);
+
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary-subtle: var(--primary-subtle);
+  --color-primary-subtle-foreground: var(--primary-subtle-foreground);
+  --color-brand: var(--brand);
+  --color-brand-foreground: var(--brand-foreground);
+  --color-brand-subtle: var(--brand-subtle);
+  --color-brand-subtle-foreground: var(--brand-subtle-foreground);
+
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-destructive-subtle: var(--destructive-subtle);
+  --color-destructive-subtle-foreground: var(--destructive-subtle-foreground);
+  --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
+  --color-success-subtle: var(--success-subtle);
+  --color-success-subtle-foreground: var(--success-subtle-foreground);
+  --color-warning: var(--warning);
+  --color-warning-foreground: var(--warning-foreground);
+  --color-warning-subtle: var(--warning-subtle);
+  --color-warning-subtle-foreground: var(--warning-subtle-foreground);
+  --color-info: var(--info);
+  --color-info-foreground: var(--info-foreground);
+  --color-info-subtle: var(--info-subtle);
+  --color-info-subtle-foreground: var(--info-subtle-foreground);
+
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-chart-grid: var(--chart-grid);
+
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-mono);
+  --font-serif: var(--font-serif);
+
+  --text-tiny: 0.625rem;
+
+  /* The client's scale. Not derived from --radius by arithmetic: the
+     multiplier form this replaces produced negative lengths for the small
+     steps, which CSS rejects, so `rounded-sm` silently rendered square. */
+  --radius-xs: 0.375rem;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1.125rem;
+  --radius-xl: 1.5rem;
+
+  --shadow-2xs: var(--shadow-2xs);
+  --shadow-xs: var(--shadow-xs);
+  --shadow-sm: var(--shadow-sm);
+  --shadow: var(--shadow);
+  --shadow-md: var(--shadow-md);
+  --shadow-lg: var(--shadow-lg);
+  --shadow-xl: var(--shadow-xl);
+  --shadow-2xl: var(--shadow-2xl);
+  --shadow-raised: var(--shadow-raised);
+  --shadow-floating: var(--shadow-floating);
+  --shadow-pressed: var(--shadow-pressed);
+  --shadow-inset: var(--shadow-inset);
+}
+
+@layer base {
+  body {
+    /* 1.5 minimum for body text; the density dial is spacing, not leading. */
+    line-height: 1.55;
+    text-rendering: optimizeLegibility;
+  }
+
+  /* One focus ring for the whole site, defined once. Two offset pixels of the
+     surface behind it keep it legible on a clay surface, where the control's
+     own edge is a gradient rather than a line. */
+  :focus-visible {
+    outline: 2px solid var(--ring);
+    outline-offset: 2px;
+    border-radius: var(--radius-xs);
+  }
+
+  ::selection {
+    background-color: var(--primary-subtle);
+    color: var(--primary-subtle-foreground);
+  }
+
+  /* Numbers that sit in a column — versions, sizes, counts — must not change
+     width as they change value, or the column jitters. */
+  .tabular {
+    font-variant-numeric: tabular-nums;
+    font-feature-settings: "tnum";
+  }
+
+  /* A checksum or a URL reflows; prose does not get broken mid-word. */
+  .wrap-anywhere {
+    overflow-wrap: anywhere;
+  }
+
+  /* Motion is opt-out at the source. Clay leans on press and lift, and both
+     are decoration: with reduced motion the final state still renders, it
+     just arrives immediately. */
+  @media (prefers-reduced-motion: reduce) {
+    *,
+    ::before,
+    ::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
+  }
+}
+
+@layer components {
+  /* The clay primitives, as the client defines them. Three states of one idea
+     — a surface sitting above the page, a surface being pushed into it, and a
+     well cut into it — so depth is a vocabulary rather than a shadow value
+     guessed per component. */
+  .clay {
+    background-color: var(--card);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-raised);
+  }
+
+  .clay-floating {
+    background-color: var(--popover);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-floating);
+  }
+
+  .clay-well {
+    background-color: var(--muted);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-inset);
+  }
+
+  /* Press is the whole interaction language of clay: the control moves a
+     pixel and its shadow collapses inward, so a click reads as physical
+     rather than as a colour change. 120ms out, ~70% of that back in — the
+     exit-faster-than-enter rule applied to a press. */
+  .clay-press {
+    transition:
+      box-shadow 120ms ease-out,
+      transform 120ms ease-out,
+      background-color 120ms ease-out,
+      color 120ms ease-out;
+  }
+
+  .clay-press:active:not(:disabled):not([aria-disabled="true"]) {
+    transform: translateY(1px);
+    box-shadow: var(--shadow-pressed);
+    transition-duration: 80ms;
+  }
+}

@@ -1,0 +1,194 @@
+{
+  // =====================================================================
+  // Deployed from the Cloudflare dashboard — no terminal required.
+  //
+  // Ask Claude to fill this in (it runs `npm run configure`), or edit by
+  // hand. Find whatever is still unset:
+  //   grep -in "change.me\|0000000" wrangler.jsonc
+  //
+  // Full walkthrough: docs/deploy.md
+  // =====================================================================
+  "$schema": "node_modules/wrangler/config-schema.json",
+
+  // CHANGE_ME — the Worker script name. This is the identity Cloudflare
+  // stores secrets, routes and deployments against, so renaming it later
+  // creates a *new* worker and orphans the old one's secrets.
+  "name": "zipr-site",
+
+  "compatibility_date": "2025-01-01",
+  "main": "worker/index.ts",
+
+  "assets": {
+    "directory": "./dist/client",
+    "binding": "ASSETS",
+    "html_handling": "auto-trailing-slash",
+    // This app server-renders every page, so unmatched paths are handled
+    // by the worker's own notFound, not by an SPA shell. "none" keeps the
+    // asset layer from swallowing 404s that should reach your router.
+    "not_found_handling": "none",
+  },
+
+  "observability": {
+    "enabled": true,
+  },
+
+  "dev": {
+    "port": 3000,
+    "local_protocol": "http",
+  },
+
+  // ---------------------------------------------------------------------
+  // Everything below is production. Cloudflare builds and deploys this on
+  // every push once the repo is connected under Settings -> Builds.
+  //
+  // Adding a staging environment later means adding an "env": { "staging":
+  // {...} } block — but named environments INHERIT NOTHING, so every binding
+  // and var must be repeated inside it, and it deploys a SEPARATE worker with
+  // its own secrets. See the appendix in docs/deploy.md.
+  // ---------------------------------------------------------------------
+
+  // CHANGE_ME — delete this block to publish on <name>.<subdomain>.workers.dev
+  // instead. `zone_name` is only required when the record is ambiguous;
+  // a custom_domain on a zone in the same account resolves without it.
+  "routes": [
+    {
+      "pattern": "change-me.example.com",
+      "custom_domain": true,
+    },
+  ],
+
+  // CHANGE_ME — Dashboard: Storage & Databases -> D1 -> Create.
+  //             The Database ID is on the database's overview page.
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "zipr-site-db",
+      "database_id": "00000000-0000-0000-0000-000000000000",
+      "migrations_dir": "drizzle",
+    },
+  ],
+
+  // CHANGE_ME — Dashboard: Storage & Databases -> KV -> Create Instance.
+  "kv_namespaces": [
+    {
+      "binding": "KV",
+      "id": "00000000000000000000000000000000",
+    },
+  ],
+
+  // CHANGE_ME — Dashboard: R2 -> Create bucket.
+  // Optional: delete this block and `R2` in worker/types.ts if the site
+  // stores no files.
+  "r2_buckets": [
+    {
+      "binding": "R2",
+      "bucket_name": "zipr-site-downloads",
+    },
+  ],
+
+  // Edge rate limiting. `namespace_id` is an arbitrary number you pick per
+  // limiter within this worker — it is NOT a resource to provision, so
+  // nothing here needs changing. Used by the auth API to throttle login
+  // attempts by IP before they reach the database.
+  "ratelimits": [
+    {
+      "name": "RATE_LIMITER",
+      "namespace_id": "1001",
+      "simple": {
+        "limit": 20,
+        "period": 60,
+      },
+    },
+  ],
+
+  "vars": {
+    "ENVIRONMENT": "production",
+
+    // --- BRANDING ---
+    // CHANGE_ME — how the site names itself in the title, nav and footer.
+    "APP_NAME": "Zipr",
+    "APP_TAGLINE": "One catalogue of the things your team launches.",
+    "APP_LOCALE": "en-AU",
+    "APP_CURRENCY": "USD",
+
+    // --- CORE AUTH ---
+    // Enabled methods: passkey, password, pin, totp, email, sms
+    "AUTH_METHODS": "password,passkey,totp",
+
+    // Milliseconds.
+    "SESSION_DURATION": "86400000",
+    "SESSION_RENEWAL_THRESHOLD": "3600000",
+    "MAX_SESSIONS_PER_USER": "5",
+
+    // SECONDS — not milliseconds. This sets the JWT `exp` claim and the
+    // cookie Max-Age directly. Pasting a millisecond value here (86400000)
+    // yields a ~2.7 YEAR session, not a day. 86400 = 24 hours.
+    "JWT_EXPIRY": "86400",
+
+    // --- SECURITY ---
+    // JWT_SECRET is deliberately absent: it is a SECRET, not a var. Set it in
+    // the dashboard under Settings -> Variables and Secrets, type "Secret".
+    // Putting it here commits it to git and leaks it to anyone with repo
+    // access. See docs/deploy.md.
+    "MAX_FAILED_LOGIN_ATTEMPTS": "5",
+    "LOCKOUT_DURATION": "900000",
+    "REQUIRE_EMAIL_VERIFICATION": "false",
+    "REQUIRE_PHONE_VERIFICATION": "false",
+    // Comma-separated allowlist. Empty means open registration.
+    // Set this for an invite-only or single-user site.
+    // This site has no public sign-up. The only accounts are the people who
+    // read the enquiry inbox and publish releases, so registration is closed
+    // to an explicit list. CHANGE_ME — add the addresses that may register.
+    "ALLOWED_EMAILS": "",
+
+    // First-run admin, so you never need a terminal to get one. Register
+    // normally with this exact email and that account becomes an admin — but
+    // ONLY while no admin exists yet, so it disarms itself the moment it
+    // works. Safe to leave set; tidier to clear afterwards.
+    "BOOTSTRAP_ADMIN_EMAIL": "",
+
+    // --- ROLES & PERMISSIONS ---
+    // CHANGE_ME — model your own resources here. Convention:
+    //   resource.action      → the action on rows the user owns
+    //   resource.action.any  → the action on anyone's rows
+    //   "*"                  → expands to all of PERMISSIONS_AVAILABLE
+    // Keep the resource names in sync with the `Resource` type in
+    // worker/services/access.service.ts.
+    "ROLES_AVAILABLE": "user,admin",
+    "ROLES_DEFAULT": "user",
+    // Roles that cannot be self-assigned at registration. Get your first
+    // admin with BOOTSTRAP_ADMIN_EMAIL below — no terminal needed.
+    "ROLES_RESTRICTED": "admin",
+    "PERMISSIONS_AVAILABLE": "enquiries.read,enquiries.update,enquiries.delete,releases.read,releases.create,releases.update,releases.delete",
+    // `user` is the default role and holds no permissions: signing in grants
+    // nothing on its own. Every staff surface is admin-only, and a narrower
+    // grant is available per user through the user_permissions table.
+    "ROLES_INHERENT": "admin:*",
+
+    // --- PASSKEY / WEBAUTHN ---
+    // CHANGE_ME — these MUST match the deployed domain or passkeys fail
+    // with no useful error. RP_ID is the bare hostname (no scheme, no
+    // port); ORIGIN is the full origin users load the site from.
+    "RP_NAME": "Zipr",
+    "RP_ID": "change-me.example.com",
+    "ORIGIN": "https://change-me.example.com",
+
+    // --- PASSWORD CONFIG ---
+    "PASSWORD_MIN_LENGTH": "8",
+    "PASSWORD_REQUIRE_UPPERCASE": "true",
+    "PASSWORD_REQUIRE_LOWERCASE": "true",
+    "PASSWORD_REQUIRE_NUMBERS": "true",
+    "PASSWORD_REQUIRE_SPECIAL": "true",
+
+    // --- PIN CONFIG ---
+    "PIN_LENGTH": "6",
+    "PIN_NUMBERS_ONLY": "true",
+
+    // --- TOTP CONFIG ---
+    // TOTP_ISSUER is the name shown in the user's authenticator app.
+    "TOTP_ISSUER": "Zipr",
+    "TOTP_ALGORITHM": "SHA1",
+    "TOTP_DIGITS": "6",
+    "TOTP_PERIOD": "30",
+  },
+}
