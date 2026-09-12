@@ -80,20 +80,23 @@ export const SectionHeading: FC<{
   </div>
 );
 
-/** A clay surface. `flat` drops the lift for cards that sit inside one. */
+/**
+ * A clay surface, in the three states the client's own stylesheet defines: one
+ * sitting above the page, one cut into it, and one floating over it.
+ *
+ * There is deliberately no flat, bordered tone. A bordered box is the thing
+ * claymorphism replaces — depth instead of lines — and having one available
+ * was why half this site drifted back to looking like a Swiss grid with soft
+ * shadows rather than like the app it is advertising.
+ */
 export const Card: FC<{
-  tone?: "raised" | "flat" | "well";
+  tone?: "raised" | "floating" | "well";
   class?: string;
   /** HTMX needs a stable target for any fragment it swaps in place. */
   id?: string;
   children?: Child;
 }> = ({ tone = "raised", class: className = "", id, children }) => {
-  const base =
-    tone === "well"
-      ? "clay-well"
-      : tone === "flat"
-        ? "rounded-[var(--radius-lg)] border border-border bg-card"
-        : "clay";
+  const base = tone === "well" ? "clay-well" : tone === "floating" ? "clay-floating" : "clay";
   return (
     <div id={id} class={`${base} ${className}`}>
       {children}
@@ -162,6 +165,32 @@ export const SubmitButton: FC<{
   </button>
 );
 
+/**
+ * The small square that holds a section's icon.
+ *
+ * Raised rather than a flat tint: at this size the client's control-scale
+ * elevation is exactly right, and it is what stops a page of icons reading as
+ * stickers.
+ */
+export const IconTile: FC<{
+  icon: string;
+  tone?: "primary" | "brand";
+  size?: "default" | "lg";
+  class?: string;
+}> = ({ icon, tone = "primary", size = "default", class: className = "" }) => (
+  <span
+    class={`clay-raised inline-flex shrink-0 items-center justify-center ${
+      size === "lg" ? "h-12 w-12" : "h-11 w-11"
+    } ${
+      tone === "brand"
+        ? "bg-brand-subtle text-brand-subtle-foreground"
+        : "bg-primary-subtle text-primary-subtle-foreground"
+    } ${className}`}
+  >
+    <i data-lucide={icon} class={size === "lg" ? "h-5 w-5" : "h-5 w-5"} aria-hidden="true"></i>
+  </span>
+);
+
 export const Badge: FC<{
   tone?: "neutral" | "primary" | "brand" | "success" | "warning";
   class?: string;
@@ -222,6 +251,17 @@ export const CheckItem: FC<{ children?: Child }> = ({ children }) => (
     <span class="text-sm leading-relaxed text-muted-foreground">{children}</span>
   </li>
 );
+
+/**
+ * A horizontally scrollable table on a clay surface.
+ *
+ * The scroll container is the clay, so the rounded corners clip the table and
+ * a wide one scrolls inside the shape rather than out of a bordered rectangle.
+ */
+export const TableFrame: FC<{ class?: string; children?: Child }> = ({
+  class: className = "",
+  children,
+}) => <div class={`clay overflow-x-auto ${className}`}>{children}</div>;
 
 /**
  * A closing call to action. Every public page ends with one, because a page

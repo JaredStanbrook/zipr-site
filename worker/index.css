@@ -143,8 +143,12 @@
   --border: #d9d2c6;
   --border-strong: #847d70;
   /* This template's `--input` is consumed as `border-input`, so it carries
-     the client's input *border*, not its field fill. */
+     the client's input *border*, not its field fill. The fill it does not have
+     a slot for is `--field`, which is the client's own `--input`. A clay field
+     is a well cut into the surface: the fill sits slightly below the card and
+     the inset shadow does the rest. */
   --input: #8b8478;
+  --field: #fbf8f3;
   --ring: #524bc4;
 
   /* --- Sidebar ---------------------------------------------------------
@@ -166,6 +170,12 @@
      tokens because both invert in dark mode — a highlight that stays white on
      a dark surface reads as a scratch, not a bevel. */
   --clay-highlight: #fffdf9;
+  /* The client's highlight is #fffdf9 against a #fbf8f3 card — a difference of
+     four values, which reads as a crisp 1px rim on a 28px control and as
+     nothing at all on a 600px card. Page-scale surfaces need a lit edge with
+     some actual light in it, so this is the same idea at a strength that
+     survives being blurred across twenty pixels. */
+  --clay-highlight-strong: #ffffffe6;
   --clay-shadow: #a2927740;
   --clay-shadow-deep: #6f624d59;
   --clay-rim: #ffffff59;
@@ -178,6 +188,22 @@
     0 2px 4px var(--clay-shadow), 0 12px 20px -6px var(--clay-shadow),
     0 32px 56px -20px var(--clay-shadow-deep), inset 0 1px 0 0 var(--clay-highlight),
     inset 0 -2px 4px -2px var(--clay-shadow-deep);
+  /* The client's elevations are tuned for controls thirty pixels tall. On a
+     card six hundred pixels wide the same shadow reads as a smudge, so page
+     surfaces get a wider, softer version of the identical recipe — the same
+     paired highlight and shadow, cast further. Without this the marketing
+     pages drift back towards flat the larger they get. */
+  --shadow-raised-lg:
+    /* The object sitting on the page. */
+    0 2px 4px var(--clay-shadow), 0 10px 18px -6px var(--clay-shadow),
+    0 30px 48px -22px var(--clay-shadow-deep),
+    /* The lit edge, blurred inward — this is the half that makes a rounded
+       rectangle read as a soft solid rather than a card with a drop shadow. */
+    inset 0 2px 1px -1px var(--clay-highlight-strong),
+    inset 3px 6px 12px -6px var(--clay-highlight-strong),
+    /* And the edge turned away from the light. */ inset 0 -2px 1px -1px var(--clay-shadow),
+    inset -3px -8px 14px -8px var(--clay-shadow-deep);
+
   --shadow-pressed: inset 0 3px 6px var(--clay-shadow-deep), inset 0 -1px 0 0 var(--clay-rim);
   --shadow-inset:
     inset 0 2px 4px var(--clay-shadow), inset 0 8px 12px -8px var(--clay-shadow-deep),
@@ -273,6 +299,7 @@
   --border: #36322b;
   --border-strong: #787264;
   --input: #736d5f;
+  --field: #1f1c17;
   --ring: #a9a4f5;
 
   /* --- Sidebar ---------------------------------------------------------- */
@@ -291,6 +318,7 @@
      no depth at all. The composite shadows above reference these, so they
      re-resolve without being restated. */
   --clay-highlight: #fff4dd1c;
+  --clay-highlight-strong: #fff4dd33;
   --clay-shadow: #00000073;
   --clay-shadow-deep: #000000bf;
   --clay-rim: #ffffff12;
@@ -354,6 +382,7 @@
   --color-border: var(--border);
   --color-border-strong: var(--border-strong);
   --color-input: var(--input);
+  --color-field: var(--field);
   --color-ring: var(--ring);
 
   --color-chart-1: var(--chart-1);
@@ -378,14 +407,19 @@
 
   --text-tiny: 0.625rem;
 
-  /* The client's scale. Not derived from --radius by arithmetic: the
-     multiplier form this replaces produced negative lengths for the small
-     steps, which CSS rejects, so `rounded-sm` silently rendered square. */
+  /* Controls keep the client's exact scale, because a control here and a
+     control there should feel like the same object.
+     
+     The two large steps are deliberately bigger than the client's. Its own
+     token file explains why it caps low — "a 24px radius on a 28px-tall table
+     row is a pill" — which is an argument about density, not about the style.
+     Clay is normally drawn at about 24px, and a marketing page is made of
+     surfaces with room for it. */
   --radius-xs: 0.375rem;
   --radius-sm: 0.5rem;
   --radius-md: 0.75rem;
-  --radius-lg: 1.125rem;
-  --radius-xl: 1.5rem;
+  --radius-lg: 1.375rem;
+  --radius-xl: 1.75rem;
 
   --shadow-2xs: var(--shadow-2xs);
   --shadow-xs: var(--shadow-xs);
@@ -396,6 +430,7 @@
   --shadow-xl: var(--shadow-xl);
   --shadow-2xl: var(--shadow-2xl);
   --shadow-raised: var(--shadow-raised);
+  --shadow-raised-lg: var(--shadow-raised-lg);
   --shadow-floating: var(--shadow-floating);
   --shadow-pressed: var(--shadow-pressed);
   --shadow-inset: var(--shadow-inset);
@@ -457,7 +492,27 @@
   .clay {
     background-color: var(--card);
     border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-raised-lg);
+  }
+
+  /* A control-sized raised surface: the client's original elevation, for
+     anything small enough that the page-scale one would swamp it. */
+  .clay-raised {
+    background-color: var(--card);
+    border-radius: var(--radius-md);
     box-shadow: var(--shadow-raised);
+  }
+
+  /*
+   * A field. The client's Input is exactly this: the fill sits below the
+   * surface and an inset shadow cuts it in, so a form reads as holes in the
+   * clay rather than boxes drawn on top of it.
+   */
+  .clay-field {
+    background-color: var(--field);
+    border: 1px solid var(--input);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow-inset);
   }
 
   .clay-floating {

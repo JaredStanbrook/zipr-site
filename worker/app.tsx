@@ -10,6 +10,7 @@ import { apiAuth } from "./routes/api/auth";
 import { webAuth } from "./routes/web/auth";
 import { logsRoute } from "./routes/admin/logs";
 import { releasesRoute } from "./routes/admin/releases.tsx";
+import { adminHomeRoute } from "./routes/admin/home.tsx";
 import { siteRoute } from "./routes/site.tsx";
 import { seoRoute } from "./routes/seo";
 import devRouter from "./routes/dev.tsx";
@@ -23,6 +24,10 @@ import type { AppEnv } from "./types";
 // than re-declaring the role check on each one.
 const admin = new Hono<AppEnv>();
 admin.use("*", requireRole("admin"));
+// `/admin` itself is the front door: this site has no customer accounts, so
+// signing in exists only to reach what is below. The guard above turns a
+// signed-out visit here into a redirect to the sign-in page for free.
+admin.route("/", adminHomeRoute);
 admin.route("/logs", logsRoute);
 admin.route("/releases", releasesRoute);
 

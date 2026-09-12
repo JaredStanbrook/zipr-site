@@ -220,18 +220,17 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
             ${
               !user
                 ? html`
-                    <div class="flex items-center gap-2">
-                      <a
-                        href="/login"
-                        class="text-sm font-medium text-muted-foreground hover:text-primary"
-                        >Login</a
-                      >
-                      <a
-                        href="/downloads"
-                        class="inline-flex items-center justify-center rounded-lg text-sm font-medium bg-primary text-primary-foreground hover:bg-primary/90 h-9 px-4 py-2 transition-colors"
-                        >Download</a
-                      >
-                    </div>
+                    <!--
+                      No sign-in link. This site has no customer accounts: the
+                      only people who sign in are the ones publishing releases,
+                      and they go straight to /admin. Advertising a login to
+                      every visitor would imply an account they cannot have.
+                    -->
+                    <a
+                      href="/downloads"
+                      class="clay-press inline-flex h-9 items-center justify-center rounded-[var(--radius-sm)] bg-primary px-4 text-sm font-semibold text-primary-foreground shadow-raised no-underline hover:brightness-110"
+                      >Download</a
+                    >
                   `
                 : UserMenu({ user })
             }
@@ -298,20 +297,12 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
           ${
             !user
               ? html`
-                  <div class="grid grid-cols-2 gap-4">
-                    <a
-                      href="/login"
-                      class="inline-flex items-center justify-center rounded-lg h-12 border border-input bg-background px-4 py-2 text-base font-medium hover:bg-accent hover:text-accent-foreground"
-                    >
-                      Login
-                    </a>
-                    <a
-                      href="/downloads"
-                      class="inline-flex items-center justify-center rounded-lg h-12 bg-primary px-4 py-2 text-base font-medium text-primary-foreground hover:bg-primary/90"
-                    >
-                      Download
-                    </a>
-                  </div>
+                  <a
+                    href="/downloads"
+                    class="clay-press inline-flex h-12 w-full items-center justify-center rounded-[var(--radius-sm)] bg-primary px-4 text-base font-semibold text-primary-foreground shadow-raised no-underline hover:brightness-110"
+                  >
+                    Download
+                  </a>
                 `
               : html`
                   <div class="rounded-xl border bg-card text-card-foreground shadow-sm">

@@ -25,11 +25,28 @@ Built on [frug-template](https://github.com/JaredStanbrook/frug-template); its
 | `/pricing`        | Three tiers, the full comparison, and what the infrastructure costs |
 | `/docs`           | Architecture, deployment shapes, and notes for client authors       |
 | `/contact`        | Four `mailto:` routes, each with a subject already written          |
+| `/admin`          | Where signing in lands you: what is published, and where to go      |
 | `/admin/releases` | Create a release, upload installers, publish                        |
 | `/admin/logs`     | The authentication audit trail                                      |
 
-Public pages need no account. Everything under `/admin` requires the `admin`
-role, and there is no public sign-up: `ALLOWED_EMAILS` gates registration.
+## Accounts
+
+There are no customer accounts. The only reason anyone signs in is to publish a
+release or read the sign-in log, so:
+
+- **`/admin` is the front door.** Visiting it signed out redirects to the form;
+  signing in comes back here. Nothing on the public site links to it.
+- **The public pages advertise no sign-in at all** — a login link would imply
+  an account a visitor cannot have.
+- **`/register` exists only until the first admin does.** That page is how
+  `BOOTSTRAP_ADMIN_EMAIL` makes the first account without a terminal; the
+  moment an admin exists the bootstrap disarms itself, and so does the page,
+  which then 404s. Further accounts are made with
+  `npm run create-admin:remote`.
+
+That last one is why `ALLOWED_EMAILS` matters less here than in the template:
+the sign-up form is not standing open waiting for someone to remember to set
+it. Set it anyway if you intend to register more than once.
 
 ## Still to configure
 
@@ -121,6 +138,29 @@ Three token names differ from the client's on purpose, and `worker/index.css`
 says why at the top. The rule that matters: style with the semantic token
 (`bg-card`, `text-muted-foreground`), never a raw colour, or it will be
 unreadable in whichever theme you did not test.
+
+### The clay vocabulary
+
+Depth, not lines. There is deliberately no flat bordered card available — a
+bordered box is the thing claymorphism replaces, and having one on hand is how
+this site drifted back to looking like a Swiss grid with soft shadows.
+
+| Class          | Is                          | Use for                        |
+| -------------- | --------------------------- | ------------------------------ |
+| `.clay`        | A surface above the page    | Cards, table frames, panels    |
+| `.clay-raised` | The same at control scale   | Icon tiles, small raised bits  |
+| `.clay-well`   | A surface cut into the page | Empty states, recessed regions |
+| `.clay-field`  | A well shaped like an input | Every form control             |
+| `.clay-press`  | A pixel down, shadow inward | Anything clickable             |
+
+Two things differ from the client's own token file, both on purpose and both
+commented where they are defined. Large surfaces use `--shadow-raised-lg`,
+which is the same paired-highlight recipe cast wider — the client's elevation
+is tuned for 28px controls and reads as a smudge on a 600px card. And
+`--radius-lg`/`--radius-xl` are larger than the client's, because its own
+comment explains that it caps low for density ("a 24px radius on a 28px-tall
+table row is a pill"), which is an argument about tables rather than about the
+style. Controls keep the client's exact scale.
 
 Plus Jakarta Sans and JetBrains Mono are self-hosted in `public/fonts` (latin
 and latin-ext, ~92KB) so first paint owes nothing to a third party and the site

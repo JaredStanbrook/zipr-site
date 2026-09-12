@@ -13,6 +13,8 @@ import {
   Badge,
   LinkButton,
   CtaBand,
+  IconTile,
+  TableFrame,
 } from "@views/components/Ui";
 
 interface DownloadsProps {
@@ -37,9 +39,7 @@ const PlatformCard: FC<{
 }> = ({ info, asset, highlighted }) => (
   <Card class={`flex h-full flex-col p-6 ${highlighted ? "ring-2 ring-primary" : ""}`}>
     <div class="flex items-start justify-between gap-3">
-      <span class="flex h-11 w-11 items-center justify-center rounded-[var(--radius-sm)] bg-primary-subtle text-primary-subtle-foreground">
-        <i data-lucide={info.icon} class="h-5 w-5" aria-hidden="true"></i>
-      </span>
+      <IconTile icon={info.icon} />
       {highlighted ? <Badge tone="primary">Looks like your system</Badge> : null}
     </div>
 
@@ -102,7 +102,7 @@ const PlatformCard: FC<{
 /** Shown before anything has ever been published. Honest, not a fake button. */
 const NoReleases: FC = () => (
   <Card class="px-6 py-14 text-center">
-    <span class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-muted text-muted-foreground">
+    <span class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-muted text-muted-foreground shadow-inset">
       <i data-lucide="package" class="h-6 w-6" aria-hidden="true"></i>
     </span>
     <h2 class="mt-5 text-2xl font-bold">No build published yet</h2>
@@ -179,7 +179,7 @@ export const DownloadsPage: FC<DownloadsProps> = ({ latest, previous, detected, 
         <SectionHeading eyebrow="Before you install" title="Three things worth knowing" />
         <div class="grid gap-5 md:grid-cols-3">
           {INSTALL_NOTES.map((note) => (
-            <Card tone="flat" class="p-6">
+            <Card class="p-6">
               <i data-lucide="info" class="h-5 w-5 text-info" aria-hidden="true"></i>
               <p class="mt-3 text-sm leading-relaxed text-muted-foreground text-pretty">{note}</p>
             </Card>
@@ -212,7 +212,7 @@ export const DownloadsPage: FC<DownloadsProps> = ({ latest, previous, detected, 
             lede="Kept so a rollback is possible. Run the newest one unless you have a reason not to."
           />
 
-          <div class="overflow-x-auto rounded-[var(--radius-lg)] border border-border bg-card">
+          <TableFrame>
             <table class="w-full min-w-[32rem] border-collapse text-left">
               <thead>
                 <tr class="border-b border-border bg-muted/60">
@@ -262,7 +262,7 @@ export const DownloadsPage: FC<DownloadsProps> = ({ latest, previous, detected, 
                 ))}
               </tbody>
             </table>
-          </div>
+          </TableFrame>
         </Container>
       </Section>
     ) : null}

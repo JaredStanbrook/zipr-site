@@ -7,6 +7,7 @@ import {
   Container,
   SectionHeading,
   Card,
+  IconTile,
   LinkButton,
   Badge,
   CtaBand,
@@ -232,9 +233,7 @@ export const HomePage: FC = () => (
         <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
           {PILLARS.map((pillar) => (
             <Card class="flex h-full flex-col p-6">
-              <span class="flex h-10 w-10 items-center justify-center rounded-[var(--radius-sm)] bg-primary-subtle text-primary-subtle-foreground">
-                <i data-lucide={pillar.icon} class="h-5 w-5" aria-hidden="true"></i>
-              </span>
+              <IconTile icon={pillar.icon} />
               <h3 class="mt-4 font-bold text-balance">{pillar.title}</h3>
               <p class="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
                 {pillar.body}

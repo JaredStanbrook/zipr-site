@@ -1,4 +1,5 @@
 import { users, authLogs } from "../../worker/schema/auth.schema";
+import { userRoles } from "../../worker/schema/roles.schema";
 import { release, releaseAsset } from "../../worker/schema/release.schema";
 
 /**
@@ -12,6 +13,8 @@ import { release, releaseAsset } from "../../worker/schema/release.schema";
 
 export type MockData = {
   users: any[];
+  /** Drives "has an admin been bootstrapped yet" — see the /register route. */
+  userRoles: any[];
   releases: any[];
   releaseAssets: any[];
   authLogs: any[];
@@ -51,6 +54,8 @@ const resolveSelect = (data: MockData, state: QueryState) => {
       return data.releases;
     case releaseAsset:
       return data.releaseAssets;
+    case userRoles:
+      return data.userRoles;
     case authLogs:
       return data.authLogs;
     default:
@@ -126,11 +131,11 @@ export const createFakeDb = (data: MockData) => ({
   },
 });
 
-export const createMockData = (): MockData => {
+export const createMockData = (overrides: Partial<MockData> = {}): MockData => {
   const now = new Date().toISOString();
   const userId = "user-1";
 
-  return {
+  const data: MockData = {
     users: [
       {
         id: userId,
@@ -180,6 +185,7 @@ export const createMockData = (): MockData => {
         updatedAt: now,
       },
     ],
+    userRoles: [{ id: "ur-1", userId, role: "admin" }],
     authLogs: [
       {
         id: "log-1",
@@ -193,4 +199,6 @@ export const createMockData = (): MockData => {
       },
     ],
   };
+
+  return { ...data, ...overrides };
 };

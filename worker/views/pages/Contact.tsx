@@ -9,6 +9,7 @@ import {
   Card,
   LinkButton,
   Badge,
+  IconTile,
 } from "@views/components/Ui";
 
 /**
@@ -116,9 +117,7 @@ const ROUTES: Route[] = [
 const RouteCard: FC<{ route: Route; highlighted: boolean }> = ({ route, highlighted }) => (
   <Card class={`flex h-full flex-col p-6 ${highlighted ? "ring-2 ring-primary" : ""}`}>
     <div class="flex items-start justify-between gap-3">
-      <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-sm)] bg-primary-subtle text-primary-subtle-foreground">
-        <i data-lucide={route.icon} class="h-5 w-5" aria-hidden="true"></i>
-      </span>
+      <IconTile icon={route.icon} />
       {highlighted ? <Badge tone="primary">You were asking about this</Badge> : null}
     </div>
 
@@ -176,9 +175,7 @@ export const ContactPage: FC<{ topic?: string }> = ({ topic }) => (
       <Section tone="muted">
         <Container size="prose">
           <Card class="p-7 text-center">
-            <span class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-brand-subtle text-brand-subtle-foreground">
-              <i data-lucide="bug" class="h-5 w-5" aria-hidden="true"></i>
-            </span>
+            <IconTile icon="bug" tone="brand" size="lg" class="mx-auto" />
             <h2 class="mt-4 text-xl font-bold">Found a bug?</h2>
             <p class="mx-auto mt-2 max-w-md text-sm leading-relaxed text-muted-foreground text-pretty">
               Issues go in the repository they belong to, so they end up next to the code that has

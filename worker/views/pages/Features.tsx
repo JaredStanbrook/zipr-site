@@ -7,6 +7,7 @@ import {
   Container,
   SectionHeading,
   Card,
+  IconTile,
   Badge,
   CtaBand,
   CheckItem,
@@ -65,9 +66,7 @@ export const FeaturesPage: FC = () => (
           {PILLARS.map((pillar) => (
             <Card class="flex h-full flex-col p-7">
               <div class="flex items-start justify-between gap-4">
-                <span class="flex h-11 w-11 shrink-0 items-center justify-center rounded-[var(--radius-sm)] bg-primary-subtle text-primary-subtle-foreground">
-                  <i data-lucide={pillar.icon} class="h-5 w-5" aria-hidden="true"></i>
-                </span>
+                <IconTile icon={pillar.icon} />
                 <Badge tone={pillar.tier === "client" ? "success" : "primary"}>
                   {pillar.tier === "client" ? "Free client" : "Needs the API"}
                 </Badge>
@@ -91,7 +90,7 @@ export const FeaturesPage: FC = () => (
 
         <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {ACTION_TYPES.map((action) => (
-            <Card tone="flat" class="p-5">
+            <Card class="p-5">
               <code class="font-mono text-sm font-semibold text-primary wrap-anywhere">
                 {action.name}
               </code>
@@ -244,7 +243,7 @@ export const FeaturesPage: FC = () => (
 
         <div class="grid gap-5 md:grid-cols-2">
           {LOCAL_LIMITS.map((item) => (
-            <Card tone="flat" class="p-6">
+            <Card class="p-6">
               <h3 class="flex items-center gap-2 font-bold">
                 <i
                   data-lucide="minus"

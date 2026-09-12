@@ -16,6 +16,7 @@ import {
   Mark,
   Disclosure,
   CtaBand,
+  TableFrame,
 } from "@views/components/Ui";
 
 /**
@@ -100,7 +101,7 @@ const TierCard: FC<{ tier: PricingTier; app: AppConfig }> = ({ tier, app }) => {
 };
 
 const ComparisonTable: FC = () => (
-  <div class="overflow-x-auto rounded-[var(--radius-lg)] border border-border bg-card">
+  <TableFrame>
     <table class="relative w-full min-w-[46rem] border-collapse text-left">
       <caption class="sr-only">
         Feature comparison between the free client, Team and Enterprise
@@ -160,7 +161,7 @@ const ComparisonTable: FC = () => (
         </tbody>
       ))}
     </table>
-  </div>
+  </TableFrame>
 );
 
 export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
@@ -218,7 +219,7 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
           lede="Zipr is self-hosted, so the infrastructure is yours and so is its cost. Two of the four components below are optional, and the deployment degrades honestly without them rather than failing."
         />
 
-        <div class="overflow-x-auto rounded-[var(--radius-lg)] border border-border bg-card">
+        <TableFrame>
           <table class="w-full min-w-[36rem] border-collapse text-left">
             <thead>
               <tr class="border-b border-border bg-muted/60">
@@ -251,7 +252,7 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
               ))}
             </tbody>
           </table>
-        </div>
+        </TableFrame>
 
         <div class="mt-6 grid gap-5 md:grid-cols-2">
           <Card class="p-6">

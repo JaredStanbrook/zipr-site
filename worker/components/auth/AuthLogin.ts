@@ -146,7 +146,7 @@ export class AuthLogin extends LitElement {
 
       if (!response.ok) throw new Error(await getErrorMessage(response));
 
-      redirectWithToast("/", "Login successful!", "Welcome to your dashboard.", "success");
+      redirectWithToast("/admin", "Signed in", "Back to the release manager.", "success");
     } catch (error: any) {
       this.showError(error.message);
     } finally {
@@ -180,7 +180,7 @@ export class AuthLogin extends LitElement {
       this.totpModal.verifySuccess();
       this.totpSessionData = null;
 
-      redirectWithToast("/", "Login successful!", "Welcome to your dashboard.", "success");
+      redirectWithToast("/admin", "Signed in", "Back to the release manager.", "success");
     } catch (error: any) {
       this.totpModal.verifyError("Verification failed. Please try again.");
       console.error("TOTP verification error:", error);
@@ -215,7 +215,7 @@ export class AuthLogin extends LitElement {
 
       if (!response.ok) throw new Error(await getErrorMessage(response));
 
-      redirectWithToast("/", "Login successful!", "Welcome to your dashboard.", "success");
+      redirectWithToast("/admin", "Signed in", "Back to the release manager.", "success");
     } catch (error: any) {
       this.showError(error.message);
     } finally {
@@ -257,7 +257,7 @@ export class AuthLogin extends LitElement {
 
       if (!verRes.ok) throw new Error(await getErrorMessage(verRes));
 
-      redirectWithToast("/", "Login successful!", "Welcome to your dashboard.", "success");
+      redirectWithToast("/admin", "Signed in", "Back to the release manager.", "success");
     } catch (error: any) {
       this.showError(error.message);
     } finally {

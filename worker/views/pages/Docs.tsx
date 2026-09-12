@@ -7,10 +7,12 @@ import {
   Container,
   SectionHeading,
   Card,
+  IconTile,
   Badge,
   LinkButton,
   CtaBand,
   Eyebrow,
+  TableFrame,
 } from "@views/components/Ui";
 
 /**
@@ -135,9 +137,7 @@ export const DocsPage: FC = () => (
             },
           ].map((piece) => (
             <Card class="p-6">
-              <span class="flex h-11 w-11 items-center justify-center rounded-[var(--radius-sm)] bg-brand-subtle text-brand-subtle-foreground">
-                <i data-lucide={piece.icon} class="h-5 w-5" aria-hidden="true"></i>
-              </span>
+              <IconTile icon={piece.icon} tone="brand" />
               <h2 class="mt-4 text-lg font-bold">{piece.name}</h2>
               <p class="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
                 {piece.body}
@@ -209,7 +209,7 @@ export const DocsPage: FC = () => (
           lede="Several route groups are registered only when their dependency is configured, and an unregistered route answers 404 — the same status as a resource you are not allowed to see. One endpoint resolves that ambiguity directly, so a client never has to guess."
         />
 
-        <div class="overflow-x-auto rounded-[var(--radius-lg)] border border-border bg-card">
+        <TableFrame>
           <table class="w-full min-w-[38rem] border-collapse text-left">
             <thead>
               <tr class="border-b border-border bg-muted/60">
@@ -242,7 +242,7 @@ export const DocsPage: FC = () => (
               ))}
             </tbody>
           </table>
-        </div>
+        </TableFrame>
       </Container>
     </Section>
 
@@ -287,7 +287,7 @@ export const DocsPage: FC = () => (
           <ol class="space-y-4">
             {CLIENT_RULES.map((rule, index) => (
               <li>
-                <Card tone="flat" class="flex gap-4 p-5">
+                <Card class="flex gap-4 p-5">
                   <span
                     class="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary-subtle font-mono text-xs font-bold text-primary-subtle-foreground tabular"
                     aria-hidden="true"

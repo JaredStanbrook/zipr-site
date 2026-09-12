@@ -10,8 +10,14 @@ import {
 import { formatBytes, formatDateShort } from "@views/lib/utils";
 import { Page, Container, Card, Badge, SubmitButton } from "@views/components/Ui";
 
+/**
+ * A field is a well cut into the clay, which is exactly what the client's own
+ * Input component is: the fill sits below the surface and an inset shadow does
+ * the rest, so a form reads as holes in the material rather than boxes drawn
+ * on top of it.
+ */
 const FIELD_CLASS =
-  "w-full rounded-[var(--radius-sm)] border border-input bg-card px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background";
+  "clay-field w-full px-3 py-2 text-sm text-foreground focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background";
 
 /** One release and its installers. Swapped whole when anything about it changes. */
 export const ReleaseCard: FC<{ item: ReleaseWithAssets; app: AppConfig }> = ({ item, app }) => (
@@ -263,7 +269,7 @@ export const ReleasesPage: FC<{
       {/* ---------- existing ---------- */}
       {releases.length === 0 ? (
         <Card class="px-6 py-16 text-center">
-          <span class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-muted text-muted-foreground">
+          <span class="mx-auto flex h-12 w-12 items-center justify-center rounded-full bg-muted text-muted-foreground shadow-inset">
             <i data-lucide="package" class="h-5 w-5" aria-hidden="true"></i>
           </span>
           <p class="mt-4 font-semibold">No releases yet</p>

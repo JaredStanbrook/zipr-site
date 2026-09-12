@@ -51,8 +51,8 @@ const createAuthConfig = (): AuthConfig => ({
   },
 });
 
-const createTestApp = (user: any | null) => {
-  const fakeDb = createFakeDb(createMockData());
+const createTestApp = (user: any | null, data = createMockData()) => {
+  const fakeDb = createFakeDb(data);
 
   const wrapper = new Hono<AppEnv>();
   wrapper.use("*", async (c, next) => {
@@ -86,7 +86,6 @@ describe("UI pages load", () => {
     for (const path of [
       "/",
       "/login",
-      "/register",
       "/features",
       "/pricing",
       "/downloads",
@@ -103,7 +102,7 @@ describe("UI pages load", () => {
   it("redirects signed-out visitors away from protected pages", async () => {
     const testApp = createTestApp(null);
 
-    for (const path of ["/profile", "/admin/logs", "/admin/releases"]) {
+    for (const path of ["/profile", "/admin", "/admin/logs", "/admin/releases"]) {
       const res = await get(testApp, path);
       expect(res.status, `GET ${path}`).toBe(302);
       expect(res.headers.get("location"), `GET ${path}`).toBe("/login");
@@ -113,7 +112,7 @@ describe("UI pages load", () => {
   it("serves protected pages to a signed-in admin", async () => {
     const testApp = createTestApp(createMockData().users[0]);
 
-    for (const path of ["/", "/profile", "/admin/logs", "/admin/releases"]) {
+    for (const path of ["/", "/profile", "/admin", "/admin/logs", "/admin/releases"]) {
       const res = await get(testApp, path);
       expect(res.status, `GET ${path}`).toBe(200);
     }
@@ -133,6 +132,26 @@ describe("UI pages load", () => {
     expect(downloads).toContain("0.1.0");
     // Published assets link at the streaming route, never at the bucket.
     expect(downloads).toContain("/downloads/1");
+  });
+
+  it("closes registration once an admin exists, and keeps it open before", async () => {
+    // The bootstrap admin is made by registering once on the live site, so the
+    // page has to exist until it has been used — and not a moment longer.
+    const withAdmin = await get(createTestApp(null), "/register");
+    expect(withAdmin.status).toBe(404);
+
+    const fresh = createTestApp(null, createMockData({ userRoles: [] }));
+    expect((await get(fresh, "/register")).status).toBe(200);
+  });
+
+  it("advertises no sign-in to a signed-out visitor", async () => {
+    const html = await (await get(createTestApp(null), "/")).text();
+
+    // There are no customer accounts, so a login link would imply an account
+    // nobody visiting can have. The download CTA is the only one offered.
+    expect(html).not.toContain('href="/login"');
+    expect(html).not.toContain('href="/register"');
+    expect(html).toContain('href="/downloads"');
   });
 
   it("offers contact as mailto only, with no form to post", async () => {
