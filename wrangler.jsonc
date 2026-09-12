@@ -2,17 +2,17 @@
   // =====================================================================
   // Deployed from the Cloudflare dashboard — no terminal required.
   //
-  // Ask Claude to fill this in (it runs `npm run configure`), or edit by
-  // hand. Find whatever is still unset:
-  //   grep -in "change.me\|0000000" wrangler.jsonc
+  // Configured. The one thing NOT here is JWT_SECRET, which is a Secret rather
+  // than a var: set it under Settings -> Variables and Secrets.
   //
   // Full walkthrough: docs/deploy.md
   // =====================================================================
   "$schema": "node_modules/wrangler/config-schema.json",
 
-  // CHANGE_ME — the Worker script name. This is the identity Cloudflare
-  // stores secrets, routes and deployments against, so renaming it later
-  // creates a *new* worker and orphans the old one's secrets.
+  // The Worker script name. This is the identity Cloudflare stores secrets,
+  // routes and deployments against, so renaming it later creates a *new*
+  // worker and orphans the old one's secrets — including JWT_SECRET, which
+  // would sign every existing session out.
   "name": "zipr-site",
 
   "compatibility_date": "2025-01-01",
@@ -47,34 +47,33 @@
   // its own secrets. See the appendix in docs/deploy.md.
   // ---------------------------------------------------------------------
 
-  // CHANGE_ME — delete this block to publish on <name>.<subdomain>.workers.dev
-  // instead. `zone_name` is only required when the record is ambiguous;
-  // a custom_domain on a zone in the same account resolves without it.
+  // `zone_name` is only required when the record is ambiguous; a custom_domain
+  // on a zone in the same account resolves without it.
   "routes": [
     {
-      "pattern": "change-me.example.com",
+      "pattern": "zipr.stanbrook.me",
       "custom_domain": true,
     },
   ],
 
-  // CHANGE_ME — Dashboard: Storage & Databases -> D1 -> Create.
-  //             The Database ID is on the database's overview page.
+  // Dashboard: Storage & Databases -> D1. These ids are not secrets — they are
+  // useless without an API token for the account — which is why they live in
+  // version control rather than in a variable.
   "d1_databases": [
     {
       "binding": "DB",
-      "database_name": "zipr-site-db",
-      "database_id": "00000000-0000-0000-0000-000000000000",
+      "database_name": "zipr-db",
+      "database_id": "e10e0a6c-32d0-4bd2-ad06-ef5f1b2c24be",
       "migrations_dir": "drizzle",
     },
   ],
 
-  // CHANGE_ME — Dashboard: R2 -> Create bucket.
-  // Optional: delete this block and `R2` in worker/types.ts if the site
-  // stores no files.
+  // Dashboard: R2. Holds the installer objects; the worker streams them back
+  // rather than the bucket being public, so nothing here is world-readable.
   "r2_buckets": [
     {
       "binding": "R2",
-      "bucket_name": "zipr-site-downloads",
+      "bucket_name": "zipr-r2",
     },
   ],
 
@@ -97,7 +96,7 @@
     "ENVIRONMENT": "production",
 
     // --- BRANDING ---
-    // CHANGE_ME — how the site names itself in the title, nav and footer.
+    // How the site names itself in the title, nav and footer.
     "APP_NAME": "Zipr",
     "APP_TAGLINE": "One catalogue of the things your team launches.",
     "APP_LOCALE": "en-AU",
@@ -134,19 +133,19 @@
     "REQUIRE_PHONE_VERIFICATION": "false",
     // Comma-separated allowlist. Empty means open registration.
     // Set this for an invite-only or single-user site.
-    // This site has no public sign-up. The only accounts are the people who
-    // read the enquiry inbox and publish releases, so registration is closed
-    // to an explicit list. CHANGE_ME — add the addresses that may register.
-    "ALLOWED_EMAILS": "",
+    // Belt and braces. /register already 404s once an admin exists, so this
+    // list has nothing to guard in the normal case — it is here for the window
+    // before the first registration, and for any later one made deliberately.
+    "ALLOWED_EMAILS": "jared@stanbrook.me",
 
     // First-run admin, so you never need a terminal to get one. Register
     // normally with this exact email and that account becomes an admin — but
     // ONLY while no admin exists yet, so it disarms itself the moment it
     // works. Safe to leave set; tidier to clear afterwards.
-    "BOOTSTRAP_ADMIN_EMAIL": "",
+    "BOOTSTRAP_ADMIN_EMAIL": "jared@stanbrook.me",
 
     // --- ROLES & PERMISSIONS ---
-    // CHANGE_ME — model your own resources here. Convention:
+    // Convention:
     //   resource.action      → the action on rows the user owns
     //   resource.action.any  → the action on anyone's rows
     //   "*"                  → expands to all of PERMISSIONS_AVAILABLE
@@ -169,12 +168,11 @@
     // so re-enabling it is a one-line change. RP_ID is the bare hostname, no
     // scheme and no port.
     //
-    // CHANGE_ME — ORIGIN is *not* optional: it is the canonical URL every page
-    // declares to search engines and the base for sitemap.xml, so a wrong one
-    // is a live SEO bug rather than a dormant auth setting.
+    // ORIGIN is the canonical URL every page declares to search engines and
+    // the base for sitemap.xml, so it has to match the route above exactly.
     "RP_NAME": "Zipr",
-    "RP_ID": "change-me.example.com",
-    "ORIGIN": "https://change-me.example.com",
+    "RP_ID": "zipr.stanbrook.me",
+    "ORIGIN": "https://zipr.stanbrook.me",
 
     // --- PASSWORD CONFIG ---
     "PASSWORD_MIN_LENGTH": "8",

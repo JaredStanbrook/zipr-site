@@ -320,10 +320,10 @@ export const DocsPage: FC = () => (
           <p class="text-sm leading-relaxed text-muted-foreground text-pretty">
             Send it to{" "}
             <a
-              href={`mailto:${CONTACT.security}`}
+              href={`mailto:${CONTACT.address}?subject=${encodeURIComponent("Zipr security report")}`}
               class="font-mono font-medium text-primary underline underline-offset-4 wrap-anywhere"
             >
-              {CONTACT.security}
+              {CONTACT.address}
             </a>
             . We will confirm receipt, keep you posted while it is being fixed, and credit you when
             it ships unless you would rather we did not.

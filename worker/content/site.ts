@@ -4,25 +4,21 @@
 // changing after launch, kept out of the views that render them.
 
 /**
- * CHANGE_ME — the domain the contact addresses live on.
+ * Where everything reaches us.
  *
- * Deliberately left as the same placeholder the rest of the unconfigured repo
- * uses, so `grep -in "change.me" -r worker/` finds it alongside the Cloudflare
- * ids. A mailto link pointing at a domain nobody owns fails silently: the
- * visitor writes a real message and it goes nowhere.
+ * One address, not one per topic. The earlier shape had `sales@`, `support@`
+ * and `security@` on the theory that a security report should not queue behind
+ * a licensing question — which is a real concern the moment there is more than
+ * one person reading, and pure theatre while there is not. Three aliases into
+ * one inbox would have bought nothing and implied a support organisation that
+ * does not exist.
+ *
+ * What actually does the routing is the subject line: every link on the
+ * contact page opens with one, so filtering is a mail rule away and the sender
+ * never has to guess which address to pick.
  */
-export const CONTACT_DOMAIN = "change-me.example.com";
-
 export const CONTACT = {
-  /** Licensing, quotes, trials. */
-  sales: `sales@${CONTACT_DOMAIN}`,
-  /** Deployment trouble, bugs, questions from a licensed team. */
-  support: `support@${CONTACT_DOMAIN}`,
-  /**
-   * Vulnerability reports. Kept separate and published plainly — a researcher
-   * who cannot find where to send a report sends it somewhere worse.
-   */
-  security: `security@${CONTACT_DOMAIN}`,
+  address: "zipr@stanbrook.me",
 };
 
 /**

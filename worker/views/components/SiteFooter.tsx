@@ -30,8 +30,14 @@ const COLUMNS: Array<{ heading: string; links: Array<{ to: string; name: string 
     heading: "Talk to us",
     links: [
       { to: "/contact", name: "Contact" },
-      { to: `mailto:${CONTACT.sales}`, name: "Licensing" },
-      { to: `mailto:${CONTACT.security}`, name: "Security reports" },
+      {
+        to: `mailto:${CONTACT.address}?subject=${encodeURIComponent("Zipr licence enquiry")}`,
+        name: "Licensing",
+      },
+      {
+        to: `mailto:${CONTACT.address}?subject=${encodeURIComponent("Zipr security report")}`,
+        name: "Security reports",
+      },
     ],
   },
 ];

@@ -48,44 +48,38 @@ That last one is why `ALLOWED_EMAILS` matters less here than in the template:
 the sign-up form is not standing open waiting for someone to remember to set
 it. Set it anyway if you intend to register more than once.
 
-## Still to configure
+## Deploying
 
-Four things cannot be guessed and are left as placeholders. Find them with:
+The repo is configured. `wrangler.jsonc` carries the real values:
 
-```sh
-grep -rn "change.me\|0000000" wrangler.jsonc worker/content/site.ts
-```
+|        |                                    |
+| ------ | ---------------------------------- |
+| Worker | `zipr-site` on `zipr.stanbrook.me` |
+| D1     | `zipr-db`                          |
+| R2     | `zipr-r2`                          |
+| Admin  | `jared@stanbrook.me`               |
 
-1. **A D1 database**, created in the Cloudflare dashboard (Storage &
-   Databases → D1). Copy the Database ID, a UUID. No KV namespace is needed.
-2. **An R2 bucket** for the installers. The downloads page needs it; the deploy
-   fails if the binding is declared and the bucket does not exist.
-3. **The domain**, which is also `ORIGIN` — the canonical URL every page
-   declares and the base of `sitemap.xml`, so a wrong one is a live SEO bug.
-4. **The contact addresses** in `worker/content/site.ts` — they currently point
-   at `change-me.example.com`, so every mailto link on the site goes nowhere.
+Those resource ids are not secrets — they are useless without an API token for
+the account — which is why they live in version control rather than in a
+variable.
 
-Then run, with your own values:
+Three things are left, all in the Cloudflare dashboard:
 
-```sh
-npm run configure -- \
-  --name zipr-site --app-name "Zipr" \
-  --tagline "One catalogue of the things your team launches." \
-  --domain zipr.example.com \
-  --d1-name zipr-site-db --d1-id <uuid> --no-kv \
-  --r2-bucket zipr-site-downloads \
-  --admin-email you@example.com \
-  --locale en-AU --currency USD
-```
+1. **`JWT_SECRET`**, under **Settings → Variables and Secrets**, type
+   **Secret**. It signs every session cookie. It is deliberately not in
+   `wrangler.jsonc`: putting it there commits it to git.
+2. **Connect the repo**, under **Settings → Builds**, with build
+   `npm run build` and deploy `npm run deploy`. The deploy command applies D1
+   migrations immediately before the new code goes live, so a schema change
+   ships itself.
+3. **Register once** on the live site at `/register` with
+   `jared@stanbrook.me`. That address is `BOOTSTRAP_ADMIN_EMAIL`, so the
+   account is granted `admin` on sign-up — and both the bootstrap and the page
+   close behind you (see [Accounts](#accounts)). After that, sign in at
+   `/admin`.
 
-Two more in the dashboard: add `JWT_SECRET` under **Settings → Variables and
-Secrets** as a **Secret**, and connect the repo under **Settings → Builds**
-with build `npm run build` and deploy `npm run deploy`. Register on the live
-site with `--admin-email` to become the admin; that bootstrap disarms itself
-once an admin exists.
-
-Set `ALLOWED_EMAILS` to the staff addresses before the site is public, or
-anyone can register an account.
+D1 migrations are forward-only, so a destructive change needs a forward fix
+rather than a rollback. `docs/deploy.md` covers failures and rollback.
 
 ## Publishing a release
 
@@ -117,7 +111,7 @@ Copy is data, not markup. Editing the words should never mean editing a layout:
   Money is integer cents; `formatPrice` converts at the edge.
 - `worker/content/features.ts` — the pillars, the twelve action types, the
   journey, and the local workspace's limits.
-- `worker/content/site.ts` — contact addresses, repository links, platform
+- `worker/content/site.ts` — the contact address, repository links, platform
   metadata, install notes, the public nav.
 
 The contact page's four routes and their pre-filled subject lines live in
@@ -175,8 +169,11 @@ npx wrangler d1 migrations apply DB --local    # once
 npm run dev                                    # vite, on :5173
 ```
 
-`.dev.vars` needs `JWT_SECRET` and `ORIGIN=http://localhost:5173`. To get an
-account locally:
+`.dev.vars` needs `JWT_SECRET` and `ORIGIN=http://localhost:5173` — copy
+`.dev.vars.example`. Note that `npm run dev` serves on Vite's port, not the
+`dev.port` in `wrangler.jsonc`, which only applies to `wrangler dev`.
+
+To get an account locally:
 
 ```sh
 npm run create-admin:local -- --email you@example.com --password 'Secret123!'

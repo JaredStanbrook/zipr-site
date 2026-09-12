@@ -15,7 +15,10 @@ JWT_SECRET="replace-with-a-long-random-string"
 # WebAuthn requires RP_ID to match the hostname exactly, and ORIGIN to
 # match the full origin including port. `bun dev` serves on :3000.
 RP_ID="localhost"
-ORIGIN="http://localhost:3000"
+# `npm run dev` serves on Vite's port, not the `dev.port` in wrangler.jsonc —
+# that one only applies to `wrangler dev`. ORIGIN has to match whatever you are
+# actually loading, because it is the base for canonical URLs and sitemap.xml.
+ORIGIN="http://localhost:5173"
 
 # Loosen registration while developing.
 ALLOWED_EMAILS=""

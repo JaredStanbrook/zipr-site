@@ -159,10 +159,20 @@ describe("UI pages load", () => {
 
     const html = await (await get(testApp, "/contact?topic=licence")).text();
 
-    // Every route is a real mailto with a subject already written.
-    expect(html).toContain("mailto:sales@");
-    expect(html).toContain("mailto:security@");
-    expect(html).toContain("subject=Zipr+licence+enquiry");
+    // One address, and the routing lives in the subject line — so each of the
+    // four has to carry its own, or they all become the same anonymous email.
+    expect(html).toContain("mailto:zipr@stanbrook.me");
+    // %20, not +. A mail client is not obliged to read form encoding, and
+    // several render the `+` literally — which would put plus signs through
+    // the one thing doing the routing.
+    for (const subject of [
+      "subject=Zipr%20licence%20enquiry",
+      "subject=Zipr%20self-hosting%20question",
+      "subject=Zipr%20support%20request",
+      "subject=Zipr%20security%20report",
+    ]) {
+      expect(html, subject).toContain(subject);
+    }
     // And there is nothing to submit: no form, and no write route behind one.
     expect(html).not.toContain("<form");
 

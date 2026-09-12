@@ -18,12 +18,13 @@ import {
  * There is no form. A form would need somewhere to put what it collected, a
  * screen for somebody to read it on, and a reason to trust that anyone
  * actually does — and a mail client already solves all three. What it costs is
- * that we cannot prompt for team size or topic, which is why each address
- * below arrives with a subject line already written.
+ * that we cannot prompt for team size or topic, which is why each link below
+ * arrives with a subject line already written, and two of them with the
+ * questions we would have asked anyway.
  *
- * The addresses are one per question rather than a single `hello@`, because
- * the three go to different people and a security report waiting behind a
- * licensing question is the failure that matters.
+ * All four go to the same address. The routing is the subject line, which is
+ * honest about there being one inbox rather than implying a support desk with
+ * departments in it.
  */
 
 /**
@@ -31,10 +32,20 @@ import {
  *
  * Encoded rather than interpolated raw: an unencoded `&` in a subject ends the
  * query string and silently truncates the body.
+ *
+ * `encodeURIComponent` rather than `URLSearchParams`, which was the first
+ * thing tried. URLSearchParams is form encoding: it writes a space as `+`,
+ * which is correct for a form submission and wrong here, because a mail client
+ * reading a mailto is not required to decode it that way — several show the
+ * subject with literal plus signs in it. Since the subject line is the whole
+ * routing mechanism on this page, that is not a cosmetic difference.
  */
 const mailto = (address: string, subject: string, body?: string) => {
-  const params = new URLSearchParams({ subject, ...(body ? { body } : {}) });
-  return `mailto:${address}?${params.toString()}`;
+  const query = [
+    `subject=${encodeURIComponent(subject)}`,
+    ...(body ? [`body=${encodeURIComponent(body)}`] : []),
+  ].join("&");
+  return `mailto:${address}?${query}`;
 };
 
 interface Route {
@@ -42,7 +53,6 @@ interface Route {
   icon: string;
   title: string;
   blurb: string;
-  address: string;
   subject: string;
   /** Pre-filled prompts, so the first reply can be a useful one. */
   body?: string;
@@ -56,7 +66,6 @@ const ROUTES: Route[] = [
     title: "Licensing and quotes",
     blurb:
       "Trials, seat counts, invoicing, and anything about what a deployment would actually cost you.",
-    address: CONTACT.sales,
     subject: "Zipr licence enquiry",
     body: [
       "Roughly how many people:",
@@ -73,7 +82,6 @@ const ROUTES: Route[] = [
     title: "Running the deployment",
     blurb:
       "Questions about standing the API up, the two identity options, or what the infrastructure needs to be.",
-    address: CONTACT.support,
     subject: "Zipr self-hosting question",
     cta: "Ask about self-hosting",
   },
@@ -83,7 +91,6 @@ const ROUTES: Route[] = [
     title: "Something is broken",
     blurb:
       "For licensed teams: deployment trouble, bugs, and the questions the documentation does not answer.",
-    address: CONTACT.support,
     subject: "Zipr support request",
     body: [
       "What you were doing:",
@@ -100,7 +107,6 @@ const ROUTES: Route[] = [
     title: "A security report",
     blurb:
       "Vulnerability reports. Please mail these rather than opening a public issue, and give us a way to reach you.",
-    address: CONTACT.security,
     subject: "Zipr security report",
     cta: "Report privately",
   },
@@ -112,7 +118,7 @@ const ROUTES: Route[] = [
  * The pricing and downloads pages link here with `?topic=…`, and arriving at a
  * page of four equal options having just clicked "ask about a licence" is a
  * small failure of follow-through. The parameter only ever adds emphasis;
- * every address is present and reachable either way.
+ * all four are present and reachable either way.
  */
 const RouteCard: FC<{ route: Route; highlighted: boolean }> = ({ route, highlighted }) => (
   <Card class={`flex h-full flex-col p-6 ${highlighted ? "ring-2 ring-primary" : ""}`}>
@@ -126,15 +132,8 @@ const RouteCard: FC<{ route: Route; highlighted: boolean }> = ({ route, highligh
       {route.blurb}
     </p>
 
-    <a
-      href={mailto(route.address, route.subject, route.body)}
-      class="mt-4 block font-mono text-sm font-medium text-primary underline underline-offset-4 wrap-anywhere"
-    >
-      {route.address}
-    </a>
-
     <LinkButton
-      href={mailto(route.address, route.subject, route.body)}
+      href={mailto(CONTACT.address, route.subject, route.body)}
       variant={highlighted ? "primary" : "outline"}
       class="mt-5 w-full"
     >
@@ -153,7 +152,7 @@ export const ContactPage: FC<{ topic?: string }> = ({ topic }) => (
           align="center"
           eyebrow="Contact"
           title="Tell us what you need"
-          lede="Whether it is a licence, a deployment that will not start, or a question about whether Zipr suits how your team works — every address below reaches a person, and each one opens with the questions we would have asked anyway."
+          lede="Whether it is a licence, a deployment that will not start, or a question about whether Zipr suits how your team works — pick the one that fits and it opens a message with the subject, and the questions we would have asked, already in it."
         />
 
         <div class="grid gap-5 sm:grid-cols-2">
@@ -163,9 +162,16 @@ export const ContactPage: FC<{ topic?: string }> = ({ topic }) => (
         </div>
 
         <p class="mx-auto mt-8 max-w-2xl text-center text-sm text-muted-foreground text-pretty">
-          We answer from a real inbox rather than an autoresponder, so give it a working day. There
-          is no form here and no list to be added to — your address is used to reply to you and for
-          nothing else.
+          All four go to{" "}
+          <a
+            href={`mailto:${CONTACT.address}`}
+            class="font-mono font-medium text-primary underline underline-offset-4 wrap-anywhere"
+          >
+            {CONTACT.address}
+          </a>
+          , answered from a real inbox rather than an autoresponder — so give it a working day.
+          There is no form here and no list to be added to: your address is used to reply to you and
+          for nothing else.
         </p>
       </Container>
     </Section>
