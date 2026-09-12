@@ -1,12 +1,9 @@
 import { Hono } from "hono";
 import { and, desc, eq, inArray, isNotNull, isNull, sql } from "drizzle-orm";
-import { zValidator } from "@hono/zod-validator";
-import { z } from "zod";
 
 import type { AppEnv } from "@server/types";
 import { release, releaseAsset } from "@server/schema/release.schema";
 import type { Platform, ReleaseWithAssets } from "@server/schema/release.schema";
-import { enquiry, enquiryFormSchema } from "@server/schema/enquiry.schema";
 import { PLATFORM_INFO } from "@server/content/site";
 
 import { HomePage } from "@views/pages/Home";
@@ -14,13 +11,14 @@ import { FeaturesPage } from "@views/pages/Features";
 import { PricingPage } from "@views/pages/Pricing";
 import { DocsPage } from "@views/pages/Docs";
 import { DownloadsPage } from "@views/pages/Downloads";
-import { ContactPage, ContactForm, ContactSuccess } from "@views/pages/Contact";
+import { ContactPage } from "@views/pages/Contact";
 
 /**
  * Every page a signed-out visitor can reach.
  *
- * No guard on this router — that is the point of it. The only write it accepts
- * is the contact form, which is rate-limited at the edge and validated here.
+ * No guard on this router — that is the point of it. It is also entirely
+ * read-only: contact is `mailto:`, so there is no public write surface on this
+ * site at all, and nothing here needs a rate limit or a validator.
  */
 export const siteRoute = new Hono<AppEnv>();
 
@@ -219,43 +217,4 @@ siteRoute.get("/contact", (c) =>
     description:
       "Ask about a Zipr licence, get help with a self-hosted deployment, or report a security issue.",
   }),
-);
-
-siteRoute.post(
-  "/contact",
-  zValidator("form", enquiryFormSchema, (result, c) => {
-    // Re-render the form with what they typed still in it. Handing someone an
-    // empty form back after they wrote five paragraphs is how an enquiry is
-    // lost — and they do not send it a second time.
-    if (!result.success) {
-      // `result.data` on a failure is the raw input, not the parsed output, so
-      // its inferred type is the one the schema *would* have produced.
-      const values = result.data as unknown as Record<string, string>;
-      return c.html(
-        <ContactForm values={values} errors={z.flattenError(result.error).fieldErrors} />,
-        422,
-      );
-    }
-  }),
-  async (c) => {
-    const data = c.req.valid("form");
-
-    // Honeypot. Answer as though it worked — telling a bot it was caught only
-    // teaches whoever wrote it which field to skip next time.
-    if (data.website) {
-      return c.html(<ContactSuccess name={data.name} />);
-    }
-
-    await c.var.db.insert(enquiry).values({
-      name: data.name,
-      email: data.email,
-      organisation: data.organisation || null,
-      topic: data.topic,
-      seats: data.seats,
-      message: data.message,
-      updatedAt: new Date().toISOString(),
-    });
-
-    return c.html(<ContactSuccess name={data.name} />);
-  },
 );

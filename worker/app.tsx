@@ -9,7 +9,6 @@ import type { SafeUser } from "./schema/auth.schema.ts";
 import { apiAuth } from "./routes/api/auth";
 import { webAuth } from "./routes/web/auth";
 import { logsRoute } from "./routes/admin/logs";
-import { enquiriesRoute } from "./routes/admin/enquiries.tsx";
 import { releasesRoute } from "./routes/admin/releases.tsx";
 import { siteRoute } from "./routes/site.tsx";
 import { seoRoute } from "./routes/seo";
@@ -25,7 +24,6 @@ import type { AppEnv } from "./types";
 const admin = new Hono<AppEnv>();
 admin.use("*", requireRole("admin"));
 admin.route("/logs", logsRoute);
-admin.route("/enquiries", enquiriesRoute);
 admin.route("/releases", releasesRoute);
 
 // ==========================================

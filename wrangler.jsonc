@@ -68,14 +68,6 @@
     },
   ],
 
-  // CHANGE_ME — Dashboard: Storage & Databases -> KV -> Create Instance.
-  "kv_namespaces": [
-    {
-      "binding": "KV",
-      "id": "00000000000000000000000000000000",
-    },
-  ],
-
   // CHANGE_ME — Dashboard: R2 -> Create bucket.
   // Optional: delete this block and `R2` in worker/types.ts if the site
   // stores no files.
@@ -113,7 +105,13 @@
 
     // --- CORE AUTH ---
     // Enabled methods: passkey, password, pin, totp, email, sms
-    "AUTH_METHODS": "password,passkey,totp",
+    //
+    // No `passkey`, deliberately and necessarily: the WebAuthn challenge is
+    // stored in KV between the options call and the verify call, and this site
+    // has no KV namespace. Re-enabling it means re-adding the binding here and
+    // `KV` to the Bindings type in worker/types.ts — the passkey code itself is
+    // untouched and still present.
+    "AUTH_METHODS": "password,totp",
 
     // Milliseconds.
     "SESSION_DURATION": "86400000",
@@ -159,16 +157,21 @@
     // Roles that cannot be self-assigned at registration. Get your first
     // admin with BOOTSTRAP_ADMIN_EMAIL below — no terminal needed.
     "ROLES_RESTRICTED": "admin",
-    "PERMISSIONS_AVAILABLE": "enquiries.read,enquiries.update,enquiries.delete,releases.read,releases.create,releases.update,releases.delete",
+    "PERMISSIONS_AVAILABLE": "releases.read,releases.create,releases.update,releases.delete",
     // `user` is the default role and holds no permissions: signing in grants
     // nothing on its own. Every staff surface is admin-only, and a narrower
     // grant is available per user through the user_permissions table.
     "ROLES_INHERENT": "admin:*",
 
     // --- PASSKEY / WEBAUTHN ---
-    // CHANGE_ME — these MUST match the deployed domain or passkeys fail
-    // with no useful error. RP_ID is the bare hostname (no scheme, no
-    // port); ORIGIN is the full origin users load the site from.
+    // Passkey sign-in is off (see AUTH_METHODS above — it needs KV, and this
+    // site has none), so RP_NAME and RP_ID are currently unused and kept only
+    // so re-enabling it is a one-line change. RP_ID is the bare hostname, no
+    // scheme and no port.
+    //
+    // CHANGE_ME — ORIGIN is *not* optional: it is the canonical URL every page
+    // declares to search engines and the base for sitemap.xml, so a wrong one
+    // is a live SEO bug rather than a dormant auth setting.
     "RP_NAME": "Zipr",
     "RP_ID": "change-me.example.com",
     "ORIGIN": "https://change-me.example.com",

@@ -3,8 +3,13 @@
 The Zipr website: what the product is, what it costs, and where to download it.
 
 A single Cloudflare Worker that server-renders every page — Hono for routing,
-JSX for views, HTMX for the few things that swap in place, D1 for the contact
-inbox and the release catalogue, R2 for the installers themselves.
+JSX for views, HTMX for the few things that swap in place, D1 for the release
+catalogue, R2 for the installers themselves.
+
+Two bindings, not three. There is no KV namespace, because the only thing the
+template used it for was holding a WebAuthn challenge — so passkey sign-in is
+off and `AUTH_METHODS` is `password,totp`. And there is no contact form:
+contact is `mailto:`, which means this site has no public write surface at all.
 
 Built on [frug-template](https://github.com/JaredStanbrook/frug-template); its
 `frugal` skill in `.claude/skills/` still applies, and `architecture.md`,
@@ -12,16 +17,16 @@ Built on [frug-template](https://github.com/JaredStanbrook/frug-template); its
 
 ## What is here
 
-| Path               |                                                                     |
-| ------------------ | ------------------------------------------------------------------- |
-| `/`                | What Zipr is, where the commercial line falls, what it does         |
-| `/features`        | The detail, ending with what the free client deliberately cannot do |
-| `/downloads`       | Installers, served from R2 through the worker, with checksums       |
-| `/pricing`         | Three tiers, the full comparison, and what the infrastructure costs |
-| `/docs`            | Architecture, deployment shapes, and notes for client authors       |
-| `/contact`         | A form that writes to D1, plus direct addresses                     |
-| `/admin/enquiries` | The contact inbox — read, triage, soft-delete                       |
-| `/admin/releases`  | Create a release, upload installers, publish                        |
+| Path              |                                                                     |
+| ----------------- | ------------------------------------------------------------------- |
+| `/`               | What Zipr is, where the commercial line falls, what it does         |
+| `/features`       | The detail, ending with what the free client deliberately cannot do |
+| `/downloads`      | Installers, served from R2 through the worker, with checksums       |
+| `/pricing`        | Three tiers, the full comparison, and what the infrastructure costs |
+| `/docs`           | Architecture, deployment shapes, and notes for client authors       |
+| `/contact`        | Four `mailto:` routes, each with a subject already written          |
+| `/admin/releases` | Create a release, upload installers, publish                        |
+| `/admin/logs`     | The authentication audit trail                                      |
 
 Public pages need no account. Everything under `/admin` requires the `admin`
 role, and there is no public sign-up: `ALLOWED_EMAILS` gates registration.
@@ -34,13 +39,12 @@ Four things cannot be guessed and are left as placeholders. Find them with:
 grep -rn "change.me\|0000000" wrangler.jsonc worker/content/site.ts
 ```
 
-1. **A D1 database and a KV namespace**, created in the Cloudflare dashboard
-   (Storage & Databases). Copy the Database ID (a UUID) and the Namespace ID
-   (32 hex).
+1. **A D1 database**, created in the Cloudflare dashboard (Storage &
+   Databases → D1). Copy the Database ID, a UUID. No KV namespace is needed.
 2. **An R2 bucket** for the installers. The downloads page needs it; the deploy
    fails if the binding is declared and the bucket does not exist.
-3. **The domain**, which also has to match `RP_ID` and `ORIGIN` or passkey
-   sign-in fails with no useful error.
+3. **The domain**, which is also `ORIGIN` — the canonical URL every page
+   declares and the base of `sitemap.xml`, so a wrong one is a live SEO bug.
 4. **The contact addresses** in `worker/content/site.ts` — they currently point
    at `change-me.example.com`, so every mailto link on the site goes nowhere.
 
@@ -51,8 +55,7 @@ npm run configure -- \
   --name zipr-site --app-name "Zipr" \
   --tagline "One catalogue of the things your team launches." \
   --domain zipr.example.com \
-  --d1-name zipr-site-db --d1-id <uuid> \
-  --kv-id <32-hex> \
+  --d1-name zipr-site-db --d1-id <uuid> --no-kv \
   --r2-bucket zipr-site-downloads \
   --admin-email you@example.com \
   --locale en-AU --currency USD
@@ -100,6 +103,10 @@ Copy is data, not markup. Editing the words should never mean editing a layout:
 - `worker/content/site.ts` — contact addresses, repository links, platform
   metadata, install notes, the public nav.
 
+The contact page's four routes and their pre-filled subject lines live in
+`worker/views/pages/Contact.tsx`, since each one is a link rather than data
+anything else reads.
+
 Every claim in those files is traceable to something the client or the API
 actually does. If one stops being true it is a bug in the content file.
 
@@ -128,8 +135,8 @@ npx wrangler d1 migrations apply DB --local    # once
 npm run dev                                    # vite, on :5173
 ```
 
-`.dev.vars` needs `JWT_SECRET`; add `RP_ID=localhost` and
-`ORIGIN=http://localhost:5173` for passkeys. To get an account locally:
+`.dev.vars` needs `JWT_SECRET` and `ORIGIN=http://localhost:5173`. To get an
+account locally:
 
 ```sh
 npm run create-admin:local -- --email you@example.com --password 'Secret123!'

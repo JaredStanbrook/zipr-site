@@ -17,7 +17,6 @@ const menuConfig: Record<string, Array<{ to: string; name: string }>> = {
   user: PUBLIC_NAV,
   admin: [
     ...PUBLIC_NAV,
-    { to: "/admin/enquiries", name: "Enquiries" },
     { to: "/admin/releases", name: "Releases" },
     { to: "/admin/logs", name: "System Logs" },
   ],

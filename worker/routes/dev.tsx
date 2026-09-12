@@ -8,7 +8,6 @@ import { Hono } from "hono";
 import { drizzle } from "drizzle-orm/d1";
 import { users, credentials, verificationCodes, authLogs } from "../schema/auth.schema";
 import { userRoles, rolePermissions, userPermissions } from "../schema/roles.schema";
-import { enquiry } from "../schema/enquiry.schema";
 import { release, releaseAsset } from "../schema/release.schema";
 import { requireRole } from "../middleware/guard.middleware";
 import { AppEnv } from "@server/types";
@@ -49,7 +48,6 @@ devRouter.get("/", async (c) => {
     fetchTableData(db, userPermissions, "user_permissions"),
 
     // Feature tables — add yours here.
-    fetchTableData(db, enquiry, "enquiry"),
     fetchTableData(db, release, "release"),
     fetchTableData(db, releaseAsset, "release_asset"),
   ]);
@@ -353,7 +351,6 @@ devRouter.get("/json", async (c) => {
     fetchTableData(db, userRoles, "user_roles"),
     fetchTableData(db, rolePermissions, "role_permissions"),
     fetchTableData(db, userPermissions, "user_permissions"),
-    fetchTableData(db, enquiry, "enquiry"),
     fetchTableData(db, release, "release"),
     fetchTableData(db, releaseAsset, "release_asset"),
   ]);

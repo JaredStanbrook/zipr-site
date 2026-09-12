@@ -192,11 +192,8 @@ export const ReleasesPage: FC<{
             What the downloads page offers. A release stays invisible until you publish it.
           </p>
         </div>
-        <a
-          href="/admin/enquiries"
-          class="text-sm font-medium text-primary underline underline-offset-4"
-        >
-          Enquiries →
+        <a href="/admin/logs" class="text-sm font-medium text-primary underline underline-offset-4">
+          System logs →
         </a>
       </div>
 

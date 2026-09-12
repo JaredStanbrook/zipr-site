@@ -1,5 +1,4 @@
 import { users, authLogs } from "../../worker/schema/auth.schema";
-import { enquiry } from "../../worker/schema/enquiry.schema";
 import { release, releaseAsset } from "../../worker/schema/release.schema";
 
 /**
@@ -13,7 +12,6 @@ import { release, releaseAsset } from "../../worker/schema/release.schema";
 
 export type MockData = {
   users: any[];
-  enquiries: any[];
   releases: any[];
   releaseAssets: any[];
   authLogs: any[];
@@ -33,7 +31,7 @@ const resolveSelect = (data: MockData, state: QueryState) => {
   }
 
   if ("count" in fields) {
-    return [{ count: data.enquiries.length }];
+    return [{ count: data.releases.length }];
   }
 
   // The download route selects an asset joined to its release under named
@@ -49,8 +47,6 @@ const resolveSelect = (data: MockData, state: QueryState) => {
   switch (state.fromTable) {
     case users:
       return data.users;
-    case enquiry:
-      return data.enquiries;
     case release:
       return data.releases;
     case releaseAsset:
@@ -152,32 +148,7 @@ export const createMockData = (): MockData => {
         createdAt: now,
         updatedAt: now,
         roles: ["admin"],
-        permissions: [
-          "enquiries.read",
-          "enquiries.update",
-          "enquiries.delete",
-          "releases.read",
-          "releases.create",
-          "releases.update",
-          "releases.delete",
-        ],
-      },
-    ],
-    enquiries: [
-      {
-        id: 1,
-        name: "Dana Okafor",
-        email: "dana@example.com",
-        organisation: "Example Ltd",
-        topic: "licence",
-        seats: 12,
-        message: "We are twelve people and want to share a catalogue. What would that cost?",
-        status: "new",
-        handledBy: null,
-        handledAt: null,
-        deletedAt: null,
-        createdAt: now,
-        updatedAt: now,
+        permissions: ["releases.read", "releases.create", "releases.update", "releases.delete"],
       },
     ],
     releases: [

@@ -8,9 +8,10 @@ export const authMiddleware = createMiddleware<AppEnv>(async (c, next) => {
   const authConfig = c.get("authConfig");
   const isMethodEnabled = c.get("isMethodEnabled");
   const db = c.get("db");
-  const kv = c.env.KV;
 
-  const auth = new Auth(c, db, kv, authConfig, isMethodEnabled);
+  // `undefined` because this site has no KV binding. Auth only reaches for it
+  // on the passkey path, which AUTH_METHODS does not enable.
+  const auth = new Auth(c, db, undefined, authConfig, isMethodEnabled);
 
   const token = getCookie(c, "auth_token");
 

@@ -42,7 +42,7 @@ const CHALLENGE_TTL = 300; // 5 minutes
 
 export class Auth {
   private db: any;
-  private kv: KVNamespace;
+  private kv: KVNamespace | undefined;
   private authConfig: AuthConfig;
   private isMethodEnabled: (method: string) => boolean;
   private c: Context;
@@ -54,7 +54,7 @@ export class Auth {
   constructor(
     c: Context,
     db: any,
-    kv: KVNamespace,
+    kv: KVNamespace | undefined,
     authConfig: AuthConfig,
     isMethodEnabled: (method: string) => boolean,
   ) {
@@ -269,20 +269,41 @@ export class Auth {
   // CHALLENGE MANAGEMENT (passkey)
   // ==========================================
 
+  /**
+   * The one thing in this service that needs KV, and the reason a site without
+   * a KV binding cannot offer passkey sign-in.
+   *
+   * Guarded rather than left to fail on its own: without this, a deployment
+   * that re-enables `passkey` in AUTH_METHODS but forgets the binding reports
+   * "cannot read properties of undefined" from inside a WebAuthn ceremony,
+   * which is a long way from naming the actual mistake.
+   */
+  private requireKv(): KVNamespace {
+    if (!this.kv) {
+      throw new Error(
+        "Passkey sign-in needs a KV namespace to hold the WebAuthn challenge. " +
+          "Add the `kv_namespaces` binding in wrangler.jsonc and `KV` to the " +
+          "Bindings type in worker/types.ts, or remove `passkey` from AUTH_METHODS.",
+      );
+    }
+    return this.kv;
+  }
+
   async setChallenge(challenge: string): Promise<string> {
     const challengeId = randomString(32);
     const kvKey = `${CHALLENGE_PREFIX}${challengeId}`;
-    await this.kv.put(kvKey, challenge, {
+    await this.requireKv().put(kvKey, challenge, {
       expirationTtl: CHALLENGE_TTL,
     });
     return challengeId;
   }
 
   async getChallenge(challengeId: string): Promise<string | null> {
+    const kv = this.requireKv();
     const kvKey = `${CHALLENGE_PREFIX}${challengeId}`;
-    const challenge = await this.kv.get(kvKey, "text");
+    const challenge = await kv.get(kvKey, "text");
     if (challenge) {
-      await this.kv.delete(kvKey);
+      await kv.delete(kvKey);
     }
     return challenge;
   }

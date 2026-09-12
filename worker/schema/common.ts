@@ -9,8 +9,7 @@ import { users } from "./auth.schema";
  *
  * A release is published by an admin but is not *theirs* — it has to survive
  * that account being deleted, which `ownershipColumns` would not allow, since
- * its foreign key cascades. An enquiry has no user at all: it arrives from a
- * signed-out visitor.
+ * its foreign key cascades.
  */
 export const timestampColumns = {
   createdAt: text("created_at")

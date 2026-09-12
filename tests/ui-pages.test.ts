@@ -93,6 +93,7 @@ describe("UI pages load", () => {
       "/docs",
       "/contact",
       "/contact?topic=licence",
+      "/contact?topic=security",
     ]) {
       const res = await get(testApp, path);
       expect(res.status, `GET ${path}`).toBe(200);
@@ -102,7 +103,7 @@ describe("UI pages load", () => {
   it("redirects signed-out visitors away from protected pages", async () => {
     const testApp = createTestApp(null);
 
-    for (const path of ["/profile", "/admin/logs", "/admin/enquiries", "/admin/releases"]) {
+    for (const path of ["/profile", "/admin/logs", "/admin/releases"]) {
       const res = await get(testApp, path);
       expect(res.status, `GET ${path}`).toBe(302);
       expect(res.headers.get("location"), `GET ${path}`).toBe("/login");
@@ -112,14 +113,7 @@ describe("UI pages load", () => {
   it("serves protected pages to a signed-in admin", async () => {
     const testApp = createTestApp(createMockData().users[0]);
 
-    for (const path of [
-      "/",
-      "/profile",
-      "/admin/logs",
-      "/admin/enquiries",
-      "/admin/enquiries?status=new",
-      "/admin/releases",
-    ]) {
+    for (const path of ["/", "/profile", "/admin/logs", "/admin/releases"]) {
       const res = await get(testApp, path);
       expect(res.status, `GET ${path}`).toBe(200);
     }
@@ -141,57 +135,22 @@ describe("UI pages load", () => {
     expect(downloads).toContain("/downloads/1");
   });
 
-  it("rejects an invalid contact form with the values still in it", async () => {
+  it("offers contact as mailto only, with no form to post", async () => {
     const testApp = createTestApp(null);
 
-    const res = await testApp.fetch(
-      new Request("http://localhost/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          "HX-Request": "true",
-        },
-        body: new URLSearchParams({
-          name: "Dana",
-          email: "not-an-email",
-          topic: "licence",
-          message: "Too short",
-        }),
-      }),
+    const html = await (await get(testApp, "/contact?topic=licence")).text();
+
+    // Every route is a real mailto with a subject already written.
+    expect(html).toContain("mailto:sales@");
+    expect(html).toContain("mailto:security@");
+    expect(html).toContain("subject=Zipr+licence+enquiry");
+    // And there is nothing to submit: no form, and no write route behind one.
+    expect(html).not.toContain("<form");
+
+    const posted = await testApp.fetch(
+      new Request("http://localhost/contact", { method: "POST" }),
       env,
     );
-
-    expect(res.status).toBe(422);
-    const html = await res.text();
-    // A fragment, and one that has kept what the visitor typed.
-    expect(html).not.toContain("<!DOCTYPE html>");
-    expect(html).toContain('value="Dana"');
-    expect(html).toContain("does not look like an email address");
-  });
-
-  it("silently accepts a honeypot submission without storing it", async () => {
-    const testApp = createTestApp(null);
-
-    const res = await testApp.fetch(
-      new Request("http://localhost/contact", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          "HX-Request": "true",
-        },
-        body: new URLSearchParams({
-          name: "Bot",
-          email: "bot@example.com",
-          topic: "other",
-          message: "Buy my search engine optimisation services today please",
-          website: "http://spam.example.com",
-        }),
-      }),
-      env,
-    );
-
-    // Answering 200 is the point: telling a bot it was caught only teaches it.
-    expect(res.status).toBe(200);
-    expect(await res.text()).toContain("Thanks, Bot");
+    expect(posted.status).not.toBe(200);
   });
 });

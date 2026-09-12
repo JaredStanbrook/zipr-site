@@ -46,8 +46,13 @@ export interface RateLimiter {
 }
 
 export type Bindings = Vars & {
-  /** Auth challenges, session metadata, short-lived caches. */
-  KV: KVNamespace;
+  /*
+   * No KV. It existed for one thing — the WebAuthn challenge held between the
+   * passkey options call and the verify call — and this site does not offer
+   * passkey sign-in, so a declared-but-unprovisioned namespace would only be a
+   * way for the deploy to fail. Re-adding it means this line, the
+   * `kv_namespaces` block in wrangler.jsonc, and `passkey` in AUTH_METHODS.
+   */
   /** Primary database. Schema lives in worker/schema/, migrations in drizzle/. */
   DB: D1Database;
   /** Static client bundle produced by `vite build --mode client`. */
