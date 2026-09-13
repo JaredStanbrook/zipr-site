@@ -52,8 +52,8 @@ const PROPERTIES = [
   },
   {
     icon: "key-round",
-    title: "Access is yours to decide",
-    body: "Roles, membership and single sign-on are configured by your administrators. Someone who should not see a catalogue cannot tell whether it exists.",
+    title: "Crossing a boundary is not loosening one",
+    body: "Work moves between teams as a published copy, and only where your administrators allow it. Roles, membership and single sign-on stay yours to set — and someone who should not see a catalogue cannot tell whether it exists.",
   },
 ];
 
@@ -93,7 +93,7 @@ export const SecurityPage: FC = () => (
           align="center"
           eyebrow="Security"
           title="The short answers your reviewer wants"
-          lede="Zipr was built so that the awkward questions have boring answers. Here they are, before you have to ask."
+          lede="Zipr is built to let knowledge cross between teams, which makes every question below a fair one. They all have boring answers. Here they are, before you have to ask."
         />
       </Container>
     </Section>

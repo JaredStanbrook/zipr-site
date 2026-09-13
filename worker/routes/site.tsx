@@ -38,7 +38,7 @@ siteRoute.get("/", (c) =>
     // site name alone rather than a "Home ·" prefix.
     title: undefined,
     description:
-      "Every tool your team uses, one keystroke away. Gather the scripts, links and commands you repeat into one place — free forever, and shareable when you want it to be.",
+      "Some ideas have to be run to be understood. Zipr turns the sequence you worked out into something a colleague can run on the first try — free forever, and shareable the day it stops being only yours.",
     type: "website",
   }),
 );
@@ -47,7 +47,7 @@ siteRoute.get("/features", (c) =>
   c.render(<FeaturesPage />, {
     title: "Features",
     description:
-      "One click instead of eleven steps. What the free app does, what a team adds, and the twelve things a single item can do.",
+      "What it takes to get an idea out of your head and into somebody else's hands intact: what the free app does, what a team adds, and the twelve things a single item can do.",
   }),
 );
 
@@ -55,7 +55,7 @@ siteRoute.get("/pricing", (c) =>
   c.render(<PricingPage app={c.var.app} />, {
     title: "Pricing",
     description:
-      "Zipr is free forever for one person. Sharing with a team is $6 per person per month, on servers you control. Full comparison and no surprises.",
+      "Zipr is free forever for one person. Sharing across a team is $6 per person per month, on servers you control. Full comparison, no surprises.",
   }),
 );
 
@@ -63,7 +63,7 @@ siteRoute.get("/security", (c) =>
   c.render(<SecurityPage />, {
     title: "Security",
     description:
-      "Where your data lives, what leaves your network, and why Zipr never runs your commands on a server. The short answers a security review needs.",
+      "Where your data lives, what leaves your network, why Zipr never runs your commands on a server, and how work crosses between teams without loosening who can see what.",
   }),
 );
 

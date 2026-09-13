@@ -16,18 +16,48 @@ import {
 } from "@views/components/Ui";
 
 /**
- * The home page has about eight seconds. In order:
+ * The home page has about eight seconds, and it is arguing one thing:
  *
- *   1. What it is, in one line anyone can picture.
- *   2. That it is free — said immediately, because it is the surprising part.
- *   3. What it feels like to use.
- *   4. Where the money is, framed as a promise rather than a catch.
+ *   an idea that can only be described is an idea nobody else has had yet.
+ *
+ * So the order is the argument, not a feature tour.
+ *
+ *   1. The claim, in a sentence anyone can picture.
+ *   2. A beat of quiet to let it land.
+ *   3. What it takes to make an idea runnable — which is free.
+ *   4. What it takes to let one travel — which is where the money is, framed
+ *      as a promise rather than a catch.
  *
  * What it deliberately does not do is explain how any of it works. That was
- * the old version's failing: it read like a design document, which flatters
+ * the first version's failing: it read like a design document, which flatters
  * the engineer who wrote it and does nothing for the person deciding whether
  * to spend four minutes installing something.
  */
+
+/**
+ * The hero illustration: one catalogue, four teams, every row still saying
+ * where it came from.
+ *
+ * That is the entire product argument in a picture, and it is why each row
+ * leads with its origin rather than with its step count — boundaries blurred,
+ * hierarchy intact. It is drawn rather than screenshotted, and says so.
+ */
+const CATALOGUE = [
+  { name: "Open the on-call runbook", from: "Platform", steps: "1 step", icon: "link" },
+  { name: "Spin up a staging stack", from: "Infrastructure", steps: "3 steps", icon: "terminal" },
+  {
+    name: "Rotate my API token",
+    from: "Yours",
+    steps: "3 steps, one confirmation",
+    icon: "key-round",
+  },
+  {
+    name: "Reset a customer sandbox",
+    from: "Support",
+    steps: "2 steps, asks first",
+    icon: "rotate-ccw",
+  },
+];
 
 const HeroPanel: FC = () => (
   <div class="relative">
@@ -36,25 +66,23 @@ const HeroPanel: FC = () => (
         <span class="h-2.5 w-2.5 rounded-full bg-destructive/60"></span>
         <span class="h-2.5 w-2.5 rounded-full bg-warning/60"></span>
         <span class="h-2.5 w-2.5 rounded-full bg-success/60"></span>
-        <span class="ml-2 text-xs font-medium text-muted-foreground">Platform team</span>
+        <span class="ml-2 text-xs font-medium text-muted-foreground">Your catalogue</span>
         <Badge tone="brand" class="ml-auto">
           <i data-lucide="hard-drive" class="h-3 w-3" aria-hidden="true"></i>
-          On this machine
+          Runs on this machine
         </Badge>
       </div>
 
       <div class="divide-y divide-border">
-        {[
-          { name: "Open the on-call runbook", steps: "1 step", icon: "link" },
-          { name: "Spin up a staging stack", steps: "3 steps", icon: "terminal" },
-          { name: "Rotate my API token", steps: "3 steps, one confirmation", icon: "key-round" },
-          { name: "Reset a customer sandbox", steps: "2 steps, asks first", icon: "rotate-ccw" },
-        ].map((item) => (
+        {CATALOGUE.map((item) => (
           <div class="flex items-center gap-4 px-4 py-3.5">
             <IconTile icon={item.icon} class="h-9 w-9" />
             <span class="min-w-0 flex-1">
               <span class="block truncate text-sm font-semibold">{item.name}</span>
-              <span class="block truncate text-xs text-muted-foreground">{item.steps}</span>
+              <span class="block truncate text-xs text-muted-foreground">
+                <span class="font-medium text-brand-subtle-foreground">{item.from}</span> ·{" "}
+                {item.steps}
+              </span>
             </span>
             <i
               data-lucide="play"
@@ -83,12 +111,13 @@ export const HomePage: FC = () => (
             </Badge>
 
             <h1 class="text-4xl font-extrabold tracking-tight text-balance sm:text-5xl lg:text-6xl">
-              Every tool your team uses. One keystroke away.
+              Some ideas can't be explained. They have to be run.
             </h1>
 
             <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-              The scripts, links and half-remembered command sequences your team runs on — gathered
-              into one place, ready to launch, and instantly shareable when you want them to be.
+              Zipr takes the thing you worked out — the sequence, the trick, the shortcut nobody
+              believes until they've seen it — and turns it into something a colleague can run on
+              the first try.
             </p>
 
             <div class="mt-8 flex flex-wrap gap-3">
@@ -111,14 +140,47 @@ export const HomePage: FC = () => (
       </Container>
     </Section>
 
-    {/* ================= PILLARS ================= */}
+    {/* =================================================================
+        MANIFESTO
+
+        One beat of quiet between the pitch and the feature grid. No card,
+        no icons, no columns — the page earns the right to be loud later by
+        being still here, and the claim is strong enough to stand on its own
+        line. The mark sits above it at low opacity as a signature rather
+        than as branding.
+       ================================================================= */}
     <Section tone="muted">
+      <Container size="prose">
+        <div class="text-center">
+          <img
+            src="/logo.svg"
+            alt=""
+            width="256"
+            height="64"
+            class="mx-auto mb-10 h-8 w-auto opacity-50"
+          />
+          <p class="text-2xl font-bold leading-snug tracking-tight text-balance sm:text-3xl">
+            Every team has an idea only one person can run.
+          </p>
+          <p class="mt-2 text-2xl font-bold leading-snug tracking-tight text-balance text-muted-foreground sm:text-3xl">
+            It is usually the best one.
+          </p>
+          <p class="mx-auto mt-8 max-w-xl leading-relaxed text-muted-foreground text-pretty">
+            Zipr exists to shorten the distance between one person having an idea and everybody else
+            being able to run it.
+          </p>
+        </div>
+      </Container>
+    </Section>
+
+    {/* ================= PILLARS ================= */}
+    <Section>
       <Container size="wide">
         <SectionHeading
           align="center"
-          eyebrow="Why people keep it open"
-          title="Built for the boring parts of the job"
-          lede="The ten-step thing you do every fortnight and get wrong every third time. Zipr is where that goes."
+          eyebrow="What it's for"
+          title="Out-of-the-box ideas have a habit of staying in one"
+          lede="The unconventional one is always the hardest to explain, and the easiest to leave in a document nobody opens. Everything here is aimed at that gap."
         />
 
         <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
@@ -145,7 +207,7 @@ export const HomePage: FC = () => (
     </Section>
 
     {/* ================= ACTIONS ================= */}
-    <Section>
+    <Section tone="muted">
       <Container>
         <div class="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
           <div>
@@ -176,14 +238,63 @@ export const HomePage: FC = () => (
       </Container>
     </Section>
 
+    {/* =================================================================
+        THE BOUNDARY
+
+        The commercial argument, and the one worth being precise about: the
+        thing a team buys is not sync, it is knowledge crossing a line that
+        normally costs a ticket and a meeting to cross. Every clause is
+        something the product genuinely does — a workspace per team, a
+        published copy rather than a handover, roles and visibility that stay
+        where the organisation already put them.
+       ================================================================= */}
+    <Section>
+      <Container>
+        <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+          <div>
+            <Eyebrow>Across the boundary</Eyebrow>
+            <h2 class="text-3xl font-bold tracking-tight text-balance sm:text-4xl">
+              Knowledge moves. The org chart stays put.
+            </h2>
+            <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
+              What you need is usually two teams away, and reaching it normally costs a ticket, a
+              meeting, or somebody's manager. Put Zipr on your own servers and every team keeps its
+              own workspace and its own rules, while the work crosses between them as a published
+              copy — attributed, current, and safe to run.
+            </p>
+            <p class="mt-4 leading-relaxed text-muted-foreground text-pretty">
+              Nobody joins a team to learn something from it. Nobody gives up ownership of anything.
+            </p>
+            <div class="mt-7 flex flex-wrap gap-3">
+              <LinkButton href="/pricing">
+                What a team costs
+                <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
+              </LinkButton>
+              <LinkButton href="/security" variant="ghost">
+                How we keep it safe
+              </LinkButton>
+            </div>
+          </div>
+
+          <Card class="flex flex-col justify-center p-7">
+            <ul class="space-y-3.5">
+              {TEAM_UNLOCKS.map((unlock) => (
+                <CheckItem>{unlock}</CheckItem>
+              ))}
+            </ul>
+          </Card>
+        </div>
+      </Container>
+    </Section>
+
     {/* ================= THE PROMISE ================= */}
-    <Section tone="muted">
+    <Section>
       <Container>
         <SectionHeading
           align="center"
           eyebrow="The honest version"
           title="Free alone. Paid together."
-          lede="Most tools hand you a hobbled free tier and wait for you to outgrow it. Zipr's free app is the whole app. You pay the day you want other people in it — and not before."
+          lede="Most tools hand you a hobbled free tier and wait for you to outgrow it. Zipr's free app is the whole app — have as many ideas as you like, forever. What costs money is the day one of them has to belong to more than you."
         />
 
         <ol class="grid gap-5 md:grid-cols-3">
@@ -205,45 +316,9 @@ export const HomePage: FC = () => (
       </Container>
     </Section>
 
-    {/* ================= TEAM ================= */}
-    <Section>
-      <Container>
-        <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          <div>
-            <Eyebrow>When the team needs it</Eyebrow>
-            <h2 class="text-3xl font-bold tracking-tight text-balance sm:text-4xl">
-              Share it, and it stays shared.
-            </h2>
-            <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
-              Put Zipr on your own servers and a catalogue stops being yours alone. Everyone gets
-              the current version, edits do not overwrite each other, and every change can be
-              undone. Your data stays on your infrastructure the whole time.
-            </p>
-            <div class="mt-7 flex flex-wrap gap-3">
-              <LinkButton href="/pricing">
-                What a team costs
-                <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
-              </LinkButton>
-              <LinkButton href="/security" variant="ghost">
-                How we keep it safe
-              </LinkButton>
-            </div>
-          </div>
-
-          <Card class="p-7">
-            <ul class="space-y-3.5">
-              {TEAM_UNLOCKS.map((unlock) => (
-                <CheckItem>{unlock}</CheckItem>
-              ))}
-            </ul>
-          </Card>
-        </div>
-      </Container>
-    </Section>
-
     <CtaBand
-      title="Start with the free app."
-      body="No card, no account, no clock counting down. If it never leaves your machine, it never costs a thing."
+      title="Start with the one you keep having to explain."
+      body="The free app needs no account and is the same one licensed teams run. Come back here the day the idea stops being only yours."
       primary={{ href: "/downloads", label: "Download Zipr" }}
       secondary={{ href: "/pricing", label: "See pricing" }}
     />

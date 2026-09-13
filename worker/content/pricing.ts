@@ -53,7 +53,7 @@ export const TIERS: PricingTier[] = [
   {
     id: "team",
     name: "Team",
-    summary: "Everything above, shared — on servers you control.",
+    summary: "Everything above, crossing between people — on servers you control.",
     monthlyCents: 700,
     annualMonthlyCents: 600,
     minimumSeats: 5,

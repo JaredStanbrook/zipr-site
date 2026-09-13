@@ -15,12 +15,42 @@ Built on [frug-template](https://github.com/JaredStanbrook/frug-template); its
 `frugal` skill in `.claude/skills/` still applies, and `architecture.md`,
 `style.md` and `endpoints.md` are the template's own documentation.
 
+## What the site argues
+
+Every visitor-facing string is written against one brief, and it is worth
+having in front of you before changing any of them:
+
+> Zipr's sole purpose is to provide a platform and toolkit for those who feel
+> their ideas must be experienced — ensuring that out-of-the-box concepts don't
+> just sit in a box. It seamlessly blurs organizational boundaries to allow
+> knowledge to flow freely, without disrupting the hierarchy of established
+> team structures.
+
+Which unpacks into the shape of the pages:
+
+- **An idea that can only be described is an idea nobody else has had yet.**
+  The product is not a launcher that happens to sync. It is the shortest path
+  between one person working something out and everybody else being able to
+  run it. So the home page argues that before it lists anything.
+- **The out-of-the-box one is the one most likely to die.** It is the hardest
+  to explain and the easiest to leave in a document nobody opens.
+- **Knowledge crosses; the org chart does not have to move.** This is the
+  commercial half, and the reason a team pays: work travels between teams as a
+  published copy while roles, ownership and visibility stay where the
+  organisation already put them. Nobody joins a team to learn from it.
+- **Free alone, paid together.** The free app is the whole app. What costs
+  money is the day an idea has to belong to more than one person.
+
+Two standing rules for the copy, both older than the brief and both still
+binding: say what the reader gets rather than how it was built, and never
+write a claim the product does not actually honour.
+
 ## What is here
 
 | Path              |                                                                     |
 | ----------------- | ------------------------------------------------------------------- |
-| `/`               | What Zipr is, where the commercial line falls, what it does         |
-| `/features`       | The detail, ending with what the free client deliberately cannot do |
+| `/`               | The argument, top to bottom, ending at the commercial line          |
+| `/features`       | Five moments where an idea travels or dies, and the twelve verbs    |
 | `/downloads`      | Installers, served from R2 through the worker, with checksums       |
 | `/pricing`        | Three tiers, the full comparison, and what the infrastructure costs |
 | `/security`       | The short answers a security review wants                           |

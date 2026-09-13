@@ -78,6 +78,34 @@ const extract = (selector) =>
           a.compareDocumentPosition(b) & Node.DOCUMENT_POSITION_FOLLOWING ? -1 : 1,
         );
 
+        /*
+         * Which candidates are containers, and which are content.
+         *
+         * "Keep the innermost" is nearly right — an <li> wrapping a <p> should
+         * report its sentence once, not twice — but it loses text outright
+         * when an element has both a nested candidate AND words of its own.
+         * The hero panel's "Platform · 1 step" is exactly that shape: a span
+         * colouring the team name, sitting inside a span that holds the rest
+         * of the line. Keeping only the inner one exported "Platform" and
+         * dropped the step count without saying so.
+         *
+         * So an element counts as a container only when it has no direct text
+         * of its own. One that does is kept whole, and the candidates inside
+         * it are consumed rather than reported as loose fragments.
+         */
+        const hasOwnText = (el) =>
+          [...el.childNodes].some((n) => n.nodeType === Node.TEXT_NODE && n.textContent.trim());
+
+        const keep = new Set();
+        const consumed = new Set();
+        for (const el of inOrder) {
+          if (consumed.has(el)) continue;
+          const inner = inOrder.filter((other) => other !== el && el.contains(other));
+          if (inner.length && !hasOwnText(el)) continue;
+          keep.add(el);
+          for (const child of inner) consumed.add(child);
+        }
+
         const out = [];
 
         for (const el of inOrder) {
@@ -146,9 +174,9 @@ const extract = (selector) =>
             continue;
           }
 
-          // Keep the innermost block: an <li> wrapping a <p> would otherwise
-          // report the same sentence twice.
-          if (inOrder.some((other) => other !== el && el.contains(other))) continue;
+          // Decided above. Tables are exempt: they are emitted by the branch
+          // overhead, which is why that one comes first.
+          if (!keep.has(el)) continue;
 
           const text = (el.innerText || "").replace(/\s+/g, " ").trim();
           if (!text) continue;

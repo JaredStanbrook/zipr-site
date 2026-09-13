@@ -175,7 +175,7 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
           align="center"
           eyebrow="Pricing"
           title="Free for you. Paid for your team."
-          lede="Everything one person can do on one machine is free, permanently. Not a trial, not a cut-down build. You pay the day somebody else needs in."
+          lede="Everything one person can do on one machine is free, permanently — not a trial, not a cut-down build. You pay on the day an idea has to belong to more than you."
         />
       </Container>
     </Section>
@@ -204,8 +204,8 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
       <Container size="wide">
         <SectionHeading
           eyebrow="Line by line"
-          title="Free versus team, line by line"
-          lede="No asterisks. Everything in the free column works forever on your own machine; the team column is what arrives when you share it."
+          title="Alone versus together, line by line"
+          lede="No asterisks. Everything in the free column works forever on your own machine. The team column is what arrives once the work starts crossing between people."
         />
         <ComparisonTable />
       </Container>
@@ -254,7 +254,7 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
 
     <CtaBand
       title="Try it before any of this matters."
-      body="The free app needs no account and is the same one licensed teams run. Come back here the day somebody else wants what you built."
+      body="The free app needs no account and is the same one licensed teams run. Come back here the day the idea stops being only yours."
       primary={{ href: "/downloads", label: "Download Zipr" }}
       secondary={{ href: "/contact?topic=licence", label: "Ask about a licence" }}
     />

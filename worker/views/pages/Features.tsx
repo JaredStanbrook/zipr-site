@@ -15,29 +15,39 @@ import {
 /**
  * For the reader who is already interested and wants to know what they get.
  *
- * Scenes, not specifications. The previous version walked through a merge
+ * Scenes, not specifications. The first version walked through a merge
  * algorithm step by step, which is fascinating exactly once and to about four
  * people — and handed the whole design to anyone considering building it.
+ *
+ * Each scene is one moment where an idea either travels or dies. That is the
+ * order to read them in, and it is why the cross-team one comes first: it is
+ * the moment the product exists for.
  */
 
 const SCENES = [
   {
+    icon: "share-2",
+    when: "What you built would help another team",
+    was: "You write it up, they misread step four, and you end up on the call anyway. Or — far more often — you never mention it at all.",
+    now: "You publish a copy into their catalogue. They run it. Yours stays exactly where it was, and theirs stays current on its own.",
+  },
+  {
     icon: "users",
     when: "A new starter joins on Monday",
-    was: "You send them a wiki page, three Slack threads and a zip of scripts, then answer the same questions for a fortnight.",
-    now: "They install Zipr, open the team catalogue, and everything the team runs is right there — current, and the same version everyone else has.",
+    was: "A wiki page, three chat threads and a zip of scripts, and then the same questions for a fortnight.",
+    now: "They install Zipr, open the team catalogue, and everything the team runs is right there — in the version everyone else is on.",
   },
   {
     icon: "git-merge",
-    when: "Two of you edit the same thing",
+    when: "Two of you improve the same thing",
     was: "Last save wins. Somebody's work quietly disappears and nobody notices until it matters.",
-    now: "Both sets of changes survive. If you genuinely changed the same line, you are told exactly what clashed and you decide.",
+    now: "Both improvements survive. If you genuinely changed the same line, you are told exactly what clashed and you decide.",
   },
   {
     icon: "history",
-    when: "Something worked last week and doesn't now",
-    was: "An archaeology session through chat history, trying to remember what changed.",
-    now: "Open the history, see who changed what, put it back the way it was. A click, not an investigation.",
+    when: "You want to try the strange version",
+    was: "You don't, because undoing it means remembering what it looked like before and hoping you got it right.",
+    now: "You try it. Every change is kept, so putting it back is a click — and an experiment that costs nothing gets run.",
   },
   {
     icon: "wifi-off",
@@ -55,8 +65,8 @@ export const FeaturesPage: FC = () => (
           as="h1"
           align="center"
           eyebrow="Features"
-          title="What you actually get"
-          lede="A launcher for the work your team repeats, that happens to be very good at the parts other tools get wrong."
+          title="Everything an idea needs to survive other people"
+          lede="Being a launcher is the least interesting thing about Zipr. What it is actually for is getting the thing in your head into somebody else's hands intact."
         />
       </Container>
     </Section>
@@ -86,8 +96,8 @@ export const FeaturesPage: FC = () => (
       <Container>
         <SectionHeading
           eyebrow="In practice"
-          title="Four afternoons you have already had"
-          lede="The difference is not that Zipr does something nobody else does. It is that these stop being events."
+          title="Five afternoons you have already had"
+          lede="None of these is a moment anybody schedules. They are just where good work gets lost, and where a tool either helps or is somewhere else."
         />
 
         <div class="space-y-5">
@@ -174,8 +184,8 @@ export const FeaturesPage: FC = () => (
     </Section>
 
     <CtaBand
-      title="It's free. Go and try it."
-      body="Four minutes from here to your first item. Come back to the pricing page the day somebody else wants in."
+      title="Four minutes to your first one."
+      body="No account, no card, no clock. Build the thing you keep explaining, and come back to the pricing page the day somebody else wants it."
       primary={{ href: "/downloads", label: "Download Zipr" }}
       secondary={{ href: "/pricing", label: "Compare free and team" }}
     />

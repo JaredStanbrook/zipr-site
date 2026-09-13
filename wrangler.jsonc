@@ -98,7 +98,7 @@
     // --- BRANDING ---
     // How the site names itself in the title, nav and footer.
     "APP_NAME": "Zipr",
-    "APP_TAGLINE": "Every tool your team uses, one keystroke away.",
+    "APP_TAGLINE": "For ideas that have to be run, not explained.",
     "APP_LOCALE": "en-AU",
     "APP_CURRENCY": "USD",
 

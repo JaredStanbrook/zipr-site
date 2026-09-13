@@ -2,7 +2,18 @@
 //
 // The product, in the customer's words.
 //
-// Two rules for everything in this file:
+// The brief this file is written against:
+//
+//   Zipr exists for people who feel their ideas have to be experienced to be
+//   understood — so that an out-of-the-box concept does not sit in a box. It
+//   blurs the boundaries between teams so knowledge can move, without
+//   disturbing the hierarchy those teams already have.
+//
+// That is the whole argument, and every string here is a piece of it. The
+// product is not a launcher that happens to sync; it is the shortest path
+// between one person having an idea and everybody else being able to run it.
+//
+// Two rules, unchanged:
 //
 // 1. Say what they get, not how we built it. No stack names, no algorithms,
 //    no internal vocabulary. If a sentence would only impress an engineer who
@@ -22,50 +33,50 @@ export interface Feature {
 export const PILLARS: Feature[] = [
   {
     icon: "zap",
-    title: "One click, not eleven steps",
-    body: "The runbook, the script, the link, the command nobody remembers — turn each into a single item anyone can run. Chain the steps once and forget them.",
+    title: "An idea, in a form somebody can run",
+    body: "The sequence you worked out becomes one thing with a name. Not a document describing it. Not a script they need talking through. A thing they click, that works the first time.",
     tier: "client",
   },
   {
     icon: "wifi-off",
-    title: "Fast because it's local",
-    body: "Everything lives on your machine, so it opens instantly and works on a plane. No spinner, no round trip, no wondering whether the network is having a moment.",
+    title: "No gap between thinking of it and doing it",
+    body: "Everything is already on your machine, so Zipr opens instantly and works on a plane. That gap — the loading, the searching, the where-did-I-put-it — is where good intentions quietly go to die.",
     tier: "client",
   },
   {
     icon: "shield",
-    title: "Your commands never leave your laptop",
-    body: "Zipr runs everything locally. Nothing you build is executed on a server — ours or yours — which is the short answer to the long question your security team is about to ask.",
+    title: "Zipr holds your ideas. It never runs them",
+    body: "Every command executes on the machine of the person who clicked, and nowhere else. Not on our servers, not on yours. It is the short answer to the long question your security team is about to ask.",
     tier: "client",
   },
   {
     icon: "users",
-    title: "Stop pasting scripts into chat",
-    body: "Share a catalogue and the whole team has it. New starters get the good version on day one instead of the copy someone forwarded them in their second week.",
+    title: "Hand it over instead of explaining it",
+    body: "Publish to a catalogue and it is theirs — current, complete, the same version everyone else has. No walkthrough, no zip file in a chat thread, no afternoon spent watching over somebody's shoulder.",
     tier: "api",
   },
   {
     icon: "git-merge",
-    title: "Two people, one item, no lost work",
-    body: "Edit the same thing at the same time and both changes survive. You are told what actually clashed, rather than discovering on Friday that Tuesday's fix is gone.",
+    title: "Two people, one idea, nothing lost",
+    body: "Improve the same thing at the same time and both improvements survive. You are told what genuinely clashed, rather than finding out on Friday that Tuesday's fix is gone.",
     tier: "api",
   },
   {
     icon: "history",
-    title: "Undo, even weeks later",
-    body: 'Every change is kept. Roll any item back to how it was, and see who changed what — so the answer to "who broke this" is a click rather than an investigation.',
+    title: "Room to try the strange version",
+    body: 'Every change is kept, so nothing you attempt is expensive. Put any item back to how it was, and see who changed what — the answer to "who broke this" is a click rather than an investigation.',
     tier: "api",
   },
   {
     icon: "puzzle",
-    title: "Extend it without waiting for us",
-    body: "Plugins add new kinds of action, sandboxed so a bad one cannot take the app down with it. Build what your team needs and share it with them.",
+    title: "When the twelve verbs run out",
+    body: "Plugins add new kinds of step, kept at arm's length so a bad one cannot take the app down with it. Build the one your team has been wishing for, and share it with them.",
     tier: "client",
   },
   {
     icon: "server",
-    title: "Runs on your infrastructure",
-    body: "Your catalogue lives on your servers, in your network, under your backups. There is no shared cloud to be a tenant of and no account of ours holding your data.",
+    title: "On your servers, inside your walls",
+    body: "Your catalogue lives on your infrastructure, in your network, under your backups. There is no shared cloud to be a tenant of and no account of ours holding your work.",
     tier: "api",
   },
 ];
@@ -98,20 +109,20 @@ export const ACTION_TYPES = [
 export const JOURNEY = [
   {
     step: "01",
-    title: "Install it",
-    body: "No account, no email, no trial clock. It opens on an empty workspace that belongs to your machine and nothing else.",
+    title: "Have the idea",
+    body: "Install it and build the first one. No account, no email, no clock counting down — just a workspace that belongs to your machine and to nothing else.",
     cost: "Free",
   },
   {
     step: "02",
-    title: "Use it forever",
-    body: "Build as much as you like. Nothing expires, nothing phones home, and you can take it all with you as a single file whenever you want.",
+    title: "Keep having them",
+    body: "Build as many as you like, for as long as you like. Nothing expires, nothing phones home, and all of it leaves with you as a single file whenever you want.",
     cost: "Free",
   },
   {
     step: "03",
-    title: "Bring the team in",
-    body: "When someone else needs what you built, put Zipr on your own servers and share it. Same app, more people, nothing to relearn.",
+    title: "Let one out of the box",
+    body: "The day an idea stops being only yours, put Zipr on your own servers and let it travel. Same app, more people, nothing to relearn.",
     cost: "Licensed",
   },
 ];
@@ -121,13 +132,15 @@ export const JOURNEY = [
  *
  * Framed as gains rather than as the free tier's shortcomings — the pricing
  * comparison already does the honest column-by-column version for anyone who
- * wants it.
+ * wants it. Each line is something that has to be true for knowledge to cross
+ * a boundary safely, which is the section it sits in.
  */
 export const TEAM_UNLOCKS = [
-  "Shared catalogues everyone stays in sync with",
-  "Members, roles and who-can-see-what",
-  "Full history, and a one-click rollback",
-  "Live updates as colleagues make changes",
+  "A workspace per team, on one deployment",
+  "Publish a copy across, keeping your own exactly as it was",
+  "Roles and visibility matching the structure you already have",
+  "Everyone's copy current, updating as colleagues work",
+  "Full history, and a one-click way back",
   "An audit trail you did not have to build",
-  "Usage figures showing what the team actually runs",
+  "Figures showing which ideas people actually run",
 ];

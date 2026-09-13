@@ -22,7 +22,7 @@ const COLUMNS: Array<{ heading: string; links: Array<{ to: string; name: string 
     heading: "Learn",
     links: [
       { to: "/security", name: "Security" },
-      { to: "/pricing#compare", name: "Free vs team" },
+      { to: "/pricing#compare", name: "Alone vs together" },
       { to: "/report", name: "Report a bug" },
     ],
   },
@@ -52,7 +52,7 @@ export const SiteFooter = ({ appName, tagline }: { appName: string; tagline: str
             ${appName}
           </a>
           <p class="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
-            ${tagline || "Every tool your team uses, one keystroke away."}
+            ${tagline || "For ideas that have to be run, not explained."}
           </p>
           <p class="mt-4 text-sm font-medium text-foreground">The app is free. Always will be.</p>
         </div>
@@ -86,7 +86,7 @@ export const SiteFooter = ({ appName, tagline }: { appName: string; tagline: str
       >
         <p>© ${new Date().getFullYear()} ${appName}. All rights reserved.</p>
 
-        <p>Made for people who are tired of pasting scripts into chat.</p>
+        <p>Made for people whose best idea is stuck in their own head.</p>
       </div>
     </div>
   </footer>
