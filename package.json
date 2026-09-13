@@ -23,7 +23,9 @@
     "format": "prettier --check .",
     "format:write": "prettier --write .",
     "preview": "npm run build && wrangler dev",
-    "test": "vitest run"
+    "test": "vitest run",
+    "// copy:export": "Pulls every visitor-facing string into docs/site-copy.md for editing. Needs `npm run dev` running and a one-off `npm i -D playwright`.",
+    "copy:export": "node scripts/copy-export.mjs > docs/site-copy.md"
   },
   "dependencies": {
     "@hono/vite-dev-server": "^0.23.0",

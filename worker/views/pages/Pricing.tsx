@@ -113,8 +113,8 @@ const ComparisonTable: FC = () => (
             Feature
           </th>
           <th scope="col" class="px-5 py-4 text-sm font-semibold">
-            Client
-            <span class="block text-xs font-normal text-muted-foreground">Free</span>
+            Free
+            <span class="block text-xs font-normal text-muted-foreground">On your machine</span>
           </th>
           <th scope="col" class="px-5 py-4 text-sm font-semibold text-primary">
             Team
