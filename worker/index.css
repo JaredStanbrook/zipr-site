@@ -6,10 +6,10 @@
  * The Zipr clay palette, ported from the desktop client.
  *
  * The source of truth is `packages/ui-kit/src/styles/tokens.css` in
- * zipr-client, and the values below are that file's, verbatim. The site and
- * the app a visitor downloads should not be two different products, and the
- * cheapest way to guarantee that is to copy the hexes rather than to
- * approximate them.
+ * zipr-client, and the values below are that file's, verbatim — with one
+ * exception, noted under Brand. The site and the app a visitor downloads
+ * should not be two different products, and the cheapest way to guarantee
+ * that is to copy the hexes rather than to approximate them.
  *
  * The look is clay: warm stone surfaces lifted by a paired highlight and
  * shadow rather than by a border. The depth tokens near the bottom are what
@@ -101,11 +101,24 @@
   --popover-foreground: #292520;
   --scrim: #29252099;
 
-  /* --- Brand ----------------------------------------------------------- */
-  --primary: #524bc4;
+  /* --- Brand -----------------------------------------------------------
+     The one deliberate departure from the client's tokens. The Zipr logo is
+     orange (#ff5722, see public/logo.svg), so the brand's primary is orange
+     and the client's clay purple is gone from the site.
+
+     Not the logo's orange, though: `--primary` is a fill that carries white
+     text and is also what `text-primary` links are painted in, and #ff5722
+     manages 3.2:1 against white and 2.5:1 as a link on the muted sections,
+     both well under AA. This is that hue taken deeper until it clears 4.5:1
+     in every place the token is actually used, which leaves the logo reading
+     as the bright member of one family rather than as a second colour.
+
+     The client still ships purple. Until its tokens.css follows, this file
+     and that one disagree on the primary ramp and nowhere else. */
+  --primary: #b83a0a;
   --primary-foreground: #ffffff;
-  --primary-subtle: #e2e0f8;
-  --primary-subtle-foreground: #363092;
+  --primary-subtle: #f9e4dc;
+  --primary-subtle-foreground: #8c3717;
   /* The client's `--accent`: its second brand colour, used for the teal
      emphases. Renamed so this template's `hover:bg-accent` stays subtle. */
   --brand: #0e6f76;
@@ -149,7 +162,7 @@
      the inset shadow does the rest. */
   --input: #8b8478;
   --field: #fbf8f3;
-  --ring: #524bc4;
+  --ring: #b83a0a;
 
   /* --- Sidebar ---------------------------------------------------------
      The client has only `--sidebar` and `--sidebar-foreground`; the rest are
@@ -157,12 +170,12 @@
      page rather than a second theme. */
   --sidebar: #e9e4da;
   --sidebar-foreground: #46403a;
-  --sidebar-primary: #524bc4;
+  --sidebar-primary: #b83a0a;
   --sidebar-primary-foreground: #ffffff;
   --sidebar-accent: #ded7cb;
   --sidebar-accent-foreground: #3b352e;
   --sidebar-border: #d0c8ba;
-  --sidebar-ring: #524bc4;
+  --sidebar-ring: #b83a0a;
 
   /* --- Clay depth -------------------------------------------------------
      Clay is a light from the upper left: a warm highlight on the lit edge, a
@@ -236,7 +249,7 @@
      Ordered so neighbours differ in lightness as well as hue: a series read
      in greyscale, or by someone who cannot separate the hues, is still a
      series. */
-  --chart-1: #524bc4;
+  --chart-1: #b83a0a;
   --chart-2: #0e6f76;
   --chart-3: #8a6008;
   --chart-4: #8d4a86;
@@ -260,10 +273,10 @@
   --scrim: #0d0c0acc;
 
   /* --- Brand ----------------------------------------------------------- */
-  --primary: #a9a4f5;
-  --primary-foreground: #1b1840;
-  --primary-subtle: #302c56;
-  --primary-subtle-foreground: #c5c1fb;
+  --primary: #ff9e66;
+  --primary-foreground: #3e1904;
+  --primary-subtle: #4f3222;
+  --primary-subtle-foreground: #fad0b7;
   --brand: #6cc6cd;
   --brand-foreground: #06282b;
   --brand-subtle: #1d3c3f;
@@ -300,17 +313,17 @@
   --border-strong: #787264;
   --input: #736d5f;
   --field: #1f1c17;
-  --ring: #a9a4f5;
+  --ring: #ff9e66;
 
   /* --- Sidebar ---------------------------------------------------------- */
   --sidebar: #211e19;
   --sidebar-foreground: #c8c1b5;
-  --sidebar-primary: #a9a4f5;
-  --sidebar-primary-foreground: #1b1840;
+  --sidebar-primary: #ff9e66;
+  --sidebar-primary-foreground: #3e1904;
   --sidebar-accent: #2b2822;
   --sidebar-accent-foreground: #ddd6ca;
   --sidebar-border: #36322b;
-  --sidebar-ring: #a9a4f5;
+  --sidebar-ring: #ff9e66;
 
   /* --- Clay depth --------------------------------------------------------
      On a dark surface the lit edge is a faint warm white at low alpha and the
@@ -324,7 +337,7 @@
   --clay-rim: #ffffff12;
 
   /* --- Charts ------------------------------------------------------------ */
-  --chart-1: #a9a4f5;
+  --chart-1: #ff9e66;
   --chart-2: #6cc6cd;
   --chart-3: #ddab4b;
   --chart-4: #d99ad2;

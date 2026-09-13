@@ -146,11 +146,15 @@ Contact stays `mailto:` — a mail client already solves that one.
 
 The palette is the desktop client's, copied verbatim from
 `packages/ui-kit/src/styles/tokens.css` in `zipr-client` — warm clay surfaces,
-paired highlight and shadow instead of borders, `#524bc4` primary. The site a
-visitor reads and the app they download should not look like two products.
+paired highlight and shadow instead of borders. The site a visitor reads and
+the app they download should not look like two products.
 
-Three token names differ from the client's on purpose, and `worker/index.css`
-says why at the top. The rule that matters: style with the semantic token
+One thing is deliberately not the client's: the primary is the logo's orange
+taken deep enough to carry white text (`#b83a0a`), not the client's clay
+purple. The client has yet to follow.
+
+Three token names also differ from the client's on purpose, and
+`worker/index.css` says why at the top. The rule that matters: style with the semantic token
 (`bg-card`, `text-muted-foreground`), never a raw colour, or it will be
 unreadable in whichever theme you did not test.
 
@@ -176,6 +180,15 @@ is tuned for 28px controls and reads as a smudge on a 600px card. And
 comment explains that it caps low for density ("a 24px radius on a 28px-tall
 table row is a pill"), which is an argument about tables rather than about the
 style. Controls keep the client's exact scale.
+
+The mark lives in two files. `public/logo.svg` is the logo itself, traced from
+the supplied raster rather than redrawn: the original is 256x128 with two
+colours and every edge on a 16px boundary, so it decodes to a 16x8 grid with
+40 blocks filled, and the SVG is those blocks merged into runs — pixel for
+pixel identical, at any size. `public/favicon.svg` is the square badge used in
+the tab, the nav bar and the footer; it is a four-by-four crop of the same
+grid, because the full mark is sixteen blocks wide and turns to mush in a
+32px box.
 
 Plus Jakarta Sans and JetBrains Mono are self-hosted in `public/fonts` (latin
 and latin-ext, ~92KB) so first paint owes nothing to a third party and the site

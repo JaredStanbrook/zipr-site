@@ -1,19 +1,24 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Zipr">
   <!--
-    The desktop client's hammer-in-a-ring mark, redrawn as vector and recoloured
-    to the clay primary. The client ships it as a magenta raster inherited from
-    the launcher Zipr descends from; magenta appears nowhere in the palette, so
-    the shape came across and the colour did not.
+    The badge form of the Zipr mark, for the browser tab and for the lockup in
+    the nav bar and footer, where it sits at 24px beside the word "Zipr".
 
-    Placeholder to the extent that it is a redrawing rather than the original
-    vector — if that artwork turns up, swap this file for it.
+    The full mark (public/logo.svg) is sixteen blocks wide. Squeezed into a
+    square its teeth land on half a pixel and it turns to mush, so this is a
+    crop instead of a redrawing: columns 3 to 6 of the mark's own grid, which
+    happen to be exactly four blocks by four. Two bars and the teeth between
+    them — a section of zipper, and every block of it is in the artwork.
+
+    Cream on the logo's own #ff5722 rather than on the `primary` token: a badge
+    is artwork, not a control, and it should be the colour the logo is.
   -->
-  <rect width="32" height="32" rx="7" fill="#524bc4" />
-  <circle cx="16" cy="16" r="11.4" fill="none" stroke="#fbf8f3" stroke-width="2" />
-  <g transform="rotate(-32 16 16)" fill="#fbf8f3">
-    <!-- Head, with a V notch at the left end standing in for the claw. -->
-    <path d="M21.6 8.7a1.4 1.4 0 0 1 0 4.6h-8.2l-4-1.4 2.5-.9-2.5-.9 4-1.4z" />
-    <!-- Handle. -->
-    <rect x="14.6" y="12.8" width="2.9" height="11" rx="1.45" />
+  <rect width="32" height="32" rx="7" fill="#ff5722" />
+  <g fill="#fbf8f3">
+    <rect x="6" y="6" width="20" height="5" />
+    <rect x="6" y="11" width="5" height="5" />
+    <rect x="16" y="11" width="5" height="5" />
+    <rect x="11" y="16" width="5" height="5" />
+    <rect x="21" y="16" width="5" height="5" />
+    <rect x="6" y="21" width="20" height="5" />
   </g>
 </svg>
