@@ -41,6 +41,15 @@ export interface PageMeta {
    * fastest way to lose rich results altogether.
    */
   jsonLd?: Record<string, unknown>[];
+  /**
+   * Render without the site nav.
+   *
+   * For a page that is public but does not belong to the signed-in app — a
+   * share link, an unlisted per-recipient page, a print view. Offering "Login"
+   * and "Get Started" to someone who has no account and cannot get one is
+   * noise at best; pair it with `noindex` when the URL itself is the secret.
+   */
+  bare?: boolean;
 }
 
 export interface ResolvedMeta {
@@ -53,6 +62,8 @@ export interface ResolvedMeta {
   siteName: string;
   locale: string;
   jsonLd: Record<string, unknown>[];
+  /** Layout rather than SEO, but it rides along so Layout has one props bag. */
+  bare: boolean;
 }
 
 /**
@@ -100,6 +111,7 @@ export function resolveMeta(meta: PageMeta, app: AppConfig, url: URL): ResolvedM
     siteName: app.name,
     locale: app.locale,
     jsonLd: meta.jsonLd ?? [],
+    bare: meta.bare ?? false,
   };
 }
 
