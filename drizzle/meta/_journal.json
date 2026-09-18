@@ -43,6 +43,13 @@
       "when": 1789251364962,
       "tag": "0005_issue_reports",
       "breakpoints": true
+    },
+    {
+      "idx": 6,
+      "version": "6",
+      "when": 1790795096460,
+      "tag": "0006_revocable_sessions",
+      "breakpoints": true
     }
   ]
 }
