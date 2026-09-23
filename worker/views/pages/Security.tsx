@@ -32,18 +32,18 @@ const PROPERTIES = [
   },
   {
     icon: "server",
-    title: "Your data never leaves your network",
-    body: "A team deployment runs on your infrastructure, in your network, under your backup policy. We have no copy, no access, and no way to get one.",
+    title: "You choose who holds it",
+    body: "Self-hosted, your data never leaves your infrastructure, your network or your backup policy, and we have no copy and no way to get one. Hosted, it sits in a database belonging to your organisation alone rather than a shared one — which is what makes a restore of just you possible.",
   },
   {
     icon: "wifi-off",
-    title: "It doesn't call home",
-    body: "Your deployment does not report to us, license-check against us, or need us to be reachable. If we vanished tomorrow your team would carry on working.",
+    title: "A self-hosted deployment doesn't call home",
+    body: "It does not report to us or check in with us, and the licence is verified on your own hardware rather than against a service of ours — so it keeps working with the internet unplugged. What it does do is stop accepting changes once the licence expires, after warning for a month; reading is never interrupted.",
   },
   {
     icon: "eye-off",
-    title: "We can't see your catalogue",
-    body: "Not encrypted-so-we-promise-not-to-look. We are simply not in the path — there is nowhere for your content to reach us from.",
+    title: "We only see what we operate",
+    body: "Self-hosted, we are not in the path at all — there is nowhere for your content to reach us from. Hosted, we run the database and can therefore reach it, so the honest answer is a contract and an access policy rather than a claim about physics.",
   },
   {
     icon: "shield-check",
@@ -60,15 +60,23 @@ const PROPERTIES = [
 const REVIEW_FAQ = [
   {
     q: "Where is our data stored?",
-    a: "On the server you run it on. Individual machines also keep a copy so the app stays fast and works offline; both are inside your control. We hold nothing.",
+    a: "Self-hosted, on the server you run it on, and we hold nothing. Hosted, in a database provisioned for your organisation and no one else's. Either way individual machines also keep a copy so the app stays fast and works offline.",
   },
   {
     q: "What does the app send over the network?",
-    a: "Only to your own deployment, and only your catalogue content and the sign-in that authorises it. With no deployment configured the app makes no network requests at all.",
+    a: "Only to the deployment it is pointed at, and only your catalogue content and the sign-in that authorises it. With no deployment configured the app makes no network requests at all.",
   },
   {
     q: "Can we run it somewhere with no internet access?",
-    a: "Yes. Air-gapped installs are supported on Enterprise and we will help you do it.",
+    a: "Yes, self-hosted. The licence verifies offline, so an air-gapped install is a supported configuration rather than a workaround, and we will help you do it. The hosted service obviously cannot be one of these.",
+  },
+  {
+    q: "How do we sign in?",
+    a: "In your browser, never inside the app — the app opens the sign-in page and never handles a password itself. Google, Microsoft Entra and Okta are supported, so accounts can be joined and removed wherever you already do that.",
+  },
+  {
+    q: "What happens to our data if we stop paying?",
+    a: "It is not held hostage. Reading keeps working while changes are refused, and you can export everything as one file at any point in that sequence without settling anything first. On the hosted service the data is retained for a stated window after suspension before anything is removed; self-hosted, it is on your own disk and we cannot touch it.",
   },
   {
     q: "Who can see what?",
@@ -168,7 +176,7 @@ export const SecurityPage: FC = () => (
 
     <CtaBand
       title="Need this in writing?"
-      body="We will happily go through a security questionnaire, sign a DPA, or talk to whoever needs convincing."
+      body="We will happily go through a security questionnaire, sign a DPA, or talk to whoever needs convincing — for either the hosted service or a deployment of your own."
       primary={{ href: "/contact?topic=licence", label: "Talk to us" }}
       secondary={{ href: "/downloads", label: "Try it first" }}
     />

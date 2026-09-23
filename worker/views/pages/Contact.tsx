@@ -61,32 +61,42 @@ interface Route {
 
 const ROUTES: Route[] = [
   {
+    id: "cloud",
+    icon: "cloud",
+    title: "Get your team set up",
+    blurb:
+      "The hosted service, run by us. Nobody self-provisions, so this is how an organisation actually starts.",
+    subject: "Zipr hosted enquiry",
+    body: [
+      "Organisation name:",
+      "Roughly how many people:",
+      "What you're hoping to share:",
+      "Anything we should know about where your data has to live:",
+      "",
+      "",
+    ].join("\n"),
+    cta: "Request access",
+  },
+  {
     id: "licence",
     icon: "receipt-text",
-    title: "Licensing and quotes",
-    blurb: "Trials, team size, invoicing, and what it would actually come to for you.",
-    subject: "Zipr licence enquiry",
+    title: "Self-hosting and quotes",
+    blurb:
+      "Running it on your own infrastructure, under a written agreement. Priced per deployment, not per person.",
+    subject: "Zipr self-hosted licence enquiry",
     body: [
-      "Roughly how many people:",
-      "Where you'd run it (your own servers, a cloud provider, air-gapped):",
+      "Where you'd run it (your own servers, your cloud account, air-gapped):",
       "What you're hoping to share:",
+      "Anything your security or procurement review will need from us:",
       "",
       "",
     ].join("\n"),
     cta: "Ask about a licence",
   },
   {
-    id: "self-hosting",
-    icon: "server",
-    title: "Setting it up",
-    blurb: "Questions about putting Zipr on your own servers, before you commit to anything.",
-    subject: "Zipr self-hosting question",
-    cta: "Ask about self-hosting",
-  },
-  {
     id: "support",
     icon: "life-buoy",
-    title: "Help, for teams",
+    title: "Help, for customers",
     blurb: "You're a customer and something isn't behaving. Jump the queue here.",
     subject: "Zipr support request",
     body: [
@@ -112,7 +122,7 @@ const ROUTES: Route[] = [
  * Which card leads.
  *
  * The pricing and downloads pages link here with `?topic=…`, and arriving at a
- * page of four equal options having just clicked "ask about a licence" is a
+ * page of four equal options having just clicked "request access" is a
  * small failure of follow-through. The parameter only ever adds emphasis;
  * all four are present and reachable either way.
  */

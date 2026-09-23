@@ -258,9 +258,9 @@ export const HomePage: FC = () => (
             </h2>
             <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
               What you need is usually two teams away, and reaching it normally costs a ticket, a
-              meeting, or somebody's manager. Put Zipr on your own servers and every team keeps its
-              own workspace and its own rules, while the work crosses between them as a published
-              copy — attributed, current, and safe to run.
+              meeting, or somebody's manager. Give your organisation a Zipr server and every team
+              keeps its own workspace and its own rules, while the work crosses between them as a
+              published copy — attributed, current, and safe to run.
             </p>
             <p class="mt-4 leading-relaxed text-muted-foreground text-pretty">
               Nobody joins a team to learn something from it. Nobody gives up ownership of anything.
@@ -294,7 +294,7 @@ export const HomePage: FC = () => (
           align="center"
           eyebrow="The honest version"
           title="Free alone. Paid together."
-          lede="Most tools hand you a hobbled free tier and wait for you to outgrow it. Zipr's free app is the whole app — have as many ideas as you like, forever. What costs money is the day one of them has to belong to more than you."
+          lede="Most tools hand you a hobbled free tier and wait for you to outgrow it. Zipr's free app is the whole app — have as many ideas as you like, forever. What costs money is the day one of them has to belong to more than you, and then you pick who runs the server."
         />
 
         <ol class="grid gap-5 md:grid-cols-3">
@@ -318,7 +318,7 @@ export const HomePage: FC = () => (
 
     <CtaBand
       title="Start with the one you keep having to explain."
-      body="The free app needs no account and is the same one licensed teams run. Come back here the day the idea stops being only yours."
+      body="The free app needs no account and is the same one paying teams run. Come back here the day the idea stops being only yours."
       primary={{ href: "/downloads", label: "Download Zipr" }}
       secondary={{ href: "/pricing", label: "See pricing" }}
     />
