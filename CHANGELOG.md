@@ -1,15 +1,31 @@
 # Changelog
 
-All notable changes to this template are documented here.
+All notable changes to this site are documented here.
 This project follows Semantic Versioning.
 
+The entries below the first one describe **frug-template**, which this site is
+built on, and are kept because the platform layer they describe is still what
+runs underneath. Changes to the site itself go above them.
+
 ## [Unreleased]
+
+### The site
+
+- The commercial copy now matches how Zipr is actually sold: Free, Hosted and
+  Self-hosted, with the hosted service advertised rather than denied, self-hosting
+  priced per deployment rather than per person, and no trial offered anywhere.
+  `/security`'s absolute claims — "we hold nothing", "we are not in the path" —
+  now say which of the two paid options they describe, because neither survives
+  operating a hosted service.
+- `README.md` carries the commercial model as a four-point checklist. Every one
+  of those four was stated wrongly on this site once, so new copy gets checked
+  against them.
+
+### The template
 
 First release. The template is the platform layer of a production Cloudflare
 Workers application, with that application's domain removed, designed so a new
 site goes from template to live without a terminal.
-
-### The template
 
 - Hono on Cloudflare Workers: server-rendered JSX, HTMX for partial updates,
   Tailwind v4, Lit Web Components only where client state is unavoidable.
