@@ -135,7 +135,11 @@ describe("UI pages load", () => {
     // assembled from cents by a formatter — so it is worth asserting rather
     // than trusting that the card rendered at all.
     expect(pricing).toContain("$6");
-    expect(pricing).toContain("Enterprise");
+    expect(pricing).toContain("Self-hosted");
+    // The two paid options are billed on different units, and saying so is the
+    // single correction this page exists to keep: a per-person figure against
+    // self-hosting would be selling a number nothing counts.
+    expect(pricing).toContain("Priced per deployment, not per person");
 
     const downloads = await (await get(testApp, "/downloads")).text();
     expect(downloads).toContain("0.1.0");
@@ -229,8 +233,8 @@ describe("UI pages load", () => {
     // several render the `+` literally — which would put plus signs through
     // the one thing doing the routing.
     for (const subject of [
-      "subject=Zipr%20licence%20enquiry",
-      "subject=Zipr%20self-hosting%20question",
+      "subject=Zipr%20hosted%20enquiry",
+      "subject=Zipr%20self-hosted%20licence%20enquiry",
       "subject=Zipr%20support%20request",
       "subject=Zipr%20security%20report",
     ]) {

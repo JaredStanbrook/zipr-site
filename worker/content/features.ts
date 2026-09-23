@@ -122,8 +122,8 @@ export const JOURNEY = [
   {
     step: "03",
     title: "Let one out of the box",
-    body: "The day an idea stops being only yours, put Zipr on your own servers and let it travel. Same app, more people, nothing to relearn.",
-    cost: "Licensed",
+    body: "The day an idea stops being only yours, give your team a Zipr server — ours or your own — and let it travel. Same app, more people, nothing to relearn.",
+    cost: "Paid",
   },
 ];
 

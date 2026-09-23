@@ -25,7 +25,12 @@ import {
  *
  * The running-costs section is the one most pricing pages leave out and the
  * one a self-hosted buyer most needs: a licence fee that turns out to be the
- * smaller half of the bill is how a product loses a customer in month two.
+ * smaller half of the bill is how a product loses a customer in month two. It
+ * now sits under the self-hosted heading rather than reading as the universal
+ * story, because for a hosted customer that bill is ours.
+ *
+ * Nothing on this page is a checkout. Both paid routes are a conversation, so
+ * every paid button goes to /contact — see the note in content/pricing.ts.
  */
 
 const TierCard: FC<{ tier: PricingTier; app: AppConfig }> = ({ tier, app }) => {
@@ -105,7 +110,7 @@ const ComparisonTable: FC = () => (
   <TableFrame>
     <table class="relative w-full min-w-[46rem] border-collapse text-left">
       <caption class="sr-only">
-        Feature comparison between the Free, Team and Enterprise plans
+        Feature comparison between the Free app, the Hosted service and a Self-hosted deployment
       </caption>
       <thead>
         <tr class="border-b border-border bg-muted/60">
@@ -117,12 +122,12 @@ const ComparisonTable: FC = () => (
             <span class="block text-xs font-normal text-muted-foreground">On your machine</span>
           </th>
           <th scope="col" class="px-5 py-4 text-sm font-semibold text-primary">
-            Team
-            <span class="block text-xs font-normal text-muted-foreground">Licensed</span>
+            Hosted
+            <span class="block text-xs font-normal text-muted-foreground">Per person</span>
           </th>
           <th scope="col" class="px-5 py-4 text-sm font-semibold">
-            Enterprise
-            <span class="block text-xs font-normal text-muted-foreground">Licensed</span>
+            Self-hosted
+            <span class="block text-xs font-normal text-muted-foreground">Per deployment</span>
           </th>
         </tr>
       </thead>
@@ -152,10 +157,10 @@ const ComparisonTable: FC = () => (
                 <Mark value={row.free} />
               </td>
               <td class="px-5 py-4 align-top">
-                <Mark value={row.team} />
+                <Mark value={row.cloud} />
               </td>
               <td class="px-5 py-4 align-top">
-                <Mark value={row.enterprise} />
+                <Mark value={row.selfHosted} />
               </td>
             </tr>
           ))}
@@ -175,7 +180,7 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
           align="center"
           eyebrow="Pricing"
           title="Free for you. Paid for your team."
-          lede="Everything one person can do on one machine is free, permanently — not a trial, not a cut-down build. You pay on the day an idea has to belong to more than you."
+          lede="Everything one person can do on one machine is free, permanently — not a trial, not a cut-down build. You pay on the day an idea has to belong to more than you, and then you choose who runs the server."
         />
       </Container>
     </Section>
@@ -190,10 +195,10 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
         </div>
 
         <p class="mt-8 text-center text-sm text-muted-foreground text-pretty">
-          Prices in {app.currency}, excluding tax. The licence covers the software; the server is
-          yours.{" "}
+          Prices in {app.currency}, excluding tax. Nobody signs themselves up for either paid option
+          — both start with a conversation, and you get a quote before anything begins.{" "}
           <a href="#running-costs" class="font-medium text-primary underline underline-offset-4">
-            Here's what running it involves.
+            Here's what running it yourself involves.
           </a>
         </p>
       </Container>
@@ -205,7 +210,7 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
         <SectionHeading
           eyebrow="Line by line"
           title="Alone versus together, line by line"
-          lede="No asterisks. Everything in the free column works forever on your own machine. The team column is what arrives once the work starts crossing between people."
+          lede="No asterisks. Everything in the free column works forever on your own machine. The other two are what arrives once the work starts crossing between people — and they are the same software, so they differ on who operates it and how it is billed rather than on what it can do."
         />
         <ComparisonTable />
       </Container>
@@ -216,9 +221,9 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
       <Container>
         <SectionHeading
           align="center"
-          eyebrow="Running it yourself"
+          eyebrow="If you run it yourself"
           title="Less work than you're bracing for"
-          lede="Self-hosted has a reputation, and most of it is earned by other software. This is one server and one command."
+          lede="Self-hosted has a reputation, and most of it is earned by other software. This is one server and one command — and if you would rather not, the hosted option is us doing exactly this for you."
         />
 
         <div class="grid gap-5 md:grid-cols-3">
@@ -234,8 +239,9 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
         </div>
 
         <p class="mx-auto mt-8 max-w-2xl text-center text-sm text-muted-foreground text-pretty">
-          The licence covers the software and the support. The server is yours, on whichever cloud
-          or rack you already use — which is the point, because it is also where your data stays.
+          The agreement covers the software and the support. The server is yours, on whichever cloud
+          or rack you already use — which is the point, because it is also where your data stays. It
+          counts nobody, so what you pay does not move when the team grows.
         </p>
       </Container>
     </Section>
@@ -254,9 +260,9 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
 
     <CtaBand
       title="Try it before any of this matters."
-      body="The free app needs no account and is the same one licensed teams run. Come back here the day the idea stops being only yours."
+      body="The free app needs no account and is the same one paying teams run. There is no trial to start and no clock to beat — come back here the day the idea stops being only yours."
       primary={{ href: "/downloads", label: "Download Zipr" }}
-      secondary={{ href: "/contact?topic=licence", label: "Ask about a licence" }}
+      secondary={{ href: "/contact?topic=cloud", label: "Talk to us about a team" }}
     />
   </Page>
 );

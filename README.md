@@ -45,21 +45,50 @@ Two standing rules for the copy, both older than the brief and both still
 binding: say what the reader gets rather than how it was built, and never
 write a claim the product does not actually honour.
 
+## The commercial model, which the copy has to keep straight
+
+Four facts. Each of them was stated wrongly on this site once, and each is the
+kind of wrong a customer only discovers after paying, so check any commercial
+wording against them before shipping it. `worker/content/pricing.ts` carries
+the same list as a comment over the data it governs.
+
+1. **There are two paid options, billed on different units.** The hosted
+   service is sold per person — anyone an administrator has added to the
+   organisation, counted from the moment they are added and whether or not
+   they ever sign in. A self-hosted deployment counts nobody at all: it is
+   priced per deployment under a written agreement, because the customer's own
+   hardware is the only limit there that means anything. Never quote a
+   per-person price for self-hosting.
+2. **There is no trial and no free tier on the server.** The free app is the
+   trial, and a real one — the same build a paying team runs. Nobody
+   self-provisions either, so every paid call to action is a conversation
+   rather than a checkout.
+3. **Not paying refuses writes; it never deletes or locks anything.** A lapsed
+   invoice, or an expired self-hosted licence, leaves everything readable and
+   stops accepting changes — and export keeps working throughout, deliberately,
+   because holding data against a bill is the first thing a procurement review
+   asks about.
+4. **Only the self-hosted claims are absolute.** "We hold nothing", "not in the
+   path", "nothing leaves your network" are true of a deployment on the
+   customer's infrastructure and false of the hosted service. Any page making
+   one of those claims has to say which it is talking about — `/security` is
+   the page where getting this wrong costs the most.
+
 ## What is here
 
-| Path              |                                                                     |
-| ----------------- | ------------------------------------------------------------------- |
-| `/`               | The argument, top to bottom, ending at the commercial line          |
-| `/features`       | Five moments where an idea travels or dies, and the twelve verbs    |
-| `/downloads`      | Installers, served from R2 through the worker, with checksums       |
-| `/pricing`        | Three tiers, the full comparison, and what the infrastructure costs |
-| `/security`       | The short answers a security review wants                           |
-| `/contact`        | Four `mailto:` routes, each with a subject already written          |
-| `/report`         | Bug reports, straight into D1. The site is the tracker              |
-| `/admin`          | Where signing in lands you: what is published, and where to go      |
-| `/admin/releases` | Create a release, upload installers, publish                        |
-| `/admin/issues`   | The bug tracker — triage, reply, close                              |
-| `/admin/logs`     | The authentication audit trail                                      |
+| Path              |                                                                      |
+| ----------------- | -------------------------------------------------------------------- |
+| `/`               | The argument, top to bottom, ending at the commercial line           |
+| `/features`       | Five moments where an idea travels or dies, and the twelve verbs     |
+| `/downloads`      | Installers, served from R2 through the worker, with checksums        |
+| `/pricing`        | Free, Hosted and Self-hosted, the full comparison, and running costs |
+| `/security`       | The short answers a security review wants                            |
+| `/contact`        | Four `mailto:` routes, each with a subject already written           |
+| `/report`         | Bug reports, straight into D1. The site is the tracker               |
+| `/admin`          | Where signing in lands you: what is published, and where to go       |
+| `/admin/releases` | Create a release, upload installers, publish                         |
+| `/admin/issues`   | The bug tracker — triage, reply, close                               |
+| `/admin/logs`     | The authentication audit trail                                       |
 
 ## Accounts
 
