@@ -110,9 +110,9 @@ export const SecurityPage: FC = () => (
       <Container size="wide">
         <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {PROPERTIES.map((property) => (
-            <Card class="flex h-full flex-col p-6">
+            <Card lift class="flex h-full flex-col p-7">
               <IconTile icon={property.icon} tone="brand" />
-              <h2 class="mt-4 text-lg font-bold text-balance">{property.title}</h2>
+              <h2 class="mt-5 text-xl leading-snug text-balance">{property.title}</h2>
               <p class="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
                 {property.body}
               </p>
@@ -125,15 +125,20 @@ export const SecurityPage: FC = () => (
     {/* ================= THE ONE THAT MATTERS ================= */}
     <Section tone="muted">
       <Container size="prose">
-        <Card class="p-8 text-center">
+        <div class="text-center">
           <IconTile icon="shield" tone="brand" size="lg" class="mx-auto" />
-          <h2 class="mt-5 text-2xl font-bold text-balance">The question behind all the others</h2>
-          <p class="mt-4 leading-relaxed text-muted-foreground text-pretty">
-            "If this tool holds our commands, what can it do with them?" Nothing. It holds them the
-            way a document holds text. Running one is always an action a person takes, on their own
-            machine, deliberately.
+          <h2 class="mt-6 text-3xl text-balance sm:text-4xl">The question behind all the others</h2>
+          <p class="font-display mx-auto mt-8 max-w-xl text-2xl leading-snug text-balance">
+            “If this tool holds our commands, what can it do with them?”
           </p>
-        </Card>
+          <p class="font-display mt-4 text-5xl text-primary">
+            <em>Nothing.</em>
+          </p>
+          <p class="mx-auto mt-6 max-w-lg leading-relaxed text-muted-foreground text-pretty">
+            It holds them the way a document holds text. Running one is always an action a person
+            takes, on their own machine, deliberately.
+          </p>
+        </div>
       </Container>
     </Section>
 
@@ -141,7 +146,7 @@ export const SecurityPage: FC = () => (
     <Section>
       <Container size="prose">
         <SectionHeading align="center" eyebrow="Review questions" title="Asked and answered" />
-        <div class="border-t border-border">
+        <div>
           {REVIEW_FAQ.map((item) => (
             <Disclosure question={item.q}>{item.a}</Disclosure>
           ))}

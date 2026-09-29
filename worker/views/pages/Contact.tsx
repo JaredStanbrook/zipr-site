@@ -127,13 +127,19 @@ const ROUTES: Route[] = [
  * all four are present and reachable either way.
  */
 const RouteCard: FC<{ route: Route; highlighted: boolean }> = ({ route, highlighted }) => (
-  <Card class={`flex h-full flex-col p-6 ${highlighted ? "ring-2 ring-primary" : ""}`}>
+  <Card
+    tone={highlighted ? "floating" : "raised"}
+    lift
+    class={`flex h-full flex-col p-7 ${
+      highlighted ? "outline-2 outline-offset-4 outline-primary/40 outline-dashed" : ""
+    }`}
+  >
     <div class="flex items-start justify-between gap-3">
-      <IconTile icon={route.icon} />
+      <IconTile icon={route.icon} size="lg" />
       {highlighted ? <Badge tone="primary">You were asking about this</Badge> : null}
     </div>
 
-    <h2 class="mt-4 text-lg font-bold text-balance">{route.title}</h2>
+    <h2 class="mt-5 text-2xl text-balance">{route.title}</h2>
     <p class="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
       {route.blurb}
     </p>

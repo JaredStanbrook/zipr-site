@@ -11,7 +11,6 @@ import {
   SectionHeading,
   Card,
   IconTile,
-  Badge,
   LinkButton,
   CheckItem,
   Mark,
@@ -38,31 +37,38 @@ const TierCard: FC<{ tier: PricingTier; app: AppConfig }> = ({ tier, app }) => {
 
   return (
     <Card
+      tone={tier.featured ? "floating" : "raised"}
+      lift
       class={`relative flex h-full flex-col p-7 ${
-        tier.featured ? "ring-2 ring-primary lg:-my-3 lg:py-10" : ""
+        tier.featured
+          ? "outline-2 outline-offset-4 outline-primary/40 outline-dashed lg:-my-4 lg:py-11"
+          : ""
       }`}
     >
       {tier.featured ? (
-        <span class="absolute -top-3 left-7">
-          <Badge tone="primary" class="shadow-raised">
+        <span class="absolute -top-3.5 left-7">
+          <span class="clay-primary inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-bold">
+            <i data-lucide="zap" class="h-3 w-3" aria-hidden="true"></i>
             Most teams start here
-          </Badge>
+          </span>
         </span>
       ) : null}
 
-      <h3 class="text-xl font-bold">{tier.name}</h3>
+      <h3 class="text-2xl">{tier.name}</h3>
       <p class="mt-2 min-h-[3rem] text-sm leading-relaxed text-muted-foreground text-pretty">
         {tier.summary}
       </p>
 
-      <div class="mt-6 border-y border-border py-6">
+      {/* The price sits in a well cut into the card: the number is the thing
+          being held, and the card is holding it. */}
+      <div class="clay-well mt-6 rounded-[1.1rem] p-5">
         {tier.annualMonthlyCents === null ? (
-          <p class="text-4xl font-extrabold tracking-tight">Let's talk</p>
+          <p class="font-display text-4xl font-semibold">Let's talk</p>
         ) : tier.annualMonthlyCents === 0 ? (
-          <p class="text-5xl font-extrabold tracking-tight tabular">{money(0)}</p>
+          <p class="font-display text-5xl font-semibold tabular">{money(0)}</p>
         ) : (
-          <p class="flex items-baseline gap-1.5">
-            <span class="text-5xl font-extrabold tracking-tight tabular">
+          <p class="flex flex-wrap items-baseline gap-1.5">
+            <span class="font-display text-5xl font-semibold tabular">
               {money(tier.annualMonthlyCents)}
             </span>
             <span class="text-sm font-medium text-muted-foreground">/ person / month</span>
@@ -179,7 +185,11 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
           as="h1"
           align="center"
           eyebrow="Pricing"
-          title="Free for you. Paid for your team."
+          title={
+            <>
+              Free for you. <em>Paid</em> for your team.
+            </>
+          }
           lede="Everything one person can do on one machine is free, permanently — not a trial, not a cut-down build. You pay on the day an idea has to belong to more than you, and then you choose who runs the server."
         />
       </Container>
@@ -228,9 +238,9 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
 
         <div class="grid gap-5 md:grid-cols-3">
           {RUNNING_NOTES.map((note) => (
-            <Card class="flex h-full flex-col p-6 text-center">
-              <IconTile icon={note.icon} tone="brand" class="mx-auto" />
-              <h3 class="mt-4 font-bold">{note.title}</h3>
+            <Card lift class="flex h-full flex-col p-7 text-center">
+              <IconTile icon={note.icon} tone="brand" size="lg" class="mx-auto" />
+              <h3 class="mt-5 text-xl">{note.title}</h3>
               <p class="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
                 {note.body}
               </p>
@@ -250,7 +260,7 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
     <Section tone="muted">
       <Container size="prose">
         <SectionHeading align="center" eyebrow="Questions" title="Before you ask" />
-        <div class="border-t border-border">
+        <div>
           {PRICING_FAQ.map((item) => (
             <Disclosure question={item.q}>{item.a}</Disclosure>
           ))}

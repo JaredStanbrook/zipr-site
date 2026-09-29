@@ -223,13 +223,25 @@ Depth, not lines. There is deliberately no flat bordered card available — a
 bordered box is the thing claymorphism replaces, and having one on hand is how
 this site drifted back to looking like a Swiss grid with soft shadows.
 
-| Class          | Is                          | Use for                        |
-| -------------- | --------------------------- | ------------------------------ |
-| `.clay`        | A surface above the page    | Cards, table frames, panels    |
-| `.clay-raised` | The same at control scale   | Icon tiles, small raised bits  |
-| `.clay-well`   | A surface cut into the page | Empty states, recessed regions |
-| `.clay-field`  | A well shaped like an input | Every form control             |
-| `.clay-press`  | A pixel down, shadow inward | Anything clickable             |
+| Class           | Is                          | Use for                        |
+| --------------- | --------------------------- | ------------------------------ |
+| `.clay`         | A surface above the page    | Cards, table frames, panels    |
+| `.clay-raised`  | The same at control scale   | Icon tiles, small raised bits  |
+| `.clay-well`    | A surface cut into the page | Empty states, recessed regions |
+| `.clay-field`   | A well shaped like an input | Every form control             |
+| `.clay-press`   | A pixel down, shadow inward | Anything clickable             |
+| `.clay-primary` | Lit orange clay with a lip  | The one main action per view   |
+| `.clay-slab`    | The same at section scale   | The closing call to action     |
+| `.clay-tray`    | A section pressed in        | `<Section tone="muted">`       |
+| `.clay-lift`    | Rises towards the pointer   | Cards a reader scans across    |
+| `.keycap`       | A key with a lip to travel  | The twelve verbs               |
+| `.brick`        | One block of the logo       | `LogoBricks`, loose decoration |
+| `.emboss`       | Type stamped into a surface | The footer wordmark, numerals  |
+
+Motion is three keyframes, all decoration and all switched off by
+`prefers-reduced-motion`: `.rise` (page-load stagger, ordered by an inline
+`--i`), `.float` (slow drift for loose pieces, phased by `--d`), and `.zip-in`
+(the logo's bricks closing left to right).
 
 Two things differ from the client's own token file, both on purpose and both
 commented where they are defined. Large surfaces use `--shadow-raised-lg`,
@@ -251,8 +263,14 @@ grid, because the full mark is sixteen blocks wide and turns to mush in a
 
 Plus Jakarta Sans and JetBrains Mono are self-hosted in `public/fonts` (latin
 and latin-ext, ~92KB) so first paint owes nothing to a third party and the site
-still looks right on a network that blocks Google Fonts. Both are OFL 1.1; see
-`public/fonts/OFL.txt`.
+still looks right on a network that blocks Google Fonts. Headings are Fraunces,
+self-hosted the same way (latin, both styles, ~130KB): a variable soft serif
+whose `SOFT` axis rounds every terminal, pinned at full softness so the
+headlines look moulded from the same material as the surfaces. The files are
+instanced to just the axis values the site uses; `public/fonts/OFL.txt` says
+exactly how. Body text stays
+Plus Jakarta so reading on the site matches reading in the app. All three are
+OFL 1.1; see `public/fonts/OFL.txt`.
 
 ## Development
 

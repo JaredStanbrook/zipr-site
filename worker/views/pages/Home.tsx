@@ -13,6 +13,7 @@ import {
   CtaBand,
   Eyebrow,
   CheckItem,
+  LogoBricks,
 } from "@views/components/Ui";
 
 /**
@@ -59,68 +60,117 @@ const CATALOGUE = [
   },
 ];
 
+/**
+ * Drawn as a clay object: the window is a raised slab, its list is a well cut
+ * into it, and each row is a small tile sitting in the well. The first row is
+ * shown mid-hover with its play button lit, so the picture has a verb in it.
+ * A few loose pieces float around it — the kind of thing that ends up on a
+ * desk next to the thing you are making.
+ */
 const HeroPanel: FC = () => (
-  <div class="relative">
-    <Card class="overflow-hidden p-0">
-      <div class="flex items-center gap-2 border-b border-border bg-muted/60 px-4 py-3">
-        <span class="h-2.5 w-2.5 rounded-full bg-destructive/60"></span>
-        <span class="h-2.5 w-2.5 rounded-full bg-warning/60"></span>
-        <span class="h-2.5 w-2.5 rounded-full bg-success/60"></span>
-        <span class="ml-2 text-xs font-medium text-muted-foreground">Your catalogue</span>
+  <div class="relative mx-auto w-full max-w-xl lg:max-w-none">
+    <span
+      class="float absolute -left-5 -top-6 z-10 hidden sm:block"
+      style="--r: -10deg; --d: -2s;"
+      aria-hidden="true"
+    >
+      <IconTile icon="key-round" tone="brand" size="lg" />
+    </span>
+    <span
+      class="float absolute -right-4 top-1/3 z-10 hidden sm:block"
+      style="--r: 8deg; --d: -4s;"
+      aria-hidden="true"
+    >
+      <IconTile icon="share-2" size="lg" />
+    </span>
+    <span
+      class="brick float absolute -bottom-3 left-[18%] z-10 h-6 w-6"
+      style="--r: 14deg; --d: -1s;"
+      aria-hidden="true"
+    ></span>
+    <span
+      class="brick float absolute -top-3 right-[22%] z-10 h-4 w-4"
+      style="--r: -20deg; --d: -5s;"
+      aria-hidden="true"
+    ></span>
+
+    <Card tone="floating" class="relative rotate-[0.6deg] p-3 sm:p-4">
+      <div class="flex items-center gap-2 px-2 pb-3 pt-1">
+        <span class="h-3 w-3 rounded-full bg-destructive/70 shadow-inset"></span>
+        <span class="h-3 w-3 rounded-full bg-warning/70 shadow-inset"></span>
+        <span class="h-3 w-3 rounded-full bg-success/70 shadow-inset"></span>
+        <span class="ml-2 font-display text-sm font-semibold">Your catalogue</span>
         <Badge tone="brand" class="ml-auto">
           <i data-lucide="hard-drive" class="h-3 w-3" aria-hidden="true"></i>
-          Runs on this machine
+          <span class="hidden sm:inline">Runs on this machine</span>
+          <span class="sm:hidden">Local</span>
         </Badge>
       </div>
 
-      <div class="divide-y divide-border">
-        {CATALOGUE.map((item) => (
-          <div class="flex items-center gap-4 px-4 py-3.5">
-            <IconTile icon={item.icon} class="h-9 w-9" />
+      <div class="clay-well space-y-2.5 rounded-[1.1rem] p-2.5 sm:p-3">
+        {CATALOGUE.map((item, i) => (
+          <div
+            class={`rise flex items-center gap-3 rounded-[0.9rem] bg-card px-3 py-2.5 sm:gap-4 ${
+              i === 0 ? "shadow-floating" : "shadow-raised"
+            }`}
+            style={`--i: ${i + 4};`}
+          >
+            <IconTile icon={item.icon} class="!h-9 !w-9 rotate-0" />
             <span class="min-w-0 flex-1">
               <span class="block truncate text-sm font-semibold">{item.name}</span>
               <span class="block truncate text-xs text-muted-foreground">
-                <span class="font-medium text-brand-subtle-foreground">{item.from}</span> ·{" "}
+                <span class="font-semibold text-brand-subtle-foreground">{item.from}</span> ·{" "}
                 {item.steps}
               </span>
             </span>
-            <i
-              data-lucide="play"
-              class="h-4 w-4 shrink-0 text-muted-foreground"
+            <span
+              class={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${
+                i === 0 ? "clay-primary" : "bg-muted text-muted-foreground shadow-inset"
+              }`}
               aria-hidden="true"
-            ></i>
+            >
+              <i data-lucide="play" class="h-3.5 w-3.5"></i>
+            </span>
           </div>
         ))}
       </div>
     </Card>
 
-    <p class="mt-3 text-center text-xs text-muted-foreground">An illustration, not a screenshot.</p>
+    <p class="mt-5 text-center text-xs text-muted-foreground">An illustration, not a screenshot.</p>
   </div>
 );
 
 export const HomePage: FC = () => (
   <Page>
     {/* ================= HERO ================= */}
-    <Section class="pt-12 sm:pt-20">
+    <Section class="pt-8 sm:pt-16">
       <Container size="wide">
-        <div class="grid items-center gap-12 [&>*]:min-w-0 lg:grid-cols-2 lg:gap-16">
+        <div class="grid items-center gap-14 [&>*]:min-w-0 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
           <div>
-            <Badge tone="success" class="mb-6">
-              <i data-lucide="circle-check" class="h-3 w-3" aria-hidden="true"></i>
-              Free forever, no account
-            </Badge>
+            <p class="rise" style="--i: 0;">
+              <Badge tone="success" class="mb-7">
+                <i data-lucide="circle-check" class="h-3 w-3" aria-hidden="true"></i>
+                Free forever, no account
+              </Badge>
+            </p>
 
-            <h1 class="text-4xl font-extrabold tracking-tight text-balance sm:text-5xl lg:text-6xl">
-              Some ideas can't be explained. They have to be run.
+            <h1
+              class="rise text-[2.9rem] leading-[0.98] text-balance sm:text-7xl lg:text-[5.25rem]"
+              style="--i: 1;"
+            >
+              Some ideas can't be explained. They have to be <em>run.</em>
             </h1>
 
-            <p class="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
+            <p
+              class="rise mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty sm:text-xl"
+              style="--i: 2;"
+            >
               Zipr takes the thing you worked out — the sequence, the trick, the shortcut nobody
               believes until they've seen it — and turns it into something a colleague can run on
               the first try.
             </p>
 
-            <div class="mt-8 flex flex-wrap gap-3">
+            <div class="rise mt-9 flex flex-wrap gap-3" style="--i: 3;">
               <LinkButton href="/downloads" size="lg">
                 <i data-lucide="download" class="h-4 w-4" aria-hidden="true"></i>
                 Download for free
@@ -130,12 +180,14 @@ export const HomePage: FC = () => (
               </LinkButton>
             </div>
 
-            <p class="mt-5 text-sm text-muted-foreground">
+            <p class="rise mt-6 text-sm text-muted-foreground" style="--i: 4;">
               Windows and macOS. Takes a minute. Nothing to sign up for.
             </p>
           </div>
 
-          <HeroPanel />
+          <div class="rise" style="--i: 2;">
+            <HeroPanel />
+          </div>
         </div>
       </Container>
     </Section>
@@ -143,29 +195,23 @@ export const HomePage: FC = () => (
     {/* =================================================================
         MANIFESTO
 
-        One beat of quiet between the pitch and the feature grid. No card,
+        One beat of quiet between the pitch and the feature grid. No cards,
         no icons, no columns — the page earns the right to be loud later by
-        being still here, and the claim is strong enough to stand on its own
-        line. The mark sits above it at low opacity as a signature rather
-        than as branding.
+        being still here. The mark sits above the claim built out of clay
+        bricks that zip shut as the page loads, which is the one piece of
+        motion on the site that means something: it is what the logo depicts.
        ================================================================= */}
     <Section tone="muted">
-      <Container size="prose">
+      <Container size="default">
         <div class="text-center">
-          <img
-            src="/logo.svg"
-            alt=""
-            width="256"
-            height="64"
-            class="mx-auto mb-10 h-8 w-auto opacity-50"
-          />
-          <p class="text-2xl font-bold leading-snug tracking-tight text-balance sm:text-3xl">
+          <LogoBricks cell="clamp(0.7rem, 2.6vw, 1.05rem)" class="mx-auto mb-12" />
+          <p class="font-display mx-auto max-w-4xl text-[2rem] leading-[1.08] text-balance sm:text-5xl lg:text-6xl">
             Every team has an idea only one person can run.
           </p>
-          <p class="mt-2 text-2xl font-bold leading-snug tracking-tight text-balance text-muted-foreground sm:text-3xl">
-            It is usually the best one.
+          <p class="font-display mt-3 text-[2rem] leading-[1.08] text-balance text-muted-foreground sm:text-5xl lg:text-6xl">
+            It is usually the <em>best</em> one.
           </p>
-          <p class="mx-auto mt-8 max-w-xl leading-relaxed text-muted-foreground text-pretty">
+          <p class="mx-auto mt-10 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
             Zipr exists to shorten the distance between one person having an idea and everybody else
             being able to run it.
           </p>
@@ -183,37 +229,39 @@ export const HomePage: FC = () => (
           lede="The unconventional one is always the hardest to explain, and the easiest to leave in a document nobody opens. Everything here is aimed at that gap."
         />
 
-        <div class="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+        <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
           {PILLARS.map((pillar) => (
-            <Card class="flex h-full flex-col p-6">
-              <IconTile icon={pillar.icon} />
-              <h3 class="mt-4 font-bold text-balance">{pillar.title}</h3>
-              <p class="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
+            <Card lift class="flex h-full flex-col p-6">
+              <div class="flex items-start justify-between gap-3">
+                <IconTile icon={pillar.icon} tone={pillar.tier === "api" ? "primary" : "brand"} />
+                <Badge tone={pillar.tier === "api" ? "primary" : "neutral"}>
+                  {pillar.tier === "api" ? "With a team" : "Free"}
+                </Badge>
+              </div>
+              <h3 class="mt-5 text-xl leading-snug text-balance">{pillar.title}</h3>
+              <p class="mt-2.5 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
                 {pillar.body}
               </p>
-              {pillar.tier === "api" ? (
-                <p class="mt-4 text-xs font-semibold uppercase tracking-wider text-primary">
-                  With a team
-                </p>
-              ) : (
-                <p class="mt-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  Free
-                </p>
-              )}
             </Card>
           ))}
         </div>
       </Container>
     </Section>
 
-    {/* ================= ACTIONS ================= */}
+    {/* =================================================================
+        ACTIONS
+
+        The twelve verbs as keys on a keyboard, because that is what they
+        are: the keys an item is typed out of. Each one gives under the
+        pointer the way a key does.
+       ================================================================= */}
     <Section tone="muted">
-      <Container>
-        <div class="grid gap-12 lg:grid-cols-[1fr_1.2fr] lg:gap-16">
-          <div>
+      <Container size="wide">
+        <div class="grid gap-12 lg:grid-cols-[0.8fr_1.4fr] lg:gap-16">
+          <div class="lg:sticky lg:top-28 lg:self-start">
             <Eyebrow>Twelve verbs</Eyebrow>
-            <h2 class="text-3xl font-bold tracking-tight text-balance sm:text-4xl">
-              If you can describe it, Zipr can run it.
+            <h2 class="text-3xl leading-[1.08] text-balance sm:text-[2.75rem]">
+              If you can describe it, Zipr can <em>run</em> it.
             </h2>
             <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
               Stack the steps in any order. Ask a question halfway through and use the answer. Do
@@ -226,11 +274,16 @@ export const HomePage: FC = () => (
             </LinkButton>
           </div>
 
-          <ul class="grid gap-x-6 gap-y-3 sm:grid-cols-2">
-            {ACTION_TYPES.map((action) => (
-              <li class="border-b border-border pb-3">
-                <span class="text-sm font-semibold">{action.name}</span>
-                <p class="mt-0.5 text-sm text-muted-foreground text-pretty">{action.blurb}</p>
+          <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+            {ACTION_TYPES.map((action, i) => (
+              <li class="keycap flex flex-col p-4">
+                <span class="font-mono text-[0.7rem] font-semibold text-primary tabular">
+                  {String(i + 1).padStart(2, "0")}
+                </span>
+                <span class="mt-2 text-sm font-bold leading-snug">{action.name}</span>
+                <p class="mt-1 text-xs leading-relaxed text-muted-foreground text-pretty">
+                  {action.blurb}
+                </p>
               </li>
             ))}
           </ul>
@@ -253,8 +306,8 @@ export const HomePage: FC = () => (
         <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
           <div>
             <Eyebrow>Across the boundary</Eyebrow>
-            <h2 class="text-3xl font-bold tracking-tight text-balance sm:text-4xl">
-              Knowledge moves. The org chart stays put.
+            <h2 class="text-3xl leading-[1.08] text-balance sm:text-[2.75rem]">
+              Knowledge <em>moves.</em> The org chart stays put.
             </h2>
             <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
               What you need is usually two teams away, and reaching it normally costs a ticket, a
@@ -276,7 +329,29 @@ export const HomePage: FC = () => (
             </div>
           </div>
 
-          <Card class="flex flex-col justify-center p-7">
+          <Card class="flex flex-col justify-center p-6 sm:p-8">
+            {/* Three teams, each in its own tray, with a copy crossing the
+                groove between two of them. The trays never merge — which is
+                the point being drawn. */}
+            <div class="mb-8 flex items-center gap-2" aria-hidden="true">
+              {["Platform", "Support", "Yours"].map((team, i) => (
+                <>
+                  {i > 0 ? (
+                    <span class="relative h-2 flex-1 rounded-full bg-muted shadow-inset">
+                      {i === 1 ? (
+                        <span
+                          class="brick float absolute left-1/2 top-1/2 -ml-2 -mt-2 h-4 w-4"
+                          style="--r: 8deg;"
+                        ></span>
+                      ) : null}
+                    </span>
+                  ) : null}
+                  <span class="clay-well rounded-full px-3 py-1.5 text-xs font-semibold text-brand-subtle-foreground sm:px-4">
+                    {team}
+                  </span>
+                </>
+              ))}
+            </div>
             <ul class="space-y-3.5">
               {TEAM_UNLOCKS.map((unlock) => (
                 <CheckItem>{unlock}</CheckItem>
@@ -293,26 +368,40 @@ export const HomePage: FC = () => (
         <SectionHeading
           align="center"
           eyebrow="The honest version"
-          title="Free alone. Paid together."
+          title={
+            <>
+              Free alone. <em>Paid together.</em>
+            </>
+          }
           lede="Most tools hand you a hobbled free tier and wait for you to outgrow it. Zipr's free app is the whole app — have as many ideas as you like, forever. What costs money is the day one of them has to belong to more than you, and then you pick who runs the server."
         />
 
-        <ol class="grid gap-5 md:grid-cols-3">
-          {JOURNEY.map((step) => (
-            <li>
-              <Card class="flex h-full flex-col p-6">
-                <div class="flex items-center justify-between">
-                  <span class="text-sm font-bold text-muted-foreground tabular">{step.step}</span>
-                  <Badge tone={step.cost === "Free" ? "success" : "primary"}>{step.cost}</Badge>
-                </div>
-                <h3 class="mt-4 text-lg font-bold text-balance">{step.title}</h3>
-                <p class="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
-                  {step.body}
-                </p>
-              </Card>
-            </li>
-          ))}
-        </ol>
+        <div class="relative">
+          {/* The groove the three steps sit along. Outside the list, because
+              an `<ol>` may only hold list items. */}
+          <span
+            class="absolute left-[8%] right-[8%] top-16 hidden h-2 rounded-full bg-muted shadow-inset md:block"
+            aria-hidden="true"
+          ></span>
+          <ol class="relative grid gap-6 md:grid-cols-3">
+            {JOURNEY.map((step) => (
+              <li class="relative">
+                <Card lift class="flex h-full flex-col p-7">
+                  <div class="flex items-center justify-between">
+                    <span class="emboss font-display text-6xl font-bold leading-none text-muted tabular">
+                      {step.step}
+                    </span>
+                    <Badge tone={step.cost === "Free" ? "success" : "primary"}>{step.cost}</Badge>
+                  </div>
+                  <h3 class="mt-5 text-2xl text-balance">{step.title}</h3>
+                  <p class="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
+                    {step.body}
+                  </p>
+                </Card>
+              </li>
+            ))}
+          </ol>
+        </div>
       </Container>
     </Section>
 
