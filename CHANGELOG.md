@@ -11,6 +11,15 @@ runs underneath. Changes to the site itself go above them.
 
 ### The site
 
+- A visual makeover that takes the clay further rather than away. Headings
+  are Fraunces at full softness; sections alternate as trays pressed into the
+  page instead of stripes of paint; the header is a floating clay bar with the
+  current page pressed in; the primary button is lit orange clay with a lip to
+  press past; the twelve verbs are keycaps; every page closes on a slab of
+  orange; and the logo is assembled from clay bricks that zip shut on load.
+  A faint grain and two soft lights sit behind everything. All of it is token
+  driven and checked in both themes, and all motion stops under
+  `prefers-reduced-motion`. No copy changed.
 - The commercial copy now matches how Zipr is actually sold: Free, Hosted and
   Self-hosted, with the hosted service advertised rather than denied, self-hosting
   priced per deployment rather than per person, and no trial offered anywhere.

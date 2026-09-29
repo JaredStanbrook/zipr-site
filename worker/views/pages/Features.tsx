@@ -72,18 +72,18 @@ export const FeaturesPage: FC = () => (
     </Section>
 
     {/* ================= PILLARS ================= */}
-    <Section tone="muted" class="pt-0 sm:pt-0">
+    <Section tone="muted">
       <Container size="wide">
         <div class="grid gap-5 sm:grid-cols-2">
           {PILLARS.map((pillar) => (
-            <Card class="flex h-full flex-col p-7">
+            <Card lift class="flex h-full flex-col p-7">
               <div class="flex items-start justify-between gap-4">
-                <IconTile icon={pillar.icon} />
+                <IconTile icon={pillar.icon} tone={pillar.tier === "api" ? "primary" : "brand"} />
                 <Badge tone={pillar.tier === "client" ? "success" : "primary"}>
                   {pillar.tier === "client" ? "Free" : "With a team"}
                 </Badge>
               </div>
-              <h2 class="mt-5 text-xl font-bold text-balance">{pillar.title}</h2>
+              <h2 class="mt-5 text-2xl leading-snug text-balance">{pillar.title}</h2>
               <p class="mt-3 leading-relaxed text-muted-foreground text-pretty">{pillar.body}</p>
             </Card>
           ))}
@@ -100,29 +100,33 @@ export const FeaturesPage: FC = () => (
           lede="None of these is a moment anybody schedules. They are just where good work gets lost, and where a tool either helps or is somewhere else."
         />
 
-        <div class="space-y-5">
-          {SCENES.map((scene) => (
-            <Card class="p-7">
-              <div class="flex items-start gap-5">
-                <IconTile icon={scene.icon} tone="brand" class="hidden sm:inline-flex" />
-                <div class="min-w-0 flex-1">
-                  <h3 class="text-lg font-bold text-balance">{scene.when}</h3>
-                  <div class="mt-4 grid gap-4 sm:grid-cols-2">
-                    <div>
-                      <p class="text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                        Without Zipr
-                      </p>
-                      <p class="mt-1.5 text-sm leading-relaxed text-muted-foreground text-pretty">
-                        {scene.was}
-                      </p>
-                    </div>
-                    <div>
-                      <p class="text-xs font-semibold uppercase tracking-wider text-brand-subtle-foreground">
-                        With it
-                      </p>
-                      <p class="mt-1.5 text-sm leading-relaxed text-pretty">{scene.now}</p>
-                    </div>
-                  </div>
+        {/* Each scene is a before and an after in clay terms: the way it
+            was sits pressed into the card, flat and a little dim; the way it
+            is now sits raised out of it, catching the light. */}
+        <div class="space-y-6">
+          {SCENES.map((scene, i) => (
+            <Card lift class="p-6 sm:p-8">
+              <div class="flex items-center gap-4">
+                <IconTile icon={scene.icon} tone="brand" />
+                <span class="font-mono text-xs font-semibold text-muted-foreground tabular">
+                  {String(i + 1).padStart(2, "0")} / {String(SCENES.length).padStart(2, "0")}
+                </span>
+              </div>
+              <h3 class="mt-5 text-2xl leading-snug text-balance sm:text-[1.75rem]">
+                {scene.when}
+              </h3>
+              <div class="mt-6 grid gap-4 sm:grid-cols-2">
+                <div class="clay-well rounded-[1.1rem] p-5">
+                  <p class="text-[0.7rem] font-bold uppercase tracking-[0.16em] text-muted-foreground">
+                    Without Zipr
+                  </p>
+                  <p class="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
+                    {scene.was}
+                  </p>
+                </div>
+                <div class="clay-raised rounded-[1.1rem] bg-brand-subtle p-5 text-brand-subtle-foreground">
+                  <p class="text-[0.7rem] font-bold uppercase tracking-[0.16em]">With it</p>
+                  <p class="mt-2 text-sm font-medium leading-relaxed text-pretty">{scene.now}</p>
                 </div>
               </div>
             </Card>
@@ -140,16 +144,21 @@ export const FeaturesPage: FC = () => (
           lede="Chain them in any order, branch on what happened, and vary the steps by operating system without making a second copy."
         />
 
-        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-          {ACTION_TYPES.map((action) => (
-            <Card class="p-5">
-              <h3 class="font-semibold">{action.name}</h3>
-              <p class="mt-1.5 text-sm leading-relaxed text-muted-foreground text-pretty">
+        <ul class="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
+          {ACTION_TYPES.map((action, i) => (
+            <li class="keycap p-4 sm:p-5">
+              <span class="font-mono text-[0.7rem] font-semibold text-primary tabular">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+              <h3 class="mt-2 font-sans text-sm font-bold tracking-normal sm:text-base">
+                {action.name}
+              </h3>
+              <p class="mt-1 text-xs leading-relaxed text-muted-foreground text-pretty sm:text-sm">
                 {action.blurb}
               </p>
-            </Card>
+            </li>
           ))}
-        </div>
+        </ul>
 
         <Card class="mt-8 p-7">
           <div class="grid gap-6 sm:grid-cols-3">
@@ -172,7 +181,7 @@ export const FeaturesPage: FC = () => (
             ].map((extra) => (
               <div>
                 <IconTile icon={extra.icon} tone="brand" />
-                <h3 class="mt-3 font-bold">{extra.title}</h3>
+                <h3 class="mt-4 text-xl">{extra.title}</h3>
                 <p class="mt-1.5 text-sm leading-relaxed text-muted-foreground text-pretty">
                   {extra.body}
                 </p>

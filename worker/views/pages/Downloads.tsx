@@ -37,18 +37,24 @@ const PlatformCard: FC<{
   asset: ReleaseWithAssets["assets"][number] | undefined;
   highlighted: boolean;
 }> = ({ info, asset, highlighted }) => (
-  <Card class={`flex h-full flex-col p-6 ${highlighted ? "ring-2 ring-primary" : ""}`}>
+  <Card
+    tone={highlighted ? "floating" : "raised"}
+    lift
+    class={`flex h-full flex-col p-7 ${
+      highlighted ? "outline-2 outline-offset-4 outline-primary/40 outline-dashed" : ""
+    }`}
+  >
     <div class="flex items-start justify-between gap-3">
-      <IconTile icon={info.icon} />
+      <IconTile icon={info.icon} size="lg" />
       {highlighted ? <Badge tone="primary">Looks like your system</Badge> : null}
     </div>
 
-    <h3 class="mt-4 text-lg font-bold">{info.name}</h3>
+    <h3 class="mt-5 text-2xl">{info.name}</h3>
     <p class="mt-1 text-sm text-muted-foreground">{info.requirement}</p>
 
     <div class="mt-5 flex-1">
       {asset ? (
-        <dl class="space-y-1.5 text-sm">
+        <dl class="clay-well space-y-1.5 rounded-[1.1rem] p-4 text-sm">
           <div class="flex justify-between gap-3">
             <dt class="text-muted-foreground">Format</dt>
             <dd class="font-medium">{info.format}</dd>
@@ -94,11 +100,13 @@ const PlatformCard: FC<{
 
 /** Shown before anything has ever been published. Honest, not a fake button. */
 const NoReleases: FC = () => (
-  <Card class="px-6 py-14 text-center">
-    <span class="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-muted text-muted-foreground shadow-inset">
-      <i data-lucide="package" class="h-6 w-6" aria-hidden="true"></i>
+  <Card class="px-6 py-16 text-center">
+    <span class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-muted text-muted-foreground shadow-inset">
+      <i data-lucide="package" class="float h-8 w-8" aria-hidden="true"></i>
     </span>
-    <h2 class="mt-5 text-2xl font-bold">Not quite yet</h2>
+    <h2 class="mt-6 text-4xl">
+      Not <em>quite</em> yet
+    </h2>
     <p class="mx-auto mt-3 max-w-lg leading-relaxed text-muted-foreground text-pretty">
       Zipr is early and the installers aren't up here yet. Leave us a line and we'll tell you the
       moment there's something to install — no list, no newsletter, just the one email.
@@ -252,8 +260,8 @@ export const DownloadsPage: FC<DownloadsProps> = ({ latest, previous, detected, 
     ) : null}
 
     <CtaBand
-      title="That\u2019s it. Nothing else to do."
-      body="No sign-up, no licence key, no clock counting down. Come back the day your team wants what you\u2019ve built."
+      title="That’s it. Nothing else to do."
+      body="No sign-up, no licence key, no clock counting down. Come back the day your team wants what you’ve built."
       primary={{ href: "/features", label: "What it can do" }}
       secondary={{ href: "/pricing", label: "What a team costs" }}
     />
