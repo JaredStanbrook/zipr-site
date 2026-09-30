@@ -67,13 +67,6 @@ export interface ResolvedMeta {
 }
 
 /**
- * The share image used when a page does not set its own: 1200×630, the size
- * every major link preview renders without cropping. Generated from the
- * brand by `scripts/og-image.mjs`.
- */
-export const DEFAULT_OG_IMAGE = "/og.png";
-
-/**
  * Paths that should never appear in search results.
  *
  * Authenticated pages are already invisible to a crawler — the guards redirect
@@ -104,7 +97,12 @@ export function resolveMeta(meta: PageMeta, app: AppConfig, url: URL): ResolvedM
     title: meta.title ? `${meta.title} · ${app.name}` : app.name,
     description: meta.description || app.tagline || "",
     canonical,
-    image: new URL(meta.image ?? DEFAULT_OG_IMAGE, origin).toString(),
+    // A page's own image, else the site default (APP_OG_IMAGE). With neither,
+    // a shared link renders as a small, image-less card.
+    image:
+      (meta.image ?? app.ogImage)
+        ? new URL((meta.image ?? app.ogImage)!, origin).toString()
+        : undefined,
     // A query string means a filtered view of a page that already exists.
     noindex: meta.noindex ?? (isNoindexPath(url.pathname) || hasQuery),
     type: meta.type ?? "website",

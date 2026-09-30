@@ -113,6 +113,9 @@
     // page asks (`today(c.var.app.timezone)` in worker/lib/dates.ts). UTC is
     // right for storage and wrong for "what's due today" in Perth before 8am.
     "APP_TIMEZONE": "UTC",
+    // Default link-preview image for pages that set none (1200×630, in
+    // public/). Rendered from the brand by `scripts/og-image.mjs`.
+    "APP_OG_IMAGE": "/og.png",
 
     // --- CORE AUTH ---
     // Enabled methods: passkey, password, pin, totp, email, sms

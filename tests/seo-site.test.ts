@@ -19,6 +19,8 @@ const appConfig = {
   locale: "en-AU",
   currency: "USD",
   origin: "https://zipr.example",
+  // As in wrangler.jsonc.
+  ogImage: "/og.png",
 };
 
 /** The redirect middleware in front of a trivial page, as the worker mounts it. */
@@ -104,7 +106,7 @@ describe("not-found page", () => {
 });
 
 describe("page metadata", () => {
-  it("gives every page a share image, unless it sets its own", () => {
+  it("gives every page the site's share image, unless it sets its own", () => {
     const url = new URL("https://zipr.example/features");
     expect(resolveMeta({}, appConfig as any, url).image).toBe("https://zipr.example/og.png");
     expect(resolveMeta({ image: "/x.png" }, appConfig as any, url).image).toBe(
