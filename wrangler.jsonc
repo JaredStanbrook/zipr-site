@@ -157,7 +157,12 @@
     // BOOTSTRAP_ADMIN_EMAIL, and only while no account exists; after that
     // /register is gone for good. Needs BOOTSTRAP_ADMIN_EMAIL set, or nobody
     // can ever register. Leave "false" for sites with open sign-up.
-    "SINGLE_ACCOUNT": "false",
+    //
+    // On here: it is exactly this site's rule, and unlike the page-level 404
+    // it is enforced by the API too, and it hides the sign-in page's "Create
+    // Account" link once the owner exists. Further staff accounts come from
+    // `npm run create-admin:remote`, which writes to D1 directly.
+    "SINGLE_ACCOUNT": "true",
 
     // First-run admin, so you never need a terminal to get one. Register
     // normally with this exact email and that account becomes an admin — but
