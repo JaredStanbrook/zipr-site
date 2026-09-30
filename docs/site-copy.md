@@ -114,7 +114,15 @@ Security reports
 
 © 2026 Zipr. All rights reserved.
 
-**[FOOT-17]** _text_
+**[FOOT-17]** _list item_
+
+Privacy
+
+**[FOOT-18]** _list item_
+
+Open-source licences
+
+**[FOOT-19]** _text_
 
 Zipr
 
@@ -542,7 +550,7 @@ One click instead of a walkthrough
 
 **[FEAT-07]** _text_
 
-The steps you worked out become one named item. A colleague clicks it and it works the first time — no document to follow, no script to be talked through.
+The steps you worked out become one named item. A colleague clicks it and it runs — no document to follow, no script to be talked through.
 
 **[FEAT-08]** _subheading_
 
@@ -1158,11 +1166,11 @@ One server and one command. If you'd rather not, the hosted option is us doing i
 
 **[PRICE-55]** _subheading_
 
-One modest server
+One server, not a cluster
 
 **[PRICE-56]** _text_
 
-A team of twenty fits comfortably on a small virtual machine. It is not a cluster, and it does not want to be.
+The server, its database and sign-in run together as one Docker Compose stack on a single machine.
 
 **[PRICE-57]** _subheading_
 
@@ -1170,7 +1178,7 @@ Up in an afternoon
 
 **[PRICE-58]** _text_
 
-One command brings the whole thing up. Most of the time is your own change control, not the install.
+Bring a domain, a TLS proxy and an email account for sign-in codes; then one command brings the whole thing up.
 
 **[PRICE-59]** _subheading_
 
@@ -1460,7 +1468,7 @@ How do we sign in?
 
 **[SEC-25]** _text_
 
-In your browser — the app opens the sign-in page and never handles a password itself. Google, Microsoft Entra and Okta are supported, so people join and leave wherever you already manage that.
+In your browser — the app opens the sign-in page and never handles your Zipr password itself. Google, Microsoft Entra and Okta are supported, so people join and leave wherever you already manage that.
 
 **[SEC-26]** _question_
 
@@ -1468,7 +1476,7 @@ What happens to our data if we stop paying?
 
 **[SEC-27]** _text_
 
-Reading keeps working while changes are refused, and you can export everything at any point without settling anything first. Hosted, the data is kept for a stated window after suspension before anything is removed. Self-hosted, it is on your own disk and we can't touch it; the licence warns you for a month before it expires.
+Reading keeps working while changes are refused, and you can export everything at any point without settling anything first. Hosted, the data is kept for the period set out in your agreement after suspension before anything is removed. Self-hosted, it is on your own disk and we can't touch it; the licence warns you for a month before it expires.
 
 **[SEC-28]** _question_
 
@@ -1601,7 +1609,7 @@ Report privately
 
 **[CONT-16]** _text_
 
-They all reach zipr@stanbrook.me— a real inbox, not an autoresponder, so give us a working day. No form, no list, no follow-up sequence. We use your address to answer you.
+They all reach zipr@stanbrook.me— a real inbox, not an autoresponder, so give us a working day. No form, no list, no follow-up sequence. We use your address to answer you; the privacy notice has the details.
 
 **[CONT-17]** _subheading_
 
@@ -1614,6 +1622,191 @@ There's a form for that, and it takes about thirty seconds. No account, no track
 **[CONT-19]** _text_
 
 Report a bug
+
+---
+
+## Privacy · `/privacy`
+
+_Source: `worker/views/pages/Privacy.tsx`_
+
+These two are what shows in a Google result and a shared link, not on the
+page itself:
+
+**[PRIV-TITLE]** _browser tab and search result_
+
+Privacy · Zipr
+
+**[PRIV-DESC]** _search result snippet_
+
+What the Zipr website and app collect, why, who else sees it, and how to ask for a copy or have it deleted.
+
+**[PRIV-01]** _text_
+
+PRIVACY
+
+**[PRIV-02]** _heading_
+
+Privacy notice
+
+**[PRIV-03]** _text_
+
+What this website and the Zipr app collect, why, and what you can ask us to do about it.
+
+**[PRIV-04]** _text_
+
+Version 1.0 · Last updated 30 Sept 2026
+
+**[PRIV-05]** _subheading_
+
+The short version
+
+**[PRIV-06]** _list item_
+
+No analytics, advertising or tracking cookies on this site.
+
+**[PRIV-07]** _list item_
+
+No third-party scripts or fonts — everything is served from our own domain.
+
+**[PRIV-08]** _list item_
+
+We only hold what you choose to send us: a bug report, or an email.
+
+**[PRIV-09]** _list item_
+
+We don't sell or share your information for marketing.
+
+**[PRIV-10]** _subheading_
+
+Who we are
+
+**[PRIV-11]** _text_
+
+This website and the Zipr app are run by Zipr. We are responsible for the information described here. For anything on this page, email zipr@stanbrook.me.
+
+**[PRIV-12]** _subheading_
+
+What we collect on this website
+
+**[PRIV-13]** _text_
+
+Bug reports. When you use the report form, we store what you type: where the problem happened, your summary and description, and — only if you fill them in — the version, your platform and your email address. We use it to investigate and fix the problem, and to reply if you left an address. Reports are not published.
+
+**[PRIV-14]** _text_
+
+Emails. If you email us, we receive your address and whatever you write, and use them to reply.
+
+**[PRIV-15]** _text_
+
+Downloads. We count how many times each installer is downloaded. The count is a number per file and is not linked to you.
+
+**[PRIV-16]** _text_
+
+Technical data. Like any website, the servers that deliver this one receive your IP address and browser details with each request. Cloudflare, which hosts the site, uses them to deliver pages and protect the site, and keeps request logs for a short period. We also use your IP address briefly to limit how many bug reports can be sent at once.
+
+**[PRIV-17]** _subheading_
+
+Cookies and browser storage
+
+**[PRIV-18]** _text_
+
+Visitors get no cookies. The site remembers whether you chose light or dark mode in your browser's local storage; that never leaves your device. The only cookies are a sign-in cookie and a one-off notification cookie used by our own staff when they sign in to publish releases. Because nothing here tracks you, there is no cookie banner to accept.
+
+**[PRIV-19]** _subheading_
+
+The Zipr app and team servers
+
+**[PRIV-20]** _text_
+
+The desktop app makes no network requests until you connect it to a team server. What you build stays on your machine.
+
+**[PRIV-21]** _text_
+
+On a self-hosted server, your organisation's data stays on infrastructure your organisation controls and we receive none of it.
+
+**[PRIV-22]** _text_
+
+On our hosted service, we store your organisation's data on its behalf, under the agreement we sign with your organisation. That includes:
+
+**[PRIV-23]** _list item_
+
+each member's account: email address, name and sign-in details;
+
+**[PRIV-24]** _list item_
+
+the catalogues, items and plugins your organisation builds;
+
+**[PRIV-25]** _list item_
+
+an audit trail of who changed what, and when;
+
+**[PRIV-26]** _list item_
+
+usage records of who ran which item, when, and from which device and app version — the basis of the team usage figures. These are kept for 180 days by default.
+
+**[PRIV-27]** _text_
+
+Your organisation decides who is a member and who can see what, so questions about that data are best sent to your administrator first — we will help them answer. Billing is handled through our payment provider, Stripe, which holds your organisation's billing details.
+
+**[PRIV-28]** _subheading_
+
+Who else sees it
+
+**[PRIV-29]** _text_
+
+Cloudflare hosts this website, its database and the installer files, and processes information on our behalf to do so. Cloudflare operates worldwide, so your information may be processed outside your country. The providers that run the hosted service, including Stripe for billing, are listed in your organisation's agreement. Beyond those, we don't share your information with anyone unless the law requires it.
+
+**[PRIV-30]** _subheading_
+
+How long we keep it
+
+**[PRIV-31]** _text_
+
+We keep bug reports for as long as they help us fix the product, and emails as ordinary correspondence. Ask us and we will delete yours sooner.
+
+**[PRIV-32]** _subheading_
+
+Why we're allowed to use it
+
+**[PRIV-33]** _text_
+
+Where data-protection law such as the GDPR applies, we rely on our legitimate interest in running this site and fixing the product, and on your request when you ask us to reply to you.
+
+**[PRIV-34]** _subheading_
+
+Your rights
+
+**[PRIV-35]** _text_
+
+You can ask us for a copy of the information we hold about you, and ask us to correct or delete it or to stop using it. Depending on where you live — for example the EU, UK, Australia or California — you may have further rights, including the right to complain to your data-protection regulator. Email zipr@stanbrook.me and we will answer within a month. We will never treat you differently for asking.
+
+**[PRIV-36]** _subheading_
+
+Children
+
+**[PRIV-37]** _text_
+
+Zipr is a tool for work and is not aimed at children. We don't knowingly collect information from anyone under 16; if you think a child has sent us some, tell us and we will delete it.
+
+**[PRIV-38]** _subheading_
+
+Keeping it safe
+
+**[PRIV-39]** _text_
+
+Everything is sent over encrypted connections, and only the people who run Zipr can see bug reports. If a breach puts your information at risk, we will tell you and the relevant regulator as the law requires.
+
+**[PRIV-40]** _subheading_
+
+Changes to this notice
+
+**[PRIV-41]** _text_
+
+When this notice changes, the version and date at the top change with it and the change is listed below. Ask us for any earlier version.
+
+**[PRIV-42]** _list item_
+
+1.0 · 30 Sept 2026 — First published.
 
 ---
 
@@ -1690,7 +1883,7 @@ Send the report
 
 **[REP-15]** _text_
 
-Goes straight to the people who can fix it.
+Goes straight to the people who can fix it. How we handle it: privacy notice.
 
 **[REP-16]** _subheading_
 

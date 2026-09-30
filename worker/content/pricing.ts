@@ -326,13 +326,13 @@ export const COMPARISON: ComparisonGroup[] = [
 export const RUNNING_NOTES = [
   {
     icon: "server",
-    title: "One modest server",
-    body: "A team of twenty fits comfortably on a small virtual machine. It is not a cluster, and it does not want to be.",
+    title: "One server, not a cluster",
+    body: "The server, its database and sign-in run together as one Docker Compose stack on a single machine.",
   },
   {
     icon: "zap",
     title: "Up in an afternoon",
-    body: "One command brings the whole thing up. Most of the time is your own change control, not the install.",
+    body: "Bring a domain, a TLS proxy and an email account for sign-in codes; then one command brings the whole thing up.",
   },
   {
     icon: "shield-check",

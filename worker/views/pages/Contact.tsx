@@ -182,7 +182,11 @@ export const ContactPage: FC<{ topic?: string }> = ({ topic }) => (
             {CONTACT.address}
           </a>
           — a real inbox, not an autoresponder, so give us a working day. No form, no list, no
-          follow-up sequence. We use your address to answer you.
+          follow-up sequence. We use your address to answer you; the{" "}
+          <a href="/privacy" class="font-medium text-primary underline underline-offset-4">
+            privacy notice
+          </a>{" "}
+          has the details.
         </p>
       </Container>
     </Section>

@@ -90,6 +90,7 @@ describe("UI pages load", () => {
       "/pricing",
       "/downloads",
       "/security",
+      "/privacy",
       "/report",
       "/contact",
       "/contact?topic=licence",

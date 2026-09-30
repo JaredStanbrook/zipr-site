@@ -24,6 +24,7 @@ const STATIC_ROUTES: SitemapEntry[] = [
   { loc: "/security", changefreq: "monthly", priority: 0.7 },
   { loc: "/report", changefreq: "yearly", priority: 0.4 },
   { loc: "/contact", changefreq: "yearly", priority: 0.5 },
+  { loc: "/privacy", changefreq: "yearly", priority: 0.3 },
 ];
 
 seoRoute.get("/robots.txt", (c) =>
