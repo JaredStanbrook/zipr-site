@@ -30,6 +30,7 @@ const PAGES = [
   { id: "SEC", path: "/security", name: "Security", source: "worker/views/pages/Security.tsx" },
   { id: "CONT", path: "/contact", name: "Contact", source: "worker/views/pages/Contact.tsx" },
   { id: "PRIV", path: "/privacy", name: "Privacy", source: "worker/views/pages/Privacy.tsx" },
+  { id: "LIC", path: "/licence", name: "Licence", source: "worker/views/pages/Licence.tsx" },
   { id: "REP", path: "/report", name: "Report a bug", source: "worker/views/pages/Report.tsx" },
 ];
 

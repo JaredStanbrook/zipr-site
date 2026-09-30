@@ -4,27 +4,28 @@
 // live. One place, so the footer, the privacy notice and anything added later
 // never disagree about the name on the door.
 //
-// BEFORE LAUNCH: `operator` must be the legal name of whoever actually runs
-// Zipr — a registered company name (with its company or ABN number in
-// `registration`), or the trading name of the person responsible. It is shown
-// as the owner in the footer and as the data controller in the privacy
-// notice, so a brand name that is not a legal entity is not good enough.
+// `operator` is the legal person who owns Zipr and runs this site. It is shown
+// as the copyright owner in the footer and as the data controller in the
+// privacy notice, so it must be a legal person rather than a brand. Today that
+// is Jared Stanbrook, personally; it matches the copyright line in the client
+// and API repositories. If a company takes Zipr over, change it here (with the
+// company or ABN number in `registration`) and in both repositories' licences.
 
 import { CONTACT } from "./site";
 
 export const LEGAL = {
   /** Legal name of the business that runs this site and publishes the app. */
-  operator: "Zipr",
+  operator: "Jared Stanbrook",
   /** Company / ABN / registration number, shown after the name. Null hides it. */
   registration: null as string | null,
   /** Where privacy requests and legal notices go. */
   contact: CONTACT.address,
   /**
-   * URL of the licence (EULA) the desktop app is distributed under. Null
-   * until one exists; once set, the downloads page links it beside every
-   * installer so nobody downloads without being able to read it.
+   * Where the licence the desktop app is distributed under is published. The
+   * downloads page links it beside every installer, so nobody downloads
+   * without being able to read it. The text is in `content/licence.ts`.
    */
-  licenceUrl: null as string | null,
+  licenceUrl: "/licence" as string | null,
 };
 
 /**

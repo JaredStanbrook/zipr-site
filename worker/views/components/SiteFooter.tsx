@@ -104,6 +104,11 @@ export const SiteFooter = ({ appName, tagline }: { appName: string; tagline: str
                from wherever information is collected, not just from one. -->
           <ul class="flex flex-wrap gap-x-5 gap-y-2">
             <li>
+              <a href="/licence" class="text-muted-foreground no-underline hover:text-primary"
+                >Licence</a
+              >
+            </li>
+            <li>
               <a href="/privacy" class="text-muted-foreground no-underline hover:text-primary"
                 >Privacy</a
               >

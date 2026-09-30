@@ -11,6 +11,13 @@ runs underneath. Changes to the site itself go above them.
 
 ### The site
 
+- Jared Stanbrook is named as Zipr's legal owner: in the footer's copyright
+  line and as the operator in the privacy notice, matching the copyright in
+  the client and API repositories.
+- The Zipr Licence v1.0, the terms of the free desktop app, is published at
+  `/licence`, linked from the footer and beside every installer on the
+  downloads page. Its text matches `LICENSE.md` in the client repository,
+  which the Windows installer now shows before it installs.
 - A visual makeover that takes the clay further rather than away. Headings
   are Fraunces at full softness; sections alternate as trays pressed into the
   page instead of stripes of paint; the header is a floating clay bar with the
