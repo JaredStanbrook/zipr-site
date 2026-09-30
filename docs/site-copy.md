@@ -46,7 +46,7 @@ Security
 
 Contact
 
-**[NAV-07]** _button_
+**[NAV-07]** _text_
 
 Download
 
@@ -88,7 +88,7 @@ Security
 
 **[FOOT-10]** _list item_
 
-Alone vs together
+Compare plans
 
 **[FOOT-11]** _list item_
 
@@ -116,7 +116,7 @@ Security reports
 
 **[FOOT-17]** _text_
 
-Made for people whose best idea is stuck in their own head.
+Zipr
 
 ---
 
@@ -133,7 +133,7 @@ Zipr
 
 **[HOME-DESC]** _search result snippet_
 
-Some ideas have to be run to be understood. Zipr turns the sequence you worked out into something a colleague can run on the first try — free forever, and shareable the day it stops being only yours.
+Zipr is a free desktop launcher for Windows and macOS. Chain commands, links, apps and prompts into one-click items, then share them with your team instead of explaining them.
 
 **[HOME-01]** _text_
 
@@ -141,13 +141,13 @@ Free forever, no account
 
 **[HOME-02]** _heading_
 
-Some ideas can't be explained. They have to be run.
+Turn the steps you keep explaining into one click.
 
 **[HOME-03]** _text_
 
-Zipr takes the thing you worked out — the sequence, the trick, the shortcut nobody believes until they've seen it — and turns it into something a colleague can run on the first try.
+Zipr is a desktop launcher for Windows and macOS. Chain commands, links, apps and prompts into one named item — then hand it to a colleague instead of a walkthrough.
 
-**[HOME-04]** _button_
+**[HOME-04]** _text_
 
 Download for free
 
@@ -157,7 +157,7 @@ See pricing
 
 **[HOME-06]** _text_
 
-Windows and macOS. Takes a minute. Nothing to sign up for.
+Windows 10+ and macOS 12+. Installs in about a minute.
 
 **[HOME-07]** _text_
 
@@ -169,339 +169,335 @@ Runs on this machine
 
 **[HOME-09]** _text_
 
-Open the on-call runbook
+Local
 
 **[HOME-10]** _text_
 
-Platform · 1 step
+Open the on-call runbook
 
 **[HOME-11]** _text_
 
-Spin up a staging stack
+Platform · 1 step
 
 **[HOME-12]** _text_
 
-Infrastructure · 3 steps
+Spin up a staging stack
 
 **[HOME-13]** _text_
 
-Rotate my API token
+Infrastructure · 3 steps
 
 **[HOME-14]** _text_
 
-Yours · 3 steps, one confirmation
+Rotate my API token
 
 **[HOME-15]** _text_
 
-Reset a customer sandbox
+Yours · 3 steps, one confirmation
 
 **[HOME-16]** _text_
 
-Support · 2 steps, asks first
+Reset a customer sandbox
 
 **[HOME-17]** _text_
 
-An illustration, not a screenshot.
+Support · 2 steps, asks first
 
 **[HOME-18]** _text_
 
-Every team has an idea only one person can run.
+An illustration, not a screenshot.
 
 **[HOME-19]** _text_
 
-It is usually the best one.
+Every team has something only one person can run.
 
 **[HOME-20]** _text_
 
-Zipr exists to shorten the distance between one person having an idea and everybody else being able to run it.
+It is usually the best thing.
 
 **[HOME-21]** _text_
 
-WHAT IT'S FOR
+It lives in a wiki page, a chat thread or somebody's head — so it gets explained, misread and explained again. Zipr turns it into something anyone can run.
 
-**[HOME-22]** _subheading_
+**[HOME-22]** _text_
 
-Out-of-the-box ideas have a habit of staying in one
+HOW IT WORKS
 
-**[HOME-23]** _text_
+**[HOME-23]** _subheading_
 
-The unconventional one is always the hardest to explain, and the easiest to leave in a document nobody opens. Everything here is aimed at that gap.
+Build it. Run it. Share it.
 
-**[HOME-24]** _subheading_
+**[HOME-24]** _text_
 
-An idea, in a form somebody can run
+The first two are free, forever. The third is what teams pay for.
 
 **[HOME-25]** _text_
 
-The sequence you worked out becomes one thing with a name. Not a document describing it. Not a script they need talking through. A thing they click, that works the first time.
+01 Free
 
-**[HOME-26]** _text_
+**[HOME-26]** _subheading_
 
-FREE
+Build it
 
-**[HOME-27]** _subheading_
+**[HOME-27]** _text_
 
-No gap between thinking of it and doing it
+Chain the steps you would normally explain — commands, links, apps, files, questions — into one named item.
 
 **[HOME-28]** _text_
 
-Everything is already on your machine, so Zipr opens instantly and works on a plane. That gap — the loading, the searching, the where-did-I-put-it — is where good intentions quietly go to die.
+02 Free
 
-**[HOME-29]** _text_
+**[HOME-29]** _subheading_
 
-FREE
+Run it
 
-**[HOME-30]** _subheading_
+**[HOME-30]** _text_
 
-Zipr holds your ideas. It never runs them
+One click runs it on your machine, instantly and offline. Build as many as you like; nothing expires and no account is needed.
 
 **[HOME-31]** _text_
 
-Every command executes on the machine of the person who clicked, and nowhere else. Not on our servers, not on yours. It is the short answer to the long question your security team is about to ask.
+03 Team
 
-**[HOME-32]** _text_
+**[HOME-32]** _subheading_
 
-FREE
+Share it
 
-**[HOME-33]** _subheading_
+**[HOME-33]** _text_
 
-Hand it over instead of explaining it
+When the team needs it, publish it to a shared catalogue on a Zipr server — hosted by us, or run by you. Same app, nothing to relearn.
 
 **[HOME-34]** _text_
 
-Publish to a catalogue and it is theirs — current, complete, the same version everyone else has. No walkthrough, no zip file in a chat thread, no afternoon spent watching over somebody's shoulder.
+TWELVE STEP TYPES
 
-**[HOME-35]** _text_
-
-WITH A TEAM
-
-**[HOME-36]** _subheading_
-
-Two people, one idea, nothing lost
-
-**[HOME-37]** _text_
-
-Improve the same thing at the same time and both improvements survive. You are told what genuinely clashed, rather than finding out on Friday that Tuesday's fix is gone.
-
-**[HOME-38]** _text_
-
-WITH A TEAM
-
-**[HOME-39]** _subheading_
-
-Room to try the strange version
-
-**[HOME-40]** _text_
-
-Every change is kept, so nothing you attempt is expensive. Put any item back to how it was, and see who changed what — the answer to "who broke this" is a click rather than an investigation.
-
-**[HOME-41]** _text_
-
-WITH A TEAM
-
-**[HOME-42]** _subheading_
-
-When the twelve verbs run out
-
-**[HOME-43]** _text_
-
-Plugins add new kinds of step, kept at arm's length so a bad one cannot take the app down with it. Build the one your team has been wishing for, and share it with them.
-
-**[HOME-44]** _text_
-
-FREE
-
-**[HOME-45]** _subheading_
-
-On your servers, inside your walls
-
-**[HOME-46]** _text_
-
-Your catalogue lives on your infrastructure, in your network, under your backups. There is no shared cloud to be a tenant of and no account of ours holding your work.
-
-**[HOME-47]** _text_
-
-WITH A TEAM
-
-**[HOME-48]** _text_
-
-TWELVE VERBS
-
-**[HOME-49]** _subheading_
+**[HOME-35]** _subheading_
 
 If you can describe it, Zipr can run it.
 
-**[HOME-50]** _text_
+**[HOME-36]** _text_
 
-Stack the steps in any order. Ask a question halfway through and use the answer. Do one thing on a Mac and another on Windows, from the same item. And when the twelve are not enough, a plugin picks up where they stop.
+Chain steps in any order, ask a question midway and use the answer, and vary a step by operating system — all in one item. Plugins cover the rest.
 
-**[HOME-51]** _button_
+**[HOME-37]** _button_
 
-See what it can do
+See all features
 
-**[HOME-52]** _text_
+**[HOME-38]** _text_
 
 A URL, in the browser you choose.
 
-**[HOME-53]** _text_
+**[HOME-39]** _text_
 
 Shell command, with whatever arguments you need.
 
-**[HOME-54]** _text_
+**[HOME-40]** _text_
 
 An executable, with arguments.
 
-**[HOME-55]** _text_
+**[HOME-41]** _text_
 
 Straight into whatever opens it.
 
-**[HOME-56]** _text_
+**[HOME-42]** _text_
 
 Jump to it in Finder or Explorer.
 
-**[HOME-57]** _text_
+**[HOME-43]** _text_
 
 Text ready to paste, with an optional nudge.
 
-**[HOME-58]** _text_
+**[HOME-44]** _text_
 
 Confirm before something irreversible.
 
-**[HOME-59]** _text_
+**[HOME-45]** _text_
 
 Prompt for input and use it further down.
 
-**[HOME-60]** _text_
+**[HOME-46]** _text_
 
 Pick one, carry on.
 
-**[HOME-61]** _text_
+**[HOME-47]** _text_
 
 Prove it's you before the risky step.
 
-**[HOME-62]** _text_
+**[HOME-48]** _text_
 
 Jump to a view inside Zipr.
 
-**[HOME-63]** _text_
+**[HOME-49]** _text_
 
 Anything the twelve don't cover.
 
-**[HOME-64]** _text_
+**[HOME-50]** _text_
 
-ACROSS THE BOUNDARY
+FOR TEAMS
 
-**[HOME-65]** _subheading_
+**[HOME-51]** _subheading_
 
 Knowledge moves. The org chart stays put.
 
-**[HOME-66]** _text_
+**[HOME-52]** _text_
 
-What you need is usually two teams away, and reaching it normally costs a ticket, a meeting, or somebody's manager. Put Zipr on your own servers and every team keeps its own workspace and its own rules, while the work crosses between them as a published copy — attributed, current, and safe to run.
+Give your organisation a Zipr server and each team keeps its own workspace and rules. Work crosses between them as a published copy — attributed, current and safe to run — instead of a ticket or a meeting.
+
+**[HOME-53]** _text_
+
+See team pricing
+
+**[HOME-54]** _text_
+
+Platform
+
+**[HOME-55]** _text_
+
+Support
+
+**[HOME-56]** _text_
+
+Yours
+
+**[HOME-57]** _list item_
+
+A workspace per team, with roles and visibility you control
+
+**[HOME-58]** _list item_
+
+Publish a copy to another team — your own stays exactly as it was
+
+**[HOME-59]** _list item_
+
+Everyone on the current version, updated as colleagues work
+
+**[HOME-60]** _list item_
+
+Full history, one-click rollback and an audit trail
+
+**[HOME-61]** _list item_
+
+Single sign-on with Google, Microsoft Entra or Okta
+
+**[HOME-62]** _list item_
+
+Usage figures showing which items people actually run
+
+**[HOME-63]** _text_
+
+SECURITY
+
+**[HOME-64]** _subheading_
+
+Built for your security review
+
+**[HOME-65]** _text_
+
+The short answers to the questions your reviewer will ask first.
+
+**[HOME-66]** _subheading_
+
+Nothing runs on a server
 
 **[HOME-67]** _text_
 
-Nobody joins a team to learn something from it. Nobody gives up ownership of anything.
+Zipr stores items. It only ever runs them on the machine of the person who clicked.
 
-**[HOME-68]** _button_
+**[HOME-68]** _subheading_
 
-What a team costs
+Your data, where you choose
 
-**[HOME-69]** _button_
+**[HOME-69]** _text_
 
-How we keep it safe
+Hosted in a database of your own, or self-hosted with nothing leaving your network.
 
-**[HOME-70]** _list item_
+**[HOME-70]** _subheading_
 
-A workspace per team, on one deployment
+Your sign-in, your rules
 
-**[HOME-71]** _list item_
+**[HOME-71]** _text_
 
-Publish a copy across, keeping your own exactly as it was
+Single sign-on, and roles and visibility set by your administrators.
 
-**[HOME-72]** _list item_
+**[HOME-72]** _subheading_
 
-Roles and visibility matching the structure you already have
+Never held hostage
 
-**[HOME-73]** _list item_
+**[HOME-73]** _text_
 
-Everyone's copy current, updating as colleagues work
+Export everything as one file at any time, even if an account lapses.
 
-**[HOME-74]** _list item_
+**[HOME-74]** _text_
 
-Full history, and a one-click way back
+Read the full security overview
 
-**[HOME-75]** _list item_
+**[HOME-75]** _text_
 
-An audit trail you did not have to build
+PRICING
 
-**[HOME-76]** _list item_
-
-Figures showing which ideas people actually run
-
-**[HOME-77]** _text_
-
-THE HONEST VERSION
-
-**[HOME-78]** _subheading_
+**[HOME-76]** _subheading_
 
 Free alone. Paid together.
 
+**[HOME-77]** _text_
+
+The free app is the whole app, not a trial. You pay only when an item has to be shared.
+
+**[HOME-78]** _subheading_
+
+The app
+
 **[HOME-79]** _text_
 
-Most tools hand you a hobbled free tier and wait for you to outgrow it. Zipr's free app is the whole app — have as many ideas as you like, forever. What costs money is the day one of them has to belong to more than you.
+Free
 
 **[HOME-80]** _text_
 
-01 Free
+$0
 
-**[HOME-81]** _subheading_
+**[HOME-81]** _text_
 
-Have the idea
+Everything one person can do on one machine. No account, no card, no expiry.
 
-**[HOME-82]** _text_
-
-Install it and build the first one. No account, no email, no clock counting down — just a workspace that belongs to your machine and to nothing else.
-
-**[HOME-83]** _text_
-
-02 Free
-
-**[HOME-84]** _subheading_
-
-Keep having them
-
-**[HOME-85]** _text_
-
-Build as many as you like, for as long as you like. Nothing expires, nothing phones home, and all of it leaves with you as a single file whenever you want.
-
-**[HOME-86]** _text_
-
-03 Licensed
-
-**[HOME-87]** _subheading_
-
-Let one out of the box
-
-**[HOME-88]** _text_
-
-The day an idea stops being only yours, put Zipr on your own servers and let it travel. Same app, more people, nothing to relearn.
-
-**[HOME-89]** _subheading_
-
-Start with the one you keep having to explain.
-
-**[HOME-90]** _text_
-
-The free app needs no account and is the same one licensed teams run. Come back here the day the idea stops being only yours.
-
-**[HOME-91]** _button_
+**[HOME-82]** _button_
 
 Download Zipr
 
-**[HOME-92]** _button_
+**[HOME-83]** _subheading_
 
-See pricing
+A team server
+
+**[HOME-84]** _text_
+
+Team
+
+**[HOME-85]** _text_
+
+From $6 / person / month
+
+**[HOME-86]** _text_
+
+Hosted by us, billed yearly, minimum 5 people. Or self-hosted on your own infrastructure, priced per deployment.
+
+**[HOME-87]** _text_
+
+Compare plans
+
+**[HOME-88]** _subheading_
+
+Start with the one you keep having to explain.
+
+**[HOME-89]** _text_
+
+Free, no account, and the same app paying teams run.
+
+**[HOME-90]** _button_
+
+Download Zipr
+
+**[HOME-91]** _text_
+
+Talk to us about a team
 
 ---
 
@@ -518,7 +514,7 @@ Features · Zipr
 
 **[FEAT-DESC]** _search result snippet_
 
-What it takes to get an idea out of your head and into somebody else's hands intact: what the free app does, what a team adds, and the twelve things a single item can do.
+What the free Zipr app does, what a team server adds, and the twelve step types every item is built from.
 
 **[FEAT-01]** _text_
 
@@ -526,179 +522,179 @@ FEATURES
 
 **[FEAT-02]** _heading_
 
-Everything an idea needs to survive other people
+Build it once. Let anyone run it.
 
 **[FEAT-03]** _text_
 
-Being a launcher is the least interesting thing about Zipr. What it is actually for is getting the thing in your head into somebody else's hands intact.
+What Zipr does on its own for free, and what it adds when your team shares a server.
 
-**[FEAT-04]** _text_
+**[FEAT-04]** _subheading_
+
+In the free app
+
+**[FEAT-05]** _text_
 
 Free
 
-**[FEAT-05]** _subheading_
+**[FEAT-06]** _subheading_
 
-An idea, in a form somebody can run
-
-**[FEAT-06]** _text_
-
-The sequence you worked out becomes one thing with a name. Not a document describing it. Not a script they need talking through. A thing they click, that works the first time.
+One click instead of a walkthrough
 
 **[FEAT-07]** _text_
 
-Free
+The steps you worked out become one named item. A colleague clicks it and it works the first time — no document to follow, no script to be talked through.
 
 **[FEAT-08]** _subheading_
 
-No gap between thinking of it and doing it
+Instant, and it works offline
 
 **[FEAT-09]** _text_
 
-Everything is already on your machine, so Zipr opens instantly and works on a plane. That gap — the loading, the searching, the where-did-I-put-it — is where good intentions quietly go to die.
+Everything is already on your machine, so Zipr opens straight away and keeps working on a plane.
 
-**[FEAT-10]** _text_
+**[FEAT-10]** _subheading_
 
-Free
+Runs only where you click
 
-**[FEAT-11]** _subheading_
+**[FEAT-11]** _text_
 
-Zipr holds your ideas. It never runs them
+Every command executes on the machine of the person who clicked — never on our servers or yours. That is the short answer to your security team's first question.
 
-**[FEAT-12]** _text_
+**[FEAT-12]** _subheading_
 
-Every command executes on the machine of the person who clicked, and nowhere else. Not on our servers, not on yours. It is the short answer to the long question your security team is about to ask.
+Plugins for everything else
 
 **[FEAT-13]** _text_
 
-With a team
+When the twelve built-in step types run out, a plugin adds a new one. Plugins are kept apart from the app, so a faulty one can't take it down.
 
 **[FEAT-14]** _subheading_
 
-Hand it over instead of explaining it
+With a team server
 
 **[FEAT-15]** _text_
 
-Publish to a catalogue and it is theirs — current, complete, the same version everyone else has. No walkthrough, no zip file in a chat thread, no afternoon spent watching over somebody's shoulder.
+Team
 
-**[FEAT-16]** _text_
+**[FEAT-16]** _subheading_
 
-With a team
+Share it instead of explaining it
 
-**[FEAT-17]** _subheading_
+**[FEAT-17]** _text_
 
-Two people, one idea, nothing lost
+Publish an item to a team catalogue and everyone runs the same, current version. No zip file in a chat thread, no afternoon spent watching over a shoulder.
 
-**[FEAT-18]** _text_
+**[FEAT-18]** _subheading_
 
-Improve the same thing at the same time and both improvements survive. You are told what genuinely clashed, rather than finding out on Friday that Tuesday's fix is gone.
+Edit together without losing work
 
 **[FEAT-19]** _text_
 
-With a team
+Two people improve the same item at once and both changes survive. If you changed the same thing, you're shown exactly what clashed.
 
 **[FEAT-20]** _subheading_
 
-Room to try the strange version
+Undo anything
 
 **[FEAT-21]** _text_
 
-Every change is kept, so nothing you attempt is expensive. Put any item back to how it was, and see who changed what — the answer to "who broke this" is a click rather than an investigation.
+Every change is kept. Put any item back how it was in one click, and see who changed what — so trying the strange version costs nothing.
 
-**[FEAT-22]** _text_
+**[FEAT-22]** _subheading_
 
-Free
+Hosted by us, or on your own servers
 
-**[FEAT-23]** _subheading_
+**[FEAT-23]** _text_
 
-When the twelve verbs run out
+Let us run the server, in a database that belongs to your organisation alone. Or self-host it inside your own network, under your own backups.
 
 **[FEAT-24]** _text_
 
-Plugins add new kinds of step, kept at arm's length so a bad one cannot take the app down with it. Build the one your team has been wishing for, and share it with them.
+IN PRACTICE
 
-**[FEAT-25]** _text_
+**[FEAT-25]** _subheading_
 
-With a team
+Five situations you'll recognise
 
-**[FEAT-26]** _subheading_
+**[FEAT-26]** _text_
 
-On your servers, inside your walls
+Where good work usually gets lost — and what changes with Zipr.
 
 **[FEAT-27]** _text_
 
-Your catalogue lives on your infrastructure, in your network, under your backups. There is no shared cloud to be a tenant of and no account of ours holding your work.
+01 / 05
 
-**[FEAT-28]** _text_
-
-IN PRACTICE
-
-**[FEAT-29]** _subheading_
-
-Five afternoons you have already had
-
-**[FEAT-30]** _text_
-
-None of these is a moment anybody schedules. They are just where good work gets lost, and where a tool either helps or is somewhere else.
-
-**[FEAT-31]** _subheading_
+**[FEAT-28]** _subheading_
 
 What you built would help another team
 
-**[FEAT-32]** _text_
+**[FEAT-29]** _text_
 
 WITHOUT ZIPR
+
+**[FEAT-30]** _text_
+
+You write it up, they misread step four, and you end up on the call anyway — or you never mention it at all.
+
+**[FEAT-31]** _text_
+
+WITH IT
+
+**[FEAT-32]** _text_
+
+You publish a copy into their catalogue and they run it. Yours stays where it was; theirs stays current.
 
 **[FEAT-33]** _text_
 
-You write it up, they misread step four, and you end up on the call anyway. Or — far more often — you never mention it at all.
+02 / 05
 
-**[FEAT-34]** _text_
-
-WITH IT
-
-**[FEAT-35]** _text_
-
-You publish a copy into their catalogue. They run it. Yours stays exactly where it was, and theirs stays current on its own.
-
-**[FEAT-36]** _subheading_
+**[FEAT-34]** _subheading_
 
 A new starter joins on Monday
 
-**[FEAT-37]** _text_
+**[FEAT-35]** _text_
 
 WITHOUT ZIPR
+
+**[FEAT-36]** _text_
+
+A wiki page, three chat threads, a zip of scripts, and the same questions for a fortnight.
+
+**[FEAT-37]** _text_
+
+WITH IT
 
 **[FEAT-38]** _text_
 
-A wiki page, three chat threads and a zip of scripts, and then the same questions for a fortnight.
+They install Zipr, open the team catalogue, and everything the team runs is there, in the current version.
 
 **[FEAT-39]** _text_
 
-WITH IT
+03 / 05
 
-**[FEAT-40]** _text_
-
-They install Zipr, open the team catalogue, and everything the team runs is right there — in the version everyone else is on.
-
-**[FEAT-41]** _subheading_
+**[FEAT-40]** _subheading_
 
 Two of you improve the same thing
 
-**[FEAT-42]** _text_
+**[FEAT-41]** _text_
 
 WITHOUT ZIPR
 
+**[FEAT-42]** _text_
+
+Last save wins, and somebody's work quietly disappears.
+
 **[FEAT-43]** _text_
-
-Last save wins. Somebody's work quietly disappears and nobody notices until it matters.
-
-**[FEAT-44]** _text_
 
 WITH IT
 
+**[FEAT-44]** _text_
+
+Both improvements survive. If you changed the same thing, you see exactly what clashed and decide.
+
 **[FEAT-45]** _text_
 
-Both improvements survive. If you genuinely changed the same line, you are told exactly what clashed and you decide.
+04 / 05
 
 **[FEAT-46]** _subheading_
 
@@ -710,7 +706,7 @@ WITHOUT ZIPR
 
 **[FEAT-48]** _text_
 
-You don't, because undoing it means remembering what it looked like before and hoping you got it right.
+You don't, because undoing it means remembering what it looked like before.
 
 **[FEAT-49]** _text_
 
@@ -718,173 +714,177 @@ WITH IT
 
 **[FEAT-50]** _text_
 
-You try it. Every change is kept, so putting it back is a click — and an experiment that costs nothing gets run.
+You try it. Every change is kept, so putting it back is one click.
 
-**[FEAT-51]** _subheading_
+**[FEAT-51]** _text_
+
+05 / 05
+
+**[FEAT-52]** _subheading_
 
 You're on a train with no signal
 
-**[FEAT-52]** _text_
+**[FEAT-53]** _text_
 
 WITHOUT ZIPR
 
-**[FEAT-53]** _text_
+**[FEAT-54]** _text_
 
 The tool is a website, so the tool is gone.
 
-**[FEAT-54]** _text_
+**[FEAT-55]** _text_
 
 WITH IT
 
-**[FEAT-55]** _text_
-
-Everything is already on your laptop. Keep working; your changes catch up when you do.
-
 **[FEAT-56]** _text_
+
+Everything is already on your laptop. Keep working; changes sync when you reconnect.
+
+**[FEAT-57]** _text_
 
 THE BUILDING BLOCKS
 
-**[FEAT-57]** _subheading_
+**[FEAT-58]** _subheading_
 
-Twelve things an item can do
+Twelve step types
 
-**[FEAT-58]** _text_
+**[FEAT-59]** _text_
 
-Chain them in any order, branch on what happened, and vary the steps by operating system without making a second copy.
+Every item is built from these, chained in any order.
 
-**[FEAT-59]** _subheading_
+**[FEAT-60]** _subheading_
 
 Open a link
 
-**[FEAT-60]** _text_
+**[FEAT-61]** _text_
 
 A URL, in the browser you choose.
 
-**[FEAT-61]** _subheading_
+**[FEAT-62]** _subheading_
 
 Run a command
 
-**[FEAT-62]** _text_
+**[FEAT-63]** _text_
 
 Shell command, with whatever arguments you need.
 
-**[FEAT-63]** _subheading_
+**[FEAT-64]** _subheading_
 
 Launch an app
 
-**[FEAT-64]** _text_
+**[FEAT-65]** _text_
 
 An executable, with arguments.
 
-**[FEAT-65]** _subheading_
+**[FEAT-66]** _subheading_
 
 Open a file
 
-**[FEAT-66]** _text_
+**[FEAT-67]** _text_
 
 Straight into whatever opens it.
 
-**[FEAT-67]** _subheading_
+**[FEAT-68]** _subheading_
 
 Reveal a folder
 
-**[FEAT-68]** _text_
+**[FEAT-69]** _text_
 
 Jump to it in Finder or Explorer.
 
-**[FEAT-69]** _subheading_
+**[FEAT-70]** _subheading_
 
 Copy to clipboard
 
-**[FEAT-70]** _text_
+**[FEAT-71]** _text_
 
 Text ready to paste, with an optional nudge.
 
-**[FEAT-71]** _subheading_
+**[FEAT-72]** _subheading_
 
 Ask yes or no
 
-**[FEAT-72]** _text_
+**[FEAT-73]** _text_
 
 Confirm before something irreversible.
 
-**[FEAT-73]** _subheading_
+**[FEAT-74]** _subheading_
 
 Ask for a value
 
-**[FEAT-74]** _text_
+**[FEAT-75]** _text_
 
 Prompt for input and use it further down.
 
-**[FEAT-75]** _subheading_
+**[FEAT-76]** _subheading_
 
 Offer a list
 
-**[FEAT-76]** _text_
+**[FEAT-77]** _text_
 
 Pick one, carry on.
 
-**[FEAT-77]** _subheading_
+**[FEAT-78]** _subheading_
 
 Require a re-auth
 
-**[FEAT-78]** _text_
+**[FEAT-79]** _text_
 
 Prove it's you before the risky step.
 
-**[FEAT-79]** _subheading_
+**[FEAT-80]** _subheading_
 
 Open a panel
 
-**[FEAT-80]** _text_
+**[FEAT-81]** _text_
 
 Jump to a view inside Zipr.
 
-**[FEAT-81]** _subheading_
+**[FEAT-82]** _subheading_
 
 Hand off to a plugin
 
-**[FEAT-82]** _text_
+**[FEAT-83]** _text_
 
 Anything the twelve don't cover.
 
-**[FEAT-83]** _subheading_
+**[FEAT-84]** _subheading_
 
 Branch as you go
 
-**[FEAT-84]** _text_
+**[FEAT-85]** _text_
 
-A step can run only if the last one worked, or only if it didn't. Stop, carry on, or say something.
+Run a step only if the last one worked — or only if it didn't.
 
-**[FEAT-85]** _subheading_
+**[FEAT-86]** _subheading_
 
 One item, every platform
 
-**[FEAT-86]** _text_
+**[FEAT-87]** _text_
 
-Different path on Windows? Say so once, in the same item, instead of maintaining two.
+Different path on Windows? Say so in the same item instead of keeping two.
 
-**[FEAT-87]** _subheading_
+**[FEAT-88]** _subheading_
 
 Go further with plugins
 
-**[FEAT-88]** _text_
+**[FEAT-89]** _text_
 
-When the twelve run out, a plugin picks up — kept at arm's length so a bad one can't take the app down.
+When the twelve run out, a plugin adds a new step type.
 
-**[FEAT-89]** _subheading_
+**[FEAT-90]** _subheading_
 
-Four minutes to your first one.
+Build your first item in minutes.
 
-**[FEAT-90]** _text_
+**[FEAT-91]** _text_
 
-No account, no card, no clock. Build the thing you keep explaining, and come back to the pricing page the day somebody else wants it.
+Free, no account, no card. Come back the day somebody else wants what you've built.
 
-**[FEAT-91]** _button_
+**[FEAT-92]** _button_
 
 Download Zipr
 
-**[FEAT-92]** _button_
+**[FEAT-93]** _text_
 
 Compare free and team
 
@@ -903,7 +903,7 @@ Pricing · Zipr
 
 **[PRICE-DESC]** _search result snippet_
 
-Zipr is free forever for one person. Sharing across a team is $6 per person per month, on servers you control. Full comparison, no surprises.
+Zipr is free forever for one person. Sharing across a team is hosted from $6 per person per month, or self-hosted and priced per deployment. Full comparison, no surprises.
 
 **[PRICE-01]** _text_
 
@@ -915,7 +915,7 @@ Free for you. Paid for your team.
 
 **[PRICE-03]** _text_
 
-Everything one person can do on one machine is free, permanently — not a trial, not a cut-down build. You pay on the day an idea has to belong to more than you.
+The whole app is free for one person, permanently. You pay when your team shares — and you choose who runs the server.
 
 **[PRICE-04]** _subheading_
 
@@ -943,7 +943,7 @@ Unlimited items and catalogues
 
 **[PRICE-10]** _list item_
 
-All twelve action types, chained however you like
+All twelve step types, chained however you like
 
 **[PRICE-11]** _list item_
 
@@ -975,11 +975,11 @@ Most teams start here
 
 **[PRICE-18]** _subheading_
 
-Team
+Hosted
 
 **[PRICE-19]** _text_
 
-Everything above, crossing between people — on servers you control.
+Everything above, crossing between people — on our servers, not yours.
 
 **[PRICE-20]** _text_
 
@@ -999,7 +999,7 @@ Everything in Free, for everyone
 
 **[PRICE-24]** _list item_
 
-Shared catalogues the whole team stays in sync with
+Shared catalogues, updated live as colleagues work
 
 **[PRICE-25]** _list item_
 
@@ -1015,102 +1015,110 @@ Full history and one-click rollback
 
 **[PRICE-28]** _list item_
 
-Live updates as colleagues make changes
+Audit trail and usage figures
 
 **[PRICE-29]** _list item_
 
-Tags across the workspace
+Sign in with Google, Microsoft or Okta
 
 **[PRICE-30]** _list item_
 
-Share plugins internally
+Your own database, not a shared one
 
 **[PRICE-31]** _list item_
 
-Audit trail and usage figures
+Export everything, any time — even if your account lapses
 
-**[PRICE-32]** _list item_
+**[PRICE-32]** _text_
 
-An admin console for the whole instance
+Request access
 
-**[PRICE-33]** _button_
+**[PRICE-33]** _subheading_
 
-Start a trial
+Self-hosted
 
-**[PRICE-34]** _subheading_
+**[PRICE-34]** _text_
 
-Enterprise
+The same thing, on infrastructure you control, under a written agreement.
 
 **[PRICE-35]** _text_
 
-For a rollout that has to satisfy somebody else.
+Let's talk
 
 **[PRICE-36]** _text_
 
-Let's talk
+Priced per deployment, not per person
 
-**[PRICE-37]** _text_
+**[PRICE-37]** _list item_
 
-Priced per deployment
+Everything in Hosted
 
 **[PRICE-38]** _list item_
 
-Everything in Team
+Runs on your servers, or in your own cloud account
 
 **[PRICE-39]** _list item_
 
-Single sign-on
+No user limit — the hardware you chose is the only one
 
 **[PRICE-40]** _list item_
 
-Settings you can lock down centrally
+Nothing leaves your network, including the licence check
 
 **[PRICE-41]** _list item_
 
-Support with an agreed response time
+Runs air-gapped
 
 **[PRICE-42]** _list item_
 
-Help with the rollout, including air-gapped
+Settings you can lock down centrally
 
 **[PRICE-43]** _list item_
 
+An admin console for the whole instance
+
+**[PRICE-44]** _list item_
+
+Support with an agreed response time
+
+**[PRICE-45]** _list item_
+
 Invoicing, security review, DPA
 
-**[PRICE-44]** _button_
+**[PRICE-46]** _button_
 
 Talk to us
 
-**[PRICE-45]** _text_
+**[PRICE-47]** _text_
 
-Prices in USD, excluding tax. The licence covers the software; the server is yours. Here's what running it involves.
-
-**[PRICE-46]** _text_
-
-LINE BY LINE
-
-**[PRICE-47]** _subheading_
-
-Alone versus together, line by line
+Prices in USD, excluding tax. Both paid options start with a conversation and a quote. What self-hosting involves
 
 **[PRICE-48]** _text_
 
-No asterisks. Everything in the free column works forever on your own machine. The team column is what arrives once the work starts crossing between people.
+COMPARE PLANS
 
-**[PRICE-49]** _table_
+**[PRICE-49]** _subheading_
+
+Every feature, side by side
+
+**[PRICE-50]** _text_
+
+Hosted and self-hosted are the same software. They differ in who runs it and how it's billed, not in what it can do.
+
+**[PRICE-51]** _table_
 
 Edit the cells in place. Keep the pipes and the row order.
 
-| Feature | Free<br>_On your machine_ | Team<br>_Licensed_ | Enterprise<br>_Licensed_ |
+| Feature | Free<br>_On your machine_ | Hosted<br>_Per person_ | Self-hosted<br>_Per deployment_ |
 | --- | --- | --- | --- |
 | Building and running things |  |  |  |
 | Items and catalogues | Unlimited | Unlimited | Unlimited |
-| All twelve action types | Included | Included | Included |
-| Your own action types<br>_For anything the built-in twelve don't cover._ | Included | Included | Included |
+| All twelve step types | Included | Included | Included |
+| Your own step types<br>_For anything the built-in twelve don't cover._ | Included | Included | Included |
 | Steps that differ per operating system | Included | Included | Included |
 | Plugins | Install your own | Share with the team | Share with the team |
 | Works with no network | Included | Included | Included |
-| Export everything<br>_One file, yours, whenever you want it._ | Included | Included | Included |
+| Export everything<br>_Never held against a bill — the hosted export works even while an account is suspended._ | One file | One file | It's your database |
 | Working with other people |  |  |  |
 | Workspaces | One, private | Unlimited | Unlimited |
 | Members and roles | Not included | Included | Included |
@@ -1128,90 +1136,85 @@ Edit the cells in place. Keep the pipes and the row order.
 | Central values your catalogues reuse<br>_Paths and addresses set once, so nothing is hardcoded in an item._ | Not included | Included | Included |
 | Lock settings centrally | Not included | Not included | Included |
 | Running it |  |  |  |
-| Where your data lives | Your machine | Your servers | Your servers |
-| Single sign-on | Not included | Not included | Included |
-| Admin console | Not included | Included | Included |
-| Support | Community | Email | Agreed response time |
-
-**[PRICE-50]** _text_
-
-RUNNING IT YOURSELF
-
-**[PRICE-51]** _subheading_
-
-Less work than you're bracing for
+| Where your data lives | Your machine | Our servers, your own database | Your servers |
+| Who operates it<br>_Upgrades, backups and the pager._ | You, trivially | Us | You |
+| Single sign-on<br>_Google, Microsoft Entra or Okta._ | Not included | Included | Included |
+| Admin console | Not included | Included | Instance-wide |
+| Runs air-gapped | Included | Not included | Included |
+| What you're billed for<br>_Self-hosting counts nobody — your hardware is the limit._ | Nothing | Per person | Per deployment |
+| Support | Best effort, by email | Email | Agreed response time |
 
 **[PRICE-52]** _text_
 
-Self-hosted has a reputation, and most of it is earned by other software. This is one server and one command.
+IF YOU RUN IT YOURSELF
 
 **[PRICE-53]** _subheading_
 
-One modest server
+Less work than you're bracing for
 
 **[PRICE-54]** _text_
 
-A team of twenty fits comfortably on a small virtual machine. It is not a cluster, and it does not want to be.
+One server and one command. If you'd rather not, the hosted option is us doing it for you.
 
 **[PRICE-55]** _subheading_
 
-Up in an afternoon
+One modest server
 
 **[PRICE-56]** _text_
 
-One command brings the whole thing up. Most of the time is your own change control, not the install.
+A team of twenty fits comfortably on a small virtual machine. It is not a cluster, and it does not want to be.
 
 **[PRICE-57]** _subheading_
 
-Nothing phones home
+Up in an afternoon
 
 **[PRICE-58]** _text_
 
-Your deployment does not report to us, check in with us, or need us to be online for your team to work.
+One command brings the whole thing up. Most of the time is your own change control, not the install.
 
-**[PRICE-59]** _text_
+**[PRICE-59]** _subheading_
 
-The licence covers the software and the support. The server is yours, on whichever cloud or rack you already use — which is the point, because it is also where your data stays.
+Nothing phones home
 
 **[PRICE-60]** _text_
 
+Your deployment does not report to us or check in with us. The licence is verified on your own hardware, so it keeps working with the internet unplugged.
+
+**[PRICE-61]** _text_
+
+The agreement covers the software and support. The server is yours, on whichever cloud or rack you already use — and because a deployment counts nobody, the price doesn't move when the team grows.
+
+**[PRICE-62]** _text_
+
 QUESTIONS
 
-**[PRICE-61]** _subheading_
+**[PRICE-63]** _subheading_
 
 Before you ask
 
-**[PRICE-62]** _question_
+**[PRICE-64]** _question_
 
 Why is the app free if the team version isn't?
 
-**[PRICE-63]** _text_
-
-Because the app is genuinely complete on its own. It stores your work on your machine and runs everything there, so it would keep working whatever we did. Charging for that would be charging for something we cannot take away. Sharing is the part that needs a server, and that is the part you pay for.
-
-**[PRICE-64]** _question_
-
-What am I paying for if I host it myself?
-
 **[PRICE-65]** _text_
 
-A licence to run the team version, and support for it. You provide the server; we provide the software that makes a catalogue shareable, and the people who answer when it misbehaves.
+Because the app is complete on its own: it stores and runs everything on your machine, so it would keep working whatever we did. Sharing needs a server, and that is the part you pay for.
 
 **[PRICE-66]** _question_
 
-What counts as a person?
+Hosted or self-hosted — which should we pick?
 
 **[PRICE-67]** _text_
 
-Someone with an account on your deployment who signed in during the billing period. Deactivated members stop counting at the next renewal.
+It is the same software, so choose on operations. Hosted: we run, patch and back it up, and you pay per person. Self-hosted: your data never leaves your infrastructure, it can run with no internet, and you pay per deployment. Teams with a platform group and a data-residency policy usually self-host; everyone else is better served hosted.
 
 **[PRICE-68]** _question_
 
-What happens if we stop paying?
+What counts as a person?
 
 **[PRICE-69]** _text_
 
-Your server keeps running and nothing is deleted or locked — it is yours. What stops is support and access to new versions. Everything on individual machines is unaffected.
+On the hosted service, anyone an administrator adds to your organisation — from the moment they are added, whether or not they sign in. Remove them and they stop counting at the next renewal. Self-hosting doesn't count people at all.
 
 **[PRICE-70]** _question_
 
@@ -1219,39 +1222,47 @@ Can we try it first?
 
 **[PRICE-71]** _text_
 
-Yes. Ask and we will set you up with a trial long enough to put a real team on it. And you can use the free app today without talking to anyone at all.
+The free app is the trial — the same build a paying team runs, with no time limit. There's no separate trial of the shared version, because setting one up is the paid work itself. Talk to us and we'll work out a sensible pilot.
 
 **[PRICE-72]** _question_
 
-Do you host it for us?
+What happens if we stop paying?
 
 **[PRICE-73]** _text_
 
-Not today. Every organisation runs its own, which is why your catalogue is not sitting on somebody else's server. If a hosted option would change your mind, tell us — it is the request we are counting.
+Nothing is deleted or held hostage. Reading keeps working, changes are refused, and you can export everything at any point without settling anything first. Self-hosted licences warn you for a month before they expire. Everything on individual machines is unaffected.
 
 **[PRICE-74]** _question_
 
-How do we pay?
+Can we start hosted and move to our own servers later?
 
 **[PRICE-75]** _text_
 
-Invoice, annually, in USD. Get in touch and we will send one along with your licence key.
+Yes — your content exports as one file whenever you want it. There is no one-click conversion that carries accounts and history across yet, so plan the move as a piece of work, and tell us early so we can help.
 
-**[PRICE-76]** _subheading_
+**[PRICE-76]** _question_
 
-Try it before any of this matters.
+How do we pay?
 
 **[PRICE-77]** _text_
 
-The free app needs no account and is the same one licensed teams run. Come back here the day the idea stops being only yours.
+By invoice. Hosted is billed yearly or monthly per person; self-hosted is an annual figure for the deployment. Either way you get a quote before anything starts.
 
-**[PRICE-78]** _button_
+**[PRICE-78]** _subheading_
+
+Try it before any of this matters.
+
+**[PRICE-79]** _text_
+
+The free app needs no account and is the same one paying teams run.
+
+**[PRICE-80]** _button_
 
 Download Zipr
 
-**[PRICE-79]** _button_
+**[PRICE-81]** _text_
 
-Ask about a licence
+Talk to us about a team
 
 ---
 
@@ -1282,171 +1293,55 @@ Install Zipr
 
 Free, no account, about a minute. Everything you make stays on your machine until you decide otherwise.
 
-**[DL-04]** _text_
+**[DL-04]** _subheading_
 
-Version 0.2.0
+Not quite yet
 
 **[DL-05]** _text_
 
-Released 13 Sept 2026
+Zipr is early and the installers aren't up here yet. Leave us a line and we'll tell you the moment there's something to install — no list, no newsletter, just the one email.
 
-**[DL-06]** _subheading_
+**[DL-06]** _text_
 
-Windows
+Tell me when it's ready
 
-**[DL-07]** _text_
+**[DL-07]** _button_
 
-Windows 10 or later, 64-bit
+See what it does
 
 **[DL-08]** _text_
 
-Format
-
-**[DL-09]** _text_
-
-Installer (.exe)
-
-**[DL-10]** _text_
-
-Size
-
-**[DL-11]** _text_
-
-9.4 MiB
-
-**[DL-12]** _text_
-
-SHA-256
-
-**[DL-13]** _text_
-
-3f786850e387550fdab836ed7e6dc881de23001b3f786850e387550fdab836ed
-
-**[DL-14]** _button_
-
-Download for Windows
-
-**[DL-15]** _subheading_
-
-macOS
-
-**[DL-16]** _text_
-
-macOS 12 Monterey or later
-
-**[DL-17]** _text_
-
-Format
-
-**[DL-18]** _text_
-
-Disk image (.dmg)
-
-**[DL-19]** _text_
-
-Size
-
-**[DL-20]** _text_
-
-12.0 MiB
-
-**[DL-21]** _text_
-
-SHA-256
-
-**[DL-22]** _text_
-
-89e01536ac207279409d4de1e5253e01f4a1769e696db0d6062ca9b8f56767c8
-
-**[DL-23]** _button_
-
-Download for macOS
-
-**[DL-24]** _text_
-
-Looks like your system
-
-**[DL-25]** _subheading_
-
-Linux
-
-**[DL-26]** _text_
-
-Not yet — tell us if you want it
-
-**[DL-27]** _text_
-
-No Linux installer yet. It's on the list — tell us you want it and it moves up.
-
-**[DL-28]** _button_
-
-Ask us about Linux
-
-**[DL-29]** _text_
-
 BEFORE YOU INSTALL
 
-**[DL-30]** _subheading_
+**[DL-09]** _subheading_
 
 Three things worth knowing
 
-**[DL-31]** _text_
+**[DL-10]** _text_
 
 We haven't signed the installers yet, so Windows and macOS will both warn you the first time. Every download lists a checksum so you can confirm you got what we published.
 
-**[DL-32]** _text_
+**[DL-11]** _text_
 
 No account, and no network request until you point it at a team server. Installing it does not sign you up for anything.
 
-**[DL-33]** _text_
+**[DL-12]** _text_
 
 Uninstalling leaves your work on disk. Export it first if you want to keep it.
 
-**[DL-34]** _text_
+**[DL-13]** _subheading_
 
-RELEASE NOTES
+That’s it. Nothing else to do.
 
-**[DL-35]** _subheading_
+**[DL-14]** _text_
 
-What changed in 0.2.0
+No sign-up, no licence key, no clock counting down. Come back the day your team wants what you’ve built.
 
-**[DL-36]** _text_
-
-Local workspace publishing, launch history, and a faster first sync.
-
-**[DL-37]** _text_
-
-ARCHIVE
-
-**[DL-38]** _subheading_
-
-Earlier versions
-
-**[DL-39]** _text_
-
-In case you need to go back. Run the newest unless you have a reason not to.
-
-**[DL-40]** _table_
-
-Edit the cells in place. Keep the pipes and the row order.
-
-| Version | Released | Installers |
-| --- | --- | --- |
-| 0.1.0 | 4 Aug 2026 | Windows |
-
-**[DL-41]** _subheading_
-
-That\u2019s it. Nothing else to do.
-
-**[DL-42]** _text_
-
-No sign-up, no licence key, no clock counting down. Come back the day your team wants what you\u2019ve built.
-
-**[DL-43]** _button_
+**[DL-15]** _button_
 
 What it can do
 
-**[DL-44]** _button_
+**[DL-16]** _text_
 
 What a team costs
 
@@ -1477,7 +1372,7 @@ The short answers your reviewer wants
 
 **[SEC-03]** _text_
 
-Zipr is built to let knowledge cross between teams, which makes every question below a fair one. They all have boring answers. Here they are, before you have to ask.
+Zipr moves knowledge between teams, so these are fair questions. The answers are deliberately boring.
 
 **[SEC-04]** _subheading_
 
@@ -1485,137 +1380,145 @@ Nothing runs on a server
 
 **[SEC-05]** _text_
 
-Zipr stores what your team built; it never executes any of it. No command, script or link is run anywhere but on the machine of the person who clicked. There is no server-side execution to review, because there isn't any.
+Zipr stores what your team built; it never executes it. Commands, scripts and links run only on the machine of the person who clicked, when they click.
 
 **[SEC-06]** _subheading_
 
-Your data never leaves your network
+Your data, where you choose
 
 **[SEC-07]** _text_
 
-A team deployment runs on your infrastructure, in your network, under your backup policy. We have no copy, no access, and no way to get one.
+Self-hosted, it never leaves your infrastructure and we have no copy. Hosted, it sits in a database belonging to your organisation alone — we operate it, so access is governed by contract and policy.
 
 **[SEC-08]** _subheading_
 
-It doesn't call home
+Self-hosted doesn't call home
 
 **[SEC-09]** _text_
 
-Your deployment does not report to us, license-check against us, or need us to be reachable. If we vanished tomorrow your team would carry on working.
+No reporting, no check-ins. The licence is verified on your own hardware, so it works with the internet unplugged.
 
 **[SEC-10]** _subheading_
 
-We can't see your catalogue
+Every change is attributable
 
 **[SEC-11]** _text_
 
-Not encrypted-so-we-promise-not-to-look. We are simply not in the path — there is nowhere for your content to reach us from.
+Who did what and when, recorded by the server and not editable from any client. An audit question is a query, not a reconstruction.
 
 **[SEC-12]** _subheading_
 
-Every change is attributable
+Sharing doesn't loosen access
 
 **[SEC-13]** _text_
 
-Who did what, when, written by the server rather than the app, and not editable from any client. The answer to an audit question is a query, not a reconstruction.
+Work crosses teams only as a published copy, where your administrators allow it. Roles, membership and single sign-on stay yours — and people can't tell whether a catalogue they can't see exists.
 
 **[SEC-14]** _subheading_
 
-Crossing a boundary is not loosening one
+Your data is never held hostage
 
 **[SEC-15]** _text_
 
-Work moves between teams as a published copy, and only where your administrators allow it. Roles, membership and single sign-on stay yours to set — and someone who should not see a catalogue cannot tell whether it exists.
+Export everything as one file at any time. If a licence or invoice lapses, reading keeps working while changes are refused.
 
-**[SEC-16]** _subheading_
-
-The question behind all the others
-
-**[SEC-17]** _text_
-
-"If this tool holds our commands, what can it do with them?" Nothing. It holds them the way a document holds text. Running one is always an action a person takes, on their own machine, deliberately.
-
-**[SEC-18]** _text_
+**[SEC-16]** _text_
 
 REVIEW QUESTIONS
 
-**[SEC-19]** _subheading_
+**[SEC-17]** _subheading_
 
 Asked and answered
 
-**[SEC-20]** _question_
+**[SEC-18]** _question_
 
 Where is our data stored?
 
-**[SEC-21]** _text_
+**[SEC-19]** _text_
 
-On the server you run it on. Individual machines also keep a copy so the app stays fast and works offline; both are inside your control. We hold nothing.
+Self-hosted, on the server you run it on, and we hold nothing. Hosted, in a database provisioned for your organisation alone, so it can be backed up and restored on its own. Either way, each machine also keeps a copy so the app is fast and works offline.
 
-**[SEC-22]** _question_
+**[SEC-20]** _question_
 
 What does the app send over the network?
 
-**[SEC-23]** _text_
+**[SEC-21]** _text_
 
-Only to your own deployment, and only your catalogue content and the sign-in that authorises it. With no deployment configured the app makes no network requests at all.
+Only your catalogue content and the sign-in that authorises it, and only to the deployment it is pointed at. With no deployment configured, it makes no network requests at all.
 
-**[SEC-24]** _question_
+**[SEC-22]** _question_
 
 Can we run it somewhere with no internet access?
 
+**[SEC-23]** _text_
+
+Yes, self-hosted. The licence verifies offline, so air-gapped is a supported configuration, not a workaround — and we'll help you set it up. The hosted service can't be air-gapped.
+
+**[SEC-24]** _question_
+
+How do we sign in?
+
 **[SEC-25]** _text_
 
-Yes. Air-gapped installs are supported on Enterprise and we will help you do it.
+In your browser — the app opens the sign-in page and never handles a password itself. Google, Microsoft Entra and Okta are supported, so people join and leave wherever you already manage that.
 
 **[SEC-26]** _question_
 
-Who can see what?
+What happens to our data if we stop paying?
 
 **[SEC-27]** _text_
 
-Your administrators decide, per workspace. The system is deliberately quiet about things you cannot access — it will not confirm that something exists just because you guessed its address.
+Reading keeps working while changes are refused, and you can export everything at any point without settling anything first. Hosted, the data is kept for a stated window after suspension before anything is removed. Self-hosted, it is on your own disk and we can't touch it; the licence warns you for a month before it expires.
 
 **[SEC-28]** _question_
 
-How do we get security updates?
+Who can see what?
 
 **[SEC-29]** _text_
 
-New versions are published here and you roll them out on your own schedule. Nothing updates itself underneath you.
+Your administrators decide, per workspace. The system won't confirm that something exists just because someone guessed its address.
 
 **[SEC-30]** _question_
 
-Are the installers signed?
+How do we get security updates?
 
 **[SEC-31]** _text_
 
-Not yet, and we would rather say so than have you find out at install time. Every download is published with a checksum so you can verify exactly what you got. Signing is on the way.
+New versions are published on the downloads page and you roll them out on your own schedule. Nothing updates itself underneath you.
 
-**[SEC-32]** _subheading_
+**[SEC-32]** _question_
 
-Found something?
+Are the installers signed?
 
 **[SEC-33]** _text_
 
-Mail it rather than filing it publicly, and give us a way to reach you. We will confirm we have it, keep you posted while it is fixed, and credit you when it ships unless you would rather we didn't.
+Not yet — signing is on the way. Every download is published with a SHA-256 checksum so you can verify exactly what you got.
 
-**[SEC-34]** _text_
+**[SEC-34]** _subheading_
 
-zipr@stanbrook.me
+Found something?
 
-**[SEC-35]** _subheading_
+**[SEC-35]** _text_
 
-Need this in writing?
+Email it privately. We'll confirm we have it, keep you posted while it's fixed, and credit you when it ships unless you'd rather we didn't.
 
 **[SEC-36]** _text_
 
-We will happily go through a security questionnaire, sign a DPA, or talk to whoever needs convincing.
+zipr@stanbrook.me
 
-**[SEC-37]** _button_
+**[SEC-37]** _subheading_
+
+Need this in writing?
+
+**[SEC-38]** _text_
+
+We'll complete a security questionnaire, sign a DPA, or talk to whoever needs convincing — hosted or self-hosted.
+
+**[SEC-39]** _button_
 
 Talk to us
 
-**[SEC-38]** _button_
+**[SEC-40]** _text_
 
 Try it first
 
@@ -1650,31 +1553,31 @@ Pick whichever fits. Each one opens a message with the subject already written �
 
 **[CONT-04]** _subheading_
 
-Licensing and quotes
+Get your team set up
 
 **[CONT-05]** _text_
 
-Trials, team size, invoicing, and what it would actually come to for you.
+The hosted service, run by us. Nobody self-provisions, so this is how an organisation actually starts.
 
 **[CONT-06]** _button_
 
-Ask about a licence
+Request access
 
 **[CONT-07]** _subheading_
 
-Setting it up
+Self-hosting and quotes
 
 **[CONT-08]** _text_
 
-Questions about putting Zipr on your own servers, before you commit to anything.
+Running it on your own infrastructure, under a written agreement. Priced per deployment, not per person.
 
 **[CONT-09]** _button_
 
-Ask about self-hosting
+Ask about a licence
 
 **[CONT-10]** _subheading_
 
-Help, for teams
+Help, for customers
 
 **[CONT-11]** _text_
 
@@ -1708,7 +1611,7 @@ Something's broken?
 
 There's a form for that, and it takes about thirty seconds. No account, no tracker to sign up for.
 
-**[CONT-19]** _button_
+**[CONT-19]** _text_
 
 Report a bug
 

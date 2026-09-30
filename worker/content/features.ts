@@ -30,53 +30,61 @@ export interface Feature {
   tier: "client" | "api";
 }
 
+/**
+ * The eight benefits, grouped by where they sit: the first four are the free
+ * app, the last four arrive with a team server. The features page renders
+ * them in those two groups, so keep them in this order.
+ *
+ * One or two sentences each. Every one says what the reader gets, then the
+ * fact that makes it true — never the other way round.
+ */
 export const PILLARS: Feature[] = [
   {
     icon: "zap",
-    title: "An idea, in a form somebody can run",
-    body: "The sequence you worked out becomes one thing with a name. Not a document describing it. Not a script they need talking through. A thing they click, that works the first time.",
+    title: "One click instead of a walkthrough",
+    body: "The steps you worked out become one named item. A colleague clicks it and it works the first time — no document to follow, no script to be talked through.",
     tier: "client",
   },
   {
     icon: "wifi-off",
-    title: "No gap between thinking of it and doing it",
-    body: "Everything is already on your machine, so Zipr opens instantly and works on a plane. That gap — the loading, the searching, the where-did-I-put-it — is where good intentions quietly go to die.",
+    title: "Instant, and it works offline",
+    body: "Everything is already on your machine, so Zipr opens straight away and keeps working on a plane.",
     tier: "client",
   },
   {
     icon: "shield",
-    title: "Zipr holds your ideas. It never runs them",
-    body: "Every command executes on the machine of the person who clicked, and nowhere else. Not on our servers, not on yours. It is the short answer to the long question your security team is about to ask.",
+    title: "Runs only where you click",
+    body: "Every command executes on the machine of the person who clicked — never on our servers or yours. That is the short answer to your security team's first question.",
+    tier: "client",
+  },
+  {
+    icon: "puzzle",
+    title: "Plugins for everything else",
+    body: "When the twelve built-in step types run out, a plugin adds a new one. Plugins are kept apart from the app, so a faulty one can't take it down.",
     tier: "client",
   },
   {
     icon: "users",
-    title: "Hand it over instead of explaining it",
-    body: "Publish to a catalogue and it is theirs — current, complete, the same version everyone else has. No walkthrough, no zip file in a chat thread, no afternoon spent watching over somebody's shoulder.",
+    title: "Share it instead of explaining it",
+    body: "Publish an item to a team catalogue and everyone runs the same, current version. No zip file in a chat thread, no afternoon spent watching over a shoulder.",
     tier: "api",
   },
   {
     icon: "git-merge",
-    title: "Two people, one idea, nothing lost",
-    body: "Improve the same thing at the same time and both improvements survive. You are told what genuinely clashed, rather than finding out on Friday that Tuesday's fix is gone.",
+    title: "Edit together without losing work",
+    body: "Two people improve the same item at once and both changes survive. If you changed the same thing, you're shown exactly what clashed.",
     tier: "api",
   },
   {
     icon: "history",
-    title: "Room to try the strange version",
-    body: 'Every change is kept, so nothing you attempt is expensive. Put any item back to how it was, and see who changed what — the answer to "who broke this" is a click rather than an investigation.',
+    title: "Undo anything",
+    body: "Every change is kept. Put any item back how it was in one click, and see who changed what — so trying the strange version costs nothing.",
     tier: "api",
   },
   {
-    icon: "puzzle",
-    title: "When the twelve verbs run out",
-    body: "Plugins add new kinds of step, kept at arm's length so a bad one cannot take the app down with it. Build the one your team has been wishing for, and share it with them.",
-    tier: "client",
-  },
-  {
     icon: "server",
-    title: "On your servers, inside your walls",
-    body: "Your catalogue lives on your infrastructure, in your network, under your backups. There is no shared cloud to be a tenant of and no account of ours holding your work.",
+    title: "Hosted by us, or on your own servers",
+    body: "Let us run the server, in a database that belongs to your organisation alone. Or self-host it inside your own network, under your own backups.",
     tier: "api",
   },
 ];
@@ -105,42 +113,70 @@ export const ACTION_TYPES = [
   { name: "Hand off to a plugin", blurb: "Anything the twelve don't cover." },
 ];
 
-/** The three-step story. It really does end at "free" twice. */
-export const JOURNEY = [
+/**
+ * How it works, in three steps — which is also the pricing model: the first
+ * two are free forever, the third is what a team pays for.
+ */
+export const HOW_IT_WORKS = [
   {
     step: "01",
-    title: "Have the idea",
-    body: "Install it and build the first one. No account, no email, no clock counting down — just a workspace that belongs to your machine and to nothing else.",
+    title: "Build it",
+    body: "Chain the steps you would normally explain — commands, links, apps, files, questions — into one named item.",
     cost: "Free",
   },
   {
     step: "02",
-    title: "Keep having them",
-    body: "Build as many as you like, for as long as you like. Nothing expires, nothing phones home, and all of it leaves with you as a single file whenever you want.",
+    title: "Run it",
+    body: "One click runs it on your machine, instantly and offline. Build as many as you like; nothing expires and no account is needed.",
     cost: "Free",
   },
   {
     step: "03",
-    title: "Let one out of the box",
-    body: "The day an idea stops being only yours, give your team a Zipr server — ours or your own — and let it travel. Same app, more people, nothing to relearn.",
-    cost: "Paid",
+    title: "Share it",
+    body: "When the team needs it, publish it to a shared catalogue on a Zipr server — hosted by us, or run by you. Same app, nothing to relearn.",
+    cost: "Team",
   },
 ];
 
 /**
- * What a paid deployment adds, for the home page.
+ * What a team server adds, for the home page.
  *
  * Framed as gains rather than as the free tier's shortcomings — the pricing
- * comparison already does the honest column-by-column version for anyone who
- * wants it. Each line is something that has to be true for knowledge to cross
- * a boundary safely, which is the section it sits in.
+ * comparison does the column-by-column version for anyone who wants it.
  */
 export const TEAM_UNLOCKS = [
-  "A workspace per team, on one deployment",
-  "Publish a copy across, keeping your own exactly as it was",
-  "Roles and visibility matching the structure you already have",
-  "Everyone's copy current, updating as colleagues work",
-  "Full history, and a one-click way back",
-  "An audit trail you did not have to build",
-  "Figures showing which ideas people actually run",
+  "A workspace per team, with roles and visibility you control",
+  "Publish a copy to another team — your own stays exactly as it was",
+  "Everyone on the current version, updated as colleagues work",
+  "Full history, one-click rollback and an audit trail",
+  "Single sign-on with Google, Microsoft Entra or Okta",
+  "Usage figures showing which items people actually run",
+];
+
+/**
+ * The security facts worth putting in front of a first-time visitor. The
+ * security page has the full set; these are the four a reader should not
+ * have to go looking for.
+ */
+export const TRUST_POINTS = [
+  {
+    icon: "shield",
+    title: "Nothing runs on a server",
+    body: "Zipr stores items. It only ever runs them on the machine of the person who clicked.",
+  },
+  {
+    icon: "server",
+    title: "Your data, where you choose",
+    body: "Hosted in a database of your own, or self-hosted with nothing leaving your network.",
+  },
+  {
+    icon: "key-round",
+    title: "Your sign-in, your rules",
+    body: "Single sign-on, and roles and visibility set by your administrators.",
+  },
+  {
+    icon: "download",
+    title: "Never held hostage",
+    body: "Export everything as one file at any time, even if an account lapses.",
+  },
 ];

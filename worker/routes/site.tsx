@@ -33,12 +33,12 @@ export const siteRoute = new Hono<AppEnv>();
 // ==========================================
 
 siteRoute.get("/", (c) =>
-  c.render(<HomePage />, {
+  c.render(<HomePage app={c.var.app} />, {
     // The home page is the site's own entry in search results, so it takes the
     // site name alone rather than a "Home ·" prefix.
     title: undefined,
     description:
-      "Some ideas have to be run to be understood. Zipr turns the sequence you worked out into something a colleague can run on the first try — free forever, and shareable the day it stops being only yours.",
+      "Zipr is a free desktop launcher for Windows and macOS. Chain commands, links, apps and prompts into one-click items, then share them with your team instead of explaining them.",
     type: "website",
   }),
 );
@@ -47,7 +47,7 @@ siteRoute.get("/features", (c) =>
   c.render(<FeaturesPage />, {
     title: "Features",
     description:
-      "What it takes to get an idea out of your head and into somebody else's hands intact: what the free app does, what a team adds, and the twelve things a single item can do.",
+      "What the free Zipr app does, what a team server adds, and the twelve step types every item is built from.",
   }),
 );
 
@@ -55,7 +55,7 @@ siteRoute.get("/pricing", (c) =>
   c.render(<PricingPage app={c.var.app} />, {
     title: "Pricing",
     description:
-      "Zipr is free forever for one person. Sharing across a team is $6 per person per month, on servers you control. Full comparison, no surprises.",
+      "Zipr is free forever for one person. Sharing across a team is hosted from $6 per person per month, or self-hosted and priced per deployment. Full comparison, no surprises.",
   }),
 );
 

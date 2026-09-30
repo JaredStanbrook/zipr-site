@@ -22,7 +22,7 @@ const COLUMNS: Array<{ heading: string; links: Array<{ to: string; name: string 
     heading: "Learn",
     links: [
       { to: "/security", name: "Security" },
-      { to: "/pricing#compare", name: "Alone vs together" },
+      { to: "/pricing#compare", name: "Compare plans" },
       { to: "/report", name: "Report a bug" },
     ],
   },
@@ -98,8 +98,6 @@ export const SiteFooter = ({ appName, tagline }: { appName: string; tagline: str
           class="mt-12 flex flex-col gap-3 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between"
         >
           <p>© ${new Date().getFullYear()} ${appName}. All rights reserved.</p>
-
-          <p>Made for people whose best idea is stuck in their own head.</p>
         </div>
       </div>
 

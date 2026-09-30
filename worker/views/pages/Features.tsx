@@ -1,6 +1,6 @@
 import type { FC } from "hono/jsx";
 
-import { PILLARS, ACTION_TYPES } from "@server/content/features";
+import { PILLARS, ACTION_TYPES, type Feature } from "@server/content/features";
 import {
   Page,
   Section,
@@ -15,47 +15,57 @@ import {
 /**
  * For the reader who is already interested and wants to know what they get.
  *
- * Scenes, not specifications. The first version walked through a merge
- * algorithm step by step, which is fascinating exactly once and to about four
- * people — and handed the whole design to anyone considering building it.
- *
- * Each scene is one moment where an idea either travels or dies. That is the
- * order to read them in, and it is why the cross-team one comes first: it is
- * the moment the product exists for.
+ * Three layers, in the order a reader decides: the benefits (split into what
+ * is free and what a team adds, because that is the question behind every
+ * one of them), the situations where they matter, and the building blocks.
+ * Mechanism stays out — "both changes survive" is a benefit; how the merge
+ * works is a design document.
  */
 
 const SCENES = [
   {
     icon: "share-2",
     when: "What you built would help another team",
-    was: "You write it up, they misread step four, and you end up on the call anyway. Or — far more often — you never mention it at all.",
-    now: "You publish a copy into their catalogue. They run it. Yours stays exactly where it was, and theirs stays current on its own.",
+    was: "You write it up, they misread step four, and you end up on the call anyway — or you never mention it at all.",
+    now: "You publish a copy into their catalogue and they run it. Yours stays where it was; theirs stays current.",
   },
   {
     icon: "users",
     when: "A new starter joins on Monday",
-    was: "A wiki page, three chat threads and a zip of scripts, and then the same questions for a fortnight.",
-    now: "They install Zipr, open the team catalogue, and everything the team runs is right there — in the version everyone else is on.",
+    was: "A wiki page, three chat threads, a zip of scripts, and the same questions for a fortnight.",
+    now: "They install Zipr, open the team catalogue, and everything the team runs is there, in the current version.",
   },
   {
     icon: "git-merge",
     when: "Two of you improve the same thing",
-    was: "Last save wins. Somebody's work quietly disappears and nobody notices until it matters.",
-    now: "Both improvements survive. If you genuinely changed the same line, you are told exactly what clashed and you decide.",
+    was: "Last save wins, and somebody's work quietly disappears.",
+    now: "Both improvements survive. If you changed the same thing, you see exactly what clashed and decide.",
   },
   {
     icon: "history",
     when: "You want to try the strange version",
-    was: "You don't, because undoing it means remembering what it looked like before and hoping you got it right.",
-    now: "You try it. Every change is kept, so putting it back is a click — and an experiment that costs nothing gets run.",
+    was: "You don't, because undoing it means remembering what it looked like before.",
+    now: "You try it. Every change is kept, so putting it back is one click.",
   },
   {
     icon: "wifi-off",
     when: "You're on a train with no signal",
     was: "The tool is a website, so the tool is gone.",
-    now: "Everything is already on your laptop. Keep working; your changes catch up when you do.",
+    now: "Everything is already on your laptop. Keep working; changes sync when you reconnect.",
   },
 ];
+
+const PillarGrid: FC<{ tier: Feature["tier"] }> = ({ tier }) => (
+  <div class="grid gap-5 sm:grid-cols-2">
+    {PILLARS.filter((pillar) => pillar.tier === tier).map((pillar) => (
+      <Card lift class="flex h-full flex-col p-7">
+        <IconTile icon={pillar.icon} tone={tier === "api" ? "primary" : "brand"} />
+        <h3 class="mt-5 text-2xl leading-snug text-balance">{pillar.title}</h3>
+        <p class="mt-3 leading-relaxed text-muted-foreground text-pretty">{pillar.body}</p>
+      </Card>
+    ))}
+  </div>
+);
 
 export const FeaturesPage: FC = () => (
   <Page>
@@ -65,29 +75,26 @@ export const FeaturesPage: FC = () => (
           as="h1"
           align="center"
           eyebrow="Features"
-          title="Everything an idea needs to survive other people"
-          lede="Being a launcher is the least interesting thing about Zipr. What it is actually for is getting the thing in your head into somebody else's hands intact."
+          title="Build it once. Let anyone run it."
+          lede="What Zipr does on its own for free, and what it adds when your team shares a server."
         />
       </Container>
     </Section>
 
-    {/* ================= PILLARS ================= */}
+    {/* ================= BENEFITS ================= */}
     <Section tone="muted">
       <Container size="wide">
-        <div class="grid gap-5 sm:grid-cols-2">
-          {PILLARS.map((pillar) => (
-            <Card lift class="flex h-full flex-col p-7">
-              <div class="flex items-start justify-between gap-4">
-                <IconTile icon={pillar.icon} tone={pillar.tier === "api" ? "primary" : "brand"} />
-                <Badge tone={pillar.tier === "client" ? "success" : "primary"}>
-                  {pillar.tier === "client" ? "Free" : "With a team"}
-                </Badge>
-              </div>
-              <h2 class="mt-5 text-2xl leading-snug text-balance">{pillar.title}</h2>
-              <p class="mt-3 leading-relaxed text-muted-foreground text-pretty">{pillar.body}</p>
-            </Card>
-          ))}
+        <div class="mb-8 flex flex-wrap items-center gap-3">
+          <h2 class="text-3xl">In the free app</h2>
+          <Badge tone="success">Free</Badge>
         </div>
+        <PillarGrid tier="client" />
+
+        <div class="mb-8 mt-16 flex flex-wrap items-center gap-3">
+          <h2 class="text-3xl">With a team server</h2>
+          <Badge tone="primary">Team</Badge>
+        </div>
+        <PillarGrid tier="api" />
       </Container>
     </Section>
 
@@ -96,8 +103,8 @@ export const FeaturesPage: FC = () => (
       <Container>
         <SectionHeading
           eyebrow="In practice"
-          title="Five afternoons you have already had"
-          lede="None of these is a moment anybody schedules. They are just where good work gets lost, and where a tool either helps or is somewhere else."
+          title="Five situations you'll recognise"
+          lede="Where good work usually gets lost — and what changes with Zipr."
         />
 
         {/* Each scene is a before and an after in clay terms: the way it
@@ -135,15 +142,14 @@ export const FeaturesPage: FC = () => (
       </Container>
     </Section>
 
-    {/* ================= ACTIONS ================= */}
+    {/* ================= STEP TYPES ================= */}
     <Section tone="muted">
       <Container>
         <SectionHeading
           eyebrow="The building blocks"
-          title="Twelve things an item can do"
-          lede="Chain them in any order, branch on what happened, and vary the steps by operating system without making a second copy."
+          title="Twelve step types"
+          lede="Every item is built from these, chained in any order."
         />
-
         <ul class="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
           {ACTION_TYPES.map((action, i) => (
             <li class="keycap p-4 sm:p-5">
@@ -166,17 +172,17 @@ export const FeaturesPage: FC = () => (
               {
                 icon: "git-branch",
                 title: "Branch as you go",
-                body: "A step can run only if the last one worked, or only if it didn't. Stop, carry on, or say something.",
+                body: "Run a step only if the last one worked — or only if it didn't.",
               },
               {
                 icon: "monitor",
                 title: "One item, every platform",
-                body: "Different path on Windows? Say so once, in the same item, instead of maintaining two.",
+                body: "Different path on Windows? Say so in the same item instead of keeping two.",
               },
               {
                 icon: "puzzle",
                 title: "Go further with plugins",
-                body: "When the twelve run out, a plugin picks up — kept at arm's length so a bad one can't take the app down.",
+                body: "When the twelve run out, a plugin adds a new step type.",
               },
             ].map((extra) => (
               <div>
@@ -193,8 +199,8 @@ export const FeaturesPage: FC = () => (
     </Section>
 
     <CtaBand
-      title="Four minutes to your first one."
-      body="No account, no card, no clock. Build the thing you keep explaining, and come back to the pricing page the day somebody else wants it."
+      title="Build your first item in minutes."
+      body="Free, no account, no card. Come back the day somebody else wants what you've built."
       primary={{ href: "/downloads", label: "Download Zipr" }}
       secondary={{ href: "/pricing", label: "Compare free and team" }}
     />
