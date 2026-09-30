@@ -2,6 +2,8 @@ import { Hono } from "hono";
 
 import type { AppEnv } from "@server/types";
 import { robotsTxt, sitemapXml, type SitemapEntry } from "@server/lib/seo";
+import { PRIVACY_VERSIONS } from "@server/content/legal";
+import { LICENCE_VERSIONS } from "@server/content/licence";
 
 export const seoRoute = new Hono<AppEnv>();
 
@@ -15,6 +17,10 @@ export const seoRoute = new Hono<AppEnv>();
  * For content that lives in the database (published posts, public profiles),
  * query it in the handler below and concatenate. Keep the list under ~50,000
  * URLs; past that, sitemaps have to be split and indexed.
+ *
+ * `lastmod` is set only where a real date exists (the legal pages' version
+ * history). Google uses lastmod only when it is consistently accurate, so a
+ * build date stamped on every page would teach it to ignore the field.
  */
 const STATIC_ROUTES: SitemapEntry[] = [
   { loc: "/", changefreq: "weekly", priority: 1.0 },
@@ -24,8 +30,8 @@ const STATIC_ROUTES: SitemapEntry[] = [
   { loc: "/security", changefreq: "monthly", priority: 0.7 },
   { loc: "/report", changefreq: "yearly", priority: 0.4 },
   { loc: "/contact", changefreq: "yearly", priority: 0.5 },
-  { loc: "/privacy", changefreq: "yearly", priority: 0.3 },
-  { loc: "/licence", changefreq: "yearly", priority: 0.3 },
+  { loc: "/privacy", changefreq: "yearly", priority: 0.3, lastmod: PRIVACY_VERSIONS[0].date },
+  { loc: "/licence", changefreq: "yearly", priority: 0.3, lastmod: LICENCE_VERSIONS[0].date },
 ];
 
 seoRoute.get("/robots.txt", (c) =>

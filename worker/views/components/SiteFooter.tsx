@@ -77,13 +77,13 @@ export const SiteFooter = ({ appName, tagline }: { appName: string; tagline: str
                 >
                   ${column.heading}
                 </h2>
-                <ul class="mt-4 space-y-2.5">
+                <ul class="mt-3 space-y-0.5">
                   ${column.links.map(
                     (link) => html`
                       <li>
                         <a
                           href="${link.to}"
-                          class="text-sm text-muted-foreground no-underline transition-colors hover:text-primary"
+                          class="inline-block py-1.5 text-sm text-muted-foreground no-underline transition-colors hover:text-primary"
                           >${link.name}</a
                         >
                       </li>
@@ -104,19 +104,23 @@ export const SiteFooter = ({ appName, tagline }: { appName: string; tagline: str
                from wherever information is collected, not just from one. -->
           <ul class="flex flex-wrap gap-x-5 gap-y-2">
             <li>
-              <a href="/licence" class="text-muted-foreground no-underline hover:text-primary"
+              <a
+                href="/licence"
+                class="inline-block py-1.5 text-muted-foreground no-underline hover:text-primary"
                 >Licence</a
               >
             </li>
             <li>
-              <a href="/privacy" class="text-muted-foreground no-underline hover:text-primary"
+              <a
+                href="/privacy"
+                class="inline-block py-1.5 text-muted-foreground no-underline hover:text-primary"
                 >Privacy</a
               >
             </li>
             <li>
               <a
                 href="/third-party-notices.txt"
-                class="text-muted-foreground no-underline hover:text-primary"
+                class="inline-block py-1.5 text-muted-foreground no-underline hover:text-primary"
                 >Open-source licences</a
               >
             </li>

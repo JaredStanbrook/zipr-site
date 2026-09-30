@@ -53,7 +53,7 @@ const PROPERTIES = [
   },
 ];
 
-const REVIEW_FAQ = [
+export const REVIEW_FAQ = [
   {
     q: "Where is our data stored?",
     a: "Self-hosted, on the server you run it on, and we hold nothing. Hosted, in a database provisioned for your organisation alone, so it can be backed up and restored on its own. Either way, each machine also keeps a copy so the app is fast and works offline.",
@@ -127,6 +127,13 @@ export const SecurityPage: FC = () => (
             <Disclosure question={item.q}>{item.a}</Disclosure>
           ))}
         </div>
+        <p class="mt-6 text-center text-sm text-muted-foreground text-pretty">
+          Exactly what the website, the app and the hosted service record is listed in the{" "}
+          <a href="/privacy" class="font-medium text-primary underline underline-offset-4">
+            privacy notice
+          </a>
+          .
+        </p>
       </Container>
     </Section>
 

@@ -28,6 +28,14 @@
     "not_found_handling": "none",
   },
 
+  // A new id on every deploy, read at runtime. Layout.tsx appends it to the
+  // fixed-name /static/main.css and client.js URLs, which is what makes the
+  // year-long cache in public/_headers safe: each deploy asks for new URLs.
+  // (A Vite `define` cannot do this — `wrangler deploy` bundles worker/ itself.)
+  "version_metadata": {
+    "binding": "CF_VERSION_METADATA",
+  },
+
   "observability": {
     "enabled": true,
   },

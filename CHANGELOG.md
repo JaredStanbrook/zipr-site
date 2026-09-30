@@ -11,6 +11,20 @@ runs underneath. Changes to the site itself go above them.
 
 ### The site
 
+- SEO audit (`docs/seo-audit.md`) and fixes. HTTP now 301s to HTTPS with
+  HSTS, and trailing-slash URLs 301 to the bare path (both in
+  `middleware/canonical-url.middleware.ts`). Unknown URLs get a real 404 page
+  instead of an empty body. Every page has a descriptive, unique title, a
+  description that fits the snippet, and a share image (`public/og.png`,
+  rendered by `scripts/og-image.mjs`). The home page carries WebSite and
+  SoftwareApplication JSON-LD, and Pricing and Security carry FAQPage, all
+  drawn from what the pages show. Pricing and Downloads no longer skip a
+  heading level.
+- Performance: sign-in and profile components load only on the pages that
+  use them, cutting public-page JavaScript by 39%. Fonts, the stylesheet and
+  the lazy chunks are cached for a year (`public/_headers`); the stylesheet
+  URL carries the deployment id from the new `CF_VERSION_METADATA` binding.
+  The display and body fonts are preloaded.
 - Jared Stanbrook is named as Zipr's legal owner: in the footer's copyright
   line and as the operator in the privacy notice, matching the copyright in
   the client and API repositories.

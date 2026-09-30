@@ -8,11 +8,14 @@ import { release, releaseAsset } from "@server/schema/release.schema";
 import type { Platform, ReleaseWithAssets } from "@server/schema/release.schema";
 import { issue, issueFormSchema } from "@server/schema/issue.schema";
 import { PLATFORM_INFO } from "@server/content/site";
+import { PRICING_FAQ, TIERS } from "@server/content/pricing";
+import { formatPrice } from "@views/lib/utils";
+import { faqSchema, softwareSchema, websiteSchema } from "@server/lib/structured-data";
 
 import { HomePage } from "@views/pages/Home";
 import { FeaturesPage } from "@views/pages/Features";
 import { PricingPage } from "@views/pages/Pricing";
-import { SecurityPage } from "@views/pages/Security";
+import { SecurityPage, REVIEW_FAQ } from "@views/pages/Security";
 import { PrivacyPage } from "@views/pages/Privacy";
 import { LicencePage } from "@views/pages/Licence";
 import { DownloadsPage } from "@views/pages/Downloads";
@@ -28,6 +31,16 @@ import { ReportPage, ReportForm, ReportSuccess } from "@views/pages/Report";
  * endpoint is rate-limited at the edge and honeypotted; everything else here
  * only reads.
  */
+/** Shared by the home page's meta description and its SoftwareApplication. */
+const HOME_DESCRIPTION =
+  "Zipr is a free desktop launcher for Windows and macOS. Chain commands, links, apps and prompts into one-click items, then share them with your team.";
+
+/** The hosted per-person price, from the pricing data rather than retyped. */
+const hostedFrom = (app: AppEnv["Variables"]["app"]) => {
+  const cents = TIERS.find((tier) => tier.id === "cloud")?.annualMonthlyCents ?? 0;
+  return formatPrice(cents, app.locale, app.currency);
+};
+
 export const siteRoute = new Hono<AppEnv>();
 
 // ==========================================
@@ -36,42 +49,43 @@ export const siteRoute = new Hono<AppEnv>();
 
 siteRoute.get("/", (c) =>
   c.render(<HomePage app={c.var.app} />, {
-    // The home page is the site's own entry in search results, so it takes the
-    // site name alone rather than a "Home ·" prefix.
-    title: undefined,
-    description:
-      "Zipr is a free desktop launcher for Windows and macOS. Chain commands, links, apps and prompts into one-click items, then share them with your team instead of explaining them.",
+    // Says what Zipr is, not "Home": the site name alone told a searcher who
+    // had not heard of Zipr nothing about whether to click.
+    title: "Desktop launcher for commands, links and apps",
+    description: HOME_DESCRIPTION,
+    jsonLd: [websiteSchema(c.var.app), softwareSchema(c.var.app, HOME_DESCRIPTION)],
     type: "website",
   }),
 );
 
 siteRoute.get("/features", (c) =>
   c.render(<FeaturesPage />, {
-    title: "Features",
+    title: "Features: step types, sharing and history",
     description:
-      "What the free Zipr app does, what a team server adds, and the twelve step types every item is built from.",
+      "What the free Zipr app does on its own, what a team server adds, and the twelve step types every item is built from.",
   }),
 );
 
 siteRoute.get("/pricing", (c) =>
   c.render(<PricingPage app={c.var.app} />, {
-    title: "Pricing",
-    description:
-      "Zipr is free forever for one person. Sharing across a team is hosted from $6 per person per month, or self-hosted and priced per deployment. Full comparison, no surprises.",
+    title: `Pricing: free app, team plans from ${hostedFrom(c.var.app)}`,
+    description: `Zipr is free for one person, for good. Team sharing is hosted from ${hostedFrom(c.var.app)} per person a month, or self-hosted and priced per deployment. Compare every feature.`,
+    jsonLd: [faqSchema(PRICING_FAQ)],
   }),
 );
 
 siteRoute.get("/security", (c) =>
   c.render(<SecurityPage />, {
-    title: "Security",
+    title: "Security and data handling",
     description:
-      "Where your data lives, what leaves your network, why Zipr never runs your commands on a server, and how work crosses between teams without loosening who can see what.",
+      "Where your data lives, what leaves your network, and why Zipr never runs your commands on a server. Short answers for your security review.",
+    jsonLd: [faqSchema(REVIEW_FAQ)],
   }),
 );
 
 siteRoute.get("/licence", (c) =>
   c.render(<LicencePage app={c.var.app} />, {
-    title: "Licence",
+    title: "Licence for the desktop app",
     description:
       "The Zipr Licence: free to install and use, on any number of devices, for personal use or work.",
   }),
@@ -79,7 +93,7 @@ siteRoute.get("/licence", (c) =>
 
 siteRoute.get("/privacy", (c) =>
   c.render(<PrivacyPage app={c.var.app} />, {
-    title: "Privacy",
+    title: "Privacy notice",
     description:
       "What the Zipr website and app collect, why, who else sees it, and how to ask for a copy or have it deleted.",
   }),
@@ -154,9 +168,9 @@ siteRoute.get("/downloads", async (c) => {
       app={c.var.app}
     />,
     {
-      title: "Downloads",
+      title: "Download for Windows and macOS",
       description:
-        "Download the Zipr desktop client for Windows or macOS. Free, no account, and no network request until you point it at a deployment.",
+        "Download the free Zipr desktop app for Windows 10+ or macOS 12+. No account needed, and no network requests until you connect it to a team server.",
     },
   );
 });
@@ -237,9 +251,12 @@ siteRoute.get("/downloads/:assetId", async (c) => {
 
 siteRoute.get("/contact", (c) =>
   c.render(<ContactPage topic={c.req.query("topic")} />, {
-    title: "Contact",
+    title: "Contact: team setup, quotes and support",
     description:
-      "Ask about a licence, get help with a deployment, or report something privately. Every message reaches a person.",
+      "Get your team set up, ask about self-hosting, get help, or report a security issue privately. Every message reaches a person.",
+    // `?topic=` only highlights one card on the same page. Canonical to
+    // /contact consolidates it; noindex on top would send a conflicting signal.
+    noindex: false,
   }),
 );
 
@@ -252,6 +269,8 @@ siteRoute.get("/report", (c) =>
     title: "Report a bug",
     description:
       "Tell us what broke in the Zipr desktop app, a deployment, or this website. No account needed.",
+    // `?product=` only preselects the dropdown; same reasoning as /contact.
+    noindex: false,
   }),
 );
 
