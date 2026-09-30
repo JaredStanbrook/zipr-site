@@ -115,7 +115,7 @@ const UserMenu = ({ user }: { user: PropsUser }) => html`
   <div class="relative">
     <details class="group relative">
       <summary
-        class="flex h-9 w-9 cursor-pointer items-center justify-center rounded-full bg-primary/10 hover:bg-primary/20 transition-colors list-none marker:hidden [&::-webkit-details-marker]:hidden border border-transparent focus:border-ring ring-offset-background"
+        class="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-primary/10 hover:bg-primary/20 transition-colors list-none marker:hidden [&::-webkit-details-marker]:hidden border border-transparent focus:border-ring ring-offset-background"
       >
         <span class="font-bold text-sm text-primary"
           >${(user.email || "??").substring(0, 2).toUpperCase()}</span

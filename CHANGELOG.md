@@ -11,6 +11,33 @@ runs underneath. Changes to the site itself go above them.
 
 ### The site
 
+- Upgraded to the current frug-template. Everything since this site was
+  created from it (template `e93af52`) is cherry-picked with `-x`, keeping
+  the site's own design where the two diverged:
+  - **Revocable sessions.** Each sign-in is a `sessions` row, so signing out,
+    changing a password or a reset really ends a session; a cookie copied
+    before sign-out is now refused. Migration `0006_revocable_sessions`
+    creates the table and lowercases stored emails. Anyone signed in when it
+    deploys is signed out once.
+  - **Auth fixes:** emails compared lowercased; every failed factor counts
+    towards lockout; a wrong password and an unknown account take the same
+    time; the password policy is enforced where it is advertised (now a
+    12-character minimum without composition rules, per NIST SP 800-63B);
+    PBKDF2 hashes carry their cost and stay within the Workers limit of
+    100,000 rounds, re-hashing on sign-in.
+  - **`requireSecrets`:** without `JWT_SECRET` nothing is served, and a page
+    says what to fix, instead of signing sessions with a public default.
+  - **`SINGLE_ACCOUNT`**, now on here: sign-up accepts only
+    `BOOTSTRAP_ADMIN_EMAIL`, once, enforced by the API as well as the page.
+    The sign-in page no longer links to a closed `/register`.
+  - The sign-in and registration pages share `authParts.tsx`, fixing a tab
+    strip sized by an uninterpolated `grid-cols-${…}` class. There is also
+    `lib/dates.ts`, an `APP_TIMEZONE` setting, a `bare` page option, a
+    single doctype, and tests against a real SQLite database
+    (`tests/auth.test.ts`) plus convention and secrets tests.
+  - The frugal skill and `architecture.md` are the template's current
+    versions, including the SEO guide. The share image is now set by the
+    template's `APP_OG_IMAGE` (`/og.png`), rather than a constant.
 - SEO audit (`docs/seo-audit.md`) and fixes. HTTP now 301s to HTTPS with
   HSTS, and trailing-slash URLs 301 to the bare path (both in
   `middleware/canonical-url.middleware.ts`). Unknown URLs get a real 404 page

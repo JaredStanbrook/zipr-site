@@ -1,6 +1,6 @@
 ---
 name: frugal
-description: Build, configure and style apps on the Frugal Cloudflare Workers template (Hono + server-rendered JSX + HTMX + D1/Drizzle, Tailwind theme tokens). Use this skill for BOTH jobs it covers. First, turning a fresh copy of the template into a real site — trigger on "I want to build X with this", "set up this repo", "new site from this template", a pasted app brief, or any mention of wiring D1, KV or R2. Second, all ongoing work — adding a page, route, form, table, migration, nav link, auth or permission rule, and every visual or CSS change however small ("restyle this", "change the colours", "make it look better", "add a dashboard", dark mode). It covers the exact template-to-app procedure, how to wire each binding, the frontend/backend split, the registration steps a feature needs in order to be reachable, and the theme-token rules that keep light and dark working — all easy to miss and tedious to debug afterwards.
+description: Build, configure and style apps on the Frugal Cloudflare Workers template (Hono + server-rendered JSX + HTMX + D1/Drizzle, Tailwind theme tokens). Use this skill for BOTH jobs it covers. First, turning a fresh copy of the template into a real site — trigger on "I want to build X with this", "set up this repo", "new site from this template", a pasted app brief, or any mention of wiring D1, KV or R2. Second, all ongoing work — adding a page, route, form, table, migration, nav link, auth or permission rule, and every visual or CSS change however small ("restyle this", "change the colours", "make it look better", "add a dashboard", dark mode). Also SEO: titles, meta descriptions, sitemap, redirects, share images, schema, page speed, audits. It covers the exact template-to-app procedure, how to wire each binding, the frontend/backend split, the registration steps a feature needs in order to be reachable, and the theme-token rules that keep light and dark working — all easy to miss and tedious to debug afterwards.
 ---
 
 # Building on the Frugal template
@@ -53,6 +53,93 @@ These are the mistakes that cost the most time, in order:
    and bundles. It catches the class of error — a view importing something a
    route no longer passes — that this architecture makes easy to create.
 
+Then read the next section, because the build catches none of it.
+
+## Traps that produce no error
+
+Everything here typechecks, lints clean, renders without throwing, and is
+wrong. Each one shipped at least once. Most now have a test — but those tests
+only cover the template's own pages, so the habit is what protects your code.
+
+**An interpolated Tailwind class name does not exist.** Tailwind builds CSS by
+scanning source for _complete_ class names, so `grid-cols-${n}` is never
+generated and the rule silently does nothing. Worse, in a plain JSX attribute
+(`class="grid-cols-${n}"` — double quotes, no braces) there is no interpolation
+at all, and the literal text `${n}` goes into the markup. Write whole class
+names and map a value onto them:
+
+```tsx
+const gridColsFor = (n: number) => (n >= 3 ? "grid-cols-3" : "grid-cols-2");
+```
+
+Caught by "renders no unevaluated template interpolation" in
+`tests/ui-pages.test.ts`. Note what let the original survive: the broken
+element only rendered with more than one auth method enabled, and the tests
+configured one. **A branch no test configures is untested** — vary the config,
+not just the route.
+
+**A pale palette tint has no dark-mode counterpart.** `bg-emerald-100
+text-emerald-800` reads perfectly in light mode and is dark-on-dark the moment
+the theme flips. Reach for a semantic token: `success` and `warning` exist
+alongside `primary` and `destructive` so status UI never needs the palette.
+Caught by `tests/conventions.test.ts`.
+
+**A hover-only control does not exist on a phone.** `opacity-0
+group-hover:opacity-100` on the only button that performs an action means a
+touch user can never reach it. Fine for decoration, never for the only path to
+an action. Interactive targets are `h-11` (44px) — which is why the template
+has no `h-9` buttons left. Also caught by `tests/conventions.test.ts`.
+
+**A missing secret fails on the success path only.** `setSignedCookie` throws
+on an undefined secret, and only a successful sign-in sets a cookie — so a
+_wrong_ password gave a clean error page and the _right_ one an opaque 500. It
+reads as "valid credentials are being rejected" and sends you into the hashing
+code, nowhere near the cause. `requireSecrets` now refuses to serve anything
+without `JWT_SECRET`, with a page naming the fix. Never reintroduce a fallback
+like `env.JWT_SECRET || "default"`: signing sessions with a literal that ships
+in public source lets anyone mint one, and nothing looks wrong. Caught by
+`tests/secrets.test.ts`.
+
+**`JWT_SECRET` must be a Secret, not a _Build_ variable.** A Build variable
+exists only while the build runs and is `undefined` at runtime, while looking
+perfectly set in the dashboard. Secrets apply immediately — no redeploy.
+
+**A delete that changed nothing still reports success.** Drizzle's `update`
+resolves happily when the `where` matched no rows, so a route that ignores the
+result returns 200, HTMX swaps the card away, and the row is back on refresh.
+Use `.returning()` and act on an empty result:
+
+```ts
+const changed = await db.update(note).set({ deletedAt: now })
+  .where(and(eq(note.id, id), isNull(note.deletedAt)))
+  .returning({ id: note.id });
+if (changed.length === 0) { /* say so; do not swap it away */ }
+```
+
+**`tests/utils/fakeDb.ts` ignores `where` clauses.** It is a shape stub for
+render tests and nothing more: it returns the same rows whatever you ask for,
+so "the wrong password is refused" or "you cannot read someone else's row"
+passes against it no matter how broken the query is.
+
+Use `tests/utils/createRealDb()` for anything where the point _is_ the `where`
+— auth, ownership scoping, filtering. It applies the real `drizzle/*.sql`
+migrations to an in-memory SQLite through `node:sqlite`, so the schema under
+test is the one that ships, and it needs no dependency and no running Worker.
+`tests/auth.test.ts` is the worked example.
+
+**A summary seeded from the child table hides its empty members.** Building a
+per-owner view from child rows drops every owner that has none, so a freshly
+added one reads as "nothing here yet". Seed from the canonical table and left
+join the children.
+
+**Content sits under the fixed header** unless `<main>` carries the offset
+(`pt-14`). A page that wants no nav sets `bare` on its meta rather than
+fighting the padding.
+
+One habit covers most of these: **open the page in a real browser before
+calling it done** — both modes, and at 390px wide. Playwright is available.
+The tests render HTML; they never look at it.
+
 ## The split
 
 **Backend — runs in the Worker:**
@@ -66,7 +153,7 @@ These are the mistakes that cost the most time, in order:
 | `worker/schema/`     | Drizzle tables + the Zod validators derived from them          |
 | `worker/middleware/` | config, db, auth, guards, the SSR renderer                     |
 | `worker/config/`     | `app.config.ts` (branding), `auth.config.ts` (auth + RBAC)     |
-| `worker/lib/`        | crypto, `htmx-helpers`, formatting                             |
+| `worker/lib/`        | crypto, `htmx-helpers`, `dates`, formatting, `seo`             |
 
 **Frontend — two different things, don't confuse them:**
 
@@ -151,8 +238,12 @@ A feature that renders but is invisible is almost always a missed line here:
       `Resource` union, or `authorize()` will not typecheck
 - [ ] `worker/routes/dev.tsx` — add the table so it shows in the inspector
 - [ ] `tests/ui-pages.test.ts` — add the new paths
-- [ ] Client-side element? Import it in `worker/components/main.ts` or it
-      never registers
+- [ ] Public page? Set `title` and `description` in `c.render`, and add it to
+      `STATIC_ROUTES` in `worker/routes/seo.ts`. Behind a guard? Leave it out of
+      the sitemap. See `references/seo.md`
+- [ ] Client-side element? Register it in `worker/components/main.ts` or it
+      never loads: a top-level import if most pages render it, or an `ISLANDS`
+      entry per tag if only a few do
 
 ### Routes
 
@@ -182,6 +273,47 @@ Two authorisation layers, answering different questions: guards
 reaches the router at all; `AccessControl.authorize(user, resource, action,
 ownerId?)` decides whether they may touch a specific row.
 
+Sessions are rows in the `sessions` table, named by the `jti` claim in the
+cookie's JWT. The signature proves the token is ours; the row decides whether
+it is still live, which is what makes `auth.revokeSession(id)`,
+`auth.revokeAllSessions(userId, { except })` and a real "sign out everywhere"
+possible at all. `auth.listSessions(userId)` backs a "where am I signed in"
+screen. A signature on its own cannot be taken back.
+
+**Anything that revokes must be awaited** — `destroySession()` writes to the
+database now, and a dropped promise leaves a "signed out" user whose token
+still works.
+
+Properties the auth service holds, worth not undoing. All are covered by
+`tests/auth.test.ts`, so a change that breaks one will say so:
+
+- **Roles come from the database on every request.** The session token carries
+  a `role` claim and nothing reads it, so a stale or tampered claim grants
+  nothing.
+- **Nothing leaves the service carrying a credential.** `toSafeUser()` is the
+  only exit; it strips `passwordHash`, `pin` and `totpSecret`.
+- **Every failed factor costs an attempt**, the second factor included, and the
+  lockout refuses the correct password too.
+- **A wrong password and an unknown account are indistinguishable** — same
+  message, and the same time spent, since a missing user is still verified
+  against a dummy hash. Returning early there turns the form into a way to
+  test whether an address has an account.
+- **Signing out revokes the session**, changing a password ends every *other*
+  session, and a reset ends all of them.
+- **Emails are stored and compared lowercased**, via `normaliseEmail`. SQLite
+  compares text case-sensitively, so skipping it lets one mailbox become two
+  accounts and locks people out of their own.
+- **Password hashes carry their cost** (`pbkdf2-sha256$rounds$salt$hash`) and
+  are re-hashed on sign-in when it is raised, so `PASSWORD_HASH_ITERATIONS` can
+  go up without a reset for anybody — **but never above 100,000.** Workers'
+  WebCrypto refuses PBKDF2 past that ("iteration counts above 100000 are not
+  supported"), so every sign-up and sign-in fails. Node does not enforce it, so
+  the tests pass regardless; `tests/crypto.test.ts` pins the limit, and config
+  clamps higher values.
+- **The password policy is enforced in one place** (`assertPasswordPolicy`) and
+  the register form is told the same numbers, so the form cannot advertise a
+  rule the server does not apply.
+
 Feedback: `htmxToast(c, msg)` when the response itself renders,
 `flashToast(c, msg)` when you are about to `c.redirect(...)` — it survives the
 navigation. Available in `c.var`: `db`, `auth`, `app` (branding/locale),
@@ -189,12 +321,56 @@ navigation. Available in `c.var`: `db`, `auth`, `app` (branding/locale),
 
 More in `references/backend.md` and the repo's `endpoints.md`.
 
+## Search and sharing
+
+Server rendering already does the hard part, and the rest is built in.
+`worker/lib/seo.ts` gives every page a canonical from `ORIGIN`, Open Graph and
+Twitter tags, JSON-LD via `jsonLd`, and `noindex` on sign-in, admin and
+query-string URLs. `worker/routes/seo.ts` serves an environment-aware
+`robots.txt` and the sitemap. On top of that:
+
+- `canonical-url.middleware.ts` 301s HTTP → HTTPS and trailing slashes away;
+- `NotFound.tsx` is a real 404 page;
+- `APP_OG_IMAGE` plus `scripts/og-image.mjs` give every page a share image;
+- `public/_headers` with the `CF_VERSION_METADATA` binding caches CSS for a
+  year;
+- `ISLANDS` in `main.ts` keeps auth JavaScript off public pages.
+
+What a route owes: a real `title` and `description`, one `<h1>` with no
+skipped heading levels, and a sitemap entry if it's public. The full guide,
+including how to audit a site, is `references/seo.md`.
+
+Traps that pass every test, each the reason a built-in piece looks the way it
+does:
+
+- **Cloudflare answers `http://` with a 200** unless "Always Use HTTPS" is on,
+  so every page exists twice.
+- **`wrangler dev` rewrites the host to production over plain HTTP.** The
+  redirect reads `CF-Visitor`, not `c.req.url`; trusting the URL loops a local
+  preview.
+- **A Vite `define` never reaches production:** `wrangler deploy` bundles
+  `worker/index.ts` itself. Per-deploy values come from the runtime.
+- **`?v=` on `client.js` runs the bundle twice**, because the lazy chunks
+  import it by its bare URL. Only `main.css` is versioned.
+- **A UI-only parameter (`?topic=`) gets `noindex` plus a canonical** by
+  default. That's a conflicting signal; pass `noindex: false` there.
+- **Structured data must match the visible page.** No rating, review or FAQ
+  that isn't on it.
+
 ## Conventions worth keeping
 
 - **Money is integer cents.** Convert at the edges with `dollarsToCents` and
   `formatCents`; never do float arithmetic on money.
 - **Soft delete** — set `deletedAt`, filter with `isNull(...)`, so history
-  survives.
+  survives. Always `.returning()` and report an empty result rather than a
+  silent success (see "Traps" above).
+- **Calendar dates are `YYYY-MM-DD` strings**, handled by `worker/lib/dates.ts`
+  (`today`, `addDays`, `daysUntil`, `isOverdue`, `relativeDueLabel`). They work
+  in UTC on purpose: a due date is a day, not an instant, and doing the
+  arithmetic on a local-time `Date` moves it by one either side of midnight.
+  The exception is *which day it is now*: use `today(c.var.app.timezone)`
+  (`APP_TIMEZONE`) for anything a person reads as "today", or a Perth user
+  sees yesterday's list until 8am.
 - **Never return a raw `users` row.** `Auth.toSafeUser()` strips
   `passwordHash`, `pin` and `totpSecret`. Every exit from the auth service
   goes through it.
@@ -220,6 +396,22 @@ To see it running: `npm run migrate:local` once, then `npm run dev` on
 :3000 (`.dev.vars` needs `JWT_SECRET`; set `RP_ID=localhost` and
 `ORIGIN=http://localhost:3000` there for passkeys).
 
+**Then actually look at it.** The tests assert that HTML comes back; they never
+assert it is legible. Before calling UI work done, open the pages you touched
+in light and dark, and at 390px wide. Playwright is installed and Chromium is
+already on disk — do not run `playwright install`:
+
+```ts
+const browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium" });
+// A sandboxed session proxies HTTPS through its own CA:
+const ctx = await browser.newContext({ ignoreHTTPSErrors: true, viewport: { width: 390, height: 844 } });
+```
+
+Two cautions from experience. Give a boosted navigation time to finish before
+asserting on the next page — otherwise you will diagnose your own race as an
+app bug. And a stale `client.js` is served from cache without a content hash in
+its filename, so a hard reload is part of reproducing anything.
+
 ## Shipping
 
 Cloudflare's Git integration builds and deploys on every push — there is no
@@ -242,3 +434,7 @@ rather than a rollback. `docs/deploy.md` covers setup, failures and rollback.
   response patterns, testing.
 - `references/frontend.md` — server views vs client islands, HTMX attributes,
   when a Lit component is justified and how to write one.
+- `references/seo.md` — search and sharing: what's built in and how to extend
+  it (redirects, 404 page, share image, structured data, caching, lazy
+  islands), the per-page checklist, titles and descriptions, silent traps, how
+  to audit a site, and the owner actions code can't do.

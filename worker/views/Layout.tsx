@@ -126,11 +126,17 @@ export const Layout: FC<LayoutProps> = (props) => {
         >
         <theme-provider defaultTheme="system"></theme-provider>
 
-        ${NavBar({
-          appName: props.app.name,
-          user: props.user,
-          currentPath: props.currentPath,
-        })}
+        ${
+          props.meta.bare
+            ? html`<header class="border-b">
+                <div class="flex h-14 items-center px-4 font-bold text-lg">${props.app.name}</div>
+              </header>`
+            : NavBar({
+                appName: props.app.name,
+                user: props.user,
+                currentPath: props.currentPath,
+              })
+        }
 
         <main hx-boost="true" id="main-content" tabindex="-1" class="relative flex-grow w-full">
           ${props.children}

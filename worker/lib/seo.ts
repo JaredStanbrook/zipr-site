@@ -41,6 +41,15 @@ export interface PageMeta {
    * fastest way to lose rich results altogether.
    */
   jsonLd?: Record<string, unknown>[];
+  /**
+   * Render without the site nav.
+   *
+   * For a page that is public but does not belong to the signed-in app — a
+   * share link, an unlisted per-recipient page, a print view. Offering "Login"
+   * and "Get Started" to someone who has no account and cannot get one is
+   * noise at best; pair it with `noindex` when the URL itself is the secret.
+   */
+  bare?: boolean;
 }
 
 export interface ResolvedMeta {
@@ -53,14 +62,9 @@ export interface ResolvedMeta {
   siteName: string;
   locale: string;
   jsonLd: Record<string, unknown>[];
+  /** Layout rather than SEO, but it rides along so Layout has one props bag. */
+  bare: boolean;
 }
-
-/**
- * The share image used when a page does not set its own: 1200×630, the size
- * every major link preview renders without cropping. Generated from the
- * brand by `scripts/og-image.mjs`.
- */
-export const DEFAULT_OG_IMAGE = "/og.png";
 
 /**
  * Paths that should never appear in search results.
@@ -93,13 +97,19 @@ export function resolveMeta(meta: PageMeta, app: AppConfig, url: URL): ResolvedM
     title: meta.title ? `${meta.title} · ${app.name}` : app.name,
     description: meta.description || app.tagline || "",
     canonical,
-    image: new URL(meta.image ?? DEFAULT_OG_IMAGE, origin).toString(),
+    // A page's own image, else the site default (APP_OG_IMAGE). With neither,
+    // a shared link renders as a small, image-less card.
+    image:
+      (meta.image ?? app.ogImage)
+        ? new URL((meta.image ?? app.ogImage)!, origin).toString()
+        : undefined,
     // A query string means a filtered view of a page that already exists.
     noindex: meta.noindex ?? (isNoindexPath(url.pathname) || hasQuery),
     type: meta.type ?? "website",
     siteName: app.name,
     locale: app.locale,
     jsonLd: meta.jsonLd ?? [],
+    bare: meta.bare ?? false,
   };
 }
 

@@ -109,6 +109,13 @@
     "APP_TAGLINE": "For ideas that have to be run, not explained.",
     "APP_LOCALE": "en-AU",
     "APP_CURRENCY": "USD",
+    // IANA zone, e.g. "Australia/Perth". Decides what "today" means when a
+    // page asks (`today(c.var.app.timezone)` in worker/lib/dates.ts). UTC is
+    // right for storage and wrong for "what's due today" in Perth before 8am.
+    "APP_TIMEZONE": "UTC",
+    // Default link-preview image for pages that set none (1200×630, in
+    // public/). Rendered from the brand by `scripts/og-image.mjs`.
+    "APP_OG_IMAGE": "/og.png",
 
     // --- CORE AUTH ---
     // Enabled methods: passkey, password, pin, totp, email, sms
@@ -145,6 +152,17 @@
     // list has nothing to guard in the normal case — it is here for the window
     // before the first registration, and for any later one made deliberately.
     "ALLOWED_EMAILS": "jared@stanbrook.me",
+
+    // One-owner site: set to "true" and sign-up accepts only
+    // BOOTSTRAP_ADMIN_EMAIL, and only while no account exists; after that
+    // /register is gone for good. Needs BOOTSTRAP_ADMIN_EMAIL set, or nobody
+    // can ever register. Leave "false" for sites with open sign-up.
+    //
+    // On here: it is exactly this site's rule, and unlike the page-level 404
+    // it is enforced by the API too, and it hides the sign-in page's "Create
+    // Account" link once the owner exists. Further staff accounts come from
+    // `npm run create-admin:remote`, which writes to D1 directly.
+    "SINGLE_ACCOUNT": "true",
 
     // First-run admin, so you never need a terminal to get one. Register
     // normally with this exact email and that account becomes an admin — but
@@ -183,11 +201,27 @@
     "ORIGIN": "https://zipr.stanbrook.me",
 
     // --- PASSWORD CONFIG ---
-    "PASSWORD_MIN_LENGTH": "8",
-    "PASSWORD_REQUIRE_UPPERCASE": "true",
-    "PASSWORD_REQUIRE_LOWERCASE": "true",
-    "PASSWORD_REQUIRE_NUMBERS": "true",
-    "PASSWORD_REQUIRE_SPECIAL": "true",
+    // These are enforced on registration, password change and reset. They used
+    // to be read into config and checked nowhere, so the values here made no
+    // difference to anything.
+    //
+    // Length over composition, per NIST SP 800-63B. Requiring an uppercase, a
+    // digit and a symbol adds little entropy and reliably produces
+    // "Password1!", while pushing people towards reuse and sticky notes; a
+    // longer minimum is worth more than all four rules together. Set any of
+    // them to "true" if a compliance checklist demands it.
+    "PASSWORD_MIN_LENGTH": "12",
+    "PASSWORD_REQUIRE_UPPERCASE": "false",
+    "PASSWORD_REQUIRE_LOWERCASE": "false",
+    "PASSWORD_REQUIRE_NUMBERS": "false",
+    "PASSWORD_REQUIRE_SPECIAL": "false",
+
+    // PBKDF2 rounds for new password hashes. 100000 is the MAXIMUM: Workers'
+    // WebCrypto refuses anything higher, and every sign-in then fails with
+    // "iteration counts above 100000 are not supported". Higher values are
+    // clamped to it. Each hash records its own cost, so lowering this never
+    // breaks existing passwords. See worker/lib/crypto.ts.
+    "PASSWORD_HASH_ITERATIONS": "100000",
 
     // --- PIN CONFIG ---
     "PIN_LENGTH": "6",

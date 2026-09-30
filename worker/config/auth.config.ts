@@ -5,6 +5,8 @@
  * All auth behavior is driven by Cloudflare Workers environment bindings
  */
 
+import { DEFAULT_PBKDF2_ITERATIONS, MAX_PBKDF2_ITERATIONS } from "../lib/crypto";
+
 export type AuthMethod = "passkey" | "password" | "pin" | "totp" | "email" | "sms";
 
 export interface AuthConfig {
@@ -20,8 +22,16 @@ export interface AuthConfig {
     requireEmailVerification: boolean;
     requirePhoneVerification: boolean;
     allowedEmails: string[];
+    /**
+     * SINGLE_ACCOUNT: the site belongs to one person. Sign-up accepts only
+     * BOOTSTRAP_ADMIN_EMAIL, and only while no account exists at all — after
+     * that there is no way to register. See `Auth.isRegistrationOpen`.
+     */
+    singleAccount?: boolean;
     jwtSecret: string;
     jwtExpiry: number;
+    /** PBKDF2 rounds for new password hashes — see DEFAULT_PBKDF2_ITERATIONS. */
+    hashIterations: number;
   };
   password?: {
     minLength: number;
@@ -124,8 +134,13 @@ export function parseAuthConfig(env: any): AuthConfig {
       requireEmailVerification,
       requirePhoneVerification,
       allowedEmails,
-      jwtSecret: env.JWT_SECRET || "default",
+      singleAccount: env.SINGLE_ACCOUNT === "true",
+      // No fallback on purpose. A default here signs real sessions with a
+      // value published in this template's source; `requireSecrets` stops the
+      // app before an empty one can be used.
+      jwtSecret: env.JWT_SECRET ?? "",
       jwtExpiry: parseInt(env.JWT_EXPIRY) || 7 * 24 * 60 * 60,
+      hashIterations: parseHashIterations(env.PASSWORD_HASH_ITERATIONS),
     },
     roles: {
       available: rolesAvailable,
@@ -138,14 +153,24 @@ export function parseAuthConfig(env: any): AuthConfig {
     },
   };
 
-  // Password configuration (only if enabled)
+  // Password configuration (only if enabled).
+  //
+  // The defaults follow NIST SP 800-63B: length is the requirement that
+  // matters, and composition rules are off unless asked for. Demanding an
+  // uppercase, a digit and a symbol does not buy much entropy — it reliably
+  // produces "Password1!" — while pushing people towards reuse and sticky
+  // notes. A longer minimum is worth more than all four classes together.
+  //
+  // These defaults used to be `!== "false"`, so every rule was on and none of
+  // them was enforced anywhere. Opt in by setting the variable to "true" if a
+  // compliance checklist demands it.
   if (methods.has("password")) {
     config.password = {
-      minLength: parseInt(env.PASSWORD_MIN_LENGTH || "8"),
-      requireUppercase: env.PASSWORD_REQUIRE_UPPERCASE !== "false",
-      requireLowercase: env.PASSWORD_REQUIRE_LOWERCASE !== "false",
-      requireNumbers: env.PASSWORD_REQUIRE_NUMBERS !== "false",
-      requireSpecialChars: env.PASSWORD_REQUIRE_SPECIAL !== "false",
+      minLength: parseInt(env.PASSWORD_MIN_LENGTH || "12"),
+      requireUppercase: env.PASSWORD_REQUIRE_UPPERCASE === "true",
+      requireLowercase: env.PASSWORD_REQUIRE_LOWERCASE === "true",
+      requireNumbers: env.PASSWORD_REQUIRE_NUMBERS === "true",
+      requireSpecialChars: env.PASSWORD_REQUIRE_SPECIAL === "true",
     };
   }
 
@@ -200,6 +225,31 @@ export function validateAuthConfig(env: any): { valid: boolean; errors: string[]
   const errors: string[] = [];
   const config = parseAuthConfig(env);
 
+  if (!env.JWT_SECRET) {
+    errors.push("JWT_SECRET must be set as a Secret on the Worker (see docs/deploy.md).");
+  }
+
+  // SESSION_DURATION is milliseconds, and the neighbouring JWT_EXPIRY is
+  // seconds — so "86400" in the wrong box is a plausible-looking number that
+  // expires every session 86 seconds after it opens. Nothing else can catch
+  // that: it is a valid integer, and the app simply signs everybody out over
+  // and over. A minute is far below any sane session and safely above any
+  // millisecond value a person would choose on purpose.
+  if (config.session.duration > 0 && config.session.duration < 60_000) {
+    errors.push(
+      `SESSION_DURATION is ${config.session.duration}ms (~${Math.round(
+        config.session.duration / 1000,
+      )}s), which signs users out almost immediately. It is in milliseconds — 86400000 is a day.`,
+    );
+  }
+
+  if (config.session.renewalThreshold > config.session.duration) {
+    errors.push(
+      "SESSION_RENEWAL_THRESHOLD is longer than SESSION_DURATION, so every session renews on " +
+        "first use and never expires.",
+    );
+  }
+
   // Method Validation
   if (config.methods.size === 0) {
     errors.push("At least one AUTH_METHOD must be specified");
@@ -234,4 +284,22 @@ export function validateAuthConfig(env: any): { valid: boolean; errors: string[]
     valid: errors.length === 0,
     errors,
   };
+}
+
+/**
+ * PASSWORD_HASH_ITERATIONS, held to what the Workers runtime can run. A value
+ * over the limit is clamped with a warning rather than passed through: passed
+ * through, every sign-up and sign-in fails with a PBKDF2 error.
+ */
+export function parseHashIterations(value: string | undefined): number {
+  const parsed = parseInt(value ?? "");
+  if (!Number.isFinite(parsed) || parsed <= 0) return DEFAULT_PBKDF2_ITERATIONS;
+  if (parsed > MAX_PBKDF2_ITERATIONS) {
+    console.warn(
+      `PASSWORD_HASH_ITERATIONS=${parsed} is above the Workers limit of ` +
+        `${MAX_PBKDF2_ITERATIONS}; using ${MAX_PBKDF2_ITERATIONS}.`,
+    );
+    return MAX_PBKDF2_ITERATIONS;
+  }
+  return parsed;
 }
