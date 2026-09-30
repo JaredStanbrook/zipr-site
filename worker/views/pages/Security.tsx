@@ -72,7 +72,7 @@ const REVIEW_FAQ = [
   },
   {
     q: "What happens to our data if we stop paying?",
-    a: "Reading keeps working while changes are refused, and you can export everything at any point without settling anything first. Hosted, the data is kept for a stated window after suspension before anything is removed. Self-hosted, it is on your own disk and we can't touch it; the licence warns you for a month before it expires.",
+    a: "Reading keeps working while changes are refused, and you can export everything at any point without settling anything first. Hosted, the data is kept for the period set out in your agreement after suspension before anything is removed. Self-hosted, it is on your own disk and we can't touch it; the licence warns you for a month before it expires.",
   },
   {
     q: "Who can see what?",

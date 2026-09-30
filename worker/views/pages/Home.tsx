@@ -250,7 +250,14 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
                 <li class="relative">
                   <Card lift class="flex h-full flex-col p-7">
                     <div class="flex items-center justify-between">
-                      <span class="emboss font-display text-6xl font-bold leading-none text-muted tabular">
+                      {/* Readable colour rather than the embossed style: sighted
+                          visitors read the order from these, so they need text
+                          contrast. Hidden from assistive tech, which gets the
+                          order from the <ol>. */}
+                      <span
+                        class="font-display text-6xl font-bold leading-none text-muted-foreground tabular"
+                        aria-hidden="true"
+                      >
                         {step.step}
                       </span>
                       <Badge tone={step.cost === "Free" ? "success" : "primary"}>{step.cost}</Badge>

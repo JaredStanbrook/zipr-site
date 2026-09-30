@@ -29,6 +29,7 @@ const PAGES = [
   { id: "DL", path: "/downloads", name: "Downloads", source: "worker/views/pages/Downloads.tsx" },
   { id: "SEC", path: "/security", name: "Security", source: "worker/views/pages/Security.tsx" },
   { id: "CONT", path: "/contact", name: "Contact", source: "worker/views/pages/Contact.tsx" },
+  { id: "PRIV", path: "/privacy", name: "Privacy", source: "worker/views/pages/Privacy.tsx" },
   { id: "REP", path: "/report", name: "Report a bug", source: "worker/views/pages/Report.tsx" },
 ];
 

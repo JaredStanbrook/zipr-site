@@ -215,6 +215,7 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
               (item) => html`
                 <a
                   href="${item.to}"
+                  aria-current="${isActive(item.to) ? "page" : "false"}"
                   class="rounded-full px-3.5 py-1.5 text-sm font-medium no-underline transition ${
                     isActive(item.to)
                       ? "bg-muted text-foreground shadow-inset"
@@ -255,6 +256,8 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
             id="mobile-menu-toggle"
             class="clay-press inline-flex h-10 w-10 items-center justify-center rounded-full bg-muted text-foreground shadow-raised lg:hidden"
             aria-label="Open menu"
+            aria-controls="mobile-menu"
+            aria-expanded="false"
           >
             <i data-lucide="menu" class="h-5 w-5"></i>
           </button>
@@ -264,6 +267,9 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
 
     <div
       id="mobile-menu"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Menu"
       class="hidden fixed inset-0 z-[100] bg-background text-foreground lg:hidden flex flex-col animate-in fade-in slide-in-from-top-4 duration-200"
     >
       <div class="px-2 pt-2">
@@ -290,6 +296,7 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
             (item) => html`
               <a
                 href="${item.to}"
+                aria-current="${isActive(item.to) ? "page" : "false"}"
                 class="flex items-center rounded-[var(--radius-lg)] px-5 py-3.5 font-display text-2xl font-semibold no-underline transition ${
                   isActive(item.to)
                     ? "bg-muted text-foreground shadow-inset"
@@ -368,15 +375,25 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
         function openMenu() {
           menu.classList.remove("hidden");
           document.body.style.overflow = "hidden"; // Prevent background scroll
+          if (toggleBtn) toggleBtn.setAttribute("aria-expanded", "true");
+          if (closeBtn) closeBtn.focus();
         }
 
         function closeMenu() {
           menu.classList.add("hidden");
           document.body.style.overflow = "";
+          if (toggleBtn) {
+            toggleBtn.setAttribute("aria-expanded", "false");
+            toggleBtn.focus();
+          }
         }
 
         if (toggleBtn) toggleBtn.addEventListener("click", openMenu);
         if (closeBtn) closeBtn.addEventListener("click", closeMenu);
+        // A dialog a keyboard user can open must be one they can close.
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && menu && !menu.classList.contains("hidden")) closeMenu();
+        });
       })();
     </script>
   `;

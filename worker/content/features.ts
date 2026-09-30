@@ -42,7 +42,7 @@ export const PILLARS: Feature[] = [
   {
     icon: "zap",
     title: "One click instead of a walkthrough",
-    body: "The steps you worked out become one named item. A colleague clicks it and it works the first time — no document to follow, no script to be talked through.",
+    body: "The steps you worked out become one named item. A colleague clicks it and it runs — no document to follow, no script to be talked through.",
     tier: "client",
   },
   {

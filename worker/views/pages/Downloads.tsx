@@ -3,6 +3,7 @@ import type { FC } from "hono/jsx";
 import type { AppConfig } from "@server/config/app.config";
 import type { ReleaseWithAssets, Platform } from "@server/schema/release.schema";
 import { PLATFORM_INFO, INSTALL_NOTES } from "@server/content/site";
+import { LEGAL } from "@server/content/legal";
 import { formatBytes, formatDateShort } from "@views/lib/utils";
 import {
   Page,
@@ -158,6 +159,21 @@ export const DownloadsPage: FC<DownloadsProps> = ({ latest, previous, detected, 
                 />
               ))}
             </div>
+
+            {/* Shown only once a licence exists — see LEGAL.licenceUrl. An
+                acceptance line pointing at nothing would be worse than none. */}
+            {LEGAL.licenceUrl ? (
+              <p class="mt-6 text-center text-sm text-muted-foreground text-pretty">
+                Zipr is licensed to you under the{" "}
+                <a
+                  href={LEGAL.licenceUrl}
+                  class="font-medium text-primary underline underline-offset-4"
+                >
+                  Zipr licence
+                </a>
+                . By downloading or installing it, you agree to its terms.
+              </p>
+            ) : null}
           </>
         ) : (
           <NoReleases />

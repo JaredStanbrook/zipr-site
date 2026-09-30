@@ -13,6 +13,7 @@ import { HomePage } from "@views/pages/Home";
 import { FeaturesPage } from "@views/pages/Features";
 import { PricingPage } from "@views/pages/Pricing";
 import { SecurityPage } from "@views/pages/Security";
+import { PrivacyPage } from "@views/pages/Privacy";
 import { DownloadsPage } from "@views/pages/Downloads";
 import { ContactPage } from "@views/pages/Contact";
 import { ReportPage, ReportForm, ReportSuccess } from "@views/pages/Report";
@@ -64,6 +65,14 @@ siteRoute.get("/security", (c) =>
     title: "Security",
     description:
       "Where your data lives, what leaves your network, why Zipr never runs your commands on a server, and how work crosses between teams without loosening who can see what.",
+  }),
+);
+
+siteRoute.get("/privacy", (c) =>
+  c.render(<PrivacyPage app={c.var.app} />, {
+    title: "Privacy",
+    description:
+      "What the Zipr website and app collect, why, who else sees it, and how to ask for a copy or have it deleted.",
   }),
 );
 

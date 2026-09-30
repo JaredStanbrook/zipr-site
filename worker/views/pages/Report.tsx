@@ -137,6 +137,8 @@ export const ReportForm: FC<{
             type="text"
             placeholder="0.2.0"
             value={values.version ?? ""}
+            aria-invalid={errors.version ? "true" : undefined}
+            aria-describedby={errors.version ? "version-error" : undefined}
             class={`${FIELD_CLASS} font-mono tabular`}
           />
         </Field>
@@ -148,6 +150,8 @@ export const ReportForm: FC<{
             type="text"
             placeholder="Windows 11"
             value={values.platform ?? ""}
+            aria-invalid={errors.platform ? "true" : undefined}
+            aria-describedby={errors.platform ? "platform-error" : undefined}
             class={FIELD_CLASS}
           />
         </Field>
@@ -190,7 +194,11 @@ export const ReportForm: FC<{
           Send the report
         </SubmitButton>
         <p class="text-xs text-muted-foreground text-pretty">
-          Goes straight to the people who can fix it.
+          Goes straight to the people who can fix it. How we handle it:{" "}
+          <a href="/privacy" class="font-medium text-primary underline underline-offset-4">
+            privacy notice
+          </a>
+          .
         </p>
       </div>
     </form>

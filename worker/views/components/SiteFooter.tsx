@@ -1,6 +1,7 @@
 import { html } from "hono/html";
 
 import { CONTACT } from "@server/content/site";
+import { operatorName } from "@server/content/legal";
 
 /**
  * The site footer.
@@ -97,7 +98,24 @@ export const SiteFooter = ({ appName, tagline }: { appName: string; tagline: str
         <div
           class="mt-12 flex flex-col gap-3 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between"
         >
-          <p>© ${new Date().getFullYear()} ${appName}. All rights reserved.</p>
+          <p>© ${new Date().getFullYear()} ${operatorName()}. All rights reserved.</p>
+
+          <!-- On every page, because the privacy notice has to be reachable
+               from wherever information is collected, not just from one. -->
+          <ul class="flex flex-wrap gap-x-5 gap-y-2">
+            <li>
+              <a href="/privacy" class="text-muted-foreground no-underline hover:text-primary"
+                >Privacy</a
+              >
+            </li>
+            <li>
+              <a
+                href="/third-party-notices.txt"
+                class="text-muted-foreground no-underline hover:text-primary"
+                >Open-source licences</a
+              >
+            </li>
+          </ul>
         </div>
       </div>
 

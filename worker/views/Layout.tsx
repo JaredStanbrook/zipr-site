@@ -68,6 +68,13 @@ export const Layout: FC<LayoutProps> = (props) => {
         ${props.headExtra}
       </head>
       <body class="bg-background text-foreground antialiased min-h-screen font-sans flex flex-col">
+        <!-- First focusable thing on every page, so keyboard users can jump
+             past the navigation (WCAG 2.4.1). Visible only when focused. -->
+        <a
+          href="#main-content"
+          class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-full focus:bg-card focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-foreground focus:shadow-floating"
+          >Skip to content</a
+        >
         <theme-provider defaultTheme="system"></theme-provider>
 
         ${NavBar({
@@ -76,7 +83,7 @@ export const Layout: FC<LayoutProps> = (props) => {
           currentPath: props.currentPath,
         })}
 
-        <main hx-boost="true" id="main-content" class="relative flex-grow w-full">
+        <main hx-boost="true" id="main-content" tabindex="-1" class="relative flex-grow w-full">
           ${props.children}
         </main>
         <div id="modal-container"></div>
