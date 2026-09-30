@@ -112,17 +112,21 @@ Security reports
 
 **[FOOT-16]** _text_
 
-© 2026 Zipr. All rights reserved.
+© 2026 Jared Stanbrook. All rights reserved.
 
 **[FOOT-17]** _list item_
 
-Privacy
+Licence
 
 **[FOOT-18]** _list item_
 
+Privacy
+
+**[FOOT-19]** _list item_
+
 Open-source licences
 
-**[FOOT-19]** _text_
+**[FOOT-20]** _text_
 
 Zipr
 
@@ -1682,7 +1686,7 @@ Who we are
 
 **[PRIV-11]** _text_
 
-This website and the Zipr app are run by Zipr. We are responsible for the information described here. For anything on this page, email zipr@stanbrook.me.
+This website and the Zipr app are run by Jared Stanbrook. We are responsible for the information described here. For anything on this page, email zipr@stanbrook.me.
 
 **[PRIV-12]** _subheading_
 
@@ -1807,6 +1811,159 @@ When this notice changes, the version and date at the top change with it and the
 **[PRIV-42]** _list item_
 
 1.0 · 30 Sept 2026 — First published.
+
+---
+
+## Licence · `/licence`
+
+_Source: `worker/views/pages/Licence.tsx`_
+
+These two are what shows in a Google result and a shared link, not on the
+page itself:
+
+**[LIC-TITLE]** _browser tab and search result_
+
+Licence · Zipr
+
+**[LIC-DESC]** _search result snippet_
+
+The Zipr Licence: free to install and use, on any number of devices, for personal use or work.
+
+**[LIC-01]** _text_
+
+LICENCE
+
+**[LIC-02]** _heading_
+
+Zipr Licence
+
+**[LIC-03]** _text_
+
+The terms you agree to when you install the free Zipr app.
+
+**[LIC-04]** _text_
+
+Version 1.0 · 30 Sept 2026
+
+**[LIC-05]** _text_
+
+This licence is between you and Jared Stanbrook ("we", "us"), who makes Zipr. It covers the Zipr desktop app as released at https://zipr.stanbrook.me/downloads (the "App"). By installing or using the App, you agree to it.
+
+**[LIC-06]** _subheading_
+
+1. What you may do
+
+**[LIC-07]** _text_
+
+You may download, install and use the App free of charge, on as many devices as you like, for personal use or for work, including inside your organisation. This licence has no fee and no expiry. It ends only as described in section 7.
+
+**[LIC-08]** _subheading_
+
+2. What you may not do
+
+**[LIC-09]** _text_
+
+You may not:
+
+**[LIC-10]** _list item_
+
+sell, rent, sublicense or redistribute the App, or offer it for download anywhere other than from us — point people to our downloads page instead;
+
+**[LIC-11]** _list item_
+
+modify, reverse engineer, decompile or disassemble the App, except to the extent the law allows you to despite this restriction;
+
+**[LIC-12]** _list item_
+
+remove or change any copyright, licence or trademark notice in the App;
+
+**[LIC-13]** _list item_
+
+get around any technical limit or licence check in the App or in a Zipr server.
+
+**[LIC-14]** _subheading_
+
+3. What is yours
+
+**[LIC-15]** _text_
+
+The items, catalogues and settings you create in the App, and any plugins you write, belong to you. This licence gives us no rights in them. What you build is stored on your own machine unless you connect the App to a Zipr server.
+
+**[LIC-16]** _subheading_
+
+4. Team servers are separate
+
+**[LIC-17]** _text_
+
+The App can connect to a Zipr server. This licence covers the App only:
+
+**[LIC-18]** _list item_
+
+the hosted service we run is governed by the agreement your organisation signs with us for it;
+
+**[LIC-19]** _list item_
+
+a self-hosted Zipr server is governed by the licence agreement issued for that deployment.
+
+**[LIC-20]** _text_
+
+Whoever runs the server you connect to decides who can use it and what is shared through it.
+
+**[LIC-21]** _subheading_
+
+5. Other people's software
+
+**[LIC-22]** _text_
+
+The App includes open-source components. Each is licensed to you under its own licence, and nothing in this licence limits your rights under those licences.
+
+**[LIC-23]** _subheading_
+
+6. No warranty, and limits on liability
+
+**[LIC-24]** _text_
+
+The App is provided "as is". Items you build can run commands, open files and change things on your computer; you are responsible for what you ask them to do. To the extent the law allows, we give no warranties about the App, express or implied, including that it is fit for a particular purpose or free of errors, and we are not liable for any loss or damage arising from using it, including lost data, lost profits or indirect loss.
+
+**[LIC-25]** _text_
+
+Nothing in this licence excludes, restricts or modifies any right or remedy you have under the Australian Consumer Law or any other law that cannot lawfully be excluded. Where our liability for a failure to comply with such a guarantee can be limited, it is limited to supplying the App again.
+
+**[LIC-26]** _subheading_
+
+7. Ending this licence
+
+**[LIC-27]** _text_
+
+You can stop using the App at any time by uninstalling it. If you break this licence, it ends automatically and you must stop using the App. Sections 3, 6 and 7 continue after it ends.
+
+**[LIC-28]** _subheading_
+
+8. Changes
+
+**[LIC-29]** _text_
+
+We may publish a new version of this licence with a future release of the App. The version that came with the release you installed applies to that release.
+
+**[LIC-30]** _subheading_
+
+9. Ownership
+
+**[LIC-31]** _text_
+
+Apart from the rights granted in section 1, we keep all rights in the App, including all intellectual property rights. The Zipr name and logo are ours; this licence does not let you use them.
+
+**[LIC-32]** _subheading_
+
+10. This repository
+
+**[LIC-33]** _text_
+
+The source code in the App's repository is confidential and is not licensed to anyone under this licence. It may be used only with our prior written permission.
+
+**[LIC-34]** _text_
+
+Questions about this licence: zipr@stanbrook.me. Using a Zipr server for a team is covered separately — see pricing.
 
 ---
 

@@ -91,6 +91,7 @@ describe("UI pages load", () => {
       "/downloads",
       "/security",
       "/privacy",
+      "/licence",
       "/report",
       "/contact",
       "/contact?topic=licence",
@@ -146,6 +147,8 @@ describe("UI pages load", () => {
     expect(downloads).toContain("0.1.0");
     // Published assets link at the streaming route, never at the bucket.
     expect(downloads).toContain("/downloads/1");
+    // Nobody downloads the app without the licence one click away.
+    expect(downloads).toContain('href="/licence"');
   });
 
   it("closes registration once an admin exists, and keeps it open before", async () => {

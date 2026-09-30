@@ -14,6 +14,7 @@ import { FeaturesPage } from "@views/pages/Features";
 import { PricingPage } from "@views/pages/Pricing";
 import { SecurityPage } from "@views/pages/Security";
 import { PrivacyPage } from "@views/pages/Privacy";
+import { LicencePage } from "@views/pages/Licence";
 import { DownloadsPage } from "@views/pages/Downloads";
 import { ContactPage } from "@views/pages/Contact";
 import { ReportPage, ReportForm, ReportSuccess } from "@views/pages/Report";
@@ -65,6 +66,14 @@ siteRoute.get("/security", (c) =>
     title: "Security",
     description:
       "Where your data lives, what leaves your network, why Zipr never runs your commands on a server, and how work crosses between teams without loosening who can see what.",
+  }),
+);
+
+siteRoute.get("/licence", (c) =>
+  c.render(<LicencePage app={c.var.app} />, {
+    title: "Licence",
+    description:
+      "The Zipr Licence: free to install and use, on any number of devices, for personal use or work.",
   }),
 );
 
