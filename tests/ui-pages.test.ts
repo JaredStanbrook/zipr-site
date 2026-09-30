@@ -20,6 +20,7 @@ const createAppConfig = (): AppConfig => ({
   tagline: "Testing",
   locale: "en-AU",
   currency: "AUD",
+  timezone: "UTC",
   origin: "http://localhost:3000",
 });
 
@@ -57,7 +58,12 @@ const createAuthConfig = (methods: string[] = ["password"]): AuthConfig => ({
  * when only one method is enabled, so a single-method config never renders
  * roughly half of those screens.
  */
-const createTestApp = (user: any | null, methods?: string[], data = createMockData()) => {
+const createTestApp = (
+  user: any | null,
+  methods?: string[],
+  data = createMockData(),
+  registrationOpen = true,
+) => {
   const fakeDb = createFakeDb(data);
 
   const wrapper = new Hono<AppEnv>();
@@ -65,7 +71,12 @@ const createTestApp = (user: any | null, methods?: string[], data = createMockDa
     c.set("db", fakeDb as any);
     c.set("app", createAppConfig());
     c.set("authConfig", createAuthConfig(methods));
-    c.set("auth", { user, session: user ? { id: user.id } : null, destroySession() {} } as any);
+    c.set("auth", {
+      user,
+      session: user ? { id: user.id } : null,
+      destroySession() {},
+      isRegistrationOpen: async () => registrationOpen,
+    } as any);
     c.set("isMethodEnabled", () => true);
     await next();
   });
@@ -106,6 +117,30 @@ describe("UI pages load", () => {
       const res = await get(testApp, path);
       expect(res.status, `GET ${path}`).toBe(200);
     }
+  });
+
+  it("closes /register and hides its link once sign-up is closed", async () => {
+    // No admin yet, so this reaches the single-account check rather than this
+    // site's own "an admin exists, so 404" rule.
+    const closed = createTestApp(null, undefined, createMockData({ userRoles: [] }), false);
+
+    const res = await get(closed, "/register");
+    expect(res.status).toBe(302);
+    expect(res.headers.get("location")).toBe("/login");
+
+    // The sign-in card stops offering it. (The nav's "Get Started" link does
+    // not know; it lands on /register, which redirects here.)
+    const login = await (await get(closed, "/login")).text();
+    expect(login).not.toContain("have an account?");
+
+    // Open by default: the prompt is there on an ordinary site.
+    const open = await (await get(createTestApp(null), "/login")).text();
+    expect(open).toContain("have an account?");
+  });
+
+  it("does not offer a restricted role on the sign-up form", async () => {
+    const html = await (await get(createTestApp(null), "/register")).text();
+    expect(html).not.toMatch(/<option[^>]*value="admin"/);
   });
 
   it("redirects signed-out visitors away from protected pages", async () => {
