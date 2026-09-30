@@ -41,9 +41,15 @@ runs underneath. Changes to the site itself go above them.
   returned, error messages tied to every report field, and readable-contrast
   step numbers on the home page. Axe reports no WCAG 2.1 AA violations on any
   public page, in either theme.
-- Two claims qualified: an item "works the first time" is now "runs", and
-  hosted data retention points at the agreement rather than an unstated
-  window.
+- Product claims checked against the client and API source. Four
+  corrected: an unsupported sizing claim ("a team of twenty fits a small
+  VM") replaced with the documented deployment shape; "never handles a
+  password" narrowed to the Zipr password, because the app does collect
+  credentials for connected systems; "works the first time" is now "runs";
+  and hosted retention points at the agreement rather than an unstated
+  window. The privacy notice lists what the hosted service records about
+  people, including per-person usage records and their 180-day default.
+- CI fails if `public/third-party-notices.txt` is stale.
 - `README.md` carries the commercial model as a four-point checklist. Every one
   of those four was stated wrongly on this site once, so new copy gets checked
   against them.

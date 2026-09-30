@@ -1166,11 +1166,11 @@ One server and one command. If you'd rather not, the hosted option is us doing i
 
 **[PRICE-55]** _subheading_
 
-One modest server
+One server, not a cluster
 
 **[PRICE-56]** _text_
 
-A team of twenty fits comfortably on a small virtual machine. It is not a cluster, and it does not want to be.
+The server, its database and sign-in run together as one Docker Compose stack on a single machine.
 
 **[PRICE-57]** _subheading_
 
@@ -1178,7 +1178,7 @@ Up in an afternoon
 
 **[PRICE-58]** _text_
 
-One command brings the whole thing up. Most of the time is your own change control, not the install.
+Bring a domain, a TLS proxy and an email account for sign-in codes; then one command brings the whole thing up.
 
 **[PRICE-59]** _subheading_
 
@@ -1468,7 +1468,7 @@ How do we sign in?
 
 **[SEC-25]** _text_
 
-In your browser — the app opens the sign-in page and never handles a password itself. Google, Microsoft Entra and Okta are supported, so people join and leave wherever you already manage that.
+In your browser — the app opens the sign-in page and never handles your Zipr password itself. Google, Microsoft Entra and Okta are supported, so people join and leave wherever you already manage that.
 
 **[SEC-26]** _question_
 
@@ -1726,65 +1726,85 @@ On a self-hosted server, your organisation's data stays on infrastructure your o
 
 **[PRIV-22]** _text_
 
-On our hosted service, we store your organisation's catalogues and member accounts on its behalf, under the agreement we sign with your organisation. Your organisation decides what is stored and who can see it, so questions about that data are best sent to your administrator first — we will help them answer.
+On our hosted service, we store your organisation's data on its behalf, under the agreement we sign with your organisation. That includes:
 
-**[PRIV-23]** _subheading_
+**[PRIV-23]** _list item_
+
+each member's account: email address, name and sign-in details;
+
+**[PRIV-24]** _list item_
+
+the catalogues, items and plugins your organisation builds;
+
+**[PRIV-25]** _list item_
+
+an audit trail of who changed what, and when;
+
+**[PRIV-26]** _list item_
+
+usage records of who ran which item, when, and from which device and app version — the basis of the team usage figures. These are kept for 180 days by default.
+
+**[PRIV-27]** _text_
+
+Your organisation decides who is a member and who can see what, so questions about that data are best sent to your administrator first — we will help them answer. Billing is handled through our payment provider, Stripe, which holds your organisation's billing details.
+
+**[PRIV-28]** _subheading_
 
 Who else sees it
 
-**[PRIV-24]** _text_
+**[PRIV-29]** _text_
 
-Cloudflare hosts this website, its database and the installer files, and processes information on our behalf to do so. Cloudflare operates worldwide, so your information may be processed outside your country. We don't share your information with anyone else unless the law requires it.
+Cloudflare hosts this website, its database and the installer files, and processes information on our behalf to do so. Cloudflare operates worldwide, so your information may be processed outside your country. The providers that run the hosted service, including Stripe for billing, are listed in your organisation's agreement. Beyond those, we don't share your information with anyone unless the law requires it.
 
-**[PRIV-25]** _subheading_
+**[PRIV-30]** _subheading_
 
 How long we keep it
 
-**[PRIV-26]** _text_
+**[PRIV-31]** _text_
 
 We keep bug reports for as long as they help us fix the product, and emails as ordinary correspondence. Ask us and we will delete yours sooner.
 
-**[PRIV-27]** _subheading_
+**[PRIV-32]** _subheading_
 
 Why we're allowed to use it
 
-**[PRIV-28]** _text_
+**[PRIV-33]** _text_
 
 Where data-protection law such as the GDPR applies, we rely on our legitimate interest in running this site and fixing the product, and on your request when you ask us to reply to you.
 
-**[PRIV-29]** _subheading_
+**[PRIV-34]** _subheading_
 
 Your rights
 
-**[PRIV-30]** _text_
+**[PRIV-35]** _text_
 
 You can ask us for a copy of the information we hold about you, and ask us to correct or delete it or to stop using it. Depending on where you live — for example the EU, UK, Australia or California — you may have further rights, including the right to complain to your data-protection regulator. Email zipr@stanbrook.me and we will answer within a month. We will never treat you differently for asking.
 
-**[PRIV-31]** _subheading_
+**[PRIV-36]** _subheading_
 
 Children
 
-**[PRIV-32]** _text_
+**[PRIV-37]** _text_
 
 Zipr is a tool for work and is not aimed at children. We don't knowingly collect information from anyone under 16; if you think a child has sent us some, tell us and we will delete it.
 
-**[PRIV-33]** _subheading_
+**[PRIV-38]** _subheading_
 
 Keeping it safe
 
-**[PRIV-34]** _text_
+**[PRIV-39]** _text_
 
 Everything is sent over encrypted connections, and only the people who run Zipr can see bug reports. If a breach puts your information at risk, we will tell you and the relevant regulator as the law requires.
 
-**[PRIV-35]** _subheading_
+**[PRIV-40]** _subheading_
 
 Changes to this notice
 
-**[PRIV-36]** _text_
+**[PRIV-41]** _text_
 
 When this notice changes, the version and date at the top change with it and the change is listed below. Ask us for any earlier version.
 
-**[PRIV-37]** _list item_
+**[PRIV-42]** _list item_
 
 1.0 · 30 Sept 2026 — First published.
 

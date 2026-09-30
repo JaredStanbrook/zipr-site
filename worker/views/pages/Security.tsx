@@ -68,7 +68,7 @@ const REVIEW_FAQ = [
   },
   {
     q: "How do we sign in?",
-    a: "In your browser — the app opens the sign-in page and never handles a password itself. Google, Microsoft Entra and Okta are supported, so people join and leave wherever you already manage that.",
+    a: "In your browser — the app opens the sign-in page and never handles your Zipr password itself. Google, Microsoft Entra and Okta are supported, so people join and leave wherever you already manage that.",
   },
   {
     q: "What happens to our data if we stop paying?",

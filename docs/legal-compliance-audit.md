@@ -1,19 +1,18 @@
 # Zipr: customer-facing legal and compliance audit
 
 **Date:** 30 September 2026
-**Scope:** the public site (`/`, `/features`, `/pricing`, `/downloads`, `/security`,
-`/contact`, `/report`), its footer, forms, cookies and browser storage, and the
-download flow.
 
-The desktop app and the API server live in private repositories and were not
-available to this audit. Claims the site makes about them are marked **Unknown**
-wherever the code could not be checked.
+**Scope:** the public site (`/`, `/features`, `/pricing`, `/downloads`, `/security`,
+`/privacy`, `/contact`, `/report`), its footer, forms, cookies and browser storage,
+and the download flow. Every claim the site makes about the product was checked
+against the source of the desktop app (`zipr-client` at `f081dba`) and the server
+(`zipr-api` at `69c6ade`).
 
 This is an engineering audit, not legal advice. The items marked **OUTSIDE CODE**
 need a lawyer or a business decision.
 
-**What the site actually collects** (traced from the code, and the basis for the
-privacy notice):
+**What the site collects** (traced from the code, and the basis for the privacy
+notice):
 
 | Data                                                                     | Where                                 | Notes                                                                   |
 | ------------------------------------------------------------------------ | ------------------------------------- | ----------------------------------------------------------------------- |
@@ -25,120 +24,158 @@ privacy notice):
 | `auth_token` and `flash-toast` cookies                                   | Staff sign-in only                    | `ALLOWED_EMAILS` limits registration to staff. Visitors get no cookies. |
 | Emails sent to the contact address                                       | Mail provider                         | `mailto:` links, not a form.                                            |
 
-No analytics, advertising, third-party scripts or third-party fonts: fonts are
-self-hosted under OFL 1.1, and icons are bundled. The site has no AI features.
+**What the hosted service stores about people** (from `zipr-api`, and now in
+the privacy notice):
+
+| Data                                                                                   | Source                                                                                |
+| -------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| Email address and name                                                                 | `deploy/self-hosted/kratos/identity.schema.json` traits                               |
+| Who changed what, and when                                                             | `audit_events`: no update or delete query exists, and the API exposes GET routes only |
+| Who ran which item, when, on which device, with which app version, errors and duration | `analytics_events`, kept 180 days by default (`ANALYTICS_RETENTION_DAYS`)             |
+| Billing                                                                                | Stripe (`/webhooks/stripe`)                                                           |
+| A suspended organisation's data                                                        | Kept 30 days by default (`ZIPR_CLOUD_SUSPENSION_RETENTION_S`)                         |
+
+The site has no analytics, advertising, third-party scripts or third-party
+fonts: fonts are self-hosted under OFL 1.1 and icons are bundled. Neither the
+site nor the product has AI features.
 
 ---
 
 ## 1. Executive summary: top 5 risks
 
-1. **There was no privacy notice anywhere, although the site collects personal
-   data.** Bug reports can include an email address, and Cloudflare logs IP
-   addresses. That breaches GDPR Articles 13–14, Australian Privacy Principle 1
-   and CalOPPA as soon as the site is public. **Fixed in code:** `/privacy` is now
-   linked from every page and from both collection points.
-2. **No licence or EULA governs the free app, and no terms govern the paid
-   service.** Anyone can download the installer without seeing a licence grant, a
-   warranty disclaimer or a liability limit. A tool whose job is to run shell
-   commands is exactly where those clauses matter. **OUTSIDE CODE:** the terms
-   need drafting. The code hook is ready: set `LEGAL.licenceUrl`.
-3. **The site doesn't identify a legal entity.** The footer said "© Zipr", and
-   the only contact is a personal-domain address. If Zipr isn't a registered
-   entity, "Zipr" is holding itself out as one. **Partly in code:** the operator
-   name is now one constant (`LEGAL.operator`) used in the footer and the privacy
-   notice. **OUTSIDE CODE:** set it to the real legal name and registration
-   number.
-4. **Technical and performance claims about code this audit couldn't see.**
-   Examples: "No network request until you point it at a team server", "Nothing
-   leaves your network, including the licence check", "Nothing runs on a server",
-   "someone who should not see a catalogue cannot tell whether it exists", "A
-   team of twenty fits comfortably on a small virtual machine", "Up in an
-   afternoon". These are specific factual claims made to security reviewers. If
-   any is wrong, it is misleading conduct (Australian Consumer Law s18, FTC Act
-   s5). **OUTSIDE CODE:** verify each one against the app and API repositories
-   before launch.
-5. **Unsigned, unnotarised installers.** The site discloses this honestly. On
-   current macOS, though, an unnotarised app can't be opened without a trip into
-   System Settings, and many enterprise endpoints block it outright. That is
-   more of a trust and distribution risk than a legal one, and it is the main
-   blocker to adoption. **OUTSIDE CODE:** get an Apple Developer ID and a
-   Windows code-signing certificate.
+1. **The app's own licence forbids using it.** `zipr-client/LICENSE.md` reads
+   "No permission is granted to use, copy, … the Software … without the prior
+   written permission of the copyright holder", and says the software is
+   "provided only for authorised use by approved users". Meanwhile the site
+   offers the same app as "free forever" to anyone. At best, a downloader has no
+   written licence at all. At worst, the one document that exists says they
+   aren't allowed to run it. No EULA is shown at download or install either.
+   **OUTSIDE CODE:** a lawyer should draft an end-user licence for the free app.
+   Ship it in the installer and set `LEGAL.licenceUrl` so the downloads page
+   links it.
+2. **The legal owner is an individual, and the site says it's "Zipr".** Both
+   repositories state "Copyright (c) 2026 Jared Stanbrook". The site's footer
+   said "© Zipr", which names someone who, on the evidence of the code, doesn't
+   exist as a legal person. **Partly in code:** one constant, `LEGAL.operator`,
+   now drives the footer and the privacy notice. **OUTSIDE CODE:** either form
+   the company and assign the IP to it (a signed IP assignment from Jared
+   Stanbrook), then set `LEGAL.operator` and `LEGAL.registration`; or set
+   `LEGAL.operator` to "Jared Stanbrook" until then. I left this for you to
+   decide, because it puts a person's name on every page.
+3. **The self-hosted licence contradicts the pricing page.** `zipr-api/LICENSE`
+   limits a self-hosted deployment to "the number of licensed users". The
+   pricing page says self-hosting "counts nobody" and has "No user limit". The
+   code enforces no seat limit on self-hosted (seats exist only on the managed
+   cloud), so the site is right and the licence text is the outlier.
+   **OUTSIDE CODE:** make the licence and the written agreement match the offer,
+   or change the offer.
+4. **There was no privacy notice, and the product records per-person usage.**
+   The site collects personal data, and the hosted service records who ran what,
+   when, and on which device. **Fixed in code:** `/privacy` covers both, and is
+   linked from every page and every collection point. **OUTSIDE CODE:** the
+   hosted agreement should require customers to tell their staff that usage is
+   recorded, because some jurisdictions regulate workplace monitoring.
+5. **The installers are unsigned, and ship no licence or third-party notices.**
+   `package.yml` builds unsigned artefacts on purpose, and the site says so
+   honestly. The Tauri bundle config sets no licence file, and the app bundles
+   open-source Rust and npm code without a notices screen. **OUTSIDE CODE:**
+   code signing and notarisation, plus a notices file in the client build.
 
 ---
 
 ## 2. The 20 checks
 
-| #   | Check                           | Status                      | Risk         | Finding and exact fix                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            |
-| --- | ------------------------------- | --------------------------- | ------------ | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 1   | Entity ownership                | **Partial**                 | High         | The footer said "© Zipr" and the contact address is on a personal domain. _Fixed:_ the operator name now comes from `LEGAL.operator` (`worker/content/legal.ts`), with an optional `registration` for the company or ABN number. The footer and privacy notice both read from it. **OUTSIDE CODE:** set it to the registered legal name and number.                                                                                                                                                              |
-| 2   | IP ownership / licence grant    | **Missing**                 | High         | The site never claims users own Zipr's code. The export copy implies users keep their own content, which is correct. But no licence grant exists anywhere. **OUTSIDE CODE:** an EULA with a limited, revocable, non-exclusive licence, including who owns plugins users write. Then set `LEGAL.licenceUrl`.                                                                                                                                                                                                      |
-| 3   | Third-party / OSS attribution   | **Compliant** (was Missing) | Medium       | The client bundle includes MIT, ISC and BSD code (lit, lucide, htmx, qrcode, hono, tailwind), and minification strips its licence comments. _Fixed:_ `public/third-party-notices.txt` is generated by `npm run notices`, linked in the footer, and ends with a line on third-party trademarks. Fonts are covered by `/fonts/OFL.txt`. **OUTSIDE CODE:** the desktop installer needs its own notices, in the app repo.                                                                                            |
-| 4   | App store / platform signals    | **N/A / Partial**           | Medium       | Not distributed through app stores, so there are no privacy labels. The download page's platform requirements and unsigned-installer warning are accurate. **OUTSIDE CODE:** code signing and macOS notarisation (see risk 5).                                                                                                                                                                                                                                                                                   |
-| 5   | Terms / EULA / clickwrap        | **Missing**                 | High         | No terms of use, EULA or service terms, and no acceptance step. Paid plans are sold by written agreement after a conversation, which covers them if that agreement contains the terms. **OUTSIDE CODE:** (a) an EULA for the free app, accepted in the installer or on first run; (b) a hosted service agreement and DPA; (c) optionally, short website terms. _Code ready:_ setting `LEGAL.licenceUrl` shows "By downloading or installing it, you agree to its terms" beside the installers.                   |
-| 6   | Privacy policy                  | **Compliant** (was Missing) | High → Low   | _Fixed:_ `/privacy`, written from the code (see the table above). Linked from the footer on every page, from the report form and from the contact page.                                                                                                                                                                                                                                                                                                                                                          |
-| 7   | Data-protection rights          | **Compliant** (was Missing) | Medium → Low | _Fixed:_ the notice gives the lawful basis (legitimate interests, and your request when you ask for a reply), the rights to access, correct, delete and object, the right to complain to a regulator, a one-month response time, and non-discrimination. Nothing is sold or shared for advertising, so no CCPA "Do Not Sell" link is needed.                                                                                                                                                                     |
-| 8   | Children's privacy              | **Compliant**               | Low          | A B2B tool with no public accounts. _Added:_ a statement that it isn't aimed at children, with no knowing collection under 16 and deletion on request. No age gate needed.                                                                                                                                                                                                                                                                                                                                       |
-| 9   | AI disclosures                  | **N/A**                     | —            | There are no AI features on the site or in the product as described. Re-check if any are added.                                                                                                                                                                                                                                                                                                                                                                                                                  |
-| 10  | Training-data rights            | **N/A**                     | —            | No models are trained. If that ever changes, it needs opt-in consent and an update to the privacy notice.                                                                                                                                                                                                                                                                                                                                                                                                        |
-| 11  | Accessibility                   | **Compliant** (was Partial) | Medium → Low | Axe (WCAG 2.1 A/AA) now reports **0 violations** on all 8 public pages in light and dark mode. _Fixed:_ the step numerals had 1.2:1 contrast; there was no skip link, no `aria-current` on nav links, and the mobile menu wasn't announced as a dialog and couldn't be closed with Escape; two report fields had errors not tied to their inputs. **Not done:** a manual screen-reader pass, and the admin pages, which aren't customer-facing.                                                                  |
-| 12  | Subscriptions / renewal         | **Partial**                 | Medium       | Pricing shows the per-person price, the yearly and monthly options, the minimum team size, currency and "excluding tax". There is no self-serve checkout, and every paid plan goes through a quote, so auto-renewal disclosure laws for online consumer sign-ups mostly don't apply. **OUTSIDE CODE:** the service agreement must state the term, the renewal mechanism and notice, and cancellation. If you ever add self-serve checkout, it needs renewal terms and a cancellation path shown before purchase. |
-| 13  | Marketing claims                | **Partial**                 | High         | _Fixed:_ "works the first time" is now "runs", because it was an unqualified guarantee. The "stated window" for hosted data retention was stated nowhere; it now points to the agreement. **OUTSIDE CODE:** verify the claims in risk 4. "Free forever" and "The app is free. Always will be." are promises about the future: keep them only if you're committed, because the Australian Consumer Law requires reasonable grounds for them.                                                                      |
-| 14  | Trademark / branding            | **Unknown**                 | Medium       | The name is used consistently, and the logo is original. Third-party marks (Google, Microsoft Entra, Okta, Windows, macOS) are used nominatively, and are now acknowledged in the notices file. **OUTSIDE CODE:** run a trademark clearance search for "Zipr" in your markets and software classes (for example IP Australia, USPTO and EUIPO, class 9 and 42), and consider registering it.                                                                                                                     |
-| 15  | User-generated content          | **N/A / Partial**           | Low          | Nothing users submit is published: bug reports are private. Hosted customers store their own catalogues and plugins, visible only inside their organisation. Reporting routes exist (`/report` and the security email). **OUTSIDE CODE:** put an acceptable-use clause in the hosted agreement. No DMCA process is needed while nothing is hosted publicly.                                                                                                                                                      |
-| 16  | Security / breach signals       | **Compliant** (was Missing) | Low          | There are no "military-grade" or similar claims. _Added:_ the privacy notice covers encryption in transit, staff-only access and breach notification "as the law requires". The security page's disclosure process and SHA-256 checksums already existed.                                                                                                                                                                                                                                                        |
-| 17  | Third-party services            | **Compliant**               | Low          | The only processor is Cloudflare (hosting, D1, R2, logs), now disclosed along with international processing. There's no analytics and no payment processor on the site. No cookie banner is needed: visitors get no cookies, and theme storage is a strictly functional preference. **Verify:** that Cloudflare Web Analytics or Zaraz isn't switched on in the dashboard, because either would inject a script this code doesn't show.                                                                          |
-| 18  | Export / sanctions              | **Unknown**                 | Low          | Anyone can download the installer, with no geo-blocking. The app presumably uses only standard encryption (TLS, passkeys), which usually counts as mass-market. **OUTSIDE CODE:** confirm the app's encryption classification. Hosted-service contracts should include a standard sanctions clause.                                                                                                                                                                                                              |
-| 19  | Industry-specific rules         | **N/A**                     | —            | A general productivity tool. No health, finance, employment or high-risk AI use.                                                                                                                                                                                                                                                                                                                                                                                                                                 |
-| 20  | Versioning / acceptance records | **Partial** (was Missing)   | Medium       | _Fixed:_ the privacy notice shows a version and last-updated date and keeps a change log (`PRIVACY_VERSIONS`), and git holds every earlier text. There are no public accounts, so there's nothing to record acceptance against on the site. **OUTSIDE CODE / app repo:** once the EULA exists, record the accepted version and a timestamp in the app. Hosted agreements are signed documents, so keep them.                                                                                                     |
+| #   | Check                           | Status                                              | Risk       | Finding and exact fix                                                                                                                                                                                                                                                                                                                                                                                                                           |
+| --- | ------------------------------- | --------------------------------------------------- | ---------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 1   | Entity ownership                | **Partial**                                         | High       | Copyright in both repos is held by "Jared Stanbrook"; the site said "© Zipr". _Fixed:_ one source (`LEGAL.operator` in `worker/content/legal.ts`) drives the footer and privacy notice. **OUTSIDE CODE:** form the entity, sign an IP assignment to it, and set `operator` and `registration`; or name the individual meanwhile (risk 2).                                                                                                       |
+| 2   | IP ownership / licence grant    | **Missing**                                         | Critical   | The site never claims users own Zipr's code, and the export copy correctly implies users keep their content. But the only licence (`zipr-client/LICENSE.md`) grants **no** right to use the app. **OUTSIDE CODE:** an EULA granting a limited, non-exclusive licence, covering who owns plugins users write. Replace `LICENSE.md` in the installer, and set `LEGAL.licenceUrl`.                                                                 |
+| 3   | Third-party / OSS attribution   | **Site: Compliant** (was Missing). **App: Missing** | Medium     | _Fixed on the site:_ `public/third-party-notices.txt`, generated by `npm run notices`, linked in the footer, with CI failing if it goes stale. Fonts are covered by `/fonts/OFL.txt`. **App repo:** the app bundles MIT, Apache and BSD crates and npm packages with no notices; `notices.rs` is a UI error channel, not licences. Add a generator such as `cargo about` and `license-checker` to the client build.                             |
+| 4   | App store / platform signals    | **N/A / Partial**                                   | Medium     | Not distributed through app stores. The platform requirements and unsigned-installer warning on the site match `package.yml`. **OUTSIDE CODE:** code signing and notarisation.                                                                                                                                                                                                                                                                  |
+| 5   | Terms / EULA / clickwrap        | **Missing**                                         | Critical   | No EULA, service terms or website terms, and no acceptance step. The Tauri bundle sets no licence to show at install. **OUTSIDE CODE:** (a) the EULA, shown in the installer or on first run; (b) a hosted service agreement and DPA; (c) optionally, short website terms. _Code ready:_ `LEGAL.licenceUrl` shows "By downloading or installing it, you agree to its terms" beside the installers.                                              |
+| 6   | Privacy policy                  | **Compliant** (was Missing)                         | High → Low | _Fixed:_ `/privacy`, written from both codebases (tables above). It includes the hosted service's per-person usage records and their 180-day default retention, and Stripe for billing. Linked from every page, the report form and the contact page.                                                                                                                                                                                           |
+| 7   | Data-protection rights          | **Compliant** (was Missing)                         | Low        | _Fixed:_ lawful basis, the rights to access, correct, delete and object, the right to complain to a regulator, a one-month response time, and non-discrimination. Nothing is sold, so no "Do Not Sell" link is needed.                                                                                                                                                                                                                          |
+| 8   | Children's privacy              | **Compliant**                                       | Low        | A B2B tool with no public accounts. _Added:_ not aimed at children, no knowing collection under 16, and deletion on request.                                                                                                                                                                                                                                                                                                                    |
+| 9   | AI disclosures                  | **N/A**                                             | —          | No AI features in the site, the client or the API.                                                                                                                                                                                                                                                                                                                                                                                              |
+| 10  | Training-data rights            | **N/A**                                             | —          | No models are trained.                                                                                                                                                                                                                                                                                                                                                                                                                          |
+| 11  | Accessibility                   | **Compliant** (was Partial)                         | Low        | Axe (WCAG 2.1 A/AA): **0 violations** on every public page in both themes. _Fixed:_ the numeral contrast, a skip link, `aria-current`, the mobile menu as a dialog with Escape and focus return, and report-field error ARIA. **Not done:** a manual screen-reader pass.                                                                                                                                                                        |
+| 12  | Subscriptions / renewal         | **Partial**                                         | Medium     | Pricing shows the price per person, yearly and monthly options, the minimum team size, currency and "excluding tax". There's no self-serve checkout: every paid plan is quoted. The hosted billing lifecycle (Stripe `customer.subscription.*` events, past-due, suspend, then 30-day retention) needs stating in the agreement. **OUTSIDE CODE:** the agreement must cover the term, renewal and notice, cancellation, and that 30-day window. |
+| 13  | Marketing claims                | **Mostly compliant** (was Unknown)                  | Medium     | Checked against both codebases; see the claims table below. 14 of 16 are true as written. _Fixed:_ the unsupported sizing claim ("a team of twenty fits comfortably on a small VM"), an over-broad sign-in claim, "works the first time", and an unstated retention window. **Remaining:** "Free forever" and "Always will be" are promises about the future. Keep them only if you're committed to them.                                       |
+| 14  | Trademark / branding            | **Unknown**                                         | Medium     | Consistent use. Third-party marks are used nominatively and acknowledged in the notices file. **OUTSIDE CODE:** a clearance search for "Zipr" (IP Australia, USPTO, EUIPO; classes 9 and 42).                                                                                                                                                                                                                                                   |
+| 15  | User-generated content          | **N/A / Partial**                                   | Low        | Nothing submitted is published. Hosted catalogues and plugins are private to each organisation. **OUTSIDE CODE:** an acceptable-use clause in the hosted agreement.                                                                                                                                                                                                                                                                             |
+| 16  | Security / breach signals       | **Compliant** (was Missing)                         | Low        | No "military-grade" style claims. _Added:_ the privacy notice covers encryption in transit, restricted access and breach notification as the law requires.                                                                                                                                                                                                                                                                                      |
+| 17  | Third-party services            | **Compliant**                                       | Low        | The site uses only Cloudflare. The hosted service uses Stripe, named in the notice; its other providers are to be listed in the agreement. The app has no telemetry, updater or crash reporter, and no CDN: its only network target is the server a user configures. **Verify:** Cloudflare dashboard analytics or Zaraz are switched off.                                                                                                      |
+| 18  | Export / sanctions              | **Low risk** (was Unknown)                          | Low        | The client uses standard TLS through `reqwest`. The server signs licences with Ed25519. Nothing beyond mass-market cryptography was found. **OUTSIDE CODE:** a sanctions clause in the hosted agreement.                                                                                                                                                                                                                                        |
+| 19  | Industry-specific rules         | **N/A**                                             | —          | Not a regulated domain. The closest is workplace monitoring through usage records (risk 4).                                                                                                                                                                                                                                                                                                                                                     |
+| 20  | Versioning / acceptance records | **Partial** (was Missing)                           | Medium     | _Fixed:_ the privacy notice shows a version and date, and keeps a change log (`PRIVACY_VERSIONS`); git holds every earlier text. **App repo:** once the EULA exists, record the accepted version and time in the client's settings store.                                                                                                                                                                                                       |
+
+### Claims checked against the product code
+
+| Claim on the site                                                      | Verdict                                       | Evidence                                                                                                                                                                                                          |
+| ---------------------------------------------------------------------- | --------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| The app makes no network request until you connect it to a server      | **True**                                      | No updater, telemetry or crash-reporter crate. Every request goes to the configured deployment (`crates/zipr-api`, `discovery.rs`).                                                                               |
+| Nothing runs on a server                                               | **True**                                      | The only `exec` in the API is `atlas migrate` during cloud provisioning, never customer content.                                                                                                                  |
+| Self-hosted doesn't call home; the licence verifies offline            | **True**                                      | Ed25519 key compiled in (`deploy/tools/LICENSING.md`). No hardcoded Zipr host is contacted; `zipr.dev/problems/*` are identifiers only.                                                                           |
+| Expired licence: reads work, writes refused, a month's warning         | **True**                                      | `internal/selfhosted/license/guard.go`: `expiryWarning = 30 days`, then writes get 402.                                                                                                                           |
+| People can't tell whether a catalogue they can't see exists            | **True**                                      | "404, not 403" guardrail in the revision, SSE and audit query services.                                                                                                                                           |
+| The audit trail is written by the server and not editable from clients | **True**                                      | No UPDATE or DELETE on `audit_events`; audit endpoints are GET-only.                                                                                                                                              |
+| Google, Microsoft Entra and Okta sign-in                               | **True**                                      | `SELF_HOSTING.md` §SSO.                                                                                                                                                                                           |
+| Sign-in happens in the browser; the app never handles a password       | **Over-broad → fixed**                        | True of the _Zipr_ sign-in (`SignIn.tsx`). But the app does collect passwords for connected systems and "Require a re-auth" steps (`auth.tsx`, `WorkflowAuth.tsx`). Now reads "never handles your Zipr password". |
+| Twelve step types                                                      | **True**                                      | `ActionType` in `crates/zipr-api/src/domains/items.rs` has 12 variants matching the site's list.                                                                                                                  |
+| Plugins are kept apart, so a bad one can't take the app down           | **True**                                      | Supervised plugin processes (`crates/zipr-plugins`).                                                                                                                                                              |
+| Self-hosting counts nobody; no user limit                              | **True in code, contradicted by the licence** | Seats are cloud-only (`guard.go`: "Seats are a managed-cloud concept"). `zipr-api/LICENSE` says otherwise (risk 3).                                                                                               |
+| Export works even while suspended                                      | **True**                                      | `internal/cloud/gateway/gateway.go`: "Its administrators can still export its data."                                                                                                                              |
+| One command brings it up                                               | **True**                                      | `docker compose up -d` (`SELF_HOSTING.md`). It also needs a domain, a TLS proxy and SMTP, which the copy now says.                                                                                                |
+| "A team of twenty fits comfortably on a small virtual machine"         | **Unsupported → removed**                     | No sizing, benchmark or load test anywhere. Replaced with what the docs support: one Compose stack on one machine.                                                                                                |
+| Installers are unsigned; every download has a checksum                 | **True**                                      | `package.yml` builds unsigned artefacts on purpose. The site stores SHA-256 per asset.                                                                                                                            |
+| Nothing updates itself underneath you                                  | **True**                                      | No updater plugin in `src-tauri/Cargo.toml`.                                                                                                                                                                      |
 
 ---
 
 ## 3. Code changes made
 
-In order of priority:
+In order of priority. All are on the site.
 
 1. `worker/content/legal.ts` (new): one source for the operator name,
-   registration number, contact address, licence URL and privacy version
-   history, so the footer and notices never disagree.
+   registration number, contact address, licence URL and privacy version history.
 2. `worker/views/pages/Privacy.tsx` (new): the privacy notice, written from the
-   actual data flows, with a version, date and change log.
-3. `worker/routes/site.tsx`: registers `GET /privacy` so the notice is
-   reachable.
-4. `worker/routes/seo.ts`: adds `/privacy` to the sitemap so it can be found.
+   site's and the API's actual data flows, with a version, date and change log.
+3. `worker/routes/site.tsx`: registers `GET /privacy`.
+4. `worker/routes/seo.ts`: adds `/privacy` to the sitemap.
 5. `worker/views/components/SiteFooter.tsx`: the copyright line names the
    operator from `LEGAL`, and every page links Privacy and Open-source licences.
-6. `worker/views/pages/Report.tsx`: adds a privacy link at the point of
-   collection, and ties the version and platform fields' errors to their inputs.
-7. `worker/views/pages/Contact.tsx`: adds a privacy link beside the email
-   addresses, which are a collection point.
+6. `worker/views/pages/Report.tsx`: a privacy link at the point of collection,
+   and error ARIA on the version and platform fields.
+7. `worker/views/pages/Contact.tsx`: a privacy link beside the email addresses.
 8. `worker/views/pages/Downloads.tsx`: a licence-acceptance line that appears
-   only once `LEGAL.licenceUrl` is set, rather than pointing at a document that
-   doesn't exist.
-9. `scripts/third-party-notices.mjs` (new), plus `npm run notices` in
-   `package.json`: generates the OSS licence file from `node_modules`, so it
-   can't drift from the bundle.
-10. `public/third-party-notices.txt` (generated): the licence text of the 14
-    packages shipped to browsers, plus the fonts and trademark acknowledgements.
-11. `worker/views/Layout.tsx`: a skip link, and a focusable `<main>` target
-    (WCAG 2.4.1).
-12. `worker/views/components/NavBar.tsx`: `aria-current` on the active link;
-    the mobile menu gets `role="dialog"`, `aria-expanded` and `aria-controls`,
-    closes on Escape, and returns focus.
-13. `worker/views/pages/Home.tsx`: the step numerals change from 1.2:1 embossed
-    text to readable contrast (WCAG 1.4.3), and are hidden from assistive tech
-    because the `<ol>` already gives the order.
-14. `worker/content/features.ts`: "works the first time" becomes "runs", because
-    it was an unqualified guarantee.
-15. `worker/views/pages/Security.tsx`: "a stated window" becomes "the period set
-    out in your agreement", because no window was stated anywhere.
-16. `tests/ui-pages.test.ts`: `/privacy` added to the public-page render test.
-17. `scripts/copy-export.mjs` and `docs/site-copy.md`: the privacy page is
-    included in the copy export, which has been regenerated.
-18. `CHANGELOG.md`: records the above.
+   once `LEGAL.licenceUrl` is set.
+9. `worker/content/pricing.ts`: the unsupported "team of twenty" sizing claim is
+   replaced with the documented deployment shape, and the "one command" card now
+   names its prerequisites.
+10. `worker/views/pages/Security.tsx`: "never handles a password" becomes "never
+    handles your Zipr password", and "a stated window" becomes "the period set
+    out in your agreement".
+11. `worker/content/features.ts`: "works the first time" becomes "runs".
+12. `scripts/third-party-notices.mjs` (new) and `npm run notices`: generates
+    the OSS licence file from `node_modules`.
+13. `public/third-party-notices.txt` (generated): the 14 packages shipped to
+    browsers, plus fonts and trademark acknowledgements.
+14. `.github/workflows/ci.yml`: fails if the notices file is stale.
+15. `worker/views/Layout.tsx`: a skip link and a focusable `<main>` (WCAG 2.4.1).
+16. `worker/views/components/NavBar.tsx`: `aria-current`; the mobile menu gets
+    dialog semantics, `aria-expanded`, Escape to close and focus return.
+17. `worker/views/pages/Home.tsx`: the step numerals get readable contrast (WCAG
+    1.4.3).
+18. `tests/ui-pages.test.ts`: `/privacy` added to the render test.
+19. `scripts/copy-export.mjs` and `docs/site-copy.md`: the privacy page is
+    included in the copy export.
+20. `CHANGELOG.md`: records the above.
 
-Verified with `npm run lint`, `npm run typecheck`, `npm run test` (22 passed)
-and `npm run build`, plus an axe scan of every public page in both themes and a
-keyboard check of the skip link and mobile menu in Chromium.
+Verified with `npm run lint`, `npm run format`, `npm run typecheck`, `npm run
+test` (22 passed) and `npm run build`, plus an axe scan of every public page in
+both themes and a keyboard check of the skip link and mobile menu in Chromium.
+
+Nothing was changed in `zipr-client` or `zipr-api`: every issue found there is a
+legal-document or release-process decision, listed below.
 
 ---
 
@@ -146,34 +183,33 @@ keyboard check of the skip link and mobile menu in Chromium.
 
 ### Must-do before launch
 
-1. **Set `LEGAL.operator` and `LEGAL.registration`** to the registered legal
-   entity. If there isn't one, decide whether to form one first. _(OUTSIDE CODE:
-   entity formation. Then a two-line code change.)_
-2. **Have the EULA drafted** (licence grant, plugin ownership, warranty
-   disclaimer, liability cap, governing law), publish it, and set
-   `LEGAL.licenceUrl`. Show it in the installer or on first run as well.
-   _(OUTSIDE CODE.)_
-3. **Put the hosted service agreement and DPA in place:** term, renewal,
-   cancellation, data retention after suspension, acceptable use, sanctions.
-   _(OUTSIDE CODE.)_
-4. **Verify every technical claim in risk 4** against the app and API code, and
-   change the copy where any isn't strictly true. _(Needs the private repos.)_
-5. **Confirm no Cloudflare dashboard analytics are injected,** or disclose them
-   in `/privacy` and add them to `PRIVACY_VERSIONS`.
-6. **Have a lawyer review `/privacy`,** in particular the lawful-basis wording
-   and whether the Australian notifiable-data-breaches scheme applies to you.
+1. **Replace the app's licence.** `zipr-client/LICENSE.md` currently forbids
+   use. Get an EULA drafted (licence grant, plugin ownership, warranty
+   disclaimer, liability cap, governing law). Ship it in the installer, show it
+   on first run, and set `LEGAL.licenceUrl`. _(OUTSIDE CODE, then one line.)_
+2. **Settle who owns Zipr.** Form the entity and sign an IP assignment from
+   Jared Stanbrook, then set `LEGAL.operator` and `LEGAL.registration`. Or set
+   the operator to the individual meanwhile. _(OUTSIDE CODE, then two lines.)_
+3. **Make `zipr-api/LICENSE` match the offer.** Remove the per-user limit on
+   self-hosted, or change the pricing page. _(OUTSIDE CODE.)_
+4. **Put the hosted agreement and DPA in place:** term, renewal, cancellation,
+   the 30-day post-suspension window, 180-day usage-record retention, the list
+   of providers, acceptable use, a sanctions clause, and a duty on customers to
+   inform staff about usage records. _(OUTSIDE CODE.)_
+5. **Confirm no Cloudflare dashboard analytics or Zaraz are enabled,** or add
+   them to `/privacy`.
+6. **Have a lawyer review `/privacy`,** especially the lawful basis, the hosted
+   processor and controller split, and whether the Australian notifiable
+   data-breaches scheme applies.
 
 ### Later
 
 1. Code signing and macOS notarisation, then remove the unsigned-installer
-   caveats from Downloads and Security.
-2. A trademark clearance search and registration for "Zipr".
-3. Once the EULA exists, record the accepted version in the desktop app.
-4. A manual screen-reader pass (VoiceOver and NVDA) over Home, Downloads and
+   caveats.
+2. Third-party notices in the desktop app, generated in its build.
+3. Record the accepted EULA version in the desktop app.
+4. A trademark clearance search and registration for "Zipr".
+5. A manual screen-reader pass (VoiceOver and NVDA) over Home, Downloads and
    Report.
-5. Third-party notices inside the desktop installer.
-6. Classify the app's encryption for export purposes.
-7. Decide whether "free forever" is a commitment you will keep. If not, soften
-   it to "free" before anyone relies on it.
-8. Re-run `npm run notices` whenever client-side dependencies change. It could
-   be added to CI.
+6. Publish real sizing guidance for self-hosting once it has been measured.
+7. Decide whether "free forever" is a commitment you will keep.

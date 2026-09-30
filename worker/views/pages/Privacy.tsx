@@ -21,6 +21,9 @@ import { Page, Section, Container, SectionHeading, Card, CheckItem } from "@view
  *   - Local storage: theme preference only.
  *   - No analytics, no third-party scripts, fonts self-hosted.
  *   - Processor: Cloudflare (Workers, D1, R2, request logs via observability).
+ *   - Hosted service (zipr-api): identity traits email + name, catalogues,
+ *     audit_events, analytics_events per person (ANALYTICS_RETENTION_DAYS,
+ *     default 180), Stripe for billing. Self-hosted never contacts us.
  */
 
 const Block: FC<{ title: string; children?: Child }> = ({ title, children }) => (
@@ -127,10 +130,23 @@ export const PrivacyPage: FC<{ app: AppConfig }> = ({ app }) => {
             </p>
             <p>
               On our <strong class="text-foreground">hosted</strong> service, we store your
-              organisation's catalogues and member accounts on its behalf, under the agreement we
-              sign with your organisation. Your organisation decides what is stored and who can see
-              it, so questions about that data are best sent to your administrator first — we will
-              help them answer.
+              organisation's data on its behalf, under the agreement we sign with your organisation.
+              That includes:
+            </p>
+            <ul class="list-disc space-y-2 pl-5">
+              <li>each member's account: email address, name and sign-in details;</li>
+              <li>the catalogues, items and plugins your organisation builds;</li>
+              <li>an audit trail of who changed what, and when;</li>
+              <li>
+                usage records of who ran which item, when, and from which device and app version —
+                the basis of the team usage figures. These are kept for 180 days by default.
+              </li>
+            </ul>
+            <p>
+              Your organisation decides who is a member and who can see what, so questions about
+              that data are best sent to your administrator first — we will help them answer.
+              Billing is handled through our payment provider, Stripe, which holds your
+              organisation's billing details.
             </p>
           </Block>
 
@@ -138,8 +154,9 @@ export const PrivacyPage: FC<{ app: AppConfig }> = ({ app }) => {
             <p>
               Cloudflare hosts this website, its database and the installer files, and processes
               information on our behalf to do so. Cloudflare operates worldwide, so your information
-              may be processed outside your country. We don't share your information with anyone
-              else unless the law requires it.
+              may be processed outside your country. The providers that run the hosted service,
+              including Stripe for billing, are listed in your organisation's agreement. Beyond
+              those, we don't share your information with anyone unless the law requires it.
             </p>
           </Block>
 

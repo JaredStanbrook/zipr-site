@@ -62,6 +62,18 @@ jobs:
       - name: Format check
         run: npm run format
 
+      # The licences of everything shipped to the browser, served at
+      # /third-party-notices.txt. Regenerated from node_modules and compared,
+      # so a dependency change that forgets `npm run notices` fails here
+      # rather than shipping code without its licence.
+      - name: Third-party notices up to date
+        run: |
+          npm run notices
+          git diff --exit-code -- public/third-party-notices.txt || {
+            echo "::error::public/third-party-notices.txt is stale. Run 'npm run notices' and commit the result."
+            exit 1
+          }
+
       # `npm run build` runs `wrangler types` first, so the generated
       # worker-configuration.d.ts exists before tsc needs it.
       - name: Typecheck and build
