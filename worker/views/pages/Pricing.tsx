@@ -54,7 +54,7 @@ const TierCard: FC<{ tier: PricingTier; app: AppConfig }> = ({ tier, app }) => {
         </span>
       ) : null}
 
-      <h3 class="text-2xl">{tier.name}</h3>
+      <h2 class="text-2xl">{tier.name}</h2>
       <p class="mt-2 min-h-[3rem] text-sm leading-relaxed text-muted-foreground text-pretty">
         {tier.summary}
       </p>

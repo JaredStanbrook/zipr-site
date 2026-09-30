@@ -50,7 +50,7 @@ const PlatformCard: FC<{
       {highlighted ? <Badge tone="primary">Looks like your system</Badge> : null}
     </div>
 
-    <h3 class="mt-5 text-2xl">{info.name}</h3>
+    <h2 class="mt-5 text-2xl">{info.name}</h2>
     <p class="mt-1 text-sm text-muted-foreground">{info.requirement}</p>
 
     <div class="mt-5 flex-1">

@@ -141,11 +141,11 @@ page itself:
 
 **[HOME-TITLE]** _browser tab and search result_
 
-Zipr
+Desktop launcher for commands, links and apps · Zipr
 
 **[HOME-DESC]** _search result snippet_
 
-Zipr is a free desktop launcher for Windows and macOS. Chain commands, links, apps and prompts into one-click items, then share them with your team instead of explaining them.
+Zipr is a free desktop launcher for Windows and macOS. Chain commands, links, apps and prompts into one-click items, then share them with your team.
 
 **[HOME-01]** _text_
 
@@ -522,11 +522,11 @@ page itself:
 
 **[FEAT-TITLE]** _browser tab and search result_
 
-Features · Zipr
+Features: step types, sharing and history · Zipr
 
 **[FEAT-DESC]** _search result snippet_
 
-What the free Zipr app does, what a team server adds, and the twelve step types every item is built from.
+What the free Zipr app does on its own, what a team server adds, and the twelve step types every item is built from.
 
 **[FEAT-01]** _text_
 
@@ -911,11 +911,11 @@ page itself:
 
 **[PRICE-TITLE]** _browser tab and search result_
 
-Pricing · Zipr
+Pricing: free app, team plans from $6 · Zipr
 
 **[PRICE-DESC]** _search result snippet_
 
-Zipr is free forever for one person. Sharing across a team is hosted from $6 per person per month, or self-hosted and priced per deployment. Full comparison, no surprises.
+Zipr is free for one person, for good. Team sharing is hosted from $6 per person a month, or self-hosted and priced per deployment. Compare every feature.
 
 **[PRICE-01]** _text_
 
@@ -1287,11 +1287,11 @@ page itself:
 
 **[DL-TITLE]** _browser tab and search result_
 
-Downloads · Zipr
+Download for Windows and macOS · Zipr
 
 **[DL-DESC]** _search result snippet_
 
-Download the Zipr desktop client for Windows or macOS. Free, no account, and no network request until you point it at a deployment.
+Download the free Zipr desktop app for Windows 10+ or macOS 12+. No account needed, and no network requests until you connect it to a team server.
 
 **[DL-01]** _text_
 
@@ -1368,11 +1368,11 @@ page itself:
 
 **[SEC-TITLE]** _browser tab and search result_
 
-Security · Zipr
+Security and data handling · Zipr
 
 **[SEC-DESC]** _search result snippet_
 
-Where your data lives, what leaves your network, why Zipr never runs your commands on a server, and how work crosses between teams without loosening who can see what.
+Where your data lives, what leaves your network, and why Zipr never runs your commands on a server. Short answers for your security review.
 
 **[SEC-01]** _text_
 
@@ -1506,31 +1506,35 @@ Are the installers signed?
 
 Not yet — signing is on the way. Every download is published with a SHA-256 checksum so you can verify exactly what you got.
 
-**[SEC-34]** _subheading_
+**[SEC-34]** _text_
+
+Exactly what the website, the app and the hosted service record is listed in the privacy notice.
+
+**[SEC-35]** _subheading_
 
 Found something?
 
-**[SEC-35]** _text_
+**[SEC-36]** _text_
 
 Email it privately. We'll confirm we have it, keep you posted while it's fixed, and credit you when it ships unless you'd rather we didn't.
 
-**[SEC-36]** _text_
+**[SEC-37]** _text_
 
 zipr@stanbrook.me
 
-**[SEC-37]** _subheading_
+**[SEC-38]** _subheading_
 
 Need this in writing?
 
-**[SEC-38]** _text_
+**[SEC-39]** _text_
 
 We'll complete a security questionnaire, sign a DPA, or talk to whoever needs convincing — hosted or self-hosted.
 
-**[SEC-39]** _button_
+**[SEC-40]** _button_
 
 Talk to us
 
-**[SEC-40]** _text_
+**[SEC-41]** _text_
 
 Try it first
 
@@ -1545,11 +1549,11 @@ page itself:
 
 **[CONT-TITLE]** _browser tab and search result_
 
-Contact · Zipr
+Contact: team setup, quotes and support · Zipr
 
 **[CONT-DESC]** _search result snippet_
 
-Ask about a licence, get help with a deployment, or report something privately. Every message reaches a person.
+Get your team set up, ask about self-hosting, get help, or report a security issue privately. Every message reaches a person.
 
 **[CONT-01]** _text_
 
@@ -1638,7 +1642,7 @@ page itself:
 
 **[PRIV-TITLE]** _browser tab and search result_
 
-Privacy · Zipr
+Privacy notice · Zipr
 
 **[PRIV-DESC]** _search result snippet_
 
@@ -1823,7 +1827,7 @@ page itself:
 
 **[LIC-TITLE]** _browser tab and search result_
 
-Licence · Zipr
+Licence for the desktop app · Zipr
 
 **[LIC-DESC]** _search result snippet_
 

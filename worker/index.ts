@@ -10,7 +10,9 @@ import routes from "./app";
 import { configMiddleware } from "./middleware/config.middleware";
 import { dbMiddleware } from "./middleware/db.middleware";
 import { authMiddleware } from "./middleware/auth.middleware";
+import { canonicalUrl } from "./middleware/canonical-url.middleware";
 import { describeError, isMissingSchema } from "./lib/errors";
+import { renderNotFound } from "./views/pages/NotFound";
 
 const worker = new Hono<AppEnv>();
 
@@ -36,6 +38,9 @@ worker.use("*", (c, next) =>
     credentials: true,
   })(c, next),
 );
+
+// One canonical URL per page — see middleware/canonical-url.middleware.ts.
+worker.use("*", canonicalUrl);
 
 // Applied globally so SSR pages get the same context as API routes.
 worker.use("*", configMiddleware);
@@ -79,13 +84,22 @@ worker.onError((err, c) => {
 // renders as a 500, so during development every genuinely missing page looks
 // like a crash. Falling back to a plain 404 is both truthful and what the
 // asset layer would have answered anyway.
+//
+// A miss that a browser asked for as a page gets the site's 404 page rather
+// than an empty body; anything else (a missing file, an API call) keeps the
+// plain 404 it had.
 worker.notFound(async (c) => {
+  const wantsPage = c.req.method === "GET" && (c.req.header("Accept") ?? "").includes("text/html");
+
+  let response: Response;
   try {
-    return await c.env.ASSETS.fetch(c.req.raw);
+    response = await c.env.ASSETS.fetch(c.req.raw);
   } catch (err) {
     console.warn(`[assets] could not serve ${c.req.path}: ${describeError(err)}`);
-    return c.text("Not found", 404);
+    response = c.text("Not found", 404);
   }
+
+  return response.status === 404 && wantsPage ? renderNotFound(c) : response;
 });
 
 export default worker;

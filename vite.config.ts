@@ -30,6 +30,9 @@ export default defineConfig(({ mode }) => {
           input: "./worker/components/main.ts",
           output: {
             entryFileNames: "static/client.js",
+            // Lazily loaded staff-page components (see components/main.ts).
+            // Hashed, and under /static so public/_headers caches them.
+            chunkFileNames: "static/chunks/[name]-[hash].js",
             assetFileNames: "static/[name].[ext]",
           },
         },

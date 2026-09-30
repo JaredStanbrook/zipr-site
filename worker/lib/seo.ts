@@ -34,6 +34,13 @@ export interface PageMeta {
   canonical?: string;
   /** `website` for landing pages, `article` for a single piece of content. */
   type?: "website" | "article";
+  /**
+   * Schema.org objects describing this page, emitted as JSON-LD. Only
+   * describe what the page visibly says — structured data that disagrees with
+   * the page is treated as spam, and invented ratings or reviews are the
+   * fastest way to lose rich results altogether.
+   */
+  jsonLd?: Record<string, unknown>[];
 }
 
 export interface ResolvedMeta {
@@ -45,7 +52,15 @@ export interface ResolvedMeta {
   type: "website" | "article";
   siteName: string;
   locale: string;
+  jsonLd: Record<string, unknown>[];
 }
+
+/**
+ * The share image used when a page does not set its own: 1200×630, the size
+ * every major link preview renders without cropping. Generated from the
+ * brand by `scripts/og-image.mjs`.
+ */
+export const DEFAULT_OG_IMAGE = "/og.png";
 
 /**
  * Paths that should never appear in search results.
@@ -78,14 +93,25 @@ export function resolveMeta(meta: PageMeta, app: AppConfig, url: URL): ResolvedM
     title: meta.title ? `${meta.title} · ${app.name}` : app.name,
     description: meta.description || app.tagline || "",
     canonical,
-    image: meta.image ? new URL(meta.image, origin).toString() : undefined,
+    image: new URL(meta.image ?? DEFAULT_OG_IMAGE, origin).toString(),
     // A query string means a filtered view of a page that already exists.
     noindex: meta.noindex ?? (isNoindexPath(url.pathname) || hasQuery),
     type: meta.type ?? "website",
     siteName: app.name,
     locale: app.locale,
+    jsonLd: meta.jsonLd ?? [],
   };
 }
+
+/**
+ * Serialise JSON-LD for a `<script>` element.
+ *
+ * `JSON.stringify` alone is not safe inside HTML: a string containing
+ * `</script>` would close the element early. Escaping `<` as `\u003c` keeps
+ * the JSON identical to a parser and inert to the HTML tokenizer.
+ */
+export const jsonLdScript = (data: Record<string, unknown>) =>
+  JSON.stringify(data).replace(/</g, "\\u003c");
 
 /**
  * `robots.txt`.
