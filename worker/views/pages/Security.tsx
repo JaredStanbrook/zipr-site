@@ -15,80 +15,76 @@ import {
 /**
  * The page for the person who has to approve the purchase.
  *
- * It replaces what used to be an architecture page: deployment topologies,
- * component counts, which identity provider, which parts are optional and
- * why. All of that answered a question nobody buying was asking, and read as
- * a parts list for anyone thinking of building the same product.
- *
- * What a security reviewer actually wants is a short list of properties they
- * can hold us to. Those are here, and every one of them is true.
+ * What a security reviewer wants is a short list of properties they can hold
+ * us to, then the detailed answers. Properties first, one or two sentences
+ * each; the FAQ below carries the nuance. Every line is true.
  */
 
 const PROPERTIES = [
   {
     icon: "shield",
     title: "Nothing runs on a server",
-    body: "Zipr stores what your team built; it never executes any of it. No command, script or link is run anywhere but on the machine of the person who clicked. There is no server-side execution to review, because there isn't any.",
+    body: "Zipr stores what your team built; it never executes it. Commands, scripts and links run only on the machine of the person who clicked, when they click.",
   },
   {
     icon: "server",
-    title: "You choose who holds it",
-    body: "Self-hosted, your data never leaves your infrastructure, your network or your backup policy, and we have no copy and no way to get one. Hosted, it sits in a database belonging to your organisation alone rather than a shared one — which is what makes a restore of just you possible.",
+    title: "Your data, where you choose",
+    body: "Self-hosted, it never leaves your infrastructure and we have no copy. Hosted, it sits in a database belonging to your organisation alone — we operate it, so access is governed by contract and policy.",
   },
   {
     icon: "wifi-off",
-    title: "A self-hosted deployment doesn't call home",
-    body: "It does not report to us or check in with us, and the licence is verified on your own hardware rather than against a service of ours — so it keeps working with the internet unplugged. What it does do is stop accepting changes once the licence expires, after warning for a month; reading is never interrupted.",
-  },
-  {
-    icon: "eye-off",
-    title: "We only see what we operate",
-    body: "Self-hosted, we are not in the path at all — there is nowhere for your content to reach us from. Hosted, we run the database and can therefore reach it, so the honest answer is a contract and an access policy rather than a claim about physics.",
+    title: "Self-hosted doesn't call home",
+    body: "No reporting, no check-ins. The licence is verified on your own hardware, so it works with the internet unplugged.",
   },
   {
     icon: "shield-check",
     title: "Every change is attributable",
-    body: "Who did what, when, written by the server rather than the app, and not editable from any client. The answer to an audit question is a query, not a reconstruction.",
+    body: "Who did what and when, recorded by the server and not editable from any client. An audit question is a query, not a reconstruction.",
   },
   {
     icon: "key-round",
-    title: "Crossing a boundary is not loosening one",
-    body: "Work moves between teams as a published copy, and only where your administrators allow it. Roles, membership and single sign-on stay yours to set — and someone who should not see a catalogue cannot tell whether it exists.",
+    title: "Sharing doesn't loosen access",
+    body: "Work crosses teams only as a published copy, where your administrators allow it. Roles, membership and single sign-on stay yours — and people can't tell whether a catalogue they can't see exists.",
+  },
+  {
+    icon: "download",
+    title: "Your data is never held hostage",
+    body: "Export everything as one file at any time. If a licence or invoice lapses, reading keeps working while changes are refused.",
   },
 ];
 
 const REVIEW_FAQ = [
   {
     q: "Where is our data stored?",
-    a: "Self-hosted, on the server you run it on, and we hold nothing. Hosted, in a database provisioned for your organisation and no one else's. Either way individual machines also keep a copy so the app stays fast and works offline.",
+    a: "Self-hosted, on the server you run it on, and we hold nothing. Hosted, in a database provisioned for your organisation alone, so it can be backed up and restored on its own. Either way, each machine also keeps a copy so the app is fast and works offline.",
   },
   {
     q: "What does the app send over the network?",
-    a: "Only to the deployment it is pointed at, and only your catalogue content and the sign-in that authorises it. With no deployment configured the app makes no network requests at all.",
+    a: "Only your catalogue content and the sign-in that authorises it, and only to the deployment it is pointed at. With no deployment configured, it makes no network requests at all.",
   },
   {
     q: "Can we run it somewhere with no internet access?",
-    a: "Yes, self-hosted. The licence verifies offline, so an air-gapped install is a supported configuration rather than a workaround, and we will help you do it. The hosted service obviously cannot be one of these.",
+    a: "Yes, self-hosted. The licence verifies offline, so air-gapped is a supported configuration, not a workaround — and we'll help you set it up. The hosted service can't be air-gapped.",
   },
   {
     q: "How do we sign in?",
-    a: "In your browser, never inside the app — the app opens the sign-in page and never handles a password itself. Google, Microsoft Entra and Okta are supported, so accounts can be joined and removed wherever you already do that.",
+    a: "In your browser — the app opens the sign-in page and never handles a password itself. Google, Microsoft Entra and Okta are supported, so people join and leave wherever you already manage that.",
   },
   {
     q: "What happens to our data if we stop paying?",
-    a: "It is not held hostage. Reading keeps working while changes are refused, and you can export everything as one file at any point in that sequence without settling anything first. On the hosted service the data is retained for a stated window after suspension before anything is removed; self-hosted, it is on your own disk and we cannot touch it.",
+    a: "Reading keeps working while changes are refused, and you can export everything at any point without settling anything first. Hosted, the data is kept for a stated window after suspension before anything is removed. Self-hosted, it is on your own disk and we can't touch it; the licence warns you for a month before it expires.",
   },
   {
     q: "Who can see what?",
-    a: "Your administrators decide, per workspace. The system is deliberately quiet about things you cannot access — it will not confirm that something exists just because you guessed its address.",
+    a: "Your administrators decide, per workspace. The system won't confirm that something exists just because someone guessed its address.",
   },
   {
     q: "How do we get security updates?",
-    a: "New versions are published here and you roll them out on your own schedule. Nothing updates itself underneath you.",
+    a: "New versions are published on the downloads page and you roll them out on your own schedule. Nothing updates itself underneath you.",
   },
   {
     q: "Are the installers signed?",
-    a: "Not yet, and we would rather say so than have you find out at install time. Every download is published with a checksum so you can verify exactly what you got. Signing is on the way.",
+    a: "Not yet — signing is on the way. Every download is published with a SHA-256 checksum so you can verify exactly what you got.",
   },
 ];
 
@@ -101,7 +97,7 @@ export const SecurityPage: FC = () => (
           align="center"
           eyebrow="Security"
           title="The short answers your reviewer wants"
-          lede="Zipr is built to let knowledge cross between teams, which makes every question below a fair one. They all have boring answers. Here they are, before you have to ask."
+          lede="Zipr moves knowledge between teams, so these are fair questions. The answers are deliberately boring."
         />
       </Container>
     </Section>
@@ -118,26 +114,6 @@ export const SecurityPage: FC = () => (
               </p>
             </Card>
           ))}
-        </div>
-      </Container>
-    </Section>
-
-    {/* ================= THE ONE THAT MATTERS ================= */}
-    <Section tone="muted">
-      <Container size="prose">
-        <div class="text-center">
-          <IconTile icon="shield" tone="brand" size="lg" class="mx-auto" />
-          <h2 class="mt-6 text-3xl text-balance sm:text-4xl">The question behind all the others</h2>
-          <p class="font-display mx-auto mt-8 max-w-xl text-2xl leading-snug text-balance">
-            “If this tool holds our commands, what can it do with them?”
-          </p>
-          <p class="font-display mt-4 text-5xl text-primary">
-            <em>Nothing.</em>
-          </p>
-          <p class="mx-auto mt-6 max-w-lg leading-relaxed text-muted-foreground text-pretty">
-            It holds them the way a document holds text. Running one is always an action a person
-            takes, on their own machine, deliberately.
-          </p>
         </div>
       </Container>
     </Section>
@@ -163,9 +139,8 @@ export const SecurityPage: FC = () => (
             <div class="min-w-0">
               <h2 class="text-lg font-bold">Found something?</h2>
               <p class="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
-                Mail it rather than filing it publicly, and give us a way to reach you. We will
-                confirm we have it, keep you posted while it is fixed, and credit you when it ships
-                unless you would rather we didn't.
+                Email it privately. We'll confirm we have it, keep you posted while it's fixed, and
+                credit you when it ships unless you'd rather we didn't.
               </p>
               <a
                 href={`mailto:${CONTACT.address}?subject=${encodeURIComponent("Zipr security report")}`}
@@ -181,7 +156,7 @@ export const SecurityPage: FC = () => (
 
     <CtaBand
       title="Need this in writing?"
-      body="We will happily go through a security questionnaire, sign a DPA, or talk to whoever needs convincing — for either the hosted service or a deployment of your own."
+      body="We'll complete a security questionnaire, sign a DPA, or talk to whoever needs convincing — hosted or self-hosted."
       primary={{ href: "/contact?topic=licence", label: "Talk to us" }}
       secondary={{ href: "/downloads", label: "Try it first" }}
     />

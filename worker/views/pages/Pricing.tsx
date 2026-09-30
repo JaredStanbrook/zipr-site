@@ -190,7 +190,7 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
               Free for you. <em>Paid</em> for your team.
             </>
           }
-          lede="Everything one person can do on one machine is free, permanently — not a trial, not a cut-down build. You pay on the day an idea has to belong to more than you, and then you choose who runs the server."
+          lede="The whole app is free for one person, permanently. You pay when your team shares — and you choose who runs the server."
         />
       </Container>
     </Section>
@@ -205,10 +205,10 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
         </div>
 
         <p class="mt-8 text-center text-sm text-muted-foreground text-pretty">
-          Prices in {app.currency}, excluding tax. Nobody signs themselves up for either paid option
-          — both start with a conversation, and you get a quote before anything begins.{" "}
+          Prices in {app.currency}, excluding tax. Both paid options start with a conversation and a
+          quote.{" "}
           <a href="#running-costs" class="font-medium text-primary underline underline-offset-4">
-            Here's what running it yourself involves.
+            What self-hosting involves
           </a>
         </p>
       </Container>
@@ -218,9 +218,9 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
     <Section tone="muted" id="compare">
       <Container size="wide">
         <SectionHeading
-          eyebrow="Line by line"
-          title="Alone versus together, line by line"
-          lede="No asterisks. Everything in the free column works forever on your own machine. The other two are what arrives once the work starts crossing between people — and they are the same software, so they differ on who operates it and how it is billed rather than on what it can do."
+          eyebrow="Compare plans"
+          title="Every feature, side by side"
+          lede="Hosted and self-hosted are the same software. They differ in who runs it and how it's billed, not in what it can do."
         />
         <ComparisonTable />
       </Container>
@@ -233,7 +233,7 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
           align="center"
           eyebrow="If you run it yourself"
           title="Less work than you're bracing for"
-          lede="Self-hosted has a reputation, and most of it is earned by other software. This is one server and one command — and if you would rather not, the hosted option is us doing exactly this for you."
+          lede="One server and one command. If you'd rather not, the hosted option is us doing it for you."
         />
 
         <div class="grid gap-5 md:grid-cols-3">
@@ -249,9 +249,9 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
         </div>
 
         <p class="mx-auto mt-8 max-w-2xl text-center text-sm text-muted-foreground text-pretty">
-          The agreement covers the software and the support. The server is yours, on whichever cloud
-          or rack you already use — which is the point, because it is also where your data stays. It
-          counts nobody, so what you pay does not move when the team grows.
+          The agreement covers the software and support. The server is yours, on whichever cloud or
+          rack you already use — and because a deployment counts nobody, the price doesn't move when
+          the team grows.
         </p>
       </Container>
     </Section>
@@ -270,7 +270,7 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
 
     <CtaBand
       title="Try it before any of this matters."
-      body="The free app needs no account and is the same one paying teams run. There is no trial to start and no clock to beat — come back here the day the idea stops being only yours."
+      body="The free app needs no account and is the same one paying teams run."
       primary={{ href: "/downloads", label: "Download Zipr" }}
       secondary={{ href: "/contact?topic=cloud", label: "Talk to us about a team" }}
     />

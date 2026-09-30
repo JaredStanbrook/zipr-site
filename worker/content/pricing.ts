@@ -64,7 +64,7 @@ export const TIERS: PricingTier[] = [
     features: [
       "Windows and macOS",
       "Unlimited items and catalogues",
-      "All twelve action types, chained however you like",
+      "All twelve step types, chained however you like",
       "Steps that differ per operating system",
       "Plugins",
       "History of what you've run",
@@ -83,17 +83,14 @@ export const TIERS: PricingTier[] = [
     priceNote: "per person, per month, billed yearly",
     features: [
       "Everything in Free, for everyone",
-      "Shared catalogues the whole team stays in sync with",
+      "Shared catalogues, updated live as colleagues work",
       "Members, roles, and who-can-see-what",
       "Edit at the same time without losing work",
       "Full history and one-click rollback",
-      "Live updates as colleagues make changes",
-      "Tags across the workspace",
-      "Share plugins internally",
       "Audit trail and usage figures",
-      "Your own database, not a shared one",
       "Sign in with Google, Microsoft or Okta",
-      "Export everything as one file, any time, whatever your account is doing",
+      "Your own database, not a shared one",
+      "Export everything, any time — even if your account lapses",
     ],
     cta: { label: "Request access", href: "/contact?topic=cloud" },
     featured: true,
@@ -156,9 +153,9 @@ export const COMPARISON: ComparisonGroup[] = [
         cloud: "Unlimited",
         selfHosted: "Unlimited",
       },
-      { feature: "All twelve action types", free: true, cloud: true, selfHosted: true },
+      { feature: "All twelve step types", free: true, cloud: true, selfHosted: true },
       {
-        feature: "Your own action types",
+        feature: "Your own step types",
         note: "For anything the built-in twelve don't cover.",
         free: true,
         cloud: true,
@@ -184,7 +181,7 @@ export const COMPARISON: ComparisonGroup[] = [
       },
       {
         feature: "Export everything",
-        note: "Nothing is ever held against a bill — on the hosted service the export keeps working even while an account is suspended.",
+        note: "Never held against a bill — the hosted export works even while an account is suspended.",
         free: "One file",
         cloud: "One file",
         selfHosted: "It's your database",
@@ -349,37 +346,37 @@ export interface Faq {
   a: string;
 }
 
+/**
+ * Short answers. The long versions of the data-handling questions live on the
+ * security page, where the reviewer who needs them is reading.
+ */
 export const PRICING_FAQ: Faq[] = [
   {
     q: "Why is the app free if the team version isn't?",
-    a: "Because the app is genuinely complete on its own. It stores your work on your machine and runs everything there, so it would keep working whatever we did. Charging for that would be charging for something we cannot take away. Sharing is the part that needs a server, and that is the part you pay for.",
+    a: "Because the app is complete on its own: it stores and runs everything on your machine, so it would keep working whatever we did. Sharing needs a server, and that is the part you pay for.",
   },
   {
     q: "Hosted or self-hosted — which should we pick?",
-    a: "It is the same software either way, so pick on operations rather than features. Hosted means we run it, patch it, back it up and get paged when it breaks, and you pay per person. Self-hosted means your data never leaves infrastructure you control, you can run it with no internet at all, and you pay for the deployment rather than for people. Teams who have a platform group and a policy about where data sits usually want the second; everyone else is better served by the first.",
+    a: "It is the same software, so choose on operations. Hosted: we run, patch and back it up, and you pay per person. Self-hosted: your data never leaves your infrastructure, it can run with no internet, and you pay per deployment. Teams with a platform group and a data-residency policy usually self-host; everyone else is better served hosted.",
   },
   {
     q: "What counts as a person?",
-    a: "On the hosted service, anyone an administrator has added to your organisation. It is a deliberate act by someone on your side, so there are no surprises on the invoice — but it also means somebody counts from the moment they are added, whether or not they ever sign in. Remove them and they stop counting at the next renewal. Self-hosting does not count people at all.",
+    a: "On the hosted service, anyone an administrator adds to your organisation — from the moment they are added, whether or not they sign in. Remove them and they stop counting at the next renewal. Self-hosting doesn't count people at all.",
   },
   {
     q: "Can we try it first?",
-    a: "The free app is the trial, and it is a real one — the same build a paying team runs, with no clock on it. There is no separate trial of the shared version, because standing one up means provisioning a database and an organisation for you, which is the paid thing itself. Talk to us and we will work out something sensible for a pilot.",
-  },
-  {
-    q: "Do you host it for us?",
-    a: "Yes. Your organisation gets its own database rather than a row in a shared one, which is what makes a per-customer restore possible and keeps one company's load off another's. We run the upgrades and the backups. If you would rather it sat on your own infrastructure, that is the self-hosted option and it is the same product.",
+    a: "The free app is the trial — the same build a paying team runs, with no time limit. There's no separate trial of the shared version, because setting one up is the paid work itself. Talk to us and we'll work out a sensible pilot.",
   },
   {
     q: "What happens if we stop paying?",
-    a: "Nothing is deleted and nothing is held hostage. On the hosted service a lapsed invoice first leaves everything readable while writes are refused, then suspends the account with your data retained — and you can export the lot at any point in that sequence without settling anything first. On a self-hosted deployment an expired licence does the same thing on your own server: reads keep working, writes are refused, and it warns you for a month beforehand rather than stopping on the morning of. Everything on individual machines is unaffected either way.",
+    a: "Nothing is deleted or held hostage. Reading keeps working, changes are refused, and you can export everything at any point without settling anything first. Self-hosted licences warn you for a month before they expire. Everything on individual machines is unaffected.",
   },
   {
     q: "Can we start hosted and move to our own servers later?",
-    a: "Your content exports as one file whenever you want it, so nothing traps you. What we do not have yet is a one-click conversion that carries accounts and history across, so treat a move as a planned piece of work rather than a setting. Tell us early and we will plan it with you.",
+    a: "Yes — your content exports as one file whenever you want it. There is no one-click conversion that carries accounts and history across yet, so plan the move as a piece of work, and tell us early so we can help.",
   },
   {
     q: "How do we pay?",
-    a: "By invoice. Hosted is billed yearly or monthly per person; self-hosted is an annual figure for the deployment, agreed up front. Either way you get a quote before anything starts, and for self-hosting a licence key with it.",
+    a: "By invoice. Hosted is billed yearly or monthly per person; self-hosted is an annual figure for the deployment. Either way you get a quote before anything starts.",
   },
 ];

@@ -1,6 +1,9 @@
 import type { FC } from "hono/jsx";
 
-import { PILLARS, JOURNEY, ACTION_TYPES, TEAM_UNLOCKS } from "@server/content/features";
+import type { AppConfig } from "@server/config/app.config";
+import { ACTION_TYPES, HOW_IT_WORKS, TEAM_UNLOCKS, TRUST_POINTS } from "@server/content/features";
+import { TIERS } from "@server/content/pricing";
+import { formatPrice } from "@views/lib/utils";
 import {
   Page,
   Section,
@@ -17,22 +20,22 @@ import {
 } from "@views/components/Ui";
 
 /**
- * The home page has about eight seconds, and it is arguing one thing:
+ * The home page has about eight seconds. In that time a visitor has to learn
+ * what Zipr is, not just how it feels — so the order is the questions a
+ * first-time visitor asks, in the order they ask them:
  *
- *   an idea that can only be described is an idea nobody else has had yet.
+ *   1. Hero         — what it is, who it's for, what to do next.
+ *   2. The problem  — the one-person process every team has.
+ *   3. How it works — build, run, share. Doubles as the pricing model.
+ *   4. Step types   — the concrete proof: what an item is made of.
+ *   5. For teams    — what a server adds, and why that's the paid part.
+ *   6. Security     — the four facts a reviewer asks first.
+ *   7. Pricing      — the two numbers, with a link to the rest.
+ *   8. Final CTA.
  *
- * So the order is the argument, not a feature tour.
- *
- *   1. The claim, in a sentence anyone can picture.
- *   2. A beat of quiet to let it land.
- *   3. What it takes to make an idea runnable — which is free.
- *   4. What it takes to let one travel — which is where the money is, framed
- *      as a promise rather than a catch.
- *
- * What it deliberately does not do is explain how any of it works. That was
- * the first version's failing: it read like a design document, which flatters
- * the engineer who wrote it and does nothing for the person deciding whether
- * to spend four minutes installing something.
+ * Detail lives one click away: every benefit on /features, the line-by-line
+ * comparison on /pricing, the full review answers on /security. Each section
+ * here says one thing and says it once.
  */
 
 /**
@@ -140,276 +143,334 @@ const HeroPanel: FC = () => (
   </div>
 );
 
-export const HomePage: FC = () => (
-  <Page>
-    {/* ================= HERO ================= */}
-    <Section class="pt-8 sm:pt-16">
-      <Container size="wide">
-        <div class="grid items-center gap-14 [&>*]:min-w-0 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
-          <div>
-            <p class="rise" style="--i: 0;">
-              <Badge tone="success" class="mb-7">
-                <i data-lucide="circle-check" class="h-3 w-3" aria-hidden="true"></i>
-                Free forever, no account
-              </Badge>
-            </p>
+export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
+  const hosted = TIERS.find((tier) => tier.id === "cloud");
+  const money = (cents: number) => formatPrice(cents, app.locale, app.currency);
 
-            <h1
-              class="rise text-[2.9rem] leading-[0.98] text-balance sm:text-7xl lg:text-[5.25rem]"
-              style="--i: 1;"
-            >
-              Some ideas can't be explained. They have to be <em>run.</em>
-            </h1>
+  return (
+    <Page>
+      {/* ================= HERO ================= */}
+      <Section class="pt-8 sm:pt-16">
+        <Container size="wide">
+          <div class="grid items-center gap-14 [&>*]:min-w-0 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
+            <div>
+              <p class="rise" style="--i: 0;">
+                <Badge tone="success" class="mb-7">
+                  <i data-lucide="circle-check" class="h-3 w-3" aria-hidden="true"></i>
+                  Free forever, no account
+                </Badge>
+              </p>
 
-            <p
-              class="rise mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty sm:text-xl"
-              style="--i: 2;"
-            >
-              Zipr takes the thing you worked out — the sequence, the trick, the shortcut nobody
-              believes until they've seen it — and turns it into something a colleague can run on
-              the first try.
-            </p>
+              <h1
+                class="rise text-[2.9rem] leading-[0.98] text-balance sm:text-7xl lg:text-[5.25rem]"
+                style="--i: 1;"
+              >
+                Turn the steps you keep explaining into <em>one click.</em>
+              </h1>
 
-            <div class="rise mt-9 flex flex-wrap gap-3" style="--i: 3;">
-              <LinkButton href="/downloads" size="lg">
-                <i data-lucide="download" class="h-4 w-4" aria-hidden="true"></i>
-                Download for free
-              </LinkButton>
-              <LinkButton href="/pricing" variant="outline" size="lg">
-                See pricing
-              </LinkButton>
+              <p
+                class="rise mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty sm:text-xl"
+                style="--i: 2;"
+              >
+                Zipr is a desktop launcher for Windows and macOS. Chain commands, links, apps and
+                prompts into one named item — then hand it to a colleague instead of a walkthrough.
+              </p>
+
+              <div class="rise mt-9 flex flex-wrap gap-3" style="--i: 3;">
+                <LinkButton href="/downloads" size="lg">
+                  <i data-lucide="download" class="h-4 w-4" aria-hidden="true"></i>
+                  Download for free
+                </LinkButton>
+                <LinkButton href="/pricing" variant="outline" size="lg">
+                  See pricing
+                </LinkButton>
+              </div>
+
+              <p class="rise mt-6 text-sm text-muted-foreground" style="--i: 4;">
+                Windows 10+ and macOS 12+. Installs in about a minute.
+              </p>
             </div>
 
-            <p class="rise mt-6 text-sm text-muted-foreground" style="--i: 4;">
-              Windows and macOS. Takes a minute. Nothing to sign up for.
+            <div class="rise" style="--i: 2;">
+              <HeroPanel />
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* =================================================================
+          THE PROBLEM
+
+          One beat of quiet between the pitch and the detail. The hero says
+          what Zipr is; this says why it needs to exist, in two lines and one
+          sentence. The mark zips shut above it as the page loads — the one
+          piece of motion on the site that means something.
+         ================================================================= */}
+      <Section tone="muted">
+        <Container size="default">
+          <div class="text-center">
+            <LogoBricks cell="clamp(0.7rem, 2.6vw, 1.05rem)" class="mx-auto mb-12" />
+            <p class="font-display mx-auto max-w-4xl text-[2rem] leading-[1.08] text-balance sm:text-5xl lg:text-6xl">
+              Every team has something only one person can run.
+            </p>
+            <p class="font-display mt-3 text-[2rem] leading-[1.08] text-balance text-muted-foreground sm:text-5xl lg:text-6xl">
+              It is usually the <em>best</em> thing.
+            </p>
+            <p class="mx-auto mt-10 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
+              It lives in a wiki page, a chat thread or somebody's head — so it gets explained,
+              misread and explained again. Zipr turns it into something anyone can run.
             </p>
           </div>
+        </Container>
+      </Section>
 
-          <div class="rise" style="--i: 2;">
-            <HeroPanel />
+      {/* ================= HOW IT WORKS ================= */}
+      <Section id="how-it-works">
+        <Container>
+          <SectionHeading
+            align="center"
+            eyebrow="How it works"
+            title={
+              <>
+                Build it. Run it. <em>Share it.</em>
+              </>
+            }
+            lede="The first two are free, forever. The third is what teams pay for."
+          />
+
+          <div class="relative">
+            {/* The groove the three steps sit along. Outside the list, because
+                an `<ol>` may only hold list items. */}
+            <span
+              class="absolute left-[8%] right-[8%] top-16 hidden h-2 rounded-full bg-muted shadow-inset md:block"
+              aria-hidden="true"
+            ></span>
+            <ol class="relative grid gap-6 md:grid-cols-3">
+              {HOW_IT_WORKS.map((step) => (
+                <li class="relative">
+                  <Card lift class="flex h-full flex-col p-7">
+                    <div class="flex items-center justify-between">
+                      <span class="emboss font-display text-6xl font-bold leading-none text-muted tabular">
+                        {step.step}
+                      </span>
+                      <Badge tone={step.cost === "Free" ? "success" : "primary"}>{step.cost}</Badge>
+                    </div>
+                    <h3 class="mt-5 text-2xl text-balance">{step.title}</h3>
+                    <p class="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
+                      {step.body}
+                    </p>
+                  </Card>
+                </li>
+              ))}
+            </ol>
           </div>
-        </div>
-      </Container>
-    </Section>
+        </Container>
+      </Section>
 
-    {/* =================================================================
-        MANIFESTO
+      {/* =================================================================
+          STEP TYPES
 
-        One beat of quiet between the pitch and the feature grid. No cards,
-        no icons, no columns — the page earns the right to be loud later by
-        being still here. The mark sits above the claim built out of clay
-        bricks that zip shut as the page loads, which is the one piece of
-        motion on the site that means something: it is what the logo depicts.
-       ================================================================= */}
-    <Section tone="muted">
-      <Container size="default">
-        <div class="text-center">
-          <LogoBricks cell="clamp(0.7rem, 2.6vw, 1.05rem)" class="mx-auto mb-12" />
-          <p class="font-display mx-auto max-w-4xl text-[2rem] leading-[1.08] text-balance sm:text-5xl lg:text-6xl">
-            Every team has an idea only one person can run.
-          </p>
-          <p class="font-display mt-3 text-[2rem] leading-[1.08] text-balance text-muted-foreground sm:text-5xl lg:text-6xl">
-            It is usually the <em>best</em> one.
-          </p>
-          <p class="mx-auto mt-10 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-            Zipr exists to shorten the distance between one person having an idea and everybody else
-            being able to run it.
-          </p>
-        </div>
-      </Container>
-    </Section>
-
-    {/* ================= PILLARS ================= */}
-    <Section>
-      <Container size="wide">
-        <SectionHeading
-          align="center"
-          eyebrow="What it's for"
-          title="Out-of-the-box ideas have a habit of staying in one"
-          lede="The unconventional one is always the hardest to explain, and the easiest to leave in a document nobody opens. Everything here is aimed at that gap."
-        />
-
-        <div class="grid gap-6 sm:grid-cols-2 xl:grid-cols-4">
-          {PILLARS.map((pillar) => (
-            <Card lift class="flex h-full flex-col p-6">
-              <div class="flex items-start justify-between gap-3">
-                <IconTile icon={pillar.icon} tone={pillar.tier === "api" ? "primary" : "brand"} />
-                <Badge tone={pillar.tier === "api" ? "primary" : "neutral"}>
-                  {pillar.tier === "api" ? "With a team" : "Free"}
-                </Badge>
-              </div>
-              <h3 class="mt-5 text-xl leading-snug text-balance">{pillar.title}</h3>
-              <p class="mt-2.5 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
-                {pillar.body}
+          The twelve step types as keys on a keyboard, because that is what
+          they are: the keys an item is typed out of. This is the concrete
+          answer to "what can it actually do", so it stays on the home page.
+         ================================================================= */}
+      <Section tone="muted">
+        <Container size="wide">
+          <div class="grid gap-12 lg:grid-cols-[0.8fr_1.4fr] lg:gap-16">
+            <div class="lg:sticky lg:top-28 lg:self-start">
+              <Eyebrow>Twelve step types</Eyebrow>
+              <h2 class="text-3xl leading-[1.08] text-balance sm:text-[2.75rem]">
+                If you can describe it, Zipr can <em>run</em> it.
+              </h2>
+              <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
+                Chain steps in any order, ask a question midway and use the answer, and vary a step
+                by operating system — all in one item. Plugins cover the rest.
               </p>
-            </Card>
-          ))}
-        </div>
-      </Container>
-    </Section>
-
-    {/* =================================================================
-        ACTIONS
-
-        The twelve verbs as keys on a keyboard, because that is what they
-        are: the keys an item is typed out of. Each one gives under the
-        pointer the way a key does.
-       ================================================================= */}
-    <Section tone="muted">
-      <Container size="wide">
-        <div class="grid gap-12 lg:grid-cols-[0.8fr_1.4fr] lg:gap-16">
-          <div class="lg:sticky lg:top-28 lg:self-start">
-            <Eyebrow>Twelve verbs</Eyebrow>
-            <h2 class="text-3xl leading-[1.08] text-balance sm:text-[2.75rem]">
-              If you can describe it, Zipr can <em>run</em> it.
-            </h2>
-            <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
-              Stack the steps in any order. Ask a question halfway through and use the answer. Do
-              one thing on a Mac and another on Windows, from the same item. And when the twelve are
-              not enough, a plugin picks up where they stop.
-            </p>
-            <LinkButton href="/features" variant="outline" class="mt-6">
-              See what it can do
-              <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
-            </LinkButton>
-          </div>
-
-          <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
-            {ACTION_TYPES.map((action, i) => (
-              <li class="keycap flex flex-col p-4">
-                <span class="font-mono text-[0.7rem] font-semibold text-primary tabular">
-                  {String(i + 1).padStart(2, "0")}
-                </span>
-                <span class="mt-2 text-sm font-bold leading-snug">{action.name}</span>
-                <p class="mt-1 text-xs leading-relaxed text-muted-foreground text-pretty">
-                  {action.blurb}
-                </p>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </Container>
-    </Section>
-
-    {/* =================================================================
-        THE BOUNDARY
-
-        The commercial argument, and the one worth being precise about: the
-        thing a team buys is not sync, it is knowledge crossing a line that
-        normally costs a ticket and a meeting to cross. Every clause is
-        something the product genuinely does — a workspace per team, a
-        published copy rather than a handover, roles and visibility that stay
-        where the organisation already put them.
-       ================================================================= */}
-    <Section>
-      <Container>
-        <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
-          <div>
-            <Eyebrow>Across the boundary</Eyebrow>
-            <h2 class="text-3xl leading-[1.08] text-balance sm:text-[2.75rem]">
-              Knowledge <em>moves.</em> The org chart stays put.
-            </h2>
-            <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
-              What you need is usually two teams away, and reaching it normally costs a ticket, a
-              meeting, or somebody's manager. Give your organisation a Zipr server and every team
-              keeps its own workspace and its own rules, while the work crosses between them as a
-              published copy — attributed, current, and safe to run.
-            </p>
-            <p class="mt-4 leading-relaxed text-muted-foreground text-pretty">
-              Nobody joins a team to learn something from it. Nobody gives up ownership of anything.
-            </p>
-            <div class="mt-7 flex flex-wrap gap-3">
-              <LinkButton href="/pricing">
-                What a team costs
+              <LinkButton href="/features" variant="outline" class="mt-6">
+                See all features
                 <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
               </LinkButton>
-              <LinkButton href="/security" variant="ghost">
-                How we keep it safe
-              </LinkButton>
             </div>
-          </div>
 
-          <Card class="flex flex-col justify-center p-6 sm:p-8">
-            {/* Three teams, each in its own tray, with a copy crossing the
-                groove between two of them. The trays never merge — which is
-                the point being drawn. */}
-            <div class="mb-8 flex items-center gap-2" aria-hidden="true">
-              {["Platform", "Support", "Yours"].map((team, i) => (
-                <>
-                  {i > 0 ? (
-                    <span class="relative h-2 flex-1 rounded-full bg-muted shadow-inset">
-                      {i === 1 ? (
-                        <span
-                          class="brick float absolute left-1/2 top-1/2 -ml-2 -mt-2 h-4 w-4"
-                          style="--r: 8deg;"
-                        ></span>
-                      ) : null}
-                    </span>
-                  ) : null}
-                  <span class="clay-well rounded-full px-3 py-1.5 text-xs font-semibold text-brand-subtle-foreground sm:px-4">
-                    {team}
+            <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
+              {ACTION_TYPES.map((action, i) => (
+                <li class="keycap flex flex-col p-4">
+                  <span class="font-mono text-[0.7rem] font-semibold text-primary tabular">
+                    {String(i + 1).padStart(2, "0")}
                   </span>
-                </>
-              ))}
-            </div>
-            <ul class="space-y-3.5">
-              {TEAM_UNLOCKS.map((unlock) => (
-                <CheckItem>{unlock}</CheckItem>
+                  <span class="mt-2 text-sm font-bold leading-snug">{action.name}</span>
+                  <p class="mt-1 text-xs leading-relaxed text-muted-foreground text-pretty">
+                    {action.blurb}
+                  </p>
+                </li>
               ))}
             </ul>
-          </Card>
-        </div>
-      </Container>
-    </Section>
+          </div>
+        </Container>
+      </Section>
 
-    {/* ================= THE PROMISE ================= */}
-    <Section>
-      <Container>
-        <SectionHeading
-          align="center"
-          eyebrow="The honest version"
-          title={
-            <>
-              Free alone. <em>Paid together.</em>
-            </>
-          }
-          lede="Most tools hand you a hobbled free tier and wait for you to outgrow it. Zipr's free app is the whole app — have as many ideas as you like, forever. What costs money is the day one of them has to belong to more than you, and then you pick who runs the server."
-        />
+      {/* =================================================================
+          FOR TEAMS
 
-        <div class="relative">
-          {/* The groove the three steps sit along. Outside the list, because
-              an `<ol>` may only hold list items. */}
-          <span
-            class="absolute left-[8%] right-[8%] top-16 hidden h-2 rounded-full bg-muted shadow-inset md:block"
-            aria-hidden="true"
-          ></span>
-          <ol class="relative grid gap-6 md:grid-cols-3">
-            {JOURNEY.map((step) => (
-              <li class="relative">
-                <Card lift class="flex h-full flex-col p-7">
-                  <div class="flex items-center justify-between">
-                    <span class="emboss font-display text-6xl font-bold leading-none text-muted tabular">
-                      {step.step}
+          The commercial argument: what a team buys is not sync, it is
+          knowledge crossing a line that normally costs a ticket and a meeting
+          to cross — without anyone's roles or ownership changing.
+         ================================================================= */}
+      <Section>
+        <Container>
+          <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
+            <div>
+              <Eyebrow>For teams</Eyebrow>
+              <h2 class="text-3xl leading-[1.08] text-balance sm:text-[2.75rem]">
+                Knowledge <em>moves.</em> The org chart stays put.
+              </h2>
+              <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
+                Give your organisation a Zipr server and each team keeps its own workspace and
+                rules. Work crosses between them as a published copy — attributed, current and safe
+                to run — instead of a ticket or a meeting.
+              </p>
+              <div class="mt-7 flex flex-wrap gap-3">
+                <LinkButton href="/pricing">
+                  See team pricing
+                  <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
+                </LinkButton>
+              </div>
+            </div>
+
+            <Card class="flex flex-col justify-center p-6 sm:p-8">
+              {/* Three teams, each in its own tray, with a copy crossing the
+                  groove between two of them. The trays never merge — which is
+                  the point being drawn. */}
+              <div class="mb-8 flex items-center gap-2" aria-hidden="true">
+                {["Platform", "Support", "Yours"].map((team, i) => (
+                  <>
+                    {i > 0 ? (
+                      <span class="relative h-2 flex-1 rounded-full bg-muted shadow-inset">
+                        {i === 1 ? (
+                          <span
+                            class="brick float absolute left-1/2 top-1/2 -ml-2 -mt-2 h-4 w-4"
+                            style="--r: 8deg;"
+                          ></span>
+                        ) : null}
+                      </span>
+                    ) : null}
+                    <span class="clay-well rounded-full px-3 py-1.5 text-xs font-semibold text-brand-subtle-foreground sm:px-4">
+                      {team}
                     </span>
-                    <Badge tone={step.cost === "Free" ? "success" : "primary"}>{step.cost}</Badge>
-                  </div>
-                  <h3 class="mt-5 text-2xl text-balance">{step.title}</h3>
-                  <p class="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
-                    {step.body}
-                  </p>
-                </Card>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </Container>
-    </Section>
+                  </>
+                ))}
+              </div>
+              <ul class="space-y-3.5">
+                {TEAM_UNLOCKS.map((unlock) => (
+                  <CheckItem>{unlock}</CheckItem>
+                ))}
+              </ul>
+            </Card>
+          </div>
+        </Container>
+      </Section>
 
-    <CtaBand
-      title="Start with the one you keep having to explain."
-      body="The free app needs no account and is the same one paying teams run. Come back here the day the idea stops being only yours."
-      primary={{ href: "/downloads", label: "Download Zipr" }}
-      secondary={{ href: "/pricing", label: "See pricing" }}
-    />
-  </Page>
-);
+      {/* =================================================================
+          SECURITY
+
+          Technical credibility, stated as facts a reviewer can hold us to.
+          There are no customer logos or testimonials on this site yet, and
+          none are invented to fill the gap — these are the proof there is.
+         ================================================================= */}
+      <Section tone="muted">
+        <Container size="wide">
+          <SectionHeading
+            align="center"
+            eyebrow="Security"
+            title="Built for your security review"
+            lede="The short answers to the questions your reviewer will ask first."
+          />
+
+          <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {TRUST_POINTS.map((point) => (
+              <Card class="flex h-full flex-col p-6">
+                <IconTile icon={point.icon} tone="brand" />
+                <h3 class="mt-5 text-lg leading-snug text-balance">{point.title}</h3>
+                <p class="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
+                  {point.body}
+                </p>
+              </Card>
+            ))}
+          </div>
+
+          <p class="mt-8 text-center">
+            <a
+              href="/security"
+              class="inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-4"
+            >
+              Read the full security overview
+              <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
+            </a>
+          </p>
+        </Container>
+      </Section>
+
+      {/* ================= PRICING ================= */}
+      <Section>
+        <Container>
+          <SectionHeading
+            align="center"
+            eyebrow="Pricing"
+            title={
+              <>
+                Free alone. <em>Paid together.</em>
+              </>
+            }
+            lede="The free app is the whole app, not a trial. You pay only when an item has to be shared."
+          />
+
+          <div class="grid gap-6 md:grid-cols-2">
+            <Card lift class="flex h-full flex-col p-7">
+              <div class="flex items-center justify-between">
+                <h3 class="text-2xl">The app</h3>
+                <Badge tone="success">Free</Badge>
+              </div>
+              <p class="mt-4 font-display text-5xl font-semibold tabular">{money(0)}</p>
+              <p class="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
+                Everything one person can do on one machine. No account, no card, no expiry.
+              </p>
+              <LinkButton href="/downloads" variant="outline" class="mt-6 w-full">
+                Download Zipr
+              </LinkButton>
+            </Card>
+
+            <Card lift class="flex h-full flex-col p-7">
+              <div class="flex items-center justify-between">
+                <h3 class="text-2xl">A team server</h3>
+                <Badge tone="primary">Team</Badge>
+              </div>
+              {hosted?.annualMonthlyCents ? (
+                <p class="mt-4 flex flex-wrap items-baseline gap-1.5">
+                  <span class="text-sm font-medium text-muted-foreground">From</span>
+                  <span class="font-display text-5xl font-semibold tabular">
+                    {money(hosted.annualMonthlyCents)}
+                  </span>
+                  <span class="text-sm font-medium text-muted-foreground">/ person / month</span>
+                </p>
+              ) : null}
+              <p class="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
+                Hosted by us, billed yearly, minimum {hosted?.minimumSeats ?? 5} people. Or
+                self-hosted on your own infrastructure, priced per deployment.
+              </p>
+              <LinkButton href="/pricing" class="mt-6 w-full">
+                Compare plans
+              </LinkButton>
+            </Card>
+          </div>
+        </Container>
+      </Section>
+
+      <CtaBand
+        title="Start with the one you keep having to explain."
+        body="Free, no account, and the same app paying teams run."
+        primary={{ href: "/downloads", label: "Download Zipr" }}
+        secondary={{ href: "/contact?topic=cloud", label: "Talk to us about a team" }}
+      />
+    </Page>
+  );
+};
