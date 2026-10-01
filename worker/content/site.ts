@@ -94,7 +94,7 @@ export const PUBLIC_NAV = [
 ];
 
 /**
- * Product screenshots, hosted off-site.
+ * Product screenshots, served from `public/screenshots/`.
  *
  * Each is rendered from the app's own screen gallery in both themes and named
  * `<id>-light.png` / `<id>-dark.png`. Width and height are the rendered
@@ -105,7 +105,7 @@ export const PUBLIC_NAV = [
  * The alt text describes what is in the picture, not what it is for: it is the
  * only way a screen-reader user learns what the launcher looks like.
  */
-export const SCREENSHOT_BASE = "https://stanbrook.me/zipr-marketing";
+export const SCREENSHOT_BASE = "/screenshots";
 
 export const SCREENSHOTS = {
   "overlay-list": {
