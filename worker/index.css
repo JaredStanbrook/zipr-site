@@ -824,6 +824,67 @@
   }
 }
 
+@layer components {
+  /* Product screenshots, one image per theme. With no class on <html> yet
+     (before the theme script runs) the operating system decides; once the
+     script has set `light` or `dark` that wins, so the header toggle and the
+     pictures never disagree. */
+  .shot-dark {
+    display: none;
+  }
+  .dark .shot-light {
+    display: none;
+  }
+  .dark .shot-dark {
+    display: block;
+  }
+  @media (prefers-color-scheme: dark) {
+    html:not(.light):not(.dark) .shot-light {
+      display: none;
+    }
+    html:not(.light):not(.dark) .shot-dark {
+      display: block;
+    }
+  }
+
+  /* Two slides stacked in one grid cell, taking turns. Each runs the same
+     cycle (`--shot-hold` each, so twice that in all) and slide `--i` is
+     started `--i` holds late, via a negative delay so nothing is visible out
+     of turn on load. The keyframes below are written for exactly two. */
+  .shot-swap {
+    --shot-hold: 5s;
+    display: grid;
+  }
+  .shot-slide {
+    grid-area: 1 / 1;
+    align-self: center;
+    animation: shot-swap calc(var(--shot-hold) * var(--n)) ease-in-out infinite;
+    animation-delay: calc(var(--shot-hold) * (var(--i) - var(--n)));
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .shot-slide {
+      animation: none !important;
+    }
+    .shot-slide:not(:first-child) {
+      display: none;
+    }
+  }
+}
+
+@keyframes shot-swap {
+  0%,
+  44% {
+    opacity: 1;
+  }
+  50%,
+  94% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
 @keyframes clay-rise {
   from {
     opacity: 0;

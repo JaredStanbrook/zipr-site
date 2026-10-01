@@ -10,6 +10,7 @@ import {
   IconTile,
   Badge,
   CtaBand,
+  Screenshot,
 } from "@views/components/Ui";
 
 /**
@@ -78,6 +79,7 @@ export const FeaturesPage: FC = () => (
           title="Build it once. Let anyone run it."
           lede="What Zipr does on its own for free, and what it adds when your team shares a server."
         />
+        <Screenshot id="app-browse" eager class="mx-auto mt-4 max-w-5xl" />
       </Container>
     </Section>
 

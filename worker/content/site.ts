@@ -92,3 +92,42 @@ export const PUBLIC_NAV = [
   { to: "/security", name: "Security" },
   { to: "/contact", name: "Contact" },
 ];
+
+/**
+ * Product screenshots, hosted off-site.
+ *
+ * Each is rendered from the app's own screen gallery in both themes and named
+ * `<id>-light.png` / `<id>-dark.png`. Width and height are the rendered
+ * pixels, kept here so the page reserves the right box before the file
+ * arrives and nothing jumps. If a file is re-rendered at a different size,
+ * change it here.
+ *
+ * The alt text describes what is in the picture, not what it is for: it is the
+ * only way a screen-reader user learns what the launcher looks like.
+ */
+export const SCREENSHOT_BASE = "https://stanbrook.me/zipr-marketing";
+
+export const SCREENSHOTS = {
+  "overlay-list": {
+    width: 1800,
+    height: 1238,
+    alt: "The Zipr launcher: a search box above a list of items — Start my workday, Join my next meeting, Present my screen and more — each with its own icon and colour.",
+  },
+  "overlay-grid": {
+    width: 1800,
+    height: 1118,
+    alt: "The Zipr launcher in its grid layout: a search box above tiles for Start my workday, Join my next meeting, Present my screen and others, each with an icon and a one-line description.",
+  },
+  "item-detail": {
+    width: 2400,
+    height: 1158,
+    alt: "A Zipr item, Deploy to production, with its tags and three steps: ask for a yes or no, run a command, and open a web address.",
+  },
+  "app-browse": {
+    width: 2880,
+    height: 1646,
+    alt: "The Zipr app's Browse screen: a sidebar of sections, a list of catalogues, and a grid of items such as Start my workday and Book a meeting room.",
+  },
+} as const;
+
+export type ScreenshotId = keyof typeof SCREENSHOTS;
