@@ -78,7 +78,7 @@ const HeroPanel: FC = () => (
 
     <ScreenshotSwap ids={["overlay-list", "overlay-grid"]} class="relative" />
 
-    <p class="mt-5 text-center text-xs text-muted-foreground">
+    <p class="-mt-8 text-center text-xs text-muted-foreground">
       The Zipr launcher, in its list and grid layouts.
     </p>
   </div>

@@ -111,13 +111,13 @@ export const SCREENSHOT_BASE = "/screenshots";
 
 export const SCREENSHOTS = {
   "overlay-list": {
-    width: 1792,
-    height: 1422,
+    width: 1232,
+    height: 1102,
     alt: "The Zipr launcher: a search box above a list of items — Start my workday, Join my next meeting, Present my screen and more — each with its own icon and colour.",
   },
   "overlay-grid": {
-    width: 1992,
-    height: 1494,
+    width: 1232,
+    height: 1038,
     alt: "The Zipr launcher in its grid layout: a search box above tiles for Start my workday, Join my next meeting, Present my screen and others, each with an icon and a one-line description.",
   },
   "item-detail": {
