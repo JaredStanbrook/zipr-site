@@ -1,5 +1,7 @@
 import type { FC, Child } from "hono/jsx";
 
+import { SCREENSHOTS, SCREENSHOT_BASE, type ScreenshotId } from "@server/content/site";
+
 /**
  * The site's layout vocabulary.
  *
@@ -416,4 +418,63 @@ export const Disclosure: FC<{ question: string; children?: Child }> = ({ questio
     </summary>
     <div class="mt-3 pb-1 leading-relaxed text-muted-foreground text-pretty">{children}</div>
   </details>
+);
+
+/**
+ * A product screenshot that follows the site's theme.
+ *
+ * Two images, one per theme, and the stylesheet shows the one that matches
+ * (`.shot-light` / `.shot-dark` in index.css). A `<picture>` with a
+ * `prefers-color-scheme` source would follow the operating system only, and
+ * the theme toggle in the header would then disagree with the pictures.
+ *
+ * The hidden image is lazy, so a browser does not download it. `eager` is for
+ * the picture at the top of the page, where lazy loading would delay the
+ * largest paint; it costs the hidden variant too, which is the price of not
+ * knowing the theme on the server.
+ */
+export const Screenshot: FC<{ id: ScreenshotId; eager?: boolean; class?: string }> = ({
+  id,
+  eager = false,
+  class: className = "",
+}) => {
+  const shot = SCREENSHOTS[id];
+  const image = (theme: "light" | "dark") => (
+    <img
+      class={`shot-${theme} h-auto w-full`}
+      src={`${SCREENSHOT_BASE}/${id}-${theme}.png`}
+      width={shot.width}
+      height={shot.height}
+      alt={shot.alt}
+      loading={eager ? "eager" : "lazy"}
+      decoding="async"
+    />
+  );
+  return (
+    <span class={`shot block overflow-hidden rounded-[1.4rem] shadow-floating ${className}`}>
+      {image("light")}
+      {image("dark")}
+    </span>
+  );
+};
+
+/**
+ * Two screenshots taking turns in one place, crossfading.
+ *
+ * Pure CSS: every slide animates on the same cycle, offset by its place in
+ * the line, so there is nothing to start, stop or fall out of step. The slides
+ * share one grid cell, so the box is as tall as the tallest and does not
+ * resize as they change. With reduced motion only the first is shown.
+ */
+export const ScreenshotSwap: FC<{ ids: [ScreenshotId, ScreenshotId]; class?: string }> = ({
+  ids,
+  class: className = "",
+}) => (
+  <div class={`shot-swap ${className}`} style={`--n: ${ids.length};`}>
+    {ids.map((id, i) => (
+      <div class="shot-slide" style={`--i: ${i};`}>
+        <Screenshot id={id} eager={i === 0} />
+      </div>
+    ))}
+  </div>
 );

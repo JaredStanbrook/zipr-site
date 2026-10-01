@@ -17,6 +17,8 @@ import {
   Eyebrow,
   CheckItem,
   LogoBricks,
+  Screenshot,
+  ScreenshotSwap,
 } from "@views/components/Ui";
 
 /**
@@ -39,36 +41,13 @@ import {
  */
 
 /**
- * The hero illustration: one catalogue, four teams, every row still saying
- * where it came from.
+ * The hero: the launcher itself, in its two layouts, taking turns.
  *
- * That is the entire product argument in a picture, and it is why each row
- * leads with its origin rather than with its step count — boundaries blurred,
- * hierarchy intact. It is drawn rather than screenshotted, and says so.
- */
-const CATALOGUE = [
-  { name: "Open the on-call runbook", from: "Platform", steps: "1 step", icon: "link" },
-  { name: "Spin up a staging stack", from: "Infrastructure", steps: "3 steps", icon: "terminal" },
-  {
-    name: "Rotate my API token",
-    from: "Yours",
-    steps: "3 steps, one confirmation",
-    icon: "key-round",
-  },
-  {
-    name: "Reset a customer sandbox",
-    from: "Support",
-    steps: "2 steps, asks first",
-    icon: "rotate-ccw",
-  },
-];
-
-/**
- * Drawn as a clay object: the window is a raised slab, its list is a well cut
- * into it, and each row is a small tile sitting in the well. The first row is
- * shown mid-hover with its play button lit, so the picture has a verb in it.
- * A few loose pieces float around it — the kind of thing that ends up on a
- * desk next to the thing you are making.
+ * It used to be a drawn catalogue, because there was nothing to photograph.
+ * Now there is, and a picture of the real thing answers "what is this?"
+ * faster than a picture that says it is only an illustration. The loose clay
+ * pieces stay: they are the site's own furniture, and they are what keeps a
+ * flat screenshot from sitting on the page like a pasted-in rectangle.
  */
 const HeroPanel: FC = () => (
   <div class="relative mx-auto w-full max-w-xl lg:max-w-none">
@@ -97,49 +76,11 @@ const HeroPanel: FC = () => (
       aria-hidden="true"
     ></span>
 
-    <Card tone="floating" class="relative rotate-[0.6deg] p-3 sm:p-4">
-      <div class="flex items-center gap-2 px-2 pb-3 pt-1">
-        <span class="h-3 w-3 rounded-full bg-destructive/70 shadow-inset"></span>
-        <span class="h-3 w-3 rounded-full bg-warning/70 shadow-inset"></span>
-        <span class="h-3 w-3 rounded-full bg-success/70 shadow-inset"></span>
-        <span class="ml-2 font-display text-sm font-semibold">Your catalogue</span>
-        <Badge tone="brand" class="ml-auto">
-          <i data-lucide="hard-drive" class="h-3 w-3" aria-hidden="true"></i>
-          <span class="hidden sm:inline">Runs on this machine</span>
-          <span class="sm:hidden">Local</span>
-        </Badge>
-      </div>
+    <ScreenshotSwap ids={["overlay-list", "overlay-grid"]} class="relative rotate-[0.6deg]" />
 
-      <div class="clay-well space-y-2.5 rounded-[1.1rem] p-2.5 sm:p-3">
-        {CATALOGUE.map((item, i) => (
-          <div
-            class={`rise flex items-center gap-3 rounded-[0.9rem] bg-card px-3 py-2.5 sm:gap-4 ${
-              i === 0 ? "shadow-floating" : "shadow-raised"
-            }`}
-            style={`--i: ${i + 4};`}
-          >
-            <IconTile icon={item.icon} class="!h-9 !w-9 rotate-0" />
-            <span class="min-w-0 flex-1">
-              <span class="block truncate text-sm font-semibold">{item.name}</span>
-              <span class="block truncate text-xs text-muted-foreground">
-                <span class="font-semibold text-brand-subtle-foreground">{item.from}</span> ·{" "}
-                {item.steps}
-              </span>
-            </span>
-            <span
-              class={`inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full ${
-                i === 0 ? "clay-primary" : "bg-muted text-muted-foreground shadow-inset"
-              }`}
-              aria-hidden="true"
-            >
-              <i data-lucide="play" class="h-3.5 w-3.5"></i>
-            </span>
-          </div>
-        ))}
-      </div>
-    </Card>
-
-    <p class="mt-5 text-center text-xs text-muted-foreground">An illustration, not a screenshot.</p>
+    <p class="mt-5 text-center text-xs text-muted-foreground">
+      The Zipr launcher, in its list and grid layouts.
+    </p>
   </div>
 );
 
@@ -313,6 +254,13 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
               ))}
             </ul>
           </div>
+
+          <figure class="mt-12 lg:mt-16">
+            <Screenshot id="item-detail" class="mx-auto max-w-4xl" />
+            <figcaption class="mt-4 text-center text-sm text-muted-foreground text-pretty">
+              One item, three steps: ask first, run a command, open a page.
+            </figcaption>
+          </figure>
         </Container>
       </Section>
 
