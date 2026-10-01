@@ -428,6 +428,9 @@ export const Disclosure: FC<{ question: string; children?: Child }> = ({ questio
  * `prefers-color-scheme` source would follow the operating system only, and
  * the theme toggle in the header would then disagree with the pictures.
  *
+ * The image carries its own corners and shadow (transparent PNG), so nothing
+ * here rounds, clips or shades it.
+ *
  * The hidden image is lazy, so a browser does not download it. `eager` is for
  * the picture at the top of the page, where lazy loading would delay the
  * largest paint; it costs the hidden variant too, which is the price of not
@@ -451,7 +454,7 @@ export const Screenshot: FC<{ id: ScreenshotId; eager?: boolean; class?: string 
     />
   );
   return (
-    <span class={`shot block overflow-hidden rounded-[1.4rem] shadow-floating ${className}`}>
+    <span class={`shot block ${className}`}>
       {image("light")}
       {image("dark")}
     </span>

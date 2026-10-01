@@ -97,7 +97,9 @@ export const PUBLIC_NAV = [
  * Product screenshots, served from `public/screenshots/`.
  *
  * Each is rendered from the app's own screen gallery in both themes and named
- * `<id>-light.png` / `<id>-dark.png`. Width and height are the rendered
+ * `<id>-light.png` / `<id>-dark.png`. They are transparent PNGs of the window
+ * alone, with its own rounded corners and a margin that holds its shadow, so
+ * the page adds no frame, radius or shadow of its own. Width and height are the rendered
  * pixels, kept here so the page reserves the right box before the file
  * arrives and nothing jumps. If a file is re-rendered at a different size,
  * change it here.
@@ -109,23 +111,23 @@ export const SCREENSHOT_BASE = "/screenshots";
 
 export const SCREENSHOTS = {
   "overlay-list": {
-    width: 1800,
-    height: 1238,
+    width: 1792,
+    height: 1422,
     alt: "The Zipr launcher: a search box above a list of items — Start my workday, Join my next meeting, Present my screen and more — each with its own icon and colour.",
   },
   "overlay-grid": {
-    width: 1800,
-    height: 1118,
+    width: 1992,
+    height: 1494,
     alt: "The Zipr launcher in its grid layout: a search box above tiles for Start my workday, Join my next meeting, Present my screen and others, each with an icon and a one-line description.",
   },
   "item-detail": {
-    width: 2400,
-    height: 1158,
+    width: 2192,
+    height: 1326,
     alt: "A Zipr item, Deploy to production, with its tags and three steps: ask for a yes or no, run a command, and open a web address.",
   },
   "app-browse": {
-    width: 2880,
-    height: 1646,
+    width: 2752,
+    height: 1928,
     alt: "The Zipr app's Browse screen: a sidebar of sections, a list of catalogues, and a grid of items such as Start my workday and Book a meeting room.",
   },
 } as const;
