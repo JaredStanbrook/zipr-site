@@ -11,7 +11,10 @@ import {
   Badge,
   CtaBand,
   Screenshot,
+  LinkButton,
+  Eyebrow,
 } from "@views/components/Ui";
+import type { ScreenshotId } from "@server/content/site";
 
 /**
  * For the reader who is already interested and wants to know what they get.
@@ -56,6 +59,32 @@ const SCENES = [
   },
 ];
 
+/**
+ * The app, one screen at a time: what each is for, beside what it looks like.
+ * Alternating sides so the eye zig-zags down the page rather than reading a
+ * column of pictures.
+ */
+const TOUR: { shot: ScreenshotId; eyebrow: string; title: string; body: string }[] = [
+  {
+    shot: "overlay-list",
+    eyebrow: "The launcher",
+    title: "One shortcut, then type",
+    body: "Press your shortcut from anywhere and start typing. Return runs the one you want; Escape puts it away. It opens instantly because everything is already on your computer.",
+  },
+  {
+    shot: "item-detail",
+    eyebrow: "Every item",
+    title: "Read it before you run it",
+    body: "See every step an item takes, in order, before you launch it — what it opens, what it asks, what it runs. Tags say what it's for and whether it needs a go-ahead.",
+  },
+  {
+    shot: "item-edit",
+    eyebrow: "The editor",
+    title: "Change it in one place",
+    body: "Reorder steps, switch one off without deleting it, and decide whether the item asks before it runs. Keep a draft on your computer until it's right.",
+  },
+];
+
 const PillarGrid: FC<{ tier: Feature["tier"] }> = ({ tier }) => (
   <div class="grid gap-5 sm:grid-cols-2">
     {PILLARS.filter((pillar) => pillar.tier === tier).map((pillar) => (
@@ -80,6 +109,57 @@ export const FeaturesPage: FC = () => (
           lede="What Zipr does on its own for free, and what it adds when your team shares a server."
         />
         <Screenshot id="app-browse" eager class="mx-auto mt-4 max-w-5xl" />
+      </Container>
+    </Section>
+
+    {/* ================= TOUR ================= */}
+    <Section>
+      <Container size="wide">
+        <SectionHeading
+          eyebrow="A closer look"
+          title="Built for the keyboard, clear at a glance"
+          lede="The few screens you'll spend your time in."
+        />
+        <div class="space-y-20 lg:space-y-28">
+          {TOUR.map((stop, i) => (
+            <div class="grid items-center gap-8 lg:grid-cols-12 lg:gap-12">
+              <div class={`lg:col-span-4 ${i % 2 === 1 ? "lg:order-2" : ""}`}>
+                <Eyebrow>{stop.eyebrow}</Eyebrow>
+                <h3 class="text-3xl leading-[1.1] text-balance">{stop.title}</h3>
+                <p class="mt-4 leading-relaxed text-muted-foreground text-pretty">{stop.body}</p>
+              </div>
+              <div class={`lg:col-span-8 ${i % 2 === 1 ? "lg:order-1" : ""}`}>
+                <Screenshot
+                  id={stop.shot}
+                  class={stop.shot.startsWith("overlay") ? "mx-auto max-w-md" : ""}
+                />
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* Zap gets a pointer, not a summary: it has a page of its own. */}
+        <Card class="mt-20 overflow-hidden lg:mt-28">
+          <div class="grid items-center gap-8 p-7 sm:p-10 lg:grid-cols-12">
+            <div class="lg:col-span-5">
+              <Eyebrow>Zap</Eyebrow>
+              <h3 class="text-3xl leading-[1.1] text-balance">
+                Or bring the idea, and let Zap speak computer.
+              </h3>
+              <p class="mt-4 leading-relaxed text-muted-foreground text-pretty">
+                Say what you want in your own words. Zap works out the links and commands to do it —
+                including ones you've never heard of — and builds the item for you to test.
+              </p>
+              <LinkButton href="/zap" variant="outline" class="mt-6">
+                Meet Zap
+                <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
+              </LinkButton>
+            </div>
+            <div class="lg:col-span-7">
+              <Screenshot id="zap" />
+            </div>
+          </div>
+        </Card>
       </Container>
     </Section>
 

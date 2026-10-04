@@ -14,6 +14,7 @@ import { faqSchema, softwareSchema, websiteSchema } from "@server/lib/structured
 
 import { HomePage } from "@views/pages/Home";
 import { FeaturesPage } from "@views/pages/Features";
+import { ZapPage, ZAP_FAQ } from "@views/pages/Zap";
 import { PricingPage } from "@views/pages/Pricing";
 import { SecurityPage, REVIEW_FAQ } from "@views/pages/Security";
 import { PrivacyPage } from "@views/pages/Privacy";
@@ -63,6 +64,15 @@ siteRoute.get("/features", (c) =>
     title: "Features: step types, sharing and history",
     description:
       "What the free Zipr app does on its own, what a team server adds, and the twelve step types every item is built from.",
+  }),
+);
+
+siteRoute.get("/zap", (c) =>
+  c.render(<ZapPage />, {
+    title: "Zap: turn an idea into steps your computer runs",
+    description:
+      "Say what you want in your own words. Zap works out the links and commands your computer needs, and builds them into one click you test before you keep.",
+    jsonLd: [faqSchema(ZAP_FAQ)],
   }),
 );
 

@@ -87,6 +87,7 @@ export const INSTALL_NOTES = [
 /** Everything the nav needs to know about the public pages. */
 export const PUBLIC_NAV = [
   { to: "/features", name: "Features" },
+  { to: "/zap", name: "Zap" },
   { to: "/downloads", name: "Downloads" },
   { to: "/pricing", name: "Pricing" },
   { to: "/security", name: "Security" },
@@ -112,23 +113,33 @@ export const SCREENSHOT_BASE = "/screenshots";
 export const SCREENSHOTS = {
   "overlay-list": {
     width: 1232,
-    height: 1102,
-    alt: "The Zipr launcher: a search box above a list of items — Start my workday, Join my next meeting, Present my screen and more — each with its own icon and colour.",
+    height: 1136,
+    alt: "The Zipr launcher: a search box above a list of items — Start my workday, Join my next meeting, Present my screen, Fill in my timesheet and more — each with its own icon and colour.",
   },
   "overlay-grid": {
     width: 1232,
-    height: 1038,
-    alt: "The Zipr launcher in its grid layout: a search box above tiles for Start my workday, Join my next meeting, Present my screen and others, each with an icon and a one-line description.",
+    height: 1060,
+    alt: "The Zipr launcher in its grid layout: a search box above tiles for Start my workday, Join my next meeting, Present my screen, Fill in my timesheet, Book a meeting room and Focus for an hour, each with an icon and a one-line description.",
   },
   "item-detail": {
     width: 2192,
-    height: 1326,
-    alt: "A Zipr item, Deploy to production, with its tags and three steps: ask for a yes or no, run a command, and open a web address.",
+    height: 1280,
+    alt: "A Zipr item, Deploy to production, tagged production and needs approval, with three steps: ask for a yes or no, run a command, and open a web address.",
+  },
+  "item-edit": {
+    width: 2192,
+    height: 1720,
+    alt: "Editing the Deploy to production item: its name, category, description, colour, icon and tags, then its three steps in order, each with its own on switch, above Cancel, Save draft and Save and send.",
   },
   "app-browse": {
-    width: 2752,
-    height: 1928,
-    alt: "The Zipr app's Browse screen: a sidebar of sections, a list of catalogues, and a grid of items such as Start my workday and Book a meeting room.",
+    width: 3232,
+    height: 1728,
+    alt: "The Zipr app's Browse screen: a sidebar of sections, the Everyday catalogue's items in a list, and an inspector beside it showing Start my workday's three steps with Launch, Open and Edit.",
+  },
+  zap: {
+    width: 2392,
+    height: 2454,
+    alt: "Zap building an item called Morning focus. On the left, the conversation: a request in plain words, Zap's reply and the changes it made, a follow-up asking for do not disturb, and a test where every step succeeded and the command shows as started. On the right, the six steps it built, a note that one runs a program, the assumption Zap made, and Test and Save item.",
   },
 } as const;
 
