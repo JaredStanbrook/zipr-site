@@ -278,11 +278,12 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
             <div class="lg:col-span-5">
               <Eyebrow>Zap</Eyebrow>
               <h2 class="text-3xl leading-[1.08] text-balance sm:text-[2.75rem]">
-                Or just <em>say</em> what you want done.
+                You have the idea. Zap speaks <em>computer.</em>
               </h2>
               <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
-                Describe a routine in plain words and Zap builds it as an item you can read and
-                test. It never runs anything itself, and nothing is saved until you choose to.
+                Say what you want in your own words. Zap works out how your computer does it — a
+                link that writes the email, the command that clears the cache — and builds it for
+                you to test. It never runs anything itself.
               </p>
               <LinkButton href="/zap" variant="outline" class="mt-6">
                 Meet Zap

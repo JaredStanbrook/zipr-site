@@ -69,9 +69,9 @@ siteRoute.get("/features", (c) =>
 
 siteRoute.get("/zap", (c) =>
   c.render(<ZapPage />, {
-    title: "Zap: describe it and Zipr builds it",
+    title: "Zap: turn an idea into steps your computer runs",
     description:
-      "Describe a routine in plain words and Zap builds a Zipr item you can read, test and change. It never runs anything itself.",
+      "Say what you want in your own words. Zap works out the links and commands your computer needs, and builds them into one click you test before you keep.",
     jsonLd: [faqSchema(ZAP_FAQ)],
   }),
 );

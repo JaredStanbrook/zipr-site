@@ -14,18 +14,120 @@ import {
 } from "@views/components/Ui";
 
 /**
- * Zap: describing an item instead of building it.
+ * Zap: the translator between an idea and the computer.
  *
- * The reader has seen a hundred "AI that does it for you" pages and trusts
- * none of them, so this one leads with what Zap will not do. The pitch is the
- * speed; the argument is the restraint — it builds, you run — and the page
- * spends most of its length on the second, because that is the part a
- * sceptical reader is checking for.
+ * The pitch is the gap Zap closes. A person knows what they want — "email my
+ * manager that I'm off sick" — and the computer needs something they have
+ * never heard of — a `mailto:` link with the subject and body filled in. Zap
+ * knows the second half. So the page leads with translations: the words a
+ * person says beside the steps Zap builds, with the computer's language shown
+ * in code so the reader sees exactly what they were spared.
+ *
+ * Two audiences on purpose. The everyday examples are for someone who has
+ * never opened a terminal; the second set are for someone who lives in one,
+ * and are there to impress them. Then, because an assistant that writes
+ * commands is only welcome if it can be trusted, the restraint: it builds,
+ * you run.
+ *
+ * The examples are all things Zap can build as the app stands. Each command
+ * is one program with its arguments, and none depends on another finishing,
+ * because Zipr starts a command without waiting for it.
  *
  * Every line is true of the app as built. The source for each is the client's
  * `docs/architecture/zap.md`: what the model may change, what a test proves,
  * what leaves the machine, and who decides whether Zap is on.
  */
+
+interface Translation {
+  say: string;
+  steps: { name: string; code: string }[];
+  note: string;
+}
+
+/** For someone who has never needed to know how any of it works. */
+const EVERYDAY: Translation[] = [
+  {
+    say: "Email my manager that I'm off sick today.",
+    steps: [
+      {
+        name: "Write the email, addressed and ready to send",
+        code: "mailto:sam@example.com?subject=Off%20sick%20today&body=Hi%20Sam%2C%20I%27m%20unwell%20today…",
+      },
+    ],
+    note: "You never had to know a mailto link exists. You click, and the email is already written, waiting for Send.",
+  },
+  {
+    say: "Ask which client, then open their page in our CRM and their shared folder.",
+    steps: [
+      { name: "Ask which client", code: "Choose one: Acme · Globex · Initech" },
+      { name: "Open their CRM page", code: "https://crm.example.com/clients/{{ prompt.client }}" },
+      { name: "Open their shared folder", code: "\\\\files\\clients\\{{ prompt.client }}" },
+    ],
+    note: "One question, and the answer goes everywhere it's needed.",
+  },
+  {
+    say: "Put my out-of-office reply on the clipboard so I can paste it anywhere.",
+    steps: [
+      {
+        name: "Copy the reply",
+        code: "Thanks for your email — I'm away until Monday and will reply then.",
+      },
+    ],
+    note: "Small, and you'll use it every week.",
+  },
+];
+
+/** For someone who lives in a terminal, and needs a reason to be impressed. */
+const POWER: Translation[] = [
+  {
+    say: "My internet's playing up. Do whatever usually fixes it.",
+    steps: [
+      { name: "Flush the DNS cache — on Windows", code: "ipconfig /flushdns" },
+      { name: "Flush the DNS cache — on a Mac", code: "dscacheutil -flushcache" },
+    ],
+    note: "One item for both platforms: each step runs only on the system it's written for.",
+  },
+  {
+    say: "Ask which project, then open it in my editor.",
+    steps: [
+      { name: "Ask which project", code: "Choose one: atlas · beacon · comet" },
+      { name: "Open it in VS Code", code: "code C:\\Projects\\{{ prompt.project }}" },
+    ],
+    note: "The answer to a question becomes part of a command.",
+  },
+  {
+    say: "The printer's jammed again. Restart the print spooler.",
+    steps: [
+      {
+        name: "Restart the service, as administrator",
+        code: "powershell -Command Restart-Service Spooler",
+      },
+    ],
+    note: "Zipr flags this one before you save it: it runs with administrator rights, and you'll be advised to have it ask first.",
+  },
+];
+
+const TranslationCard: FC<{ example: Translation }> = ({ example }) => (
+  <Card lift class="flex h-full flex-col p-6">
+    <p class="text-[0.7rem] font-bold uppercase tracking-[0.16em] text-muted-foreground">You say</p>
+    <p class="mt-2 font-display text-xl leading-snug text-balance">“{example.say}”</p>
+    <p class="mt-5 text-[0.7rem] font-bold uppercase tracking-[0.16em] text-primary">Zap builds</p>
+    <ol class="clay-well mt-2 space-y-3 rounded-[1.1rem] p-4">
+      {example.steps.map((step, i) => (
+        <li class="min-w-0">
+          <p class="text-sm font-medium">
+            <span class="mr-2 font-mono text-xs text-muted-foreground tabular">{i + 1}</span>
+            {step.name}
+          </p>
+          <code class="mt-1 block font-mono text-xs leading-relaxed text-muted-foreground wrap-anywhere">
+            {step.code}
+          </code>
+        </li>
+      ))}
+    </ol>
+    <p class="mt-4 text-sm leading-relaxed text-muted-foreground text-pretty">{example.note}</p>
+  </Card>
+);
 
 const STEPS = [
   {
@@ -96,6 +198,14 @@ const NEVER_SENT = [
 
 export const ZAP_FAQ = [
   {
+    q: "Do I need to understand the technical side?",
+    a: "No. Say what you want and Zap works out how. Every step it builds is shown in plain words, with its settings underneath for anyone who wants to look, and you can change any of them yourself.",
+  },
+  {
+    q: "Will it really use the command line?",
+    a: "When that's the best way to do what you asked, yes — including steps that only run on Windows or only on a Mac, and programs that need administrator rights. Anything that runs a program is marked as such before you save it, and you're advised to have the item ask before it runs.",
+  },
+  {
     q: "Can Zap run things on my computer?",
     a: "No. Zap only changes the draft it's building. A test is something you press, and it runs exactly what launching the item would — including asking you first, if the item is set to ask.",
   },
@@ -131,17 +241,53 @@ export const ZapPage: FC = () => (
           eyebrow="Zap"
           title={
             <>
-              Say what you want done. <em>Zap</em> builds it.
+              You have the idea. Zap speaks <em>computer</em>.
             </>
           }
-          lede="Describe a routine in plain words and Zap turns it into a Zipr item you can read, test and change. Nothing runs, and nothing is saved, until you say so."
+          lede="Say what you want in your own words. Zap works out how your computer actually does it — the right link, the right command, the right order — and turns it into one click you test before you keep."
         />
         <Screenshot id="zap" eager class="mx-auto mt-4 max-w-5xl" />
       </Container>
     </Section>
 
-    {/* ================= HOW IT WORKS ================= */}
+    {/* ================= TRANSLATIONS ================= */}
     <Section tone="muted">
+      <Container size="wide">
+        <SectionHeading
+          eyebrow="From idea to action"
+          title="Everyday words in. Working steps out."
+          lede="Most good ideas stall on a detail nobody told you: that an email can be written by a link, which command clears a cache, how to carry an answer from one step to the next. That part is what Zap knows."
+        />
+
+        <div class="mb-6 max-w-2xl">
+          <h3 class="text-2xl">For everyone</h3>
+          <p class="mt-1 leading-relaxed text-muted-foreground text-pretty">
+            You don't need to know how it works. You only need to know what you want.
+          </p>
+        </div>
+        <div class="grid gap-5 md:grid-cols-3">
+          {EVERYDAY.map((example) => (
+            <TranslationCard example={example} />
+          ))}
+        </div>
+
+        <div class="mb-6 mt-16 max-w-2xl">
+          <h3 class="text-2xl">For the ones who live in a terminal</h3>
+          <p class="mt-1 leading-relaxed text-muted-foreground text-pretty">
+            And if you do know how it works, Zap reaches for the command line, per-platform steps
+            and administrator rights when that's the way to get it done.
+          </p>
+        </div>
+        <div class="grid gap-5 md:grid-cols-3">
+          {POWER.map((example) => (
+            <TranslationCard example={example} />
+          ))}
+        </div>
+      </Container>
+    </Section>
+
+    {/* ================= HOW IT WORKS ================= */}
+    <Section>
       <Container size="wide">
         <SectionHeading
           eyebrow="How it works"
@@ -168,7 +314,7 @@ export const ZapPage: FC = () => (
     </Section>
 
     {/* ================= THE PROMISES ================= */}
-    <Section>
+    <Section tone="muted">
       <Container size="wide">
         <SectionHeading
           eyebrow="Why it's different"
@@ -177,7 +323,7 @@ export const ZapPage: FC = () => (
               It builds. <em>You</em> run.
             </>
           }
-          lede="An assistant that can act on your computer is only as good as the line it won't cross. Zap's is drawn in the app, not in a prompt."
+          lede="Something that can write commands for your computer is only welcome if you can trust it. Zap's limits are drawn in the app, not in a prompt."
         />
         <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {PROMISES.map((promise) => (
@@ -194,7 +340,7 @@ export const ZapPage: FC = () => (
     </Section>
 
     {/* ================= WHAT LEAVES THE MACHINE ================= */}
-    <Section tone="muted">
+    <Section>
       <Container>
         <SectionHeading
           eyebrow="Your data"
@@ -230,7 +376,7 @@ export const ZapPage: FC = () => (
     </Section>
 
     {/* ================= WHOSE AI ================= */}
-    <Section>
+    <Section tone="muted">
       <Container>
         <SectionHeading
           eyebrow="Your AI, or your team's"
@@ -260,7 +406,7 @@ export const ZapPage: FC = () => (
     </Section>
 
     {/* ================= FAQ ================= */}
-    <Section tone="muted">
+    <Section>
       <Container size="prose">
         <SectionHeading align="center" eyebrow="Questions" title="Asked and answered" />
         <div>
@@ -272,8 +418,8 @@ export const ZapPage: FC = () => (
     </Section>
 
     <CtaBand
-      title="Describe your first item today."
-      body="Zap is in the app. Download Zipr, connect a model, and say what you want done."
+      title="Bring an idea. Leave with a button."
+      body="Zap is in the app. Download Zipr, connect a model, and tell it the idea."
       primary={{ href: "/downloads", label: "Download Zipr" }}
       secondary={{ href: "/features", label: "See everything Zipr does" }}
     />

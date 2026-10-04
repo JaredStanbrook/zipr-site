@@ -143,10 +143,12 @@ export const FeaturesPage: FC = () => (
           <div class="grid items-center gap-8 p-7 sm:p-10 lg:grid-cols-12">
             <div class="lg:col-span-5">
               <Eyebrow>Zap</Eyebrow>
-              <h3 class="text-3xl leading-[1.1] text-balance">Or just say what you want done.</h3>
+              <h3 class="text-3xl leading-[1.1] text-balance">
+                Or bring the idea, and let Zap speak computer.
+              </h3>
               <p class="mt-4 leading-relaxed text-muted-foreground text-pretty">
-                Describe a routine in plain words and Zap builds the item for you. You test it, and
-                nothing is saved until you choose to.
+                Say what you want in your own words. Zap works out the links and commands to do it —
+                including ones you've never heard of — and builds the item for you to test.
               </p>
               <LinkButton href="/zap" variant="outline" class="mt-6">
                 Meet Zap
