@@ -164,7 +164,15 @@ describe("rendered pages", () => {
 
   it("gives each page its own title and a description short enough not to be cut", async () => {
     const titles = new Set<string>();
-    for (const path of ["/", "/features", "/pricing", "/downloads", "/security", "/contact"]) {
+    for (const path of [
+      "/",
+      "/features",
+      "/zap",
+      "/pricing",
+      "/downloads",
+      "/security",
+      "/contact",
+    ]) {
       const html = await page(path);
       const title = html.match(/<title>([^<]*)<\/title>/)?.[1] ?? "";
       const description = html.match(/<meta name="description" content="([^"]*)"/)?.[1] ?? "";

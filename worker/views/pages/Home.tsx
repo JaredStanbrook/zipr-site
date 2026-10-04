@@ -265,13 +265,45 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
       </Section>
 
       {/* =================================================================
+          ZAP
+
+          The step types above are the vocabulary; Zap is the shortcut past
+          learning it. One band, pointing at its own page: the argument for
+          trusting it is too long to make here, and too important to make
+          badly.
+         ================================================================= */}
+      <Section>
+        <Container>
+          <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
+            <div class="lg:col-span-5">
+              <Eyebrow>Zap</Eyebrow>
+              <h2 class="text-3xl leading-[1.08] text-balance sm:text-[2.75rem]">
+                Or just <em>say</em> what you want done.
+              </h2>
+              <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
+                Describe a routine in plain words and Zap builds it as an item you can read and
+                test. It never runs anything itself, and nothing is saved until you choose to.
+              </p>
+              <LinkButton href="/zap" variant="outline" class="mt-6">
+                Meet Zap
+                <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
+              </LinkButton>
+            </div>
+            <div class="lg:col-span-7">
+              <Screenshot id="zap" />
+            </div>
+          </div>
+        </Container>
+      </Section>
+
+      {/* =================================================================
           FOR TEAMS
 
           The commercial argument: what a team buys is not sync, it is
           knowledge crossing a line that normally costs a ticket and a meeting
           to cross — without anyone's roles or ownership changing.
          ================================================================= */}
-      <Section>
+      <Section tone="muted">
         <Container>
           <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
             <div>
@@ -332,7 +364,7 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
           There are no customer logos or testimonials on this site yet, and
           none are invented to fill the gap — these are the proof there is.
          ================================================================= */}
-      <Section tone="muted">
+      <Section>
         <Container size="wide">
           <SectionHeading
             align="center"
@@ -366,7 +398,7 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
       </Section>
 
       {/* ================= PRICING ================= */}
-      <Section>
+      <Section tone="muted">
         <Container>
           <SectionHeading
             align="center"
