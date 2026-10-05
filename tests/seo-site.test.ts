@@ -168,6 +168,7 @@ describe("rendered pages", () => {
       "/",
       "/features",
       "/zap",
+      "/zap/setup",
       "/pricing",
       "/downloads",
       "/security",

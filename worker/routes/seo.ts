@@ -3,6 +3,7 @@ import { Hono } from "hono";
 import type { AppEnv } from "@server/types";
 import { robotsTxt, sitemapXml, type SitemapEntry } from "@server/lib/seo";
 import { PRIVACY_VERSIONS } from "@server/content/legal";
+import { zapSetupUpdated } from "@server/content/zapSetup";
 import { LICENCE_VERSIONS } from "@server/content/licence";
 
 export const seoRoute = new Hono<AppEnv>();
@@ -26,6 +27,7 @@ const STATIC_ROUTES: SitemapEntry[] = [
   { loc: "/", changefreq: "weekly", priority: 1.0 },
   { loc: "/features", changefreq: "monthly", priority: 0.8 },
   { loc: "/zap", changefreq: "monthly", priority: 0.8 },
+  { loc: "/zap/setup", changefreq: "monthly", priority: 0.6, lastmod: zapSetupUpdated() },
   { loc: "/pricing", changefreq: "monthly", priority: 0.9 },
   { loc: "/downloads", changefreq: "weekly", priority: 0.9 },
   { loc: "/security", changefreq: "monthly", priority: 0.7 },

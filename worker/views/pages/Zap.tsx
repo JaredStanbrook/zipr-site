@@ -183,9 +183,11 @@ const PROMISES = [
 const SENT = [
   "Your conversation with Zap",
   "The item being built",
-  "The list of step types Zipr can run, and your operating system",
+  "The list of step types Zipr can run",
+  "Your operating system, its version, your processor type and the app's language",
   "The plugins Zap is allowed to use",
   "The results of your tests",
+  "Whether one program, app or link type Zap asked about is installed — yes or no, shown to you in the chat — unless your organisation turns this off",
 ];
 
 const NEVER_SENT = [
@@ -391,6 +393,14 @@ export const ZapPage: FC = () => (
               Connect Anthropic, OpenAI, Google Gemini or any OpenAI-compatible endpoint — including
               a model on your own machine. The key stays in your operating system's keychain, and
               the app's screens never see it.
+            </p>
+            <p class="mt-4 text-sm">
+              <a
+                href="/zap/setup"
+                class="font-semibold text-primary underline-offset-4 hover:underline"
+              >
+                How to get a key from Claude or ChatGPT
+              </a>
             </p>
           </Card>
           <Card lift class="flex h-full flex-col p-7">
