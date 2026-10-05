@@ -187,6 +187,7 @@ const SENT = [
   "Your operating system, its version, your processor type and the app's language",
   "The plugins Zap is allowed to use",
   "The results of your tests",
+  "Whether one program, app or link type Zap asked about is installed — yes or no, shown to you in the chat — unless your organisation turns this off",
 ];
 
 const NEVER_SENT = [
