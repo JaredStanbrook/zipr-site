@@ -69,7 +69,7 @@ export const TIERS: PricingTier[] = [
       "Plugins",
       "History of what you've run",
       "Export everything as one file",
-      "Works offline, permanently",
+      "Works offline",
     ],
     cta: { label: "Download Zipr", href: "/downloads" },
   },

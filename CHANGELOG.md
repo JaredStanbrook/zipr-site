@@ -18,8 +18,9 @@ runs underneath. Changes to the site itself go above them.
   - **Zap is in the plan comparison**: its own row, and a row for one AI key
     shared across a team.
   - **The "free forever" promises are gone**: the footer badge, the homepage
-    badge and "free, forever" in the how-it-works line. The pages still say
-    what the app costs today.
+    badge, "free, forever" in the how-it-works line, "for good" in the pricing
+    description, and "permanently" in the pricing hero and the Free card. The
+    pages still say what the app costs today.
   - **Zap page:** a new "how it works" lead, the trust and "sent to the
     model" lines reworded, and the closing call to action is "Get started".
   - **Features page:** the tour captions are one short sentence each, Zap is

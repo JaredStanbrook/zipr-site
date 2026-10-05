@@ -257,7 +257,14 @@ describe("UI pages load", () => {
     const testApp = createTestApp(null);
     for (const path of ["/", "/features", "/zap", "/pricing", "/downloads", "/security"]) {
       const html = await (await get(testApp, path)).text();
-      for (const phrase of ["Always will be", "Free forever", "free, forever", "free forever"]) {
+      for (const phrase of [
+        "Always will be",
+        "Free forever",
+        "free, forever",
+        "free forever",
+        "for good",
+        "permanently",
+      ]) {
         expect(html, `${path} should not say "${phrase}"`).not.toContain(phrase);
       }
     }

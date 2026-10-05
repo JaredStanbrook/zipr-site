@@ -89,7 +89,7 @@ siteRoute.get("/zap/setup", (c) =>
 siteRoute.get("/pricing", (c) =>
   c.render(<PricingPage app={c.var.app} />, {
     title: `Pricing: free app, team plans from ${hostedFrom(c.var.app)}`,
-    description: `Zipr is free for one person, for good. Team sharing is hosted from ${hostedFrom(c.var.app)} per person a month, or self-hosted and priced per deployment. Compare every feature.`,
+    description: `Zipr is free for one person. Team sharing is hosted from ${hostedFrom(c.var.app)} per person a month, or self-hosted and priced per deployment. Compare every feature.`,
     jsonLd: [faqSchema(PRICING_FAQ)],
   }),
 );
