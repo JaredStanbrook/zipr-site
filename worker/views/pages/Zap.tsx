@@ -394,6 +394,14 @@ export const ZapPage: FC = () => (
               a model on your own machine. The key stays in your operating system's keychain, and
               the app's screens never see it.
             </p>
+            <p class="mt-4 text-sm">
+              <a
+                href="/zap/setup"
+                class="font-semibold text-primary underline-offset-4 hover:underline"
+              >
+                How to get a key from Claude or ChatGPT
+              </a>
+            </p>
           </Card>
           <Card lift class="flex h-full flex-col p-7">
             <IconTile icon="server" tone="primary" />

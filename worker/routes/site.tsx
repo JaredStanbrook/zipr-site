@@ -15,6 +15,7 @@ import { faqSchema, softwareSchema, websiteSchema } from "@server/lib/structured
 import { HomePage } from "@views/pages/Home";
 import { FeaturesPage } from "@views/pages/Features";
 import { ZapPage, ZAP_FAQ } from "@views/pages/Zap";
+import { ZapSetupPage, ZAP_SETUP_FAQ } from "@views/pages/ZapSetup";
 import { PricingPage } from "@views/pages/Pricing";
 import { SecurityPage, REVIEW_FAQ } from "@views/pages/Security";
 import { PrivacyPage } from "@views/pages/Privacy";
@@ -73,6 +74,15 @@ siteRoute.get("/zap", (c) =>
     description:
       "Say what you want in your own words. Zap works out the links and commands your computer needs, and builds them into one click you test before you keep.",
     jsonLd: [faqSchema(ZAP_FAQ)],
+  }),
+);
+
+siteRoute.get("/zap/setup", (c) =>
+  c.render(<ZapSetupPage app={c.var.app} />, {
+    title: "Connect Zap to Claude or ChatGPT",
+    description:
+      "Get an API key from the Claude Console or the OpenAI Platform, pick a model that works with Zap, and connect it in Zipr. Dated and re-checked.",
+    jsonLd: [faqSchema(ZAP_SETUP_FAQ)],
   }),
 );
 
