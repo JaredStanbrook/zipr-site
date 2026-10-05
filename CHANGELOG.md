@@ -11,6 +11,21 @@ runs underneath. Changes to the site itself go above them.
 
 ### The site
 
+- Copy feedback applied across the site:
+  - **Prices are in Australian dollars** (`APP_CURRENCY` is now `AUD`). The
+    figures are unchanged, so Hosted stays at $6 a person a month billed
+    yearly; the card now says "AUD" beside it.
+  - **Zap is in the plan comparison**: its own row, and a row for one AI key
+    shared across a team.
+  - **The "free forever" promises are gone**: the footer badge, the homepage
+    badge and "free, forever" in the how-it-works line. The pages still say
+    what the app costs today.
+  - **Zap page:** a new "how it works" lead, the trust and "sent to the
+    model" lines reworded, and the closing call to action is "Get started".
+  - **Features page:** the tour captions are one short sentence each, Zap is
+    one line, and "Branch as you go" and "One item, every platform" are now
+    "Decide what happens next" and "One item for Windows and Mac".
+  - **Homepage:** "It's usually the most useful one."
 - Upgraded to the current frug-template. Everything since this site was
   created from it (template `e93af52`) is cherry-picked with `-x`, keeping
   the site's own design where the two diverged:

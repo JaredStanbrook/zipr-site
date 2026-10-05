@@ -71,7 +71,9 @@ const TierCard: FC<{ tier: PricingTier; app: AppConfig }> = ({ tier, app }) => {
             <span class="font-display text-5xl font-semibold tabular">
               {money(tier.annualMonthlyCents)}
             </span>
-            <span class="text-sm font-medium text-muted-foreground">/ person / month</span>
+            <span class="text-sm font-medium text-muted-foreground">
+              {app.currency} / person / month
+            </span>
           </p>
         )}
 

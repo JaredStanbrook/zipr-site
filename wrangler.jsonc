@@ -108,7 +108,7 @@
     "APP_NAME": "Zipr",
     "APP_TAGLINE": "For ideas that have to be run, not explained.",
     "APP_LOCALE": "en-AU",
-    "APP_CURRENCY": "USD",
+    "APP_CURRENCY": "AUD",
     // IANA zone, e.g. "Australia/Perth". Decides what "today" means when a
     // page asks (`today(c.var.app.timezone)` in worker/lib/dates.ts). UTC is
     // right for storage and wrong for "what's due today" in Perth before 8am.

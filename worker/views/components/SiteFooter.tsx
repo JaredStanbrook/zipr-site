@@ -61,12 +61,6 @@ export const SiteFooter = ({ appName, tagline }: { appName: string; tagline: str
             <p class="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
               ${tagline || "For ideas that have to be run, not explained."}
             </p>
-            <p
-              class="clay-raised mt-5 inline-flex items-center gap-2 rounded-full px-3.5 py-1.5 text-sm font-semibold"
-            >
-              <span class="h-2 w-2 rounded-full bg-success" aria-hidden="true"></span>
-              The app is free. Always will be.
-            </p>
           </div>
 
           ${COLUMNS.map(

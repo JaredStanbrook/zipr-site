@@ -80,7 +80,7 @@ export const TIERS: PricingTier[] = [
     monthlyCents: 700,
     annualMonthlyCents: 600,
     minimumSeats: 5,
-    priceNote: "per person, per month, billed yearly",
+    priceNote: "Billed yearly",
     features: [
       "Everything in Free, for everyone",
       "Shared catalogues, updated live as colleagues work",
@@ -155,6 +155,13 @@ export const COMPARISON: ComparisonGroup[] = [
       },
       { feature: "All twelve step types", free: true, cloud: true, selfHosted: true },
       {
+        feature: "Zap, the AI that builds items for you",
+        note: "Describe what you want and Zap builds it for you to test. You choose the AI model, such as Claude or ChatGPT, and the provider bills you directly.",
+        free: "With your own key",
+        cloud: "Your key, or your team's",
+        selfHosted: "Your key, or your team's",
+      },
+      {
         feature: "Your own step types",
         note: "For anything the built-in twelve don't cover.",
         free: true,
@@ -199,6 +206,13 @@ export const COMPARISON: ComparisonGroup[] = [
       },
       { feature: "Members and roles", free: false, cloud: true, selfHosted: true },
       { feature: "Shared catalogues", free: false, cloud: true, selfHosted: true },
+      {
+        feature: "One AI key for the whole team",
+        note: "An administrator sets it once and chooses who can use Zap. Nobody needs a key of their own.",
+        free: false,
+        cloud: true,
+        selfHosted: true,
+      },
       {
         feature: "Publish your work to the team",
         note: "A copy, so your own version stays exactly where it was.",

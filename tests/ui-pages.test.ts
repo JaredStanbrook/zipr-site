@@ -251,6 +251,51 @@ describe("UI pages load", () => {
     }
   });
 
+  it("keeps the 'free forever' promises off every public page", async () => {
+    // Removed on purpose: the page says what the app costs today and does not
+    // promise what it will cost later.
+    const testApp = createTestApp(null);
+    for (const path of ["/", "/features", "/zap", "/pricing", "/downloads", "/security"]) {
+      const html = await (await get(testApp, path)).text();
+      for (const phrase of ["Always will be", "Free forever", "free, forever", "free forever"]) {
+        expect(html, `${path} should not say "${phrase}"`).not.toContain(phrase);
+      }
+    }
+  });
+
+  it("states prices in Australian dollars, and the site is configured that way", async () => {
+    const pricing = await (await get(createTestApp(null), "/pricing")).text();
+    expect(pricing).toContain("AUD / person / month");
+    expect(pricing).toContain("Prices in AUD");
+
+    // The test app is handed its own config, so this is what holds the real
+    // one: wrangler.jsonc is what production reads.
+    const { readFileSync } = await import("node:fs");
+    const wrangler = readFileSync("wrangler.jsonc", "utf8");
+    expect(wrangler).toMatch(/"APP_CURRENCY":\s*"AUD"/);
+  });
+
+  it("lists Zap in the plan comparison", async () => {
+    const pricing = await (await get(createTestApp(null), "/pricing")).text();
+    expect(pricing).toContain("Zap, the AI that builds items for you");
+    expect(pricing).toContain("With your own key");
+    expect(pricing).toContain("One AI key for the whole team");
+  });
+
+  it("uses the plainer wording on the home and features pages", async () => {
+    const testApp = createTestApp(null);
+    const home = await (await get(testApp, "/")).text();
+    expect(home).toContain("most useful");
+    expect(home).toContain("The first two are free. The third is what teams pay for.");
+
+    const features = await (await get(testApp, "/features")).text();
+    expect(features).toContain("One item for Windows and Mac");
+    expect(features).toContain("Decide what happens next");
+    expect(features).not.toContain("Branch as you go");
+    expect(features).not.toContain("One item, every platform");
+    expect(features).toContain("Zap knows Zipr like the back of its hand");
+  });
+
   it("renders the pricing comparison and the downloads page", async () => {
     const testApp = createTestApp(null);
 
