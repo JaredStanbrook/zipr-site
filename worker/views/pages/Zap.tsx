@@ -183,7 +183,8 @@ const PROMISES = [
 const SENT = [
   "Your conversation with Zap",
   "The item being built",
-  "The list of step types Zipr can run, and your operating system",
+  "The list of step types Zipr can run",
+  "Your operating system, its version, your processor type and the app's language",
   "The plugins Zap is allowed to use",
   "The results of your tests",
 ];
