@@ -17,7 +17,7 @@ const appConfig = {
   name: "Zipr",
   tagline: "",
   locale: "en-AU",
-  currency: "USD",
+  currency: "AUD",
   origin: "https://zipr.example",
   // As in wrangler.jsonc.
   ogImage: "/og.png",

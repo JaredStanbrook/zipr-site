@@ -71,7 +71,9 @@ const TierCard: FC<{ tier: PricingTier; app: AppConfig }> = ({ tier, app }) => {
             <span class="font-display text-5xl font-semibold tabular">
               {money(tier.annualMonthlyCents)}
             </span>
-            <span class="text-sm font-medium text-muted-foreground">/ person / month</span>
+            <span class="text-sm font-medium text-muted-foreground">
+              {app.currency} / person / month
+            </span>
           </p>
         )}
 
@@ -190,7 +192,7 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
               Free for you. <em>Paid</em> for your team.
             </>
           }
-          lede="The whole app is free for one person, permanently. You pay when your team shares — and you choose who runs the server."
+          lede="The whole app is free for one person. You pay when your team shares — and you choose who runs the server."
         />
       </Container>
     </Section>

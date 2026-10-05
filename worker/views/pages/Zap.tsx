@@ -133,12 +133,12 @@ const STEPS = [
   {
     icon: "send",
     title: "Describe it",
-    body: "Write it the way you'd explain it to a colleague: what you open, in what order, what you'd be asked. Ask for changes the same way.",
+    body: "Say it the way you'd explain it to a colleague: what you open, in what order, what you'd be asked. That's the whole brief. Ask for changes the same way.",
   },
   {
     icon: "zap",
-    title: "Zap builds it",
-    body: "It assembles an item from Zipr's own step types, and tells you anything it had to assume — an address it guessed, a choice it made for you.",
+    title: "Zap and your model build it",
+    body: "Zap knows every step Zipr can run. The model you've chosen works out the rest: the right command, a step for each platform, the order. Anything it had to assume, it tells you.",
   },
   {
     icon: "play",
@@ -187,7 +187,7 @@ const SENT = [
   "Your operating system, its version, your processor type and the app's language",
   "The plugins Zap is allowed to use",
   "The results of your tests",
-  "Whether one program, app or link type Zap asked about is installed — yes or no, shown to you in the chat — unless your organisation turns this off",
+  "Whether an app or program is installed — yes or no, unless disabled by your organisation.",
 ];
 
 const NEVER_SENT = [
@@ -293,8 +293,8 @@ export const ZapPage: FC = () => (
       <Container size="wide">
         <SectionHeading
           eyebrow="How it works"
-          title="A conversation, then a working item"
-          lede="The same item you'd have built by hand — in the time it takes to describe it."
+          title="A conversation is all it takes"
+          lede="Zap knows everything Zipr can do. The AI model you choose brings the intelligence. Together they build items your IT admins would be impressed with, from a few sentences in plain words."
         />
         <ol class="grid gap-5 md:grid-cols-3">
           {STEPS.map((step, i) => (
@@ -325,7 +325,7 @@ export const ZapPage: FC = () => (
               It builds. <em>You</em> run.
             </>
           }
-          lede="Something that can write commands for your computer is only welcome if you can trust it. Zap's limits are drawn in the app, not in a prompt."
+          lede="If an AI can control your computer, you need to know you can trust it. Zap's boundaries are built into the app, not left to prompts."
         />
         <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {PROMISES.map((promise) => (
@@ -428,7 +428,7 @@ export const ZapPage: FC = () => (
     </Section>
 
     <CtaBand
-      title="Bring an idea. Leave with a button."
+      title="Get started"
       body="Zap is in the app. Download Zipr, connect a model, and tell it the idea."
       primary={{ href: "/downloads", label: "Download Zipr" }}
       secondary={{ href: "/features", label: "See everything Zipr does" }}

@@ -115,7 +115,7 @@ export const ACTION_TYPES = [
 
 /**
  * How it works, in three steps — which is also the pricing model: the first
- * two are free forever, the third is what a team pays for.
+ * two are free, the third is what a team pays for.
  */
 export const HOW_IT_WORKS = [
   {

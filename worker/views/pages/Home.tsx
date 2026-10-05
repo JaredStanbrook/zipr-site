@@ -95,13 +95,6 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
         <Container size="wide">
           <div class="grid items-center gap-14 [&>*]:min-w-0 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
             <div>
-              <p class="rise" style="--i: 0;">
-                <Badge tone="success" class="mb-7">
-                  <i data-lucide="circle-check" class="h-3 w-3" aria-hidden="true"></i>
-                  Free forever, no account
-                </Badge>
-              </p>
-
               <h1
                 class="rise text-[2.9rem] leading-[0.98] text-balance sm:text-7xl lg:text-[5.25rem]"
                 style="--i: 1;"
@@ -155,7 +148,7 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
               Every team has something only one person can run.
             </p>
             <p class="font-display mt-3 text-[2rem] leading-[1.08] text-balance text-muted-foreground sm:text-5xl lg:text-6xl">
-              It is usually the <em>best</em> thing.
+              It's usually the <em>most useful</em> one.
             </p>
             <p class="mx-auto mt-10 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
               It lives in a wiki page, a chat thread or somebody's head — so it gets explained,
@@ -176,7 +169,7 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
                 Build it. Run it. <em>Share it.</em>
               </>
             }
-            lede="The first two are free, forever. The third is what teams pay for."
+            lede="The first two are free. The third is what teams pay for."
           />
 
           <div class="relative">

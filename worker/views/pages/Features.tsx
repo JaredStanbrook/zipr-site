@@ -69,19 +69,19 @@ const TOUR: { shot: ScreenshotId; eyebrow: string; title: string; body: string }
     shot: "overlay-list",
     eyebrow: "The launcher",
     title: "One shortcut, then type",
-    body: "Press your shortcut from anywhere and start typing. Return runs the one you want; Escape puts it away. It opens instantly because everything is already on your computer.",
+    body: "Press your shortcut from anywhere, type, and press Return.",
   },
   {
     shot: "item-detail",
     eyebrow: "Every item",
     title: "Read it before you run it",
-    body: "See every step an item takes, in order, before you launch it — what it opens, what it asks, what it runs. Tags say what it's for and whether it needs a go-ahead.",
+    body: "See every step an item takes before you launch it.",
   },
   {
     shot: "item-edit",
     eyebrow: "The editor",
     title: "Change it in one place",
-    body: "Reorder steps, switch one off without deleting it, and decide whether the item asks before it runs. Keep a draft on your computer until it's right.",
+    body: "Reorder steps, switch one off, or make the item ask first.",
   },
 ];
 
@@ -147,8 +147,8 @@ export const FeaturesPage: FC = () => (
                 Or bring the idea, and let Zap speak computer.
               </h3>
               <p class="mt-4 leading-relaxed text-muted-foreground text-pretty">
-                Say what you want in your own words. Zap works out the links and commands to do it —
-                including ones you've never heard of — and builds the item for you to test.
+                Zap knows Zipr like the back of its hand and intelligently builds the item for you
+                to test.
               </p>
               <LinkButton href="/zap" variant="outline" class="mt-6">
                 Meet Zap
@@ -253,13 +253,13 @@ export const FeaturesPage: FC = () => (
             {[
               {
                 icon: "git-branch",
-                title: "Branch as you go",
-                body: "Run a step only if the last one worked — or only if it didn't.",
+                title: "Decide what happens next",
+                body: "Run a step only if the one before it worked, or only if it didn't, such as opening a help page.",
               },
               {
                 icon: "monitor",
-                title: "One item, every platform",
-                body: "Different path on Windows? Say so in the same item instead of keeping two.",
+                title: "One item for Windows and Mac",
+                body: "If a step differs between them, mark it for Windows or for Mac. The same item then works on both.",
               },
               {
                 icon: "puzzle",
