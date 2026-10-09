@@ -46,6 +46,12 @@ export const PRIVACY_VERSIONS: LegalVersion[] = [
     date: "2026-09-30",
     summary: "First published.",
   },
+  {
+    version: "1.1",
+    date: "2026-10-09",
+    summary:
+      "Added the language button: your choice is remembered in your browser's local storage, and translation happens in your browser.",
+  },
 ];
 
 /** "Zipr" or "Zipr (ABN 12 345 678 901)". */

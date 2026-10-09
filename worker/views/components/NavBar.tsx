@@ -1,6 +1,7 @@
 import { html } from "hono/html";
 import { PropsUser } from "@server/schema/auth.schema";
 import { PUBLIC_NAV } from "@server/content/site";
+import { LANGUAGES } from "@server/content/languages";
 
 // --- CONFIGURATION ---
 /**
@@ -105,6 +106,77 @@ export const ThemeToggle = () => html`
       });
     })();
   </script>
+`;
+
+/**
+ * The language button and its menu.
+ *
+ * Present on every page and at every width, because it is the way into the
+ * site for someone who cannot read the English, and that person should not
+ * have to find a menu first. The menu is a native popover: it opens, closes on
+ * Escape and on a click outside, and sits above everything, with no script.
+ * `components/ui/LanguageSwitcher.ts` marks the current language and applies a
+ * choice.
+ *
+ * Each language is written in its own name and marked `translate="no"`, so it
+ * is never translated into the language you are leaving, and `lang` lets a
+ * screen reader pronounce it. The note at the bottom is translated like any
+ * other text, and is honest about what these translations are.
+ */
+const LanguageMenu = () => html`
+  <div class="relative">
+    <button
+      type="button"
+      popovertarget="language-menu"
+      class="clay-press inline-flex h-10 items-center justify-center gap-1.5 rounded-full bg-muted px-3 text-muted-foreground shadow-inset hover:text-foreground"
+      aria-label="Choose a language"
+    >
+      <i data-lucide="languages" class="h-5 w-5" aria-hidden="true"></i>
+      <span
+        data-language-label
+        translate="no"
+        class="hidden text-xs font-bold tracking-wide sm:inline"
+        aria-hidden="true"
+        >EN</span
+      >
+    </button>
+
+    <div
+      id="language-menu"
+      popover
+      class="clay-floating fixed inset-auto right-2 top-[4.5rem] m-0 w-72 max-w-[calc(100vw-1rem)] bg-popover p-1.5 text-popover-foreground sm:right-4"
+    >
+      <p
+        class="px-3 pb-1 pt-2 text-[0.7rem] font-bold uppercase tracking-[0.16em] text-muted-foreground"
+      >
+        Language
+      </p>
+      <ul>
+        ${[{ code: "en", htmlLang: "en", native: "English" }, ...LANGUAGES].map(
+          (language) => html`
+            <li>
+              <button
+                type="button"
+                data-language="${language.code}"
+                lang="${language.htmlLang}"
+                translate="no"
+                class="flex w-full items-center rounded-lg px-3 py-2 text-left text-sm hover:bg-accent focus-visible:bg-accent aria-[current=true]:font-semibold"
+              >
+                <span>${language.native}</span>
+                <span data-language-check class="ml-auto hidden text-primary" aria-hidden="true"
+                  >✓</span
+                >
+              </button>
+            </li>
+          `,
+        )}
+      </ul>
+      <p class="px-3 pb-2 pt-3 text-xs leading-relaxed text-muted-foreground">
+        Translated automatically. If something reads oddly, the English is the original. The privacy
+        notice and licence are only in English.
+      </p>
+    </div>
+  </div>
 `;
 
 /**
@@ -230,6 +302,8 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
         </div>
 
         <div class="flex items-center gap-2">
+          ${LanguageMenu()}
+
           <div class="hidden lg:block">${ThemeToggle()}</div>
 
           <div class="hidden lg:block">

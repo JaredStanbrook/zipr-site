@@ -1,0 +1,1092 @@
+[
+  ["381d190f", "Notifications"],
+  ["cd86acc3", "Close"],
+  ["c7af44e6", "Skip to content"],
+  ["44888cd2", "Zipr"],
+  ["6c4737ea", "Features"],
+  ["fe2079dc", "Zap"],
+  ["539307de", "Downloads"],
+  ["b4d17ded", "Pricing"],
+  ["c2fe21db", "Security"],
+  ["73ac94c3", "Contact"],
+  ["9a73db9b", "Language"],
+  [
+    "d217eb03",
+    "Translated automatically. If something reads oddly, the English is the original. The privacy notice and licence are only in English."
+  ],
+  ["6964bb19", "Download"],
+  ["00c6075a", "Menu"],
+  ["31018b9f", "Appearance"],
+  ["891f33f0", "Turn the steps you keep explaining into <1>one click.</1>"],
+  [
+    "706964c5",
+    "Zipr is a desktop launcher for Windows and macOS. Chain commands, links, apps and prompts into one named item — then hand it to a colleague instead of a walkthrough."
+  ],
+  ["67923770", "Download for free"],
+  ["8418a386", "See pricing"],
+  ["c7702235", "Windows 10+ and macOS 12+. Installs in about a minute."],
+  ["49c0225e", "The Zipr launcher, in its list and grid layouts."],
+  ["8b9bd80d", "Every team has something only one person can run."],
+  ["9ccceede", "It's usually the <1>most useful</1> one."],
+  [
+    "48e68d4b",
+    "It lives in a wiki page, a chat thread or somebody's head — so it gets explained, misread and explained again. Zipr turns it into something anyone can run."
+  ],
+  ["d03ba450", "How it works"],
+  ["009cbce7", "Build it. Run it. <1>Share it.</1>"],
+  ["a7f38201", "The first two are free. The third is what teams pay for."],
+  ["1c5c36fb", "Free"],
+  ["b5b5866c", "Build it"],
+  [
+    "02f256f0",
+    "Chain the steps you would normally explain — commands, links, apps, files, questions — into one named item."
+  ],
+  ["72430853", "Run it"],
+  [
+    "c4e0b222",
+    "One click runs it on your machine, instantly and offline. Build as many as you like; nothing expires and no account is needed."
+  ],
+  ["2329c92c", "Team"],
+  ["7dcce3a5", "Share it"],
+  [
+    "786240d5",
+    "When the team needs it, publish it to a shared catalogue on a Zipr server — hosted by us, or run by you. Same app, nothing to relearn."
+  ],
+  ["88f2983b", "Twelve step types"],
+  ["1b1d0cd7", "If you can describe it, Zipr can <1>run</1> it."],
+  [
+    "d8ecaba4",
+    "Chain steps in any order, ask a question midway and use the answer, and vary a step by operating system — all in one item. Plugins cover the rest."
+  ],
+  ["23d390c6", "See all features"],
+  ["a9e646b2", "Open a link"],
+  ["5cf7f6b7", "A URL, in the browser you choose."],
+  ["ba0d10c4", "Run a command"],
+  ["77bee7eb", "Shell command, with whatever arguments you need."],
+  ["830772aa", "Launch an app"],
+  ["b43aafc0", "An executable, with arguments."],
+  ["53c0467c", "Open a file"],
+  ["5a72bf17", "Straight into whatever opens it."],
+  ["b8e1d559", "Reveal a folder"],
+  ["09691bf0", "Jump to it in Finder or Explorer."],
+  ["a833a027", "Copy to clipboard"],
+  ["95b9c077", "Text ready to paste, with an optional nudge."],
+  ["fc7e3c85", "Ask yes or no"],
+  ["3df6ff00", "Confirm before something irreversible."],
+  ["0e77e267", "Ask for a value"],
+  ["7870d9ff", "Prompt for input and use it further down."],
+  ["0ac029a2", "Offer a list"],
+  ["aea5123a", "Pick one, carry on."],
+  ["57b18c81", "Require a re-auth"],
+  ["bbc65c8b", "Prove it's you before the risky step."],
+  ["915ec088", "Open a panel"],
+  ["0c78b4e9", "Jump to a view inside Zipr."],
+  ["0018913c", "Hand off to a plugin"],
+  ["3318f466", "Anything the twelve don't cover."],
+  ["0d9848a5", "One item, three steps: ask first, run a command, open a page."],
+  ["82ae34ce", "You have the idea. Zap speaks <1>computer.</1>"],
+  [
+    "c5d6f1d6",
+    "Say what you want in your own words. Zap works out how your computer does it — a link that writes the email, the command that clears the cache — and builds it for you to test. It never runs anything itself."
+  ],
+  ["9670e201", "Meet Zap"],
+  ["134f810e", "For teams"],
+  ["2eb6b2f2", "Knowledge <1>moves.</1> The org chart stays put."],
+  [
+    "1d5425ff",
+    "Give your organisation a Zipr server and each team keeps its own workspace and rules. Work crosses between them as a published copy — attributed, current and safe to run — instead of a ticket or a meeting."
+  ],
+  ["caa9ca37", "See team pricing"],
+  ["7bf2eed2", "Platform"],
+  ["6be6f488", "Support"],
+  ["2635ea3b", "Yours"],
+  ["8ca5a68f", "A workspace per team, with roles and visibility you control"],
+  ["021bff7c", "Publish a copy to another team — your own stays exactly as it was"],
+  ["d7f7396b", "Everyone on the current version, updated as colleagues work"],
+  ["5e74eae2", "Full history, one-click rollback and an audit trail"],
+  ["0b5fd15f", "Single sign-on with Google, Microsoft Entra or Okta"],
+  ["7dd253ea", "Usage figures showing which items people actually run"],
+  ["16b0f5a5", "Built for your security review"],
+  ["1e23bcb9", "The short answers to the questions your reviewer will ask first."],
+  ["1df61a41", "Nothing runs on a server"],
+  [
+    "44878674",
+    "Zipr stores items. It only ever runs them on the machine of the person who clicked."
+  ],
+  ["ad826aa7", "Your data, where you choose"],
+  [
+    "5425512c",
+    "Hosted in a database of your own, or self-hosted with nothing leaving your network."
+  ],
+  ["ee414fcd", "Your sign-in, your rules"],
+  ["76779e67", "Single sign-on, and roles and visibility set by your administrators."],
+  ["de5b21e1", "Never held hostage"],
+  ["b2dc6263", "Export everything as one file at any time, even if an account lapses."],
+  ["4ab95036", "Read the full security overview"],
+  ["c01ada8d", "Free alone. <1>Paid together.</1>"],
+  [
+    "6538df4a",
+    "The free app is the whole app, not a trial. You pay only when an item has to be shared."
+  ],
+  ["05fcdac7", "The app"],
+  ["3df1de25", "Everything one person can do on one machine. No account, no card, no expiry."],
+  ["1a035898", "Download Zipr"],
+  ["44108814", "A team server"],
+  ["18743595", "From"],
+  ["c67c565c", "/ person / month"],
+  [
+    "979db73a",
+    "Hosted by us, billed yearly, minimum 5 people. Or self-hosted on your own infrastructure, priced per deployment."
+  ],
+  ["177992d4", "Compare plans"],
+  ["0ab46b4b", "Start with the one you keep having to explain."],
+  ["d38ef8c1", "Free, no account, and the same app paying teams run."],
+  ["55c8dba7", "Talk to us about a team"],
+  ["160250a9", "For ideas that have to be run, not explained."],
+  ["529c60cc", "Product"],
+  ["2524e8b5", "Learn"],
+  ["a39905da", "Report a bug"],
+  ["4bf776d0", "Talk to us"],
+  ["eee62c37", "Licensing"],
+  ["da2e7a94", "Security reports"],
+  ["66094431", "<1/> All rights reserved."],
+  ["58c031d4", "Licence"],
+  ["ebfa87e7", "Privacy"],
+  ["e93031eb", "Open-source licences"],
+  ["c9db273f", "Choose a language"],
+  ["8a1231d0", "Toggle theme"],
+  ["b79c01dc", "Open menu"],
+  ["58ee52ce", "Close menu"],
+  [
+    "501ad987",
+    "The Zipr launcher: a search box above a list of items — Start my workday, Join my next meeting, Present my screen, Fill in my timesheet and more — each with its own icon and colour."
+  ],
+  [
+    "8f74b12e",
+    "The Zipr launcher in its grid layout: a search box above tiles for Start my workday, Join my next meeting, Present my screen, Fill in my timesheet, Book a meeting room and Focus for an hour, each with an icon and a one-line description."
+  ],
+  [
+    "c06323b1",
+    "A Zipr item, Deploy to production, tagged production and needs approval, with three steps: ask for a yes or no, run a command, and open a web address."
+  ],
+  [
+    "b6d8ed96",
+    "Zap building an item called Morning focus. On the left, the conversation: a request in plain words, Zap's reply and the changes it made, a follow-up asking for do not disturb, and a test where every step succeeded and the command shows as started. On the right, the six steps it built, a note that one runs a program, the assumption Zap made, and Test and Save item."
+  ],
+  ["95af0f70", "Desktop launcher for commands, links and apps · Zipr"],
+  ["d1cb36c6", "Build it once. Let anyone run it."],
+  [
+    "600cf34f",
+    "What Zipr does on its own for free, and what it adds when your team shares a server."
+  ],
+  ["00d2d1f9", "A closer look"],
+  ["ad8bcb5f", "Built for the keyboard, clear at a glance"],
+  ["1a4e463a", "The few screens you'll spend your time in."],
+  ["a38f9a54", "The launcher"],
+  ["2932d9fc", "One shortcut, then type"],
+  ["c528e0a8", "Press your shortcut from anywhere, type, and press Return."],
+  ["8acfd3e3", "Every item"],
+  ["233feab8", "Read it before you run it"],
+  ["8ae968b7", "See every step an item takes before you launch it."],
+  ["1d9fb88d", "The editor"],
+  ["d6f33e2a", "Change it in one place"],
+  ["b2e5c566", "Reorder steps, switch one off, or make the item ask first."],
+  ["d43928ae", "Or bring the idea, and let Zap speak computer."],
+  [
+    "1e42a041",
+    "Zap knows Zipr like the back of its hand and intelligently builds the item for you to test."
+  ],
+  ["9fdc1526", "In the free app"],
+  ["081b9b87", "One click instead of a walkthrough"],
+  [
+    "eb6de995",
+    "The steps you worked out become one named item. A colleague clicks it and it runs — no document to follow, no script to be talked through."
+  ],
+  ["dad51e81", "Instant, and it works offline"],
+  [
+    "48c30a31",
+    "Everything is already on your machine, so Zipr opens straight away and keeps working on a plane."
+  ],
+  ["fcdb5787", "Runs only where you click"],
+  [
+    "d722b0d5",
+    "Every command executes on the machine of the person who clicked — never on our servers or yours. That is the short answer to your security team's first question."
+  ],
+  ["6b8e2906", "Plugins for everything else"],
+  [
+    "53119249",
+    "When the twelve built-in step types run out, a plugin adds a new one. Plugins are kept apart from the app, so a faulty one can't take it down."
+  ],
+  ["e7255ea6", "With a team server"],
+  ["c8120656", "Share it instead of explaining it"],
+  [
+    "08ab14f9",
+    "Publish an item to a team catalogue and everyone runs the same, current version. No zip file in a chat thread, no afternoon spent watching over a shoulder."
+  ],
+  ["a8287ff2", "Edit together without losing work"],
+  [
+    "d99bda44",
+    "Two people improve the same item at once and both changes survive. If you changed the same thing, you're shown exactly what clashed."
+  ],
+  ["52582e1f", "Undo anything"],
+  [
+    "24fa40f7",
+    "Every change is kept. Put any item back how it was in one click, and see who changed what — so trying the strange version costs nothing."
+  ],
+  ["db2c71f8", "Hosted by us, or on your own servers"],
+  [
+    "6f23728a",
+    "Let us run the server, in a database that belongs to your organisation alone. Or self-host it inside your own network, under your own backups."
+  ],
+  ["24654da7", "In practice"],
+  ["c33104f3", "Five situations you'll recognise"],
+  ["5a06e2b1", "Where good work usually gets lost — and what changes with Zipr."],
+  ["bcb0266c", "What you built would help another team"],
+  ["d8e4cab6", "Without Zipr"],
+  [
+    "c2f0b876",
+    "You write it up, they misread step four, and you end up on the call anyway — or you never mention it at all."
+  ],
+  ["951395b6", "With it"],
+  [
+    "1e3140c5",
+    "You publish a copy into their catalogue and they run it. Yours stays where it was; theirs stays current."
+  ],
+  ["636d57a7", "A new starter joins on Monday"],
+  [
+    "8910b02d",
+    "A wiki page, three chat threads, a zip of scripts, and the same questions for a fortnight."
+  ],
+  [
+    "797e0b8f",
+    "They install Zipr, open the team catalogue, and everything the team runs is there, in the current version."
+  ],
+  ["b93c5444", "Two of you improve the same thing"],
+  ["e7ff58c6", "Last save wins, and somebody's work quietly disappears."],
+  [
+    "babb8293",
+    "Both improvements survive. If you changed the same thing, you see exactly what clashed and decide."
+  ],
+  ["1bd0c581", "You want to try the strange version"],
+  ["cf7fbd83", "You don't, because undoing it means remembering what it looked like before."],
+  ["fd8441e4", "You try it. Every change is kept, so putting it back is one click."],
+  ["7f375cad", "You're on a train with no signal"],
+  ["2639af3c", "The tool is a website, so the tool is gone."],
+  [
+    "f0a8f65f",
+    "Everything is already on your laptop. Keep working; changes sync when you reconnect."
+  ],
+  ["b8b03812", "The building blocks"],
+  ["64f1ca69", "Every item is built from these, chained in any order."],
+  ["2261ad89", "Decide what happens next"],
+  [
+    "68e543ee",
+    "Run a step only if the one before it worked, or only if it didn't, such as opening a help page."
+  ],
+  ["b611464e", "One item for Windows and Mac"],
+  [
+    "fe131988",
+    "If a step differs between them, mark it for Windows or for Mac. The same item then works on both."
+  ],
+  ["cca595a3", "Go further with plugins"],
+  ["262af06f", "When the twelve run out, a plugin adds a new step type."],
+  ["8bc88bc3", "Build your first item in minutes."],
+  [
+    "6464d25f",
+    "Free, no account, no card. Come back the day somebody else wants what you've built."
+  ],
+  ["0ccd4a44", "Compare free and team"],
+  [
+    "7a5640d0",
+    "The Zipr app's Browse screen: a sidebar of sections, the Everyday catalogue's items in a list, and an inspector beside it showing Start my workday's three steps with Launch, Open and Edit."
+  ],
+  [
+    "4c6567db",
+    "Editing the Deploy to production item: its name, category, description, colour, icon and tags, then its three steps in order, each with its own on switch, above Cancel, Save draft and Save and send."
+  ],
+  ["dccc6bcc", "Features: step types, sharing and history · Zipr"],
+  ["a85cc82e", "You have the idea. Zap speaks <1>computer</1>."],
+  [
+    "be0866ce",
+    "Say what you want in your own words. Zap works out how your computer actually does it — the right link, the right command, the right order — and turns it into one click you test before you keep."
+  ],
+  ["2862ca8d", "From idea to action"],
+  ["f767f59e", "Everyday words in. Working steps out."],
+  [
+    "807d8ae9",
+    "Most good ideas stall on a detail nobody told you: that an email can be written by a link, which command clears a cache, how to carry an answer from one step to the next. That part is what Zap knows."
+  ],
+  ["eecf71b1", "For everyone"],
+  ["d04a7327", "You don't need to know how it works. You only need to know what you want."],
+  ["e0fa602f", "You say"],
+  ["c0058579", "“Email my manager that I'm off sick today.”"],
+  ["379e9975", "Zap builds"],
+  ["ee07245b", "Write the email, addressed and ready to send"],
+  [
+    "be16ad62",
+    "You never had to know a mailto link exists. You click, and the email is already written, waiting for Send."
+  ],
+  ["a08cefe6", "“Ask which client, then open their page in our CRM and their shared folder.”"],
+  ["ff0e14ba", "Ask which client"],
+  ["a43aa5ec", "Open their CRM page"],
+  ["12b64d7a", "Open their shared folder"],
+  ["81674ff1", "One question, and the answer goes everywhere it's needed."],
+  ["95338480", "“Put my out-of-office reply on the clipboard so I can paste it anywhere.”"],
+  ["863e7f9f", "Copy the reply"],
+  ["a4e18d70", "Small, and you'll use it every week."],
+  ["a04eed62", "For the ones who live in a terminal"],
+  [
+    "76433e44",
+    "And if you do know how it works, Zap reaches for the command line, per-platform steps and administrator rights when that's the way to get it done."
+  ],
+  ["3a695bfc", "“My internet's playing up. Do whatever usually fixes it.”"],
+  ["2d41bec9", "Flush the DNS cache — on Windows"],
+  ["18f67ae8", "Flush the DNS cache — on a Mac"],
+  ["43ce393f", "One item for both platforms: each step runs only on the system it's written for."],
+  ["ca8049c3", "“Ask which project, then open it in my editor.”"],
+  ["00b8069a", "Ask which project"],
+  ["5f6b1995", "Open it in VS Code"],
+  ["413a9608", "The answer to a question becomes part of a command."],
+  ["0a216496", "“The printer's jammed again. Restart the print spooler.”"],
+  ["b3662805", "Restart the service, as administrator"],
+  [
+    "12742727",
+    "Zipr flags this one before you save it: it runs with administrator rights, and you'll be advised to have it ask first."
+  ],
+  ["3e6c88cf", "A conversation is all it takes"],
+  [
+    "b4e4e4c3",
+    "Zap knows everything Zipr can do. The AI model you choose brings the intelligence. Together they build items your IT admins would be impressed with, from a few sentences in plain words."
+  ],
+  ["8b6a2295", "Describe it"],
+  [
+    "f34adaad",
+    "Say it the way you'd explain it to a colleague: what you open, in what order, what you'd be asked. That's the whole brief. Ask for changes the same way."
+  ],
+  ["06eb06e6", "Zap and your model build it"],
+  [
+    "1c596a15",
+    "Zap knows every step Zipr can run. The model you've chosen works out the rest: the right command, a step for each platform, the order. Anything it had to assume, it tells you."
+  ],
+  ["fdbc5563", "You test it, then save"],
+  [
+    "a78a82e4",
+    "Test runs it on your computer exactly as launching it would. Happy? Save it to a catalogue. Not yet? Keep talking, or go back to any earlier version."
+  ],
+  ["63ad36a1", "Why it's different"],
+  ["b8f9ba38", "It builds. <1>You</1> run."],
+  [
+    "19a3b820",
+    "If an AI can control your computer, you need to know you can trust it. Zap's boundaries are built into the app, not left to prompts."
+  ],
+  ["eea3f7be", "It never runs anything"],
+  [
+    "7da2f514",
+    "Zap can build and change an item. Only you can run it: Test is your button, and Zap has no way to press it."
+  ],
+  ["dc0f1377", "Tested means tested"],
+  [
+    "b48826ca",
+    "A draft shows as tested only while your latest test ran the version on screen. Change one step and it's untested again."
+  ],
+  ["8b77c2d0", "Honest about what it knows"],
+  [
+    "0d4f9876",
+    "Zipr starts a command without waiting for it, so a test says the command started — never that it worked. Zap is told exactly that, and says so."
+  ],
+  ["bdf89a1f", "Risk is worked out, not guessed"],
+  [
+    "b4051d9f",
+    "Whether a step opens something, asks a question, runs a program or acts as another account is decided by the app from the step itself — never by the AI. When it matters, you're advised to have the item ask before it runs."
+  ],
+  ["c1cea9f3", "Nothing disappears quietly"],
+  [
+    "987f4156",
+    "Every change Zap makes is a numbered revision. A step it removes is shown to you, and putting it back is one click."
+  ],
+  ["7d6d98e9", "Only steps that really run"],
+  [
+    "6de5910c",
+    "Zap can only use the step types Zipr runs, with the settings each one accepts. It can't write a step that would be saved and then silently ignored."
+  ],
+  ["0819f3fe", "Your data"],
+  ["db97d452", "Exactly what the AI sees"],
+  [
+    "bb586817",
+    "Zap needs to know what it's building. It doesn't need to know anything else, so it isn't told."
+  ],
+  ["e001eada", "Sent to the model"],
+  ["d0d957ec", "Your conversation with Zap"],
+  ["e6534a6c", "The item being built"],
+  ["3844640c", "The list of step types Zipr can run"],
+  ["3eb17a60", "Your operating system, its version, your processor type and the app's language"],
+  ["717ac211", "The plugins Zap is allowed to use"],
+  ["77d38da7", "The results of your tests"],
+  [
+    "11bbe456",
+    "Whether an app or program is installed — yes or no, unless disabled by your organisation."
+  ],
+  ["afea4b9d", "Never sent"],
+  ["c4ced915", "Any password, key or other credential"],
+  ["6f1de15f", "Your other items, catalogues and workspaces"],
+  ["8bfbc1de", "Files, your clipboard, environment or launch history"],
+  ["38bb93c1", "What you typed into a question an item asked"],
+  ["558b29f2", "Which account a sign-in step used"],
+  ["7da0fdd7", "Your AI, or your team's"],
+  ["9863868b", "Bring your own model"],
+  [
+    "f85216d4",
+    "Zap works with the AI provider you already use, or with the one your organisation has set up."
+  ],
+  ["5328f8e9", "Your own key"],
+  [
+    "071670d8",
+    "Connect Anthropic, OpenAI, Google Gemini or any OpenAI-compatible endpoint — including a model on your own machine. The key stays in your operating system's keychain, and the app's screens never see it."
+  ],
+  ["a163b4be", "How to get a key from Claude or ChatGPT"],
+  ["bc187df8", "Your team's server"],
+  [
+    "5f9ebaa7",
+    "A Zipr team server can offer Zap with the organisation's own key and an access list, so nobody needs a key of their own. Administrators decide who can use it."
+  ],
+  ["1ce522a2", "Questions"],
+  ["e32377a1", "Asked and answered"],
+  ["546620b8", "Do I need to understand the technical side?"],
+  [
+    "d0e71825",
+    "No. Say what you want and Zap works out how. Every step it builds is shown in plain words, with its settings underneath for anyone who wants to look, and you can change any of them yourself."
+  ],
+  ["cc925c77", "Will it really use the command line?"],
+  [
+    "b2235c7a",
+    "When that's the best way to do what you asked, yes — including steps that only run on Windows or only on a Mac, and programs that need administrator rights. Anything that runs a program is marked as such before you save it, and you're advised to have the item ask before it runs."
+  ],
+  ["05985e47", "Can Zap run things on my computer?"],
+  [
+    "6ebd385a",
+    "No. Zap only changes the draft it's building. A test is something you press, and it runs exactly what launching the item would — including asking you first, if the item is set to ask."
+  ],
+  ["bc580b8a", "What happens to the item once I save it?"],
+  [
+    "c66accdd",
+    "It becomes an ordinary item in your own workspace, with no link back to the conversation. Edit it, launch it, or share it with your team like anything else you've built."
+  ],
+  ["f2cbd560", "Which AI models does it work with?"],
+  [
+    "ab9586ac",
+    "Anthropic, OpenAI and Google Gemini, or any OpenAI-compatible endpoint — including a model running on your own machine. The model has to support tool calling; Zipr checks that when you connect it, so a key that won't work is refused then rather than halfway through a draft."
+  ],
+  ["1bc4dec0", "Where is my API key kept?"],
+  [
+    "3c55b562",
+    "In your operating system's keychain, and nowhere else. The app's own screens never see it. Linux has no keychain, so on Linux Zap works through a team server instead of a personal key."
+  ],
+  ["64d78f16", "Can my organisation control it?"],
+  [
+    "f3258753",
+    "Yes. On computers your organisation manages, an administrator can leave the choice to you, allow only the team server, or turn Zap off. Turning it off keeps any drafts in progress; it just stops new conversations."
+  ],
+  ["d99ed2a3", "Does Zap keep a record of what I asked?"],
+  [
+    "1e02cde3",
+    "Your drafts are stored on your computer until you save or discard them. The app logs no prompt and no reply."
+  ],
+  ["e83ca5ee", "Get started"],
+  ["b299047d", "Zap is in the app. Download Zipr, connect a model, and tell it the idea."],
+  ["ea69ad05", "See everything Zipr does"],
+  ["f35886ea", "Zap: turn an idea into steps your computer runs · Zipr"],
+  ["2c601441", "Zap setup"],
+  ["7f1f7737", "Connect Zap to Claude or ChatGPT"],
+  [
+    "5d71a11d",
+    "Zap uses an AI model you choose, with your own key. Getting one takes about five minutes at the provider, then a minute in Zipr."
+  ],
+  ["e4d2e31e", "Written <1/> · Last updated"],
+  [
+    "04155f21",
+    "These steps describe Anthropic's and OpenAI's websites, which change often. Each section says when it was last checked. If what you see doesn't match, the provider's own page, linked at the end of each section, is right and this one is out of date."
+  ],
+  ["ee8ba885", "Before you start"],
+  [
+    "18062998",
+    "<1>Your organisation may have done this already.</1> If Zap offers \"New draft through your deployment\", you can use it without a key of your own."
+  ],
+  [
+    "e2403874",
+    "<1>A chat subscription isn't an API key.</1> ChatGPT Plus and Claude Pro or Max don't include API use. You pay the provider separately, per use, from credit you add."
+  ],
+  [
+    "cbc10870",
+    "<1>Zipr doesn't charge for Zap or see your bill.</1> The provider bills you directly. Your key goes from Zipr to them and nowhere else."
+  ],
+  [
+    "dfc5ff97",
+    "<1>On Linux, use your organisation's server.</1> Linux has no keychain to keep a personal key in, so Zipr won't store one there."
+  ],
+  ["d85189f0", "Claude (Anthropic)"],
+  ["8d94317d", "ChatGPT (OpenAI)"],
+  ["116eb3d3", "Anthropic"],
+  ["a09282ed", "Claude: connect with an API key"],
+  ["c8c326bc", "Steps last checked <1/> against Anthropic's own pages"],
+  [
+    "9776253a",
+    "A Claude Pro or Max plan covers Claude on claude.ai and its apps, not the API. API use is paid for separately, in the Claude Console, with credits."
+  ],
+  ["adc82ae0", "In the Claude Console"],
+  ["219dc916", "Sign in to the Claude Console"],
+  [
+    "210603d2",
+    "Go to platform.claude.com and sign in, or create an account. It is a different place from claude.ai, though you can use the same email address."
+  ],
+  ["925f4f07", "Buy some credits"],
+  [
+    "884e1f4d",
+    "Open Settings → Billing and choose Buy credits. Credits are available as soon as the purchase goes through. You need the Admin or Billing role in the organisation to do this; if the option isn't there, ask whoever set the organisation up."
+  ],
+  ["2346f6ed", "Create a key"],
+  [
+    "c139cd0f",
+    "Open Settings → API keys and choose Create key. Name it something you'll recognise later, such as \"Zipr on my laptop\", pick when it should expire, and leave Linked account set to yourself."
+  ],
+  ["06145d8c", "Copy the key straight away"],
+  [
+    "3bcdb5cc",
+    "The key starts with sk-ant- and is shown only once. Copy it now. If you lose it, delete it and create another — it can't be shown again."
+  ],
+  ["21e4bf51", "Open the Claude Console"],
+  ["9ec52889", "In Zipr"],
+  ["a0063308", "Open Zap in Zipr"],
+  ["50b10999", "Choose Zap in the sidebar and find the card called Your model connection."],
+  ["33ccc2bd", "Set Provider to Anthropic"],
+  [
+    "96e8b69d",
+    "Leave Base URL empty. It's only for a model running on your own computer or another OpenAI-compatible service."
+  ],
+  ["df6ea072", "Type the model name"],
+  ["754004cb", "In Model, type <1/>, or another model from the list below, exactly as written."],
+  ["6bd215fc", "Paste the key and press Check and save"],
+  [
+    "c8e83268",
+    "Zipr sends one small request asking the model to call a tool. If it does, the key is saved to your operating system's keychain and is never shown again. If not, the message says why — see Troubleshooting below."
+  ],
+  ["bee8b8f3", "Which model"],
+  ["e63b2832", "Anthropic's current Opus, and the one to start with."],
+  ["b3e1a415", "Half the price per token, and quick. A good choice if you use Zap a lot."],
+  ["cbfd1a64", "Where these steps come from"],
+  ["5b1f6a43", "Get your Claude API key"],
+  ["98c468d4", "How do I pay for my Claude API usage?"],
+  ["5edac77d", "What is the Pro plan?"],
+  ["51caaaf6", "Models overview"],
+  ["54497523", "OpenAI"],
+  ["ff6d1da4", "ChatGPT: connect with an API key"],
+  ["01ebb5ee", "Steps last checked <1/> against OpenAI's own pages"],
+  [
+    "34ef4d3d",
+    "A ChatGPT Plus, Pro or Business plan covers ChatGPT, not the API. API use is billed separately, on the OpenAI Platform, from a prepaid balance."
+  ],
+  ["086fbeec", "In the OpenAI Platform"],
+  ["4a6985da", "Sign in to the OpenAI Platform"],
+  [
+    "ccbe67c3",
+    "Go to platform.openai.com and sign in, or create an account. You can use the same login as ChatGPT, but billing is kept apart. OpenAI may ask to verify a phone number."
+  ],
+  ["83e2475c", "Add a payment method and credit"],
+  [
+    "d952c6b0",
+    "Open Settings → Billing, add a card and buy prepaid credit. A small amount is enough to try Zap. Consider setting a monthly usage limit while you're there."
+  ],
+  [
+    "5fee396d",
+    "Open the API keys page (platform.openai.com/api-keys) and choose Create new secret key. Name it something you'll recognise later, such as \"Zipr on my laptop\"."
+  ],
+  [
+    "05769997",
+    "The full key is shown only once, when you create it. Copy it now. If you lose it, revoke it and create another."
+  ],
+  ["288dd8eb", "Open the OpenAI Platform"],
+  ["ba6a4131", "Set Provider to OpenAI"],
+  ["026bad12", "OpenAI's flagship, and the one that works with Zipr today."],
+  ["3e91fd74", "Doesn't work:"],
+  [
+    "7ba80368",
+    "OpenAI only supports tool calling for this model through its Responses API. Zipr uses Chat Completions, so Check and save refuses it."
+  ],
+  [
+    "ccb85f8f",
+    "Calls tools through Chat Completions only with a setting Zipr doesn't send, so Check and save refuses it."
+  ],
+  ["2430157c", "OpenAI API quickstart"],
+  ["a6b0aec7", "OpenAI models"],
+  ["c746b514", "GPT-6 Astra model page"],
+  ["18334a7b", "Managing billing for ChatGPT and the API platform"],
+  ["564c7b3e", "If it doesn't work"],
+  ["eacc4991", "Troubleshooting"],
+  ["b0bef607", "Check and save says the provider refused the request (401)"],
+  [
+    "3828e6d0",
+    "The key wasn't accepted. Check it was copied whole, with nothing before or after it, and that it hasn't been deleted or expired at the provider. If in doubt, create a new key and paste that."
+  ],
+  ["ab7ed3e2", "It says the provider refused the request because of credit, quota or billing"],
+  [
+    "ecbd6dfa",
+    "The account has no credit left, or no payment method. Add credit in the provider's billing settings, wait a minute, and press Check and save again."
+  ],
+  ["fb2ff480", "It says the model answered without calling a tool"],
+  [
+    "010472fc",
+    "Zap needs a model that can call tools, and checks for it before saving. Use one of the models listed for your provider on this page, typed exactly as shown."
+  ],
+  ["444e5e40", "It says the model doesn't exist, or wasn't found"],
+  [
+    "889443cf",
+    "Model names must be typed exactly, in lower case, with the hyphens. Copy one from this page. Providers also retire models over time; if a listed one has gone, the provider's models page names its replacement."
+  ],
+  ["642a9bb8", "It says this computer has no keychain"],
+  [
+    "84f8ca59",
+    "Linux has no system keychain, and Zipr won't write a key to disk. On Linux, use Zap through your organisation's Zipr server instead of a personal key."
+  ],
+  ["e004362c", "Afterwards"],
+  ["2e6d9e2c", "Looking after your key"],
+  ["12e0309e", "Set a monthly spending limit at the provider, so a busy month can't surprise you."],
+  [
+    "03851518",
+    "Use a separate key for each computer. If one is lost, delete that key at the provider and the others keep working."
+  ],
+  [
+    "441baf63",
+    "To stop using a key, press Remove in Zipr's model connection card, then delete the key at the provider."
+  ],
+  [
+    "d5df6047",
+    "What Zap sends to the model, and what it never sends, is listed on the <1>Zap page</1>."
+  ],
+  ["90b6765c", "Changes to this page"],
+  ["509736e5", "— First published, covering Claude and OpenAI."],
+  ["274f2b7d", "Providers"],
+  ["50778a61", "Connect Zap to Claude or ChatGPT · Zipr"],
+  ["61884917", "Free for you. <1>Paid</1> for your team."],
+  [
+    "4da88ed2",
+    "The whole app is free for one person. You pay when your team shares — and you choose who runs the server."
+  ],
+  ["ddabf70a", "The whole app, on your machine, for as long as you like."],
+  ["5873487c", "No account. No card. No expiry."],
+  ["c616f942", "Windows and macOS"],
+  ["879e4541", "Unlimited items and catalogues"],
+  ["052c4e30", "All twelve step types, chained however you like"],
+  ["b4f7b2f4", "Steps that differ per operating system"],
+  ["847d7bcb", "Plugins"],
+  ["68181b16", "History of what you've run"],
+  ["4dc657be", "Export everything as one file"],
+  ["bc3af3b2", "Works offline"],
+  ["a5274bfe", "Most teams start here"],
+  ["b4ba844e", "Hosted"],
+  ["d6d1a93a", "Everything above, crossing between people — on our servers, not yours."],
+  ["21e958a6", "AUD / person / month"],
+  ["f066a719", "Billed yearly"],
+  ["012cb00b", "month to month. Minimum <1/> people, so <2/> a year at the smallest."],
+  ["f242622f", "Everything in Free, for everyone"],
+  ["6d912eda", "Shared catalogues, updated live as colleagues work"],
+  ["8a4fad40", "Members, roles, and who-can-see-what"],
+  ["04c1e0d5", "Edit at the same time without losing work"],
+  ["938e3784", "Full history and one-click rollback"],
+  ["b7445f07", "Audit trail and usage figures"],
+  ["92b5c0d2", "Sign in with Google, Microsoft or Okta"],
+  ["a5f71208", "Your own database, not a shared one"],
+  ["b282f58e", "Export everything, any time — even if your account lapses"],
+  ["9138f3f0", "Request access"],
+  ["08ba8fb9", "Self-hosted"],
+  ["503edc40", "The same thing, on infrastructure you control, under a written agreement."],
+  ["7cd71d92", "Let's talk"],
+  ["8769881f", "Priced per deployment, not per person"],
+  ["448ed4f6", "Everything in Hosted"],
+  ["c0a04662", "Runs on your servers, or in your own cloud account"],
+  ["4ae8d847", "No user limit — the hardware you chose is the only one"],
+  ["11ecefee", "Nothing leaves your network, including the licence check"],
+  ["68952bfb", "Runs air-gapped"],
+  ["ddadf5aa", "Settings you can lock down centrally"],
+  ["e1907b82", "An admin console for the whole instance"],
+  ["a41924f5", "Support with an agreed response time"],
+  ["9745b8ee", "Invoicing, security review, DPA"],
+  [
+    "1a457321",
+    "Prices in AUD, excluding tax. Both paid options start with a conversation and a quote. <1>What self-hosting involves</1>"
+  ],
+  ["2218aebd", "Every feature, side by side"],
+  [
+    "1054ad41",
+    "Hosted and self-hosted are the same software. They differ in who runs it and how it's billed, not in what it can do."
+  ],
+  [
+    "ed13a6ee",
+    "Feature comparison between the Free app, the Hosted service and a Self-hosted deployment"
+  ],
+  ["fe9102dd", "Feature"],
+  ["7ca31f05", "Free<1>On your machine</1>"],
+  ["1441a2cb", "Hosted<1>Per person</1>"],
+  ["cad857fc", "Self-hosted<1>Per deployment</1>"],
+  ["39e476a4", "Building and running things"],
+  ["0ec0e5c0", "Items and catalogues"],
+  ["2d283a80", "Unlimited"],
+  ["314d01f8", "All twelve step types"],
+  ["b8adfdd9", "Included"],
+  ["67427871", "Zap, the AI that builds items for you"],
+  [
+    "14bed2f5",
+    "Describe what you want and Zap builds it for you to test. You choose the AI model, such as Claude or ChatGPT, and the provider bills you directly."
+  ],
+  ["54aeedd7", "With your own key"],
+  ["722a4b0a", "Your key, or your team's"],
+  ["092b6161", "Your own step types"],
+  ["4e44e4d1", "For anything the built-in twelve don't cover."],
+  ["edc411ab", "Install your own"],
+  ["8870b7a0", "Share with the team"],
+  ["bf4e59d8", "Works with no network"],
+  ["7a682fa4", "Export everything"],
+  [
+    "ffb88601",
+    "Never held against a bill — the hosted export works even while an account is suspended."
+  ],
+  ["c9f2711b", "One file"],
+  ["26c49b96", "It's your database"],
+  ["704ac475", "Working with other people"],
+  ["f14d873f", "Workspaces"],
+  ["c764dd86", "One, private"],
+  ["1d5584f4", "Members and roles"],
+  ["34c9f84e", "Not included"],
+  ["2241ef22", "Shared catalogues"],
+  ["77824000", "One AI key for the whole team"],
+  [
+    "e7028936",
+    "An administrator sets it once and chooses who can use Zap. Nobody needs a key of their own."
+  ],
+  ["33fabdc7", "Publish your work to the team"],
+  ["bc5185e5", "A copy, so your own version stays exactly where it was."],
+  ["9d3e4498", "Everyone's copy stays current"],
+  ["65df718d", "Live updates"],
+  ["e4c68c83", "Changes appear as colleagues make them."],
+  ["8f9b5743", "Editing the same item at once"],
+  ["f653c751", "Both sets of changes survive, and you are told what actually clashed."],
+  ["9f7f439b", "Not applicable"],
+  ["1469dcb1", "History and oversight"],
+  ["c894dca3", "Full history and rollback"],
+  ["76bda0c0", "Tags"],
+  ["54db432d", "What you've run"],
+  ["e82e3790", "This machine"],
+  ["059c99fa", "This machine + team"],
+  ["18654f72", "Team usage figures"],
+  ["573fa268", "What people actually run, so you know what matters."],
+  ["34742914", "Audit trail"],
+  ["44a72569", "Per workspace"],
+  ["6244b142", "Instance-wide"],
+  ["535cb4fb", "Central values your catalogues reuse"],
+  ["b41b90ad", "Paths and addresses set once, so nothing is hardcoded in an item."],
+  ["4d1192c5", "Lock settings centrally"],
+  ["88296479", "Running it"],
+  ["519afb6e", "Where your data lives"],
+  ["ad0d6867", "Your machine"],
+  ["632a674f", "Our servers, your own database"],
+  ["e16817fe", "Your servers"],
+  ["97f70279", "Who operates it"],
+  ["209060b0", "Upgrades, backups and the pager."],
+  ["67a809ca", "You, trivially"],
+  ["45f35df9", "Us"],
+  ["b5bdd13c", "You"],
+  ["43f3d44c", "Single sign-on"],
+  ["e07855aa", "Google, Microsoft Entra or Okta."],
+  ["887c7a25", "Admin console"],
+  ["6f5972a7", "What you're billed for"],
+  ["67d7bc74", "Self-hosting counts nobody — your hardware is the limit."],
+  ["2cea492a", "Nothing"],
+  ["510a0ab9", "Per person"],
+  ["ead7a4a3", "Per deployment"],
+  ["9e88759e", "Best effort, by email"],
+  ["43352167", "Email"],
+  ["eb2e6e05", "Agreed response time"],
+  ["57507276", "If you run it yourself"],
+  ["089e4ab2", "Less work than you're bracing for"],
+  [
+    "24cd73f7",
+    "One server and one command. If you'd rather not, the hosted option is us doing it for you."
+  ],
+  ["a1bfd61a", "One server, not a cluster"],
+  [
+    "acd2f71a",
+    "The server, its database and sign-in run together as one Docker Compose stack on a single machine."
+  ],
+  ["2983fafa", "Up in an afternoon"],
+  [
+    "bed62ac2",
+    "Bring a domain, a TLS proxy and an email account for sign-in codes; then one command brings the whole thing up."
+  ],
+  ["6bdf598e", "Nothing phones home"],
+  [
+    "ae424fa1",
+    "Your deployment does not report to us or check in with us. The licence is verified on your own hardware, so it keeps working with the internet unplugged."
+  ],
+  [
+    "4d87e034",
+    "The agreement covers the software and support. The server is yours, on whichever cloud or rack you already use — and because a deployment counts nobody, the price doesn't move when the team grows."
+  ],
+  ["4d9ee530", "Before you ask"],
+  ["3db896a4", "Why is the app free if the team version isn't?"],
+  [
+    "005faf4d",
+    "Because the app is complete on its own: it stores and runs everything on your machine, so it would keep working whatever we did. Sharing needs a server, and that is the part you pay for."
+  ],
+  ["27d682bf", "Hosted or self-hosted — which should we pick?"],
+  [
+    "f0f424e0",
+    "It is the same software, so choose on operations. Hosted: we run, patch and back it up, and you pay per person. Self-hosted: your data never leaves your infrastructure, it can run with no internet, and you pay per deployment. Teams with a platform group and a data-residency policy usually self-host; everyone else is better served hosted."
+  ],
+  ["b8891b96", "What counts as a person?"],
+  [
+    "cc5d3ac3",
+    "On the hosted service, anyone an administrator adds to your organisation — from the moment they are added, whether or not they sign in. Remove them and they stop counting at the next renewal. Self-hosting doesn't count people at all."
+  ],
+  ["c46a546a", "Can we try it first?"],
+  [
+    "7c6bfeeb",
+    "The free app is the trial — the same build a paying team runs, with no time limit. There's no separate trial of the shared version, because setting one up is the paid work itself. Talk to us and we'll work out a sensible pilot."
+  ],
+  ["9fdee542", "What happens if we stop paying?"],
+  [
+    "655fc13b",
+    "Nothing is deleted or held hostage. Reading keeps working, changes are refused, and you can export everything at any point without settling anything first. Self-hosted licences warn you for a month before they expire. Everything on individual machines is unaffected."
+  ],
+  ["a55cd412", "Can we start hosted and move to our own servers later?"],
+  [
+    "953d7c4d",
+    "Yes — your content exports as one file whenever you want it. There is no one-click conversion that carries accounts and history across yet, so plan the move as a piece of work, and tell us early so we can help."
+  ],
+  ["5a8add2d", "How do we pay?"],
+  [
+    "c34e4c96",
+    "By invoice. Hosted is billed yearly or monthly per person; self-hosted is an annual figure for the deployment. Either way you get a quote before anything starts."
+  ],
+  ["17aaa1a5", "Try it before any of this matters."],
+  ["c6cf2d37", "The free app needs no account and is the same one paying teams run."],
+  ["2c75e7f3", "Pricing: free app, team plans from $6 · Zipr"],
+  ["57133887", "Install Zipr"],
+  [
+    "c05e049d",
+    "Free, no account, about a minute. Everything you make stays on your machine until you decide otherwise."
+  ],
+  ["4c879717", "Version <1/>"],
+  ["ebe28124", "Released <1/>"],
+  ["0640028a", "Windows"],
+  ["b88db102", "Windows 10 or later, 64-bit"],
+  ["ffb0ff72", "Format"],
+  ["370ca400", "Installer (.exe)"],
+  ["a6478e7c", "Size"],
+  ["c64cb93d", "SHA-256"],
+  ["8a4767ff", "Download for Windows"],
+  ["62c463c2", "macOS"],
+  ["dc9facbf", "macOS 12 Monterey or later"],
+  ["f91b7e04", "No build up for this one yet."],
+  ["21c0ea0c", "Tell us you need it"],
+  ["94f302bd", "Linux"],
+  ["746e2e40", "Not yet — tell us if you want it"],
+  ["60e69b05", "No Linux installer yet. It's on the list — tell us you want it and it moves up."],
+  ["7db4b841", "Ask us about Linux"],
+  [
+    "8aca793c",
+    "Zipr is licensed to you under the <1>Zipr licence</1>. By downloading or installing it, you agree to its terms."
+  ],
+  ["907b10f6", "Before you install"],
+  ["83193d9d", "Three things worth knowing"],
+  [
+    "f8e06469",
+    "We haven't signed the installers yet, so Windows and macOS will both warn you the first time. Every download lists a checksum so you can confirm you got what we published."
+  ],
+  [
+    "fc4438c2",
+    "No account, and no network request until you point it at a team server. Installing it does not sign you up for anything."
+  ],
+  ["311d671b", "Uninstalling leaves your work on disk. Export it first if you want to keep it."],
+  ["c52ab62f", "Release notes"],
+  ["c65907e0", "What changed in <1/>"],
+  ["692eab6b", "That’s it. Nothing else to do."],
+  [
+    "119a4162",
+    "No sign-up, no licence key, no clock counting down. Come back the day your team wants what you’ve built."
+  ],
+  ["ef24fd23", "What it can do"],
+  ["a16b2247", "What a team costs"],
+  ["484be0f9", "Download for Windows and macOS · Zipr"],
+  ["56da7e19", "Not <1>quite</1> yet"],
+  [
+    "4dd713b9",
+    "Zipr is early and the installers aren't up here yet. Leave us a line and we'll tell you the moment there's something to install — no list, no newsletter, just the one email."
+  ],
+  ["3241b130", "Tell me when it's ready"],
+  ["9a28b0f4", "See what it does"],
+  ["391a65d4", "The short answers your reviewer wants"],
+  [
+    "f7945fa5",
+    "Zipr moves knowledge between teams, so these are fair questions. The answers are deliberately boring."
+  ],
+  [
+    "0b2d1aeb",
+    "Zipr stores what your team built; it never executes it. Commands, scripts and links run only on the machine of the person who clicked, when they click."
+  ],
+  [
+    "2f03513e",
+    "Self-hosted, it never leaves your infrastructure and we have no copy. Hosted, it sits in a database belonging to your organisation alone — we operate it, so access is governed by contract and policy."
+  ],
+  ["c4188d7c", "Self-hosted doesn't call home"],
+  [
+    "2c315046",
+    "No reporting, no check-ins. The licence is verified on your own hardware, so it works with the internet unplugged."
+  ],
+  ["8cc8ac89", "Every change is attributable"],
+  [
+    "02f3c132",
+    "Who did what and when, recorded by the server and not editable from any client. An audit question is a query, not a reconstruction."
+  ],
+  ["2cc0dbc3", "Sharing doesn't loosen access"],
+  [
+    "eb23d903",
+    "Work crosses teams only as a published copy, where your administrators allow it. Roles, membership and single sign-on stay yours — and people can't tell whether a catalogue they can't see exists."
+  ],
+  ["505e806a", "Your data is never held hostage"],
+  [
+    "28bb3f68",
+    "Export everything as one file at any time. If a licence or invoice lapses, reading keeps working while changes are refused."
+  ],
+  ["e00fcf7c", "Review questions"],
+  ["c325b1ea", "Where is our data stored?"],
+  [
+    "547441c2",
+    "Self-hosted, on the server you run it on, and we hold nothing. Hosted, in a database provisioned for your organisation alone, so it can be backed up and restored on its own. Either way, each machine also keeps a copy so the app is fast and works offline."
+  ],
+  ["19b6628a", "What does the app send over the network?"],
+  [
+    "d824c710",
+    "Only your catalogue content and the sign-in that authorises it, and only to the deployment it is pointed at. With no deployment configured, it makes no network requests at all."
+  ],
+  ["b74094c3", "Can we run it somewhere with no internet access?"],
+  [
+    "eeb41ac2",
+    "Yes, self-hosted. The licence verifies offline, so air-gapped is a supported configuration, not a workaround — and we'll help you set it up. The hosted service can't be air-gapped."
+  ],
+  ["c3dd90af", "How do we sign in?"],
+  [
+    "0bdd2b50",
+    "In your browser — the app opens the sign-in page and never handles your Zipr password itself. Google, Microsoft Entra and Okta are supported, so people join and leave wherever you already manage that."
+  ],
+  ["412139a1", "What happens to our data if we stop paying?"],
+  [
+    "f2693af2",
+    "Reading keeps working while changes are refused, and you can export everything at any point without settling anything first. Hosted, the data is kept for the period set out in your agreement after suspension before anything is removed. Self-hosted, it is on your own disk and we can't touch it; the licence warns you for a month before it expires."
+  ],
+  ["9bf39fc1", "Who can see what?"],
+  [
+    "4f679e0a",
+    "Your administrators decide, per workspace. The system won't confirm that something exists just because someone guessed its address."
+  ],
+  ["d7173883", "How do we get security updates?"],
+  [
+    "9fe27923",
+    "New versions are published on the downloads page and you roll them out on your own schedule. Nothing updates itself underneath you."
+  ],
+  ["dda06b4e", "Are the installers signed?"],
+  [
+    "ecf0cb86",
+    "Not yet — signing is on the way. Every download is published with a SHA-256 checksum so you can verify exactly what you got."
+  ],
+  [
+    "9a279194",
+    "Exactly what the website, the app and the hosted service record is listed in the <1>privacy notice</1>."
+  ],
+  ["6926f184", "Found something?"],
+  [
+    "b269c580",
+    "Email it privately. We'll confirm we have it, keep you posted while it's fixed, and credit you when it ships unless you'd rather we didn't."
+  ],
+  ["e96be51b", "zipr@stanbrook.me"],
+  ["01a8cf63", "Need this in writing?"],
+  [
+    "80d8085d",
+    "We'll complete a security questionnaire, sign a DPA, or talk to whoever needs convincing — hosted or self-hosted."
+  ],
+  ["f231e491", "Try it first"],
+  ["89189281", "Security and data handling · Zipr"],
+  ["7e87a196", "Something broken? Tell us."],
+  [
+    "7af715b9",
+    "No account, no tracker to sign up for, no template to fill in. Two boxes and you are done."
+  ],
+  ["fe9df7ff", "Where did it happen?"],
+  ["a79b09af", "The desktop app"],
+  ["30a8c08b", "A deployment"],
+  ["0d24d7a0", "This website"],
+  ["be13464f", "What went wrong?"],
+  ["fca7b619", "What were you doing?"],
+  ["380223bc", "What you expected, and what happened instead. Steps to reproduce it are gold."],
+  ["8bcb629c", "Version<1>Optional</1>"],
+  ["917eec3f", "Platform<1>Optional</1>"],
+  ["36a9afac", "Email<1>Optional</1>"],
+  ["f752362d", "Only if you want to hear back."],
+  ["9c369531", "Leave this field empty"],
+  ["d0ae98ae", "Send the report"],
+  [
+    "62022b00",
+    "Goes straight to the people who can fix it. How we handle it: <1>privacy notice</1>."
+  ],
+  ["f6b28ffe", "What helps most"],
+  ["3d13611e", "What you clicked, in order"],
+  ["576df72e", "What you expected instead"],
+  ["9872c8c6", "Whether it happens every time"],
+  ["eb8a448e", "Found a security problem?"],
+  [
+    "b7c42e6c",
+    "Please don't use this form. Mail it instead, so the details stay between us until there is a fix."
+  ],
+  ["585d6694", "Launching an item does nothing on Windows"],
+  ["7c8379a4", "Windows 11"],
+  ["47ae02de", "Report a bug · Zipr"],
+  ["feef4b88", "Talk to a person"],
+  [
+    "21c2b236",
+    "Pick whichever fits. Each one opens a message with the subject already written — and where it helps, the questions we'd have asked anyway."
+  ],
+  ["108abbbc", "Get your team set up"],
+  [
+    "60b0d517",
+    "The hosted service, run by us. Nobody self-provisions, so this is how an organisation actually starts."
+  ],
+  ["6622adda", "Self-hosting and quotes"],
+  [
+    "20887cfa",
+    "Running it on your own infrastructure, under a written agreement. Priced per deployment, not per person."
+  ],
+  ["ccd7a697", "Ask about a licence"],
+  ["e41cdf50", "Help, for customers"],
+  ["6148efb5", "You're a customer and something isn't behaving. Jump the queue here."],
+  ["5f3dbff8", "Get support"],
+  ["c4198bc4", "A security report"],
+  [
+    "bedb09b2",
+    "Found a vulnerability? Tell us privately and we'll keep you posted until it's fixed."
+  ],
+  ["af8b3bff", "Report privately"],
+  [
+    "f549f7b6",
+    "They all reach <1>zipr@stanbrook.me</1>— a real inbox, not an autoresponder, so give us a working day. No form, no list, no follow-up sequence. We use your address to answer you; the <2>privacy notice</2> has the details."
+  ],
+  ["cad5f67b", "Something's broken?"],
+  [
+    "7e9da469",
+    "There's a form for that, and it takes about thirty seconds. No account, no tracker to sign up for."
+  ],
+  ["0547f28a", "Contact: team setup, quotes and support · Zipr"],
+  ["9cc33ff0", "That page isn't here"],
+  [
+    "e09b4bfe",
+    "The link may be old, or the address mistyped. These are the pages most people are looking for."
+  ],
+  ["52f50eae", "Home"],
+  ["a2654c61", "Page not found · Zipr"]
+]

@@ -71,6 +71,9 @@ export default defineConfig(({ mode }) => {
           /.*\.png($|\?)/,
           /.*\.jpg($|\?)/,
           /.*\.svg($|\?)/,
+          // The translation catalogues under public/i18n. Without this the
+          // dev server hands them to the worker, which has no such route.
+          /^\/i18n\/.*\.json($|\?)/,
         ],
       }),
       tailwindcss(),

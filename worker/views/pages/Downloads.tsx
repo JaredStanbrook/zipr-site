@@ -62,12 +62,17 @@ const PlatformCard: FC<{
           </div>
           <div class="flex justify-between gap-3">
             <dt class="text-muted-foreground">Size</dt>
-            <dd class="font-medium tabular">{formatBytes(asset.sizeBytes)}</dd>
+            <dd class="font-medium tabular" translate="no">
+              {formatBytes(asset.sizeBytes)}
+            </dd>
           </div>
           {asset.sha256 ? (
             <div class="pt-2">
               <dt class="text-xs text-muted-foreground">SHA-256</dt>
-              <dd class="mt-1 wrap-anywhere font-mono text-xs leading-relaxed text-muted-foreground">
+              <dd
+                class="mt-1 wrap-anywhere font-mono text-xs leading-relaxed text-muted-foreground"
+                translate="no"
+              >
                 {asset.sha256}
               </dd>
             </div>
@@ -140,12 +145,16 @@ export const DownloadsPage: FC<DownloadsProps> = ({ latest, previous, detected, 
             <div class="mb-8 flex flex-wrap items-center justify-center gap-3">
               <Badge tone="success">
                 <i data-lucide="circle-check" class="h-3 w-3" aria-hidden="true"></i>
-                Version <span class="tabular">{latest.version}</span>
+                Version{" "}
+                <span class="tabular" translate="no">
+                  {latest.version}
+                </span>
               </Badge>
               {latest.channel === "beta" ? <Badge tone="warning">Beta channel</Badge> : null}
               {latest.publishedAt ? (
                 <span class="text-sm text-muted-foreground">
-                  Released {formatDateShort(latest.publishedAt, app.locale)}
+                  Released{" "}
+                  <span translate="no">{formatDateShort(latest.publishedAt, app.locale)}</span>
                 </span>
               ) : null}
             </div>
@@ -200,9 +209,21 @@ export const DownloadsPage: FC<DownloadsProps> = ({ latest, previous, detected, 
     {latest?.notes ? (
       <Section>
         <Container size="prose">
-          <SectionHeading eyebrow="Release notes" title={`What changed in ${latest.version}`} />
+          <SectionHeading
+            eyebrow="Release notes"
+            title={
+              <>
+                What changed in <span translate="no">{latest.version}</span>
+              </>
+            }
+          />
           <Card class="p-7">
-            <div class="whitespace-pre-wrap text-sm leading-relaxed text-muted-foreground">
+            {/* Written by whoever published the release, in English, and not
+                part of the site's own copy: it is left as written. */}
+            <div
+              class="whitespace-pre-wrap text-sm leading-relaxed text-muted-foreground"
+              translate="no"
+            >
               {latest.notes}
             </div>
           </Card>
@@ -238,7 +259,11 @@ export const DownloadsPage: FC<DownloadsProps> = ({ latest, previous, detected, 
               <tbody>
                 {previous.map((rel) => (
                   <tr class="border-b border-border last:border-0">
-                    <th scope="row" class="px-5 py-3.5 font-mono text-sm font-semibold tabular">
+                    <th
+                      scope="row"
+                      class="px-5 py-3.5 font-mono text-sm font-semibold tabular"
+                      translate="no"
+                    >
                       {rel.version}
                       {rel.channel === "beta" ? (
                         <Badge tone="warning" class="ml-2">
@@ -246,7 +271,7 @@ export const DownloadsPage: FC<DownloadsProps> = ({ latest, previous, detected, 
                         </Badge>
                       ) : null}
                     </th>
-                    <td class="px-5 py-3.5 text-sm text-muted-foreground">
+                    <td class="px-5 py-3.5 text-sm text-muted-foreground" translate="no">
                       {rel.publishedAt ? formatDateShort(rel.publishedAt, app.locale) : "—"}
                     </td>
                     <td class="px-5 py-3.5">
