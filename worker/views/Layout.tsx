@@ -3,6 +3,7 @@ import type { FC, Child } from "hono/jsx";
 import { type PropsUser } from "@server/schema/auth.schema";
 import type { AppConfig } from "@server/config/app.config";
 import { jsonLdScript, type ResolvedMeta } from "@server/lib/seo";
+import { isTranslatablePath, LANGUAGE_STORAGE_KEY } from "@server/content/languages";
 import { NavBar } from "./components/NavBar";
 import { SiteFooter } from "./components/SiteFooter";
 
@@ -33,7 +34,11 @@ export const Layout: FC<LayoutProps> = (props) => {
 
   return html`
     <!DOCTYPE html>
-    <html lang="${props.meta.locale}">
+    <html
+      lang="${props.meta.locale}"
+      data-i18n="${isTranslatablePath(props.currentPath) ? "on" : "off"}"
+      data-i18n-v="${props.assetVersion}"
+    >
       <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -110,6 +115,30 @@ export const Layout: FC<LayoutProps> = (props) => {
             ? html`<link rel="stylesheet" href="/static/main.css?v=${props.assetVersion}" />`
             : html`<link rel="stylesheet" href="/worker/index.css" />`
         }
+        <!-- If a language was chosen on an earlier visit, start fetching its
+             catalogue now rather than when the bundle has loaded, so the page
+             spends as little time in English as it can. Nothing here changes
+             the page; ui/LanguageSwitcher.ts does that. -->
+        <script>
+          (function () {
+            try {
+              var code = localStorage.getItem("${LANGUAGE_STORAGE_KEY}");
+              var root = document.documentElement;
+              if (code && /^[a-z]{2}$/.test(code) && root.getAttribute("data-i18n") === "on") {
+                var link = document.createElement("link");
+                link.rel = "preload";
+                link.as = "fetch";
+                link.crossOrigin = "anonymous";
+                link.href =
+                  "/i18n/" +
+                  code +
+                  ".json?v=" +
+                  encodeURIComponent(root.getAttribute("data-i18n-v") || "");
+                document.head.appendChild(link);
+              }
+            } catch (error) {}
+          })();
+        </script>
         <script
           type="module"
           src="${isProd ? "/static/client.js" : "/worker/components/main.ts"}"

@@ -11,6 +11,14 @@ runs underneath. Changes to the site itself go above them.
 
 ### The site
 
+- **A language button in the header**, with eight languages besides English:
+  Spanish, French, German, Italian, Brazilian Portuguese, Japanese, Korean and
+  Simplified Chinese. Translation happens in the visitor's browser from
+  catalogues in `public/i18n/`, so there is no third-party script and no cookie;
+  the choice is kept in local storage. The privacy notice is updated (1.1) and
+  stays in English, like the licence and the staff pages. The translations were
+  produced with an LLM and have not been reviewed by native speakers. How it
+  works and how to add or update a language: `docs/i18n.md`.
 - Copy feedback applied across the site:
   - **Prices are in Australian dollars** (`APP_CURRENCY` is now `AUD`). The
     figures are unchanged, so Hosted stays at $6 a person a month billed

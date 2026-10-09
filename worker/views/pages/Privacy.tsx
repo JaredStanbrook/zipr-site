@@ -111,11 +111,13 @@ export const PrivacyPage: FC<{ app: AppConfig }> = ({ app }) => {
 
           <Block title="Cookies and browser storage">
             <p>
-              Visitors get no cookies. The site remembers whether you chose light or dark mode in
-              your browser's local storage; that never leaves your device. The only cookies are a
-              sign-in cookie and a one-off notification cookie used by our own staff when they sign
-              in to publish releases. Because nothing here tracks you, there is no cookie banner to
-              accept.
+              Visitors get no cookies. The site remembers whether you chose light or dark mode, and
+              which language you chose if you used the translate button, in your browser's local
+              storage; neither leaves your device. Translation happens in your browser from files
+              served by this site, so the text of the page is not sent to any translation service.
+              The only cookies are a sign-in cookie and a one-off notification cookie used by our
+              own staff when they sign in to publish releases. Because nothing here tracks you,
+              there is no cookie banner to accept.
             </p>
           </Block>
 

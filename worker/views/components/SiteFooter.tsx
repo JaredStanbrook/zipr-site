@@ -92,7 +92,10 @@ export const SiteFooter = ({ appName, tagline }: { appName: string; tagline: str
         <div
           class="mt-12 flex flex-col gap-3 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between"
         >
-          <p>© ${new Date().getFullYear()} ${operatorName()}. All rights reserved.</p>
+          <p>
+            <span translate="no">© ${new Date().getFullYear()} ${operatorName()}.</span> All rights
+            reserved.
+          </p>
 
           <!-- On every page, because the privacy notice has to be reachable
                from wherever information is collected, not just from one. -->

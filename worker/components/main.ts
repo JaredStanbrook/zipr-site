@@ -12,6 +12,7 @@ import "./ui/AppToaster";
 import "./ui/ThemeProvider";
 import "./ui/ThemeToggle";
 import "./ui/NavUserMenu";
+import "./ui/LanguageSwitcher";
 
 /**
  * Components only the staff pages use — sign-in, registration, the profile —

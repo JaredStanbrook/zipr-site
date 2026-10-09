@@ -27,7 +27,10 @@
     "// copy:export": "Pulls every visitor-facing string into docs/site-copy.md for editing. Needs `npm run dev` running and a one-off `npm i -D playwright`.",
     "copy:export": "node scripts/copy-export.mjs > docs/site-copy.md",
     "// notices": "Regenerates public/third-party-notices.txt from the licences of every package shipped to the browser. Re-run after changing client-side dependencies.",
-    "notices": "node scripts/third-party-notices.mjs"
+    "notices": "node scripts/third-party-notices.mjs",
+    "i18n:extract": "I18N_EXTRACT=1 vitest run tests/i18n.test.ts -t \"extract:\"",
+    "i18n:status": "I18N_STATUS=1 vitest run tests/i18n.test.ts -t \"status:\"",
+    "i18n:import": "tsx scripts/i18n-import.ts"
   },
   "dependencies": {
     "@hono/vite-dev-server": "^0.23.0",
@@ -58,6 +61,7 @@
     "eslint": "^9.33.0",
     "eslint-config-prettier": "^10.1.8",
     "globals": "^16.3.0",
+    "linkedom": "^0.18.13",
     "prettier": "^3.6.1",
     "tsx": "^4.20.3",
     "tw-animate-css": "^1.3.6",
