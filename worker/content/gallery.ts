@@ -7,7 +7,7 @@
 // to be a ready-made file — the page says so. Each one is a picture of what a
 // person could build, so a visitor can recognise a task they already do.
 //
-// The one hard rule: every example must be buildable today. Each lists the
+// The one hard rule: every example must be buildable from steps the toolbox has. Each lists the
 // steps it is made of, named as in the toolbox (`ACTION_TYPES` in
 // features.ts), and uses only those. If an idea needs something the app does
 // not do yet, it does not go in.

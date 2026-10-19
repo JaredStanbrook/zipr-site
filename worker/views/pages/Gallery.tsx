@@ -20,7 +20,7 @@ import {
  * from this page, and the page says so near the top rather than letting a
  * visitor discover it after clicking. Examples are grouped by the work people
  * do, because a visitor recognises their own Tuesday faster than they read a
- * feature list. Every example is made only of steps the app runs today.
+ * feature list. Every example is made from steps in the toolbox.
  */
 
 export const GalleryPage: FC = () => (
@@ -41,7 +41,7 @@ export const GalleryPage: FC = () => (
         <div class="mx-auto -mt-4 max-w-2xl text-center">
           <p class="text-sm leading-relaxed text-muted-foreground text-pretty">
             These are ideas to spark your own, not files to download. Each one is made from steps
-            you can put together in Zipr today.
+            you can put together in Zipr.
           </p>
           <nav aria-label="Jump to a role" class="mt-6 flex flex-wrap justify-center gap-2">
             {GALLERY_ROLES.map((role) => (

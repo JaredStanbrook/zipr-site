@@ -239,14 +239,4 @@ export const STEP_GROUPS: StepGroup[] = [
   },
 ];
 
-/** Steps in a group, plus how many the app runs today. */
-export const groupCounts = (group: StepGroup) => ({
-  total: group.steps.length,
-  available: group.steps.filter((step) => step.status === "available").length,
-});
-
 export const ALL_STEPS_COUNT = STEP_GROUPS.reduce((n, group) => n + group.steps.length, 0);
-export const AVAILABLE_STEPS_COUNT = STEP_GROUPS.reduce(
-  (n, group) => n + groupCounts(group).available,
-  0,
-);

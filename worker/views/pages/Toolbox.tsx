@@ -1,13 +1,6 @@
 import type { FC } from "hono/jsx";
 
-import {
-  STEP_GROUPS,
-  ALL_STEPS_COUNT,
-  AVAILABLE_STEPS_COUNT,
-  groupCounts,
-  type Step,
-  type StepGroup,
-} from "@server/content/steps";
+import { STEP_GROUPS, ALL_STEPS_COUNT, type Step, type StepGroup } from "@server/content/steps";
 import {
   Page,
   Section,
@@ -15,7 +8,6 @@ import {
   SectionHeading,
   Card,
   IconTile,
-  Badge,
   LinkButton,
   CtaBand,
 } from "@views/components/Ui";
@@ -26,8 +18,6 @@ import {
  * One group per section, in the order the app's toolbox lists them, with a jump
  * bar at the top so a long page is still quick to use. Each step is a small
  * card: its name, how it reads aloud, and whether the app can run it yet.
- * "Coming" is said on the card itself — the library here is the whole plan, and
- * a visitor should not have to work out which part has shipped.
  *
  * Advanced steps sit in a collapsed disclosure, as the app does. Step names
  * and sentences are the app's own text, so they stay in English
@@ -36,14 +26,9 @@ import {
 
 const StepCard: FC<{ step: Step }> = ({ step }) => (
   <li class="keycap flex flex-col p-4">
-    <div class="flex items-start justify-between gap-2">
-      <h4 class="font-sans text-sm font-bold leading-snug tracking-normal" translate="no">
-        {step.label}
-      </h4>
-      <Badge tone={step.status === "available" ? "success" : "neutral"} class="shrink-0">
-        {step.status === "available" ? "Available" : "Coming"}
-      </Badge>
-    </div>
+    <h4 class="font-sans text-sm font-bold leading-snug tracking-normal" translate="no">
+      {step.label}
+    </h4>
     <p class="mt-1.5 text-xs leading-relaxed text-muted-foreground" translate="no">
       {step.sentence}
     </p>
@@ -59,7 +44,7 @@ const StepList: FC<{ group: StepGroup }> = ({ group }) => (
 );
 
 const GroupSection: FC<{ group: StepGroup; index: number }> = ({ group, index }) => {
-  const { total, available } = groupCounts(group);
+  const total = group.steps.length;
   return (
     <Section id={group.id} tone={index % 2 === 0 ? "muted" : "default"} class="scroll-mt-24">
       <Container size="wide">
@@ -71,12 +56,6 @@ const GroupSection: FC<{ group: StepGroup; index: number }> = ({ group, index })
             </h2>
             <p class="mt-1 text-muted-foreground text-pretty">{group.holds}</p>
           </div>
-          {total > 0 ? (
-            <Badge tone={available > 0 ? "success" : "neutral"}>
-              <span translate="no">{available}</span> of <span translate="no">{total}</span>{" "}
-              available
-            </Badge>
-          ) : null}
         </div>
 
         {total === 0 ? (
@@ -124,17 +103,7 @@ export const ToolboxPage: FC = () => (
 
         <div class="mx-auto -mt-4 flex max-w-2xl flex-col items-center gap-5 text-center">
           <p class="text-sm leading-relaxed text-muted-foreground text-pretty">
-            Zipr runs <strong class="text-foreground">{AVAILABLE_STEPS_COUNT}</strong> of these
-            today, and the rest of the <span translate="no">{ALL_STEPS_COUNT}</span> are on the way.
-            Each step is marked, so you can see which is which.
-          </p>
-          <p class="flex flex-wrap justify-center gap-2 text-xs text-muted-foreground">
-            <span class="inline-flex items-center gap-2">
-              <Badge tone="success">Available</Badge> works in the app now
-            </span>
-            <span class="inline-flex items-center gap-2">
-              <Badge tone="neutral">Coming</Badge> planned, not in the app yet
-            </span>
+            Here are all <span translate="no">{ALL_STEPS_COUNT}</span> steps, by group.
           </p>
           <nav aria-label="Jump to a group" class="flex flex-wrap justify-center gap-2">
             {STEP_GROUPS.map((group) => (
@@ -175,7 +144,7 @@ export const ToolboxPage: FC = () => (
 
     <CtaBand
       title="Build your first shortcut."
-      body="Free, no account, and every step above that's marked Available works today."
+      body="Free, no account, and every step is one click away once you've built it."
       primary={{ href: "/downloads", label: "Download Zipr" }}
       secondary={{ href: "/features", label: "Explore what Zipr can do" }}
     />

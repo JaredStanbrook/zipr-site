@@ -64,7 +64,7 @@
     "7bca195b",
     "Each step does one job. Put steps together to make a shortcut that gets something useful done. Ask a question midway and use the answer, or vary a step by operating system, all in one shortcut."
   ],
-  ["2a912873", "<1/> steps in <2/> groups. <3/> work in the app today, and each one is marked."],
+  ["f6a44ea0", "<1/> steps in <2/> groups."],
   ["1127b5c3", "See every step"],
   ["c65b8454", "<1/> steps"],
   ["55e53048", "Open a page, search, or get directions."],
@@ -313,10 +313,7 @@
     "4f2a771f",
     "Each step does one job. Put steps together, in any order, to make a shortcut that gets something useful done."
   ],
-  [
-    "fb023820",
-    "<1/> of <2/> steps work in the app today; each one is marked. <3>See every step</3>"
-  ],
+  ["678df13f", "<1/> steps, by group. <2>See every step</2>"],
   ["2261ad89", "Decide what happens next"],
   [
     "68e543ee",
@@ -705,15 +702,7 @@
     "143f11d7",
     "Each step does one job. Put steps together to make a shortcut that gets something useful done. Here is every step, by group."
   ],
-  [
-    "caef2766",
-    "Zipr runs <1/> of these today, and the rest of the <2/> are on the way. Each step is marked, so you can see which is which."
-  ],
-  ["fc553422", "<1>Available</1> works in the app now"],
-  ["4954c371", "<1>Coming</1> planned, not in the app yet"],
-  ["63faa384", "<1/> of <2/> available"],
-  ["215d2ad2", "Coming"],
-  ["72402638", "Available"],
+  ["c277c939", "Here are all <1/> steps, by group."],
   ["c5457dd4", "Show the 4 advanced steps"],
   ["1ddc726a", "These may need more technical knowledge. You can build plenty without them."],
   ["51255597", "Plugins can add their own steps, and those work like any other step."],
@@ -722,14 +711,14 @@
     "6807fa88",
     "See what other people do with these steps in the Gallery, or describe what you want and ask Zap, the helper that builds shortcuts from your words, to build it."
   ],
-  ["42b949bf", "Free, no account, and every step above that's marked Available works today."],
+  ["f51be62e", "Free, no account, and every step is one click away once you've built it."],
   ["b363d8b4", "Explore what Zipr can do"],
   ["54121de6", "Jump to a group"],
   ["a3e41c40", "The toolbox: every step, by group · Zipr"],
   ["9504e342", "What could Zipr help you do <1>at work?</1>"],
   [
-    "6d8fc96a",
-    "These are ideas to spark your own, not files to download. Each one is made from steps you can put together in Zipr today."
+    "cdb50ba9",
+    "These are ideas to spark your own, not files to download. Each one is made from steps you can put together in Zipr."
   ],
   ["7bef93ba", "Developers"],
   ["d11a8642", "Managers and team leads"],

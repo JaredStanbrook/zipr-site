@@ -2,7 +2,7 @@ import type { FC } from "hono/jsx";
 
 import type { AppConfig } from "@server/config/app.config";
 import { HOW_IT_WORKS, TEAM_UNLOCKS, TRUST_POINTS } from "@server/content/features";
-import { ALL_STEPS_COUNT, AVAILABLE_STEPS_COUNT, STEP_GROUPS } from "@server/content/steps";
+import { ALL_STEPS_COUNT, STEP_GROUPS } from "@server/content/steps";
 import { ToolboxTiles } from "@views/components/Toolbox";
 import { GALLERY_ROLES } from "@server/content/gallery";
 import { TIERS } from "@server/content/pricing";
@@ -227,7 +227,7 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
           The built-in steps as keys on a keyboard, because that is what they
           are: the keys a shortcut is typed out of. This is the concrete
           answer to "what can it actually do", so it stays on the home page.
-          Advanced steps are marked, as the brand guide asks.
+          Advanced steps sit behind their own toggle on the toolbox page.
          ================================================================= */}
       <Section tone="muted" id="toolbox">
         <Container size="wide">
@@ -245,8 +245,6 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
               <p class="mt-4 text-sm text-muted-foreground text-pretty">
                 <span translate="no">{ALL_STEPS_COUNT}</span> steps in{" "}
                 <span translate="no">{STEP_GROUP_COUNT}</span> groups.{" "}
-                <span translate="no">{AVAILABLE_STEPS_COUNT}</span> work in the app today, and each
-                one is marked.
               </p>
               <LinkButton href="/toolbox" variant="outline" class="mt-6">
                 See every step

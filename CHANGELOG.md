@@ -20,9 +20,9 @@ runs underneath. Changes to the site itself go above them.
 - **A toolbox page, `/toolbox`,** lists every step in the client's Action Model
   by group, from Web to AI. Each step is marked Available or Coming, taken from
   the client's built-in registry and roadmap, so the page does not present
-  planned steps as shipped. The home and features pages show the groups as tiles
-  that link into it. When a wave of steps ships, flip its `status` in
-  `worker/content/steps.ts`.
+  planned steps as shipped, but the site itself does not label steps as
+  available or coming. The home and features pages show the groups as tiles
+  that link into it.
 - **New pages:** `/gallery` (examples by role and routine, a showcase rather
   than a download library) and `/teams` (how sharing grows from one person to a
   team, and what the Catalogue is). The header is now Features, Gallery, Build

@@ -1,6 +1,6 @@
 import type { FC } from "hono/jsx";
 
-import { STEP_GROUPS, groupCounts } from "@server/content/steps";
+import { STEP_GROUPS } from "@server/content/steps";
 import { IconTile } from "@views/components/Ui";
 
 /**
@@ -19,7 +19,7 @@ export const ToolboxTiles: FC<{ columns?: "three" | "four" }> = ({ columns = "th
     }`}
   >
     {STEP_GROUPS.map((group) => {
-      const { total } = groupCounts(group);
+      const total = group.steps.length;
       return (
         <li>
           <a

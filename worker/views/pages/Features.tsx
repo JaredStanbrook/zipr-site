@@ -1,7 +1,7 @@
 import type { FC } from "hono/jsx";
 
 import { PILLARS, type Feature } from "@server/content/features";
-import { ALL_STEPS_COUNT, AVAILABLE_STEPS_COUNT } from "@server/content/steps";
+import { ALL_STEPS_COUNT } from "@server/content/steps";
 import { ToolboxTiles } from "@views/components/Toolbox";
 import {
   Page,
@@ -236,9 +236,7 @@ export const FeaturesPage: FC = () => (
         />
         <ToolboxTiles columns="four" />
         <p class="mt-6 text-center text-sm text-muted-foreground text-pretty">
-          <span translate="no">{AVAILABLE_STEPS_COUNT}</span> of{" "}
-          <span translate="no">{ALL_STEPS_COUNT}</span> steps work in the app today; each one is
-          marked.{" "}
+          <span translate="no">{ALL_STEPS_COUNT}</span> steps, by group.{" "}
           <a href="/toolbox" class="font-semibold text-primary underline underline-offset-4">
             See every step
           </a>
