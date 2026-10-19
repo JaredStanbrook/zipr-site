@@ -2,6 +2,7 @@ import type { FC } from "hono/jsx";
 
 import type { AppConfig } from "@server/config/app.config";
 import { ACTION_TYPES, HOW_IT_WORKS, TEAM_UNLOCKS, TRUST_POINTS } from "@server/content/features";
+import { GALLERY_ROLES } from "@server/content/gallery";
 import { TIERS } from "@server/content/pricing";
 import { formatPrice } from "@views/lib/utils";
 import {
@@ -23,21 +24,21 @@ import {
 
 /**
  * The home page has about eight seconds. In that time a visitor has to learn
- * what Zipr is, not just how it feels — so the order is the questions a
- * first-time visitor asks, in the order they ask them:
+ * what Zipr is, not just how it feels — so the order is the brand guide's,
+ * which is also the order a first-time visitor's questions come in:
  *
  *   1. Hero         — what it is, who it's for, what to do next.
- *   2. The problem  — the one-person process every team has.
+ *   2. Origin story — why it exists, in the maker's own words.
  *   3. How it works — build, run, share. Doubles as the pricing model.
- *   4. Step types   — the concrete proof: what an item is made of.
- *   5. For teams    — what a server adds, and why that's the paid part.
- *   6. Security     — the four facts a reviewer asks first.
- *   7. Pricing      — the two numbers, with a link to the rest.
- *   8. Final CTA.
+ *   4. The toolbox  — the concrete proof: what a shortcut is made of.
+ *   5. Gallery      — ideas by role, so a visitor sees their own work.
+ *   6. Zap          — the helper that builds shortcuts from words.
+ *   7. For teams    — what a server adds, and the four security facts.
+ *   8. Download     — the two prices and the next step.
  *
- * Detail lives one click away: every benefit on /features, the line-by-line
- * comparison on /pricing, the full review answers on /security. Each section
- * here says one thing and says it once.
+ * Detail lives one click away: every benefit on /features, every example on
+ * /gallery, the line-by-line comparison on /pricing, the full review answers
+ * on /security. Each section here says one thing and says it once.
  */
 
 /**
@@ -79,7 +80,7 @@ const HeroPanel: FC = () => (
     <ScreenshotSwap ids={["overlay-list", "overlay-grid"]} class="relative" />
 
     <p class="-mt-8 text-center text-xs text-muted-foreground">
-      The Zipr launcher, in its list and grid layouts.
+      The Zipr launcher, with a few shortcuts ready to run.
     </p>
   </div>
 );
@@ -99,29 +100,30 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
                 class="rise text-[2.9rem] leading-[0.98] text-balance sm:text-7xl lg:text-[5.25rem]"
                 style="--i: 1;"
               >
-                Turn the steps you keep explaining into <em>one click.</em>
+                Your computer tricks, in <em>one click.</em>
               </h1>
 
               <p
                 class="rise mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty sm:text-xl"
                 style="--i: 2;"
               >
-                Zipr is a desktop launcher for Windows and macOS. Chain commands, links, apps and
-                prompts into one named item — then hand it to a colleague instead of a walkthrough.
+                Zipr turns the clever things you do on your computer into shortcuts you can run
+                again — and share with anyone who's ever asked, “How did you do that?” No code
+                needed.
               </p>
 
               <div class="rise mt-9 flex flex-wrap gap-3" style="--i: 3;">
                 <LinkButton href="/downloads" size="lg">
                   <i data-lucide="download" class="h-4 w-4" aria-hidden="true"></i>
-                  Download for free
+                  Download Zipr
                 </LinkButton>
-                <LinkButton href="/pricing" variant="outline" size="lg">
-                  See pricing
+                <LinkButton href="/gallery" variant="outline" size="lg">
+                  Browse the Gallery
                 </LinkButton>
               </div>
 
               <p class="rise mt-6 text-sm text-muted-foreground" style="--i: 4;">
-                Windows 10+ and macOS 12+. Installs in about a minute.
+                Free for Windows 10+ and macOS 12+. No account needed.
               </p>
             </div>
 
@@ -133,26 +135,33 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
       </Section>
 
       {/* =================================================================
-          THE PROBLEM
+          ORIGIN STORY
 
           One beat of quiet between the pitch and the detail. The hero says
-          what Zipr is; this says why it needs to exist, in two lines and one
-          sentence. The mark zips shut above it as the page loads — the one
-          piece of motion on the site that means something.
+          what Zipr is; this says why it exists, in the maker's own words.
+          The mark zips shut above it as the page loads — the one piece of
+          motion on the site that means something.
          ================================================================= */}
-      <Section tone="muted">
+      <Section tone="muted" id="origin">
         <Container size="default">
           <div class="text-center">
             <LogoBricks cell="clamp(0.7rem, 2.6vw, 1.05rem)" class="mx-auto mb-12" />
-            <p class="font-display mx-auto max-w-4xl text-[2rem] leading-[1.08] text-balance sm:text-5xl lg:text-6xl">
-              Every team has something only one person can run.
+            <Eyebrow>Why Zipr exists</Eyebrow>
+            <h2 class="font-display mx-auto max-w-4xl text-[2rem] leading-[1.08] text-balance sm:text-5xl lg:text-6xl">
+              Everyone has something <em>worth sharing.</em>
+            </h2>
+          </div>
+          <div class="mx-auto mt-10 max-w-2xl space-y-5 text-lg leading-relaxed text-muted-foreground text-pretty">
+            <p>
+              At work, I noticed that people often had their own ways of doing the same things on a
+              computer. Some methods were outdated. Others were inefficient or simply different.
+              Often there was a better way, but that knowledge stayed with the person who had
+              discovered it.
             </p>
-            <p class="font-display mt-3 text-[2rem] leading-[1.08] text-balance text-muted-foreground sm:text-5xl lg:text-6xl">
-              It's usually the <em>most useful</em> one.
-            </p>
-            <p class="mx-auto mt-10 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-              It lives in a wiki page, a chat thread or somebody's head — so it gets explained,
-              misread and explained again. Zipr turns it into something anyone can run.
+            <p>
+              That's why I built Zipr: a toolbox anyone can use to turn the way they work into a
+              single button press. It saves time, cuts out repetitive tasks, and makes it easy to
+              share useful shortcuts with friends and colleagues.
             </p>
           </div>
         </Container>
@@ -169,7 +178,7 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
                 Build it. Run it. <em>Share it.</em>
               </>
             }
-            lede="The first two are free. The third is what teams pay for."
+            lede="Build a shortcut from steps that do useful things on your computer. Run it when you need it, then share it with someone else."
           />
 
           <div class="relative">
@@ -209,39 +218,41 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
       </Section>
 
       {/* =================================================================
-          STEP TYPES
+          THE TOOLBOX
 
-          The twelve step types as keys on a keyboard, because that is what
-          they are: the keys an item is typed out of. This is the concrete
+          The built-in steps as keys on a keyboard, because that is what they
+          are: the keys a shortcut is typed out of. This is the concrete
           answer to "what can it actually do", so it stays on the home page.
+          Advanced steps are marked, as the brand guide asks.
          ================================================================= */}
-      <Section tone="muted">
+      <Section tone="muted" id="toolbox">
         <Container size="wide">
           <div class="grid gap-12 lg:grid-cols-[0.8fr_1.4fr] lg:gap-16">
             <div class="lg:sticky lg:top-28 lg:self-start">
-              <Eyebrow>Twelve step types</Eyebrow>
+              <Eyebrow>The toolbox</Eyebrow>
               <h2 class="text-3xl leading-[1.08] text-balance sm:text-[2.75rem]">
-                If you can describe it, Zipr can <em>run</em> it.
+                Your computer can do more than you think. <em>Here's the toolbox.</em>
               </h2>
               <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
-                Chain steps in any order, ask a question midway and use the answer, and vary a step
-                by operating system — all in one item. Plugins cover the rest.
+                Each step does one job. Put steps together to make a shortcut that gets something
+                useful done. Ask a question midway and use the answer, or vary a step by operating
+                system, all in one shortcut.
               </p>
               <LinkButton href="/features" variant="outline" class="mt-6">
-                See all features
+                Explore what Zipr can do
                 <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
               </LinkButton>
             </div>
 
             <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
-              {ACTION_TYPES.map((action, i) => (
+              {ACTION_TYPES.map((step) => (
                 <li class="keycap flex flex-col p-4">
-                  <span class="font-mono text-[0.7rem] font-semibold text-primary tabular">
-                    {String(i + 1).padStart(2, "0")}
+                  <span class="flex items-center justify-between gap-2 text-[0.7rem] font-semibold text-primary">
+                    {step.category}
                   </span>
-                  <span class="mt-2 text-sm font-bold leading-snug">{action.name}</span>
+                  <span class="mt-2 text-sm font-bold leading-snug">{step.name}</span>
                   <p class="mt-1 text-xs leading-relaxed text-muted-foreground text-pretty">
-                    {action.blurb}
+                    {step.blurb}
                   </p>
                 </li>
               ))}
@@ -251,35 +262,90 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
           <figure class="mt-12 lg:mt-16">
             <Screenshot id="item-detail" class="mx-auto max-w-4xl" />
             <figcaption class="mt-4 text-center text-sm text-muted-foreground text-pretty">
-              One item, three steps: ask first, run a command, open a page.
+              One shortcut, three steps: ask first, run a command, open a page.
             </figcaption>
           </figure>
         </Container>
       </Section>
 
       {/* =================================================================
+          GALLERY PREVIEW
+
+          "What could Zipr help me do in my job?" Three roles, one example
+          each, with a way into the rest. The Gallery is a showcase of ideas,
+          so the copy never says download or install.
+         ================================================================= */}
+      <Section id="gallery">
+        <Container size="wide">
+          <SectionHeading
+            align="center"
+            eyebrow="The Gallery"
+            title="What could Zipr help you do at work?"
+            lede="The Gallery shows what Zipr can help you do, with practical examples inspired by different roles, routines and everyday tasks."
+          />
+          <div class="grid gap-5 md:grid-cols-3">
+            {GALLERY_ROLES.slice(0, 3).map((role) => {
+              const example = role.examples[0];
+              return (
+                <Card lift class="flex h-full flex-col p-7">
+                  <IconTile icon={role.icon} tone="brand" />
+                  <p class="mt-5 text-[0.7rem] font-bold uppercase tracking-[0.16em] text-primary">
+                    {role.role}
+                  </p>
+                  <h3 class="mt-1 text-2xl leading-snug text-balance">{example.name}</h3>
+                  <p class="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
+                    {example.does}
+                  </p>
+                  <ol class="clay-well mt-5 flex-1 space-y-2 rounded-[1.1rem] p-4">
+                    {example.steps.map((step, n) => (
+                      <li class="flex gap-2.5 text-sm">
+                        <span class="font-mono text-xs leading-5 text-muted-foreground tabular">
+                          {n + 1}
+                        </span>
+                        <span>{step}</span>
+                      </li>
+                    ))}
+                  </ol>
+                </Card>
+              );
+            })}
+          </div>
+          <div class="mt-10 flex flex-wrap justify-center gap-3">
+            <LinkButton href="/gallery" size="lg">
+              Browse the Gallery
+              <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
+            </LinkButton>
+            <LinkButton href="/gallery#tricks" variant="outline" size="lg">
+              Try a trick
+            </LinkButton>
+          </div>
+        </Container>
+      </Section>
+
+      {/* =================================================================
           ZAP
 
-          The step types above are the vocabulary; Zap is the shortcut past
+          The toolbox above is the vocabulary; Zap is the shortcut past
           learning it. One band, pointing at its own page: the argument for
           trusting it is too long to make here, and too important to make
-          badly.
+          badly. Zap is explained where it is first named, and its button says
+          what it does.
          ================================================================= */}
-      <Section>
+      <Section tone="muted" id="zap">
         <Container>
           <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
             <div class="lg:col-span-5">
-              <Eyebrow>Zap</Eyebrow>
+              <Eyebrow>Describe it</Eyebrow>
               <h2 class="text-3xl leading-[1.08] text-balance sm:text-[2.75rem]">
-                You have the idea. Zap speaks <em>computer.</em>
+                Got the idea? Let Zap start the shortcut.
               </h2>
               <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
-                Say what you want in your own words. Zap works out how your computer does it — a
-                link that writes the email, the command that clears the cache — and builds it for
-                you to test. It never runs anything itself.
+                Zap, the helper that builds shortcuts from your words, helps turn an idea into a
+                starting point for a shortcut. Say what you want, test what it builds, then keep it.
+                It never runs anything itself.
               </p>
-              <LinkButton href="/zap" variant="outline" class="mt-6">
-                Meet Zap
+              <LinkButton href="/zap" class="mt-6">
+                Ask Zap to build it
                 <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
               </LinkButton>
             </div>
@@ -293,27 +359,33 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
       {/* =================================================================
           FOR TEAMS
 
-          The commercial argument: what a team buys is not sync, it is
-          knowledge crossing a line that normally costs a ticket and a meeting
-          to cross — without anyone's roles or ownership changing.
+          What a team adds: a shared Catalogue, and knowledge crossing a line
+          that normally costs a ticket and a meeting to cross — without
+          anyone's roles or ownership changing. The security facts sit here
+          too, because the reviewer who reads this section asks for them next.
+          There are no customer logos or testimonials on this site yet, and
+          none are invented to fill the gap.
          ================================================================= */}
-      <Section tone="muted">
+      <Section id="teams">
         <Container>
           <div class="grid gap-12 lg:grid-cols-2 lg:gap-16">
             <div>
               <Eyebrow>For teams</Eyebrow>
               <h2 class="text-3xl leading-[1.08] text-balance sm:text-[2.75rem]">
-                Knowledge <em>moves.</em> The org chart stays put.
+                Make something useful. Share it with <em>someone.</em>
               </h2>
               <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
-                Give your organisation a Zipr server and each team keeps its own workspace and
-                rules. Work crosses between them as a published copy — attributed, current and safe
-                to run — instead of a ticket or a meeting.
+                The Catalogue is your team's shared collection of shortcuts. Keep useful shortcuts
+                organised so everyone can find and use them. Each team keeps its own workspace and
+                rules, and work crosses between teams as a published copy.
               </p>
               <div class="mt-7 flex flex-wrap gap-3">
-                <LinkButton href="/pricing">
-                  See team pricing
+                <LinkButton href="/teams">
+                  See how teams share
                   <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
+                </LinkButton>
+                <LinkButton href="/pricing" variant="outline">
+                  See team pricing
                 </LinkButton>
               </div>
             </div>
@@ -348,72 +420,57 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
               </ul>
             </Card>
           </div>
-        </Container>
-      </Section>
 
-      {/* =================================================================
-          SECURITY
-
-          Technical credibility, stated as facts a reviewer can hold us to.
-          There are no customer logos or testimonials on this site yet, and
-          none are invented to fill the gap — these are the proof there is.
-         ================================================================= */}
-      <Section>
-        <Container size="wide">
-          <SectionHeading
-            align="center"
-            eyebrow="Security"
-            title="Built for your security review"
-            lede="The short answers to the questions your reviewer will ask first."
-          />
-
-          <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
-            {TRUST_POINTS.map((point) => (
-              <Card class="flex h-full flex-col p-6">
-                <IconTile icon={point.icon} tone="brand" />
-                <h3 class="mt-5 text-lg leading-snug text-balance">{point.title}</h3>
-                <p class="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
-                  {point.body}
-                </p>
-              </Card>
-            ))}
+          <div class="mt-16">
+            <p class="mb-6 text-center text-sm font-semibold text-muted-foreground">
+              Built for your security review
+            </p>
+            <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+              {TRUST_POINTS.map((point) => (
+                <Card class="flex h-full flex-col p-6">
+                  <IconTile icon={point.icon} tone="brand" />
+                  <h3 class="mt-5 text-lg leading-snug text-balance">{point.title}</h3>
+                  <p class="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
+                    {point.body}
+                  </p>
+                </Card>
+              ))}
+            </div>
+            <p class="mt-8 text-center">
+              <a
+                href="/security"
+                class="inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-4"
+              >
+                Read the full security overview
+                <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
+              </a>
+            </p>
           </div>
-
-          <p class="mt-8 text-center">
-            <a
-              href="/security"
-              class="inline-flex items-center gap-1 font-semibold text-primary underline underline-offset-4"
-            >
-              Read the full security overview
-              <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
-            </a>
-          </p>
         </Container>
       </Section>
 
-      {/* ================= PRICING ================= */}
-      <Section tone="muted">
+      {/* ================= DOWNLOAD =================
+          The next step, with both prices beside it so nobody has to click
+          through to learn whether the paid half is per person or per
+          deployment. */}
+      <Section tone="muted" id="download">
         <Container>
           <SectionHeading
             align="center"
-            eyebrow="Pricing"
-            title={
-              <>
-                Free alone. <em>Paid together.</em>
-              </>
-            }
-            lede="The free app is the whole app, not a trial. You pay only when an item has to be shared."
+            eyebrow="Download"
+            title="Start free. Bring your team when they ask."
+            lede="The free app is the whole app for one person, not a trial. A team server adds a shared Catalogue."
           />
 
           <div class="grid gap-6 md:grid-cols-2">
             <Card lift class="flex h-full flex-col p-7">
               <div class="flex items-center justify-between">
-                <h3 class="text-2xl">The app</h3>
+                <h3 class="text-2xl">Zipr for you</h3>
                 <Badge tone="success">Free</Badge>
               </div>
               <p class="mt-4 font-display text-5xl font-semibold tabular">{money(0)}</p>
               <p class="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
-                Everything one person can do on one machine. No account, no card, no expiry.
+                Everything one person can do on one computer. No account, no card, no expiry.
               </p>
               <LinkButton href="/downloads" variant="outline" class="mt-6 w-full">
                 Download Zipr
@@ -439,7 +496,7 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
                 self-hosted on your own infrastructure, priced per deployment.
               </p>
               <LinkButton href="/pricing" class="mt-6 w-full">
-                Compare plans
+                See team pricing
               </LinkButton>
             </Card>
           </div>
@@ -447,8 +504,8 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
       </Section>
 
       <CtaBand
-        title="Start with the one you keep having to explain."
-        body="Free, no account, and the same app paying teams run."
+        title="Build your first shortcut."
+        body="Start with the one you keep having to explain. Free, no account, and the same app paying teams run."
         primary={{ href: "/downloads", label: "Download Zipr" }}
         secondary={{ href: "/contact?topic=cloud", label: "Talk to us about a team" }}
       />

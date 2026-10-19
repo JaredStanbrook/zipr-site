@@ -106,7 +106,7 @@
     // --- BRANDING ---
     // How the site names itself in the title, nav and footer.
     "APP_NAME": "Zipr",
-    "APP_TAGLINE": "For ideas that have to be run, not explained.",
+    "APP_TAGLINE": "Your computer tricks, in one click.",
     "APP_LOCALE": "en-AU",
     "APP_CURRENCY": "AUD",
     // IANA zone, e.g. "Australia/Perth". Decides what "today" means when a

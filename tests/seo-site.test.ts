@@ -167,6 +167,8 @@ describe("rendered pages", () => {
     for (const path of [
       "/",
       "/features",
+      "/gallery",
+      "/teams",
       "/zap",
       "/zap/setup",
       "/pricing",

@@ -85,7 +85,7 @@ const POWER: Translation[] = [
       { name: "Flush the DNS cache — on Windows", code: "ipconfig /flushdns" },
       { name: "Flush the DNS cache — on a Mac", code: "dscacheutil -flushcache" },
     ],
-    note: "One item for both platforms: each step runs only on the system it's written for.",
+    note: "One shortcut for both platforms: each step runs only on the system it's written for.",
   },
   {
     say: "Ask which project, then open it in my editor.",
@@ -143,7 +143,7 @@ const STEPS = [
   {
     icon: "play",
     title: "You test it, then save",
-    body: "Test runs it on your computer exactly as launching it would. Happy? Save it to a catalogue. Not yet? Keep talking, or go back to any earlier version.",
+    body: "Test runs it on your computer exactly as launching it would. Happy? Save it as a shortcut. Not yet? Keep talking, or go back to any earlier version.",
   },
 ];
 
@@ -151,7 +151,7 @@ const PROMISES = [
   {
     icon: "shield",
     title: "It never runs anything",
-    body: "Zap can build and change an item. Only you can run it: Test is your button, and Zap has no way to press it.",
+    body: "Zap can build and change a shortcut. Only you can run it: Test is your button, and Zap has no way to press it.",
   },
   {
     icon: "circle-check",
@@ -166,7 +166,7 @@ const PROMISES = [
   {
     icon: "triangle-alert",
     title: "Risk is worked out, not guessed",
-    body: "Whether a step opens something, asks a question, runs a program or acts as another account is decided by the app from the step itself — never by the AI. When it matters, you're advised to have the item ask before it runs.",
+    body: "Whether a step opens something, asks a question, runs a program or acts as another account is decided by the app from the step itself — never by the AI. When it matters, you're advised to have the shortcut ask before it runs.",
   },
   {
     icon: "history",
@@ -176,14 +176,14 @@ const PROMISES = [
   {
     icon: "layers",
     title: "Only steps that really run",
-    body: "Zap can only use the step types Zipr runs, with the settings each one accepts. It can't write a step that would be saved and then silently ignored.",
+    body: "Zap can only use the steps Zipr runs, with the settings each one accepts. It can't write a step that would be saved and then silently ignored.",
   },
 ];
 
 const SENT = [
   "Your conversation with Zap",
-  "The item being built",
-  "The list of step types Zipr can run",
+  "The shortcut being built",
+  "The list of steps Zipr can run",
   "Your operating system, its version, your processor type and the app's language",
   "The plugins Zap is allowed to use",
   "The results of your tests",
@@ -192,9 +192,9 @@ const SENT = [
 
 const NEVER_SENT = [
   "Any password, key or other credential",
-  "Your other items, catalogues and workspaces",
+  "Your other shortcuts, Catalogues and workspaces",
   "Files, your clipboard, environment or launch history",
-  "What you typed into a question an item asked",
+  "What you typed into a question a shortcut asked",
   "Which account a sign-in step used",
 ];
 
@@ -205,15 +205,15 @@ export const ZAP_FAQ = [
   },
   {
     q: "Will it really use the command line?",
-    a: "When that's the best way to do what you asked, yes — including steps that only run on Windows or only on a Mac, and programs that need administrator rights. Anything that runs a program is marked as such before you save it, and you're advised to have the item ask before it runs.",
+    a: "When that's the best way to do what you asked, yes — including steps that only run on Windows or only on a Mac, and programs that need administrator rights. Anything that runs a program is marked as such before you save it, and you're advised to have the shortcut ask before it runs.",
   },
   {
     q: "Can Zap run things on my computer?",
-    a: "No. Zap only changes the draft it's building. A test is something you press, and it runs exactly what launching the item would — including asking you first, if the item is set to ask.",
+    a: "No. Zap only changes the draft it's building. A test is something you press, and it runs exactly what running the shortcut would — including asking you first, if the shortcut is set to ask.",
   },
   {
-    q: "What happens to the item once I save it?",
-    a: "It becomes an ordinary item in your own workspace, with no link back to the conversation. Edit it, launch it, or share it with your team like anything else you've built.",
+    q: "What happens to the shortcut once I save it?",
+    a: "It becomes an ordinary shortcut in your own workspace, with no link back to the conversation. Edit it, run it, or share it with your team like anything else you've built.",
   },
   {
     q: "Which AI models does it work with?",
@@ -240,13 +240,13 @@ export const ZapPage: FC = () => (
         <SectionHeading
           as="h1"
           align="center"
-          eyebrow="Zap"
+          eyebrow="Build with Zap"
           title={
             <>
               You have the idea. Zap speaks <em>computer</em>.
             </>
           }
-          lede="Say what you want in your own words. Zap works out how your computer actually does it — the right link, the right command, the right order — and turns it into one click you test before you keep."
+          lede="Zap, the helper that builds shortcuts from your words, helps turn an idea into a starting point for a shortcut. Say what you want and it suggests the steps — then you test it before you keep it."
         />
         <Screenshot id="zap" eager class="mx-auto mt-4 max-w-5xl" />
       </Container>
@@ -294,7 +294,7 @@ export const ZapPage: FC = () => (
         <SectionHeading
           eyebrow="How it works"
           title="A conversation is all it takes"
-          lede="Zap knows everything Zipr can do. The AI model you choose brings the intelligence. Together they build items your IT admins would be impressed with, from a few sentences in plain words."
+          lede="Zap knows everything Zipr can do. The AI model you choose brings the intelligence. Together they build a starting point for a shortcut, from a few sentences in plain words."
         />
         <ol class="grid gap-5 md:grid-cols-3">
           {STEPS.map((step, i) => (
@@ -428,8 +428,8 @@ export const ZapPage: FC = () => (
     </Section>
 
     <CtaBand
-      title="Get started"
-      body="Zap is in the app. Download Zipr, connect a model, and tell it the idea."
+      title="Ask Zap to build it."
+      body="Zap is in the app. Download Zipr, connect a model, and describe your idea."
       primary={{ href: "/downloads", label: "Download Zipr" }}
       secondary={{ href: "/features", label: "See everything Zipr does" }}
     />

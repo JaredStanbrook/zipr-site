@@ -276,6 +276,8 @@ describe("which pages are translated", () => {
       "/",
       "/zap",
       "/zap/setup",
+      "/gallery",
+      "/teams",
       "/pricing",
       "/downloads",
       undefined,

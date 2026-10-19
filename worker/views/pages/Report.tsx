@@ -102,7 +102,7 @@ export const ReportForm: FC<{
           type="text"
           required
           maxlength={160}
-          placeholder="Launching an item does nothing on Windows"
+          placeholder="Running a shortcut does nothing on Windows"
           value={values.summary ?? ""}
           aria-invalid={errors.summary ? "true" : undefined}
           aria-describedby={errors.summary ? "summary-error" : undefined}

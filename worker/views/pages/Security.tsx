@@ -44,7 +44,7 @@ const PROPERTIES = [
   {
     icon: "key-round",
     title: "Sharing doesn't loosen access",
-    body: "Work crosses teams only as a published copy, where your administrators allow it. Roles, membership and single sign-on stay yours — and people can't tell whether a catalogue they can't see exists.",
+    body: "Work crosses teams only as a published copy, where your administrators allow it. Roles, membership and single sign-on stay yours — and people can't tell whether a Catalogue they can't see exists.",
   },
   {
     icon: "download",
@@ -60,7 +60,7 @@ export const REVIEW_FAQ = [
   },
   {
     q: "What does the app send over the network?",
-    a: "Only your catalogue content and the sign-in that authorises it, and only to the deployment it is pointed at. With no deployment configured, it makes no network requests at all.",
+    a: "Only your Catalogue content and the sign-in that authorises it, and only to the deployment it is pointed at. With no deployment configured, it makes no network requests at all.",
   },
   {
     q: "Can we run it somewhere with no internet access?",

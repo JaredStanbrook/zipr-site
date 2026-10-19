@@ -14,6 +14,8 @@ import { faqSchema, softwareSchema, websiteSchema } from "@server/lib/structured
 
 import { HomePage } from "@views/pages/Home";
 import { FeaturesPage } from "@views/pages/Features";
+import { GalleryPage } from "@views/pages/Gallery";
+import { TeamsPage } from "@views/pages/Teams";
 import { ZapPage, ZAP_FAQ } from "@views/pages/Zap";
 import { ZapSetupPage, ZAP_SETUP_FAQ } from "@views/pages/ZapSetup";
 import { PricingPage } from "@views/pages/Pricing";
@@ -35,7 +37,7 @@ import { ReportPage, ReportForm, ReportSuccess } from "@views/pages/Report";
  */
 /** Shared by the home page's meta description and its SoftwareApplication. */
 const HOME_DESCRIPTION =
-  "Zipr is a free desktop launcher for Windows and macOS. Chain commands, links, apps and prompts into one-click items, then share them with your team.";
+  "Zipr turns the clever things you do on your computer into one-click shortcuts you can use yourself or share with anyone. Free for Windows and macOS.";
 
 /** The hosted per-person price, from the pricing data rather than retyped. */
 const hostedFrom = (app: AppEnv["Variables"]["app"]) => {
@@ -53,7 +55,7 @@ siteRoute.get("/", (c) =>
   c.render(<HomePage app={c.var.app} />, {
     // Says what Zipr is, not "Home": the site name alone told a searcher who
     // had not heard of Zipr nothing about whether to click.
-    title: "Desktop launcher for commands, links and apps",
+    title: "Your computer tricks, in one click",
     description: HOME_DESCRIPTION,
     jsonLd: [websiteSchema(c.var.app), softwareSchema(c.var.app, HOME_DESCRIPTION)],
     type: "website",
@@ -62,17 +64,33 @@ siteRoute.get("/", (c) =>
 
 siteRoute.get("/features", (c) =>
   c.render(<FeaturesPage />, {
-    title: "Features: step types, sharing and history",
+    title: "Features: shortcuts, steps, sharing and history",
     description:
-      "What the free Zipr app does on its own, what a team server adds, and the twelve step types every item is built from.",
+      "What the free Zipr app does on its own, what a team server adds, and the steps every shortcut is built from.",
+  }),
+);
+
+siteRoute.get("/gallery", (c) =>
+  c.render(<GalleryPage />, {
+    title: "Gallery: what could Zipr help you do at work?",
+    description:
+      "Practical examples of shortcuts, organised by role and everyday routine. Recognise a task you already do and see how Zipr could make it one click.",
+  }),
+);
+
+siteRoute.get("/teams", (c) =>
+  c.render(<TeamsPage />, {
+    title: "For teams: a shared Catalogue of shortcuts",
+    description:
+      "Start with one person, then share. A Zipr team server gives your team a shared Catalogue, roles, history and single sign-on, hosted by us or run by you.",
   }),
 );
 
 siteRoute.get("/zap", (c) =>
   c.render(<ZapPage />, {
-    title: "Zap: turn an idea into steps your computer runs",
+    title: "Build with Zap: describe it, get a shortcut to test",
     description:
-      "Say what you want in your own words. Zap works out the links and commands your computer needs, and builds them into one click you test before you keep.",
+      "Zap, the helper that builds shortcuts from your words, turns an idea into a starting point you test before you keep.",
     jsonLd: [faqSchema(ZAP_FAQ)],
   }),
 );

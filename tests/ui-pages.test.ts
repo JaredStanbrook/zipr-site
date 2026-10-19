@@ -23,6 +23,8 @@ describe("UI pages load", () => {
       "/features",
       "/zap",
       "/zap/setup",
+      "/gallery",
+      "/teams",
       "/pricing",
       "/downloads",
       "/security",
@@ -201,23 +203,68 @@ describe("UI pages load", () => {
 
   it("lists Zap in the plan comparison", async () => {
     const pricing = await (await get(createTestApp(null), "/pricing")).text();
-    expect(pricing).toContain("Zap, the AI that builds items for you");
+    expect(pricing).toContain("Zap, the helper that builds shortcuts from your words");
     expect(pricing).toContain("With your own key");
     expect(pricing).toContain("One AI key for the whole team");
   });
 
-  it("uses the plainer wording on the home and features pages", async () => {
+  it("tells the story in the brand guide's order and words on the home page", async () => {
+    const home = await (await get(createTestApp(null), "/")).text();
+    // The guide's section order: hero, origin, how it works, toolbox, Gallery,
+    // Zap, teams, download.
+    const order = ["origin", "how-it-works", "toolbox", "gallery", "zap", "teams", "download"].map(
+      (id) => home.indexOf(`id="${id}"`),
+    );
+    expect(order.every((at) => at > 0)).toBe(true);
+    expect([...order].sort((x, y) => x - y)).toEqual(order);
+
+    expect(home).toContain("Your computer tricks, in");
+    expect(home).toContain("Build it. Run it.");
+    expect(home).toContain("Zap, the helper that builds shortcuts from your words");
+    expect(home).toContain("Ask Zap to build it");
+    expect(home).toContain("Browse the Gallery");
+  });
+
+  it("links to every page the navigation promises", async () => {
     const testApp = createTestApp(null);
     const home = await (await get(testApp, "/")).text();
-    expect(home).toContain("most useful");
-    expect(home).toContain("The first two are free. The third is what teams pay for.");
+    for (const [href, label] of [
+      ["/features", "Features"],
+      ["/gallery", "Gallery"],
+      ["/zap", "Build with Zap"],
+      ["/teams", "For teams"],
+      ["/pricing", "Pricing"],
+      ["/downloads", "Download"],
+    ]) {
+      expect(home, `nav link ${label}`).toMatch(new RegExp(`href="${href}"[^>]*>[^<]*${label}`));
+      expect((await get(testApp, href)).status, `GET ${href}`).toBe(200);
+    }
+  });
 
-    const features = await (await get(testApp, "/features")).text();
-    expect(features).toContain("One item for Windows and Mac");
-    expect(features).toContain("Decide what happens next");
-    expect(features).not.toContain("Branch as you go");
-    expect(features).not.toContain("One item, every platform");
-    expect(features).toContain("Zap knows Zipr like the back of its hand");
+  it("keeps Catalogue and Gallery apart, and avoids the retired words", async () => {
+    const testApp = createTestApp(null);
+    for (const path of ["/", "/features", "/gallery", "/teams", "/zap", "/pricing"]) {
+      const html = await (await get(testApp, path)).text();
+      // Visible text only: attribute values and class names may use `item`.
+      const text = html.replace(/<(script|style)[\s\S]*?<\/\1>/g, "").replace(/<[^>]+>/g, " ");
+      for (const word of [/\bitems?\b/i, /\bworkflows?\b/i, /\bmarketplace\b/i, /\bnodes?\b/i]) {
+        expect(text, `${word} on ${path}`).not.toMatch(word);
+      }
+      // The Gallery is a showcase: nothing on it is downloaded or installed.
+      expect(text, `Gallery as a library on ${path}`).not.toMatch(
+        /gallery\s+(to|you can)\s+(download|install)/i,
+      );
+    }
+
+    const teams = await (await get(testApp, "/teams")).text();
+    expect(teams).toContain("The Catalogue is your team");
+    const gallery = await (await get(testApp, "/gallery")).text();
+    expect(gallery).toContain("not files to download");
+  });
+
+  it("explains Zap where it is first named", async () => {
+    const zap = await (await get(createTestApp(null), "/zap")).text();
+    expect(zap).toContain("Zap, the helper that builds shortcuts from your words");
   });
 
   it("renders the pricing comparison and the downloads page", async () => {

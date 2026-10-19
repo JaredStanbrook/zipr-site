@@ -31,13 +31,13 @@ const SCENES = [
     icon: "share-2",
     when: "What you built would help another team",
     was: "You write it up, they misread step four, and you end up on the call anyway — or you never mention it at all.",
-    now: "You publish a copy into their catalogue and they run it. Yours stays where it was; theirs stays current.",
+    now: "You publish a copy into their Catalogue and they run it. Yours stays where it was; theirs stays current.",
   },
   {
     icon: "users",
     when: "A new starter joins on Monday",
     was: "A wiki page, three chat threads, a zip of scripts, and the same questions for a fortnight.",
-    now: "They install Zipr, open the team catalogue, and everything the team runs is there, in the current version.",
+    now: "They install Zipr, open the team's Catalogue, and every shortcut the team runs is there, in its current version.",
   },
   {
     icon: "git-merge",
@@ -68,20 +68,20 @@ const TOUR: { shot: ScreenshotId; eyebrow: string; title: string; body: string }
   {
     shot: "overlay-list",
     eyebrow: "The launcher",
-    title: "One shortcut, then type",
+    title: "One key press, then type",
     body: "Press your shortcut from anywhere, type, and press Return.",
   },
   {
     shot: "item-detail",
-    eyebrow: "Every item",
+    eyebrow: "Every shortcut",
     title: "Read it before you run it",
-    body: "See every step an item takes before you launch it.",
+    body: "See every step a shortcut takes before you run it.",
   },
   {
     shot: "item-edit",
     eyebrow: "The editor",
     title: "Change it in one place",
-    body: "Reorder steps, switch one off, or make the item ask first.",
+    body: "Reorder steps, switch one off, or make the shortcut ask first.",
   },
 ];
 
@@ -105,7 +105,7 @@ export const FeaturesPage: FC = () => (
           as="h1"
           align="center"
           eyebrow="Features"
-          title="Build it once. Let anyone run it."
+          title="Build it once. Use it whenever you need it."
           lede="What Zipr does on its own for free, and what it adds when your team shares a server."
         />
         <Screenshot id="app-browse" eager class="mx-auto mt-4 max-w-5xl" />
@@ -144,14 +144,14 @@ export const FeaturesPage: FC = () => (
             <div class="lg:col-span-5">
               <Eyebrow>Zap</Eyebrow>
               <h3 class="text-3xl leading-[1.1] text-balance">
-                Or bring the idea, and let Zap speak computer.
+                Or bring the idea, and ask Zap to build it.
               </h3>
               <p class="mt-4 leading-relaxed text-muted-foreground text-pretty">
-                Zap knows Zipr like the back of its hand and intelligently builds the item for you
-                to test.
+                Zap, the helper that builds shortcuts from your words, turns an idea into a starting
+                point for a shortcut, for you to test before you keep it.
               </p>
               <LinkButton href="/zap" variant="outline" class="mt-6">
-                Meet Zap
+                Ask Zap to build it
                 <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
               </LinkButton>
             </div>
@@ -186,7 +186,7 @@ export const FeaturesPage: FC = () => (
         <SectionHeading
           eyebrow="In practice"
           title="Five situations you'll recognise"
-          lede="Where good work usually gets lost — and what changes with Zipr."
+          lede="Where good know-how usually gets lost — and what changes with Zipr."
         />
 
         {/* Each scene is a before and an after in clay terms: the way it
@@ -228,15 +228,15 @@ export const FeaturesPage: FC = () => (
     <Section tone="muted">
       <Container>
         <SectionHeading
-          eyebrow="The building blocks"
-          title="Twelve step types"
-          lede="Every item is built from these, chained in any order."
+          eyebrow="The toolbox"
+          title="The steps a shortcut is built from"
+          lede="Each step does one job. Put steps together, in any order, to make a shortcut that gets something useful done."
         />
         <ul class="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-          {ACTION_TYPES.map((action, i) => (
+          {ACTION_TYPES.map((action) => (
             <li class="keycap p-4 sm:p-5">
               <span class="font-mono text-[0.7rem] font-semibold text-primary tabular">
-                {String(i + 1).padStart(2, "0")}
+                {action.category}
               </span>
               <h3 class="mt-2 font-sans text-sm font-bold tracking-normal sm:text-base">
                 {action.name}
@@ -258,13 +258,13 @@ export const FeaturesPage: FC = () => (
               },
               {
                 icon: "monitor",
-                title: "One item for Windows and Mac",
-                body: "If a step differs between them, mark it for Windows or for Mac. The same item then works on both.",
+                title: "One shortcut for Windows and Mac",
+                body: "If a step differs between them, mark it for Windows or for Mac. The same shortcut then works on both.",
               },
               {
                 icon: "puzzle",
                 title: "Go further with plugins",
-                body: "When the twelve run out, a plugin adds a new step type.",
+                body: "When the built-in steps run out, a plugin adds a new one.",
               },
             ].map((extra) => (
               <div>
@@ -281,10 +281,10 @@ export const FeaturesPage: FC = () => (
     </Section>
 
     <CtaBand
-      title="Build your first item in minutes."
-      body="Free, no account, no card. Come back the day somebody else wants what you've built."
+      title="Build your first shortcut."
+      body="Free, no account, no card. Come back the day somebody else asks how you did it."
       primary={{ href: "/downloads", label: "Download Zipr" }}
-      secondary={{ href: "/pricing", label: "Compare free and team" }}
+      secondary={{ href: "/gallery", label: "Browse the Gallery" }}
     />
   </Page>
 );
