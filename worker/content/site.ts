@@ -84,14 +84,18 @@ export const INSTALL_NOTES = [
   "Uninstalling leaves your work on disk. Export it first if you want to keep it.",
 ];
 
-/** Everything the nav needs to know about the public pages. */
+/**
+ * The header's links, in the brand guide's order. Download is the button at the
+ * end of the bar (and the last item on the phone menu) rather than a link in
+ * this list, so it stays the loudest thing in the header. Security and Contact
+ * live in the footer.
+ */
 export const PUBLIC_NAV = [
   { to: "/features", name: "Features" },
-  { to: "/zap", name: "Zap" },
-  { to: "/downloads", name: "Downloads" },
+  { to: "/gallery", name: "Gallery" },
+  { to: "/zap", name: "Build with Zap" },
+  { to: "/teams", name: "For teams" },
   { to: "/pricing", name: "Pricing" },
-  { to: "/security", name: "Security" },
-  { to: "/contact", name: "Contact" },
 ];
 
 /**
@@ -114,7 +118,7 @@ export const SCREENSHOTS = {
   "overlay-list": {
     width: 1232,
     height: 1136,
-    alt: "The Zipr launcher: a search box above a list of items — Start my workday, Join my next meeting, Present my screen, Fill in my timesheet and more — each with its own icon and colour.",
+    alt: "The Zipr launcher: a search box above a list of shortcuts — Start my workday, Join my next meeting, Present my screen, Fill in my timesheet and more — each with its own icon and colour.",
   },
   "overlay-grid": {
     width: 1232,
@@ -124,17 +128,17 @@ export const SCREENSHOTS = {
   "item-detail": {
     width: 2192,
     height: 1280,
-    alt: "A Zipr item, Deploy to production, tagged production and needs approval, with three steps: ask for a yes or no, run a command, and open a web address.",
+    alt: "A Zipr shortcut, Deploy to production, tagged production and needs approval, with three steps: ask for a yes or no, run a command, and open a web address.",
   },
   "item-edit": {
     width: 2192,
     height: 1720,
-    alt: "Editing the Deploy to production item: its name, category, description, colour, icon and tags, then its three steps in order, each with its own on switch, above Cancel, Save draft and Save and send.",
+    alt: "Editing the Deploy to production shortcut: its name, category, description, colour, icon and tags, then its three steps in order, each with its own on switch, above Cancel, Save draft and Save and send.",
   },
   "app-browse": {
     width: 3232,
     height: 1728,
-    alt: "The Zipr app's Browse screen: a sidebar of sections, the Everyday catalogue's items in a list, and an inspector beside it showing Start my workday's three steps with Launch, Open and Edit.",
+    alt: "The Zipr app's Browse screen: a sidebar of sections, the Everyday collection's shortcuts in a list, and an inspector beside it showing Start my workday's three steps with Launch, Open and Edit.",
   },
   zap: {
     width: 2392,

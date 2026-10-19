@@ -11,6 +11,23 @@ runs underneath. Changes to the site itself go above them.
 
 ### The site
 
+- **Copy and structure follow the brand guide.** Customer-facing pages say
+  shortcut and step instead of item and step type, name Zap where it is first
+  mentioned, and keep Catalogue (a team's shared collection) apart from Gallery
+  (the website's showcase). The home page now runs hero, origin story, how it
+  works, toolbox, Gallery preview, Zap, for teams, download. The toolbox uses
+  the guide's step labels and categories for the twelve steps the app ships.
+- **A toolbox page, `/toolbox`,** lists every step in the client's Action Model
+  by group, from Web to AI. Each step is marked Available or Coming, taken from
+  the client's built-in registry and roadmap, so the page does not present
+  planned steps as shipped, but the site itself does not label steps as
+  available or coming. The home and features pages show the groups as tiles
+  that link into it.
+- **New pages:** `/gallery` (examples by role and routine, a showcase rather
+  than a download library) and `/teams` (how sharing grows from one person to a
+  team, and what the Catalogue is). The header is now Features, Gallery, Build
+  with Zap, For teams, Pricing and a Download button; Security and Contact are
+  in the footer.
 - **A language button in the header**, with eight languages besides English:
   Spanish, French, German, Italian, Brazilian Portuguese, Japanese, Korean and
   Simplified Chinese. Translation happens in the visitor's browser from

@@ -15,8 +15,12 @@ const COLUMNS: Array<{ heading: string; links: Array<{ to: string; name: string 
     heading: "Product",
     links: [
       { to: "/features", name: "Features" },
-      { to: "/downloads", name: "Downloads" },
+      { to: "/toolbox", name: "Toolbox" },
+      { to: "/gallery", name: "Gallery" },
+      { to: "/zap", name: "Build with Zap" },
+      { to: "/teams", name: "For teams" },
       { to: "/pricing", name: "Pricing" },
+      { to: "/downloads", name: "Download" },
     ],
   },
   {
@@ -59,7 +63,7 @@ export const SiteFooter = ({ appName, tagline }: { appName: string; tagline: str
               <span class="font-display text-2xl font-semibold">${appName}</span>
             </a>
             <p class="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
-              ${tagline || "For ideas that have to be run, not explained."}
+              ${tagline || "Your computer tricks, in one click."}
             </p>
           </div>
 

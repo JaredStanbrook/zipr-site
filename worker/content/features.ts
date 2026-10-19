@@ -4,14 +4,14 @@
 //
 // The brief this file is written against:
 //
-//   Zipr exists for people who feel their ideas have to be experienced to be
-//   understood — so that an out-of-the-box concept does not sit in a box. It
-//   blurs the boundaries between teams so knowledge can move, without
-//   disturbing the hierarchy those teams already have.
+//   Zipr turns the useful things people do on their computers into shortcuts
+//   they can run again and share. The feeling is magic; the language is plain.
 //
-// That is the whole argument, and every string here is a piece of it. The
-// product is not a launcher that happens to sync; it is the shortest path
-// between one person having an idea and everybody else being able to run it.
+// The vocabulary comes from the brand guide and is the same on every page:
+// a Shortcut is built from Steps (the Action is the code underneath, and
+// stays out of customer-facing copy), a team's shared collection is a
+// Catalogue, and the Gallery is the website's showcase of ideas. Do not
+// say item, node, workflow or macro.
 //
 // Two rules, unchanged:
 //
@@ -42,43 +42,43 @@ export const PILLARS: Feature[] = [
   {
     icon: "zap",
     title: "One click instead of a walkthrough",
-    body: "The steps you worked out become one named item. A colleague clicks it and it runs — no document to follow, no script to be talked through.",
+    body: "The steps you worked out become one named shortcut. A colleague clicks it and it runs — no document to follow, no one talking them through it.",
     tier: "client",
   },
   {
     icon: "wifi-off",
     title: "Instant, and it works offline",
-    body: "Everything is already on your machine, so Zipr opens straight away and keeps working on a plane.",
+    body: "Everything is already on your computer, so Zipr opens straight away and keeps working on a plane.",
     tier: "client",
   },
   {
     icon: "shield",
     title: "Runs only where you click",
-    body: "Every command executes on the machine of the person who clicked — never on our servers or yours. That is the short answer to your security team's first question.",
+    body: "Every step runs on the computer of the person who clicked — never on our servers or yours. That is the short answer to your security team's first question.",
     tier: "client",
   },
   {
     icon: "puzzle",
     title: "Plugins for everything else",
-    body: "When the twelve built-in step types run out, a plugin adds a new one. Plugins are kept apart from the app, so a faulty one can't take it down.",
+    body: "When the built-in steps run out, a plugin adds a new one. Plugins are kept apart from the app, so a faulty one can't take it down.",
     tier: "client",
   },
   {
     icon: "users",
     title: "Share it instead of explaining it",
-    body: "Publish an item to a team catalogue and everyone runs the same, current version. No zip file in a chat thread, no afternoon spent watching over a shoulder.",
+    body: "Publish a shortcut to your team's Catalogue and everyone runs the same, current version. No zip file in a chat thread, no afternoon spent watching over a shoulder.",
     tier: "api",
   },
   {
     icon: "git-merge",
     title: "Edit together without losing work",
-    body: "Two people improve the same item at once and both changes survive. If you changed the same thing, you're shown exactly what clashed.",
+    body: "Two people improve the same shortcut at once and both changes survive. If you changed the same thing, you're shown exactly what clashed.",
     tier: "api",
   },
   {
     icon: "history",
     title: "Undo anything",
-    body: "Every change is kept. Put any item back how it was in one click, and see who changed what — so trying the strange version costs nothing.",
+    body: "Every change is kept. Put any shortcut back how it was in one click, and see who changed what — so trying the strange version costs nothing.",
     tier: "api",
   },
   {
@@ -90,67 +90,48 @@ export const PILLARS: Feature[] = [
 ];
 
 /**
- * The action vocabulary, in English.
+ * How it works: build, run, share.
  *
- * Previously this listed the raw type identifiers from the action registry.
- * Those are an implementation contract — useful to somebody writing a client
- * against the API, which is exactly who we are not writing for here, and a
- * neat inventory for anyone thinking of building the same thing. What sells is
- * the verb.
- */
-export const ACTION_TYPES = [
-  { name: "Open a link", blurb: "A URL, in the browser you choose." },
-  { name: "Run a command", blurb: "Shell command, with whatever arguments you need." },
-  { name: "Launch an app", blurb: "An executable, with arguments." },
-  { name: "Open a file", blurb: "Straight into whatever opens it." },
-  { name: "Reveal a folder", blurb: "Jump to it in Finder or Explorer." },
-  { name: "Copy to clipboard", blurb: "Text ready to paste, with an optional nudge." },
-  { name: "Ask yes or no", blurb: "Confirm before something irreversible." },
-  { name: "Ask for a value", blurb: "Prompt for input and use it further down." },
-  { name: "Offer a list", blurb: "Pick one, carry on." },
-  { name: "Require a re-auth", blurb: "Prove it's you before the risky step." },
-  { name: "Open a panel", blurb: "Jump to a view inside Zipr." },
-  { name: "Hand off to a plugin", blurb: "Anything the twelve don't cover." },
-];
-
-/**
- * How it works, in three steps — which is also the pricing model: the first
- * two are free, the third is what a team pays for.
+ * Building and running need nothing but the free app. Sharing across a team
+ * needs a Zipr server, and the badge says so rather than calling the whole
+ * product free or the whole product paid.
  */
 export const HOW_IT_WORKS = [
   {
     step: "01",
     title: "Build it",
-    body: "Chain the steps you would normally explain — commands, links, apps, files, questions — into one named item.",
+    body: "Put together the steps you'd normally explain — links, apps, files, questions — into one named shortcut. Or describe it and ask Zap to build it.",
     cost: "Free",
   },
   {
     step: "02",
     title: "Run it",
-    body: "One click runs it on your machine, instantly and offline. Build as many as you like; nothing expires and no account is needed.",
+    body: "One click runs it on your computer, instantly and offline. Build as many as you like; nothing expires and no account is needed.",
     cost: "Free",
   },
   {
     step: "03",
     title: "Share it",
-    body: "When the team needs it, publish it to a shared catalogue on a Zipr server — hosted by us, or run by you. Same app, nothing to relearn.",
-    cost: "Team",
+    body: "When the team needs it, publish it to your team's Catalogue on a Zipr server — hosted by us, or run by you. Same app, nothing to relearn.",
+    cost: "Team server",
   },
 ];
 
 /**
- * What a team server adds, for the home page.
+ * What a team server adds. Framed as gains rather than as the free app's
+ * shortcomings — the pricing comparison does the column-by-column version.
  *
- * Framed as gains rather than as the free tier's shortcomings — the pricing
- * comparison does the column-by-column version for anyone who wants it.
+ * Each line is something the product ships today; the brand guide's list of
+ * "potential" team capabilities is wider, and this is only the part that is
+ * true.
  */
 export const TEAM_UNLOCKS = [
-  "A workspace per team, with roles and visibility you control",
+  "A shared Catalogue, with a workspace per team and roles and visibility you control",
   "Publish a copy to another team — your own stays exactly as it was",
   "Everyone on the current version, updated as colleagues work",
   "Full history, one-click rollback and an audit trail",
   "Single sign-on with Google, Microsoft Entra or Okta",
-  "Usage figures showing which items people actually run",
+  "Usage figures showing which shortcuts people actually run",
 ];
 
 /**
@@ -162,7 +143,7 @@ export const TRUST_POINTS = [
   {
     icon: "shield",
     title: "Nothing runs on a server",
-    body: "Zipr stores items. It only ever runs them on the machine of the person who clicked.",
+    body: "Zipr stores shortcuts. It only ever runs them on the computer of the person who clicked.",
   },
   {
     icon: "server",

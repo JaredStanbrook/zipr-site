@@ -4,11 +4,10 @@
   ["c7af44e6", "Skip to content"],
   ["44888cd2", "Zipr"],
   ["6c4737ea", "Features"],
-  ["fe2079dc", "Zap"],
-  ["539307de", "Downloads"],
+  ["d7b54cdd", "Gallery"],
+  ["3fc2d796", "Build with Zap"],
+  ["134f810e", "For teams"],
   ["b4d17ded", "Pricing"],
-  ["c2fe21db", "Security"],
-  ["73ac94c3", "Contact"],
   ["9a73db9b", "Language"],
   [
     "d217eb03",
@@ -17,101 +16,127 @@
   ["6964bb19", "Download"],
   ["00c6075a", "Menu"],
   ["31018b9f", "Appearance"],
-  ["891f33f0", "Turn the steps you keep explaining into <1>one click.</1>"],
+  ["1bde3e39", "Your computer tricks, in <1>one click.</1>"],
   [
-    "706964c5",
-    "Zipr is a desktop launcher for Windows and macOS. Chain commands, links, apps and prompts into one named item — then hand it to a colleague instead of a walkthrough."
+    "7fb6002e",
+    "Zipr turns the clever things you do on your computer into shortcuts you can run again — and share with anyone who's ever asked, “How did you do that?” No code needed."
   ],
-  ["67923770", "Download for free"],
-  ["8418a386", "See pricing"],
-  ["c7702235", "Windows 10+ and macOS 12+. Installs in about a minute."],
-  ["49c0225e", "The Zipr launcher, in its list and grid layouts."],
-  ["8b9bd80d", "Every team has something only one person can run."],
-  ["9ccceede", "It's usually the <1>most useful</1> one."],
+  ["1a035898", "Download Zipr"],
+  ["41a49dba", "Browse the Gallery"],
+  ["e2d27bf4", "Free for Windows 10+ and macOS 12+. No account needed."],
+  ["cfc849de", "The Zipr launcher, with a few shortcuts ready to run."],
+  ["2feea8c8", "Why Zipr exists"],
+  ["2e66fd5f", "Everyone has something <1>worth sharing.</1>"],
   [
-    "48e68d4b",
-    "It lives in a wiki page, a chat thread or somebody's head — so it gets explained, misread and explained again. Zipr turns it into something anyone can run."
+    "9e418d52",
+    "At work, I noticed that people often had their own ways of doing the same things on a computer. Some methods were outdated. Others were inefficient or simply different. Often there was a better way, but that knowledge stayed with the person who had discovered it."
+  ],
+  [
+    "2420a3c0",
+    "That's why I built Zipr: a toolbox anyone can use to turn the way they work into a single button press. It saves time, cuts out repetitive tasks, and makes it easy to share useful shortcuts with friends and colleagues."
   ],
   ["d03ba450", "How it works"],
   ["009cbce7", "Build it. Run it. <1>Share it.</1>"],
-  ["a7f38201", "The first two are free. The third is what teams pay for."],
+  [
+    "0d907bfb",
+    "Build a shortcut from steps that do useful things on your computer. Run it when you need it, then share it with someone else."
+  ],
   ["1c5c36fb", "Free"],
   ["b5b5866c", "Build it"],
   [
-    "02f256f0",
-    "Chain the steps you would normally explain — commands, links, apps, files, questions — into one named item."
+    "7d68b7ad",
+    "Put together the steps you'd normally explain — links, apps, files, questions — into one named shortcut. Or describe it and ask Zap to build it."
   ],
   ["72430853", "Run it"],
   [
-    "c4e0b222",
-    "One click runs it on your machine, instantly and offline. Build as many as you like; nothing expires and no account is needed."
+    "f360e4be",
+    "One click runs it on your computer, instantly and offline. Build as many as you like; nothing expires and no account is needed."
   ],
-  ["2329c92c", "Team"],
+  ["06f2e547", "Team server"],
   ["7dcce3a5", "Share it"],
   [
-    "786240d5",
-    "When the team needs it, publish it to a shared catalogue on a Zipr server — hosted by us, or run by you. Same app, nothing to relearn."
+    "aa865adf",
+    "When the team needs it, publish it to your team's Catalogue on a Zipr server — hosted by us, or run by you. Same app, nothing to relearn."
   ],
-  ["88f2983b", "Twelve step types"],
-  ["1b1d0cd7", "If you can describe it, Zipr can <1>run</1> it."],
+  ["22d9864b", "The toolbox"],
+  ["2579e10e", "Your computer can do more than you think. <1>Here's the toolbox.</1>"],
   [
-    "d8ecaba4",
-    "Chain steps in any order, ask a question midway and use the answer, and vary a step by operating system — all in one item. Plugins cover the rest."
+    "7bca195b",
+    "Each step does one job. Put steps together to make a shortcut that gets something useful done. Ask a question midway and use the answer, or vary a step by operating system, all in one shortcut."
   ],
-  ["23d390c6", "See all features"],
-  ["a9e646b2", "Open a link"],
-  ["5cf7f6b7", "A URL, in the browser you choose."],
-  ["ba0d10c4", "Run a command"],
-  ["77bee7eb", "Shell command, with whatever arguments you need."],
-  ["830772aa", "Launch an app"],
-  ["b43aafc0", "An executable, with arguments."],
-  ["53c0467c", "Open a file"],
-  ["5a72bf17", "Straight into whatever opens it."],
-  ["b8e1d559", "Reveal a folder"],
-  ["09691bf0", "Jump to it in Finder or Explorer."],
-  ["a833a027", "Copy to clipboard"],
-  ["95b9c077", "Text ready to paste, with an optional nudge."],
-  ["fc7e3c85", "Ask yes or no"],
-  ["3df6ff00", "Confirm before something irreversible."],
-  ["0e77e267", "Ask for a value"],
-  ["7870d9ff", "Prompt for input and use it further down."],
-  ["0ac029a2", "Offer a list"],
-  ["aea5123a", "Pick one, carry on."],
-  ["57b18c81", "Require a re-auth"],
-  ["bbc65c8b", "Prove it's you before the risky step."],
-  ["915ec088", "Open a panel"],
-  ["0c78b4e9", "Jump to a view inside Zipr."],
-  ["0018913c", "Hand off to a plugin"],
-  ["3318f466", "Anything the twelve don't cover."],
-  ["0d9848a5", "One item, three steps: ask first, run a command, open a page."],
-  ["82ae34ce", "You have the idea. Zap speaks <1>computer.</1>"],
+  ["f6a44ea0", "<1/> steps in <2/> groups."],
+  ["1127b5c3", "See every step"],
+  ["c65b8454", "<1/> steps"],
+  ["55e53048", "Open a page, search, or get directions."],
+  ["f6f2eef1", "Write an email, call someone, join a meeting, or connect to another computer."],
+  ["faa3c4df", "Open, find, organise and save files."],
+  ["1eb8a9e4", "Open and quit apps, take screenshots, and change computer settings."],
+  ["0ae6e0cd", "Everything that asks the person something first."],
+  ["729a81a9", "Write, change and copy text."],
+  ["3d3be001", "Work with lists and structured data."],
+  ["13ff4c60", "Today's date, dated names, and simple maths."],
+  ["29a3e60f", "If, repeat, wait, variables, and other shortcuts."],
+  ["8659d8f0", "Notifications, previews, sound and speech."],
+  ["d4b9bfbc", "Generate and rework text, using the model you've connected to Zap."],
+  ["c77c8255", "Raw links, web requests, shell commands and plugin screens."],
+  ["a04f694c", "From your plugins"],
+  ["c24d9d6e", "Steps added by the plugins you install."],
+  ["81beeeea", "One shortcut, three steps: ask first, run a command, open a page."],
+  ["70efa43a", "The Gallery"],
+  ["453ebc7f", "What could Zipr help you do at work?"],
   [
-    "c5d6f1d6",
-    "Say what you want in your own words. Zap works out how your computer does it — a link that writes the email, the command that clears the cache — and builds it for you to test. It never runs anything itself."
+    "07daabce",
+    "The Gallery shows what Zipr can help you do, with practical examples inspired by different roles, routines and everyday tasks."
   ],
-  ["9670e201", "Meet Zap"],
-  ["134f810e", "For teams"],
-  ["2eb6b2f2", "Knowledge <1>moves.</1> The org chart stays put."],
+  ["1305d87f", "Everyday work"],
+  ["7ec4d816", "Start my workday"],
+  ["2d71144d", "Opens everything you open first thing, in one go."],
+  ["2ac1b4bc", "Open your mail and calendar"],
+  ["eba7e469", "Open your chat app"],
+  ["964d3c65", "Show today's folder"],
+  ["59878b96", "IT and support"],
+  ["bf19fa5d", "My internet's playing up"],
+  ["fe7a0466", "Clears the usual suspect, with one version for Windows and one for Mac."],
+  ["8c1858bd", "Flush the DNS cache on Windows"],
+  ["7e18841c", "Flush the DNS cache on a Mac"],
+  ["113c0c7e", "Sales and client work"],
+  ["a1557f99", "Open a client"],
+  ["f6483d36", "Ask which client, then open their page and their shared folder."],
+  ["3deca407", "Choose a client from a list"],
+  ["b6f20882", "Open their page in your CRM"],
+  ["8243623c", "Show their folder"],
+  ["aa652eaa", "Try a trick"],
+  ["8b6a2295", "Describe it"],
+  ["be62d2bb", "Got the idea? Let Zap start the shortcut."],
   [
-    "1d5425ff",
-    "Give your organisation a Zipr server and each team keeps its own workspace and rules. Work crosses between them as a published copy — attributed, current and safe to run — instead of a ticket or a meeting."
+    "83b47127",
+    "Zap, the helper that builds shortcuts from your words, helps turn an idea into a starting point for a shortcut. Say what you want, test what it builds, then keep it. It never runs anything itself."
   ],
+  ["9d56d077", "Ask Zap to build it"],
+  ["7f056510", "Make something useful. Share it with <1>someone.</1>"],
+  [
+    "38eb73c5",
+    "The Catalogue is your team's shared collection of shortcuts. Keep useful shortcuts organised so everyone can find and use them. Each team keeps its own workspace and rules, and work crosses between teams as a published copy."
+  ],
+  ["7b53135b", "See how teams share"],
   ["caa9ca37", "See team pricing"],
   ["7bf2eed2", "Platform"],
   ["6be6f488", "Support"],
   ["2635ea3b", "Yours"],
-  ["8ca5a68f", "A workspace per team, with roles and visibility you control"],
+  [
+    "9254a317",
+    "A shared Catalogue, with a workspace per team and roles and visibility you control"
+  ],
   ["021bff7c", "Publish a copy to another team — your own stays exactly as it was"],
   ["d7f7396b", "Everyone on the current version, updated as colleagues work"],
   ["5e74eae2", "Full history, one-click rollback and an audit trail"],
   ["0b5fd15f", "Single sign-on with Google, Microsoft Entra or Okta"],
-  ["7dd253ea", "Usage figures showing which items people actually run"],
+  ["182496ed", "Usage figures showing which shortcuts people actually run"],
   ["16b0f5a5", "Built for your security review"],
-  ["1e23bcb9", "The short answers to the questions your reviewer will ask first."],
   ["1df61a41", "Nothing runs on a server"],
   [
-    "44878674",
-    "Zipr stores items. It only ever runs them on the machine of the person who clicked."
+    "9b6e01af",
+    "Zipr stores shortcuts. It only ever runs them on the computer of the person who clicked."
   ],
   ["ad826aa7", "Your data, where you choose"],
   [
@@ -123,30 +148,36 @@
   ["de5b21e1", "Never held hostage"],
   ["b2dc6263", "Export everything as one file at any time, even if an account lapses."],
   ["4ab95036", "Read the full security overview"],
-  ["c01ada8d", "Free alone. <1>Paid together.</1>"],
+  ["931f1f6e", "Start free. Bring your team when they ask."],
   [
-    "6538df4a",
-    "The free app is the whole app, not a trial. You pay only when an item has to be shared."
+    "9f91bd1c",
+    "The free app is the whole app for one person, not a trial. A team server adds a shared Catalogue."
   ],
-  ["05fcdac7", "The app"],
-  ["3df1de25", "Everything one person can do on one machine. No account, no card, no expiry."],
-  ["1a035898", "Download Zipr"],
+  ["f1b4027e", "Zipr for you"],
+  ["3799d2cf", "Everything one person can do on one computer. No account, no card, no expiry."],
   ["44108814", "A team server"],
+  ["2329c92c", "Team"],
   ["18743595", "From"],
   ["c67c565c", "/ person / month"],
   [
     "979db73a",
     "Hosted by us, billed yearly, minimum 5 people. Or self-hosted on your own infrastructure, priced per deployment."
   ],
-  ["177992d4", "Compare plans"],
-  ["0ab46b4b", "Start with the one you keep having to explain."],
-  ["d38ef8c1", "Free, no account, and the same app paying teams run."],
+  ["f97cdde4", "Build your first shortcut."],
+  [
+    "851f9285",
+    "Start with the one you keep having to explain. Free, no account, and the same app paying teams run."
+  ],
   ["55c8dba7", "Talk to us about a team"],
-  ["160250a9", "For ideas that have to be run, not explained."],
+  ["b4105398", "Your computer tricks, in one click."],
   ["529c60cc", "Product"],
+  ["239a9538", "Toolbox"],
   ["2524e8b5", "Learn"],
+  ["c2fe21db", "Security"],
+  ["177992d4", "Compare plans"],
   ["a39905da", "Report a bug"],
   ["4bf776d0", "Talk to us"],
+  ["73ac94c3", "Contact"],
   ["eee62c37", "Licensing"],
   ["da2e7a94", "Security reports"],
   ["66094431", "<1/> All rights reserved."],
@@ -158,23 +189,23 @@
   ["b79c01dc", "Open menu"],
   ["58ee52ce", "Close menu"],
   [
-    "501ad987",
-    "The Zipr launcher: a search box above a list of items — Start my workday, Join my next meeting, Present my screen, Fill in my timesheet and more — each with its own icon and colour."
+    "e1b10698",
+    "The Zipr launcher: a search box above a list of shortcuts — Start my workday, Join my next meeting, Present my screen, Fill in my timesheet and more — each with its own icon and colour."
   ],
   [
     "8f74b12e",
     "The Zipr launcher in its grid layout: a search box above tiles for Start my workday, Join my next meeting, Present my screen, Fill in my timesheet, Book a meeting room and Focus for an hour, each with an icon and a one-line description."
   ],
   [
-    "c06323b1",
-    "A Zipr item, Deploy to production, tagged production and needs approval, with three steps: ask for a yes or no, run a command, and open a web address."
+    "ec078e26",
+    "A Zipr shortcut, Deploy to production, tagged production and needs approval, with three steps: ask for a yes or no, run a command, and open a web address."
   ],
   [
     "b6d8ed96",
     "Zap building an item called Morning focus. On the left, the conversation: a request in plain words, Zap's reply and the changes it made, a follow-up asking for do not disturb, and a test where every step succeeded and the command shows as started. On the right, the six steps it built, a note that one runs a program, the assumption Zap made, and Test and Save item."
   ],
-  ["95af0f70", "Desktop launcher for commands, links and apps · Zipr"],
-  ["d1cb36c6", "Build it once. Let anyone run it."],
+  ["db4baf9a", "Your computer tricks, in one click · Zipr"],
+  ["af387b7f", "Build it once. Use it whenever you need it."],
   [
     "600cf34f",
     "What Zipr does on its own for free, and what it adds when your team shares a server."
@@ -183,55 +214,56 @@
   ["ad8bcb5f", "Built for the keyboard, clear at a glance"],
   ["1a4e463a", "The few screens you'll spend your time in."],
   ["a38f9a54", "The launcher"],
-  ["2932d9fc", "One shortcut, then type"],
+  ["cd3aa2c4", "One key press, then type"],
   ["c528e0a8", "Press your shortcut from anywhere, type, and press Return."],
-  ["8acfd3e3", "Every item"],
+  ["0e7f4b8e", "Every shortcut"],
   ["233feab8", "Read it before you run it"],
-  ["8ae968b7", "See every step an item takes before you launch it."],
+  ["c9add382", "See every step a shortcut takes before you run it."],
   ["1d9fb88d", "The editor"],
   ["d6f33e2a", "Change it in one place"],
-  ["b2e5c566", "Reorder steps, switch one off, or make the item ask first."],
-  ["d43928ae", "Or bring the idea, and let Zap speak computer."],
+  ["63c86f01", "Reorder steps, switch one off, or make the shortcut ask first."],
+  ["fe2079dc", "Zap"],
+  ["37cebd4f", "Or bring the idea, and ask Zap to build it."],
   [
-    "1e42a041",
-    "Zap knows Zipr like the back of its hand and intelligently builds the item for you to test."
+    "4b4ec304",
+    "Zap, the helper that builds shortcuts from your words, turns an idea into a starting point for a shortcut, for you to test before you keep it."
   ],
   ["9fdc1526", "In the free app"],
   ["081b9b87", "One click instead of a walkthrough"],
   [
-    "eb6de995",
-    "The steps you worked out become one named item. A colleague clicks it and it runs — no document to follow, no script to be talked through."
+    "f4e16b21",
+    "The steps you worked out become one named shortcut. A colleague clicks it and it runs — no document to follow, no one talking them through it."
   ],
   ["dad51e81", "Instant, and it works offline"],
   [
-    "48c30a31",
-    "Everything is already on your machine, so Zipr opens straight away and keeps working on a plane."
+    "bb05e3c5",
+    "Everything is already on your computer, so Zipr opens straight away and keeps working on a plane."
   ],
   ["fcdb5787", "Runs only where you click"],
   [
-    "d722b0d5",
-    "Every command executes on the machine of the person who clicked — never on our servers or yours. That is the short answer to your security team's first question."
+    "11db2d74",
+    "Every step runs on the computer of the person who clicked — never on our servers or yours. That is the short answer to your security team's first question."
   ],
   ["6b8e2906", "Plugins for everything else"],
   [
-    "53119249",
-    "When the twelve built-in step types run out, a plugin adds a new one. Plugins are kept apart from the app, so a faulty one can't take it down."
+    "99a48506",
+    "When the built-in steps run out, a plugin adds a new one. Plugins are kept apart from the app, so a faulty one can't take it down."
   ],
   ["e7255ea6", "With a team server"],
   ["c8120656", "Share it instead of explaining it"],
   [
-    "08ab14f9",
-    "Publish an item to a team catalogue and everyone runs the same, current version. No zip file in a chat thread, no afternoon spent watching over a shoulder."
+    "ebbb94b6",
+    "Publish a shortcut to your team's Catalogue and everyone runs the same, current version. No zip file in a chat thread, no afternoon spent watching over a shoulder."
   ],
   ["a8287ff2", "Edit together without losing work"],
   [
-    "d99bda44",
-    "Two people improve the same item at once and both changes survive. If you changed the same thing, you're shown exactly what clashed."
+    "9e721a35",
+    "Two people improve the same shortcut at once and both changes survive. If you changed the same thing, you're shown exactly what clashed."
   ],
   ["52582e1f", "Undo anything"],
   [
-    "24fa40f7",
-    "Every change is kept. Put any item back how it was in one click, and see who changed what — so trying the strange version costs nothing."
+    "a9c00b0e",
+    "Every change is kept. Put any shortcut back how it was in one click, and see who changed what — so trying the strange version costs nothing."
   ],
   ["db2c71f8", "Hosted by us, or on your own servers"],
   [
@@ -240,7 +272,7 @@
   ],
   ["24654da7", "In practice"],
   ["c33104f3", "Five situations you'll recognise"],
-  ["5a06e2b1", "Where good work usually gets lost — and what changes with Zipr."],
+  ["887d1744", "Where good know-how usually gets lost — and what changes with Zipr."],
   ["bcb0266c", "What you built would help another team"],
   ["d8e4cab6", "Without Zipr"],
   [
@@ -249,8 +281,8 @@
   ],
   ["951395b6", "With it"],
   [
-    "1e3140c5",
-    "You publish a copy into their catalogue and they run it. Yours stays where it was; theirs stays current."
+    "52b5d525",
+    "You publish a copy into their Catalogue and they run it. Yours stays where it was; theirs stays current."
   ],
   ["636d57a7", "A new starter joins on Monday"],
   [
@@ -258,8 +290,8 @@
     "A wiki page, three chat threads, a zip of scripts, and the same questions for a fortnight."
   ],
   [
-    "797e0b8f",
-    "They install Zipr, open the team catalogue, and everything the team runs is there, in the current version."
+    "663d20ec",
+    "They install Zipr, open the team's Catalogue, and every shortcut the team runs is there, in its current version."
   ],
   ["b93c5444", "Two of you improve the same thing"],
   ["e7ff58c6", "Last save wins, and somebody's work quietly disappears."],
@@ -276,39 +308,38 @@
     "f0a8f65f",
     "Everything is already on your laptop. Keep working; changes sync when you reconnect."
   ],
-  ["b8b03812", "The building blocks"],
-  ["64f1ca69", "Every item is built from these, chained in any order."],
+  ["10d1b362", "The steps a shortcut is built from"],
+  [
+    "4f2a771f",
+    "Each step does one job. Put steps together, in any order, to make a shortcut that gets something useful done."
+  ],
+  ["678df13f", "<1/> steps, by group. <2>See every step</2>"],
   ["2261ad89", "Decide what happens next"],
   [
     "68e543ee",
     "Run a step only if the one before it worked, or only if it didn't, such as opening a help page."
   ],
-  ["b611464e", "One item for Windows and Mac"],
+  ["05f572d7", "One shortcut for Windows and Mac"],
   [
-    "fe131988",
-    "If a step differs between them, mark it for Windows or for Mac. The same item then works on both."
+    "0f033da5",
+    "If a step differs between them, mark it for Windows or for Mac. The same shortcut then works on both."
   ],
   ["cca595a3", "Go further with plugins"],
-  ["262af06f", "When the twelve run out, a plugin adds a new step type."],
-  ["8bc88bc3", "Build your first item in minutes."],
+  ["858e74fb", "When the built-in steps run out, a plugin adds a new one."],
+  ["63826e56", "Free, no account, no card. Come back the day somebody else asks how you did it."],
   [
-    "6464d25f",
-    "Free, no account, no card. Come back the day somebody else wants what you've built."
-  ],
-  ["0ccd4a44", "Compare free and team"],
-  [
-    "7a5640d0",
-    "The Zipr app's Browse screen: a sidebar of sections, the Everyday catalogue's items in a list, and an inspector beside it showing Start my workday's three steps with Launch, Open and Edit."
+    "c0ddb596",
+    "The Zipr app's Browse screen: a sidebar of sections, the Everyday collection's shortcuts in a list, and an inspector beside it showing Start my workday's three steps with Launch, Open and Edit."
   ],
   [
-    "4c6567db",
-    "Editing the Deploy to production item: its name, category, description, colour, icon and tags, then its three steps in order, each with its own on switch, above Cancel, Save draft and Save and send."
+    "0114d8e8",
+    "Editing the Deploy to production shortcut: its name, category, description, colour, icon and tags, then its three steps in order, each with its own on switch, above Cancel, Save draft and Save and send."
   ],
-  ["dccc6bcc", "Features: step types, sharing and history · Zipr"],
+  ["1f35f17d", "Features: shortcuts, steps, sharing and history · Zipr"],
   ["a85cc82e", "You have the idea. Zap speaks <1>computer</1>."],
   [
-    "be0866ce",
-    "Say what you want in your own words. Zap works out how your computer actually does it — the right link, the right command, the right order — and turns it into one click you test before you keep."
+    "3479eee2",
+    "Zap, the helper that builds shortcuts from your words, helps turn an idea into a starting point for a shortcut. Say what you want and it suggests the steps — then you test it before you keep it."
   ],
   ["2862ca8d", "From idea to action"],
   ["f767f59e", "Everyday words in. Working steps out."],
@@ -342,7 +373,10 @@
   ["3a695bfc", "“My internet's playing up. Do whatever usually fixes it.”"],
   ["2d41bec9", "Flush the DNS cache — on Windows"],
   ["18f67ae8", "Flush the DNS cache — on a Mac"],
-  ["43ce393f", "One item for both platforms: each step runs only on the system it's written for."],
+  [
+    "73f36f2a",
+    "One shortcut for both platforms: each step runs only on the system it's written for."
+  ],
   ["ca8049c3", "“Ask which project, then open it in my editor.”"],
   ["00b8069a", "Ask which project"],
   ["5f6b1995", "Open it in VS Code"],
@@ -355,10 +389,9 @@
   ],
   ["3e6c88cf", "A conversation is all it takes"],
   [
-    "b4e4e4c3",
-    "Zap knows everything Zipr can do. The AI model you choose brings the intelligence. Together they build items your IT admins would be impressed with, from a few sentences in plain words."
+    "ad11f08a",
+    "Zap knows everything Zipr can do. The AI model you choose brings the intelligence. Together they build a starting point for a shortcut, from a few sentences in plain words."
   ],
-  ["8b6a2295", "Describe it"],
   [
     "f34adaad",
     "Say it the way you'd explain it to a colleague: what you open, in what order, what you'd be asked. That's the whole brief. Ask for changes the same way."
@@ -370,8 +403,8 @@
   ],
   ["fdbc5563", "You test it, then save"],
   [
-    "a78a82e4",
-    "Test runs it on your computer exactly as launching it would. Happy? Save it to a catalogue. Not yet? Keep talking, or go back to any earlier version."
+    "cb77f9d6",
+    "Test runs it on your computer exactly as launching it would. Happy? Save it as a shortcut. Not yet? Keep talking, or go back to any earlier version."
   ],
   ["63ad36a1", "Why it's different"],
   ["b8f9ba38", "It builds. <1>You</1> run."],
@@ -381,8 +414,8 @@
   ],
   ["eea3f7be", "It never runs anything"],
   [
-    "7da2f514",
-    "Zap can build and change an item. Only you can run it: Test is your button, and Zap has no way to press it."
+    "9ded133d",
+    "Zap can build and change a shortcut. Only you can run it: Test is your button, and Zap has no way to press it."
   ],
   ["dc0f1377", "Tested means tested"],
   [
@@ -396,8 +429,8 @@
   ],
   ["bdf89a1f", "Risk is worked out, not guessed"],
   [
-    "b4051d9f",
-    "Whether a step opens something, asks a question, runs a program or acts as another account is decided by the app from the step itself — never by the AI. When it matters, you're advised to have the item ask before it runs."
+    "e0374d86",
+    "Whether a step opens something, asks a question, runs a program or acts as another account is decided by the app from the step itself — never by the AI. When it matters, you're advised to have the shortcut ask before it runs."
   ],
   ["c1cea9f3", "Nothing disappears quietly"],
   [
@@ -406,8 +439,8 @@
   ],
   ["7d6d98e9", "Only steps that really run"],
   [
-    "6de5910c",
-    "Zap can only use the step types Zipr runs, with the settings each one accepts. It can't write a step that would be saved and then silently ignored."
+    "4f9d7410",
+    "Zap can only use the steps Zipr runs, with the settings each one accepts. It can't write a step that would be saved and then silently ignored."
   ],
   ["0819f3fe", "Your data"],
   ["db97d452", "Exactly what the AI sees"],
@@ -417,8 +450,8 @@
   ],
   ["e001eada", "Sent to the model"],
   ["d0d957ec", "Your conversation with Zap"],
-  ["e6534a6c", "The item being built"],
-  ["3844640c", "The list of step types Zipr can run"],
+  ["b24d3841", "The shortcut being built"],
+  ["dfc7b05e", "The list of steps Zipr can run"],
   ["3eb17a60", "Your operating system, its version, your processor type and the app's language"],
   ["717ac211", "The plugins Zap is allowed to use"],
   ["77d38da7", "The results of your tests"],
@@ -428,9 +461,9 @@
   ],
   ["afea4b9d", "Never sent"],
   ["c4ced915", "Any password, key or other credential"],
-  ["6f1de15f", "Your other items, catalogues and workspaces"],
+  ["24fe0992", "Your other shortcuts, Catalogues and workspaces"],
   ["8bfbc1de", "Files, your clipboard, environment or launch history"],
-  ["38bb93c1", "What you typed into a question an item asked"],
+  ["b8a53e42", "What you typed into a question a shortcut asked"],
   ["558b29f2", "Which account a sign-in step used"],
   ["7da0fdd7", "Your AI, or your team's"],
   ["9863868b", "Bring your own model"],
@@ -458,18 +491,18 @@
   ],
   ["cc925c77", "Will it really use the command line?"],
   [
-    "b2235c7a",
-    "When that's the best way to do what you asked, yes — including steps that only run on Windows or only on a Mac, and programs that need administrator rights. Anything that runs a program is marked as such before you save it, and you're advised to have the item ask before it runs."
+    "11104aa3",
+    "When that's the best way to do what you asked, yes — including steps that only run on Windows or only on a Mac, and programs that need administrator rights. Anything that runs a program is marked as such before you save it, and you're advised to have the shortcut ask before it runs."
   ],
   ["05985e47", "Can Zap run things on my computer?"],
   [
-    "6ebd385a",
-    "No. Zap only changes the draft it's building. A test is something you press, and it runs exactly what launching the item would — including asking you first, if the item is set to ask."
+    "63a42368",
+    "No. Zap only changes the draft it's building. A test is something you press, and it runs exactly what running the shortcut would — including asking you first, if the shortcut is set to ask."
   ],
-  ["bc580b8a", "What happens to the item once I save it?"],
+  ["6f86bfc3", "What happens to the shortcut once I save it?"],
   [
-    "c66accdd",
-    "It becomes an ordinary item in your own workspace, with no link back to the conversation. Edit it, launch it, or share it with your team like anything else you've built."
+    "71398066",
+    "It becomes an ordinary shortcut in your own workspace, with no link back to the conversation. Edit it, run it, or share it with your team like anything else you've built."
   ],
   ["f2cbd560", "Which AI models does it work with?"],
   [
@@ -491,10 +524,10 @@
     "1e02cde3",
     "Your drafts are stored on your computer until you save or discard them. The app logs no prompt and no reply."
   ],
-  ["e83ca5ee", "Get started"],
-  ["b299047d", "Zap is in the app. Download Zipr, connect a model, and tell it the idea."],
+  ["08a9fc1b", "Ask Zap to build it."],
+  ["a301349e", "Zap is in the app. Download Zipr, connect a model, and describe your idea."],
   ["ea69ad05", "See everything Zipr does"],
-  ["f35886ea", "Zap: turn an idea into steps your computer runs · Zipr"],
+  ["c66edb12", "Build with Zap: describe it, get a shortcut to test · Zipr"],
   ["2c601441", "Zap setup"],
   ["7f1f7737", "Connect Zap to Claude or ChatGPT"],
   [
@@ -665,29 +698,175 @@
   ["509736e5", "— First published, covering Claude and OpenAI."],
   ["274f2b7d", "Providers"],
   ["50778a61", "Connect Zap to Claude or ChatGPT · Zipr"],
+  [
+    "143f11d7",
+    "Each step does one job. Put steps together to make a shortcut that gets something useful done. Here is every step, by group."
+  ],
+  ["c277c939", "Here are all <1/> steps, by group."],
+  ["c5457dd4", "Show the 4 advanced steps"],
+  ["1ddc726a", "These may need more technical knowledge. You can build plenty without them."],
+  ["51255597", "Plugins can add their own steps, and those work like any other step."],
+  ["e762cd5e", "Not sure where to start?"],
+  [
+    "6807fa88",
+    "See what other people do with these steps in the Gallery, or describe what you want and ask Zap, the helper that builds shortcuts from your words, to build it."
+  ],
+  ["f51be62e", "Free, no account, and every step is one click away once you've built it."],
+  ["b363d8b4", "Explore what Zipr can do"],
+  ["54121de6", "Jump to a group"],
+  ["a3e41c40", "The toolbox: every step, by group · Zipr"],
+  ["9504e342", "What could Zipr help you do <1>at work?</1>"],
+  [
+    "cdb50ba9",
+    "These are ideas to spark your own, not files to download. Each one is made from steps you can put together in Zipr."
+  ],
+  ["7bef93ba", "Developers"],
+  ["d11a8642", "Managers and team leads"],
+  ["15fd6221", "Designers and creators"],
+  ["d06a6be0", "Quick tricks"],
+  ["4a355a81", "The same ten clicks to get started every morning."],
+  ["e7c79ade", "Its steps"],
+  ["495fffbb", "Join my next meeting"],
+  ["b976fe0e", "Takes you straight to the call, with no hunting for the link."],
+  ["7449fde1", "Open the meeting link"],
+  ["eb4b5591", "Open your notes file"],
+  ["d21e9b79", "The fix you give out ten times a week."],
+  ["b108ddbc", "Restart the print spooler"],
+  ["e134eb88", "Asks first, then gets the printer moving again."],
+  ["ae175fb4", "Ask first"],
+  ["d48a2a3c", "Restart the spooler as administrator"],
+  ["018cb06e", "Everything about one client, scattered across four places."],
+  ["f3eeaee0", "Out of office"],
+  ["c1ff39f4", "Puts your reply on the clipboard, ready to paste anywhere."],
+  ["db006d66", "Copy your out-of-office reply"],
+  ["bb3e37ff", "The command everyone has to look up, every time."],
+  ["6c23772b", "Open a project"],
+  ["04cd49ae", "Pick a project and it opens in your editor."],
+  ["164896a7", "Choose a project from a list"],
+  ["15138975", "Run the command that opens it"],
+  ["150bf082", "Deploy to production"],
+  ["f8a62b5f", "Checks you mean it, proves it's you, then runs the release."],
+  ["a2e46a93", "Confirm Identity"],
+  ["95015d55", "Run the deploy command"],
+  ["a4810e92", "Open the release page"],
+  ["5bb8f4a3", "The weekly ritual that takes longer than it should."],
+  ["59ad44e8", "Friday wrap-up"],
+  ["4a192339", "Opens the board and the report, and starts your update."],
+  ["aa735b8f", "Open the project board"],
+  ["987e73d1", "Open the weekly report"],
+  ["b25e0467", "Open a new email to the team"],
+  ["b398fe1d", "Welcome a new starter"],
+  ["1b913369", "Opens everything someone needs on their first morning."],
+  ["421205c1", "Open the wiki and handbook"],
+  ["07ff6e6f", "Open the team chat"],
+  ["3093ef23", "Show the shared onboarding folder"],
+  ["b9009328", "Setting the scene before the real work can begin."],
+  ["34f7a1bf", "Start a new project"],
+  ["76f6f1f7", "Asks for a name, then gets your tools and a folder ready."],
+  ["7c0a9246", "Ask for the project name"],
+  ["b45119f9", "Open your design app"],
+  ["b9d4cc2d", "Show the projects folder"],
+  ["b94a46e3", "Focus for an hour"],
+  ["678aae5b", "Opens just what you need and leaves a note for others."],
+  ["5ed11345", "Open your notes"],
+  ["1a2e4b34", "Copy a 'heads down until 3' message"],
+  ["7c80c28f", "Small ideas that pay off every week"],
+  [
+    "afc17c38",
+    "Describe one in your own words and ask Zap, the helper that builds shortcuts from your words, to build it. You test it before you keep it."
+  ],
+  ["ab4c246b", "Email my manager that I'm off sick"],
+  ["e017b127", "Opens an email that is already written and addressed. You just press Send."],
+  ["078d299c", "Put my reply on the clipboard"],
+  ["26c347c9", "One click and your usual answer is ready to paste anywhere."],
+  ["3a05bf3d", "Open every page for one client"],
+  ["3f69b57c", "Ask which client, and their pages and folders all open at once."],
+  ["90464703", "Fix the printer"],
+  ["352e40b5", "Restart the part that jams, asking first so it never surprises you."],
+  ["02f4b3da", "Start with the task you do most. Free, and no account needed."],
+  ["144155ab", "Jump to a role"],
+  ["e53f9deb", "Gallery: what could Zipr help you do at work? · Zipr"],
+  ["0609c214", "Make something useful. <1>Share it</1> with someone."],
+  [
+    "d105fc72",
+    "The Catalogue is your team's shared collection of shortcuts. Keep useful shortcuts organised so everyone can find and use them."
+  ],
+  ["b2536d67", "How teams start"],
+  ["34cf1fe0", "It starts with one person"],
+  [
+    "c379a3fd",
+    "Zipr is useful before anyone invites anyone. Teams happen when what one person built gets noticed."
+  ],
+  ["fa18c0ee", "Discover"],
+  [
+    "cae358e9",
+    "Someone sees a useful trick, or an example in the Gallery, and thinks: I could use that."
+  ],
+  ["95967543", "Build"],
+  [
+    "5c006662",
+    "They make a shortcut for a task they do themselves. It's useful to them straight away."
+  ],
+  ["97d85393", "Get asked"],
+  ["b43f3e65", "A colleague notices the result and asks, “How did you do that?”"],
+  ["4f856dd8", "Share"],
+  [
+    "694d0eca",
+    "They hand it over. The next person gets the same shortcut, not a description of it."
+  ],
+  ["7665eb46", "Sharing becomes part of how the group works, in a Catalogue everyone can find."],
+  ["dd9bdb0d", "The Catalogue"],
+  ["6da57269", "One place your team's shortcuts live."],
+  [
+    "1458f646",
+    "A new starter opens the Catalogue and finds what the team runs, in its current version. Teams keep their own workspace and rules, and share work as a published copy that stays attributed and up to date."
+  ],
+  ["e4e2d450", "What you need"],
+  ["d01849b4", "A Zipr server, hosted by us or run by you"],
+  [
+    "9483a993",
+    "Sharing across a team uses a Zipr server. Everything else stays in the app you already have."
+  ],
+  ["b4ba844e", "Hosted"],
+  [
+    "d060f70b",
+    "We run it, patch it and back it up, in a database that belongs to your organisation alone. Billed per person."
+  ],
+  ["9138f3f0", "Request access"],
+  ["08ba8fb9", "Self-hosted"],
+  [
+    "533b5e18",
+    "Run it inside your own network, under your own backups, even with no internet. Priced per deployment, not per person."
+  ],
+  [
+    "d4d86c4c",
+    "Want the details? <1>Compare every feature</1> or <2>read the security overview</2>."
+  ],
+  ["0ab46b4b", "Start with the one you keep having to explain."],
+  ["e5eb165b", "Build it free, then bring your team when they ask how you did it."],
+  ["fc43df5b", "For teams: a shared Catalogue of shortcuts · Zipr"],
   ["61884917", "Free for you. <1>Paid</1> for your team."],
   [
-    "4da88ed2",
-    "The whole app is free for one person. You pay when your team shares — and you choose who runs the server."
+    "bdfafc64",
+    "The whole app is free for one person. A team server adds a shared Catalogue — and you choose who runs it."
   ],
   ["ddabf70a", "The whole app, on your machine, for as long as you like."],
   ["5873487c", "No account. No card. No expiry."],
   ["c616f942", "Windows and macOS"],
-  ["879e4541", "Unlimited items and catalogues"],
-  ["052c4e30", "All twelve step types, chained however you like"],
+  ["55fabe63", "Unlimited shortcuts"],
+  ["bb2313da", "Every built-in step, chained however you like"],
   ["b4f7b2f4", "Steps that differ per operating system"],
   ["847d7bcb", "Plugins"],
   ["68181b16", "History of what you've run"],
   ["4dc657be", "Export everything as one file"],
   ["bc3af3b2", "Works offline"],
   ["a5274bfe", "Most teams start here"],
-  ["b4ba844e", "Hosted"],
-  ["d6d1a93a", "Everything above, crossing between people — on our servers, not yours."],
+  ["53f3d2bf", "Everything above, shared between people — on our servers, not yours."],
   ["21e958a6", "AUD / person / month"],
   ["f066a719", "Billed yearly"],
   ["012cb00b", "month to month. Minimum <1/> people, so <2/> a year at the smallest."],
   ["f242622f", "Everything in Free, for everyone"],
-  ["6d912eda", "Shared catalogues, updated live as colleagues work"],
+  ["e97a8bb8", "A shared Catalogue, updated live as colleagues work"],
   ["8a4fad40", "Members, roles, and who-can-see-what"],
   ["04c1e0d5", "Edit at the same time without losing work"],
   ["938e3784", "Full history and one-click rollback"],
@@ -695,8 +874,6 @@
   ["92b5c0d2", "Sign in with Google, Microsoft or Okta"],
   ["a5f71208", "Your own database, not a shared one"],
   ["b282f58e", "Export everything, any time — even if your account lapses"],
-  ["9138f3f0", "Request access"],
-  ["08ba8fb9", "Self-hosted"],
   ["503edc40", "The same thing, on infrastructure you control, under a written agreement."],
   ["7cd71d92", "Let's talk"],
   ["8769881f", "Priced per deployment, not per person"],
@@ -727,19 +904,19 @@
   ["1441a2cb", "Hosted<1>Per person</1>"],
   ["cad857fc", "Self-hosted<1>Per deployment</1>"],
   ["39e476a4", "Building and running things"],
-  ["0ec0e5c0", "Items and catalogues"],
+  ["f09038a0", "Shortcuts"],
   ["2d283a80", "Unlimited"],
-  ["314d01f8", "All twelve step types"],
+  ["cf47b092", "Every built-in step"],
   ["b8adfdd9", "Included"],
-  ["67427871", "Zap, the AI that builds items for you"],
+  ["32edd536", "Zap, the helper that builds shortcuts from your words"],
   [
-    "14bed2f5",
-    "Describe what you want and Zap builds it for you to test. You choose the AI model, such as Claude or ChatGPT, and the provider bills you directly."
+    "728b3217",
+    "Describe what you want and Zap builds a starting point for you to test. You choose the AI model, such as Claude or ChatGPT, and the provider bills you directly."
   ],
   ["54aeedd7", "With your own key"],
   ["722a4b0a", "Your key, or your team's"],
-  ["092b6161", "Your own step types"],
-  ["4e44e4d1", "For anything the built-in twelve don't cover."],
+  ["7c00ca09", "Your own steps"],
+  ["745e92d1", "For anything the built-in steps don't cover."],
   ["edc411ab", "Install your own"],
   ["8870b7a0", "Share with the team"],
   ["bf4e59d8", "Works with no network"],
@@ -755,18 +932,18 @@
   ["c764dd86", "One, private"],
   ["1d5584f4", "Members and roles"],
   ["34c9f84e", "Not included"],
-  ["2241ef22", "Shared catalogues"],
+  ["2664f745", "Shared Catalogue"],
   ["77824000", "One AI key for the whole team"],
   [
     "e7028936",
     "An administrator sets it once and chooses who can use Zap. Nobody needs a key of their own."
   ],
-  ["33fabdc7", "Publish your work to the team"],
+  ["29848cef", "Publish your shortcuts to the team"],
   ["bc5185e5", "A copy, so your own version stays exactly where it was."],
   ["9d3e4498", "Everyone's copy stays current"],
   ["65df718d", "Live updates"],
   ["e4c68c83", "Changes appear as colleagues make them."],
-  ["8f9b5743", "Editing the same item at once"],
+  ["3638cf42", "Editing the same shortcut at once"],
   ["f653c751", "Both sets of changes survive, and you are told what actually clashed."],
   ["9f7f439b", "Not applicable"],
   ["1469dcb1", "History and oversight"],
@@ -780,8 +957,8 @@
   ["34742914", "Audit trail"],
   ["44a72569", "Per workspace"],
   ["6244b142", "Instance-wide"],
-  ["535cb4fb", "Central values your catalogues reuse"],
-  ["b41b90ad", "Paths and addresses set once, so nothing is hardcoded in an item."],
+  ["84f6c27f", "Central values your Catalogue reuses"],
+  ["b09dd920", "Paths and addresses set once, so nothing is hardcoded in a shortcut."],
   ["4d1192c5", "Lock settings centrally"],
   ["88296479", "Running it"],
   ["519afb6e", "Where your data lives"],
@@ -868,6 +1045,7 @@
   ["17aaa1a5", "Try it before any of this matters."],
   ["c6cf2d37", "The free app needs no account and is the same one paying teams run."],
   ["2c75e7f3", "Pricing: free app, team plans from $6 · Zipr"],
+  ["539307de", "Downloads"],
   ["57133887", "Install Zipr"],
   [
     "c05e049d",
@@ -947,8 +1125,8 @@
   ],
   ["2cc0dbc3", "Sharing doesn't loosen access"],
   [
-    "eb23d903",
-    "Work crosses teams only as a published copy, where your administrators allow it. Roles, membership and single sign-on stay yours — and people can't tell whether a catalogue they can't see exists."
+    "3aa4f2a3",
+    "Work crosses teams only as a published copy, where your administrators allow it. Roles, membership and single sign-on stay yours — and people can't tell whether a Catalogue they can't see exists."
   ],
   ["505e806a", "Your data is never held hostage"],
   [
@@ -963,8 +1141,8 @@
   ],
   ["19b6628a", "What does the app send over the network?"],
   [
-    "d824c710",
-    "Only your catalogue content and the sign-in that authorises it, and only to the deployment it is pointed at. With no deployment configured, it makes no network requests at all."
+    "e9f8c3f0",
+    "Only your Catalogue content and the sign-in that authorises it, and only to the deployment it is pointed at. With no deployment configured, it makes no network requests at all."
   ],
   ["b74094c3", "Can we run it somewhere with no internet access?"],
   [
@@ -1044,7 +1222,7 @@
     "b7c42e6c",
     "Please don't use this form. Mail it instead, so the details stay between us until there is a fix."
   ],
-  ["585d6694", "Launching an item does nothing on Windows"],
+  ["fea94d37", "Running a shortcut does nothing on Windows"],
   ["7c8379a4", "Windows 11"],
   ["47ae02de", "Report a bug · Zipr"],
   ["feef4b88", "Talk to a person"],
