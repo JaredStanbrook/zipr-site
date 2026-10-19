@@ -22,6 +22,7 @@ export const TRANSLATED_PAGES = [
   "/features",
   "/zap",
   "/zap/setup",
+  "/toolbox",
   "/gallery",
   "/teams",
   "/pricing",

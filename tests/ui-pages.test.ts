@@ -23,6 +23,7 @@ describe("UI pages load", () => {
       "/features",
       "/zap",
       "/zap/setup",
+      "/toolbox",
       "/gallery",
       "/teams",
       "/pricing",
@@ -243,10 +244,17 @@ describe("UI pages load", () => {
 
   it("keeps Catalogue and Gallery apart, and avoids the retired words", async () => {
     const testApp = createTestApp(null);
-    for (const path of ["/", "/features", "/gallery", "/teams", "/zap", "/pricing"]) {
+    for (const path of ["/", "/features", "/toolbox", "/gallery", "/teams", "/zap", "/pricing"]) {
       const html = await (await get(testApp, path)).text();
       // Visible text only: attribute values and class names may use `item`.
-      const text = html.replace(/<(script|style)[\s\S]*?<\/\1>/g, "").replace(/<[^>]+>/g, " ");
+      const text = html
+        .replace(/<(script|style)[\s\S]*?<\/\1>/g, "")
+        .replace(/<[^>]+>/g, " ")
+        // Step names and sentences are the Action Model's own text, copied exactly.
+        .replace(
+          /Get Item from List|for each item in|keep items in|count the items in|\{items\}|item\(s\)/gi,
+          "",
+        );
       for (const word of [/\bitems?\b/i, /\bworkflows?\b/i, /\bmarketplace\b/i, /\bnodes?\b/i]) {
         expect(text, `${word} on ${path}`).not.toMatch(word);
       }

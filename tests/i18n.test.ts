@@ -276,6 +276,7 @@ describe("which pages are translated", () => {
       "/",
       "/zap",
       "/zap/setup",
+      "/toolbox",
       "/gallery",
       "/teams",
       "/pricing",

@@ -15,6 +15,7 @@ const COLUMNS: Array<{ heading: string; links: Array<{ to: string; name: string 
     heading: "Product",
     links: [
       { to: "/features", name: "Features" },
+      { to: "/toolbox", name: "Toolbox" },
       { to: "/gallery", name: "Gallery" },
       { to: "/zap", name: "Build with Zap" },
       { to: "/teams", name: "For teams" },

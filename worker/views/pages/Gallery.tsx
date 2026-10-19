@@ -96,7 +96,9 @@ export const GalleryPage: FC = () => (
                     </ol>
                     <p class="mt-4 flex flex-wrap gap-1.5">
                       {example.builtFrom.map((name) => (
-                        <Badge tone="neutral">{name}</Badge>
+                        <span translate="no">
+                          <Badge tone="neutral">{name}</Badge>
+                        </span>
                       ))}
                     </p>
                   </Card>

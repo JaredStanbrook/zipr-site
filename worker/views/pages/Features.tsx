@@ -1,6 +1,8 @@
 import type { FC } from "hono/jsx";
 
-import { PILLARS, ACTION_TYPES, type Feature } from "@server/content/features";
+import { PILLARS, type Feature } from "@server/content/features";
+import { ALL_STEPS_COUNT, AVAILABLE_STEPS_COUNT } from "@server/content/steps";
+import { ToolboxTiles } from "@views/components/Toolbox";
 import {
   Page,
   Section,
@@ -232,21 +234,15 @@ export const FeaturesPage: FC = () => (
           title="The steps a shortcut is built from"
           lede="Each step does one job. Put steps together, in any order, to make a shortcut that gets something useful done."
         />
-        <ul class="grid grid-cols-2 gap-3 sm:gap-4 lg:grid-cols-4">
-          {ACTION_TYPES.map((action) => (
-            <li class="keycap p-4 sm:p-5">
-              <span class="font-mono text-[0.7rem] font-semibold text-primary tabular">
-                {action.category}
-              </span>
-              <h3 class="mt-2 font-sans text-sm font-bold tracking-normal sm:text-base">
-                {action.name}
-              </h3>
-              <p class="mt-1 text-xs leading-relaxed text-muted-foreground text-pretty sm:text-sm">
-                {action.blurb}
-              </p>
-            </li>
-          ))}
-        </ul>
+        <ToolboxTiles columns="four" />
+        <p class="mt-6 text-center text-sm text-muted-foreground text-pretty">
+          <span translate="no">{AVAILABLE_STEPS_COUNT}</span> of{" "}
+          <span translate="no">{ALL_STEPS_COUNT}</span> steps work in the app today; each one is
+          marked.{" "}
+          <a href="/toolbox" class="font-semibold text-primary underline underline-offset-4">
+            See every step
+          </a>
+        </p>
 
         <Card class="mt-8 p-7">
           <div class="grid gap-6 sm:grid-cols-3">

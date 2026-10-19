@@ -1,7 +1,9 @@
 import type { FC } from "hono/jsx";
 
 import type { AppConfig } from "@server/config/app.config";
-import { ACTION_TYPES, HOW_IT_WORKS, TEAM_UNLOCKS, TRUST_POINTS } from "@server/content/features";
+import { HOW_IT_WORKS, TEAM_UNLOCKS, TRUST_POINTS } from "@server/content/features";
+import { ALL_STEPS_COUNT, AVAILABLE_STEPS_COUNT, STEP_GROUPS } from "@server/content/steps";
+import { ToolboxTiles } from "@views/components/Toolbox";
 import { GALLERY_ROLES } from "@server/content/gallery";
 import { TIERS } from "@server/content/pricing";
 import { formatPrice } from "@views/lib/utils";
@@ -84,6 +86,8 @@ const HeroPanel: FC = () => (
     </p>
   </div>
 );
+
+const STEP_GROUP_COUNT = STEP_GROUPS.filter((group) => group.steps.length > 0).length;
 
 export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
   const hosted = TIERS.find((tier) => tier.id === "cloud");
@@ -238,25 +242,19 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
                 useful done. Ask a question midway and use the answer, or vary a step by operating
                 system, all in one shortcut.
               </p>
-              <LinkButton href="/features" variant="outline" class="mt-6">
-                Explore what Zipr can do
+              <p class="mt-4 text-sm text-muted-foreground text-pretty">
+                <span translate="no">{ALL_STEPS_COUNT}</span> steps in{" "}
+                <span translate="no">{STEP_GROUP_COUNT}</span> groups.{" "}
+                <span translate="no">{AVAILABLE_STEPS_COUNT}</span> work in the app today, and each
+                one is marked.
+              </p>
+              <LinkButton href="/toolbox" variant="outline" class="mt-6">
+                See every step
                 <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
               </LinkButton>
             </div>
 
-            <ul class="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4">
-              {ACTION_TYPES.map((step) => (
-                <li class="keycap flex flex-col p-4">
-                  <span class="flex items-center justify-between gap-2 text-[0.7rem] font-semibold text-primary">
-                    {step.category}
-                  </span>
-                  <span class="mt-2 text-sm font-bold leading-snug">{step.name}</span>
-                  <p class="mt-1 text-xs leading-relaxed text-muted-foreground text-pretty">
-                    {step.blurb}
-                  </p>
-                </li>
-              ))}
-            </ul>
+            <ToolboxTiles />
           </div>
 
           <figure class="mt-12 lg:mt-16">

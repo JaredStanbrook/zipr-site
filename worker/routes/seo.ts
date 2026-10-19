@@ -26,6 +26,7 @@ export const seoRoute = new Hono<AppEnv>();
 const STATIC_ROUTES: SitemapEntry[] = [
   { loc: "/", changefreq: "weekly", priority: 1.0 },
   { loc: "/features", changefreq: "monthly", priority: 0.8 },
+  { loc: "/toolbox", changefreq: "monthly", priority: 0.7 },
   { loc: "/gallery", changefreq: "monthly", priority: 0.8 },
   { loc: "/teams", changefreq: "monthly", priority: 0.7 },
   { loc: "/zap", changefreq: "monthly", priority: 0.8 },

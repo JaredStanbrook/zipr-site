@@ -16,6 +16,7 @@ import { HomePage } from "@views/pages/Home";
 import { FeaturesPage } from "@views/pages/Features";
 import { GalleryPage } from "@views/pages/Gallery";
 import { TeamsPage } from "@views/pages/Teams";
+import { ToolboxPage } from "@views/pages/Toolbox";
 import { ZapPage, ZAP_FAQ } from "@views/pages/Zap";
 import { ZapSetupPage, ZAP_SETUP_FAQ } from "@views/pages/ZapSetup";
 import { PricingPage } from "@views/pages/Pricing";
@@ -67,6 +68,14 @@ siteRoute.get("/features", (c) =>
     title: "Features: shortcuts, steps, sharing and history",
     description:
       "What the free Zipr app does on its own, what a team server adds, and the steps every shortcut is built from.",
+  }),
+);
+
+siteRoute.get("/toolbox", (c) =>
+  c.render(<ToolboxPage />, {
+    title: "The toolbox: every step, by group",
+    description:
+      "Every step a Zipr shortcut can be built from, in groups from Web to AI, with what works in the app today and what is coming.",
   }),
 );
 
