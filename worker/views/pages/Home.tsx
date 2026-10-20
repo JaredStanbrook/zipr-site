@@ -82,7 +82,7 @@ const HeroPanel: FC = () => (
     <ScreenshotSwap ids={["overlay-list", "overlay-grid"]} class="relative" />
 
     <p class="-mt-8 text-center text-xs text-muted-foreground">
-      The Zipr launcher, with a few shortcuts ready to run.
+      The Zipr launcher, with some example shortcuts.
     </p>
   </div>
 );
@@ -125,10 +125,6 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
                   Browse the Gallery
                 </LinkButton>
               </div>
-
-              <p class="rise mt-6 text-sm text-muted-foreground" style="--i: 4;">
-                Free for Windows 10+ and macOS 12+. No account needed.
-              </p>
             </div>
 
             <div class="rise" style="--i: 2;">
@@ -182,7 +178,7 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
                 Build it. Run it. <em>Share it.</em>
               </>
             }
-            lede="Build a shortcut from steps that do useful things on your computer. Run it when you need it, then share it with someone else."
+            lede="Create a shortcut from simple steps on your computer. Run it when you need it. Share it with anyone."
           />
 
           <div class="relative">
@@ -235,12 +231,10 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
             <div class="lg:sticky lg:top-28 lg:self-start">
               <Eyebrow>The toolbox</Eyebrow>
               <h2 class="text-3xl leading-[1.08] text-balance sm:text-[2.75rem]">
-                Your computer can do more than you think. <em>Here's the toolbox.</em>
+                Here’s what <em>Zipr</em> can do
               </h2>
               <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
-                Each step does one job. Put steps together to make a shortcut that gets something
-                useful done. Ask a question midway and use the answer, or vary a step by operating
-                system, all in one shortcut.
+                Each step does one job. Combine them into a shortcut and make <em>magic.</em>
               </p>
               <p class="mt-4 text-sm text-muted-foreground text-pretty">
                 <span translate="no">{ALL_STEPS_COUNT}</span> steps in{" "}
@@ -311,9 +305,6 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
               Browse the Gallery
               <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
             </LinkButton>
-            <LinkButton href="/gallery#tricks" variant="outline" size="lg">
-              Try a trick
-            </LinkButton>
           </div>
         </Container>
       </Section>
@@ -333,15 +324,14 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
             <div class="lg:col-span-5">
               <Eyebrow>Describe it</Eyebrow>
               <h2 class="text-3xl leading-[1.08] text-balance sm:text-[2.75rem]">
-                Got the idea? Let Zap start the shortcut.
+                Got the idea? Let Zap build it.
               </h2>
               <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
-                Zap, the helper that builds shortcuts from your words, helps turn an idea into a
-                starting point for a shortcut. Say what you want, test what it builds, then keep it.
+                Zap is the AI that builds shortcuts from what you say. Describe what you want, test what it makes, then keep it.
                 It never runs anything itself.
               </p>
               <LinkButton href="/zap" class="mt-6">
-                Ask Zap to build it
+                Learn about Zap
                 <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
               </LinkButton>
             </div>
@@ -368,12 +358,10 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
             <div>
               <Eyebrow>For teams</Eyebrow>
               <h2 class="text-3xl leading-[1.08] text-balance sm:text-[2.75rem]">
-                Make something useful. Share it with <em>someone.</em>
+                Make something useful. Share it with <em>your team.</em>
               </h2>
               <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
-                The Catalogue is your team's shared collection of shortcuts. Keep useful shortcuts
-                organised so everyone can find and use them. Each team keeps its own workspace and
-                rules, and work crosses between teams as a published copy.
+                Keep personal catalogues in your local workspace. With a team plan, create shared workspaces and catalogues so your organisation can organise teams and control access.
               </p>
               <div class="mt-7 flex flex-wrap gap-3">
                 <LinkButton href="/teams">
@@ -454,11 +442,12 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
           <SectionHeading
             align="center"
             eyebrow="Download"
-            title="Start free. Bring your team when they ask."
-            lede="The free app is the whole app for one person, not a trial. A team server adds a shared Catalogue."
+            title="Start free. Add your team when you’re ready."
+            lede="The free app is the full app for one person. A team plan adds shared workspaces and catalogues."
           />
-
+      
           <div class="grid gap-6 md:grid-cols-2">
+            {/* Free card – mostly fine */}
             <Card lift class="flex h-full flex-col p-7">
               <div class="flex items-center justify-between">
                 <h3 class="text-2xl">Zipr for you</h3>
@@ -472,10 +461,11 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
                 Download Zipr
               </LinkButton>
             </Card>
-
+      
+            {/* Team card – cleaned up */}
             <Card lift class="flex h-full flex-col p-7">
               <div class="flex items-center justify-between">
-                <h3 class="text-2xl">A team server</h3>
+                <h3 class="text-2xl">Team plan</h3>
                 <Badge tone="primary">Team</Badge>
               </div>
               {hosted?.annualMonthlyCents ? (
@@ -488,8 +478,7 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
                 </p>
               ) : null}
               <p class="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
-                Hosted by us, billed yearly, minimum {hosted?.minimumSeats ?? 5} people. Or
-                self-hosted on your own infrastructure, priced per deployment.
+                Shared workspaces and catalogues for your organisation. Hosted by us (billed yearly, minimum {hosted?.minimumSeats ?? 5} people) or self-hosted on your own infrastructure.
               </p>
               <LinkButton href="/pricing" class="mt-6 w-full">
                 See team pricing
