@@ -100,19 +100,19 @@ export const HOW_IT_WORKS = [
   {
     step: "01",
     title: "Build it",
-    body: "Put together the steps you'd normally explain — links, apps, files, questions — into one named shortcut. Or describe it and ask Zap to build it.",
+    body: "Put together the steps you'd normally explain into one named shortcut. Or describe it and ask Zap to build it.",
     cost: "Free",
   },
   {
     step: "02",
     title: "Run it",
-    body: "One click runs it on your computer, instantly and offline. Build as many as you like; nothing expires and no account is needed.",
+    body: "One click runs it on your computer, instantly and offline.",
     cost: "Free",
   },
   {
     step: "03",
     title: "Share it",
-    body: "When the team needs it, publish it to your team's Catalogue on a Zipr server — hosted by us, or run by you. Same app, nothing to relearn.",
+    body: "When the team needs it, publish it to your team on a Zipr server hosted by us, or run by you.",
     cost: "Team server",
   },
 ];
