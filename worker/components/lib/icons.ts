@@ -28,6 +28,13 @@ import {
   CircleX,
   CircleHelp,
   Calendar,
+  FileText,
+  Coffee,
+  MessageSquare,
+  Workflow,
+  Hand,
+  ShieldAlert,
+  ArrowUpRight,
   Cloud,
   Download,
   Folder,
@@ -84,6 +91,13 @@ import {
 } from "lucide";
 
 export const ICONS = {
+  ArrowUpRight,
+  ShieldAlert,
+  Hand,
+  FileText,
+  Coffee,
+  MessageSquare,
+  Workflow,
   AlertTriangle,
   Briefcase,
   Bug,

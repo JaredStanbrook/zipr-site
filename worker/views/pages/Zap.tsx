@@ -1,4 +1,3 @@
-
 import type { FC } from "hono/jsx";
 
 import {
@@ -42,8 +41,7 @@ const EXAMPLES: Translation[] = [
         code: "mailto:sam@example.com?subject=Off%20sick%20today&body=Hi%20Sam%2C%20I'm%20unwell%20today…",
       },
     ],
-    note:
-      "Zap can prepare the mail link for you. Your email app opens with the details filled in; you review it and decide whether to send.",
+    note: "Zap can prepare the mail link for you. Your email app opens with the details filled in; you review it and decide whether to send.",
   },
   {
     audience: "everyday",
@@ -62,8 +60,7 @@ const EXAMPLES: Translation[] = [
         code: "\\\\files\\clients\\{{ selected client }}",
       },
     ],
-    note:
-      "This illustrates the intended workflow. The prompt value and the later steps must be configured to use the same selection in the actual shortcut.",
+    note: "This illustrates the intended shortcut. The prompt value and the later steps must be configured to use the same selection in the actual shortcut.",
   },
   {
     audience: "everyday",
@@ -74,8 +71,7 @@ const EXAMPLES: Translation[] = [
         code: "Thanks for your email — I'm away until Monday and will reply then.",
       },
     ],
-    note:
-      "A small shortcut can be useful when you repeat the same task every week.",
+    note: "A small shortcut can be useful when you repeat the same task every week.",
   },
   {
     audience: "power",
@@ -90,8 +86,7 @@ const EXAMPLES: Translation[] = [
         code: "dscacheutil -flushcache",
       },
     ],
-    note:
-      "These are platform-specific examples, not commands to run together. A real shortcut needs to select the appropriate command for the operating system.",
+    note: "These are platform-specific examples, not commands to run together. A real shortcut needs to select the appropriate command for the operating system.",
   },
   {
     audience: "power",
@@ -106,8 +101,7 @@ const EXAMPLES: Translation[] = [
         code: "code C:\\Projects\\{{ selected project }}",
       },
     ],
-    note:
-      "The selected value can be used by a later step when the shortcut is configured to pass it through. The command and path must match your environment.",
+    note: "The selected value can be used by a later step when the shortcut is configured to pass it through. The command and path must match your environment.",
   },
   {
     audience: "power",
@@ -118,8 +112,7 @@ const EXAMPLES: Translation[] = [
         code: "powershell -Command Restart-Service Spooler",
       },
     ],
-    note:
-      "This operation may require administrator rights. Review the command and use an appropriate confirmation step before running it.",
+    note: "This operation may require administrator rights. Review the command and use an appropriate confirmation step before running it.",
   },
 ];
 
@@ -129,9 +122,7 @@ const TranslationCard: FC<{ example: Translation }> = ({ example }) => (
       The request
     </p>
 
-    <p class="mt-2 font-display text-xl leading-snug text-balance">
-      “{example.say}”
-    </p>
+    <p class="mt-2 font-display text-xl leading-snug text-balance">“{example.say}”</p>
 
     <div class="my-5 flex items-center gap-3 text-muted-foreground">
       <span class="h-px flex-1 bg-border"></span>
@@ -167,20 +158,17 @@ const HOW_IT_WORKS = [
   {
     icon: "message-square",
     title: "Describe the task",
-    body:
-      "Explain what you want to happen, what information to ask for and what should open or run. You can request changes in the same conversation.",
+    body: "Explain what you want to happen, what information to ask for and what should open or run. You can request changes in the same conversation.",
   },
   {
     icon: "workflow",
     title: "Review the draft",
-    body:
-      "Zap proposes a sequence of steps Zipr supports. Inspect the order, settings and commands, and review any assumptions before keeping the shortcut.",
+    body: "Zap proposes a sequence of steps Zipr supports. Inspect the order, settings and commands, and review any assumptions before keeping the shortcut.",
   },
   {
     icon: "play",
     title: "Test it yourself",
-    body:
-      "Run the draft using Test. Check what happened on your computer, make changes if needed, then save the shortcut when you're satisfied.",
+    body: "Run the draft using Test. Check what happened on your computer, make changes if needed, then save the shortcut when you're satisfied.",
   },
 ];
 
@@ -188,38 +176,32 @@ const TRUST_POINTS = [
   {
     icon: "hand",
     title: "You stay in control",
-    body:
-      "Zap builds and changes a draft. It cannot press Test or run the shortcut for you. You decide when to execute the steps.",
+    body: "Zap builds and changes a draft. It cannot press Test or run the shortcut for you. You decide when to execute the steps.",
   },
   {
-    icon: "check-circle",
+    icon: "circle-check",
     title: "Testing is tied to the draft",
-    body:
-      "A draft is marked tested only while the latest test corresponds to the version you're viewing. Change the draft and it needs another test.",
+    body: "A draft is marked tested only while the latest test corresponds to the version you're viewing. Change the draft and it needs another test.",
   },
   {
     icon: "terminal",
     title: "A started command isn't a success report",
-    body:
-      "Zipr starts commands without waiting for them to finish. A test can establish that a command started, not that the intended task succeeded.",
+    body: "Zipr starts commands without waiting for them to finish. A test can establish that a command started, not that the intended task succeeded.",
   },
   {
     icon: "shield-alert",
     title: "Understand risky steps",
-    body:
-      "The app evaluates the step itself to identify actions such as running a program or using administrator rights. Review the warning and consider adding confirmation where appropriate.",
+    body: "The app evaluates the step itself to identify actions such as running a program or using administrator rights. Review the warning and consider adding confirmation where appropriate.",
   },
   {
     icon: "history",
     title: "Changes are reviewable",
-    body:
-      "Zap tracks numbered revisions. You can inspect changes, including removed steps, and restore an earlier version when needed.",
+    body: "Zap tracks numbered revisions. You can inspect changes, including removed steps, and restore an earlier version when needed.",
   },
   {
     icon: "layers",
     title: "Built around supported steps",
-    body:
-      "Zap works with the steps Zipr exposes and their accepted settings. The resulting draft should use real supported actions, not invented capabilities.",
+    body: "Zap works with the steps Zipr exposes and their accepted settings. The resulting draft should use real supported actions, not invented capabilities.",
   },
 ];
 
@@ -245,8 +227,7 @@ const MODEL_OPTIONS = [
   {
     icon: "key-round",
     title: "Use your own provider",
-    body:
-      "Connect Anthropic, OpenAI, Google Gemini or an OpenAI-compatible endpoint, including a compatible model running on your own machine. The model must support tool calling.",
+    body: "Connect Anthropic, OpenAI, Google Gemini or an OpenAI-compatible endpoint, including a compatible model running on your own machine. The model must support tool calling.",
     detail:
       "Your API key is stored in your operating system's keychain. The app's own screens do not see the key.",
     link: {
@@ -257,58 +238,47 @@ const MODEL_OPTIONS = [
   {
     icon: "server",
     title: "Use your team's server",
-    body:
-      "A Zipr team server can provide Zap using the organisation's configured key and access list. Team members can use the service without each supplying a personal key.",
-    detail:
-      "Administrators control who can use the team service and which options are available.",
+    body: "A Zipr team server can provide Zap using the organisation's configured key and access list. Team members can use the service without each supplying a personal key.",
+    detail: "Administrators control who can use the team service and which options are available.",
   },
 ];
 
 export const ZAP_FAQ = [
   {
     q: "Do I need to understand commands or code?",
-    a:
-      "No. Start by describing the task in your own words. Zap proposes the steps and shows their settings so you can review them. Some workflows involve commands or configuration, so inspect those carefully before running them.",
+    a: "No. Start by describing the task in your own words. Zap proposes the steps and shows their settings so you can review them. Some shortcuts involve commands or configuration, so inspect those carefully before running them.",
   },
   {
     q: "Does Zap create a finished shortcut automatically?",
-    a:
-      "Zap creates and edits a draft. You review it, test it yourself and save it when you're satisfied. A draft is not the same thing as a verified result.",
+    a: "Zap creates and edits a draft. You review it, test it yourself and save it when you're satisfied. A draft is not the same thing as a verified result.",
   },
   {
     q: "Can Zap run commands on my computer without asking?",
-    a:
-      "Zap itself cannot press Test or run the shortcut. When you choose to test or run a shortcut, its configured steps execute. Review commands and permissions, and add confirmation steps when appropriate.",
+    a: "Zap itself cannot press Test or run the shortcut. When you choose to test or run a shortcut, its configured steps execute. Review commands and permissions, and add confirmation steps when appropriate.",
   },
   {
     q: "Does a successful test prove the task worked?",
-    a:
-      "Not necessarily. Zipr starts a command without waiting for it to finish, so a test may show that the command started without proving its final result. Check the output and the actual outcome when a task matters.",
+    a: "Not necessarily. Zipr starts a command without waiting for it to finish, so a test may show that the command started without proving its final result. Check the output and the actual outcome when a task matters.",
   },
   {
     q: "What happens when I save a shortcut?",
-    a:
-      "It becomes an ordinary shortcut in your own workspace, without a link back to the Zap conversation. You can edit, run or share it like other shortcuts you've created.",
+    a: "It becomes an ordinary shortcut in your own workspace, without a link back to the Zap conversation. You can edit, run or share it like other shortcuts you've created.",
   },
   {
     q: "Which AI providers are supported?",
-    a:
-      "Zap supports Anthropic, OpenAI, Google Gemini and OpenAI-compatible endpoints, including compatible models hosted locally. The model must support tool calling, and Zipr checks compatibility when you connect it.",
+    a: "Zap supports Anthropic, OpenAI, Google Gemini and OpenAI-compatible endpoints, including compatible models hosted locally. The model must support tool calling, and Zipr checks compatibility when you connect it.",
   },
   {
     q: "Where is my API key stored?",
-    a:
-      "Your key is stored in your operating system's keychain. On Linux, where Zipr does not use a system keychain for this purpose, Zap works through a team server rather than a personal API key.",
+    a: "Your key is stored in your operating system's keychain. On Linux, where Zipr does not use a system keychain for this purpose, Zap works through a team server rather than a personal API key.",
   },
   {
     q: "Can my organisation restrict Zap?",
-    a:
-      "Yes. On organisation-managed computers, an administrator can leave the choice to the user, require the team server, or turn Zap off. Turning it off preserves drafts already in progress but prevents new conversations.",
+    a: "Yes. On organisation-managed computers, an administrator can leave the choice to the user, require the team server, or turn Zap off. Turning it off preserves drafts already in progress but prevents new conversations.",
   },
   {
     q: "Does Zap keep a record of my conversation?",
-    a:
-      "Drafts are stored on your computer until you save or discard them. The app does not log prompts or replies. The information sent to your chosen model is described in the data section above.",
+    a: "Drafts are stored on your computer until you save or discard them. The app does not log prompts or replies. The information sent to your chosen model is described in the data section above.",
   },
 ];
 
@@ -356,7 +326,7 @@ export const ZapPage: FC = () => {
       <Section tone="muted">
         <Container size="wide">
           <SectionHeading
-            eyebrow="From words to workflow"
+            eyebrow="From words to shortcut"
             title="Start with the task, not the syntax."
             lede="You shouldn't need to know which command, link or sequence of steps a task requires before you can start building a shortcut."
           />
@@ -368,9 +338,8 @@ export const ZapPage: FC = () => {
           </div>
 
           <p class="mx-auto mt-5 max-w-3xl text-center text-sm leading-relaxed text-muted-foreground">
-            These are illustrative previews of possible shortcut drafts, not
-            prebuilt shortcuts. The steps, values and integrations must be
-            configured for your environment.
+            These are illustrative previews of possible shortcut drafts, not prebuilt shortcuts. The
+            steps, values and integrations must be configured for your environment.
           </p>
         </Container>
       </Section>
@@ -380,7 +349,7 @@ export const ZapPage: FC = () => {
         <Container size="wide">
           <SectionHeading
             eyebrow="More than simple automation"
-            title="For the workflows that need a little more."
+            title="For the shortcuts that need a little more."
             lede="When a task calls for commands, platform-specific behaviour or system-level actions, Zap can help assemble the steps — and show you what it proposes."
           />
 
@@ -411,12 +380,8 @@ export const ZapPage: FC = () => {
                       {String(i + 1).padStart(2, "0")}
                     </span>
                   </div>
-                  <h3 class="mt-5 text-2xl leading-snug text-balance">
-                    {step.title}
-                  </h3>
-                  <p class="mt-3 leading-relaxed text-muted-foreground text-pretty">
-                    {step.body}
-                  </p>
+                  <h3 class="mt-5 text-2xl leading-snug text-balance">{step.title}</h3>
+                  <p class="mt-3 leading-relaxed text-muted-foreground text-pretty">{step.body}</p>
                 </Card>
               </li>
             ))}
@@ -434,16 +399,14 @@ export const ZapPage: FC = () => {
                 It builds. <em>You</em> run.
               </>
             }
-            lede="AI-generated automation deserves clear limits. Zap's permissions and workflow behaviour are enforced by the app, not left to a promise in the conversation."
+            lede="AI-generated automation deserves clear limits. Zap's permissions and shortcut behaviour are enforced by the app, not left to a promise in the conversation."
           />
 
           <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {TRUST_POINTS.map((point) => (
               <Card lift class="flex h-full flex-col p-7">
                 <IconTile icon={point.icon} tone="brand" />
-                <h3 class="mt-5 text-xl leading-snug text-balance">
-                  {point.title}
-                </h3>
+                <h3 class="mt-5 text-xl leading-snug text-balance">{point.title}</h3>
                 <p class="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
                   {point.body}
                 </p>
@@ -488,9 +451,7 @@ export const ZapPage: FC = () => {
                       class="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground"
                       aria-hidden="true"
                     ></i>
-                    <span class="text-sm leading-relaxed text-muted-foreground">
-                      {line}
-                    </span>
+                    <span class="text-sm leading-relaxed text-muted-foreground">{line}</span>
                   </li>
                 ))}
               </ul>
@@ -498,9 +459,8 @@ export const ZapPage: FC = () => {
           </div>
 
           <p class="mt-5 text-sm leading-relaxed text-muted-foreground">
-            The model provider processes the information sent to it. Check the
-            provider's privacy terms and your organisation's policies before
-            sending sensitive work details.
+            The model provider processes the information sent to it. Check the provider's privacy
+            terms and your organisation's policies before sending sensitive work details.
           </p>
         </Container>
       </Section>
@@ -544,11 +504,7 @@ export const ZapPage: FC = () => {
       {/* FAQ */}
       <Section tone="muted">
         <Container size="prose">
-          <SectionHeading
-            align="center"
-            eyebrow="Questions"
-            title="Before you get started."
-          />
+          <SectionHeading align="center" eyebrow="Questions" title="Before you get started." />
           <div>
             {ZAP_FAQ.map((item) => (
               <Disclosure question={item.q}>{item.a}</Disclosure>

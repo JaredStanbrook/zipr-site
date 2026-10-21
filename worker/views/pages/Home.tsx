@@ -287,12 +287,12 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
                     {example.does}
                   </p>
                   <ol class="clay-well mt-5 flex-1 space-y-2 rounded-[1.1rem] p-4">
-                    {example.steps.map((step, n) => (
+                    {example.recipe.map((step, n) => (
                       <li class="flex gap-2.5 text-sm">
                         <span class="font-mono text-xs leading-5 text-muted-foreground tabular">
                           {n + 1}
                         </span>
-                        <span>{step}</span>
+                        <span>{step.sentence}</span>
                       </li>
                     ))}
                   </ol>
@@ -327,8 +327,8 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
                 Got the idea? Let Zap build it.
               </h2>
               <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
-                Zap is the AI that builds shortcuts from what you say. Describe what you want, test what it makes, then keep it.
-                It never runs anything itself.
+                Zap is the AI that builds shortcuts from what you say. Describe what you want, test
+                what it makes, then keep it. It never runs anything itself.
               </p>
               <LinkButton href="/zap" class="mt-6">
                 Learn about Zap
@@ -361,7 +361,9 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
                 Make something useful. Share it with <em>your team.</em>
               </h2>
               <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
-                Keep personal catalogues in your local workspace. With a team plan, create shared workspaces and catalogues so your organisation can organise teams and control access.
+                Keep personal catalogues in your local workspace. With a team plan, create shared
+                workspaces and catalogues so your organisation can organise teams and control
+                access.
               </p>
               <div class="mt-7 flex flex-wrap gap-3">
                 <LinkButton href="/teams">
@@ -445,7 +447,7 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
             title="Start free. Add your team when you’re ready."
             lede="The free app is the full app for one person. A team plan adds shared workspaces and catalogues."
           />
-      
+
           <div class="grid gap-6 md:grid-cols-2">
             {/* Free card – mostly fine */}
             <Card lift class="flex h-full flex-col p-7">
@@ -461,7 +463,7 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
                 Download Zipr
               </LinkButton>
             </Card>
-      
+
             {/* Team card – cleaned up */}
             <Card lift class="flex h-full flex-col p-7">
               <div class="flex items-center justify-between">
@@ -478,7 +480,9 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
                 </p>
               ) : null}
               <p class="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
-                Shared workspaces and catalogues for your organisation. Hosted by us (billed yearly, minimum {hosted?.minimumSeats ?? 5} people) or self-hosted on your own infrastructure.
+                Shared workspaces and catalogues for your organisation. Hosted by us (billed yearly,
+                minimum {hosted?.minimumSeats ?? 5} people) or self-hosted on your own
+                infrastructure.
               </p>
               <LinkButton href="/pricing" class="mt-6 w-full">
                 See team pricing

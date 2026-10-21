@@ -1,5 +1,4 @@
-
- // worker/content/gallery.ts
+// worker/content/gallery.ts
 //
 // The Gallery: real shortcut ideas, organised around the work people do.
 //
@@ -62,13 +61,11 @@ export const GALLERY_ROLES: GalleryRole[] = [
     id: "everyday-work",
     icon: "sun",
     role: "Everyday productivity",
-    routine:
-      "Get from switching on your computer to actually getting work done.",
+    routine: "Get from switching on your computer to actually getting work done.",
     examples: [
       {
         name: "Start my workday",
-        does:
-          "Set up your workspace in one run. Open your essential apps, notes and working folder without hunting through your computer.",
+        does: "Set up your workspace in one run. Open your essential apps, notes and working folder without hunting through your computer.",
         builtFrom: ["Open App", "Open File", "Open Folder"],
         recipe: [
           {
@@ -87,8 +84,7 @@ export const GALLERY_ROLES: GalleryRole[] = [
       },
       {
         name: "Focus mode, ready",
-        does:
-          "Open the tools you need, turn on Do Not Disturb, and copy a focus message ready to share.",
+        does: "Open the tools you need, turn on Do Not Disturb, and copy a focus message ready to share.",
         builtFrom: ["Open App", "Set Do Not Disturb", "Copy to Clipboard"],
         recipe: [
           {
@@ -108,19 +104,12 @@ export const GALLERY_ROLES: GalleryRole[] = [
       },
       {
         name: "Pick up where I left off",
-        does:
-          "Choose a project and reopen its notes, folder and workspace. Useful when you regularly switch between projects.",
-        builtFrom: [
-          "Choose from List",
-          "Open Folder",
-          "Open File",
-          "Open App",
-        ],
+        does: "Choose a project and reopen its notes, folder and workspace. Useful when you regularly switch between projects.",
+        builtFrom: ["Choose from List", "Open Folder", "Open File", "Open App"],
         recipe: [
           {
             action: "Choose from List",
-            sentence:
-              "Choose an item from Client A, Website Redesign, Internal Tools",
+            sentence: "Choose an item from Client A, Website Redesign, Internal Tools",
           },
           {
             action: "Open Folder",
@@ -142,13 +131,11 @@ export const GALLERY_ROLES: GalleryRole[] = [
     id: "it-support",
     icon: "life-buoy",
     role: "IT and service desk",
-    routine:
-      "Turn repeatable troubleshooting into a consistent, deliberate workflow.",
+    routine: "Turn repeatable troubleshooting into a consistent, deliberate shortcut.",
     examples: [
       {
         name: "Run a network diagnostic",
-        does:
-          "Choose a diagnostic and run the corresponding approved script. Keep your common checks in one place.",
+        does: "Choose a diagnostic and run the corresponding approved script. Keep your common checks in one place.",
         builtFrom: ["Choose from Menu", "Run Shell Script", "Show Result"],
         recipe: [
           {
@@ -162,20 +149,14 @@ export const GALLERY_ROLES: GalleryRole[] = [
           },
           {
             action: "Show Result",
-            sentence:
-              "Display Network diagnostic finished. Review the output before proceeding.",
+            sentence: "Display Network diagnostic finished. Review the output before proceeding.",
           },
         ],
       },
       {
         name: "Confirm before a system change",
-        does:
-          "Build a checkpoint before running a maintenance script. Configure and verify the script for the target system.",
-        builtFrom: [
-          "Ask for Confirmation",
-          "Run Shell Script",
-          "Show Result",
-        ],
+        does: "Build a checkpoint before running a maintenance script. Configure and verify the script for the target system.",
+        builtFrom: ["Ask for Confirmation", "Run Shell Script", "Show Result"],
         recipe: [
           {
             action: "Ask for Confirmation",
@@ -195,19 +176,12 @@ export const GALLERY_ROLES: GalleryRole[] = [
       },
       {
         name: "Open a support case workspace",
-        does:
-          "Choose a support category and open the relevant troubleshooting guide, ticketing page and notes.",
-        builtFrom: [
-          "Choose from List",
-          "Open File",
-          "Open Link",
-          "Open File",
-        ],
+        does: "Choose a support category and open the relevant troubleshooting guide, ticketing page and notes.",
+        builtFrom: ["Choose from List", "Open File", "Open Link", "Open File"],
         recipe: [
           {
             action: "Choose from List",
-            sentence:
-              "Choose an item from Network, Printing, Account access, Hardware",
+            sentence: "Choose an item from Network, Printing, Account access, Hardware",
           },
           {
             action: "Open File",
@@ -234,8 +208,7 @@ export const GALLERY_ROLES: GalleryRole[] = [
     examples: [
       {
         name: "Create a project workspace",
-        does:
-          "Ask for a project name, run a configured script to create its folder structure, and open the workspace.",
+        does: "Ask for a project name, run a configured script to create its folder structure, and open the workspace.",
         builtFrom: ["Ask for Input", "Run Shell Script", "Open Folder"],
         recipe: [
           {
@@ -254,8 +227,7 @@ export const GALLERY_ROLES: GalleryRole[] = [
       },
       {
         name: "Open my daily handover",
-        does:
-          "Open your handover notes and supporting files folder, ready for the next person to pick up.",
+        does: "Open your handover notes and supporting files folder, ready for the next person to pick up.",
         builtFrom: ["Open File", "Open Folder"],
         recipe: [
           {
@@ -270,13 +242,8 @@ export const GALLERY_ROLES: GalleryRole[] = [
       },
       {
         name: "Tidy a batch of downloads",
-        does:
-          "Choose a cleanup routine and run a configured script to sort or archive downloads. Review the script before use.",
-        builtFrom: [
-          "Choose from Menu",
-          "Ask for Confirmation",
-          "Run Shell Script",
-        ],
+        does: "Choose a cleanup routine and run a configured script to sort or archive downloads. Review the script before use.",
+        builtFrom: ["Choose from Menu", "Ask for Confirmation", "Run Shell Script"],
         recipe: [
           {
             action: "Choose from Menu",
@@ -285,8 +252,7 @@ export const GALLERY_ROLES: GalleryRole[] = [
           },
           {
             action: "Ask for Confirmation",
-            sentence:
-              'Ask the user to confirm: "Proceed with the selected downloads cleanup?"',
+            sentence: 'Ask the user to confirm: "Proceed with the selected downloads cleanup?"',
           },
           {
             action: "Run Shell Script",
@@ -305,19 +271,12 @@ export const GALLERY_ROLES: GalleryRole[] = [
     examples: [
       {
         name: "Open a project",
-        does:
-          "Choose a project and open its workspace, notes and development tools.",
-        builtFrom: [
-          "Choose from List",
-          "Open Folder",
-          "Open App",
-          "Open File",
-        ],
+        does: "Choose a project and open its workspace, notes and development tools.",
+        builtFrom: ["Choose from List", "Open Folder", "Open App", "Open File"],
         recipe: [
           {
             action: "Choose from List",
-            sentence:
-              "Choose an item from API Service, Website, Mobile App",
+            sentence: "Choose an item from API Service, Website, Mobile App",
           },
           {
             action: "Open Folder",
@@ -335,14 +294,8 @@ export const GALLERY_ROLES: GalleryRole[] = [
       },
       {
         name: "Run a local development task",
-        does:
-          "Choose a predefined task and run its configured script. Use it for repeatable local tasks, not an unreviewed production deployment.",
-        builtFrom: [
-          "Choose from Menu",
-          "Ask for Confirmation",
-          "Run Shell Script",
-          "Show Result",
-        ],
+        does: "Choose a predefined task and run its configured script. Use it for repeatable local tasks, not an unreviewed production deployment.",
+        builtFrom: ["Choose from Menu", "Ask for Confirmation", "Run Shell Script", "Show Result"],
         recipe: [
           {
             action: "Choose from Menu",
@@ -351,8 +304,7 @@ export const GALLERY_ROLES: GalleryRole[] = [
           },
           {
             action: "Ask for Confirmation",
-            sentence:
-              'Ask the user to confirm: "Run the selected development task?"',
+            sentence: 'Ask the user to confirm: "Run the selected development task?"',
           },
           {
             action: "Run Shell Script",
@@ -360,21 +312,18 @@ export const GALLERY_ROLES: GalleryRole[] = [
           },
           {
             action: "Show Result",
-            sentence:
-              "Display Task finished. Review the terminal output for errors.",
+            sentence: "Display Task finished. Review the terminal output for errors.",
           },
         ],
       },
       {
         name: "Open the right documentation",
-        does:
-          "Choose a topic and open the matching documentation page and local reference file.",
+        does: "Choose a topic and open the matching documentation page and local reference file.",
         builtFrom: ["Choose from List", "Open Link", "Open File"],
         recipe: [
           {
             action: "Choose from List",
-            sentence:
-              "Choose an item from API authentication, Deployment, Troubleshooting",
+            sentence: "Choose an item from API authentication, Deployment, Troubleshooting",
           },
           {
             action: "Open Link",
@@ -392,19 +341,16 @@ export const GALLERY_ROLES: GalleryRole[] = [
     id: "writing-and-ai",
     icon: "file-text",
     role: "Writing and AI",
-    routine:
-      "Get from a blank page to a useful first draft without starting from scratch.",
+    routine: "Get from a blank page to a useful first draft without starting from scratch.",
     examples: [
       {
         name: "Prepare a reusable response",
-        does:
-          "Choose a response type and copy a prepared template to your clipboard, ready to personalise and send.",
+        does: "Choose a response type and copy a prepared template to your clipboard, ready to personalise and send.",
         builtFrom: ["Choose from List", "Copy to Clipboard"],
         recipe: [
           {
             action: "Choose from List",
-            sentence:
-              "Choose an item from Request received, Need more information, Issue resolved",
+            sentence: "Choose an item from Request received, Need more information, Issue resolved",
           },
           {
             action: "Copy to Clipboard",
@@ -415,8 +361,7 @@ export const GALLERY_ROLES: GalleryRole[] = [
       },
       {
         name: "Start a writing session",
-        does:
-          "Open your writing app, notes and reference material so everything is ready before you begin.",
+        does: "Open your writing app, notes and reference material so everything is ready before you begin.",
         builtFrom: ["Open App", "Open File", "Open Folder"],
         recipe: [
           {
@@ -435,8 +380,7 @@ export const GALLERY_ROLES: GalleryRole[] = [
       },
       {
         name: "Prepare a meeting summary",
-        does:
-          "Open your meeting notes and summary document, then copy a reusable outline. This prepares the workspace without claiming to transcribe or summarise the meeting automatically.",
+        does: "Open your meeting notes and summary document, then copy a reusable outline. This prepares the workspace without claiming to transcribe or summarise the meeting automatically.",
         builtFrom: ["Open File", "Open File", "Copy to Clipboard"],
         recipe: [
           {
@@ -449,8 +393,7 @@ export const GALLERY_ROLES: GalleryRole[] = [
           },
           {
             action: "Copy to Clipboard",
-            sentence:
-              "Copy Decisions, Action items, Owners, Deadlines to your clipboard",
+            sentence: "Copy Decisions, Action items, Owners, Deadlines to your clipboard",
           },
         ],
       },
@@ -465,8 +408,7 @@ export const GALLERY_ROLES: GalleryRole[] = [
     examples: [
       {
         name: "Friday wrap-up",
-        does:
-          "Open your project board, weekly report and team update draft so you can close out the week.",
+        does: "Open your project board, weekly report and team update draft so you can close out the week.",
         builtFrom: ["Open Link", "Open File", "Open File"],
         recipe: [
           {
@@ -485,8 +427,7 @@ export const GALLERY_ROLES: GalleryRole[] = [
       },
       {
         name: "Prepare a new starter's workspace",
-        does:
-          "Open the onboarding handbook, team resources and chat app for a consistent first-day setup.",
+        does: "Open the onboarding handbook, team resources and chat app for a consistent first-day setup.",
         builtFrom: ["Open File", "Open Folder", "Open App"],
         recipe: [
           {
@@ -505,8 +446,7 @@ export const GALLERY_ROLES: GalleryRole[] = [
       },
       {
         name: "Start a one-to-one meeting",
-        does:
-          "Choose a team member and open your meeting notes and discussion guide before the meeting starts.",
+        does: "Choose a team member and open your meeting notes and discussion guide before the meeting starts.",
         builtFrom: ["Choose from List", "Open File", "Open File"],
         recipe: [
           {
@@ -529,13 +469,11 @@ export const GALLERY_ROLES: GalleryRole[] = [
     id: "design-and-creative",
     icon: "palette",
     role: "Designers and creators",
-    routine:
-      "Spend less time preparing your workspace and more time making things.",
+    routine: "Spend less time preparing your workspace and more time making things.",
     examples: [
       {
         name: "Start a design project",
-        does:
-          "Ask for a project name, open your design tool and bring up the folder where project files live.",
+        does: "Ask for a project name, open your design tool and bring up the folder where project files live.",
         builtFrom: ["Ask for Input", "Open App", "Open Folder"],
         recipe: [
           {
@@ -554,8 +492,7 @@ export const GALLERY_ROLES: GalleryRole[] = [
       },
       {
         name: "Review design references",
-        does:
-          "Open your reference board, design files and inspiration folder in a single sequence.",
+        does: "Open your reference board, design files and inspiration folder in a single sequence.",
         builtFrom: ["Open Link", "Open File", "Open Folder"],
         recipe: [
           {
@@ -574,8 +511,7 @@ export const GALLERY_ROLES: GalleryRole[] = [
       },
       {
         name: "Copy a project status update",
-        does:
-          "Put a reusable project update template on your clipboard before you send it to your team.",
+        does: "Put a reusable project update template on your clipboard before you send it to your team.",
         builtFrom: ["Copy to Clipboard", "Open App"],
         recipe: [
           {
@@ -594,20 +530,17 @@ export const GALLERY_ROLES: GalleryRole[] = [
   {
     id: "personal-workflows",
     icon: "coffee",
-    role: "Personal workflows",
-    routine:
-      "Automate the little computer tasks that interrupt your day.",
+    role: "Personal routines",
+    routine: "Automate the little computer tasks that interrupt your day.",
     examples: [
       {
         name: "Plan an evening",
-        does:
-          "Choose an activity and open your planning notes and a relevant website.",
+        does: "Choose an activity and open your planning notes and a relevant website.",
         builtFrom: ["Choose from List", "Open File", "Open Link"],
         recipe: [
           {
             action: "Choose from List",
-            sentence:
-              "Choose an item from Dinner, Movie night, Weekend trip",
+            sentence: "Choose an item from Dinner, Movie night, Weekend trip",
           },
           {
             action: "Open File",
@@ -621,18 +554,12 @@ export const GALLERY_ROLES: GalleryRole[] = [
       },
       {
         name: "Take a proper break",
-        does:
-          "Confirm you're ready for a break, open your preferred break activity and copy a reminder for later.",
-        builtFrom: [
-          "Ask for Confirmation",
-          "Open Link",
-          "Copy to Clipboard",
-        ],
+        does: "Confirm you're ready for a break, open your preferred break activity and copy a reminder for later.",
+        builtFrom: ["Ask for Confirmation", "Open Link", "Copy to Clipboard"],
         recipe: [
           {
             action: "Ask for Confirmation",
-            sentence:
-              'Ask the user to confirm: "Ready to take a short break?"',
+            sentence: 'Ask the user to confirm: "Ready to take a short break?"',
           },
           {
             action: "Open Link",
@@ -640,8 +567,7 @@ export const GALLERY_ROLES: GalleryRole[] = [
           },
           {
             action: "Copy to Clipboard",
-            sentence:
-              "Copy Break finished — time to return to my next task. to your clipboard",
+            sentence: "Copy Break finished — time to return to my next task. to your clipboard",
           },
         ],
       },
@@ -658,8 +584,7 @@ export const GALLERY_ROLES: GalleryRole[] = [
 export const GALLERY_TRICKS: GalleryTrick[] = [
   {
     name: "Copy a polished reply",
-    does:
-      "Choose a common response and copy its template to your clipboard, ready to personalise.",
+    does: "Choose a common response and copy its template to your clipboard, ready to personalise.",
     builtFrom: ["Choose from List", "Copy to Clipboard"],
     recipe: [
       {
@@ -676,8 +601,7 @@ export const GALLERY_TRICKS: GalleryTrick[] = [
   },
   {
     name: "Open a complete client workspace",
-    does:
-      "Choose a client, then open the relevant project page, working folder and notes.",
+    does: "Choose a client, then open the relevant project page, working folder and notes.",
     builtFrom: ["Choose from List", "Open Link", "Open Folder", "Open File"],
     recipe: [
       {
@@ -700,14 +624,12 @@ export const GALLERY_TRICKS: GalleryTrick[] = [
   },
   {
     name: "Run a task with a safety check",
-    does:
-      "Ask for confirmation before running a configured script. Confirmation is a checkpoint, not a substitute for validating the script itself.",
+    does: "Ask for confirmation before running a configured script. Confirmation is a checkpoint, not a substitute for validating the script itself.",
     builtFrom: ["Ask for Confirmation", "Run Shell Script"],
     recipe: [
       {
         action: "Ask for Confirmation",
-        sentence:
-          'Ask the user to confirm: "Are you sure you want to run this task?"',
+        sentence: 'Ask the user to confirm: "Are you sure you want to run this task?"',
       },
       {
         action: "Run Shell Script",
@@ -717,8 +639,7 @@ export const GALLERY_TRICKS: GalleryTrick[] = [
   },
   {
     name: "Open your daily essentials",
-    does:
-      "Launch your main app, daily notes and current working folder with one shortcut.",
+    does: "Launch your main app, daily notes and current working folder with one shortcut.",
     builtFrom: ["Open App", "Open File", "Open Folder"],
     recipe: [
       {
@@ -737,8 +658,7 @@ export const GALLERY_TRICKS: GalleryTrick[] = [
   },
   {
     name: "Choose what happens next",
-    does:
-      "Present a menu of predefined tasks, then use the selection to direct the workflow.",
+    does: "Present a menu of predefined tasks, then use the selection to decide what runs next.",
     builtFrom: ["Choose from Menu", "If"],
     recipe: [
       {
@@ -754,8 +674,7 @@ export const GALLERY_TRICKS: GalleryTrick[] = [
   },
   {
     name: "Repeat a routine",
-    does:
-      "Use a repeat block for a routine that needs to run several times. Configure the work to be repeated inside the loop.",
+    does: "Use a repeat block for a routine that needs to run several times. Configure the work to be repeated inside the loop.",
     builtFrom: ["Repeat"],
     recipe: [
       {

@@ -85,12 +85,12 @@ export const GalleryPage: FC = () => (
                       Its steps
                     </p>
                     <ol class="clay-well mt-2 space-y-2 rounded-[1.1rem] p-4">
-                      {example.steps.map((step, n) => (
+                      {example.recipe.map((step, n) => (
                         <li class="flex gap-2.5 text-sm">
                           <span class="font-mono text-xs leading-5 text-muted-foreground tabular">
                             {n + 1}
                           </span>
-                          <span>{step}</span>
+                          <span>{step.sentence}</span>
                         </li>
                       ))}
                     </ol>
