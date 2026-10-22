@@ -484,12 +484,9 @@ export const ZoomTrigger: FC<{ children?: Child }> = ({ children }) => (
     type="button"
     data-lightbox
     aria-haspopup="dialog"
-    class="zoom-trigger group relative block w-full cursor-zoom-in rounded-[var(--radius-lg)] text-left"
+    class="zoom-trigger block w-full cursor-zoom-in rounded-[var(--radius-lg)] text-left"
   >
     {children}
-    <span class="zoom-badge" aria-hidden="true">
-      <i data-lucide="maximize-2" class="h-4 w-4"></i>
-    </span>
   </button>
 );
 

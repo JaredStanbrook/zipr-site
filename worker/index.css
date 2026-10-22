@@ -1280,7 +1280,8 @@
    Image lightbox
    ========================================================================== */
 @layer components {
-  /* The trigger wraps a picture; it must not add a frame of its own. */
+  /* The trigger wraps a picture; it must not add a frame of its own. The picture
+     itself is the control: the zoom cursor is the only hint. */
   .zoom-trigger {
     padding: 0;
     border: 0;
@@ -1293,31 +1294,6 @@
       transform: translateY(-3px);
     }
   }
-  /* A small clay chip in the corner says "this opens". Always visible, so a
-     phone sees it too; it is a hint, not the control. */
-  .zoom-badge {
-    position: absolute;
-    right: 0.75rem;
-    bottom: 0.75rem;
-    display: inline-flex;
-    height: 2rem;
-    width: 2rem;
-    align-items: center;
-    justify-content: center;
-    border-radius: 9999px;
-    background-color: var(--card);
-    color: var(--muted-foreground);
-    box-shadow: var(--shadow-raised);
-    transition:
-      transform 160ms cubic-bezier(0.3, 1.5, 0.5, 1),
-      color 160ms ease-out;
-  }
-  .zoom-trigger:hover .zoom-badge,
-  .zoom-trigger:focus-visible .zoom-badge {
-    color: var(--primary);
-    transform: scale(1.12);
-  }
-
   html.lightbox-open {
     overflow: hidden;
   }
