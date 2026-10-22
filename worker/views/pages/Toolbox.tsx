@@ -17,11 +17,11 @@ import {
  *
  * One group per section, in the order the app's toolbox lists them, with a jump
  * bar at the top so a long page is still quick to use. Each step is a small
- * card: its name, how it reads aloud, and whether the app can run it yet.
+ * card: its name, what it does in plain words, and a realistic example.
  *
- * Advanced steps sit in a collapsed disclosure, as the app does. Step names
- * and sentences are the app's own text, so they stay in English
- * (`translate="no"`); the descriptions around them translate as usual.
+ * Advanced steps sit in a collapsed disclosure, as the app does. Step names and
+ * these descriptions stay in English (`translate="no"`), like the names they
+ * explain; the page text around them translates as usual.
  */
 
 const StepCard: FC<{ step: Step }> = ({ step }) => (
@@ -29,9 +29,16 @@ const StepCard: FC<{ step: Step }> = ({ step }) => (
     <h4 class="font-sans text-sm font-bold leading-snug tracking-normal" translate="no">
       {step.label}
     </h4>
+    {/* The description and example read like a person talking. The raw sentence
+        template, with its {slots}, is only the fallback for a step with neither. */}
     <p class="mt-1.5 text-xs leading-relaxed text-muted-foreground" translate="no">
-      {step.sentence}
+      {step.description ?? step.sentence}
     </p>
+    {step.example ? (
+      <p class="mt-2 text-xs leading-relaxed text-foreground/80" translate="no">
+        <span class="font-semibold text-primary">Example:</span> {step.example}
+      </p>
+    ) : null}
   </li>
 );
 

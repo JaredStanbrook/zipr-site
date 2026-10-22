@@ -7,6 +7,14 @@ export interface Step {
   /** Natural-language description of the step, with substitution slots. */
   sentence: string;
   status: StepStatus;
+  /**
+   * What the step does, in plain language, with no `{slots}`. This is what the
+   * glossary shows. The `sentence` above is left alone because the app, parsing
+   * and AI generation read it.
+   */
+  description?: string;
+  /** One realistic use, written as a person would say it. Also free of `{slots}`. */
+  example?: string;
 }
 
 export interface StepGroup {
@@ -31,7 +39,340 @@ const s = (label: string, id: string, sentence: string, status: StepStatus = "co
 
 const now = "available" as const;
 
-export const STEP_GROUPS: StepGroup[] = [
+/**
+ * Plain-language descriptions and examples, keyed by step id.
+ *
+ * Kept apart from the steps themselves so the Action Model's labels, ids and
+ * sentence templates stay exactly as the app has them. The glossary shows these
+ * instead of the templates; a step with no entry falls back to its sentence.
+ * Examples are everyday, concrete and carry no `{placeholders}`.
+ */
+const DETAILS: Record<string, { description: string; example: string }> = {
+  // Web
+  open_webpage: {
+    description: "Open a website in your browser.",
+    example: "Open the team project board in Chrome.",
+  },
+  search_web: {
+    description: "Search a site such as Google or Wikipedia for the words you choose.",
+    example: "Search Wikipedia for Sydney Opera House.",
+  },
+  show_directions: {
+    description: "Open a map with directions to a place.",
+    example: "Get directions to the Melbourne office.",
+  },
+
+  // Email, Calls & Meetings
+  create_email: {
+    description:
+      "Draft an email to your recipient about your chosen subject. It opens ready to review and never sends itself.",
+    example: "Create an email to Alex about Friday's meeting.",
+  },
+  start_call: {
+    description: "Start a call to a phone number.",
+    example: "Call the front desk on 02 5550 0123.",
+  },
+  join_meeting: {
+    description: "Open a meeting link in the right app.",
+    example: "Join the weekly team meeting from its video link.",
+  },
+  open_chat: {
+    description: "Open a chat with someone in your messaging app.",
+    example: "Open a chat with Sam in Teams.",
+  },
+  connect_to_computer: {
+    description: "Connect to another computer from yours.",
+    example: "Connect to your office desktop from home.",
+  },
+
+  // Files & Folders
+  open_file: {
+    description: "Open a file in the app that normally opens it.",
+    example: "Open this week's report.",
+  },
+  open_folder: {
+    description: "Open a folder so you can see what's inside.",
+    example: "Open your Downloads folder.",
+  },
+  show_in_folder: {
+    description: "Open the folder that contains a file.",
+    example: "Show invoice-march.pdf in its folder.",
+  },
+  select_file: {
+    description: "Ask the person to pick a file to use in the next steps.",
+    example: "Ask which spreadsheet to use.",
+  },
+  select_folder: {
+    description: "Ask the person to pick a folder to use in the next steps.",
+    example: "Ask which project folder to open.",
+  },
+  find_files: {
+    description: "Search a folder for files by name and pass the matches to later steps.",
+    example: "Find files named statement in Downloads.",
+  },
+  get_contents_of_folder: {
+    description: "List everything inside a folder.",
+    example: "Get everything in the Receipts folder.",
+  },
+  get_file_details: {
+    description: "Look up a detail about a file, such as its size or when it changed.",
+    example: "Get the date modified for budget.xlsx.",
+  },
+  create_folder: {
+    description: "Make a new folder.",
+    example: "Create a folder called March in Documents.",
+  },
+  move_files: {
+    description: "Move files from one place to another.",
+    example: "Move the statements you found to the March folder.",
+  },
+  copy_files: {
+    description: "Copy files to another place, leaving the originals where they are.",
+    example: "Copy the signed contract to the Archive folder.",
+  },
+  rename_files: {
+    description: "Give files a new name.",
+    example: "Rename the photos to include today's date.",
+  },
+  delete_files: {
+    description: "Send files to the bin or trash. Nothing is deleted permanently.",
+    example: "Move the old drafts to the bin.",
+  },
+  save_file: {
+    description: "Save text or data as a file.",
+    example: "Save the meeting notes as notes.txt in Documents.",
+  },
+  zip_files: {
+    description: "Compress files into a single ZIP file.",
+    example: "Zip the project files into project-backup.zip.",
+  },
+  unzip_file: {
+    description: "Extract the contents of a ZIP file into a folder.",
+    example: "Unzip photos.zip into your Pictures folder.",
+  },
+
+  // Apps & System
+  open_app: {
+    description: "Launch an app on your computer.",
+    example: "Open Slack.",
+  },
+  quit_app: {
+    description: "Close an app that's running.",
+    example: "Close the video call app when the meeting ends.",
+  },
+  take_screenshot: {
+    description: "Capture the whole screen, a window or a selected area.",
+    example: "Take a screenshot of the window you're working in.",
+  },
+  set_volume: {
+    description: "Set how loud your computer plays sound.",
+    example: "Set your volume to 20% for a quiet office.",
+  },
+  set_appearance: {
+    description: "Switch your computer between light and dark mode.",
+    example: "Switch your computer to dark mode in the evening.",
+  },
+  set_do_not_disturb: {
+    description: "Turn Do Not Disturb on or off.",
+    example: "Turn on Do Not Disturb while you focus.",
+  },
+  lock_screen: {
+    description: "Lock your computer so nobody else can use it.",
+    example: "Lock your screen when you step away.",
+  },
+  get_device_details: {
+    description: "Look up details about this computer, such as its operating system.",
+    example: "Check whether this computer runs Windows or macOS.",
+  },
+
+  // Ask & Choose
+  ask_for_input: {
+    description: "Ask the person to type something, then use their answer in later steps.",
+    example: "Ask for the name of the new project.",
+  },
+  ask_for_confirmation: {
+    description: "Ask a yes-or-no question before carrying on.",
+    example: "Ask “Are you ready to send this?”",
+  },
+  choose_from_list: {
+    description: "Let the person pick an option from a list.",
+    example: "Choose a client from Client A, Client B and Client C.",
+  },
+  choose_from_menu: {
+    description: "Show a short menu and run different steps depending on what's chosen.",
+    example: "Ask whether to open the weekly or the monthly report.",
+  },
+  confirm_identity: {
+    description:
+      "Ask the person to prove it's really them using their computer's sign-in, such as Windows Hello or Touch ID.",
+    example: "Check it's really you before a risky step.",
+  },
+
+  // Text & Clipboard
+  text: {
+    description: "Write a piece of text to use in later steps.",
+    example: "Write “Thanks for getting in touch” to use in a reply.",
+  },
+  combine_text: {
+    description: "Join a list of items into one piece of text.",
+    example: "Join a list of names into one line, separated by commas.",
+  },
+  split_text: {
+    description: "Break a piece of text into a list wherever a separator appears.",
+    example: "Split a list of email addresses at each comma.",
+  },
+  replace_text: {
+    description: "Swap one piece of text for another.",
+    example: "Replace Draft with Final in a file name.",
+  },
+  change_case: {
+    description: "Change text to upper case, lower case or title case.",
+    example: "Convert a heading to upper case.",
+  },
+  get_clipboard: {
+    description: "Use whatever you last copied.",
+    example: "Get the link you just copied.",
+  },
+  copy_to_clipboard: {
+    description: "Copy text so you can paste it anywhere.",
+    example: "Copy your out-of-office reply to your clipboard.",
+  },
+
+  // Lists & Data
+  list: {
+    description: "Make a list of things for later steps to work through.",
+    example: "Create a list of Alex, Jordan and Taylor.",
+  },
+  get_item_from_list: {
+    description: "Pick the first, last, random or a numbered entry from a list.",
+    example: "Get the first file from the files you found.",
+  },
+  filter_list: {
+    description: "Keep only the entries in a list that match a rule.",
+    example: "Keep only files larger than 10 MB.",
+  },
+  sort_list: {
+    description: "Put a list in order.",
+    example: "Sort a list of files by date, newest first.",
+  },
+  count: {
+    description: "Count how many entries are in a list.",
+    example: "Count the files in a folder.",
+  },
+  get_value: {
+    description: "Read one piece of information out of structured data.",
+    example: "Get the customer's name from a record.",
+  },
+
+  // Dates & Numbers
+  get_current_date: {
+    description: "Get today's date to use in later steps.",
+    example: "Get today's date for a file name.",
+  },
+  format_date: {
+    description: "Show a date in the style you choose.",
+    example: "Format today's date as 2026-03-14.",
+  },
+  adjust_date: {
+    description: "Add or take away days, weeks, months or years from a date.",
+    example: "Add 7 days to a due date.",
+  },
+  calculate: {
+    description: "Work out a sum and use the answer in later steps.",
+    example: "Calculate 15% of an invoice total.",
+  },
+
+  // Logic & Flow
+  if: {
+    description: "Do one thing when something is true, and something else when it isn't.",
+    example: "If the file exists, open it; otherwise, create it.",
+  },
+  repeat: {
+    description: "Run the same steps a set number of times.",
+    example: "Repeat a reminder sound three times.",
+  },
+  repeat_with_each: {
+    description: "Run the same steps once for every entry in a list.",
+    example: "Open each file in a folder, one at a time.",
+  },
+  wait: {
+    description: "Pause before the next step.",
+    example: "Pause for 5 seconds before opening the next page.",
+  },
+  set_variable: {
+    description: "Give a value a name so later steps can use it.",
+    example: "Set Client to the name the person chose.",
+  },
+  run_shortcut: {
+    description: "Run another shortcut from inside this one.",
+    example: "Run your Start my workday shortcut at the end.",
+  },
+  stop_shortcut: {
+    description: "End the shortcut at this point.",
+    example: "Stop here if the person says no.",
+  },
+  comment: {
+    description: "Leave a note for whoever reads the shortcut. It does nothing when run.",
+    example: "Add a note explaining why a step is needed.",
+  },
+
+  // Show & Speak
+  show_notification: {
+    description: "Show a notification on your computer.",
+    example: "Show a notification saying your backup has finished.",
+  },
+  show_result: {
+    description: "Show text or data in a window you can read and close.",
+    example: "Display the answer a step worked out.",
+  },
+  quick_look: {
+    description: "Preview a file, image or text without opening an app.",
+    example: "Preview a downloaded file before opening it.",
+  },
+  speak_text: {
+    description: "Read text aloud using your computer's voice.",
+    example: "Read “Time for a break” aloud.",
+  },
+  play_sound: {
+    description: "Play a sound or an audio file.",
+    example: "Play a chime when a long task finishes.",
+  },
+
+  // AI
+  generate_text: {
+    description: "Ask your connected AI model to write text from an instruction.",
+    example: "Generate a friendly reminder email.",
+  },
+  summarise_text: {
+    description: "Ask your connected AI model for a shorter version of some text.",
+    example: "Summarise meeting notes into three bullet points.",
+  },
+  rewrite_text: {
+    description: "Ask your connected AI model to say the same thing in a different tone.",
+    example: "Rewrite a message in a friendlier tone.",
+  },
+
+  // Advanced
+  open_link: {
+    description:
+      "Open any kind of link, such as a web address, an email link or a phone link, with whatever your computer uses for it.",
+    example: "Open an email link that fills in a message for you.",
+  },
+  get_contents_of_url: {
+    description: "Fetch information from a web address and use what comes back.",
+    example: "Retrieve the latest status from a company status page.",
+  },
+  run_shell_script: {
+    description: "Run a script on your computer and keep what it prints.",
+    example: "Run a script that clears the cache.",
+  },
+  open_plugin_panel: {
+    description: "Open a custom screen added by an installed plugin.",
+    example: "Open the invoicing plugin's panel.",
+  },
+};
+
+const RAW_GROUPS: StepGroup[] = [
   {
     id: "web",
     name: "Web",
@@ -225,5 +566,11 @@ export const STEP_GROUPS: StepGroup[] = [
     steps: [],
   },
 ];
+
+/** The groups with each step's description and example attached. */
+export const STEP_GROUPS: StepGroup[] = RAW_GROUPS.map((group) => ({
+  ...group,
+  steps: group.steps.map((step) => ({ ...step, ...DETAILS[step.id] })),
+}));
 
 export const ALL_STEPS_COUNT = STEP_GROUPS.reduce((n, group) => n + group.steps.length, 0);

@@ -274,6 +274,28 @@ describe("UI pages load", () => {
     expect(gallery).toContain("not files to download");
   });
 
+  it("describes every toolbox step in plain words, with no template syntax", async () => {
+    const { STEP_GROUPS } = await import("../worker/content/steps");
+    const html = await (await get(createTestApp(null), "/toolbox")).text();
+
+    for (const group of STEP_GROUPS) {
+      for (const step of group.steps) {
+        expect(step.description, `description for ${step.id}`).toBeTruthy();
+        expect(step.example, `example for ${step.id}`).toBeTruthy();
+        // The templates stay in `sentence` for the app; people never read them here.
+        expect(step.description, step.id).not.toMatch(/[{}]/);
+        expect(step.example, step.id).not.toMatch(/[{}]/);
+        expect(step.sentence, `${step.id} keeps its template`).toBeTruthy();
+      }
+    }
+
+    expect(html).toContain("Draft an email to your recipient about your chosen subject.");
+    expect(html).toContain("Create an email to Alex about Friday&#39;s meeting.");
+    expect(html).toContain("Example:");
+    // No raw placeholder reaches the page.
+    expect(html).not.toMatch(/\{(to|subject|number|link|url|file|folder)\}/);
+  });
+
   it("explains Zap where it is first named", async () => {
     const zap = await (await get(createTestApp(null), "/zap")).text();
     expect(zap).toContain("Zap, the helper that builds shortcuts from your words");
