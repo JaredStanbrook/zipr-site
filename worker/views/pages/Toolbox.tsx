@@ -24,8 +24,8 @@ import {
  * explain; the page text around them translates as usual.
  */
 
-const StepCard: FC<{ step: Step }> = ({ step }) => (
-  <li class="keycap flex flex-col p-4">
+const StepCard: FC<{ step: Step; index: number }> = ({ step, index }) => (
+  <li class="keycap flex flex-col p-4" data-reveal style={`--i: ${index % 3};`}>
     <h4 class="font-sans text-sm font-bold leading-snug tracking-normal" translate="no">
       {step.label}
     </h4>
@@ -44,8 +44,8 @@ const StepCard: FC<{ step: Step }> = ({ step }) => (
 
 const StepList: FC<{ group: StepGroup }> = ({ group }) => (
   <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-    {group.steps.map((step) => (
-      <StepCard step={step} />
+    {group.steps.map((step, i) => (
+      <StepCard step={step} index={i} />
     ))}
   </ul>
 );

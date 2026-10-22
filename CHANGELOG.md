@@ -11,6 +11,19 @@ runs underneath. Changes to the site itself go above them.
 
 ### The site
 
+- **Scroll motion across the marketing pages.** Cards, tiles and toolbox groups
+  fade, rise and settle as they arrive; background pebbles, the hero's floating
+  pieces and the closing slab's bricks drift at their own speeds. Three new
+  showpieces on the home page: a **shortcut builder** that is driven by scroll
+  (steps float in, clay strings connect them, they pack into a glowing Run
+  button, and the shortcut then runs), a **Zap chat demo** that plays once and
+  can be replayed, and a **Gallery carousel** with role tabs that press in when
+  active. Only `transform` and `opacity` animate on scroll. With reduced motion
+  or no JavaScript every element renders complete and still.
+- **Home page, standard sections:** a facts strip under the hero (no invented
+  testimonials), an FAQ built from answers already on the site (with matching
+  structured data), a Download button and platform line in the footer, and a
+  back-to-top control.
 - **Copy and structure follow the brand guide.** Customer-facing pages say
   shortcut and step instead of item and step type, name Zap where it is first
   mentioned, and keep Catalogue (a team's shared collection) apart from Gallery

@@ -12,7 +12,7 @@ import { PRICING_FAQ, TIERS } from "@server/content/pricing";
 import { formatPrice } from "@views/lib/utils";
 import { faqSchema, softwareSchema, websiteSchema } from "@server/lib/structured-data";
 
-import { HomePage } from "@views/pages/Home";
+import { HomePage, HOME_FAQ } from "@views/pages/Home";
 import { FeaturesPage } from "@views/pages/Features";
 import { GalleryPage } from "@views/pages/Gallery";
 import { TeamsPage } from "@views/pages/Teams";
@@ -58,7 +58,11 @@ siteRoute.get("/", (c) =>
     // had not heard of Zipr nothing about whether to click.
     title: "Your computer tricks, in one click",
     description: HOME_DESCRIPTION,
-    jsonLd: [websiteSchema(c.var.app), softwareSchema(c.var.app, HOME_DESCRIPTION)],
+    jsonLd: [
+      websiteSchema(c.var.app),
+      softwareSchema(c.var.app, HOME_DESCRIPTION),
+      faqSchema(HOME_FAQ),
+    ],
     type: "website",
   }),
 );

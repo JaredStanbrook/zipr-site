@@ -144,7 +144,7 @@ describe("rendered pages", () => {
   it("describes the site and the free app on the home page, and nothing invented", async () => {
     const data = jsonLd(await page("/"));
     const types = data.map((d) => d["@type"]);
-    expect(types).toEqual(["WebSite", "SoftwareApplication"]);
+    expect(types).toEqual(["WebSite", "SoftwareApplication", "FAQPage"]);
 
     const software = data[1];
     expect(software.offers.price).toBe("0");

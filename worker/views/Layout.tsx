@@ -139,6 +139,22 @@ export const Layout: FC<LayoutProps> = (props) => {
             } catch (error) {}
           })();
         </script>
+        <!-- Scroll motion is opt-in per visitor. This marks the page before first
+             paint so entrance states do not flash, and only when motion is
+             allowed; without the class (no JavaScript, reduced motion) every
+             element simply renders in its finished state. The timer is a safety
+             net: if the bundle never starts, nothing stays hidden. -->
+        <script>
+          (function () {
+            var root = document.documentElement;
+            if (!window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+              root.classList.add("motion");
+              setTimeout(function () {
+                if (!root.classList.contains("motion-live")) root.classList.add("motion-failsafe");
+              }, 4000);
+            }
+          })();
+        </script>
         <script
           type="module"
           src="${isProd ? "/static/client.js" : "/worker/components/main.ts"}"

@@ -4,7 +4,9 @@ import type { AppConfig } from "@server/config/app.config";
 import { HOW_IT_WORKS, TEAM_UNLOCKS, TRUST_POINTS } from "@server/content/features";
 import { ALL_STEPS_COUNT, STEP_GROUPS } from "@server/content/steps";
 import { ToolboxTiles } from "@views/components/Toolbox";
-import { GALLERY_ROLES } from "@server/content/gallery";
+import { ClayPebble, GalleryCarousel, ShortcutBuilder, ZapDemo } from "@views/components/Motion";
+import { PRICING_FAQ } from "@server/content/pricing";
+import { ZAP_FAQ } from "@views/pages/Zap";
 import { TIERS } from "@server/content/pricing";
 import { formatPrice } from "@views/lib/utils";
 import {
@@ -22,6 +24,7 @@ import {
   LogoBricks,
   Screenshot,
   ScreenshotSwap,
+  Disclosure,
 } from "@views/components/Ui";
 
 /**
@@ -54,30 +57,30 @@ import {
  */
 const HeroPanel: FC = () => (
   <div class="relative mx-auto w-full max-w-xl lg:max-w-none">
-    <span
-      class="float absolute -left-5 -top-6 z-10 hidden sm:block"
-      style="--r: -10deg; --d: -2s;"
-      aria-hidden="true"
-    >
-      <IconTile icon="key-round" tone="brand" size="lg" />
+    <span data-parallax="0.09" class="absolute -left-5 -top-6 z-10 hidden sm:block">
+      <span class="float block" style="--r: -10deg; --d: -2s;" aria-hidden="true">
+        <IconTile icon="key-round" tone="brand" size="lg" />
+      </span>
     </span>
-    <span
-      class="float absolute -right-4 top-1/3 z-10 hidden sm:block"
-      style="--r: 8deg; --d: -4s;"
-      aria-hidden="true"
-    >
-      <IconTile icon="share-2" size="lg" />
+    <span data-parallax="-0.07" class="absolute -right-4 top-1/3 z-10 hidden sm:block">
+      <span class="float block" style="--r: 8deg; --d: -4s;" aria-hidden="true">
+        <IconTile icon="share-2" size="lg" />
+      </span>
     </span>
-    <span
-      class="brick float absolute -bottom-3 left-[18%] z-10 h-6 w-6"
-      style="--r: 14deg; --d: -1s;"
-      aria-hidden="true"
-    ></span>
-    <span
-      class="brick float absolute -top-3 right-[22%] z-10 h-4 w-4"
-      style="--r: -20deg; --d: -5s;"
-      aria-hidden="true"
-    ></span>
+    <span data-parallax="0.14" class="absolute -bottom-3 left-[18%] z-10">
+      <span
+        class="brick float block h-6 w-6"
+        style="--r: 14deg; --d: -1s;"
+        aria-hidden="true"
+      ></span>
+    </span>
+    <span data-parallax="-0.12" class="absolute -top-3 right-[22%] z-10">
+      <span
+        class="brick float block h-4 w-4"
+        style="--r: -20deg; --d: -5s;"
+        aria-hidden="true"
+      ></span>
+    </span>
 
     <ScreenshotSwap ids={["overlay-list", "overlay-grid"]} class="relative" />
 
@@ -86,6 +89,19 @@ const HeroPanel: FC = () => (
     </p>
   </div>
 );
+
+const PROOF = [
+  { icon: "monitor", text: "Windows and macOS" },
+  { icon: "wifi-off", text: "Works offline" },
+  { icon: "shield", text: "Nothing runs on a server" },
+  { icon: "circle-check", text: "No account. No card. No expiry." },
+];
+
+/**
+ * The questions a first-time visitor asks next, answered with the site's own
+ * existing answers rather than a second wording that could drift from them.
+ */
+export const HOME_FAQ = [PRICING_FAQ[0], PRICING_FAQ[3], ZAP_FAQ[0], ZAP_FAQ[2], PRICING_FAQ[4]];
 
 const STEP_GROUP_COUNT = STEP_GROUPS.filter((group) => group.steps.length > 0).length;
 
@@ -134,6 +150,27 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
         </Container>
       </Section>
 
+      {/* ================= PROOF =================
+          There are no customer logos or testimonials on this site yet, and none
+          are invented to fill the gap. What a first-time visitor can verify is
+          shorter and truer: what it runs on, what it costs, where it runs. */}
+      <section class="pb-4" aria-label="Facts about Zipr">
+        <Container size="wide">
+          <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+            {PROOF.map((fact, i) => (
+              <li
+                data-reveal
+                style={`--i: ${i};`}
+                class="clay-raised flex items-center gap-3 rounded-full py-2.5 pl-2.5 pr-5"
+              >
+                <IconTile icon={fact.icon} tone="brand" />
+                <span class="text-sm font-semibold leading-snug text-balance">{fact.text}</span>
+              </li>
+            ))}
+          </ul>
+        </Container>
+      </section>
+
       {/* =================================================================
           ORIGIN STORY
 
@@ -168,8 +205,10 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
       </Section>
 
       {/* ================= HOW IT WORKS ================= */}
-      <Section id="how-it-works">
-        <Container>
+      <Section id="how-it-works" class="relative overflow-x-clip">
+        <ClayPebble speed={0.1} class="-left-6 top-24" size="h-28 w-28" />
+        <ClayPebble speed={-0.08} class="-right-4 top-[38rem]" size="h-20 w-20" delay="-3s" />
+        <Container class="relative z-10">
           <SectionHeading
             align="center"
             eyebrow="How it works"
@@ -189,8 +228,8 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
               aria-hidden="true"
             ></span>
             <ol class="relative grid gap-6 md:grid-cols-3">
-              {HOW_IT_WORKS.map((step) => (
-                <li class="relative">
+              {HOW_IT_WORKS.map((step, i) => (
+                <li class="relative" data-reveal style={`--i: ${i};`}>
                   <Card lift class="flex h-full flex-col p-7">
                     <div class="flex items-center justify-between">
                       {/* Readable colour rather than the embossed style: sighted
@@ -213,6 +252,10 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
                 </li>
               ))}
             </ol>
+          </div>
+
+          <div class="mx-auto mt-16 max-w-4xl">
+            <ShortcutBuilder />
           </div>
         </Container>
       </Section>
@@ -273,33 +316,7 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
             title="What could Zipr help you do at work?"
             lede="The Gallery shows what Zipr can help you do, with practical examples inspired by different roles, routines and everyday tasks."
           />
-          <div class="grid gap-5 md:grid-cols-3">
-            {GALLERY_ROLES.slice(0, 3).map((role) => {
-              const example = role.examples[0];
-              return (
-                <Card lift class="flex h-full flex-col p-7">
-                  <IconTile icon={role.icon} tone="brand" />
-                  <p class="mt-5 text-[0.7rem] font-bold uppercase tracking-[0.16em] text-primary">
-                    {role.role}
-                  </p>
-                  <h3 class="mt-1 text-2xl leading-snug text-balance">{example.name}</h3>
-                  <p class="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
-                    {example.does}
-                  </p>
-                  <ol class="clay-well mt-5 flex-1 space-y-2 rounded-[1.1rem] p-4">
-                    {example.recipe.map((step, n) => (
-                      <li class="flex gap-2.5 text-sm">
-                        <span class="font-mono text-xs leading-5 text-muted-foreground tabular">
-                          {n + 1}
-                        </span>
-                        <span>{step.sentence}</span>
-                      </li>
-                    ))}
-                  </ol>
-                </Card>
-              );
-            })}
-          </div>
+          <GalleryCarousel />
           <div class="mt-10 flex flex-wrap justify-center gap-3">
             <LinkButton href="/gallery" size="lg">
               Browse the Gallery
@@ -336,7 +353,7 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
               </LinkButton>
             </div>
             <div class="lg:col-span-7">
-              <Screenshot id="zap" />
+              <ZapDemo />
             </div>
           </div>
         </Container>
@@ -488,6 +505,19 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
                 See team pricing
               </LinkButton>
             </Card>
+          </div>
+        </Container>
+      </Section>
+
+      {/* ================= FAQ ================= */}
+      <Section id="faq" class="relative overflow-x-clip">
+        <ClayPebble speed={0.1} class="-right-6 top-16" size="h-24 w-24" delay="-2s" />
+        <Container size="prose" class="relative z-10">
+          <SectionHeading align="center" eyebrow="Questions" title="Asked and answered" />
+          <div>
+            {HOME_FAQ.map((item) => (
+              <Disclosure question={item.q}>{item.a}</Disclosure>
+            ))}
           </div>
         </Container>
       </Section>

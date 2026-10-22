@@ -350,26 +350,34 @@ export const CtaBand: FC<{
   <Section>
     <Container>
       <div class="clay-slab relative overflow-hidden rounded-[2.5rem] px-6 py-16 text-center sm:px-14 sm:py-20">
-        <span
-          class="brick float absolute left-[7%] top-[18%] hidden h-7 w-7 sm:block"
-          style="--r: -12deg; --d: -1s;"
-          aria-hidden="true"
-        ></span>
-        <span
-          class="brick float absolute bottom-[16%] left-[12%] hidden h-4 w-4 sm:block"
-          style="--r: 18deg; --d: -3s;"
-          aria-hidden="true"
-        ></span>
-        <span
-          class="brick float absolute right-[9%] top-[26%] hidden h-5 w-5 sm:block"
-          style="--r: 8deg; --d: -5s;"
-          aria-hidden="true"
-        ></span>
-        <span
-          class="brick float absolute bottom-[20%] right-[6%] hidden h-9 w-9 sm:block"
-          style="--r: -6deg; --d: -2s;"
-          aria-hidden="true"
-        ></span>
+        <span data-parallax="0.12" class="absolute left-[7%] top-[18%] hidden sm:block">
+          <span
+            class="brick float block h-7 w-7"
+            style="--r: -12deg; --d: -1s;"
+            aria-hidden="true"
+          ></span>
+        </span>
+        <span data-parallax="-0.1" class="absolute bottom-[16%] left-[12%] hidden sm:block">
+          <span
+            class="brick float block h-4 w-4"
+            style="--r: 18deg; --d: -3s;"
+            aria-hidden="true"
+          ></span>
+        </span>
+        <span data-parallax="0.16" class="absolute right-[9%] top-[26%] hidden sm:block">
+          <span
+            class="brick float block h-5 w-5"
+            style="--r: 8deg; --d: -5s;"
+            aria-hidden="true"
+          ></span>
+        </span>
+        <span data-parallax="-0.14" class="absolute bottom-[20%] right-[6%] hidden sm:block">
+          <span
+            class="brick float block h-9 w-9"
+            style="--r: -6deg; --d: -2s;"
+            aria-hidden="true"
+          ></span>
+        </span>
 
         <h2 class="relative mx-auto max-w-3xl text-4xl leading-[1.05] text-balance sm:text-5xl">
           {title}

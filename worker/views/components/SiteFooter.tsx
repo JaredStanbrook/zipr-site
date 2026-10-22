@@ -103,7 +103,7 @@ export const SiteFooter = ({ appName, tagline }: { appName: string; tagline: str
 
           <!-- On every page, because the privacy notice has to be reachable
                from wherever information is collected, not just from one. -->
-          <ul class="flex flex-wrap gap-x-5 gap-y-2">
+          <ul class="flex flex-wrap items-center gap-x-5 gap-y-2">
             <li>
               <a
                 href="/licence"
@@ -116,6 +116,15 @@ export const SiteFooter = ({ appName, tagline }: { appName: string; tagline: str
                 href="/privacy"
                 class="inline-block py-1.5 text-muted-foreground no-underline hover:text-primary"
                 >Privacy</a
+              >
+            </li>
+            <li>
+              <a
+                href="#top"
+                class="clay-chip clay-press inline-flex h-11 items-center gap-2 px-4 text-xs font-semibold no-underline"
+                aria-label="Back to top"
+                ><i data-lucide="chevron-down" class="h-4 w-4 rotate-180" aria-hidden="true"></i>
+                Top</a
               >
             </li>
             <li>

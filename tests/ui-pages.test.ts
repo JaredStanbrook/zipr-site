@@ -245,8 +245,9 @@ describe("UI pages load", () => {
   it("keeps Catalogue and Gallery apart, and avoids the retired words", async () => {
     const testApp = createTestApp(null);
     for (const path of ["/", "/features", "/gallery", "/teams", "/zap", "/pricing"]) {
-      // /gallery and /toolbox are left out of the bare "item" check on purpose: they
-      // show the Action Model's own step sentences, which say "item" where the model does.
+      // /, /gallery and /toolbox are left out of the bare "item" check on purpose: they show
+      // the Action Model's own step sentences (the home page in its Gallery carousel),
+      // which say "item" where the model does.
       const html = await (await get(testApp, path)).text();
       // Visible text only: attribute values and class names may use `item`.
       const text = html
@@ -254,11 +255,11 @@ describe("UI pages load", () => {
         .replace(/<[^>]+>/g, " ")
         // Step names and sentences are the Action Model's own text, copied exactly.
         .replace(
-          /Get Item from List|for each item in|keep items in|count the items in|\{items\}|item\(s\)/gi,
+          /Get Item from List|Choose an item from|for each item in|keep items in|count the items in|\{items\}|item\(s\)/gi,
           "",
         );
       const words = [/\bworkflows?\b/i, /\bmarketplace\b/i, /\bnodes?\b/i];
-      if (path !== "/gallery" && path !== "/toolbox") words.push(/\bitems?\b/i);
+      if (!["/", "/gallery", "/toolbox"].includes(path)) words.push(/\bitems?\b/i);
       for (const word of words) {
         expect(text, `${word} on ${path}`).not.toMatch(word);
       }

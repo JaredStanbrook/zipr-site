@@ -7,6 +7,7 @@ import "../index.css";
 import "htmx.org";
 
 import { renderIcons } from "./lib/icons";
+import { initCarousels, initMotion, initReplay } from "./lib/motion";
 
 import "./ui/AppToaster";
 import "./ui/ThemeProvider";
@@ -55,17 +56,26 @@ declare global {
 
 window.renderIcons = renderIcons;
 
+/** Scroll motion, carousels and demo replay for whatever is on the page now. */
+const startMotion = () => {
+  initCarousels();
+  initReplay();
+  initMotion();
+};
+
 // Render icons, and load any staff-page components, for markup HTMX just
 // swapped in.
 document.body.addEventListener("htmx:afterSwap", () => {
   renderIcons();
   loadIslands();
+  startMotion();
 });
 
 // And for the server-rendered page itself.
 document.addEventListener("DOMContentLoaded", () => {
   renderIcons();
   loadIslands();
+  startMotion();
 });
 
 /**

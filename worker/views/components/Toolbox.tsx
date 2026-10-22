@@ -18,10 +18,10 @@ export const ToolboxTiles: FC<{ columns?: "three" | "four" }> = ({ columns = "th
       columns === "four" ? "lg:grid-cols-4" : "lg:grid-cols-3"
     }`}
   >
-    {STEP_GROUPS.map((group) => {
+    {STEP_GROUPS.map((group, i) => {
       const total = group.steps.length;
       return (
-        <li>
+        <li data-reveal style={`--i: ${i % 3};`}>
           <a
             href={`/toolbox#${group.id}`}
             class="keycap flex h-full flex-col p-4 no-underline transition hover:-translate-y-0.5"
