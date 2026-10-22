@@ -41,11 +41,11 @@ let frame = 0;
 const progressOf = (el: HTMLElement) => {
   const rect = el.getBoundingClientRect();
   const vh = window.innerHeight;
-  // Starts when the top is 85% down the screen and finishes once three
-  // quarters of the element's own height (plus a little) has scrolled in, so a
-  // tall block still completes while its end is on screen.
-  const distance = rect.height * 0.75 + vh * 0.1;
-  return clamp01((vh * 0.85 - rect.top) / distance);
+  // Starts only once the top has climbed to 70% of the way down the screen, so
+  // nothing begins while it is still a sliver at the bottom edge, and finishes
+  // once most of the element's own height has scrolled in.
+  const distance = rect.height * 0.7 + vh * 0.1;
+  return clamp01((vh * 0.7 - rect.top) / distance);
 };
 
 const update = () => {
@@ -91,18 +91,22 @@ export function initMotion(root: ParentNode = document) {
         window.setTimeout(() => el.setAttribute("data-reveal", "done"), 1400);
       }
     },
-    { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
+    { rootMargin: "0px 0px -16% 0px", threshold: 0.2 },
   );
 
+  // Plays once it is mostly in view. A block too tall to ever be 65% visible (a
+  // phone held sideways) still plays once it is well up the screen.
   playObserver ??= new IntersectionObserver(
     (entries) => {
       for (const entry of entries) {
-        if (!entry.isIntersecting) continue;
+        const high = entry.boundingClientRect.top < window.innerHeight * 0.45;
+        if (!(entry.intersectionRatio >= 0.65 || (entry.intersectionRatio >= 0.3 && high)))
+          continue;
         playObserver?.unobserve(entry.target);
         entry.target.classList.add("is-playing");
       }
     },
-    { threshold: 0.45 },
+    { rootMargin: "0px 0px -8% 0px", threshold: [0.3, 0.65] },
   );
 
   // Only blocks near the viewport are kept in the per-frame set.
