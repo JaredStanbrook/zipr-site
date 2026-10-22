@@ -1275,3 +1275,130 @@
     transform: none;
   }
 }
+
+/* ==========================================================================
+   Image lightbox
+   ========================================================================== */
+@layer components {
+  /* The trigger wraps a picture; it must not add a frame of its own. */
+  .zoom-trigger {
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  @media (hover: hover) {
+    .zoom-trigger:hover {
+      transform: translateY(-3px);
+    }
+  }
+  /* A small clay chip in the corner says "this opens". Always visible, so a
+     phone sees it too; it is a hint, not the control. */
+  .zoom-badge {
+    position: absolute;
+    right: 0.75rem;
+    bottom: 0.75rem;
+    display: inline-flex;
+    height: 2rem;
+    width: 2rem;
+    align-items: center;
+    justify-content: center;
+    border-radius: 9999px;
+    background-color: var(--card);
+    color: var(--muted-foreground);
+    box-shadow: var(--shadow-raised);
+    transition:
+      transform 160ms cubic-bezier(0.3, 1.5, 0.5, 1),
+      color 160ms ease-out;
+  }
+  .zoom-trigger:hover .zoom-badge,
+  .zoom-trigger:focus-visible .zoom-badge {
+    color: var(--primary);
+    transform: scale(1.12);
+  }
+
+  html.lightbox-open {
+    overflow: hidden;
+  }
+
+  dialog.lightbox {
+    width: 100%;
+    max-width: 100vw;
+    height: 100%;
+    max-height: 100dvh;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background: transparent;
+    color: var(--foreground);
+    overflow: hidden;
+  }
+  dialog.lightbox[open] {
+    display: grid;
+    place-items: center;
+    animation: lightbox-in 240ms cubic-bezier(0.2, 0.9, 0.25, 1.05) both;
+  }
+  dialog.lightbox::backdrop {
+    /* A fixed warm dark, not a token: in dark mode the foreground is light. */
+    background: #191713b8;
+  }
+
+  .lightbox-frame {
+    position: relative;
+    display: block;
+    max-width: min(96vw, 1600px);
+    max-height: 94dvh;
+    padding: 0.75rem;
+    border-radius: 2rem;
+    background-color: var(--popover);
+    box-shadow: var(--shadow-floating);
+  }
+  .lightbox-img {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: calc(94dvh - 1.5rem);
+    object-fit: contain;
+    border-radius: 1.4rem;
+  }
+  .lightbox-close {
+    position: absolute;
+    top: -0.9rem;
+    right: -0.9rem;
+    z-index: 1;
+    color: var(--foreground);
+  }
+  /* On a phone a wide screenshot is too small to read at screen width, so the
+     picture is allowed to be larger than the screen and the frame scrolls
+     around it. The close control stays put. */
+  @media (max-width: 640px) {
+    .lightbox-frame {
+      overflow: auto;
+      max-width: 96vw;
+      -webkit-overflow-scrolling: touch;
+    }
+    .lightbox-img {
+      max-width: none;
+      max-height: none;
+      width: max(100%, 170vw);
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 0.75rem;
+      right: 0.75rem;
+    }
+  }
+}
+
+@keyframes lightbox-in {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}

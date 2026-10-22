@@ -188,6 +188,24 @@ export const Layout: FC<LayoutProps> = (props) => {
         </main>
         <div id="modal-container"></div>
 
+        <!-- The one viewer every picture opens in. Native <dialog>: the browser
+             traps focus, closes on Escape and hands focus back to whatever
+             opened it. lib/lightbox.ts fills it in. -->
+        <dialog id="lightbox" class="lightbox" aria-labelledby="lightbox-caption">
+          <div class="lightbox-frame">
+            <button
+              type="button"
+              data-lightbox-close
+              class="lightbox-close clay-chip clay-press inline-flex h-11 w-11 items-center justify-center"
+              aria-label="Close enlarged image"
+            >
+              <i data-lucide="x" class="h-5 w-5" aria-hidden="true"></i>
+            </button>
+            <img class="lightbox-img" alt="" />
+            <p id="lightbox-caption" class="sr-only"></p>
+          </div>
+        </dialog>
+
         <app-toaster></app-toaster>
 
         ${SiteFooter({ appName: props.app.name, tagline: props.app.tagline })}

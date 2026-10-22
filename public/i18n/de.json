@@ -1159,6 +1159,7 @@
   "f8e06469": "Wir haben die Installer noch nicht signiert, daher warnen Windows und macOS beim ersten Mal beide. Jeder Download nennt eine Prüfsumme, damit Sie bestätigen können, dass Sie das bekommen haben, was wir veröffentlicht haben.",
   "f91b7e04": "Dafür gibt es noch keinen Build.",
   "f94fe1d7": "Skript „create-project-workspace.sh“ ausführen",
+  "f97507ca": "Vergrößertes Bild schließen",
   "f97cdde4": "Bauen Sie Ihr erstes Element.",
   "f9c34f24": "Den Link https://projects.example.com öffnen",
   "fa11153b": "Ihr Schlüssel wird im Schlüsselbund Ihres Betriebssystems gespeichert. Unter Linux, wo Zipr dafür keinen Systemschlüsselbund nutzt, arbeitet Zap über einen Teamserver statt über einen persönlichen API-Schlüssel.",

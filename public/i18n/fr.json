@@ -1159,6 +1159,7 @@
   "f8e06469": "Nous n'avons pas encore signé les programmes d'installation, donc Windows et macOS vous avertiront tous deux la première fois. Chaque téléchargement indique une somme de contrôle pour que vous puissiez confirmer avoir obtenu ce que nous avons publié.",
   "f91b7e04": "Pas encore de version disponible pour celui-ci.",
   "f94fe1d7": "Exécuter le script « create-project-workspace.sh »",
+  "f97507ca": "Fermer l'image agrandie",
   "f97cdde4": "Créez votre premier élément.",
   "f9c34f24": "Ouvrir le lien https://projects.example.com",
   "fa11153b": "Votre clé est stockée dans le trousseau de votre système d'exploitation. Sous Linux, où Zipr n'utilise pas de trousseau système pour cela, Zap fonctionne via un serveur d'équipe plutôt qu'une clé d'API personnelle.",

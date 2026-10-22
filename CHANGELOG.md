@@ -11,6 +11,11 @@ runs underneath. Changes to the site itself go above them.
 
 ### The site
 
+- **Click any screenshot to enlarge it.** Every product screenshot opens in a
+  focused viewer (one native dialog per page): keyboard-operable, Escape or a
+  click outside closes it, focus returns to the picture, and it shows the
+  current light or dark version. On a phone the picture opens larger than the
+  screen and scrolls, so its text can be read.
 - **Scroll motion across the marketing pages.** Cards, tiles and toolbox groups
   fade, rise and settle as they arrive; background pebbles, the hero's floating
   pieces and the closing slab's bricks drift at their own speeds. Three new

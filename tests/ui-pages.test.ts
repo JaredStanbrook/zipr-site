@@ -297,6 +297,23 @@ describe("UI pages load", () => {
     expect(html).not.toMatch(/\{(to|subject|number|link|url|file|folder)\}/);
   });
 
+  it("opens every screenshot in the lightbox", async () => {
+    const testApp = createTestApp(null);
+    for (const path of ["/", "/features", "/zap", "/toolbox", "/teams"]) {
+      const html = await (await get(testApp, path)).text();
+      // One viewer per page, however many pictures there are.
+      expect(html.match(/<dialog id="lightbox"/g)?.length ?? 0, `dialog on ${path}`).toBe(1);
+
+      // Every screenshot is inside a trigger button: strip the triggers' contents
+      // and no screenshot may remain outside one.
+      const outside = html.replace(/<button[^>]*data-lightbox[\s\S]*?<\/button>/g, "");
+      expect(outside, `unwrapped screenshot on ${path}`).not.toMatch(/class="shot-(light|dark)/);
+    }
+
+    const features = await (await get(testApp, "/features")).text();
+    expect(features).toMatch(/<button[^>]*data-lightbox[^>]*aria-haspopup="dialog"/);
+  });
+
   it("explains Zap where it is first named", async () => {
     const zap = await (await get(createTestApp(null), "/zap")).text();
     expect(zap).toContain("Zap, the helper that builds shortcuts from your words");

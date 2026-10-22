@@ -1159,6 +1159,7 @@
   "f8e06469": "Ainda não assinamos os instaladores, então o Windows e o macOS vão avisar você na primeira vez. Cada download traz uma soma de verificação para você confirmar que obteve o que publicamos.",
   "f91b7e04": "Ainda não há uma versão disponível para este.",
   "f94fe1d7": "Executar o script \"create-project-workspace.sh\"",
+  "f97507ca": "Fechar imagem ampliada",
   "f97cdde4": "Crie seu primeiro item.",
   "f9c34f24": "Abrir o link https://projects.example.com",
   "fa11153b": "Sua chave fica armazenada no chaveiro do seu sistema operacional. No Linux, onde o Zipr não usa um chaveiro do sistema para isso, o Zap funciona por meio de um servidor de equipe em vez de uma chave de API pessoal.",

@@ -444,11 +444,13 @@ export const Disclosure: FC<{ question: string; children?: Child }> = ({ questio
  * largest paint; it costs the hidden variant too, which is the price of not
  * knowing the theme on the server.
  */
-export const Screenshot: FC<{ id: ScreenshotId; eager?: boolean; class?: string }> = ({
-  id,
-  eager = false,
-  class: className = "",
-}) => {
+export const Screenshot: FC<{
+  id: ScreenshotId;
+  eager?: boolean;
+  class?: string;
+  /** Wrap in the lightbox trigger. Off only where a parent already is one. */
+  zoom?: boolean;
+}> = ({ id, eager = false, class: className = "", zoom = true }) => {
   const shot = SCREENSHOTS[id];
   const image = (theme: "light" | "dark") => (
     <img
@@ -461,13 +463,35 @@ export const Screenshot: FC<{ id: ScreenshotId; eager?: boolean; class?: string 
       decoding="async"
     />
   );
-  return (
+  const pictures = (
     <span class={`shot block ${className}`}>
       {image("light")}
       {image("dark")}
     </span>
   );
+  return zoom ? <ZoomTrigger>{pictures}</ZoomTrigger> : pictures;
 };
+
+/**
+ * Makes a picture open in the lightbox (`lib/lightbox.ts`, one `<dialog>` in
+ * the layout). It is a real button, so it is reachable and operable from the
+ * keyboard; its name comes from the picture's own alt text, and
+ * `aria-haspopup="dialog"` says what it does. Without JavaScript it is simply
+ * a picture.
+ */
+export const ZoomTrigger: FC<{ children?: Child }> = ({ children }) => (
+  <button
+    type="button"
+    data-lightbox
+    aria-haspopup="dialog"
+    class="zoom-trigger group relative block w-full cursor-zoom-in rounded-[var(--radius-lg)] text-left"
+  >
+    {children}
+    <span class="zoom-badge" aria-hidden="true">
+      <i data-lucide="maximize-2" class="h-4 w-4"></i>
+    </span>
+  </button>
+);
 
 /**
  * Two screenshots taking turns in one place, crossfading.
@@ -481,11 +505,13 @@ export const ScreenshotSwap: FC<{ ids: [ScreenshotId, ScreenshotId]; class?: str
   ids,
   class: className = "",
 }) => (
-  <div class={`shot-swap ${className}`} style={`--n: ${ids.length};`}>
-    {ids.map((id, i) => (
-      <div class="shot-slide" style={`--i: ${i};`}>
-        <Screenshot id={id} eager={i === 0} />
-      </div>
-    ))}
-  </div>
+  <ZoomTrigger>
+    <div class={`shot-swap ${className}`} style={`--n: ${ids.length};`}>
+      {ids.map((id, i) => (
+        <div class="shot-slide" style={`--i: ${i};`}>
+          <Screenshot id={id} eager={i === 0} zoom={false} />
+        </div>
+      ))}
+    </div>
+  </ZoomTrigger>
 );

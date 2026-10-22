@@ -1159,6 +1159,7 @@
   "f8e06469": "Non abbiamo ancora firmato i programmi di installazione, quindi Windows e macOS ti avviseranno entrambi la prima volta. Ogni download riporta un checksum così puoi confermare di aver ottenuto ciò che abbiamo pubblicato.",
   "f91b7e04": "Non c'è ancora una build per questo.",
   "f94fe1d7": "Esegui lo script \"create-project-workspace.sh\"",
+  "f97507ca": "Chiudi l'immagine ingrandita",
   "f97cdde4": "Costruisci il tuo primo elemento.",
   "f9c34f24": "Apri il link https://projects.example.com",
   "fa11153b": "La tua chiave è memorizzata nel portachiavi del sistema operativo. Su Linux, dove Zipr non usa un portachiavi di sistema per questo, Zap funziona tramite un server di team invece che con una chiave API personale.",
