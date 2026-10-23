@@ -1339,10 +1339,9 @@
     object-fit: contain;
     border-radius: 1.4rem;
   }
-  /* Pinned to the corner of the screen, not of the picture, and solid dark
-     whatever the theme: the screenshots are pale and transparent, and a pale
-     button over one disappears. It is the same warm dark as the backdrop, with
-     a light ring so it also reads against the dim area around the picture. */
+  /* A plain cross in the top right of the screen, not of the picture, and
+     solid dark whatever the theme: the screenshots are pale and transparent,
+     and a pale button over one disappears. */
   .lightbox-close {
     position: fixed;
     top: max(0.75rem, env(safe-area-inset-top));
@@ -1350,16 +1349,14 @@
     z-index: 2;
     display: inline-flex;
     align-items: center;
-    gap: 0.5rem;
+    justify-content: center;
+    width: 2.75rem;
     height: 2.75rem;
-    padding: 0 1rem 0 0.85rem;
+    padding: 0;
     border: 1.5px solid #ffffffd9;
     border-radius: 9999px;
     background: #191713;
     color: #fff;
-    font-size: 0.9rem;
-    font-weight: 600;
-    line-height: 1;
     cursor: pointer;
     box-shadow:
       0 2px 6px #0000005c,

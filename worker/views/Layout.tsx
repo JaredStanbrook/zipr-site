@@ -200,7 +200,6 @@ export const Layout: FC<LayoutProps> = (props) => {
               aria-label="Close enlarged image"
             >
               <i data-lucide="x" class="h-5 w-5" aria-hidden="true"></i>
-              <span>Close</span>
             </button>
             <img class="lightbox-img" alt="" />
             <p id="lightbox-caption" class="sr-only"></p>
