@@ -74,16 +74,16 @@ const TOUR: { shot: ScreenshotId; eyebrow: string; title: string; body: string }
     body: "Press your shortcut from anywhere, type, and press Return.",
   },
   {
-    shot: "item-detail",
+    shot: "editor-steps",
     eyebrow: "Every shortcut",
     title: "Read it before you run it",
     body: "See every step a shortcut takes before you run it.",
   },
   {
-    shot: "item-edit",
+    shot: "editor-branches",
     eyebrow: "The editor",
-    title: "Change it in one place",
-    body: "Reorder steps, switch one off, or make the shortcut ask first.",
+    title: "Let it take a different path",
+    body: "Add an If or a menu, and the shortcut takes one path or another.",
   },
 ];
 
@@ -110,7 +110,7 @@ export const FeaturesPage: FC = () => (
           title="Build it once. Use it whenever you need it."
           lede="What Zipr does on its own for free, and what it adds when your team shares a server."
         />
-        <Screenshot id="app-browse" eager class="mx-auto mt-4 max-w-5xl" />
+        <Screenshot id="app-shortcuts" eager class="mx-auto mt-4 max-w-5xl" />
       </Container>
     </Section>
 

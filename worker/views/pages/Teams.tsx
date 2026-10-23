@@ -132,7 +132,7 @@ export const TeamsPage: FC = () => (
             </ul>
           </div>
           <div class="lg:col-span-7">
-            <Screenshot id="app-browse" />
+            <Screenshot id="app-shortcuts" />
           </div>
         </div>
       </Container>

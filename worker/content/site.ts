@@ -117,33 +117,33 @@ export const SCREENSHOT_BASE = "/screenshots";
 export const SCREENSHOTS = {
   "overlay-list": {
     width: 1232,
-    height: 1136,
-    alt: "The Zipr launcher: a search box above a list of shortcuts — Start my workday, Join my next meeting, Present my screen, Fill in my timesheet and more — each with its own icon and colour.",
+    height: 1304,
+    alt: "The Zipr launcher: a search box above a list of shortcuts — Start my workday pinned at the top, then Join my next meeting, Focus for an hour, Present my screen, Fill in my timesheet and more — each with its own icon and colour.",
   },
   "overlay-grid": {
     width: 1232,
     height: 1060,
     alt: "The Zipr launcher in its grid layout: a search box above tiles for Start my workday, Join my next meeting, Present my screen, Fill in my timesheet, Book a meeting room and Focus for an hour, each with an icon and a one-line description.",
   },
-  "item-detail": {
-    width: 2192,
-    height: 1280,
-    alt: "A Zipr shortcut, Deploy to production, tagged production and needs approval, with three steps: ask for a yes or no, run a command, and open a web address.",
+  "editor-steps": {
+    width: 2592,
+    height: 2014,
+    alt: "The Zipr shortcut editor open on Start my workday, which starts on its own at 08:45 on weekdays. Three steps run in order — open my email, open my calendar, open the stand-up notes — and the last is selected, with its web address and what to do if it fails beside it. Below, the shortcut's recent runs.",
   },
-  "item-edit": {
-    width: 2192,
-    height: 1720,
-    alt: "Editing the Deploy to production shortcut: its name, category, description, colour, icon and tags, then its three steps in order, each with its own on switch, above Cancel, Save draft and Save and send.",
+  "editor-branches": {
+    width: 2992,
+    height: 2014,
+    alt: "The Zipr shortcut editor open on Check the VPN. After a check, an If step sends the shortcut down two paths: when the VPN is connected it opens the intranet, otherwise it asks what to do — connect, open the help page or leave it. The If's condition is set out beside it.",
   },
-  "app-browse": {
-    width: 3232,
-    height: 1728,
-    alt: "The Zipr app's Browse screen: a sidebar of sections, the Everyday collection's shortcuts in a list, and an inspector beside it showing Start my workday's three steps with Launch, Open and Edit.",
+  "app-shortcuts": {
+    width: 2752,
+    height: 1808,
+    alt: "The Zipr app's Shortcuts screen: a sidebar of sections, and the list of your shortcuts — Start my workday, Join my next meeting, Present my screen, Fill in my timesheet and more — each with its number of steps and when it last changed, above the shortcuts shared with you by your team.",
   },
   zap: {
     width: 2392,
-    height: 2454,
-    alt: "Zap building an item called Morning focus. On the left, the conversation: a request in plain words, Zap's reply and the changes it made, a follow-up asking for do not disturb, and a test where every step succeeded and the command shows as started. On the right, the six steps it built, a note that one runs a program, the assumption Zap made, and Test and Save item.",
+    height: 2414,
+    alt: "Zap building a shortcut called Morning focus. On the left, the conversation: a request in plain words, Zap's reply and the changes it made, a follow-up asking for do not disturb, and a test where every step succeeded and the program shows as started. On the right, the six steps it built, a note that one runs a program, the assumption Zap made, and Test and Save as shortcut.",
   },
 } as const;
 

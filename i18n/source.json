@@ -78,7 +78,7 @@
   ["76021e89", "Work with URLs, run scripts and access advanced integrations."],
   ["a04f694c", "From your plugins"],
   ["769e7a36", "Extend your shortcuts with steps from installed plugins."],
-  ["81beeeea", "One shortcut, three steps: ask first, run a command, open a page."],
+  ["32aaad54", "One shortcut, three steps, and it starts by itself every weekday at 8:45."],
   ["70efa43a", "The Gallery"],
   ["453ebc7f", "What could Zipr help you do at work?"],
   [
@@ -391,8 +391,8 @@
   ["b79c01dc", "Open menu"],
   ["58ee52ce", "Close menu"],
   [
-    "e1b10698",
-    "The Zipr launcher: a search box above a list of shortcuts — Start my workday, Join my next meeting, Present my screen, Fill in my timesheet and more — each with its own icon and colour."
+    "f297dd50",
+    "The Zipr launcher: a search box above a list of shortcuts — Start my workday pinned at the top, then Join my next meeting, Focus for an hour, Present my screen, Fill in my timesheet and more — each with its own icon and colour."
   ],
   [
     "8f74b12e",
@@ -400,8 +400,8 @@
   ],
   ["14b2daf0", "Facts about Zipr"],
   [
-    "ec078e26",
-    "A Zipr shortcut, Deploy to production, tagged production and needs approval, with three steps: ask for a yes or no, run a command, and open a web address."
+    "a7a67031",
+    "The Zipr shortcut editor open on Start my workday, which starts on its own at 08:45 on weekdays. Three steps run in order — open my email, open my calendar, open the stand-up notes — and the last is selected, with its web address and what to do if it fails beside it. Below, the shortcut's recent runs."
   ],
   ["3e77ce7e", "Roles"],
   ["d82f0974", "Gallery examples"],
@@ -425,8 +425,8 @@
   ["233feab8", "Read it before you run it"],
   ["c9add382", "See every step a shortcut takes before you run it."],
   ["1d9fb88d", "The editor"],
-  ["d6f33e2a", "Change it in one place"],
-  ["63c86f01", "Reorder steps, switch one off, or make the shortcut ask first."],
+  ["26982c4f", "Let it take a different path"],
+  ["f945246a", "Add an If or a menu, and the shortcut takes one path or another."],
   ["fe2079dc", "Zap"],
   ["37cebd4f", "Or bring the idea, and ask Zap to build it."],
   [
@@ -534,16 +534,16 @@
   ["858e74fb", "When the built-in steps run out, a plugin adds a new one."],
   ["63826e56", "Free, no account, no card. Come back the day somebody else asks how you did it."],
   [
-    "c0ddb596",
-    "The Zipr app's Browse screen: a sidebar of sections, the Everyday collection's shortcuts in a list, and an inspector beside it showing Start my workday's three steps with Launch, Open and Edit."
+    "f9312108",
+    "The Zipr app's Shortcuts screen: a sidebar of sections, and the list of your shortcuts — Start my workday, Join my next meeting, Present my screen, Fill in my timesheet and more — each with its number of steps and when it last changed, above the shortcuts shared with you by your team."
   ],
   [
-    "0114d8e8",
-    "Editing the Deploy to production shortcut: its name, category, description, colour, icon and tags, then its three steps in order, each with its own on switch, above Cancel, Save draft and Save and send."
+    "25ce8ddc",
+    "The Zipr shortcut editor open on Check the VPN. After a check, an If step sends the shortcut down two paths: when the VPN is connected it opens the intranet, otherwise it asks what to do — connect, open the help page or leave it. The If's condition is set out beside it."
   ],
   [
-    "b6d8ed96",
-    "Zap building an item called Morning focus. On the left, the conversation: a request in plain words, Zap's reply and the changes it made, a follow-up asking for do not disturb, and a test where every step succeeded and the command shows as started. On the right, the six steps it built, a note that one runs a program, the assumption Zap made, and Test and Save item."
+    "c917fcc5",
+    "Zap building a shortcut called Morning focus. On the left, the conversation: a request in plain words, Zap's reply and the changes it made, a follow-up asking for do not disturb, and a test where every step succeeded and the program shows as started. On the right, the six steps it built, a note that one runs a program, the assumption Zap made, and Test and Save as shortcut."
   ],
   ["1f35f17d", "Features: shortcuts, steps, sharing and history · Zipr"],
   ["9670e201", "Meet Zap"],

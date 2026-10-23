@@ -293,9 +293,9 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
           </div>
 
           <figure class="mt-12 lg:mt-16">
-            <Screenshot id="item-detail" class="mx-auto max-w-4xl" />
+            <Screenshot id="editor-steps" class="mx-auto max-w-4xl" />
             <figcaption class="mt-4 text-center text-sm text-muted-foreground text-pretty">
-              One shortcut, three steps: ask first, run a command, open a page.
+              One shortcut, three steps, and it starts by itself every weekday at 8:45.
             </figcaption>
           </figure>
         </Container>
