@@ -196,10 +196,11 @@ export const Layout: FC<LayoutProps> = (props) => {
             <button
               type="button"
               data-lightbox-close
-              class="lightbox-close clay-chip clay-press inline-flex h-11 w-11 items-center justify-center"
+              class="lightbox-close"
               aria-label="Close enlarged image"
             >
               <i data-lucide="x" class="h-5 w-5" aria-hidden="true"></i>
+              <span>Close</span>
             </button>
             <img class="lightbox-img" alt="" />
             <p id="lightbox-caption" class="sr-only"></p>

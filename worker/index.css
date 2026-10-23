@@ -1339,16 +1339,48 @@
     object-fit: contain;
     border-radius: 1.4rem;
   }
+  /* Pinned to the corner of the screen, not of the picture, and solid dark
+     whatever the theme: the screenshots are pale and transparent, and a pale
+     button over one disappears. It is the same warm dark as the backdrop, with
+     a light ring so it also reads against the dim area around the picture. */
   .lightbox-close {
-    position: absolute;
-    top: -0.9rem;
-    right: -0.9rem;
-    z-index: 1;
-    color: var(--foreground);
+    position: fixed;
+    top: max(0.75rem, env(safe-area-inset-top));
+    right: max(0.75rem, env(safe-area-inset-right));
+    z-index: 2;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    height: 2.75rem;
+    padding: 0 1rem 0 0.85rem;
+    border: 1.5px solid #ffffffd9;
+    border-radius: 9999px;
+    background: #191713;
+    color: #fff;
+    font-size: 0.9rem;
+    font-weight: 600;
+    line-height: 1;
+    cursor: pointer;
+    box-shadow:
+      0 2px 6px #0000005c,
+      0 10px 28px #00000066;
+    transition:
+      background-color 150ms ease,
+      transform 150ms ease;
+  }
+  .lightbox-close:hover {
+    background: #36312a;
+  }
+  .lightbox-close:active {
+    transform: scale(0.97);
+  }
+  .lightbox-close:focus-visible {
+    outline: 3px solid #fff;
+    outline-offset: 3px;
   }
   /* On a phone a wide screenshot is too small to read at screen width, so the
      picture is allowed to be larger than the screen and the frame scrolls
-     around it. The close control stays put. */
+     around it. The close control stays put in the corner of the screen. */
   @media (max-width: 640px) {
     .lightbox-frame {
       overflow: auto;
@@ -1359,11 +1391,6 @@
       max-width: none;
       max-height: none;
       width: max(100%, 170vw);
-    }
-    .lightbox-close {
-      position: fixed;
-      top: 0.75rem;
-      right: 0.75rem;
     }
   }
 }
