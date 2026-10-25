@@ -128,7 +128,7 @@ export const SCREENSHOTS = {
   "editor-steps": {
     width: 2592,
     height: 2014,
-    alt: "The Zipr shortcut editor open on Start my workday, which starts on its own at 08:45 on weekdays. Three steps run in order — open my email, open my calendar, open the stand-up notes — and the last is selected, with its web address and what to do if it fails beside it. Below, the shortcut's recent runs.",
+    alt: "The Zipr shortcut editor open on Start my workday, a personal shortcut that starts on its own at 08:45 on weekdays. Three steps run in order — open my email, open my calendar, open the stand-up notes — and the last is selected, with its web address and what to do if it fails beside it. Below, the shortcut's recent runs.",
   },
   "editor-branches": {
     width: 2992,
@@ -138,7 +138,7 @@ export const SCREENSHOTS = {
   "app-shortcuts": {
     width: 2752,
     height: 1808,
-    alt: "The Zipr app's Shortcuts screen: a sidebar of sections, and the list of your shortcuts — Start my workday, Join my next meeting, Present my screen, Fill in my timesheet and more — each with its number of steps and when it last changed, above the shortcuts shared with you by your team.",
+    alt: "The Zipr app's Library: a sidebar with Library, Teams and Personal, a search box with a filter, and your personal shortcuts — Book a meeting room, Check the VPN, Fill in my timesheet, Start my workday and more — each with its number of steps and when it last changed, above the shortcuts of your team, Acme IT, in its Helpdesk group.",
   },
   zap: {
     width: 2392,

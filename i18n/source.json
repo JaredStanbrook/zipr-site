@@ -55,8 +55,8 @@
   ["06f2e547", "Team server"],
   ["7dcce3a5", "Share it"],
   [
-    "277df588",
-    "When the team needs it, publish it to your team on a Zipr server hosted by us, or run by you."
+    "b454689b",
+    "When the team needs it, move it into your team on a Zipr server hosted by us, or run by you."
   ],
   ["22d9864b", "The toolbox"],
   ["4532bb80", "Here’s what <1>Zipr</1> can do"],
@@ -290,19 +290,16 @@
   ["a7f40e53", "Learn about Zap"],
   ["69502a3c", "Make something useful. Share it with <1>your team.</1>"],
   [
-    "75aa4d60",
-    "Keep personal catalogues in your local workspace. With a team plan, create shared workspaces and catalogues so your organisation can organise teams and control access."
+    "48340574",
+    "Keep personal shortcuts on your own computer. With a team plan, create teams that share their shortcuts, so your organisation can organise people and control access."
   ],
   ["7b53135b", "See how teams share"],
   ["caa9ca37", "See team pricing"],
   ["7bf2eed2", "Platform"],
   ["6be6f488", "Support"],
   ["2635ea3b", "Yours"],
-  [
-    "9254a317",
-    "A shared Catalogue, with a workspace per team and roles and visibility you control"
-  ],
-  ["021bff7c", "Publish a copy to another team — your own stays exactly as it was"],
+  ["b87f8acf", "Teams that own their shortcuts, with optional groups and roles you control"],
+  ["9e16c9b7", "Share a shortcut with the whole organisation, and your team still looks after it"],
   ["d7f7396b", "Everyone on the current version, updated as colleagues work"],
   ["5e74eae2", "Full history, one-click rollback and an audit trail"],
   ["0b5fd15f", "Single sign-on with Google, Microsoft Entra or Okta"],
@@ -324,8 +321,8 @@
   ["4ab95036", "Read the full security overview"],
   ["a3602e06", "Start free. Add your team when you’re ready."],
   [
-    "82b5d0a1",
-    "The free app is the full app for one person. A team plan adds shared workspaces and catalogues."
+    "6af38912",
+    "The free app is the full app for one person. A team plan adds teams that share their shortcuts."
   ],
   ["f1b4027e", "Zipr for you"],
   ["3799d2cf", "Everything one person can do on one computer. No account, no card, no expiry."],
@@ -334,8 +331,8 @@
   ["18743595", "From"],
   ["c67c565c", "/ person / month"],
   [
-    "2c2031c6",
-    "Shared workspaces and catalogues for your organisation. Hosted by us (billed yearly, minimum 5 people) or self-hosted on your own infrastructure."
+    "7f14e2f5",
+    "Teams and shared shortcuts for your organisation. Hosted by us (billed yearly, minimum 5 people) or self-hosted on your own infrastructure."
   ],
   ["1ce522a2", "Questions"],
   ["e32377a1", "Asked and answered"],
@@ -400,8 +397,8 @@
   ],
   ["14b2daf0", "Facts about Zipr"],
   [
-    "a7a67031",
-    "The Zipr shortcut editor open on Start my workday, which starts on its own at 08:45 on weekdays. Three steps run in order — open my email, open my calendar, open the stand-up notes — and the last is selected, with its web address and what to do if it fails beside it. Below, the shortcut's recent runs."
+    "b94227c2",
+    "The Zipr shortcut editor open on Start my workday, a personal shortcut that starts on its own at 08:45 on weekdays. Three steps run in order — open my email, open my calendar, open the stand-up notes — and the last is selected, with its web address and what to do if it fails beside it. Below, the shortcut's recent runs."
   ],
   ["3e77ce7e", "Roles"],
   ["d82f0974", "Gallery examples"],
@@ -458,8 +455,8 @@
   ["e7255ea6", "With a team server"],
   ["c8120656", "Share it instead of explaining it"],
   [
-    "ebbb94b6",
-    "Publish a shortcut to your team's Catalogue and everyone runs the same, current version. No zip file in a chat thread, no afternoon spent watching over a shoulder."
+    "a855ae32",
+    "Move a shortcut into your team and everyone runs the same, current version. No zip file in a chat thread, no afternoon spent watching over a shoulder."
   ],
   ["a8287ff2", "Edit together without losing work"],
   [
@@ -487,8 +484,8 @@
   ],
   ["951395b6", "With it"],
   [
-    "52b5d525",
-    "You publish a copy into their Catalogue and they run it. Yours stays where it was; theirs stays current."
+    "8bcf1853",
+    "You share it with the organisation and they run it. Your team still looks after it, so theirs stays current."
   ],
   ["636d57a7", "A new starter joins on Monday"],
   [
@@ -496,8 +493,8 @@
     "A wiki page, three chat threads, a zip of scripts, and the same questions for a fortnight."
   ],
   [
-    "663d20ec",
-    "They install Zipr, open the team's Catalogue, and every shortcut the team runs is there, in its current version."
+    "a1bcfc59",
+    "They install Zipr, open the Library, and every shortcut the team runs is there, in its current version."
   ],
   ["b93c5444", "Two of you improve the same thing"],
   ["e7ff58c6", "Last save wins, and somebody's work quietly disappears."],
@@ -534,8 +531,8 @@
   ["858e74fb", "When the built-in steps run out, a plugin adds a new one."],
   ["63826e56", "Free, no account, no card. Come back the day somebody else asks how you did it."],
   [
-    "f9312108",
-    "The Zipr app's Shortcuts screen: a sidebar of sections, and the list of your shortcuts — Start my workday, Join my next meeting, Present my screen, Fill in my timesheet and more — each with its number of steps and when it last changed, above the shortcuts shared with you by your team."
+    "e46ffb69",
+    "The Zipr app's Library: a sidebar with Library, Teams and Personal, a search box with a filter, and your personal shortcuts — Book a meeting room, Check the VPN, Fill in my timesheet, Start my workday and more — each with its number of steps and when it last changed, above the shortcuts of your team, Acme IT, in its Helpdesk group."
   ],
   [
     "25ce8ddc",
@@ -685,7 +682,7 @@
   ],
   ["30beec2b", "Not sent to the model"],
   ["446f56d0", "Passwords, API keys and other credentials"],
-  ["f5fa87f2", "Your other shortcuts, catalogues and workspaces"],
+  ["b13d5e94", "Your other shortcuts, groups and teams"],
   ["dcadb6e8", "Files, clipboard contents, environment variables and launch history"],
   ["28a88fa9", "The answers you enter into questions asked by a shortcut"],
   ["558b29f2", "Which account a sign-in step used"],
@@ -731,8 +728,8 @@
   ],
   ["2fe5f466", "What happens when I save a shortcut?"],
   [
-    "5a2f395a",
-    "It becomes an ordinary shortcut in your own workspace, without a link back to the Zap conversation. You can edit, run or share it like other shortcuts you've created."
+    "31fce70d",
+    "It becomes an ordinary personal shortcut, without a link back to the Zap conversation. You can edit, run or share it like other shortcuts you've created."
   ],
   ["e95618b7", "Which AI providers are supported?"],
   [
@@ -1007,8 +1004,8 @@
   ["e53f9deb", "Gallery: what could Zipr help you do at work? · Zipr"],
   ["0609c214", "Make something useful. <1>Share it</1> with someone."],
   [
-    "d105fc72",
-    "The Catalogue is your team's shared collection of shortcuts. Keep useful shortcuts organised so everyone can find and use them."
+    "92d592f2",
+    "Your team keeps its shortcuts together, in groups if it wants them, so everyone can find and run them."
   ],
   ["b2536d67", "How teams start"],
   ["34cf1fe0", "It starts with one person"],
@@ -1033,12 +1030,12 @@
     "694d0eca",
     "They hand it over. The next person gets the same shortcut, not a description of it."
   ],
-  ["7665eb46", "Sharing becomes part of how the group works, in a Catalogue everyone can find."],
-  ["dd9bdb0d", "The Catalogue"],
+  ["3cfdbd49", "Sharing becomes part of how the group works, in a Library everyone can search."],
+  ["bf64e91f", "The Library"],
   ["6da57269", "One place your team's shortcuts live."],
   [
-    "1458f646",
-    "A new starter opens the Catalogue and finds what the team runs, in its current version. Teams keep their own workspace and rules, and share work as a published copy that stays attributed and up to date."
+    "314aeca9",
+    "A new starter opens the Library and finds what the team runs, in its current version. Each team keeps its own shortcuts and rules, and can share one with the whole organisation, which always knows whose it is and runs it up to date."
   ],
   ["e4e2d450", "What you need"],
   ["d01849b4", "A Zipr server, hosted by us or run by you"],
@@ -1063,11 +1060,11 @@
   ],
   ["0ab46b4b", "Start with the one you keep having to explain."],
   ["e5eb165b", "Build it free, then bring your team when they ask how you did it."],
-  ["fc43df5b", "For teams: a shared Catalogue of shortcuts · Zipr"],
+  ["227ca8ff", "For teams: one Library for your team's shortcuts · Zipr"],
   ["61884917", "Free for you. <1>Paid</1> for your team."],
   [
-    "bdfafc64",
-    "The whole app is free for one person. A team server adds a shared Catalogue — and you choose who runs it."
+    "e70d5d3a",
+    "The whole app is free for one person. A team server adds teams that share their shortcuts — and you choose who runs it."
   ],
   ["ddabf70a", "The whole app, on your machine, for as long as you like."],
   ["55fabe63", "Unlimited shortcuts"],
@@ -1082,7 +1079,7 @@
   ["f066a719", "Billed yearly"],
   ["012cb00b", "month to month. Minimum <1/> people, so <2/> a year at the smallest."],
   ["f242622f", "Everything in Free, for everyone"],
-  ["e97a8bb8", "A shared Catalogue, updated live as colleagues work"],
+  ["74600071", "Team shortcuts, updated live as colleagues work"],
   ["8a4fad40", "Members, roles, and who-can-see-what"],
   ["04c1e0d5", "Edit at the same time without losing work"],
   ["938e3784", "Full history and one-click rollback"],
@@ -1144,18 +1141,19 @@
   ["c9f2711b", "One file"],
   ["26c49b96", "It's your database"],
   ["704ac475", "Working with other people"],
-  ["f14d873f", "Workspaces"],
-  ["c764dd86", "One, private"],
+  ["b9c8008d", "Teams"],
+  ["9faed5d9", "Personal only"],
   ["1d5584f4", "Members and roles"],
   ["34c9f84e", "Not included"],
-  ["2664f745", "Shared Catalogue"],
+  ["d38141aa", "Share with the whole organisation"],
+  ["c755f235", "One shortcut everyone can run, still looked after by its team."],
   ["77824000", "One AI key for the whole team"],
   [
     "e7028936",
     "An administrator sets it once and chooses who can use Zap. Nobody needs a key of their own."
   ],
-  ["29848cef", "Publish your shortcuts to the team"],
-  ["bc5185e5", "A copy, so your own version stays exactly where it was."],
+  ["c02245a6", "Move your shortcuts into a team"],
+  ["c4c58363", "It moves, so there is one version and everyone runs it."],
   ["9d3e4498", "Everyone's copy stays current"],
   ["65df718d", "Live updates"],
   ["e4c68c83", "Changes appear as colleagues make them."],
@@ -1171,9 +1169,9 @@
   ["18654f72", "Team usage figures"],
   ["573fa268", "What people actually run, so you know what matters."],
   ["34742914", "Audit trail"],
-  ["44a72569", "Per workspace"],
+  ["d5eb7bbd", "Per team"],
   ["6244b142", "Instance-wide"],
-  ["84f6c27f", "Central values your Catalogue reuses"],
+  ["eb611750", "Central values your shortcuts reuse"],
   ["b09dd920", "Paths and addresses set once, so nothing is hardcoded in a shortcut."],
   ["4d1192c5", "Lock settings centrally"],
   ["88296479", "Running it"],
@@ -1326,8 +1324,8 @@
   ],
   ["2cc0dbc3", "Sharing doesn't loosen access"],
   [
-    "3aa4f2a3",
-    "Work crosses teams only as a published copy, where your administrators allow it. Roles, membership and single sign-on stay yours — and people can't tell whether a Catalogue they can't see exists."
+    "72d26a40",
+    "A shortcut leaves its team only when someone the team allows shares it with the organisation or copies it to another team. Roles, membership and single sign-on stay yours — and people can't tell whether a team they can't see exists."
   ],
   ["505e806a", "Your data is never held hostage"],
   [
@@ -1342,8 +1340,8 @@
   ],
   ["19b6628a", "What does the app send over the network?"],
   [
-    "e9f8c3f0",
-    "Only your Catalogue content and the sign-in that authorises it, and only to the deployment it is pointed at. With no deployment configured, it makes no network requests at all."
+    "e7b5b27f",
+    "Only your teams' shortcuts and the sign-in that authorises them, and only to the deployment it is pointed at. With no deployment configured, it makes no network requests at all."
   ],
   ["b74094c3", "Can we run it somewhere with no internet access?"],
   [
@@ -1362,8 +1360,8 @@
   ],
   ["9bf39fc1", "Who can see what?"],
   [
-    "4f679e0a",
-    "Your administrators decide, per workspace. The system won't confirm that something exists just because someone guessed its address."
+    "d5fa13a4",
+    "Your administrators decide, per team. The system won't confirm that something exists just because someone guessed its address."
   ],
   ["d7173883", "How do we get security updates?"],
   [

@@ -52,6 +52,12 @@ export const PRIVACY_VERSIONS: LegalVersion[] = [
     summary:
       "Added the language button: your choice is remembered in your browser's local storage, and translation happens in your browser.",
   },
+  {
+    version: "1.2",
+    date: "2026-10-25",
+    summary:
+      "Says teams and shortcuts where it said catalogues and items, as the app now does. What is collected and why is unchanged.",
+  },
 ];
 
 /** "Zipr" or "Zipr (ABN 12 345 678 901)". */

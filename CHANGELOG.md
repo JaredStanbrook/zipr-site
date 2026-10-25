@@ -11,6 +11,14 @@ runs underneath. Changes to the site itself go above them.
 
 ### The site
 
+- **Copy says what the app now says.** Every page, the pricing comparison, the
+  privacy notice (1.2) and the licence (1.1) describe teams that own their
+  shortcuts, optional groups, a Library to find them, and sharing a shortcut
+  with the whole organisation. "Catalogue" is retired, and so are "publish a
+  copy", and "workspaces" and "items" in product copy. Moving a shortcut into
+  a team moves it rather than copying it. The three app screenshots that show
+  the Library and the editor are regenerated from the app, every translation
+  is updated, and `docs/site-copy.md` is re-exported.
 - **Click any screenshot to enlarge it.** Every product screenshot opens in a
   focused viewer (one native dialog per page): keyboard-operable, Escape or a
   click outside closes it, focus returns to the picture, and it shows the

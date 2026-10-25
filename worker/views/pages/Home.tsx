@@ -49,7 +49,7 @@ import {
 /**
  * The hero: the launcher itself, in its two layouts, taking turns.
  *
- * It used to be a drawn catalogue, because there was nothing to photograph.
+ * It used to be a drawing, because there was nothing to photograph.
  * Now there is, and a picture of the real thing answers "what is this?"
  * faster than a picture that says it is only an illustration. The loose clay
  * pieces stay: they are the site's own furniture, and they are what keeps a
@@ -362,7 +362,7 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
       {/* =================================================================
           FOR TEAMS
 
-          What a team adds: a shared Catalogue, and knowledge crossing a line
+          What a team adds: shortcuts a team owns, and knowledge crossing a line
           that normally costs a ticket and a meeting to cross — without
           anyone's roles or ownership changing. The security facts sit here
           too, because the reviewer who reads this section asks for them next.
@@ -378,9 +378,8 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
                 Make something useful. Share it with <em>your team.</em>
               </h2>
               <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
-                Keep personal catalogues in your local workspace. With a team plan, create shared
-                workspaces and catalogues so your organisation can organise teams and control
-                access.
+                Keep personal shortcuts on your own computer. With a team plan, create teams that
+                share their shortcuts, so your organisation can organise people and control access.
               </p>
               <div class="mt-7 flex flex-wrap gap-3">
                 <LinkButton href="/teams">
@@ -462,7 +461,7 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
             align="center"
             eyebrow="Download"
             title="Start free. Add your team when you’re ready."
-            lede="The free app is the full app for one person. A team plan adds shared workspaces and catalogues."
+            lede="The free app is the full app for one person. A team plan adds teams that share their shortcuts."
           />
 
           <div class="grid gap-6 md:grid-cols-2">
@@ -497,7 +496,7 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
                 </p>
               ) : null}
               <p class="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
-                Shared workspaces and catalogues for your organisation. Hosted by us (billed yearly,
+                Teams and shared shortcuts for your organisation. Hosted by us (billed yearly,
                 minimum {hosted?.minimumSeats ?? 5} people) or self-hosted on your own
                 infrastructure.
               </p>

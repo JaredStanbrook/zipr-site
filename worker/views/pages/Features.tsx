@@ -33,13 +33,13 @@ const SCENES = [
     icon: "share-2",
     when: "What you built would help another team",
     was: "You write it up, they misread step four, and you end up on the call anyway — or you never mention it at all.",
-    now: "You publish a copy into their Catalogue and they run it. Yours stays where it was; theirs stays current.",
+    now: "You share it with the organisation and they run it. Your team still looks after it, so theirs stays current.",
   },
   {
     icon: "users",
     when: "A new starter joins on Monday",
     was: "A wiki page, three chat threads, a zip of scripts, and the same questions for a fortnight.",
-    now: "They install Zipr, open the team's Catalogue, and every shortcut the team runs is there, in its current version.",
+    now: "They install Zipr, open the Library, and every shortcut the team runs is there, in its current version.",
   },
   {
     icon: "git-merge",

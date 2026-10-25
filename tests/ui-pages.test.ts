@@ -242,7 +242,7 @@ describe("UI pages load", () => {
     }
   });
 
-  it("keeps Catalogue and Gallery apart, and avoids the retired words", async () => {
+  it("keeps the Library and the Gallery apart, and avoids the retired words", async () => {
     const testApp = createTestApp(null);
     for (const path of ["/", "/features", "/gallery", "/teams", "/zap", "/pricing"]) {
       // /, /gallery and /toolbox are left out of the bare "item" check on purpose: they show
@@ -258,7 +258,7 @@ describe("UI pages load", () => {
           /Get Item from List|Choose an item from|for each item in|keep items in|count the items in|\{items\}|item\(s\)/gi,
           "",
         );
-      const words = [/\bworkflows?\b/i, /\bmarketplace\b/i, /\bnodes?\b/i];
+      const words = [/\bworkflows?\b/i, /\bmarketplace\b/i, /\bnodes?\b/i, /\bcatalogues?\b/i];
       if (!["/", "/gallery", "/toolbox"].includes(path)) words.push(/\bitems?\b/i);
       for (const word of words) {
         expect(text, `${word} on ${path}`).not.toMatch(word);
@@ -270,7 +270,7 @@ describe("UI pages load", () => {
     }
 
     const teams = await (await get(testApp, "/teams")).text();
-    expect(teams).toContain("The Catalogue is your team");
+    expect(teams).toContain("The Library");
     const gallery = await (await get(testApp, "/gallery")).text();
     expect(gallery).toContain("not files to download");
   });

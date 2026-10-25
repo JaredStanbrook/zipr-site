@@ -217,7 +217,7 @@ const SENT_TO_MODEL = [
 
 const NOT_SENT_TO_MODEL = [
   "Passwords, API keys and other credentials",
-  "Your other shortcuts, catalogues and workspaces",
+  "Your other shortcuts, groups and teams",
   "Files, clipboard contents, environment variables and launch history",
   "The answers you enter into questions asked by a shortcut",
   "Which account a sign-in step used",
@@ -262,7 +262,7 @@ export const ZAP_FAQ = [
   },
   {
     q: "What happens when I save a shortcut?",
-    a: "It becomes an ordinary shortcut in your own workspace, without a link back to the Zap conversation. You can edit, run or share it like other shortcuts you've created.",
+    a: "It becomes an ordinary personal shortcut, without a link back to the Zap conversation. You can edit, run or share it like other shortcuts you've created.",
   },
   {
     q: "Which AI providers are supported?",
