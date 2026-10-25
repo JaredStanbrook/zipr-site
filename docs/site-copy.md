@@ -32,21 +32,69 @@ Features
 
 **[NAV-03]** _text_
 
-Downloads
+Gallery
 
 **[NAV-04]** _text_
 
-Pricing
+Build with Zap
 
 **[NAV-05]** _text_
 
-Security
+For teams
 
 **[NAV-06]** _text_
 
-Contact
+Pricing
 
 **[NAV-07]** _text_
+
+EN
+
+**[NAV-08]** _text_
+
+Language
+
+**[NAV-09]** _button_
+
+English ✓
+
+**[NAV-10]** _button_
+
+Español ✓
+
+**[NAV-11]** _button_
+
+Français ✓
+
+**[NAV-12]** _button_
+
+Deutsch ✓
+
+**[NAV-13]** _button_
+
+Italiano ✓
+
+**[NAV-14]** _button_
+
+Português (Brasil) ✓
+
+**[NAV-15]** _button_
+
+日本語 ✓
+
+**[NAV-16]** _button_
+
+한국어 ✓
+
+**[NAV-17]** _button_
+
+简体中文 ✓
+
+**[NAV-18]** _text_
+
+Translated automatically. If something reads oddly, the English is the original. The privacy notice and licence are only in English.
+
+**[NAV-19]** _text_
 
 Download
 
@@ -56,77 +104,93 @@ Zipr
 
 **[FOOT-02]** _text_
 
-For ideas that have to be run, not explained.
+Your computer tricks, in one click.
 
-**[FOOT-03]** _text_
-
-The app is free. Always will be.
-
-**[FOOT-04]** _subheading_
+**[FOOT-03]** _subheading_
 
 PRODUCT
 
-**[FOOT-05]** _list item_
+**[FOOT-04]** _list item_
 
 Features
 
+**[FOOT-05]** _list item_
+
+Toolbox
+
 **[FOOT-06]** _list item_
 
-Downloads
+Gallery
 
 **[FOOT-07]** _list item_
 
-Pricing
+Build with Zap
 
-**[FOOT-08]** _subheading_
+**[FOOT-08]** _list item_
 
-LEARN
+For teams
 
 **[FOOT-09]** _list item_
 
-Security
+Pricing
 
 **[FOOT-10]** _list item_
 
-Compare plans
+Download
 
-**[FOOT-11]** _list item_
+**[FOOT-11]** _subheading_
 
-Report a bug
+LEARN
 
-**[FOOT-12]** _subheading_
+**[FOOT-12]** _list item_
 
-TALK TO US
+Security
 
 **[FOOT-13]** _list item_
 
-Contact
+Compare plans
 
 **[FOOT-14]** _list item_
 
-Licensing
+Report a bug
 
-**[FOOT-15]** _list item_
+**[FOOT-15]** _subheading_
 
-Security reports
+TALK TO US
 
-**[FOOT-16]** _text_
+**[FOOT-16]** _list item_
 
-© 2026 Jared Stanbrook. All rights reserved.
+Contact
 
 **[FOOT-17]** _list item_
 
-Licence
+Licensing
 
 **[FOOT-18]** _list item_
 
+Security reports
+
+**[FOOT-19]** _text_
+
+© 2026 Jared Stanbrook. All rights reserved.
+
+**[FOOT-20]** _list item_
+
+Licence
+
+**[FOOT-21]** _list item_
+
 Privacy
 
-**[FOOT-19]** _list item_
+**[FOOT-22]** _list item_
+
+Top
+
+**[FOOT-23]** _list item_
 
 Open-source licences
 
-**[FOOT-20]** _text_
+**[FOOT-24]** _text_
 
 Zipr
 
@@ -141,373 +205,1125 @@ page itself:
 
 **[HOME-TITLE]** _browser tab and search result_
 
-Desktop launcher for commands, links and apps · Zipr
+Your computer tricks, in one click · Zipr
 
 **[HOME-DESC]** _search result snippet_
 
-Zipr is a free desktop launcher for Windows and macOS. Chain commands, links, apps and prompts into one-click items, then share them with your team.
+Zipr turns the clever things you do on your computer into one-click shortcuts you can use yourself or share with anyone. Free for Windows and macOS.
 
-**[HOME-01]** _text_
+**[HOME-01]** _heading_
 
-Free forever, no account
+Your computer tricks, in one click.
 
-**[HOME-02]** _heading_
+**[HOME-02]** _text_
 
-Turn the steps you keep explaining into one click.
+Zipr turns the clever things you do on your computer into shortcuts you can run again — and share with anyone who's ever asked, “How did you do that?” No code needed.
 
 **[HOME-03]** _text_
 
-Zipr is a desktop launcher for Windows and macOS. Chain commands, links, apps and prompts into one named item — then hand it to a colleague instead of a walkthrough.
+Download Zipr
 
-**[HOME-04]** _text_
+**[HOME-04]** _button_
 
-Download for free
+Browse the Gallery
 
-**[HOME-05]** _button_
+**[HOME-05]** _text_
 
-See pricing
+The Zipr launcher, with some example shortcuts.
 
-**[HOME-06]** _text_
+**[HOME-06]** _list item_
 
-Windows 10+ and macOS 12+. Installs in about a minute.
+Windows and macOS
 
-**[HOME-07]** _text_
+**[HOME-07]** _list item_
 
-Your catalogue
+Works offline
 
-**[HOME-08]** _text_
-
-Runs on this machine
-
-**[HOME-09]** _text_
-
-Local
-
-**[HOME-10]** _text_
-
-Open the on-call runbook
-
-**[HOME-11]** _text_
-
-Platform · 1 step
-
-**[HOME-12]** _text_
-
-Spin up a staging stack
-
-**[HOME-13]** _text_
-
-Infrastructure · 3 steps
-
-**[HOME-14]** _text_
-
-Rotate my API token
-
-**[HOME-15]** _text_
-
-Yours · 3 steps, one confirmation
-
-**[HOME-16]** _text_
-
-Reset a customer sandbox
-
-**[HOME-17]** _text_
-
-Support · 2 steps, asks first
-
-**[HOME-18]** _text_
-
-An illustration, not a screenshot.
-
-**[HOME-19]** _text_
-
-Every team has something only one person can run.
-
-**[HOME-20]** _text_
-
-It is usually the best thing.
-
-**[HOME-21]** _text_
-
-It lives in a wiki page, a chat thread or somebody's head — so it gets explained, misread and explained again. Zipr turns it into something anyone can run.
-
-**[HOME-22]** _text_
-
-HOW IT WORKS
-
-**[HOME-23]** _subheading_
-
-Build it. Run it. Share it.
-
-**[HOME-24]** _text_
-
-The first two are free, forever. The third is what teams pay for.
-
-**[HOME-25]** _text_
-
-01 Free
-
-**[HOME-26]** _subheading_
-
-Build it
-
-**[HOME-27]** _text_
-
-Chain the steps you would normally explain — commands, links, apps, files, questions — into one named item.
-
-**[HOME-28]** _text_
-
-02 Free
-
-**[HOME-29]** _subheading_
-
-Run it
-
-**[HOME-30]** _text_
-
-One click runs it on your machine, instantly and offline. Build as many as you like; nothing expires and no account is needed.
-
-**[HOME-31]** _text_
-
-03 Team
-
-**[HOME-32]** _subheading_
-
-Share it
-
-**[HOME-33]** _text_
-
-When the team needs it, publish it to a shared catalogue on a Zipr server — hosted by us, or run by you. Same app, nothing to relearn.
-
-**[HOME-34]** _text_
-
-TWELVE STEP TYPES
-
-**[HOME-35]** _subheading_
-
-If you can describe it, Zipr can run it.
-
-**[HOME-36]** _text_
-
-Chain steps in any order, ask a question midway and use the answer, and vary a step by operating system — all in one item. Plugins cover the rest.
-
-**[HOME-37]** _button_
-
-See all features
-
-**[HOME-38]** _text_
-
-A URL, in the browser you choose.
-
-**[HOME-39]** _text_
-
-Shell command, with whatever arguments you need.
-
-**[HOME-40]** _text_
-
-An executable, with arguments.
-
-**[HOME-41]** _text_
-
-Straight into whatever opens it.
-
-**[HOME-42]** _text_
-
-Jump to it in Finder or Explorer.
-
-**[HOME-43]** _text_
-
-Text ready to paste, with an optional nudge.
-
-**[HOME-44]** _text_
-
-Confirm before something irreversible.
-
-**[HOME-45]** _text_
-
-Prompt for input and use it further down.
-
-**[HOME-46]** _text_
-
-Pick one, carry on.
-
-**[HOME-47]** _text_
-
-Prove it's you before the risky step.
-
-**[HOME-48]** _text_
-
-Jump to a view inside Zipr.
-
-**[HOME-49]** _text_
-
-Anything the twelve don't cover.
-
-**[HOME-50]** _text_
-
-FOR TEAMS
-
-**[HOME-51]** _subheading_
-
-Knowledge moves. The org chart stays put.
-
-**[HOME-52]** _text_
-
-Give your organisation a Zipr server and each team keeps its own workspace and rules. Work crosses between them as a published copy — attributed, current and safe to run — instead of a ticket or a meeting.
-
-**[HOME-53]** _text_
-
-See team pricing
-
-**[HOME-54]** _text_
-
-Platform
-
-**[HOME-55]** _text_
-
-Support
-
-**[HOME-56]** _text_
-
-Yours
-
-**[HOME-57]** _list item_
-
-A workspace per team, with roles and visibility you control
-
-**[HOME-58]** _list item_
-
-Publish a copy to another team — your own stays exactly as it was
-
-**[HOME-59]** _list item_
-
-Everyone on the current version, updated as colleagues work
-
-**[HOME-60]** _list item_
-
-Full history, one-click rollback and an audit trail
-
-**[HOME-61]** _list item_
-
-Single sign-on with Google, Microsoft Entra or Okta
-
-**[HOME-62]** _list item_
-
-Usage figures showing which items people actually run
-
-**[HOME-63]** _text_
-
-SECURITY
-
-**[HOME-64]** _subheading_
-
-Built for your security review
-
-**[HOME-65]** _text_
-
-The short answers to the questions your reviewer will ask first.
-
-**[HOME-66]** _subheading_
+**[HOME-08]** _list item_
 
 Nothing runs on a server
 
-**[HOME-67]** _text_
+**[HOME-09]** _list item_
 
-Zipr stores items. It only ever runs them on the machine of the person who clicked.
+No account. No card. No expiry.
 
-**[HOME-68]** _subheading_
+**[HOME-10]** _text_
 
-Your data, where you choose
+WHY ZIPR EXISTS
 
-**[HOME-69]** _text_
+**[HOME-11]** _subheading_
 
-Hosted in a database of your own, or self-hosted with nothing leaving your network.
+Everyone has something worth sharing.
 
-**[HOME-70]** _subheading_
+**[HOME-12]** _text_
 
-Your sign-in, your rules
+At work, I noticed that people often had their own ways of doing the same things on a computer. Some methods were outdated. Others were inefficient or simply different. Often there was a better way, but that knowledge stayed with the person who had discovered it.
 
-**[HOME-71]** _text_
+**[HOME-13]** _text_
 
-Single sign-on, and roles and visibility set by your administrators.
+That's why I built Zipr: a toolbox anyone can use to turn the way they work into a single button press. It saves time, cuts out repetitive tasks, and makes it easy to share useful shortcuts with friends and colleagues.
 
-**[HOME-72]** _subheading_
+**[HOME-14]** _text_
 
-Never held hostage
+HOW IT WORKS
 
-**[HOME-73]** _text_
+**[HOME-15]** _subheading_
 
-Export everything as one file at any time, even if an account lapses.
+Build it. Run it. Share it.
 
-**[HOME-74]** _text_
+**[HOME-16]** _text_
 
-Read the full security overview
+Create a shortcut from simple steps on your computer. Run it when you need it. Share it with anyone.
 
-**[HOME-75]** _text_
+**[HOME-17]** _text_
 
-PRICING
+01 Free
 
-**[HOME-76]** _subheading_
+**[HOME-18]** _subheading_
 
-Free alone. Paid together.
+Build it
 
-**[HOME-77]** _text_
+**[HOME-19]** _text_
 
-The free app is the whole app, not a trial. You pay only when an item has to be shared.
+Put together the steps you'd normally explain into one named shortcut. Or describe it and ask Zap to build it.
 
-**[HOME-78]** _subheading_
+**[HOME-20]** _text_
 
-The app
+02 Free
 
-**[HOME-79]** _text_
+**[HOME-21]** _subheading_
 
-Free
+Run it
 
-**[HOME-80]** _text_
+**[HOME-22]** _text_
 
-$0
+One click runs it on your computer, instantly and offline.
 
-**[HOME-81]** _text_
+**[HOME-23]** _text_
 
-Everything one person can do on one machine. No account, no card, no expiry.
+03 Team server
 
-**[HOME-82]** _button_
+**[HOME-24]** _subheading_
 
-Download Zipr
+Share it
+
+**[HOME-25]** _text_
+
+When the team needs it, move it into your team on a Zipr server hosted by us, or run by you.
+
+**[HOME-26]** _text_
+
+Open a client
+
+**[HOME-27]** _text_
+
+Three steps
+
+**[HOME-28]** _text_
+
+Choose from List
+
+**[HOME-29]** _text_
+
+Choose a client
+
+**[HOME-30]** _text_
+
+Open Link
+
+**[HOME-31]** _text_
+
+Open their CRM page
+
+**[HOME-32]** _text_
+
+Open Folder
+
+**[HOME-33]** _text_
+
+Open their shared folder
+
+**[HOME-34]** _list item_
+
+Run
+
+**[HOME-35]** _text_
+
+Running Open a client
+
+**[HOME-36]** _text_
+
+Done
+
+**[HOME-37]** _list item_
+
+Choose from List Choose a client
+
+**[HOME-38]** _list item_
+
+Open Link Open their CRM page
+
+**[HOME-39]** _list item_
+
+Open Folder Open their shared folder
+
+**[HOME-40]** _text_
+
+THE TOOLBOX
+
+**[HOME-41]** _subheading_
+
+Here’s what Zipr can do
+
+**[HOME-42]** _text_
+
+Each step does one job. Combine them into a shortcut and make magic.
+
+**[HOME-43]** _text_
+
+74 steps in 12 groups.
+
+**[HOME-44]** _button_
+
+See every step
+
+**[HOME-45]** _list item_
+
+Web 3 steps Open websites, search for information and find your way. Open Webpage · Search Web · Show Directions
+
+**[HOME-46]** _list item_
+
+Email, Calls & Meetings 5 steps Send emails, start calls, join meetings and connect to other computers. Create Email · Start Call · Join Meeting …
+
+**[HOME-47]** _list item_
+
+Files & Folders 16 steps Find, open, organise, copy and save your files. Open File · Open Folder · Show in Folder …
+
+**[HOME-48]** _list item_
+
+Apps & System 8 steps Control your apps, adjust settings and capture your screen. Open App · Quit App · Take Screenshot …
+
+**[HOME-49]** _list item_
+
+Ask & Choose 5 steps Ask questions, collect answers and let people choose what happens next. Ask for Input · Ask for Confirmation · Choose from List …
+
+**[HOME-50]** _list item_
+
+Text & Clipboard 7 steps Create, transform and reuse text wherever you need it. Text · Combine Text · Split Text …
+
+**[HOME-51]** _list item_
+
+Lists & Data 6 steps Build lists, organise information and find the data you need. List · Get Item from List · Filter List …
+
+**[HOME-52]** _list item_
+
+Dates & Numbers 4 steps Work with dates, adjust time periods and perform calculations. Get Current Date · Format Date · Adjust Date …
+
+**[HOME-53]** _list item_
+
+Logic & Flow 8 steps Add decisions, repeat tasks and control how your shortcuts run. If · Repeat · Repeat with Each …
+
+**[HOME-54]** _list item_
+
+Show & Speak 5 steps Show results, display notifications, preview files and speak text aloud. Show Notification · Show Result · Quick Look …
+
+**[HOME-55]** _list item_
+
+AI 3 steps Generate, summarise and rewrite text with your connected AI model. Generate Text · Summarise Text · Rewrite Text
+
+**[HOME-56]** _list item_
+
+Advanced 4 steps Work with URLs, run scripts and access advanced integrations. Open Link · Get Contents of URL · Run Shell Script …
+
+**[HOME-57]** _list item_
+
+Plugins From your plugins Extend your shortcuts with steps from installed plugins.
+
+**[HOME-58]** _text_
+
+One shortcut, three steps, and it starts by itself every weekday at 8:45.
+
+**[HOME-59]** _text_
+
+THE GALLERY
+
+**[HOME-60]** _subheading_
+
+What could Zipr help you do at work?
+
+**[HOME-61]** _text_
+
+The Gallery shows what Zipr can help you do, with practical examples inspired by different roles, routines and everyday tasks.
+
+**[HOME-62]** _button_
+
+Everyday productivity
+
+**[HOME-63]** _button_
+
+IT and service desk
+
+**[HOME-64]** _button_
+
+Files and organisation
+
+**[HOME-65]** _button_
+
+Developers and technical teams
+
+**[HOME-66]** _button_
+
+Writing and AI
+
+**[HOME-67]** _button_
+
+Managers and team leads
+
+**[HOME-68]** _button_
+
+Designers and creators
+
+**[HOME-69]** _button_
+
+Personal routines
+
+**[HOME-70]** _text_
+
+EVERYDAY PRODUCTIVITY
+
+**[HOME-71]** _subheading_
+
+Start my workday
+
+**[HOME-72]** _text_
+
+Set up your workspace in one run. Open your essential apps, notes and working folder without hunting through your computer.
+
+**[HOME-73]** _list item_
+
+1 Open Slack
+
+**[HOME-74]** _list item_
+
+2 Open daily-notes.md
+
+**[HOME-75]** _list item_
+
+3 Open the Today's Work folder
+
+**[HOME-76]** _text_
+
+EVERYDAY PRODUCTIVITY
+
+**[HOME-77]** _subheading_
+
+Focus mode, ready
+
+**[HOME-78]** _text_
+
+Open the tools you need, turn on Do Not Disturb, and copy a focus message ready to share.
+
+**[HOME-79]** _list item_
+
+1 Open Visual Studio Code
+
+**[HOME-80]** _list item_
+
+2 Turn Do Not Disturb on
+
+**[HOME-81]** _list item_
+
+3 Copy I'm focusing until 3 PM. I'll get back to you afterwards. to your clipboard
+
+**[HOME-82]** _text_
+
+EVERYDAY PRODUCTIVITY
 
 **[HOME-83]** _subheading_
 
-A team server
+Pick up where I left off
 
 **[HOME-84]** _text_
 
-Team
+Choose a project and reopen its notes, folder and workspace. Useful when you regularly switch between projects.
 
-**[HOME-85]** _text_
+**[HOME-85]** _list item_
 
-From $6 / person / month
+1 Choose an item from Client A, Website Redesign, Internal Tools
 
-**[HOME-86]** _text_
+**[HOME-86]** _list item_
 
-Hosted by us, billed yearly, minimum 5 people. Or self-hosted on your own infrastructure, priced per deployment.
+2 Open the Website Redesign folder
 
-**[HOME-87]** _text_
+**[HOME-87]** _list item_
 
-Compare plans
+3 Open website-redesign-notes.md
 
-**[HOME-88]** _subheading_
+**[HOME-88]** _list item_
 
-Start with the one you keep having to explain.
+4 Open Figma
 
 **[HOME-89]** _text_
 
-Free, no account, and the same app paying teams run.
+IT and service desk
 
-**[HOME-90]** _button_
+**[HOME-90]** _subheading_
+
+Run a network diagnostic
+
+**[HOME-91]** _text_
+
+Choose a diagnostic and run the corresponding approved script. Keep your common checks in one place.
+
+**[HOME-92]** _list item_
+
+1Ask the user to choose what to do: Check DNS, Check connectivity, Show IP configuration
+
+**[HOME-93]** _list item_
+
+2Run the script "approved-network-diagnostic.sh"
+
+**[HOME-94]** _list item_
+
+3Display Network diagnostic finished. Review the output before proceeding.
+
+**[HOME-95]** _text_
+
+IT and service desk
+
+**[HOME-96]** _subheading_
+
+Confirm before a system change
+
+**[HOME-97]** _text_
+
+Build a checkpoint before running a maintenance script. Configure and verify the script for the target system.
+
+**[HOME-98]** _list item_
+
+1Ask the user to confirm: "Run the approved maintenance script on this computer?"
+
+**[HOME-99]** _list item_
+
+2Run the script "maintenance-check.sh"
+
+**[HOME-100]** _list item_
+
+3Display Maintenance script finished. Check its output to confirm the result.
+
+**[HOME-101]** _text_
+
+IT and service desk
+
+**[HOME-102]** _subheading_
+
+Open a support case workspace
+
+**[HOME-103]** _text_
+
+Choose a support category and open the relevant troubleshooting guide, ticketing page and notes.
+
+**[HOME-104]** _list item_
+
+1Choose an item from Network, Printing, Account access, Hardware
+
+**[HOME-105]** _list item_
+
+2Open network-troubleshooting.md
+
+**[HOME-106]** _list item_
+
+3Open the link https://support.example.com
+
+**[HOME-107]** _list item_
+
+4Open support-case-notes.md
+
+**[HOME-108]** _text_
+
+Files and organisation
+
+**[HOME-109]** _subheading_
+
+Create a project workspace
+
+**[HOME-110]** _text_
+
+Ask for a project name, run a configured script to create its folder structure, and open the workspace.
+
+**[HOME-111]** _list item_
+
+1Ask the user for the project name
+
+**[HOME-112]** _list item_
+
+2Run the script "create-project-workspace.sh"
+
+**[HOME-113]** _list item_
+
+3Open the New Project folder
+
+**[HOME-114]** _text_
+
+Files and organisation
+
+**[HOME-115]** _subheading_
+
+Open my daily handover
+
+**[HOME-116]** _text_
+
+Open your handover notes and supporting files folder, ready for the next person to pick up.
+
+**[HOME-117]** _list item_
+
+1Open daily-handover.md
+
+**[HOME-118]** _list item_
+
+2Open the Handover Attachments folder
+
+**[HOME-119]** _text_
+
+Files and organisation
+
+**[HOME-120]** _subheading_
+
+Tidy a batch of downloads
+
+**[HOME-121]** _text_
+
+Choose a cleanup routine and run a configured script to sort or archive downloads. Review the script before use.
+
+**[HOME-122]** _list item_
+
+1Ask the user to choose what to do: Sort downloads, Archive old files, Preview cleanup
+
+**[HOME-123]** _list item_
+
+2Ask the user to confirm: "Proceed with the selected downloads cleanup?"
+
+**[HOME-124]** _list item_
+
+3Run the script "organise-downloads.sh"
+
+**[HOME-125]** _text_
+
+Developers and technical teams
+
+**[HOME-126]** _subheading_
+
+Open a project
+
+**[HOME-127]** _text_
+
+Choose a project and open its workspace, notes and development tools.
+
+**[HOME-128]** _list item_
+
+1Choose an item from API Service, Website, Mobile App
+
+**[HOME-129]** _list item_
+
+2Open the API Service folder
+
+**[HOME-130]** _list item_
+
+3Open Visual Studio Code
+
+**[HOME-131]** _list item_
+
+4Open README.md
+
+**[HOME-132]** _text_
+
+Developers and technical teams
+
+**[HOME-133]** _subheading_
+
+Run a local development task
+
+**[HOME-134]** _text_
+
+Choose a predefined task and run its configured script. Use it for repeatable local tasks, not an unreviewed production deployment.
+
+**[HOME-135]** _list item_
+
+1Ask the user to choose what to do: Run tests, Start development server, Check formatting
+
+**[HOME-136]** _list item_
+
+2Ask the user to confirm: "Run the selected development task?"
+
+**[HOME-137]** _list item_
+
+3Run the script "run-development-task.sh"
+
+**[HOME-138]** _list item_
+
+4Display Task finished. Review the terminal output for errors.
+
+**[HOME-139]** _text_
+
+Developers and technical teams
+
+**[HOME-140]** _subheading_
+
+Open the right documentation
+
+**[HOME-141]** _text_
+
+Choose a topic and open the matching documentation page and local reference file.
+
+**[HOME-142]** _list item_
+
+1Choose an item from API authentication, Deployment, Troubleshooting
+
+**[HOME-143]** _list item_
+
+2Open the link https://docs.example.com
+
+**[HOME-144]** _list item_
+
+3Open developer-reference.md
+
+**[HOME-145]** _text_
+
+Writing and AI
+
+**[HOME-146]** _subheading_
+
+Prepare a reusable response
+
+**[HOME-147]** _text_
+
+Choose a response type and copy a prepared template to your clipboard, ready to personalise and send.
+
+**[HOME-148]** _list item_
+
+1Choose an item from Request received, Need more information, Issue resolved
+
+**[HOME-149]** _list item_
+
+2Copy Thanks for getting in touch. I'll review this and follow up with you shortly. to your clipboard
+
+**[HOME-150]** _text_
+
+Writing and AI
+
+**[HOME-151]** _subheading_
+
+Start a writing session
+
+**[HOME-152]** _text_
+
+Open your writing app, notes and reference material so everything is ready before you begin.
+
+**[HOME-153]** _list item_
+
+1Open Microsoft Word
+
+**[HOME-154]** _list item_
+
+2Open article-draft.docx
+
+**[HOME-155]** _list item_
+
+3Open the Research folder
+
+**[HOME-156]** _text_
+
+Writing and AI
+
+**[HOME-157]** _subheading_
+
+Prepare a meeting summary
+
+**[HOME-158]** _text_
+
+Open your meeting notes and summary document, then copy a reusable outline. This prepares the workspace without claiming to transcribe or summarise the meeting automatically.
+
+**[HOME-159]** _list item_
+
+1Open meeting-notes.md
+
+**[HOME-160]** _list item_
+
+2Open meeting-summary.docx
+
+**[HOME-161]** _list item_
+
+3Copy Decisions, Action items, Owners, Deadlines to your clipboard
+
+**[HOME-162]** _text_
+
+Managers and team leads
+
+**[HOME-163]** _subheading_
+
+Friday wrap-up
+
+**[HOME-164]** _text_
+
+Open your project board, weekly report and team update draft so you can close out the week.
+
+**[HOME-165]** _list item_
+
+1Open the link https://projects.example.com
+
+**[HOME-166]** _list item_
+
+2Open weekly-report.docx
+
+**[HOME-167]** _list item_
+
+3Open team-update-draft.docx
+
+**[HOME-168]** _text_
+
+Managers and team leads
+
+**[HOME-169]** _subheading_
+
+Prepare a new starter's workspace
+
+**[HOME-170]** _text_
+
+Open the onboarding handbook, team resources and chat app for a consistent first-day setup.
+
+**[HOME-171]** _list item_
+
+1Open onboarding-handbook.pdf
+
+**[HOME-172]** _list item_
+
+2Open the Team Resources folder
+
+**[HOME-173]** _list item_
+
+3Open Slack
+
+**[HOME-174]** _text_
+
+Managers and team leads
+
+**[HOME-175]** _subheading_
+
+Start a one-to-one meeting
+
+**[HOME-176]** _text_
+
+Choose a team member and open your meeting notes and discussion guide before the meeting starts.
+
+**[HOME-177]** _list item_
+
+1Choose an item from Alex, Jordan, Taylor
+
+**[HOME-178]** _list item_
+
+2Open one-to-one-notes.md
+
+**[HOME-179]** _list item_
+
+3Open one-to-one-agenda.md
+
+**[HOME-180]** _text_
+
+Designers and creators
+
+**[HOME-181]** _subheading_
+
+Start a design project
+
+**[HOME-182]** _text_
+
+Ask for a project name, open your design tool and bring up the folder where project files live.
+
+**[HOME-183]** _list item_
+
+1Ask the user for the project name
+
+**[HOME-184]** _list item_
+
+2Open Figma
+
+**[HOME-185]** _list item_
+
+3Open the Design Projects folder
+
+**[HOME-186]** _text_
+
+Designers and creators
+
+**[HOME-187]** _subheading_
+
+Review design references
+
+**[HOME-188]** _text_
+
+Open your reference board, design files and inspiration folder in a single sequence.
+
+**[HOME-189]** _list item_
+
+1Open the link https://design.example.com/references
+
+**[HOME-190]** _list item_
+
+2Open current-design.fig
+
+**[HOME-191]** _list item_
+
+3Open the Inspiration folder
+
+**[HOME-192]** _text_
+
+Designers and creators
+
+**[HOME-193]** _subheading_
+
+Copy a project status update
+
+**[HOME-194]** _text_
+
+Put a reusable project update template on your clipboard before you send it to your team.
+
+**[HOME-195]** _list item_
+
+1Copy Progress: [update]. Next: [next step]. Blockers: [none or details]. to your clipboard
+
+**[HOME-196]** _list item_
+
+2Open Slack
+
+**[HOME-197]** _text_
+
+Personal routines
+
+**[HOME-198]** _subheading_
+
+Plan an evening
+
+**[HOME-199]** _text_
+
+Choose an activity and open your planning notes and a relevant website.
+
+**[HOME-200]** _list item_
+
+1Choose an item from Dinner, Movie night, Weekend trip
+
+**[HOME-201]** _list item_
+
+2Open personal-plans.md
+
+**[HOME-202]** _list item_
+
+3Open the link https://example.com
+
+**[HOME-203]** _text_
+
+Personal routines
+
+**[HOME-204]** _subheading_
+
+Take a proper break
+
+**[HOME-205]** _text_
+
+Confirm you're ready for a break, open your preferred break activity and copy a reminder for later.
+
+**[HOME-206]** _list item_
+
+1Ask the user to confirm: "Ready to take a short break?"
+
+**[HOME-207]** _list item_
+
+2Open the link https://example.com
+
+**[HOME-208]** _list item_
+
+3Copy Break finished — time to return to my next task. to your clipboard
+
+**[HOME-209]** _text_
+
+Browse the Gallery
+
+**[HOME-210]** _text_
+
+DESCRIBE IT
+
+**[HOME-211]** _subheading_
+
+Got the idea? Let Zap build it.
+
+**[HOME-212]** _text_
+
+Zap is the AI that builds shortcuts from what you say. Describe what you want, test what it makes, then keep it. It never runs anything itself.
+
+**[HOME-213]** _text_
+
+Learn about Zap
+
+**[HOME-214]** _text_
+
+Zap
+
+**[HOME-215]** _text_
+
+Builds shortcuts from your words
+
+**[HOME-216]** _button_
+
+Replay
+
+**[HOME-217]** _text_
+
+Ask which client I'm working with, then open their CRM page and shared folder.
+
+**[HOME-218]** _text_
+
+Here's a draft with three steps. Test it before you keep it.
+
+**[HOME-219]** _text_
+
+DRAFT SHORTCUT
+
+**[HOME-220]** _text_
+
+Choose from List
+
+**[HOME-221]** _text_
+
+Client A, Client B, Client C
+
+**[HOME-222]** _text_
+
+Open Link
+
+**[HOME-223]** _text_
+
+Open their CRM page
+
+**[HOME-224]** _text_
+
+Open Folder
+
+**[HOME-225]** _text_
+
+Open their shared folder
+
+**[HOME-226]** _text_
+
+Test
+
+**[HOME-227]** _text_
+
+FOR TEAMS
+
+**[HOME-228]** _subheading_
+
+Make something useful. Share it with your team.
+
+**[HOME-229]** _text_
+
+Keep personal shortcuts on your own computer. With a team plan, create teams that share their shortcuts, so your organisation can organise people and control access.
+
+**[HOME-230]** _text_
+
+See how teams share
+
+**[HOME-231]** _button_
+
+See team pricing
+
+**[HOME-232]** _text_
+
+Platform
+
+**[HOME-233]** _text_
+
+Support
+
+**[HOME-234]** _text_
+
+Yours
+
+**[HOME-235]** _list item_
+
+Teams that own their shortcuts, with optional groups and roles you control
+
+**[HOME-236]** _list item_
+
+Share a shortcut with the whole organisation, and your team still looks after it
+
+**[HOME-237]** _list item_
+
+Everyone on the current version, updated as colleagues work
+
+**[HOME-238]** _list item_
+
+Full history, one-click rollback and an audit trail
+
+**[HOME-239]** _list item_
+
+Single sign-on with Google, Microsoft Entra or Okta
+
+**[HOME-240]** _list item_
+
+Usage figures showing which shortcuts people actually run
+
+**[HOME-241]** _text_
+
+Built for your security review
+
+**[HOME-242]** _subheading_
+
+Nothing runs on a server
+
+**[HOME-243]** _text_
+
+Zipr stores shortcuts. It only ever runs them on the computer of the person who clicked.
+
+**[HOME-244]** _subheading_
+
+Your data, where you choose
+
+**[HOME-245]** _text_
+
+Hosted in a database of your own, or self-hosted with nothing leaving your network.
+
+**[HOME-246]** _subheading_
+
+Your sign-in, your rules
+
+**[HOME-247]** _text_
+
+Single sign-on, and roles and visibility set by your administrators.
+
+**[HOME-248]** _subheading_
+
+Never held hostage
+
+**[HOME-249]** _text_
+
+Export everything as one file at any time, even if an account lapses.
+
+**[HOME-250]** _text_
+
+Read the full security overview
+
+**[HOME-251]** _text_
+
+DOWNLOAD
+
+**[HOME-252]** _subheading_
+
+Start free. Add your team when you’re ready.
+
+**[HOME-253]** _text_
+
+The free app is the full app for one person. A team plan adds teams that share their shortcuts.
+
+**[HOME-254]** _subheading_
+
+Zipr for you
+
+**[HOME-255]** _text_
+
+Free
+
+**[HOME-256]** _text_
+
+$0
+
+**[HOME-257]** _text_
+
+Everything one person can do on one computer. No account, no card, no expiry.
+
+**[HOME-258]** _button_
 
 Download Zipr
 
-**[HOME-91]** _text_
+**[HOME-259]** _subheading_
+
+Team plan
+
+**[HOME-260]** _text_
+
+Team
+
+**[HOME-261]** _text_
+
+From $6 / person / month
+
+**[HOME-262]** _text_
+
+Teams and shared shortcuts for your organisation. Hosted by us (billed yearly, minimum 5 people) or self-hosted on your own infrastructure.
+
+**[HOME-263]** _text_
+
+See team pricing
+
+**[HOME-264]** _text_
+
+QUESTIONS
+
+**[HOME-265]** _subheading_
+
+Asked and answered
+
+**[HOME-266]** _question_
+
+Why is the app free if the team version isn't?
+
+**[HOME-267]** _text_
+
+Because the app is complete on its own: it stores and runs everything on your machine, so it would keep working whatever we did. Sharing needs a server, and that is the part you pay for.
+
+**[HOME-268]** _question_
+
+Can we try it first?
+
+**[HOME-269]** _text_
+
+The free app is the trial — the same build a paying team runs, with no time limit. There's no separate trial of the shared version, because setting one up is the paid work itself. Talk to us and we'll work out a sensible pilot.
+
+**[HOME-270]** _question_
+
+Do I need to understand commands or code?
+
+**[HOME-271]** _text_
+
+No. Start by describing the task in your own words. Zap proposes the steps and shows their settings so you can review them. Some shortcuts involve commands or configuration, so inspect those carefully before running them.
+
+**[HOME-272]** _question_
+
+Can Zap run commands on my computer without asking?
+
+**[HOME-273]** _text_
+
+Zap itself cannot press Test or run the shortcut. When you choose to test or run a shortcut, its configured steps execute. Review commands and permissions, and add confirmation steps when appropriate.
+
+**[HOME-274]** _question_
+
+What happens if we stop paying?
+
+**[HOME-275]** _text_
+
+Nothing is deleted or held hostage. Reading keeps working, changes are refused, and you can export everything at any point without settling anything first. Self-hosted licences warn you for a month before they expire. Everything on individual machines is unaffected.
+
+**[HOME-276]** _subheading_
+
+Build your first shortcut.
+
+**[HOME-277]** _text_
+
+Start with the one you keep having to explain. Free, no account, and the same app paying teams run.
+
+**[HOME-278]** _button_
+
+Download Zipr
+
+**[HOME-279]** _text_
 
 Talk to us about a team
 
@@ -522,11 +1338,11 @@ page itself:
 
 **[FEAT-TITLE]** _browser tab and search result_
 
-Features: step types, sharing and history · Zipr
+Features: shortcuts, steps, sharing and history · Zipr
 
 **[FEAT-DESC]** _search result snippet_
 
-What the free Zipr app does on its own, what a team server adds, and the twelve step types every item is built from.
+What the free Zipr app does on its own, what a team server adds, and the steps every shortcut is built from.
 
 **[FEAT-01]** _text_
 
@@ -534,371 +1350,395 @@ FEATURES
 
 **[FEAT-02]** _heading_
 
-Build it once. Let anyone run it.
+Build it once. Use it whenever you need it.
 
 **[FEAT-03]** _text_
 
 What Zipr does on its own for free, and what it adds when your team shares a server.
 
-**[FEAT-04]** _subheading_
+**[FEAT-04]** _text_
 
-In the free app
+A CLOSER LOOK
 
-**[FEAT-05]** _text_
+**[FEAT-05]** _subheading_
 
-Free
+Built for the keyboard, clear at a glance
 
-**[FEAT-06]** _subheading_
+**[FEAT-06]** _text_
 
-One click instead of a walkthrough
+The few screens you'll spend your time in.
 
 **[FEAT-07]** _text_
 
-The steps you worked out become one named item. A colleague clicks it and it runs — no document to follow, no script to be talked through.
+THE LAUNCHER
 
 **[FEAT-08]** _subheading_
 
-Instant, and it works offline
+One key press, then type
 
 **[FEAT-09]** _text_
 
-Everything is already on your machine, so Zipr opens straight away and keeps working on a plane.
+Press your shortcut from anywhere, type, and press Return.
 
-**[FEAT-10]** _subheading_
+**[FEAT-10]** _text_
 
-Runs only where you click
+EVERY SHORTCUT
 
-**[FEAT-11]** _text_
+**[FEAT-11]** _subheading_
 
-Every command executes on the machine of the person who clicked — never on our servers or yours. That is the short answer to your security team's first question.
+Read it before you run it
 
-**[FEAT-12]** _subheading_
+**[FEAT-12]** _text_
 
-Plugins for everything else
+See every step a shortcut takes before you run it.
 
 **[FEAT-13]** _text_
 
-When the twelve built-in step types run out, a plugin adds a new one. Plugins are kept apart from the app, so a faulty one can't take it down.
+THE EDITOR
 
 **[FEAT-14]** _subheading_
 
-With a team server
+Let it take a different path
 
 **[FEAT-15]** _text_
 
-Team
+Add an If or a menu, and the shortcut takes one path or another.
 
-**[FEAT-16]** _subheading_
+**[FEAT-16]** _text_
 
-Share it instead of explaining it
+ZAP
 
-**[FEAT-17]** _text_
+**[FEAT-17]** _subheading_
 
-Publish an item to a team catalogue and everyone runs the same, current version. No zip file in a chat thread, no afternoon spent watching over a shoulder.
+Or bring the idea, and ask Zap to build it.
 
-**[FEAT-18]** _subheading_
+**[FEAT-18]** _text_
 
-Edit together without losing work
+Zap, the helper that builds shortcuts from your words, turns an idea into a starting point for a shortcut, for you to test before you keep it.
 
-**[FEAT-19]** _text_
+**[FEAT-19]** _button_
 
-Two people improve the same item at once and both changes survive. If you changed the same thing, you're shown exactly what clashed.
+Ask Zap to build it
 
 **[FEAT-20]** _subheading_
 
-Undo anything
+In the free app
 
 **[FEAT-21]** _text_
 
-Every change is kept. Put any item back how it was in one click, and see who changed what — so trying the strange version costs nothing.
+Free
 
 **[FEAT-22]** _subheading_
 
-Hosted by us, or on your own servers
+One click instead of a walkthrough
 
 **[FEAT-23]** _text_
 
-Let us run the server, in a database that belongs to your organisation alone. Or self-host it inside your own network, under your own backups.
+The steps you worked out become one named shortcut. A colleague clicks it and it runs — no document to follow, no one talking them through it.
 
-**[FEAT-24]** _text_
+**[FEAT-24]** _subheading_
 
-IN PRACTICE
+Instant, and it works offline
 
-**[FEAT-25]** _subheading_
+**[FEAT-25]** _text_
 
-Five situations you'll recognise
+Everything is already on your computer, so Zipr opens straight away and keeps working on a plane.
 
-**[FEAT-26]** _text_
+**[FEAT-26]** _subheading_
 
-Where good work usually gets lost — and what changes with Zipr.
+Runs only where you click
 
 **[FEAT-27]** _text_
 
-01 / 05
+Every step runs on the computer of the person who clicked — never on our servers or yours. That is the short answer to your security team's first question.
 
 **[FEAT-28]** _subheading_
 
-What you built would help another team
+Plugins for everything else
 
 **[FEAT-29]** _text_
 
-WITHOUT ZIPR
+When the built-in steps run out, a plugin adds a new one. Plugins are kept apart from the app, so a faulty one can't take it down.
 
-**[FEAT-30]** _text_
+**[FEAT-30]** _subheading_
 
-You write it up, they misread step four, and you end up on the call anyway — or you never mention it at all.
+With a team server
 
 **[FEAT-31]** _text_
 
-WITH IT
+Team
 
-**[FEAT-32]** _text_
+**[FEAT-32]** _subheading_
 
-You publish a copy into their catalogue and they run it. Yours stays where it was; theirs stays current.
+Share it instead of explaining it
 
 **[FEAT-33]** _text_
 
-02 / 05
+Move a shortcut into your team and everyone runs the same, current version. No zip file in a chat thread, no afternoon spent watching over a shoulder.
 
 **[FEAT-34]** _subheading_
 
-A new starter joins on Monday
+Edit together without losing work
 
 **[FEAT-35]** _text_
 
-WITHOUT ZIPR
+Two people improve the same shortcut at once and both changes survive. If you changed the same thing, you're shown exactly what clashed.
 
-**[FEAT-36]** _text_
+**[FEAT-36]** _subheading_
 
-A wiki page, three chat threads, a zip of scripts, and the same questions for a fortnight.
+Undo anything
 
 **[FEAT-37]** _text_
 
-WITH IT
+Every change is kept. Put any shortcut back how it was in one click, and see who changed what — so trying the strange version costs nothing.
 
-**[FEAT-38]** _text_
+**[FEAT-38]** _subheading_
 
-They install Zipr, open the team catalogue, and everything the team runs is there, in the current version.
+Hosted by us, or on your own servers
 
 **[FEAT-39]** _text_
 
-03 / 05
+Let us run the server, in a database that belongs to your organisation alone. Or self-host it inside your own network, under your own backups.
 
-**[FEAT-40]** _subheading_
+**[FEAT-40]** _text_
 
-Two of you improve the same thing
+IN PRACTICE
 
-**[FEAT-41]** _text_
+**[FEAT-41]** _subheading_
 
-WITHOUT ZIPR
+Five situations you'll recognise
 
 **[FEAT-42]** _text_
 
-Last save wins, and somebody's work quietly disappears.
+Where good know-how usually gets lost — and what changes with Zipr.
 
 **[FEAT-43]** _text_
 
-WITH IT
+01 / 05
 
-**[FEAT-44]** _text_
+**[FEAT-44]** _subheading_
 
-Both improvements survive. If you changed the same thing, you see exactly what clashed and decide.
+What you built would help another team
 
 **[FEAT-45]** _text_
 
-04 / 05
+WITHOUT ZIPR
 
-**[FEAT-46]** _subheading_
+**[FEAT-46]** _text_
 
-You want to try the strange version
+You write it up, they misread step four, and you end up on the call anyway — or you never mention it at all.
 
 **[FEAT-47]** _text_
 
-WITHOUT ZIPR
+WITH IT
 
 **[FEAT-48]** _text_
 
-You don't, because undoing it means remembering what it looked like before.
+You share it with the organisation and they run it. Your team still looks after it, so theirs stays current.
 
 **[FEAT-49]** _text_
 
-WITH IT
+02 / 05
 
-**[FEAT-50]** _text_
+**[FEAT-50]** _subheading_
 
-You try it. Every change is kept, so putting it back is one click.
+A new starter joins on Monday
 
 **[FEAT-51]** _text_
 
-05 / 05
+WITHOUT ZIPR
 
-**[FEAT-52]** _subheading_
+**[FEAT-52]** _text_
 
-You're on a train with no signal
+A wiki page, three chat threads, a zip of scripts, and the same questions for a fortnight.
 
 **[FEAT-53]** _text_
 
-WITHOUT ZIPR
+WITH IT
 
 **[FEAT-54]** _text_
 
-The tool is a website, so the tool is gone.
+They install Zipr, open the Library, and every shortcut the team runs is there, in its current version.
 
 **[FEAT-55]** _text_
 
-WITH IT
+03 / 05
 
-**[FEAT-56]** _text_
+**[FEAT-56]** _subheading_
 
-Everything is already on your laptop. Keep working; changes sync when you reconnect.
+Two of you improve the same thing
 
 **[FEAT-57]** _text_
 
-THE BUILDING BLOCKS
+WITHOUT ZIPR
 
-**[FEAT-58]** _subheading_
+**[FEAT-58]** _text_
 
-Twelve step types
+Last save wins, and somebody's work quietly disappears.
 
 **[FEAT-59]** _text_
 
-Every item is built from these, chained in any order.
+WITH IT
 
-**[FEAT-60]** _subheading_
+**[FEAT-60]** _text_
 
-Open a link
+Both improvements survive. If you changed the same thing, you see exactly what clashed and decide.
 
 **[FEAT-61]** _text_
 
-A URL, in the browser you choose.
+04 / 05
 
 **[FEAT-62]** _subheading_
 
-Run a command
+You want to try the strange version
 
 **[FEAT-63]** _text_
 
-Shell command, with whatever arguments you need.
+WITHOUT ZIPR
 
-**[FEAT-64]** _subheading_
+**[FEAT-64]** _text_
 
-Launch an app
+You don't, because undoing it means remembering what it looked like before.
 
 **[FEAT-65]** _text_
 
-An executable, with arguments.
+WITH IT
 
-**[FEAT-66]** _subheading_
+**[FEAT-66]** _text_
 
-Open a file
+You try it. Every change is kept, so putting it back is one click.
 
 **[FEAT-67]** _text_
 
-Straight into whatever opens it.
+05 / 05
 
 **[FEAT-68]** _subheading_
 
-Reveal a folder
+You're on a train with no signal
 
 **[FEAT-69]** _text_
 
-Jump to it in Finder or Explorer.
+WITHOUT ZIPR
 
-**[FEAT-70]** _subheading_
+**[FEAT-70]** _text_
 
-Copy to clipboard
+The tool is a website, so the tool is gone.
 
 **[FEAT-71]** _text_
 
-Text ready to paste, with an optional nudge.
+WITH IT
 
-**[FEAT-72]** _subheading_
+**[FEAT-72]** _text_
 
-Ask yes or no
+Everything is already on your laptop. Keep working; changes sync when you reconnect.
 
 **[FEAT-73]** _text_
 
-Confirm before something irreversible.
+THE TOOLBOX
 
 **[FEAT-74]** _subheading_
 
-Ask for a value
+The steps a shortcut is built from
 
 **[FEAT-75]** _text_
 
-Prompt for input and use it further down.
+Each step does one job. Put steps together, in any order, to make a shortcut that gets something useful done.
 
-**[FEAT-76]** _subheading_
+**[FEAT-76]** _list item_
 
-Offer a list
+Web 3 steps Open websites, search for information and find your way. Open Webpage · Search Web · Show Directions
 
-**[FEAT-77]** _text_
+**[FEAT-77]** _list item_
 
-Pick one, carry on.
+Email, Calls & Meetings 5 steps Send emails, start calls, join meetings and connect to other computers. Create Email · Start Call · Join Meeting …
 
-**[FEAT-78]** _subheading_
+**[FEAT-78]** _list item_
 
-Require a re-auth
+Files & Folders 16 steps Find, open, organise, copy and save your files. Open File · Open Folder · Show in Folder …
 
-**[FEAT-79]** _text_
+**[FEAT-79]** _list item_
 
-Prove it's you before the risky step.
+Apps & System 8 steps Control your apps, adjust settings and capture your screen. Open App · Quit App · Take Screenshot …
 
-**[FEAT-80]** _subheading_
+**[FEAT-80]** _list item_
 
-Open a panel
+Ask & Choose 5 steps Ask questions, collect answers and let people choose what happens next. Ask for Input · Ask for Confirmation · Choose from List …
 
-**[FEAT-81]** _text_
+**[FEAT-81]** _list item_
 
-Jump to a view inside Zipr.
+Text & Clipboard 7 steps Create, transform and reuse text wherever you need it. Text · Combine Text · Split Text …
 
-**[FEAT-82]** _subheading_
+**[FEAT-82]** _list item_
 
-Hand off to a plugin
+Lists & Data 6 steps Build lists, organise information and find the data you need. List · Get Item from List · Filter List …
 
-**[FEAT-83]** _text_
+**[FEAT-83]** _list item_
 
-Anything the twelve don't cover.
+Dates & Numbers 4 steps Work with dates, adjust time periods and perform calculations. Get Current Date · Format Date · Adjust Date …
 
-**[FEAT-84]** _subheading_
+**[FEAT-84]** _list item_
 
-Branch as you go
+Logic & Flow 8 steps Add decisions, repeat tasks and control how your shortcuts run. If · Repeat · Repeat with Each …
 
-**[FEAT-85]** _text_
+**[FEAT-85]** _list item_
 
-Run a step only if the last one worked — or only if it didn't.
+Show & Speak 5 steps Show results, display notifications, preview files and speak text aloud. Show Notification · Show Result · Quick Look …
 
-**[FEAT-86]** _subheading_
+**[FEAT-86]** _list item_
 
-One item, every platform
+AI 3 steps Generate, summarise and rewrite text with your connected AI model. Generate Text · Summarise Text · Rewrite Text
 
-**[FEAT-87]** _text_
+**[FEAT-87]** _list item_
 
-Different path on Windows? Say so in the same item instead of keeping two.
+Advanced 4 steps Work with URLs, run scripts and access advanced integrations. Open Link · Get Contents of URL · Run Shell Script …
 
-**[FEAT-88]** _subheading_
+**[FEAT-88]** _list item_
 
-Go further with plugins
+Plugins From your plugins Extend your shortcuts with steps from installed plugins.
 
 **[FEAT-89]** _text_
 
-When the twelve run out, a plugin adds a new step type.
+74 steps, by group. See every step
 
 **[FEAT-90]** _subheading_
 
-Build your first item in minutes.
+Decide what happens next
 
 **[FEAT-91]** _text_
 
-Free, no account, no card. Come back the day somebody else wants what you've built.
+Run a step only if the one before it worked, or only if it didn't, such as opening a help page.
 
-**[FEAT-92]** _button_
+**[FEAT-92]** _subheading_
 
-Download Zipr
+One shortcut for Windows and Mac
 
 **[FEAT-93]** _text_
 
-Compare free and team
+If a step differs between them, mark it for Windows or for Mac. The same shortcut then works on both.
+
+**[FEAT-94]** _subheading_
+
+Go further with plugins
+
+**[FEAT-95]** _text_
+
+When the built-in steps run out, a plugin adds a new one.
+
+**[FEAT-96]** _subheading_
+
+Build your first shortcut.
+
+**[FEAT-97]** _text_
+
+Free, no account, no card. Come back the day somebody else asks how you did it.
+
+**[FEAT-98]** _button_
+
+Download Zipr
+
+**[FEAT-99]** _text_
+
+Browse the Gallery
 
 ---
 
@@ -915,7 +1755,7 @@ Pricing: free app, team plans from $6 · Zipr
 
 **[PRICE-DESC]** _search result snippet_
 
-Zipr is free for one person, for good. Team sharing is hosted from $6 per person a month, or self-hosted and priced per deployment. Compare every feature.
+Zipr is free for one person. Team sharing is hosted from $6 per person a month, or self-hosted and priced per deployment. Compare every feature.
 
 **[PRICE-01]** _text_
 
@@ -927,7 +1767,7 @@ Free for you. Paid for your team.
 
 **[PRICE-03]** _text_
 
-The whole app is free for one person, permanently. You pay when your team shares — and you choose who runs the server.
+The whole app is free for one person. A team server adds teams that share their shortcuts — and you choose who runs it.
 
 **[PRICE-04]** _subheading_
 
@@ -951,11 +1791,11 @@ Windows and macOS
 
 **[PRICE-09]** _list item_
 
-Unlimited items and catalogues
+Unlimited shortcuts
 
 **[PRICE-10]** _list item_
 
-All twelve step types, chained however you like
+Every built-in step, chained however you like
 
 **[PRICE-11]** _list item_
 
@@ -975,7 +1815,7 @@ Export everything as one file
 
 **[PRICE-15]** _list item_
 
-Works offline, permanently
+Works offline
 
 **[PRICE-16]** _button_
 
@@ -991,15 +1831,15 @@ Hosted
 
 **[PRICE-19]** _text_
 
-Everything above, crossing between people — on our servers, not yours.
+Everything above, shared between people — on our servers, not yours.
 
 **[PRICE-20]** _text_
 
-$6 / person / month
+$6 AUD / person / month
 
 **[PRICE-21]** _text_
 
-per person, per month, billed yearly
+Billed yearly
 
 **[PRICE-22]** _text_
 
@@ -1011,7 +1851,7 @@ Everything in Free, for everyone
 
 **[PRICE-24]** _list item_
 
-Shared catalogues, updated live as colleagues work
+Team shortcuts, updated live as colleagues work
 
 **[PRICE-25]** _list item_
 
@@ -1103,7 +1943,7 @@ Talk to us
 
 **[PRICE-47]** _text_
 
-Prices in USD, excluding tax. Both paid options start with a conversation and a quote. What self-hosting involves
+Prices in AUD, excluding tax. Both paid options start with a conversation and a quote. What self-hosting involves
 
 **[PRICE-48]** _text_
 
@@ -1124,28 +1964,30 @@ Edit the cells in place. Keep the pipes and the row order.
 | Feature | Free<br>_On your machine_ | Hosted<br>_Per person_ | Self-hosted<br>_Per deployment_ |
 | --- | --- | --- | --- |
 | Building and running things |  |  |  |
-| Items and catalogues | Unlimited | Unlimited | Unlimited |
-| All twelve step types | Included | Included | Included |
-| Your own step types<br>_For anything the built-in twelve don't cover._ | Included | Included | Included |
+| Shortcuts | Unlimited | Unlimited | Unlimited |
+| Every built-in step | Included | Included | Included |
+| Zap, the helper that builds shortcuts from your words<br>_Describe what you want and Zap builds a starting point for you to test. You choose the AI model, such as Claude or ChatGPT, and the provider bills you directly._ | With your own key | Your key, or your team's | Your key, or your team's |
+| Your own steps<br>_For anything the built-in steps don't cover._ | Included | Included | Included |
 | Steps that differ per operating system | Included | Included | Included |
 | Plugins | Install your own | Share with the team | Share with the team |
 | Works with no network | Included | Included | Included |
 | Export everything<br>_Never held against a bill — the hosted export works even while an account is suspended._ | One file | One file | It's your database |
 | Working with other people |  |  |  |
-| Workspaces | One, private | Unlimited | Unlimited |
+| Teams | Personal only | Unlimited | Unlimited |
 | Members and roles | Not included | Included | Included |
-| Shared catalogues | Not included | Included | Included |
-| Publish your work to the team<br>_A copy, so your own version stays exactly where it was._ | Not included | Included | Included |
+| Share with the whole organisation<br>_One shortcut everyone can run, still looked after by its team._ | Not included | Included | Included |
+| One AI key for the whole team<br>_An administrator sets it once and chooses who can use Zap. Nobody needs a key of their own._ | Not included | Included | Included |
+| Move your shortcuts into a team<br>_It moves, so there is one version and everyone runs it._ | Not included | Included | Included |
 | Everyone's copy stays current | Not included | Included | Included |
 | Live updates<br>_Changes appear as colleagues make them._ | Not included | Included | Included |
-| Editing the same item at once<br>_Both sets of changes survive, and you are told what actually clashed._ | Not applicable | Included | Included |
+| Editing the same shortcut at once<br>_Both sets of changes survive, and you are told what actually clashed._ | Not applicable | Included | Included |
 | History and oversight |  |  |  |
 | Full history and rollback | Not included | Included | Included |
 | Tags | Not included | Included | Included |
 | What you've run | This machine | This machine + team | This machine + team |
 | Team usage figures<br>_What people actually run, so you know what matters._ | Not included | Included | Included |
-| Audit trail | Not included | Per workspace | Instance-wide |
-| Central values your catalogues reuse<br>_Paths and addresses set once, so nothing is hardcoded in an item._ | Not included | Included | Included |
+| Audit trail | Not included | Per team | Instance-wide |
+| Central values your shortcuts reuse<br>_Paths and addresses set once, so nothing is hardcoded in a shortcut._ | Not included | Included | Included |
 | Lock settings centrally | Not included | Not included | Included |
 | Running it |  |  |  |
 | Where your data lives | Your machine | Our servers, your own database | Your servers |
@@ -1287,75 +2129,11 @@ page itself:
 
 **[DL-TITLE]** _browser tab and search result_
 
-Download for Windows and macOS · Zipr
+
 
 **[DL-DESC]** _search result snippet_
 
-Download the free Zipr desktop app for Windows 10+ or macOS 12+. No account needed, and no network requests until you connect it to a team server.
 
-**[DL-01]** _text_
-
-DOWNLOADS
-
-**[DL-02]** _heading_
-
-Install Zipr
-
-**[DL-03]** _text_
-
-Free, no account, about a minute. Everything you make stays on your machine until you decide otherwise.
-
-**[DL-04]** _subheading_
-
-Not quite yet
-
-**[DL-05]** _text_
-
-Zipr is early and the installers aren't up here yet. Leave us a line and we'll tell you the moment there's something to install — no list, no newsletter, just the one email.
-
-**[DL-06]** _text_
-
-Tell me when it's ready
-
-**[DL-07]** _button_
-
-See what it does
-
-**[DL-08]** _text_
-
-BEFORE YOU INSTALL
-
-**[DL-09]** _subheading_
-
-Three things worth knowing
-
-**[DL-10]** _text_
-
-We haven't signed the installers yet, so Windows and macOS will both warn you the first time. Every download lists a checksum so you can confirm you got what we published.
-
-**[DL-11]** _text_
-
-No account, and no network request until you point it at a team server. Installing it does not sign you up for anything.
-
-**[DL-12]** _text_
-
-Uninstalling leaves your work on disk. Export it first if you want to keep it.
-
-**[DL-13]** _subheading_
-
-That’s it. Nothing else to do.
-
-**[DL-14]** _text_
-
-No sign-up, no licence key, no clock counting down. Come back the day your team wants what you’ve built.
-
-**[DL-15]** _button_
-
-What it can do
-
-**[DL-16]** _text_
-
-What a team costs
 
 ---
 
@@ -1424,7 +2202,7 @@ Sharing doesn't loosen access
 
 **[SEC-13]** _text_
 
-Work crosses teams only as a published copy, where your administrators allow it. Roles, membership and single sign-on stay yours — and people can't tell whether a catalogue they can't see exists.
+A shortcut leaves its team only when someone the team allows shares it with the organisation or copies it to another team. Roles, membership and single sign-on stay yours — and people can't tell whether a team they can't see exists.
 
 **[SEC-14]** _subheading_
 
@@ -1456,7 +2234,7 @@ What does the app send over the network?
 
 **[SEC-21]** _text_
 
-Only your catalogue content and the sign-in that authorises it, and only to the deployment it is pointed at. With no deployment configured, it makes no network requests at all.
+Only your teams' shortcuts and the sign-in that authorises them, and only to the deployment it is pointed at. With no deployment configured, it makes no network requests at all.
 
 **[SEC-22]** _question_
 
@@ -1488,7 +2266,7 @@ Who can see what?
 
 **[SEC-29]** _text_
 
-Your administrators decide, per workspace. The system won't confirm that something exists just because someone guessed its address.
+Your administrators decide, per team. The system won't confirm that something exists just because someone guessed its address.
 
 **[SEC-30]** _question_
 
@@ -1718,7 +2496,7 @@ Cookies and browser storage
 
 **[PRIV-18]** _text_
 
-Visitors get no cookies. The site remembers whether you chose light or dark mode in your browser's local storage; that never leaves your device. The only cookies are a sign-in cookie and a one-off notification cookie used by our own staff when they sign in to publish releases. Because nothing here tracks you, there is no cookie banner to accept.
+Visitors get no cookies. The site remembers whether you chose light or dark mode, and which language you chose if you used the translate button, in your browser's local storage; neither leaves your device. Translation happens in your browser from files served by this site, so the text of the page is not sent to any translation service. The only cookies are a sign-in cookie and a one-off notification cookie used by our own staff when they sign in to publish releases. Because nothing here tracks you, there is no cookie banner to accept.
 
 **[PRIV-19]** _subheading_
 
@@ -1742,7 +2520,7 @@ each member's account: email address, name and sign-in details;
 
 **[PRIV-24]** _list item_
 
-the catalogues, items and plugins your organisation builds;
+the teams, shortcuts and plugins your organisation builds;
 
 **[PRIV-25]** _list item_
 
@@ -1750,7 +2528,7 @@ an audit trail of who changed what, and when;
 
 **[PRIV-26]** _list item_
 
-usage records of who ran which item, when, and from which device and app version — the basis of the team usage figures. These are kept for 180 days by default.
+usage records of who ran which shortcut, when, and from which device and app version — the basis of the team usage figures. These are kept for 180 days by default.
 
 **[PRIV-27]** _text_
 
@@ -1815,6 +2593,14 @@ When this notice changes, the version and date at the top change with it and the
 **[PRIV-42]** _list item_
 
 1.0 · 30 Sept 2026 — First published.
+
+**[PRIV-43]** _list item_
+
+1.1 · 9 Oct 2026 — Added the language button: your choice is remembered in your browser's local storage, and translation happens in your browser.
+
+**[PRIV-44]** _list item_
+
+1.2 · 25 Oct 2026 — Says teams and shortcuts where it said catalogues and items, as the app now does. What is collected and why is unchanged.
 
 ---
 
@@ -1891,7 +2677,7 @@ get around any technical limit or licence check in the App or in a Zipr server.
 
 **[LIC-15]** _text_
 
-The items, catalogues and settings you create in the App, and any plugins you write, belong to you. This licence gives us no rights in them. What you build is stored on your own machine unless you connect the App to a Zipr server.
+The shortcuts, groups and settings you create in the App, and any plugins you write, belong to you. This licence gives us no rights in them. What you build is stored on your own machine unless you connect the App to a Zipr server.
 
 **[LIC-16]** _subheading_
 
@@ -1927,7 +2713,7 @@ The App includes open-source components. Each is licensed to you under its own l
 
 **[LIC-24]** _text_
 
-The App is provided "as is". Items you build can run commands, open files and change things on your computer; you are responsible for what you ask them to do. To the extent the law allows, we give no warranties about the App, express or implied, including that it is fit for a particular purpose or free of errors, and we are not liable for any loss or damage arising from using it, including lost data, lost profits or indirect loss.
+The App is provided "as is". Shortcuts you build can run commands, open files and change things on your computer; you are responsible for what you ask them to do. To the extent the law allows, we give no warranties about the App, express or implied, including that it is fit for a particular purpose or free of errors, and we are not liable for any loss or damage arising from using it, including lost data, lost profits or indirect loss.
 
 **[LIC-25]** _text_
 

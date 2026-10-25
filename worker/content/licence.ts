@@ -19,6 +19,12 @@ export const LICENCE_VERSIONS: LegalVersion[] = [
     date: "2026-09-30",
     summary: "First published.",
   },
+  {
+    version: "1.1",
+    date: "2026-10-25",
+    summary:
+      "Says shortcuts and groups where it said items and catalogues, as the App now does. What you may and may not do is unchanged.",
+  },
 ];
 
 export interface LicenceSection {
@@ -54,7 +60,7 @@ export const LICENCE_SECTIONS: LicenceSection[] = [
   {
     title: "What is yours",
     body: [
-      "The items, catalogues and settings you create in the App, and any plugins you write, belong to you. This licence gives us no rights in them. What you build is stored on your own machine unless you connect the App to a Zipr server.",
+      "The shortcuts, groups and settings you create in the App, and any plugins you write, belong to you. This licence gives us no rights in them. What you build is stored on your own machine unless you connect the App to a Zipr server.",
     ],
   },
   {
@@ -77,7 +83,7 @@ export const LICENCE_SECTIONS: LicenceSection[] = [
   {
     title: "No warranty, and limits on liability",
     body: [
-      'The App is provided "as is". Items you build can run commands, open files and change things on your computer; you are responsible for what you ask them to do. To the extent the law allows, we give no warranties about the App, express or implied, including that it is fit for a particular purpose or free of errors, and we are not liable for any loss or damage arising from using it, including lost data, lost profits or indirect loss.',
+      'The App is provided "as is". Shortcuts you build can run commands, open files and change things on your computer; you are responsible for what you ask them to do. To the extent the law allows, we give no warranties about the App, express or implied, including that it is fit for a particular purpose or free of errors, and we are not liable for any loss or damage arising from using it, including lost data, lost profits or indirect loss.',
       "Nothing in this licence excludes, restricts or modifies any right or remedy you have under the Australian Consumer Law or any other law that cannot lawfully be excluded. Where our liability for a failure to comply with such a guarantee can be limited, it is limited to supplying the App again.",
     ],
   },

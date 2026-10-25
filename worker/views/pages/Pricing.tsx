@@ -192,7 +192,7 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
               Free for you. <em>Paid</em> for your team.
             </>
           }
-          lede="The whole app is free for one person. A team server adds a shared Catalogue — and you choose who runs it."
+          lede="The whole app is free for one person. A team server adds teams that share their shortcuts — and you choose who runs it."
         />
       </Container>
     </Section>

@@ -83,7 +83,7 @@ export const TIERS: PricingTier[] = [
     priceNote: "Billed yearly",
     features: [
       "Everything in Free, for everyone",
-      "A shared Catalogue, updated live as colleagues work",
+      "Team shortcuts, updated live as colleagues work",
       "Members, roles, and who-can-see-what",
       "Edit at the same time without losing work",
       "Full history and one-click rollback",
@@ -199,13 +199,19 @@ export const COMPARISON: ComparisonGroup[] = [
     title: "Working with other people",
     rows: [
       {
-        feature: "Workspaces",
-        free: "One, private",
+        feature: "Teams",
+        free: "Personal only",
         cloud: "Unlimited",
         selfHosted: "Unlimited",
       },
       { feature: "Members and roles", free: false, cloud: true, selfHosted: true },
-      { feature: "Shared Catalogue", free: false, cloud: true, selfHosted: true },
+      {
+        feature: "Share with the whole organisation",
+        note: "One shortcut everyone can run, still looked after by its team.",
+        free: false,
+        cloud: true,
+        selfHosted: true,
+      },
       {
         feature: "One AI key for the whole team",
         note: "An administrator sets it once and chooses who can use Zap. Nobody needs a key of their own.",
@@ -214,8 +220,8 @@ export const COMPARISON: ComparisonGroup[] = [
         selfHosted: true,
       },
       {
-        feature: "Publish your shortcuts to the team",
-        note: "A copy, so your own version stays exactly where it was.",
+        feature: "Move your shortcuts into a team",
+        note: "It moves, so there is one version and everyone runs it.",
         free: false,
         cloud: true,
         selfHosted: true,
@@ -263,11 +269,11 @@ export const COMPARISON: ComparisonGroup[] = [
       {
         feature: "Audit trail",
         free: false,
-        cloud: "Per workspace",
+        cloud: "Per team",
         selfHosted: "Instance-wide",
       },
       {
-        feature: "Central values your Catalogue reuses",
+        feature: "Central values your shortcuts reuse",
         note: "Paths and addresses set once, so nothing is hardcoded in a shortcut.",
         free: false,
         cloud: true,

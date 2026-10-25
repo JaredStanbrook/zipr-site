@@ -44,7 +44,7 @@ const PROPERTIES = [
   {
     icon: "key-round",
     title: "Sharing doesn't loosen access",
-    body: "Work crosses teams only as a published copy, where your administrators allow it. Roles, membership and single sign-on stay yours — and people can't tell whether a Catalogue they can't see exists.",
+    body: "A shortcut leaves its team only when someone the team allows shares it with the organisation or copies it to another team. Roles, membership and single sign-on stay yours — and people can't tell whether a team they can't see exists.",
   },
   {
     icon: "download",
@@ -60,7 +60,7 @@ export const REVIEW_FAQ = [
   },
   {
     q: "What does the app send over the network?",
-    a: "Only your Catalogue content and the sign-in that authorises it, and only to the deployment it is pointed at. With no deployment configured, it makes no network requests at all.",
+    a: "Only your teams' shortcuts and the sign-in that authorises them, and only to the deployment it is pointed at. With no deployment configured, it makes no network requests at all.",
   },
   {
     q: "Can we run it somewhere with no internet access?",
@@ -76,7 +76,7 @@ export const REVIEW_FAQ = [
   },
   {
     q: "Who can see what?",
-    a: "Your administrators decide, per workspace. The system won't confirm that something exists just because someone guessed its address.",
+    a: "Your administrators decide, per team. The system won't confirm that something exists just because someone guessed its address.",
   },
   {
     q: "How do we get security updates?",

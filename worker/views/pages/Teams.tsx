@@ -19,9 +19,10 @@ import {
  * For teams: how sharing grows from one person to a group.
  *
  * Zipr is useful to an individual first, and the page leads with that: the
- * team arrives at the end of the path, not as a prerequisite. The Catalogue
- * is the team's shared collection; the Gallery (a separate, public showcase)
- * is not mentioned here except as the place to find ideas.
+ * team arrives at the end of the path, not as a prerequisite. A team owns
+ * its shortcuts and the Library is where people find them; the Gallery (a
+ * separate, public showcase) is not mentioned here except as the place to
+ * find ideas.
  *
  * The capabilities listed are the ones the team server ships today and are the
  * same as the pricing comparison. Nothing here promises a feature that is not
@@ -52,7 +53,7 @@ const PATH = [
   {
     icon: "users",
     title: "Team",
-    body: "Sharing becomes part of how the group works, in a Catalogue everyone can find.",
+    body: "Sharing becomes part of how the group works, in a Library everyone can search.",
   },
 ];
 
@@ -69,7 +70,7 @@ export const TeamsPage: FC = () => (
               Make something useful. <em>Share it</em> with someone.
             </>
           }
-          lede="The Catalogue is your team's shared collection of shortcuts. Keep useful shortcuts organised so everyone can find and use them."
+          lede="Your team keeps its shortcuts together, in groups if it wants them, so everyone can find and run them."
         />
         <div class="flex flex-wrap justify-center gap-3">
           <LinkButton href="/pricing" size="lg">
@@ -111,19 +112,19 @@ export const TeamsPage: FC = () => (
       </Container>
     </Section>
 
-    {/* ================= THE CATALOGUE ================= */}
+    {/* ================= THE LIBRARY ================= */}
     <Section>
       <Container size="wide">
         <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
           <div class="lg:col-span-5">
-            <Eyebrow>The Catalogue</Eyebrow>
+            <Eyebrow>The Library</Eyebrow>
             <h2 class="text-3xl leading-[1.08] text-balance sm:text-[2.75rem]">
               One place your team's shortcuts live.
             </h2>
             <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
-              A new starter opens the Catalogue and finds what the team runs, in its current
-              version. Teams keep their own workspace and rules, and share work as a published copy
-              that stays attributed and up to date.
+              A new starter opens the Library and finds what the team runs, in its current version.
+              Each team keeps its own shortcuts and rules, and can share one with the whole
+              organisation, which always knows whose it is and runs it up to date.
             </p>
             <ul class="mt-6 space-y-3.5">
               {TEAM_UNLOCKS.map((unlock) => (

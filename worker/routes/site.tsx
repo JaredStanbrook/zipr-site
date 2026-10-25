@@ -93,9 +93,9 @@ siteRoute.get("/gallery", (c) =>
 
 siteRoute.get("/teams", (c) =>
   c.render(<TeamsPage />, {
-    title: "For teams: a shared Catalogue of shortcuts",
+    title: "For teams: one Library for your team's shortcuts",
     description:
-      "Start with one person, then share. A Zipr team server gives your team a shared Catalogue, roles, history and single sign-on, hosted by us or run by you.",
+      "Start with one person, then share. A Zipr team server gives your team a Library of its shortcuts, with roles, history and single sign-on, hosted or self-hosted.",
   }),
 );
 

@@ -7,11 +7,14 @@
 //   Zipr turns the useful things people do on their computers into shortcuts
 //   they can run again and share. The feeling is magic; the language is plain.
 //
-// The vocabulary comes from the brand guide and is the same on every page:
-// a Shortcut is built from Steps (the Action is the code underneath, and
-// stays out of customer-facing copy), a team's shared collection is a
-// Catalogue, and the Gallery is the website's showcase of ideas. Do not
-// say item, node, workflow or macro.
+// The vocabulary comes from the brand guide and the app, and is the same on
+// every page: a Shortcut is built from Steps (the Action is the code
+// underneath, and stays out of customer-facing copy). A person's own
+// shortcuts are Personal and live on their computer; a Team owns its
+// shortcuts, optionally organised in Groups, and can share one with the whole
+// organisation; the Library is where a person finds every shortcut they can
+// run; and the Gallery is the website's showcase of ideas. Do not say item,
+// node, workflow, macro, catalogue or workspace for any of these.
 //
 // Two rules, unchanged:
 //
@@ -66,7 +69,7 @@ export const PILLARS: Feature[] = [
   {
     icon: "users",
     title: "Share it instead of explaining it",
-    body: "Publish a shortcut to your team's Catalogue and everyone runs the same, current version. No zip file in a chat thread, no afternoon spent watching over a shoulder.",
+    body: "Move a shortcut into your team and everyone runs the same, current version. No zip file in a chat thread, no afternoon spent watching over a shoulder.",
     tier: "api",
   },
   {
@@ -112,7 +115,7 @@ export const HOW_IT_WORKS = [
   {
     step: "03",
     title: "Share it",
-    body: "When the team needs it, publish it to your team on a Zipr server hosted by us, or run by you.",
+    body: "When the team needs it, move it into your team on a Zipr server hosted by us, or run by you.",
     cost: "Team server",
   },
 ];
@@ -126,8 +129,8 @@ export const HOW_IT_WORKS = [
  * true.
  */
 export const TEAM_UNLOCKS = [
-  "A shared Catalogue, with a workspace per team and roles and visibility you control",
-  "Publish a copy to another team — your own stays exactly as it was",
+  "Teams that own their shortcuts, with optional groups and roles you control",
+  "Share a shortcut with the whole organisation, and your team still looks after it",
   "Everyone on the current version, updated as colleagues work",
   "Full history, one-click rollback and an audit trail",
   "Single sign-on with Google, Microsoft Entra or Okta",
