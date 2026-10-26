@@ -26,20 +26,11 @@ import { ChevronLeft, ChevronRight, createElement, X, ZoomIn, ZoomOut } from "lu
  *  high-density screen then shows every pixel and no more. */
 const PIXELS_PER_POINT = 2;
 
-const opacityOf = (img: HTMLImageElement) => {
-  // The home hero crossfades two screenshots; enlarge whichever is showing.
-  const slide = img.closest<HTMLElement>(".shot-slide");
-  return slide ? Number.parseFloat(getComputedStyle(slide).opacity) : 1;
-};
-
-/** The picture a trigger is showing right now: the current theme's, and the
- *  slide currently in front. */
-const shownImage = (trigger: HTMLElement) => {
-  const imgs = Array.from(trigger.querySelectorAll<HTMLImageElement>("img")).filter(
+/** The picture a trigger is showing: the current theme's. */
+const shownImage = (trigger: HTMLElement) =>
+  Array.from(trigger.querySelectorAll<HTMLImageElement>("img")).find(
     (img) => img.getClientRects().length > 0,
-  );
-  return imgs.sort((a, b) => opacityOf(b) - opacityOf(a))[0] ?? null;
-};
+  ) ?? null;
 
 const slideFor = (img: HTMLImageElement): SlideData => {
   const src = img.currentSrc || img.src;

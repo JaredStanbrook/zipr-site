@@ -11,6 +11,20 @@ runs underneath. Changes to the site itself go above them.
 
 ### The site
 
+- **The hero shows the launcher both ways at once.** Its two pictures, the
+  launcher as a list and as a grid, used to take turns in one place, so
+  opening one enlarged whichever happened to be in front and the other never
+  reached the picture viewer. They now overlap, the grid behind and the list
+  in front, and each is its own picture: either opens on its own, both are in
+  the viewer's gallery, and the one under the pointer or the focus comes
+  forward so the back one can be read before it is opened. The caption says
+  there are two layouts. The crossfade it replaces is gone, with the viewer's
+  special case for it.
+- **The app's pictures show its new sidebar.** The Library, the editor tour
+  and Run history are captured again from the app, with the sidebar grouped
+  into Shortcuts, Extensions, Insights and System and the account, help and
+  collapse at its foot. The Library's description says so, in every language,
+  and `docs/site-copy.md` is re-exported.
 - **Pictures open in PhotoSwipe.** The enlarged-picture viewer was a plain
   dialog showing one picture at a time; it is now PhotoSwipe, so a picture
   grows out of its place on the page, the page's pictures can be stepped

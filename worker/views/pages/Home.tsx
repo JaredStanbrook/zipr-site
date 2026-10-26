@@ -23,7 +23,6 @@ import {
   CheckItem,
   LogoBricks,
   Screenshot,
-  ScreenshotSwap,
   Disclosure,
 } from "@views/components/Ui";
 
@@ -47,7 +46,13 @@ import {
  */
 
 /**
- * The hero: the launcher itself, in its two layouts, taking turns.
+ * The hero: the launcher itself, in its two layouts at once.
+ *
+ * They used to take turns in one place, crossfading, which made the picture a
+ * lottery to open: a click enlarged whichever was in front, and the other was
+ * never in the viewer at all. Now each is its own picture, overlapping, so
+ * either opens on its own, both are in the viewer's gallery, and the page says
+ * at a glance that there are two ways to see your shortcuts.
  *
  * It used to be a drawing, because there was nothing to photograph.
  * Now there is, and a picture of the real thing answers "what is this?"
@@ -82,10 +87,17 @@ const HeroPanel: FC = () => (
       ></span>
     </span>
 
-    <ScreenshotSwap ids={["overlay-list", "overlay-grid"]} class="relative" />
+    <div class="shot-stack relative">
+      <div>
+        <Screenshot id="overlay-grid" />
+      </div>
+      <div>
+        <Screenshot id="overlay-list" eager />
+      </div>
+    </div>
 
-    <p class="-mt-8 text-center text-xs text-muted-foreground">
-      The Zipr launcher, with some example shortcuts.
+    <p class="-mt-6 text-center text-xs text-muted-foreground">
+      The Zipr launcher as a list and as a grid, with some example shortcuts.
     </p>
   </div>
 );

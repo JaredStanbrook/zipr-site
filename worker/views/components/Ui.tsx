@@ -489,26 +489,3 @@ export const ZoomTrigger: FC<{ children?: Child }> = ({ children }) => (
     {children}
   </button>
 );
-
-/**
- * Two screenshots taking turns in one place, crossfading.
- *
- * Pure CSS: every slide animates on the same cycle, offset by its place in
- * the line, so there is nothing to start, stop or fall out of step. The slides
- * share one grid cell, so the box is as tall as the tallest and does not
- * resize as they change. With reduced motion only the first is shown.
- */
-export const ScreenshotSwap: FC<{ ids: [ScreenshotId, ScreenshotId]; class?: string }> = ({
-  ids,
-  class: className = "",
-}) => (
-  <ZoomTrigger>
-    <div class={`shot-swap ${className}`} style={`--n: ${ids.length};`}>
-      {ids.map((id, i) => (
-        <div class="shot-slide" style={`--i: ${i};`}>
-          <Screenshot id={id} eager={i === 0} zoom={false} />
-        </div>
-      ))}
-    </div>
-  </ZoomTrigger>
-);

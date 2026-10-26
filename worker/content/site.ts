@@ -148,7 +148,7 @@ export const SCREENSHOTS = {
   "app-shortcuts": {
     width: 2752,
     height: 1808,
-    alt: "The Zipr app's Library: a sidebar with Library, Teams and Personal, a search box with a filter, and your personal shortcuts — Book a meeting room, Check the VPN, Fill in my timesheet, Start my workday and more — each with its number of steps and when it last changed, above the shortcuts of your team, Acme IT, in its Helpdesk group.",
+    alt: "The Zipr app's Library: a sidebar grouping Library, Teams and Zap, plugins, insights and settings, with your account at its foot; a search box with a filter; and your personal shortcuts — Book a meeting room, Check the VPN, Fill in my timesheet, Start my workday and more — each with its number of steps and when it last changed, above the shortcuts of your team, Acme IT, in its Helpdesk group.",
   },
   zap: {
     width: 2392,
