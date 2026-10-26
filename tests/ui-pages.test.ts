@@ -301,8 +301,11 @@ describe("UI pages load", () => {
     const testApp = createTestApp(null);
     for (const path of ["/", "/features", "/zap", "/toolbox", "/teams"]) {
       const html = await (await get(testApp, path)).text();
-      // One viewer per page, however many pictures there are.
-      expect(html.match(/<dialog id="lightbox"/g)?.length ?? 0, `dialog on ${path}`).toBe(1);
+      // The viewer's labels, once per page, for the translator to find.
+      expect(html.match(/id="lightbox-text"/g)?.length ?? 0, `labels on ${path}`).toBe(1);
+      for (const key of ["dialog", "close", "zoom", "previous", "next", "error"]) {
+        expect(html, `${key} label on ${path}`).toContain(`data-lightbox-text="${key}"`);
+      }
 
       // Every screenshot is inside a trigger button: strip the triggers' contents
       // and no screenshot may remain outside one.

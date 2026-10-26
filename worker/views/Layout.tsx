@@ -188,23 +188,19 @@ export const Layout: FC<LayoutProps> = (props) => {
         </main>
         <div id="modal-container"></div>
 
-        <!-- The one viewer every picture opens in. Native <dialog>: the browser
-             traps focus, closes on Escape and hands focus back to whatever
-             opened it. lib/lightbox.ts fills it in. -->
-        <dialog id="lightbox" class="lightbox" aria-labelledby="lightbox-caption">
-          <div class="lightbox-frame">
-            <button
-              type="button"
-              data-lightbox-close
-              class="lightbox-close"
-              aria-label="Close enlarged image"
-            >
-              <i data-lucide="x" class="h-5 w-5" aria-hidden="true"></i>
-            </button>
-            <img class="lightbox-img" alt="" />
-            <p id="lightbox-caption" class="sr-only"></p>
-          </div>
-        </dialog>
+        <!-- The words the picture viewer (lib/lightbox.ts, PhotoSwipe) speaks.
+             PhotoSwipe builds its controls only when a picture is opened, so
+             the labels live here, where the translator finds them with the
+             rest of the page, and are handed to it from here. Hidden: they
+             are read out on the controls themselves, not from this list. -->
+        <div id="lightbox-text" hidden>
+          <span data-lightbox-text="dialog">Enlarged picture</span>
+          <span data-lightbox-text="close">Close enlarged image</span>
+          <span data-lightbox-text="zoom">Zoom in or out</span>
+          <span data-lightbox-text="previous">Previous picture</span>
+          <span data-lightbox-text="next">Next picture</span>
+          <span data-lightbox-text="error">This picture didn't load.</span>
+        </div>
 
         <app-toaster></app-toaster>
 

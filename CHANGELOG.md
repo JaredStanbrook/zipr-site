@@ -11,6 +11,18 @@ runs underneath. Changes to the site itself go above them.
 
 ### The site
 
+- **Pictures open in PhotoSwipe.** The enlarged-picture viewer was a plain
+  dialog showing one picture at a time; it is now PhotoSwipe, so a picture
+  grows out of its place on the page, the page's pictures can be stepped
+  through with the arrows, the arrow keys or a swipe, and a picture can be
+  pinched, double-tapped or zoomed to the size it was drawn at and panned —
+  where on a phone it used to open cropped, twice the screen's width. A spinner
+  shows while a picture loads and a message if it does not. The viewer is
+  loaded only when someone is about to open a picture, and if it cannot be
+  loaded the picture opens on its own instead. Its controls keep the site's
+  round dark buttons, it is a named modal dialog that reads each picture's
+  description as it is shown, and its labels are translated with the page.
+  PhotoSwipe (MIT) is added to the third-party notices.
 - **The new shortcut editor, on show.** The home page's editor picture is now
   the whole app with a shortcut open that shows everything the editor draws:
   its trigger at the head of its steps, both paths of an If joining again,
