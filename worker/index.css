@@ -1304,20 +1304,13 @@
   .pswp {
     /* A fixed warm dark, not a token: in dark mode the foreground is light. */
     --pswp-bg: #191713;
-    --pswp-placeholder-bg: var(--popover);
+    --pswp-placeholder-bg: transparent;
     --pswp-root-z-index: 300;
     --pswp-preloader-color: #ffffff33;
     --pswp-preloader-color-secondary: #fff;
     --pswp-error-text-color: var(--foreground);
     font-family: var(--font-sans);
   }
-  /* The screenshots have transparent corners; seat them on the card colour, as
-     they are on the page. */
-  .pswp__img {
-    border-radius: 1.4rem;
-    background-color: var(--popover);
-  }
-
   .pswp__top-bar {
     top: max(0.75rem, env(safe-area-inset-top));
     right: max(0.75rem, env(safe-area-inset-right));
