@@ -95,7 +95,7 @@ siteRoute.get("/teams", (c) =>
   c.render(<TeamsPage />, {
     title: "For teams: one Library for your team's shortcuts",
     description:
-      "Start with one person, then share. A Zipr team server gives your team a Library of its shortcuts, with roles, history and single sign-on, hosted or self-hosted.",
+      "Move from sending .zipr files to one shared Library: one version of each shortcut, kept current, with roles, history and single sign-on. Hosted or self-hosted.",
   }),
 );
 
