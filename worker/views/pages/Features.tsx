@@ -85,6 +85,12 @@ const TOUR: { shot: ScreenshotId; eyebrow: string; title: string; body: string }
     title: "Let it take a different path",
     body: "Add an If or a menu, and the shortcut takes one path or another.",
   },
+  {
+    shot: "run-history",
+    eyebrow: "Run history",
+    title: "See what every run did",
+    body: "Every time a shortcut runs on your computer: when, how long it took, and if it stopped, the step that stopped it and why.",
+  },
 ];
 
 const PillarGrid: FC<{ tier: Feature["tier"] }> = ({ tier }) => (

@@ -293,9 +293,10 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
           </div>
 
           <figure class="mt-12 lg:mt-16">
-            <Screenshot id="editor-steps" class="mx-auto max-w-4xl" />
+            <Screenshot id="editor-tour" class="mx-auto max-w-5xl" />
             <figcaption class="mt-4 text-center text-sm text-muted-foreground text-pretty">
-              One shortcut, three steps, and it starts by itself every weekday at 8:45.
+              One shortcut: it checks the VPN, takes the path that fits, and starts by itself every
+              weekday at 8:30.
             </figcaption>
           </figure>
         </Container>

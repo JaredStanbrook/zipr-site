@@ -441,7 +441,7 @@ Plugins From your plugins Extend your shortcuts with steps from installed plugin
 
 **[HOME-58]** _text_
 
-One shortcut, three steps, and it starts by itself every weekday at 8:45.
+One shortcut: it checks the VPN, takes the path that fits, and starts by itself every weekday at 8:30.
 
 **[HOME-59]** _text_
 
@@ -1406,337 +1406,349 @@ Add an If or a menu, and the shortcut takes one path or another.
 
 **[FEAT-16]** _text_
 
-ZAP
+RUN HISTORY
 
 **[FEAT-17]** _subheading_
 
-Or bring the idea, and ask Zap to build it.
+See what every run did
 
 **[FEAT-18]** _text_
 
-Zap, the helper that builds shortcuts from your words, turns an idea into a starting point for a shortcut, for you to test before you keep it.
+Every time a shortcut runs on your computer: when, how long it took, and if it stopped, the step that stopped it and why.
 
-**[FEAT-19]** _button_
+**[FEAT-19]** _text_
 
-Ask Zap to build it
+ZAP
 
 **[FEAT-20]** _subheading_
 
-In the free app
+Or bring the idea, and ask Zap to build it.
 
 **[FEAT-21]** _text_
 
+Zap, the helper that builds shortcuts from your words, turns an idea into a starting point for a shortcut, for you to test before you keep it.
+
+**[FEAT-22]** _button_
+
+Ask Zap to build it
+
+**[FEAT-23]** _subheading_
+
+In the free app
+
+**[FEAT-24]** _text_
+
 Free
 
-**[FEAT-22]** _subheading_
+**[FEAT-25]** _subheading_
 
 One click instead of a walkthrough
 
-**[FEAT-23]** _text_
+**[FEAT-26]** _text_
 
 The steps you worked out become one named shortcut. A colleague clicks it and it runs — no document to follow, no one talking them through it.
 
-**[FEAT-24]** _subheading_
+**[FEAT-27]** _subheading_
 
 Instant, and it works offline
 
-**[FEAT-25]** _text_
+**[FEAT-28]** _text_
 
 Everything is already on your computer, so Zipr opens straight away and keeps working on a plane.
 
-**[FEAT-26]** _subheading_
+**[FEAT-29]** _subheading_
 
 Runs only where you click
 
-**[FEAT-27]** _text_
+**[FEAT-30]** _text_
 
 Every step runs on the computer of the person who clicked — never on our servers or yours. That is the short answer to your security team's first question.
 
-**[FEAT-28]** _subheading_
+**[FEAT-31]** _subheading_
 
 Plugins for everything else
 
-**[FEAT-29]** _text_
+**[FEAT-32]** _text_
 
 When the built-in steps run out, a plugin adds a new one. Plugins are kept apart from the app, so a faulty one can't take it down.
 
-**[FEAT-30]** _subheading_
+**[FEAT-33]** _subheading_
 
 With a team server
 
-**[FEAT-31]** _text_
+**[FEAT-34]** _text_
 
 Team
 
-**[FEAT-32]** _subheading_
+**[FEAT-35]** _subheading_
 
 Share it instead of explaining it
 
-**[FEAT-33]** _text_
+**[FEAT-36]** _text_
 
 Move a shortcut into your team and everyone runs the same, current version. No zip file in a chat thread, no afternoon spent watching over a shoulder.
 
-**[FEAT-34]** _subheading_
+**[FEAT-37]** _subheading_
 
 Edit together without losing work
 
-**[FEAT-35]** _text_
+**[FEAT-38]** _text_
 
 Two people improve the same shortcut at once and both changes survive. If you changed the same thing, you're shown exactly what clashed.
 
-**[FEAT-36]** _subheading_
+**[FEAT-39]** _subheading_
 
 Undo anything
 
-**[FEAT-37]** _text_
+**[FEAT-40]** _text_
 
 Every change is kept. Put any shortcut back how it was in one click, and see who changed what — so trying the strange version costs nothing.
 
-**[FEAT-38]** _subheading_
+**[FEAT-41]** _subheading_
 
 Hosted by us, or on your own servers
 
-**[FEAT-39]** _text_
+**[FEAT-42]** _text_
 
 Let us run the server, in a database that belongs to your organisation alone. Or self-host it inside your own network, under your own backups.
 
-**[FEAT-40]** _text_
+**[FEAT-43]** _text_
 
 IN PRACTICE
 
-**[FEAT-41]** _subheading_
+**[FEAT-44]** _subheading_
 
 Five situations you'll recognise
 
-**[FEAT-42]** _text_
+**[FEAT-45]** _text_
 
 Where good know-how usually gets lost — and what changes with Zipr.
 
-**[FEAT-43]** _text_
+**[FEAT-46]** _text_
 
 01 / 05
 
-**[FEAT-44]** _subheading_
+**[FEAT-47]** _subheading_
 
 What you built would help another team
 
-**[FEAT-45]** _text_
-
-WITHOUT ZIPR
-
-**[FEAT-46]** _text_
-
-You write it up, they misread step four, and you end up on the call anyway — or you never mention it at all.
-
-**[FEAT-47]** _text_
-
-WITH IT
-
 **[FEAT-48]** _text_
 
-You share it with the organisation and they run it. Your team still looks after it, so theirs stays current.
+WITHOUT ZIPR
 
 **[FEAT-49]** _text_
 
-02 / 05
+You write it up, they misread step four, and you end up on the call anyway — or you never mention it at all.
 
-**[FEAT-50]** _subheading_
+**[FEAT-50]** _text_
 
-A new starter joins on Monday
+WITH IT
 
 **[FEAT-51]** _text_
 
-WITHOUT ZIPR
+You share it with the organisation and they run it. Your team still looks after it, so theirs stays current.
 
 **[FEAT-52]** _text_
 
-A wiki page, three chat threads, a zip of scripts, and the same questions for a fortnight.
+02 / 05
 
-**[FEAT-53]** _text_
+**[FEAT-53]** _subheading_
 
-WITH IT
+A new starter joins on Monday
 
 **[FEAT-54]** _text_
 
-They install Zipr, open the Library, and every shortcut the team runs is there, in its current version.
+WITHOUT ZIPR
 
 **[FEAT-55]** _text_
 
-03 / 05
+A wiki page, three chat threads, a zip of scripts, and the same questions for a fortnight.
 
-**[FEAT-56]** _subheading_
+**[FEAT-56]** _text_
 
-Two of you improve the same thing
+WITH IT
 
 **[FEAT-57]** _text_
 
-WITHOUT ZIPR
+They install Zipr, open the Library, and every shortcut the team runs is there, in its current version.
 
 **[FEAT-58]** _text_
 
-Last save wins, and somebody's work quietly disappears.
+03 / 05
 
-**[FEAT-59]** _text_
+**[FEAT-59]** _subheading_
 
-WITH IT
+Two of you improve the same thing
 
 **[FEAT-60]** _text_
 
-Both improvements survive. If you changed the same thing, you see exactly what clashed and decide.
+WITHOUT ZIPR
 
 **[FEAT-61]** _text_
 
-04 / 05
+Last save wins, and somebody's work quietly disappears.
 
-**[FEAT-62]** _subheading_
+**[FEAT-62]** _text_
 
-You want to try the strange version
+WITH IT
 
 **[FEAT-63]** _text_
 
-WITHOUT ZIPR
+Both improvements survive. If you changed the same thing, you see exactly what clashed and decide.
 
 **[FEAT-64]** _text_
 
-You don't, because undoing it means remembering what it looked like before.
+04 / 05
 
-**[FEAT-65]** _text_
+**[FEAT-65]** _subheading_
 
-WITH IT
+You want to try the strange version
 
 **[FEAT-66]** _text_
 
-You try it. Every change is kept, so putting it back is one click.
+WITHOUT ZIPR
 
 **[FEAT-67]** _text_
 
-05 / 05
+You don't, because undoing it means remembering what it looked like before.
 
-**[FEAT-68]** _subheading_
-
-You're on a train with no signal
-
-**[FEAT-69]** _text_
-
-WITHOUT ZIPR
-
-**[FEAT-70]** _text_
-
-The tool is a website, so the tool is gone.
-
-**[FEAT-71]** _text_
+**[FEAT-68]** _text_
 
 WITH IT
 
+**[FEAT-69]** _text_
+
+You try it. Every change is kept, so putting it back is one click.
+
+**[FEAT-70]** _text_
+
+05 / 05
+
+**[FEAT-71]** _subheading_
+
+You're on a train with no signal
+
 **[FEAT-72]** _text_
 
-Everything is already on your laptop. Keep working; changes sync when you reconnect.
+WITHOUT ZIPR
 
 **[FEAT-73]** _text_
 
-THE TOOLBOX
+The tool is a website, so the tool is gone.
 
-**[FEAT-74]** _subheading_
+**[FEAT-74]** _text_
 
-The steps a shortcut is built from
+WITH IT
 
 **[FEAT-75]** _text_
 
+Everything is already on your laptop. Keep working; changes sync when you reconnect.
+
+**[FEAT-76]** _text_
+
+THE TOOLBOX
+
+**[FEAT-77]** _subheading_
+
+The steps a shortcut is built from
+
+**[FEAT-78]** _text_
+
 Each step does one job. Put steps together, in any order, to make a shortcut that gets something useful done.
-
-**[FEAT-76]** _list item_
-
-Web 3 steps Open websites, search for information and find your way. Open Webpage · Search Web · Show Directions
-
-**[FEAT-77]** _list item_
-
-Email, Calls & Meetings 5 steps Send emails, start calls, join meetings and connect to other computers. Create Email · Start Call · Join Meeting …
-
-**[FEAT-78]** _list item_
-
-Files & Folders 16 steps Find, open, organise, copy and save your files. Open File · Open Folder · Show in Folder …
 
 **[FEAT-79]** _list item_
 
-Apps & System 8 steps Control your apps, adjust settings and capture your screen. Open App · Quit App · Take Screenshot …
+Web 3 steps Open websites, search for information and find your way. Open Webpage · Search Web · Show Directions
 
 **[FEAT-80]** _list item_
 
-Ask & Choose 5 steps Ask questions, collect answers and let people choose what happens next. Ask for Input · Ask for Confirmation · Choose from List …
+Email, Calls & Meetings 5 steps Send emails, start calls, join meetings and connect to other computers. Create Email · Start Call · Join Meeting …
 
 **[FEAT-81]** _list item_
 
-Text & Clipboard 7 steps Create, transform and reuse text wherever you need it. Text · Combine Text · Split Text …
+Files & Folders 16 steps Find, open, organise, copy and save your files. Open File · Open Folder · Show in Folder …
 
 **[FEAT-82]** _list item_
 
-Lists & Data 6 steps Build lists, organise information and find the data you need. List · Get Item from List · Filter List …
+Apps & System 8 steps Control your apps, adjust settings and capture your screen. Open App · Quit App · Take Screenshot …
 
 **[FEAT-83]** _list item_
 
-Dates & Numbers 4 steps Work with dates, adjust time periods and perform calculations. Get Current Date · Format Date · Adjust Date …
+Ask & Choose 5 steps Ask questions, collect answers and let people choose what happens next. Ask for Input · Ask for Confirmation · Choose from List …
 
 **[FEAT-84]** _list item_
 
-Logic & Flow 8 steps Add decisions, repeat tasks and control how your shortcuts run. If · Repeat · Repeat with Each …
+Text & Clipboard 7 steps Create, transform and reuse text wherever you need it. Text · Combine Text · Split Text …
 
 **[FEAT-85]** _list item_
 
-Show & Speak 5 steps Show results, display notifications, preview files and speak text aloud. Show Notification · Show Result · Quick Look …
+Lists & Data 6 steps Build lists, organise information and find the data you need. List · Get Item from List · Filter List …
 
 **[FEAT-86]** _list item_
 
-AI 3 steps Generate, summarise and rewrite text with your connected AI model. Generate Text · Summarise Text · Rewrite Text
+Dates & Numbers 4 steps Work with dates, adjust time periods and perform calculations. Get Current Date · Format Date · Adjust Date …
 
 **[FEAT-87]** _list item_
 
-Advanced 4 steps Work with URLs, run scripts and access advanced integrations. Open Link · Get Contents of URL · Run Shell Script …
+Logic & Flow 8 steps Add decisions, repeat tasks and control how your shortcuts run. If · Repeat · Repeat with Each …
 
 **[FEAT-88]** _list item_
 
+Show & Speak 5 steps Show results, display notifications, preview files and speak text aloud. Show Notification · Show Result · Quick Look …
+
+**[FEAT-89]** _list item_
+
+AI 3 steps Generate, summarise and rewrite text with your connected AI model. Generate Text · Summarise Text · Rewrite Text
+
+**[FEAT-90]** _list item_
+
+Advanced 4 steps Work with URLs, run scripts and access advanced integrations. Open Link · Get Contents of URL · Run Shell Script …
+
+**[FEAT-91]** _list item_
+
 Plugins From your plugins Extend your shortcuts with steps from installed plugins.
 
-**[FEAT-89]** _text_
+**[FEAT-92]** _text_
 
 74 steps, by group. See every step
 
-**[FEAT-90]** _subheading_
+**[FEAT-93]** _subheading_
 
 Decide what happens next
 
-**[FEAT-91]** _text_
+**[FEAT-94]** _text_
 
 Run a step only if the one before it worked, or only if it didn't, such as opening a help page.
 
-**[FEAT-92]** _subheading_
+**[FEAT-95]** _subheading_
 
 One shortcut for Windows and Mac
 
-**[FEAT-93]** _text_
+**[FEAT-96]** _text_
 
 If a step differs between them, mark it for Windows or for Mac. The same shortcut then works on both.
 
-**[FEAT-94]** _subheading_
+**[FEAT-97]** _subheading_
 
 Go further with plugins
 
-**[FEAT-95]** _text_
+**[FEAT-98]** _text_
 
 When the built-in steps run out, a plugin adds a new one.
 
-**[FEAT-96]** _subheading_
+**[FEAT-99]** _subheading_
 
 Build your first shortcut.
 
-**[FEAT-97]** _text_
+**[FEAT-100]** _text_
 
 Free, no account, no card. Come back the day somebody else asks how you did it.
 
-**[FEAT-98]** _button_
+**[FEAT-101]** _button_
 
 Download Zipr
 
-**[FEAT-99]** _text_
+**[FEAT-102]** _text_
 
 Browse the Gallery
 
