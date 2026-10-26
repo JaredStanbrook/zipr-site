@@ -171,10 +171,6 @@ const LanguageMenu = () => html`
           `,
         )}
       </ul>
-      <p class="px-3 pb-2 pt-3 text-xs leading-relaxed text-muted-foreground">
-        Translated automatically. If something reads oddly, the English is the original. The privacy
-        notice and licence are only in English.
-      </p>
     </div>
   </div>
 `;
