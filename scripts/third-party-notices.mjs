@@ -25,6 +25,7 @@ const ROOTS = [
   "htmx.org",
   "lit",
   "lucide",
+  "photoswipe",
   "@simplewebauthn/browser",
   "qrcode",
   "hono",
