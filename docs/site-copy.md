@@ -92,10 +92,6 @@ Português (Brasil) ✓
 
 **[NAV-18]** _text_
 
-Translated automatically. If something reads oddly, the English is the original. The privacy notice and licence are only in English.
-
-**[NAV-19]** _text_
-
 Download
 
 **[FOOT-01]** _text_
@@ -229,7 +225,7 @@ Browse the Gallery
 
 **[HOME-05]** _text_
 
-The Zipr launcher, with some example shortcuts.
+The Zipr launcher as a list and as a grid, with some example shortcuts.
 
 **[HOME-06]** _list item_
 

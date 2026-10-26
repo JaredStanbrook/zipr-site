@@ -850,41 +850,31 @@
     }
   }
 
-  /* Two slides stacked in one grid cell, taking turns. Each runs the same
-     cycle (`--shot-hold` each, so twice that in all) and slide `--i` is
-     started `--i` holds late, via a negative delay so nothing is visible out
-     of turn on load. The keyframes below are written for exactly two. */
-  .shot-swap {
-    --shot-hold: 5s;
+  /* The hero's two launcher pictures, overlapping: the grid behind and to the
+     right, the list in front and lower. One grid cell, so the box is as tall
+     as the two together and nothing is positioned out of flow. Each is its
+     own picture to open, so the one under the pointer or the focus comes
+     forward — the back one can be read before it is opened. The pictures
+     carry their own shadow margin, so the overlap looks smaller than it is. */
+  .shot-stack {
     display: grid;
   }
-  .shot-slide {
+  .shot-stack > * {
     grid-area: 1 / 1;
-    align-self: center;
-    animation: shot-swap calc(var(--shot-hold) * var(--n)) ease-in-out infinite;
-    animation-delay: calc(var(--shot-hold) * (var(--i) - var(--n)));
+    width: 80%;
   }
-  @media (prefers-reduced-motion: reduce) {
-    .shot-slide {
-      animation: none !important;
-    }
-    .shot-slide:not(:first-child) {
-      display: none;
-    }
+  .shot-stack > :first-child {
+    justify-self: end;
+    align-self: start;
   }
-}
-
-@keyframes shot-swap {
-  0%,
-  44% {
-    opacity: 1;
+  .shot-stack > :last-child {
+    justify-self: start;
+    margin-top: 22%;
+    z-index: 1;
   }
-  50%,
-  94% {
-    opacity: 0;
-  }
-  100% {
-    opacity: 1;
+  .shot-stack > :hover,
+  .shot-stack > :focus-within {
+    z-index: 2;
   }
 }
 
