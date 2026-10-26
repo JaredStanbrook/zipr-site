@@ -11,6 +11,15 @@ runs underneath. Changes to the site itself go above them.
 
 ### The site
 
+- **The new shortcut editor, on show.** The home page's editor picture is now
+  the whole app with a shortcut open that shows everything the editor draws:
+  its trigger at the head of its steps, both paths of an If joining again,
+  which step reads which, how each step went in its last run, an overview map
+  and the panel beside it. The features tour gains a fourth stop, Run history,
+  with a failed run open on the step that stopped it. The editor, Library and
+  launcher pictures are regenerated from the app, the alt text says what each
+  one now shows, every translation is updated, and `docs/site-copy.md` is
+  re-exported.
 - **Copy says what the app now says.** Every page, the pricing comparison, the
   privacy notice (1.2) and the licence (1.1) describe teams that own their
   shortcuts, optional groups, a Library to find them, and sharing a shortcut

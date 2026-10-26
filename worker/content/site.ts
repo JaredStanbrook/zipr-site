@@ -118,22 +118,32 @@ export const SCREENSHOTS = {
   "overlay-list": {
     width: 1232,
     height: 1304,
-    alt: "The Zipr launcher: a search box above a list of shortcuts — Start my workday pinned at the top, then Join my next meeting, Focus for an hour, Present my screen, Fill in my timesheet and more — each with its own icon and colour.",
+    alt: "The Zipr launcher: a search box above a list of shortcuts — Start my workday pinned at the top, then the recent ones, Join my next meeting, Focus for an hour, Check the VPN and Start my day connected, then Present my screen, Fill in my timesheet and more — each with its own icon and colour.",
   },
   "overlay-grid": {
     width: 1232,
     height: 1060,
-    alt: "The Zipr launcher in its grid layout: a search box above tiles for Start my workday, Join my next meeting, Present my screen, Fill in my timesheet, Book a meeting room and Focus for an hour, each with an icon and a one-line description.",
+    alt: "The Zipr launcher in its grid layout: a search box above tiles for Start my workday, Start my day connected, Join my next meeting, Present my screen, Fill in my timesheet and Book a meeting room, each with an icon and a one-line description.",
   },
   "editor-steps": {
     width: 2592,
-    height: 2014,
-    alt: "The Zipr shortcut editor open on Start my workday, a personal shortcut that starts on its own at 08:45 on weekdays. Three steps run in order — open my email, open my calendar, open the stand-up notes — and the last is selected, with its web address and what to do if it fails beside it. Below, the shortcut's recent runs.",
+    height: 1808,
+    alt: "The Zipr shortcut editor open on Start my workday, a personal shortcut that starts on its own at 08:45 on weekdays. Its trigger sits above its steps, switched on, with its next run. Three steps run in order — open my email, open my calendar, open the stand-up notes — each ticked from its last run, and the last is selected, with its web address and what to do if it fails in the panel beside it.",
   },
   "editor-branches": {
     width: 2992,
-    height: 2014,
-    alt: "The Zipr shortcut editor open on Check the VPN. After a check, an If step sends the shortcut down two paths: when the VPN is connected it opens the intranet, otherwise it asks what to do — connect, open the help page or leave it. The If's condition is set out beside it.",
+    height: 1928,
+    alt: "The Zipr shortcut editor open on Check the VPN. After a check, an If step sends the shortcut down two paths: when the VPN is connected it opens the intranet, otherwise it asks what to do — connect, open the help page or leave it. The If is selected, and its condition is set out in the panel beside it.",
+  },
+  "editor-tour": {
+    width: 3392,
+    height: 2168,
+    alt: "The Zipr app with the shortcut editor open on Start my day connected. At the top of its steps sits its trigger, weekdays at 08:30, switched on, with its next run. The shortcut checks the VPN, then an If sends it down one of two paths — open the intranet when it is connected, or connect to the VPN and give it a moment — and both paths join again to open email and the stand-up notes. A line shows the If reading the check's result, each step is ticked from its last run, an overview map sits in the corner, and the If is selected with its condition in the panel beside it.",
+  },
+  "run-history": {
+    width: 3072,
+    height: 1568,
+    alt: "Run history for Start my day connected: five runs, each with whether it worked, when, how long it took and what started it. The failed one is open, listing each step in order with its time — the VPN check and the If done, then Connect to the VPN failed, because the program could not be started.",
   },
   "app-shortcuts": {
     width: 2752,
