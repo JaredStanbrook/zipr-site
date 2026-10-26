@@ -11,6 +11,16 @@ runs underneath. Changes to the site itself go above them.
 
 ### The site
 
+- **The Teams page is about what changes, not how a team comes about.** It
+  is written for someone who already uses Zipr and is weighing a team. The
+  five-step "it starts with one person" path is gone. In its place: what a
+  shared Library does that sending `.zipr` files cannot, set side by side —
+  one version instead of drifting copies, fixes that reach everyone, roles,
+  history and rollback, usage figures, and paths and an AI key set once —
+  then the Library itself, three steps to start (choose where it runs, sign
+  in from the app you have, move your shortcuts in) and where it runs. Every
+  claim is one the pricing comparison makes. The page leads with Request
+  access, its description says the same, and every language is translated.
 - **The hero shows the launcher both ways at once.** Its two pictures, the
   launcher as a list and as a grid, used to take turns in one place, so
   opening one enlarged whichever happened to be in front and the other never
