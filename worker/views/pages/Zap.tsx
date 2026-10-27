@@ -10,165 +10,68 @@ import {
   CheckItem,
   CtaBand,
   Disclosure,
+  Eyebrow,
   Screenshot,
 } from "@views/components/Ui";
-
-interface Translation {
-  say: string;
-  steps: { name: string; code: string }[];
-  note: string;
-  audience: "everyday" | "power";
-}
 
 /**
  * Zap turns a plain-language request into an editable Zipr shortcut draft.
  *
  * Page principles:
- * - Show the product experience before explaining the implementation.
- * - Use concrete examples without pretending previews are installed shortcuts.
- * - Distinguish starting a command from verifying its outcome.
+ * - Show Zap at work rather than describe it: two real conversations, one
+ *   everyday and one that uses the whole set of steps, each as a picture.
+ * - Name what Zap builds with — the step categories — not example commands.
  * - Make user control and data boundaries easy to find.
  * - Keep technical depth available without making it the entry point.
+ *
+ * Every claim is one the app makes good: Zap only adds steps the registry
+ * has, checks whether an app or command is installed, lists its assumptions,
+ * and cannot test or run anything; steps that run a program, send something
+ * off the computer or use a plugin need allowing first; and only opening an
+ * app is reported as started rather than finished.
  */
 
-const EXAMPLES: Translation[] = [
-  {
-    audience: "everyday",
-    say: "Email my manager that I'm off sick today.",
-    steps: [
-      {
-        name: "Prepare an email",
-        code: "mailto:sam@example.com?subject=Off%20sick%20today&body=Hi%20Sam%2C%20I'm%20unwell%20today…",
-      },
-    ],
-    note: "Zap can prepare the mail link for you. Your email app opens with the details filled in; you review it and decide whether to send.",
-  },
-  {
-    audience: "everyday",
-    say: "Ask which client I'm working with, then open their workspace.",
-    steps: [
-      {
-        name: "Ask you to choose",
-        code: "Acme · Globex · Initech",
-      },
-      {
-        name: "Open the matching client page",
-        code: "https://crm.example.com/clients/{{ selected client }}",
-      },
-      {
-        name: "Open the matching folder",
-        code: "\\\\files\\clients\\{{ selected client }}",
-      },
-    ],
-    note: "This illustrates the intended shortcut. The prompt value and the later steps must be configured to use the same selection in the actual shortcut.",
-  },
-  {
-    audience: "everyday",
-    say: "Give me a standard out-of-office reply I can paste anywhere.",
-    steps: [
-      {
-        name: "Copy a prepared reply",
-        code: "Thanks for your email — I'm away until Monday and will reply then.",
-      },
-    ],
-    note: "A small shortcut can be useful when you repeat the same task every week.",
-  },
-  {
-    audience: "power",
-    say: "Help me troubleshoot a DNS issue on this computer.",
-    steps: [
-      {
-        name: "Windows command",
-        code: "ipconfig /flushdns",
-      },
-      {
-        name: "macOS command",
-        code: "dscacheutil -flushcache",
-      },
-    ],
-    note: "These are platform-specific examples, not commands to run together. A real shortcut needs to select the appropriate command for the operating system.",
-  },
-  {
-    audience: "power",
-    say: "Ask which project I'm working on, then open it in VS Code.",
-    steps: [
-      {
-        name: "Choose a project",
-        code: "atlas · beacon · comet",
-      },
-      {
-        name: "Open the project folder",
-        code: "code C:\\Projects\\{{ selected project }}",
-      },
-    ],
-    note: "The selected value can be used by a later step when the shortcut is configured to pass it through. The command and path must match your environment.",
-  },
-  {
-    audience: "power",
-    say: "Restart the Windows print spooler.",
-    steps: [
-      {
-        name: "Restart the service",
-        code: "powershell -Command Restart-Service Spooler",
-      },
-    ],
-    note: "This operation may require administrator rights. Review the command and use an appropriate confirmation step before running it.",
-  },
+/** The step categories Zap builds with, as the editor's action search names them. */
+const STEP_KINDS = [
+  { icon: "folder", label: "Files & folders" },
+  { icon: "type", label: "Text & clipboard" },
+  { icon: "list", label: "Lists & data" },
+  { icon: "calendar", label: "Dates & numbers" },
+  { icon: "globe", label: "Web requests" },
+  { icon: "sparkles", label: "AI" },
+  { icon: "message-square", label: "Questions & menus" },
+  { icon: "git-branch", label: "If, Repeat & loops" },
+  { icon: "terminal", label: "Scripts & apps" },
+  { icon: "bell", label: "Notifications" },
 ];
 
-const TranslationCard: FC<{ example: Translation }> = ({ example }) => (
-  <Card lift class="flex h-full flex-col p-6">
-    <p class="text-[0.7rem] font-bold uppercase tracking-[0.16em] text-muted-foreground">
-      The request
-    </p>
+const WORDS_POINTS = [
+  "Every step is one Zipr really has, with settings it accepts",
+  "Ask for a change in a sentence, and every revision is kept",
+  "What Zap assumed is listed beside the draft, to correct",
+];
 
-    <p class="mt-2 font-display text-xl leading-snug text-balance">“{example.say}”</p>
-
-    <div class="my-5 flex items-center gap-3 text-muted-foreground">
-      <span class="h-px flex-1 bg-border"></span>
-      <span class="text-xs font-medium">A possible shortcut draft</span>
-      <span class="h-px flex-1 bg-border"></span>
-    </div>
-
-    <ol class="clay-well space-y-4 rounded-[1.1rem] p-4">
-      {example.steps.map((step, i) => (
-        <li class="min-w-0">
-          <div class="flex items-start gap-3">
-            <span class="mt-0.5 flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-background font-mono text-xs text-muted-foreground">
-              {i + 1}
-            </span>
-            <div class="min-w-0 flex-1">
-              <p class="text-sm font-medium">{step.name}</p>
-              <code class="mt-1 block font-mono text-xs leading-relaxed text-muted-foreground wrap-anywhere">
-                {step.code}
-              </code>
-            </div>
-          </div>
-        </li>
-      ))}
-    </ol>
-
-    <p class="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
-      {example.note}
-    </p>
-  </Card>
-);
+const MORE_POINTS = [
+  "Run a script, call a web service, and branch on what comes back",
+  "Paths nest as deep as the task needs: If, menus and loops",
+  "Checks the apps and commands it relies on are installed",
+];
 
 const HOW_IT_WORKS = [
   {
     icon: "message-square",
     title: "Describe the task",
-    body: "Explain what you want to happen, what information to ask for and what should open or run. You can request changes in the same conversation.",
+    body: "Say what should happen in your own words, and ask for changes in the same conversation.",
   },
   {
     icon: "workflow",
     title: "Review the draft",
-    body: "Zap proposes a sequence of steps Zipr supports. Inspect the order, settings and commands, and review any assumptions before keeping the shortcut.",
+    body: "Read each step in plain language, with its settings and Zap's assumptions beside it.",
   },
   {
     icon: "play",
     title: "Test it yourself",
-    body: "Run the draft using Test. Check what happened on your computer, make changes if needed, then save the shortcut when you're satisfied.",
+    body: "Run the draft for real with Test, then save it as an ordinary shortcut.",
   },
 ];
 
@@ -176,32 +79,32 @@ const TRUST_POINTS = [
   {
     icon: "hand",
     title: "You stay in control",
-    body: "Zap builds and changes a draft. It cannot press Test or run the shortcut for you. You decide when to execute the steps.",
+    body: "Zap builds and changes a draft. It cannot press Test or run the shortcut for you.",
+  },
+  {
+    icon: "shield-alert",
+    title: "Risky steps wait for your OK",
+    body: "Steps that run a program, send something off your computer or use a plugin are listed before a test. Allow them once; if Zap changes one, you're asked again.",
   },
   {
     icon: "circle-check",
     title: "Testing is tied to the draft",
-    body: "A draft is marked tested only while the latest test corresponds to the version you're viewing. Change the draft and it needs another test.",
+    body: "A draft counts as tested only while its latest test ran on the version you're viewing.",
   },
   {
     icon: "terminal",
-    title: "A started command isn't a success report",
-    body: "Zipr starts commands without waiting for them to finish. A test can establish that a command started, not that the intended task succeeded.",
-  },
-  {
-    icon: "shield-alert",
-    title: "Understand risky steps",
-    body: "The app evaluates the step itself to identify actions such as running a program or using administrator rights. Review the warning and consider adding confirmation where appropriate.",
+    title: "Started isn't finished",
+    body: "Scripts, web requests and file steps report what happened. Opening an app only reports that it started, and the test says so.",
   },
   {
     icon: "history",
     title: "Changes are reviewable",
-    body: "Zap tracks numbered revisions. You can inspect changes, including removed steps, and restore an earlier version when needed.",
+    body: "Every revision is numbered, removed steps are shown, and an earlier version can be restored.",
   },
   {
     icon: "layers",
-    title: "Built around supported steps",
-    body: "Zap works with the steps Zipr exposes and their accepted settings. The resulting draft should use real supported actions, not invented capabilities.",
+    title: "Real steps only",
+    body: "Zap can only add steps this computer and your organisation allow, and every change is checked the way a save is.",
   },
 ];
 
@@ -254,11 +157,11 @@ export const ZAP_FAQ = [
   },
   {
     q: "Can Zap run commands on my computer without asking?",
-    a: "Zap itself cannot press Test or run the shortcut. When you choose to test or run a shortcut, its configured steps execute. Review commands and permissions, and add confirmation steps when appropriate.",
+    a: "No. Zap cannot press Test or run the shortcut. A step that runs a program, sends something off your computer or uses a plugin must be allowed by you before the draft can be tested or saved.",
   },
   {
     q: "Does a successful test prove the task worked?",
-    a: "Not necessarily. Zipr starts a command without waiting for it to finish, so a test may show that the command started without proving its final result. Check the output and the actual outcome when a task matters.",
+    a: "Mostly. Scripts, web requests and file steps report what actually happened. Opening an app only reports that it started, so check the outcome yourself when a task matters.",
   },
   {
     q: "What happens when I save a shortcut?",
@@ -282,244 +185,261 @@ export const ZAP_FAQ = [
   },
 ];
 
-export const ZapPage: FC = () => {
-  const everyday = EXAMPLES.filter((example) => example.audience === "everyday");
-  const power = EXAMPLES.filter((example) => example.audience === "power");
+export const ZapPage: FC = () => (
+  <Page>
+    {/* HERO */}
+    <Section class="pt-12 sm:pt-20">
+      <Container>
+        <SectionHeading
+          as="h1"
+          align="center"
+          eyebrow="Meet Zap"
+          title={
+            <>
+              Describe it. <em>Zap builds it.</em>
+            </>
+          }
+          lede="Say what you want done in your own words. Zap builds it from every kind of step Zipr has — files, text, web requests, AI, menus, loops and branches — and you test it before anything is saved."
+        />
 
-  return (
-    <Page>
-      {/* HERO */}
-      <Section class="pt-12 sm:pt-20">
-        <Container>
-          <SectionHeading
-            as="h1"
-            align="center"
-            eyebrow="Meet Zap"
-            title={
-              <>
-                Your idea, translated into <em>action.</em>
-              </>
-            }
-            lede="Describe the task in plain language. Zap helps turn it into a Zipr shortcut draft you can inspect, test and save — with you in control at every step."
-          />
+        <div class="mx-auto grid max-w-3xl gap-3 sm:grid-cols-3">
+          {[
+            { icon: "message-square", text: "Describe what you want" },
+            { icon: "workflow", text: "Review the steps" },
+            { icon: "play", text: "Test before saving" },
+          ].map((item) => (
+            <div class="flex items-center justify-center gap-3 rounded-2xl border border-border/70 bg-background/60 p-4 text-sm font-medium">
+              <IconTile icon={item.icon} tone="brand" />
+              <span>{item.text}</span>
+            </div>
+          ))}
+        </div>
+      </Container>
+    </Section>
 
-          <div class="mx-auto mt-8 max-w-5xl">
-            <Screenshot id="zap" eager class="mx-auto" />
+    {/* FROM WORDS TO SHORTCUT */}
+    <Section tone="muted">
+      <Container size="wide">
+        <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
+          <div class="lg:col-span-5">
+            <Eyebrow>From words to shortcut</Eyebrow>
+            <h2 class="text-3xl leading-[1.08] text-balance sm:text-[2.75rem]">
+              Start with the task, not the syntax.
+            </h2>
+            <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
+              One message about a messy Downloads folder becomes a shortcut that reads dates, finds,
+              moves and zips files, and only archives when there is something to archive.
+            </p>
+            <ul class="mt-6 space-y-3.5">
+              {WORDS_POINTS.map((point) => (
+                <CheckItem>{point}</CheckItem>
+              ))}
+            </ul>
           </div>
-
-          <div class="mx-auto mt-8 grid max-w-3xl gap-3 sm:grid-cols-3">
-            {[
-              { icon: "message-square", text: "Describe what you want" },
-              { icon: "workflow", text: "Review the steps" },
-              { icon: "play", text: "Test before saving" },
-            ].map((item) => (
-              <div class="flex items-center justify-center gap-3 rounded-2xl border border-border/70 bg-background/60 p-4 text-sm font-medium">
-                <IconTile icon={item.icon} tone="brand" />
-                <span>{item.text}</span>
-              </div>
-            ))}
+          <div class="lg:col-span-7">
+            <Screenshot id="zap" eager />
           </div>
-        </Container>
-      </Section>
+        </div>
+      </Container>
+    </Section>
 
-      {/* SHOW THE EXPERIENCE */}
-      <Section tone="muted">
-        <Container size="wide">
-          <SectionHeading
-            eyebrow="From words to shortcut"
-            title="Start with the task, not the syntax."
-            lede="You shouldn't need to know which command, link or sequence of steps a task requires before you can start building a shortcut."
-          />
-
-          <div class="grid gap-5 md:grid-cols-3">
-            {everyday.map((example) => (
-              <TranslationCard example={example} />
-            ))}
+    {/* MORE THAN SIMPLE AUTOMATION */}
+    <Section>
+      <Container size="wide">
+        <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
+          <div class="lg:order-2 lg:col-span-5">
+            <Eyebrow>More than simple automation</Eyebrow>
+            <h2 class="text-3xl leading-[1.08] text-balance sm:text-[2.75rem]">
+              Scripts, AI, web requests and branches, in one shortcut.
+            </h2>
+            <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
+              Zap reaches for whatever the idea needs. Here it reads the commits since a release,
+              has an AI model write notes customers would read, then offers to copy, email or post
+              them.
+            </p>
+            <ul class="mt-6 flex flex-wrap gap-2" aria-label="What Zap builds with">
+              {STEP_KINDS.map((kind) => (
+                <li class="flex items-center gap-1.5 rounded-full border border-border/70 bg-background/60 py-1 pl-2 pr-3 text-xs font-medium">
+                  <i
+                    data-lucide={kind.icon}
+                    class="h-3.5 w-3.5 text-primary"
+                    aria-hidden="true"
+                  ></i>
+                  {kind.label}
+                </li>
+              ))}
+            </ul>
+            <ul class="mt-6 space-y-3.5">
+              {MORE_POINTS.map((point) => (
+                <CheckItem>{point}</CheckItem>
+              ))}
+            </ul>
           </div>
-
-          <p class="mx-auto mt-5 max-w-3xl text-center text-sm leading-relaxed text-muted-foreground">
-            These are illustrative previews of possible shortcut drafts, not prebuilt shortcuts. The
-            steps, values and integrations must be configured for your environment.
-          </p>
-        </Container>
-      </Section>
-
-      {/* FOR POWER USERS */}
-      <Section>
-        <Container size="wide">
-          <SectionHeading
-            eyebrow="More than simple automation"
-            title="For the shortcuts that need a little more."
-            lede="When a task calls for commands, platform-specific behaviour or system-level actions, Zap can help assemble the steps — and show you what it proposes."
-          />
-
-          <div class="grid gap-5 md:grid-cols-3">
-            {power.map((example) => (
-              <TranslationCard example={example} />
-            ))}
+          <div class="lg:order-1 lg:col-span-7">
+            <Screenshot id="zap-release" />
           </div>
-        </Container>
-      </Section>
+        </div>
+      </Container>
+    </Section>
 
-      {/* PROCESS */}
-      <Section tone="muted">
-        <Container size="wide">
-          <SectionHeading
-            eyebrow="How it works"
-            title="From first request to saved shortcut."
-            lede="The model works out a possible solution using Zipr's available steps. You stay responsible for reviewing and running it."
-          />
+    {/* PROCESS */}
+    <Section tone="muted">
+      <Container size="wide">
+        <SectionHeading
+          eyebrow="How it works"
+          title="From first request to saved shortcut."
+          lede="The model works out a possible solution using Zipr's available steps. You stay responsible for reviewing and running it."
+        />
 
-          <ol class="grid gap-5 md:grid-cols-3">
-            {HOW_IT_WORKS.map((step, i) => (
-              <li>
-                <Card lift class="flex h-full flex-col p-7">
-                  <div class="flex items-center gap-4">
-                    <IconTile icon={step.icon} tone="brand" />
-                    <span class="font-mono text-xs font-semibold text-muted-foreground tabular">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                  </div>
-                  <h3 class="mt-5 text-2xl leading-snug text-balance">{step.title}</h3>
-                  <p class="mt-3 leading-relaxed text-muted-foreground text-pretty">{step.body}</p>
-                </Card>
-              </li>
-            ))}
-          </ol>
-        </Container>
-      </Section>
-
-      {/* TRUST */}
-      <Section>
-        <Container size="wide">
-          <SectionHeading
-            eyebrow="Built with boundaries"
-            title={
-              <>
-                It builds. <em>You</em> run.
-              </>
-            }
-            lede="AI-generated automation deserves clear limits. Zap's permissions and shortcut behaviour are enforced by the app, not left to a promise in the conversation."
-          />
-
-          <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
-            {TRUST_POINTS.map((point) => (
+        <ol class="grid gap-5 md:grid-cols-3">
+          {HOW_IT_WORKS.map((step, i) => (
+            <li>
               <Card lift class="flex h-full flex-col p-7">
-                <IconTile icon={point.icon} tone="brand" />
-                <h3 class="mt-5 text-xl leading-snug text-balance">{point.title}</h3>
-                <p class="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
-                  {point.body}
-                </p>
+                <div class="flex items-center gap-4">
+                  <IconTile icon={step.icon} tone="brand" />
+                  <span class="font-mono text-xs font-semibold text-muted-foreground tabular">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                </div>
+                <h3 class="mt-5 text-2xl leading-snug text-balance">{step.title}</h3>
+                <p class="mt-3 leading-relaxed text-muted-foreground text-pretty">{step.body}</p>
               </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
+            </li>
+          ))}
+        </ol>
+      </Container>
+    </Section>
 
-      {/* PRIVACY */}
-      <Section tone="muted">
-        <Container>
-          <SectionHeading
-            eyebrow="Your data"
-            title="Know what the model receives."
-            lede="Zap sends information needed to build and troubleshoot the shortcut. It excludes several categories of local information."
-          />
+    {/* TRUST */}
+    <Section>
+      <Container size="wide">
+        <SectionHeading
+          eyebrow="Built with boundaries"
+          title={
+            <>
+              It builds. <em>You</em> run.
+            </>
+          }
+          lede="AI-generated automation deserves clear limits. Zap's permissions and shortcut behaviour are enforced by the app, not left to a promise in the conversation."
+        />
 
-          <div class="grid gap-5 md:grid-cols-2">
-            <Card class="p-7">
-              <div class="flex items-center gap-3">
-                <IconTile icon="arrow-up-right" tone="brand" />
-                <h3 class="text-xl">Sent to the model</h3>
-              </div>
-              <ul class="mt-5 space-y-3">
-                {SENT_TO_MODEL.map((line) => (
-                  <CheckItem>{line}</CheckItem>
-                ))}
-              </ul>
+        <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          {TRUST_POINTS.map((point) => (
+            <Card lift class="flex h-full flex-col p-7">
+              <IconTile icon={point.icon} tone="brand" />
+              <h3 class="mt-5 text-xl leading-snug text-balance">{point.title}</h3>
+              <p class="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
+                {point.body}
+              </p>
             </Card>
+          ))}
+        </div>
+      </Container>
+    </Section>
 
-            <Card class="p-7">
-              <div class="flex items-center gap-3">
-                <IconTile icon="shield-check" tone="primary" />
-                <h3 class="text-xl">Not sent to the model</h3>
-              </div>
-              <ul class="mt-5 space-y-3">
-                {NOT_SENT_TO_MODEL.map((line) => (
-                  <li class="flex gap-3">
-                    <i
-                      data-lucide="circle-x"
-                      class="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground"
-                      aria-hidden="true"
-                    ></i>
-                    <span class="text-sm leading-relaxed text-muted-foreground">{line}</span>
-                  </li>
-                ))}
-              </ul>
+    {/* PRIVACY */}
+    <Section tone="muted">
+      <Container>
+        <SectionHeading
+          eyebrow="Your data"
+          title="Know what the model receives."
+          lede="Zap sends information needed to build and troubleshoot the shortcut. It excludes several categories of local information."
+        />
+
+        <div class="grid gap-5 md:grid-cols-2">
+          <Card class="p-7">
+            <div class="flex items-center gap-3">
+              <IconTile icon="arrow-up-right" tone="brand" />
+              <h3 class="text-xl">Sent to the model</h3>
+            </div>
+            <ul class="mt-5 space-y-3">
+              {SENT_TO_MODEL.map((line) => (
+                <CheckItem>{line}</CheckItem>
+              ))}
+            </ul>
+          </Card>
+
+          <Card class="p-7">
+            <div class="flex items-center gap-3">
+              <IconTile icon="shield-check" tone="primary" />
+              <h3 class="text-xl">Not sent to the model</h3>
+            </div>
+            <ul class="mt-5 space-y-3">
+              {NOT_SENT_TO_MODEL.map((line) => (
+                <li class="flex gap-3">
+                  <i
+                    data-lucide="circle-x"
+                    class="mt-0.5 h-5 w-5 shrink-0 text-muted-foreground"
+                    aria-hidden="true"
+                  ></i>
+                  <span class="text-sm leading-relaxed text-muted-foreground">{line}</span>
+                </li>
+              ))}
+            </ul>
+          </Card>
+        </div>
+
+        <p class="mt-5 text-sm leading-relaxed text-muted-foreground">
+          The model provider processes the information sent to it. Check the provider's privacy
+          terms and your organisation's policies before sending sensitive work details.
+        </p>
+      </Container>
+    </Section>
+
+    {/* PROVIDERS */}
+    <Section>
+      <Container>
+        <SectionHeading
+          eyebrow="Choose your model"
+          title="Your AI, your choice."
+          lede="Use a supported provider you already have access to, or connect through your organisation's configured service."
+        />
+
+        <div class="grid gap-5 md:grid-cols-2">
+          {MODEL_OPTIONS.map((option) => (
+            <Card lift class="flex h-full flex-col p-7">
+              <IconTile icon={option.icon} tone="brand" />
+              <h3 class="mt-5 text-xl">{option.title}</h3>
+              <p class="mt-3 text-sm leading-relaxed text-muted-foreground text-pretty">
+                {option.body}
+              </p>
+              <p class="mt-4 text-sm leading-relaxed text-muted-foreground text-pretty">
+                {option.detail}
+              </p>
+              {option.link ? (
+                <p class="mt-5 text-sm">
+                  <a
+                    href={option.link.href}
+                    class="font-semibold text-primary underline-offset-4 hover:underline"
+                  >
+                    {option.link.label}
+                  </a>
+                </p>
+              ) : null}
             </Card>
-          </div>
+          ))}
+        </div>
+      </Container>
+    </Section>
 
-          <p class="mt-5 text-sm leading-relaxed text-muted-foreground">
-            The model provider processes the information sent to it. Check the provider's privacy
-            terms and your organisation's policies before sending sensitive work details.
-          </p>
-        </Container>
-      </Section>
+    {/* FAQ */}
+    <Section tone="muted">
+      <Container size="prose">
+        <SectionHeading align="center" eyebrow="Questions" title="Before you get started." />
+        <div>
+          {ZAP_FAQ.map((item) => (
+            <Disclosure question={item.q}>{item.a}</Disclosure>
+          ))}
+        </div>
+      </Container>
+    </Section>
 
-      {/* PROVIDERS */}
-      <Section>
-        <Container>
-          <SectionHeading
-            eyebrow="Choose your model"
-            title="Your AI, your choice."
-            lede="Use a supported provider you already have access to, or connect through your organisation's configured service."
-          />
-
-          <div class="grid gap-5 md:grid-cols-2">
-            {MODEL_OPTIONS.map((option) => (
-              <Card lift class="flex h-full flex-col p-7">
-                <IconTile icon={option.icon} tone="brand" />
-                <h3 class="mt-5 text-xl">{option.title}</h3>
-                <p class="mt-3 text-sm leading-relaxed text-muted-foreground text-pretty">
-                  {option.body}
-                </p>
-                <p class="mt-4 text-sm leading-relaxed text-muted-foreground text-pretty">
-                  {option.detail}
-                </p>
-                {option.link ? (
-                  <p class="mt-5 text-sm">
-                    <a
-                      href={option.link.href}
-                      class="font-semibold text-primary underline-offset-4 hover:underline"
-                    >
-                      {option.link.label}
-                    </a>
-                  </p>
-                ) : null}
-              </Card>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* FAQ */}
-      <Section tone="muted">
-        <Container size="prose">
-          <SectionHeading align="center" eyebrow="Questions" title="Before you get started." />
-          <div>
-            {ZAP_FAQ.map((item) => (
-              <Disclosure question={item.q}>{item.a}</Disclosure>
-            ))}
-          </div>
-        </Container>
-      </Section>
-
-      {/* CTA */}
-      <CtaBand
-        title="Bring your idea to Zap."
-        body="Download Zipr, connect a supported model and describe the shortcut you want to build. Review it, test it and decide when it's ready to save."
-        primary={{ href: "/downloads", label: "Download Zipr" }}
-        secondary={{ href: "/features", label: "Explore Zipr" }}
-      />
-    </Page>
-  );
-};
+    {/* CTA */}
+    <CtaBand
+      title="Bring your idea to Zap."
+      body="Download Zipr, connect a model and describe the shortcut you want. You test it, and you decide when it's saved."
+      primary={{ href: "/downloads", label: "Download Zipr" }}
+      secondary={{ href: "/features", label: "Explore Zipr" }}
+    />
+  </Page>
+);

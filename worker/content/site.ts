@@ -152,8 +152,13 @@ export const SCREENSHOTS = {
   },
   zap: {
     width: 2392,
-    height: 2414,
-    alt: "Zap building a shortcut called Morning focus. On the left, the conversation: a request in plain words, Zap's reply and the changes it made, a follow-up asking for do not disturb, and a test where every step succeeded and the program shows as started. On the right, the six steps it built, a note that one runs a program, the assumption Zap made, and Test and Save as shortcut.",
+    height: 2910,
+    alt: "Zap building a shortcut called Friday tidy-up. The request asks for screenshots to go into Pictures and anything untouched for a month to be zipped into an archive. Zap builds it, then, asked not to make an empty zip, counts the old files first and wraps the archiving in an If. The steps: get today's date, go back 30 days, find and move the screenshots, find and count the old files, then, if there are any, zip them under today's date, send the originals to the bin and say what was archived — otherwise say it was already tidy. A test shows every step succeeded.",
+  },
+  "zap-release": {
+    width: 2392,
+    height: 3506,
+    alt: "Zap building a shortcut called Release notes, after checking git is on this computer. It runs a git script for the commits since the last tag, splits them into lines, leaves out merge commits, joins them back up and has an AI model write customer-friendly release notes. A menu then offers three paths: copy the notes, draft an email to the team, or post them to the changelog — where an If shows a notification when the changelog accepts them and its answer when it does not. A panel lists the three steps that need allowing before a test: the script, the AI step and the post.",
   },
 } as const;
 
