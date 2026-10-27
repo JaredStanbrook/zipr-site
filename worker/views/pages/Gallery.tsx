@@ -36,13 +36,9 @@ export const GalleryPage: FC = () => (
               What could Zipr help you do <em>at work?</em>
             </>
           }
-          lede="The Gallery shows what Zipr can help you do, with practical examples inspired by different roles, routines and everyday tasks."
+          lede="Explore practical examples across roles and tasks to spark your own ideas, all built directly inside Zipr."
         />
         <div class="mx-auto -mt-4 max-w-2xl text-center">
-          <p class="text-sm leading-relaxed text-muted-foreground text-pretty">
-            These are ideas to spark your own, not files to download. Each one is made from steps
-            you can put together in Zipr.
-          </p>
           <nav aria-label="Jump to a role" class="mt-6 flex flex-wrap justify-center gap-2">
             {GALLERY_ROLES.map((role) => (
               <a
