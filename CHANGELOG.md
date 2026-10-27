@@ -11,6 +11,18 @@ runs underneath. Changes to the site itself go above them.
 
 ### The site
 
+- **The Zap page shows Zap at work.** The six illustrative request cards,
+  each a single command or link with a caveat beneath it, are gone. "From
+  words to shortcut" now shows Zap building a Friday tidy-up from one
+  message — dates, finding, moving, zipping and binning files, with an If
+  added in a second turn — and "More than simple automation" shows it
+  building release notes from a git script, an AI step, a menu of three
+  paths and a web request it branches on, beside the step categories Zap
+  builds with. Both pictures come from zipr-client's showcase. The hero no
+  longer repeats a picture, and the boundaries and FAQ are brought up to
+  date: risky steps wait for your OK, and only opening an app reports
+  "started" — scripts, web requests and file steps report what happened.
+  Every language is translated.
 - **The Teams page is about what changes, not how a team comes about.** It
   is written for someone who already uses Zipr and is weighing a team. The
   five-step "it starts with one person" path is gone. In its place: what a
