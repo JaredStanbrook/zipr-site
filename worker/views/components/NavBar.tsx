@@ -262,7 +262,7 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
       scrolling under it reads as passing beneath an object. The active page is
       the one link pressed in.
     -->
-    <header class="fixed inset-x-0 top-0 z-40 px-2 pt-2 sm:px-4 sm:pt-3">
+    <header class="fixed inset-x-0 top-0 z-40 px-6 pt-2 sm:px-12 sm:pt-3">
       <div
         class="mx-auto flex h-14 max-w-6xl items-center justify-between rounded-full bg-card/80 pl-4 pr-2 shadow-raised backdrop-blur-md supports-[backdrop-filter]:bg-card/70"
       >
