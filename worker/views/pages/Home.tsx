@@ -127,7 +127,7 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
       <Section class="pt-8 sm:pt-16">
         <Container size="wide">
           <div class="grid items-center gap-14 [&>*]:min-w-0 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
-            <div>
+            <div class="text-center">
               <h1
                 class="rise text-[2.9rem] leading-[0.98] text-balance sm:text-7xl lg:text-[5.25rem]"
                 style="--i: 1;"
@@ -136,15 +136,15 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
               </h1>
 
               <p
-                class="rise mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty sm:text-xl"
+                class="rise mx-auto mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty sm:text-xl"
                 style="--i: 2;"
               >
                 Zipr turns the clever things you do on your computer into shortcuts you can run
-                again — and share with anyone who's ever asked, “How did you do that?” No code
+                again and share with anyone who's ever asked, “How did you do that?” No code
                 needed.
               </p>
 
-              <div class="rise mt-9 flex flex-wrap gap-3" style="--i: 3;">
+              <div class="rise mt-9 flex flex-wrap justify-center gap-3" style="--i: 3;">
                 <LinkButton href="/downloads" size="lg">
                   <i data-lucide="download" class="h-4 w-4" aria-hidden="true"></i>
                   Download Zipr
