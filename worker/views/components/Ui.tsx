@@ -76,7 +76,7 @@ export const Eyebrow: FC<{ children?: Child; class?: string }> = ({
   class: className = "",
 }) => (
   <p
-    class={`mb-5 py-1 text-[0.7rem] font-bold tracking-[0.16em] text-muted ${className}`}
+    class={`mb-5 py-1 text-[1rem] font-bold tracking-[0.16em] text-balance ${className}`}
   >
     {children}
   </p>
