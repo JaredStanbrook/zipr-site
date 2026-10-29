@@ -76,12 +76,8 @@ export const Eyebrow: FC<{ children?: Child; class?: string }> = ({
   class: className = "",
 }) => (
   <p
-    class={`clay-raised mb-5 inline-flex items-center gap-2 rounded-full px-3 py-1 text-[0.7rem] font-bold uppercase tracking-[0.16em] text-brand-subtle-foreground ${className}`}
+    class={`mb-5 inline-flex px-3 py-1 text-[0.7rem] tracking-[0.16em] text-brand-subtle-foreground ${className}`}
   >
-    <span
-      class="h-1.5 w-1.5 rounded-full bg-primary shadow-[0_0_0_3px_var(--primary-subtle)]"
-      aria-hidden="true"
-    ></span>
     {children}
   </p>
 );
