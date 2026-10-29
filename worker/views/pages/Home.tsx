@@ -191,7 +191,7 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
           The mark zips shut above it as the page loads — the one piece of
           motion on the site that means something.
          ================================================================= */}
-      <Section tone="muted" id="origin">
+      <Section id="origin">
         <Container size="default">
           <div class="text-center">
             <LogoBricks cell="clamp(0.7rem, 2.6vw, 1.05rem)" class="mx-auto mb-12" />
@@ -280,7 +280,7 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
           answer to "what can it actually do", so it stays on the home page.
           Advanced steps sit behind their own toggle on the toolbox page.
          ================================================================= */}
-      <Section tone="muted" id="toolbox">
+      <Section id="toolbox">
         <Container size="wide">
           <div class="grid gap-12 lg:grid-cols-[0.8fr_1.4fr] lg:gap-16">
             <div class="lg:sticky lg:top-28 lg:self-start">
@@ -348,7 +348,7 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
           badly. Zap is explained where it is first named, and its button says
           what it does.
          ================================================================= */}
-      <Section tone="muted" id="zap">
+      <Section id="zap">
         <Container>
           <div class="grid items-center gap-10 lg:grid-cols-12 lg:gap-14">
             <div class="lg:col-span-5">
@@ -468,7 +468,7 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
           The next step, with both prices beside it so nobody has to click
           through to learn whether the paid half is per person or per
           deployment. */}
-      <Section tone="muted" id="download">
+      <Section id="download">
         <Container>
           <SectionHeading
             align="center"
