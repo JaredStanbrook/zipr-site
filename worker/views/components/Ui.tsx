@@ -5,16 +5,14 @@ import { SCREENSHOTS, SCREENSHOT_BASE, type ScreenshotId } from "@server/content
 /**
  * The site's layout vocabulary.
  *
- * Two systems meeting: the structure is Swiss — a wide measure, a real grid,
- * generous vertical rhythm, one weight of emphasis per screen — and the
- * surfaces are the client's clay, so the page a visitor reads and the app they
- * download look like one product.
+ * Structured sections, precise geometry, generous spacing — and flat. The
+ * page is paper; content sits on it, never above it. Depth is three layers of
+ * flat paint (paper, grey, ink, in that order and no further), and the one way
+ * to set content apart is a well: a grey tray cut into the page, used
+ * sparingly. See the header of `index.css` for the whole system.
  *
- * The clay goes all the way down now. Sections are trays pressed into the
- * page, the primary action is a lump of lit orange with a lip under it, the
- * headings are a soft serif that looks moulded rather than typeset, and the
- * logo is built out of bricks rather than printed. Depth is still a
- * vocabulary — raised, pressed, well, tray — never a shadow guessed per box.
+ * Headings are Space Grotesk, body is Inter, and anything technical is
+ * monospace.
  *
  * Everything here is a pure function of props, rendered on the server. Nothing
  * in this file may reach for browser state.
@@ -31,53 +29,59 @@ export const Container: FC<{
 };
 
 /**
- * Every page starts here. The header floats a few pixels below the top edge
- * and is 56px tall, so `pt-20` clears it with a little air; a page's first
- * section adds its own on top.
+ * Every page starts here. The header is a flat 64px bar fixed to the top
+ * edge, so `pt-20` clears it with a little air; a page's first section adds
+ * its own on top.
  */
 export const Page: FC<{ children?: Child }> = ({ children }) => (
   <div class="pt-20 animate-in fade-in duration-500">{children}</div>
 );
 
 /**
- * A labelled band. `muted` no longer paints a stripe: it presses the band into
- * the page as a tray with rounded ends, inset from the viewport edge so the
- * rim of the tray is visible on both sides.
+ * A labelled band. `muted` paints it grey, edge to edge — layer two, flat.
+ * For one piece of content that needs setting apart, use a `Well` instead.
  */
 export const Section: FC<{
   id?: string;
   tone?: "default" | "muted";
   class?: string;
   children?: Child;
-}> = ({ id, tone = "default", class: className = "", children }) =>
-  tone === "muted" ? (
-    <section id={id} class="px-2 py-4 sm:px-4">
-      <div
-        class={`clay-tray mx-auto max-w-[96rem] rounded-[2rem] py-16 sm:rounded-[3rem] sm:py-24 ${className}`}
-      >
-        {children}
-      </div>
-    </section>
-  ) : (
-    <section id={id} class={`py-16 sm:py-24 ${className}`}>
-      {children}
-    </section>
-  );
+}> = ({ id, tone = "default", class: className = "", children }) => (
+  <section id={id} class={`py-16 sm:py-24 ${tone === "muted" ? "surface-grey" : ""} ${className}`}>
+    {children}
+  </section>
+);
 
 /**
- * The small label above a heading, as a raised chip with a lit dot.
- *
- * Tracked and sized to stay legible — uppercase at 12px with default tracking
- * is measurably harder to read than the same string spaced out, and this
- * appears above every section on the site.
+ * A well: grey, cut a hair into the page. The only place content in the body
+ * may sit "inside" something — so use it sparingly, for the one thing on a
+ * screen that should be set apart. Grey buttons inside one turn white.
+ */
+export const Well: FC<{
+  class?: string;
+  id?: string;
+  as?: "div" | "section" | "aside" | "figure";
+  label?: string;
+  children?: Child;
+}> = ({ class: className = "", id, as: Tag = "div", label, children }) => (
+  <Tag id={id} class={`well ${className}`} aria-label={label}>
+    {children}
+  </Tag>
+);
+
+/**
+ * The small label above a heading: one orange square — the logo's unit — and
+ * the label, tracked out. Tracked because uppercase at this size with default
+ * spacing is measurably harder to read, and this sits above every section.
  */
 export const Eyebrow: FC<{ children?: Child; class?: string }> = ({
   children,
   class: className = "",
 }) => (
   <p
-    class={`mb-5 py-1 text-[1rem] font-bold tracking-[0.16em] text-balance ${className}`}
+    class={`mb-5 flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground text-balance ${className}`}
   >
+    <span class="eyebrow-mark" aria-hidden="true"></span>
     {children}
   </p>
 );
@@ -94,8 +98,8 @@ export const SectionHeading: FC<{
     <Heading
       class={
         Heading === "h1"
-          ? "text-[2.6rem] leading-[1.02] text-balance sm:text-6xl lg:text-7xl"
-          : "text-3xl leading-[1.08] text-balance sm:text-[2.75rem]"
+          ? "text-[2.6rem] leading-[1.0] text-balance sm:text-6xl lg:text-7xl"
+          : "text-3xl leading-[1.05] text-balance sm:text-[2.75rem]"
       }
     >
       {title}
@@ -107,12 +111,10 @@ export const SectionHeading: FC<{
 );
 
 /**
- * A clay surface, in the three states the client's own stylesheet defines: one
- * sitting above the page, one cut into it, and one floating over it.
- *
- * There is deliberately no flat, bordered tone. A bordered box is the thing
- * claymorphism replaces — depth instead of lines. `lift` makes the surface
- * rise towards the pointer, for cards a reader is likely to scan across.
+ * A card. Flat on the page with a hairline edge — never lifted off it. `well`
+ * cuts it into the page instead, for the one card on a screen that should be
+ * set apart. (`raised` and `floating` are the old names for the flat card and
+ * still render as one.) `lift` sharpens the edge under the pointer.
  */
 export const Card: FC<{
   tone?: "raised" | "floating" | "well";
@@ -123,7 +125,7 @@ export const Card: FC<{
   id?: string;
   children?: Child;
 }> = ({ tone = "raised", lift = false, class: className = "", id, style, children }) => {
-  const base = tone === "well" ? "clay-well" : tone === "floating" ? "clay-floating" : "clay";
+  const base = tone === "well" ? "well" : "flat";
   return (
     <div id={id} style={style} class={`${base} ${lift ? "clay-lift" : ""} ${className}`}>
       {children}
@@ -131,29 +133,41 @@ export const Card: FC<{
   );
 };
 
+/**
+ * Buttons are coloured by where they go, not by how much they matter:
+ *
+ *   primary (black)        leaves the page — another page, a download, a site.
+ *   outline (black edge)   a second way off the page, beside a first.
+ *   secondary (grey)       stays on the page — a toggle, a jump, a submit that
+ *                          swaps in place. White on any grey surface.
+ *   ghost                  a quiet in-page control.
+ *   inverse                the old name for a button on a slab; now grey.
+ *
+ * Every one of them glows on hover and focus (`.btn` in index.css).
+ */
 type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "inverse";
 
 const BUTTON_VARIANTS: Record<ButtonVariant, string> = {
-  primary: "clay-primary",
-  secondary: "clay-press bg-secondary text-secondary-foreground shadow-raised hover:brightness-105",
-  outline: "clay-press bg-card text-foreground shadow-raised hover:bg-popover",
-  ghost: "clay-press text-foreground hover:bg-accent hover:text-accent-foreground",
-  /* For a button sitting on a primary-coloured slab, where the primary
-     button would vanish into its own background. */
-  inverse: "clay-press bg-card text-foreground shadow-floating hover:bg-popover",
+  primary: "btn-ink",
+  outline: "btn-ink-outline",
+  secondary: "btn-grey",
+  inverse: "btn-grey",
+  ghost: "btn-ghost",
 };
 
 const buttonClass = (variant: ButtonVariant, size: "default" | "lg", extra: string) =>
-  `inline-flex cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-full font-semibold no-underline transition [&_svg]:size-4 [&_svg]:shrink-0 ${
-    size === "lg" ? "h-12 px-6 text-base" : "h-10 px-5 text-sm"
+  `btn inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-full font-semibold no-underline transition-colors [&_svg]:size-4 [&_svg]:shrink-0 ${
+    size === "lg" ? "h-12 px-6 text-base" : "h-11 px-5 text-sm"
   } ${BUTTON_VARIANTS[variant]} ${extra}`;
 
+/** A link that stays on this page is an in-page action, so it is grey. */
+const variantFor = (href: string): ButtonVariant =>
+  href.startsWith("#") ? "secondary" : "primary";
+
 /**
- * The client's button, as an anchor.
- *
- * Every variant presses: a pixel down, the shadow collapsing inward, so a
- * click reads as physical rather than as a colour change. The primary has its
- * own three-position version with a lip, in `.clay-primary`.
+ * A button that is a link. Its colour follows its destination unless told
+ * otherwise: a `#fragment` stays on the page and is grey, anything else
+ * leaves it and is black.
  */
 export const LinkButton: FC<{
   href: string;
@@ -164,38 +178,61 @@ export const LinkButton: FC<{
   rel?: string;
   target?: string;
   children?: Child;
-}> = ({
-  href,
-  variant = "primary",
-  size = "default",
-  class: className = "",
-  children,
-  ...rest
-}) => (
-  <a href={href} class={buttonClass(variant, size, className)} {...rest}>
+}> = ({ href, variant, size = "default", class: className = "", children, ...rest }) => (
+  <a href={href} class={buttonClass(variant ?? variantFor(href), size, className)} {...rest}>
     {children}
   </a>
 );
 
-/** Same shape, for a real `<button>` inside a form. */
+/** Same shape, for a real `<button>` inside a form. A submit that swaps its
+ *  result in place stays on the page, so it is grey unless told otherwise. */
 export const SubmitButton: FC<{
   variant?: ButtonVariant;
   size?: "default" | "lg";
   class?: string;
   children?: Child;
-}> = ({ variant = "primary", size = "default", class: className = "", children }) => (
+}> = ({ variant = "secondary", size = "default", class: className = "", children }) => (
   <button type="submit" class={buttonClass(variant, size, className)}>
     {children}
   </button>
 );
 
+/** A plain in-page `<button>`: grey, glowing, and the shape of the others. */
+export const ActionButton: FC<{
+  variant?: ButtonVariant;
+  size?: "default" | "lg";
+  class?: string;
+  id?: string;
+  label?: string;
+  pressed?: boolean;
+  data?: Record<string, string>;
+  children?: Child;
+}> = ({
+  variant = "secondary",
+  size = "default",
+  class: className = "",
+  id,
+  label,
+  pressed,
+  data = {},
+  children,
+}) => (
+  <button
+    type="button"
+    id={id}
+    aria-label={label}
+    aria-pressed={pressed === undefined ? undefined : pressed ? "true" : "false"}
+    class={buttonClass(variant, size, className)}
+    {...Object.fromEntries(Object.entries(data).map(([k, v]) => [`data-${k}`, v]))}
+  >
+    {children}
+  </button>
+);
+
 /**
- * The small square that holds a section's icon.
- *
- * Raised rather than a flat tint: at this size the client's control-scale
- * elevation is exactly right, and it is what stops a page of icons reading as
- * stickers. A little tilt, because a row of perfectly square tiles is a grid
- * and a row of slightly handled ones is a set of objects.
+ * The small square that holds a section's icon. Flat: `primary` is a solid
+ * orange square carrying a near-black glyph, `brand` a hairline square on
+ * whatever surface it sits on. Square, untilted — the grid is the point.
  */
 export const IconTile: FC<{
   icon: string;
@@ -204,12 +241,12 @@ export const IconTile: FC<{
   class?: string;
 }> = ({ icon, tone = "primary", size = "default", class: className = "" }) => (
   <span
-    class={`clay-raised inline-flex shrink-0 -rotate-3 items-center justify-center rounded-[0.9rem] ${
+    class={`inline-flex shrink-0 items-center justify-center rounded-[var(--radius-md)] ${
       size === "lg" ? "h-14 w-14" : "h-11 w-11"
     } ${
       tone === "brand"
-        ? "bg-brand-subtle text-brand-subtle-foreground"
-        : "bg-primary-subtle text-primary-subtle-foreground"
+        ? "border border-border bg-surface text-foreground"
+        : "bg-orange text-orange-foreground"
     } ${className}`}
   >
     <i data-lucide={icon} class={size === "lg" ? "h-6 w-6" : "h-5 w-5"} aria-hidden="true"></i>
@@ -223,14 +260,14 @@ export const Badge: FC<{
 }> = ({ tone = "neutral", class: className = "", children }) => {
   const tones = {
     neutral: "bg-muted text-muted-foreground",
-    primary: "bg-primary-subtle text-primary-subtle-foreground",
-    brand: "bg-brand-subtle text-brand-subtle-foreground",
+    primary: "bg-orange text-orange-foreground",
+    brand: "bg-ink text-ink-foreground",
     success: "bg-success-subtle text-success-subtle-foreground",
     warning: "bg-warning-subtle text-warning-subtle-foreground",
   };
   return (
     <span
-      class={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold shadow-[inset_0_1px_0_0_var(--clay-highlight),0_1px_2px_var(--clay-shadow)] ${tones[tone]} ${className}`}
+      class={`inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-semibold ${tones[tone]} ${className}`}
     >
       {children}
     </span>
@@ -257,12 +294,12 @@ export const Mark: FC<{ value: boolean | string }> = ({ value }) => {
     return <span class="text-sm font-medium text-foreground">{value}</span>;
   }
   return value ? (
-    <span class="relative inline-flex h-7 w-7 items-center justify-center rounded-full bg-success-subtle text-success-subtle-foreground shadow-raised">
+    <span class="relative inline-flex h-7 w-7 items-center justify-center rounded-full bg-success-subtle text-success-subtle-foreground">
       <i data-lucide="check" class="h-4 w-4" aria-hidden="true"></i>
       <span class="sr-only">Included</span>
     </span>
   ) : (
-    <span class="relative inline-flex h-7 w-7 items-center justify-center rounded-full bg-muted text-muted-foreground shadow-inset">
+    <span class="relative inline-flex h-7 w-7 items-center justify-center rounded-full bg-muted text-muted-foreground">
       <i data-lucide="minus" class="h-4 w-4" aria-hidden="true"></i>
       <span class="sr-only">Not included</span>
     </span>
@@ -272,7 +309,7 @@ export const Mark: FC<{ value: boolean | string }> = ({ value }) => {
 /** A tick-led list item, used through the pricing cards and feature lists. */
 export const CheckItem: FC<{ children?: Child }> = ({ children }) => (
   <li class="flex gap-3">
-    <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-brand-subtle text-brand-subtle-foreground shadow-[inset_0_1px_0_0_var(--clay-highlight),0_1px_2px_var(--clay-shadow)]">
+    <span class="mt-0.5 inline-flex h-5 w-5 shrink-0 items-center justify-center rounded-[var(--radius-xs)] bg-orange text-orange-foreground">
       <i data-lucide="check" class="h-3 w-3" aria-hidden="true"></i>
     </span>
     <span class="text-sm leading-relaxed text-muted-foreground">{children}</span>
@@ -280,26 +317,29 @@ export const CheckItem: FC<{ children?: Child }> = ({ children }) => (
 );
 
 /**
- * A horizontally scrollable table on a clay surface.
- *
- * The scroll container is the clay, so the rounded corners clip the table and
- * a wide one scrolls inside the shape rather than out of a bordered rectangle.
+ * A horizontally scrollable table on a flat, bordered frame. The frame is the
+ * scroll container, so a wide table scrolls inside it rather than out of it.
  */
 export const TableFrame: FC<{ class?: string; children?: Child }> = ({
   class: className = "",
   children,
-}) => <div class={`clay overflow-x-auto ${className}`}>{children}</div>;
+}) => <div class={`flat overflow-x-auto ${className}`}>{children}</div>;
 
 /**
- * The logo, built from clay.
+ * The logo, built from bricks.
  *
  * `public/logo.svg` is a 16x4 grid of square blocks (see the note in that
- * file), which means it can be assembled out of raised bricks rather than
- * drawn — and the bricks can zip shut left to right when the page loads,
+ * file), which means it can be assembled out of flat orange squares rather
+ * than drawn — and the bricks can zip shut left to right when the page loads,
  * which is what the mark depicts. Each row is the SVG's rects, one character
- * per cell.
+ * per cell. Exported for the footer, which builds its raised copy in `html`.
  */
-const LOGO_ROWS = [".OOOOOOOOOOO....", "..O.O.O.O.O.OOOO", ".O.O.O.O.O.OO.OO", "OOOOOOOOOOO....."];
+export const LOGO_ROWS = [
+  ".OOOOOOOOOOO....",
+  "..O.O.O.O.O.OOOO",
+  ".O.O.O.O.O.OO.OO",
+  "OOOOOOOOOOO.....",
+];
 
 export const LogoBricks: FC<{ cell?: string; animate?: boolean; class?: string }> = ({
   cell = "0.9rem",
@@ -334,8 +374,9 @@ export const LogoBricks: FC<{ cell?: string; animate?: boolean; class?: string }
  * A closing call to action. Every public page ends with one, because a page
  * that answers a question and then stops leaves the reader to hunt the nav.
  *
- * The one place the site goes loud: a whole slab of lit orange clay, with a
- * few stray bricks resting on it.
+ * It used to be a slab of orange; now it is a well — the page's one piece of
+ * emphasis, cut in rather than shouted. Asymmetric: the argument on the left,
+ * the way out on the right.
  */
 export const CtaBand: FC<{
   title: string;
@@ -344,55 +385,24 @@ export const CtaBand: FC<{
   secondary?: { href: string; label: string };
 }> = ({ title, body, primary, secondary }) => (
   <Section>
-    <Container>
-      <div class="clay-slab relative overflow-hidden rounded-[2.5rem] px-6 py-16 text-center sm:px-14 sm:py-20">
-        <span data-parallax="0.12" class="absolute left-[7%] top-[18%] hidden sm:block">
-          <span
-            class="brick float block h-7 w-7"
-            style="--r: -12deg; --d: -1s;"
-            aria-hidden="true"
-          ></span>
-        </span>
-        <span data-parallax="-0.1" class="absolute bottom-[16%] left-[12%] hidden sm:block">
-          <span
-            class="brick float block h-4 w-4"
-            style="--r: 18deg; --d: -3s;"
-            aria-hidden="true"
-          ></span>
-        </span>
-        <span data-parallax="0.16" class="absolute right-[9%] top-[26%] hidden sm:block">
-          <span
-            class="brick float block h-5 w-5"
-            style="--r: 8deg; --d: -5s;"
-            aria-hidden="true"
-          ></span>
-        </span>
-        <span data-parallax="-0.14" class="absolute bottom-[20%] right-[6%] hidden sm:block">
-          <span
-            class="brick float block h-9 w-9"
-            style="--r: -6deg; --d: -2s;"
-            aria-hidden="true"
-          ></span>
-        </span>
-
-        <h2 class="relative mx-auto max-w-3xl text-4xl leading-[1.05] text-balance sm:text-5xl">
-          {title}
-        </h2>
-        <p class="relative mx-auto mt-5 max-w-2xl text-lg leading-relaxed opacity-90 text-pretty">
-          {body}
-        </p>
-        <div class="relative mt-9 flex flex-wrap items-center justify-center gap-3">
-          <LinkButton href={primary.href} variant="inverse" size="lg">
+    <Container size="wide">
+      <div class="well grid gap-10 px-6 py-12 sm:px-12 sm:py-16 lg:grid-cols-12 lg:items-end">
+        <div class="lg:col-span-7">
+          <Eyebrow>Next step</Eyebrow>
+          <h2 class="max-w-3xl text-4xl leading-[1.02] text-balance sm:text-5xl">{title}</h2>
+          <p class="mt-5 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
+            {body}
+          </p>
+        </div>
+        <div class="flex flex-wrap items-center gap-3 lg:col-span-5 lg:justify-end">
+          <LinkButton href={primary.href} size="lg">
             {primary.label}
             <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
           </LinkButton>
           {secondary ? (
-            <a
-              href={secondary.href}
-              class="inline-flex h-12 items-center justify-center rounded-full px-6 font-semibold underline decoration-2 underline-offset-[6px] opacity-90 transition hover:opacity-100"
-            >
+            <LinkButton href={secondary.href} variant="outline" size="lg">
               {secondary.label}
-            </a>
+            </LinkButton>
           ) : null}
         </div>
       </div>
@@ -406,13 +416,14 @@ export const CtaBand: FC<{
  * with no JavaScript at all — which matters for an FAQ that answers the
  * objection standing between a reader and a purchase.
  *
- * Each question is its own raised tile; opening one presses its chevron in.
+ * Flat rows ruled by a hairline. The chevron is a grey in-page control, and
+ * the row glows while it has focus.
  */
 export const Disclosure: FC<{ question: string; children?: Child }> = ({ question, children }) => (
-  <details class="group clay-raised mb-3 rounded-[var(--radius-lg)] px-5 py-4 sm:px-6">
-    <summary class="flex cursor-pointer list-none items-center justify-between gap-4 font-semibold marker:hidden [&::-webkit-details-marker]:hidden">
+  <details class="group border-b border-border py-1 first:border-t">
+    <summary class="glow flex cursor-pointer list-none items-center justify-between gap-4 rounded-[var(--radius-md)] bg-surface px-1 py-4 font-display text-lg font-semibold marker:hidden [&::-webkit-details-marker]:hidden">
       <span class="text-pretty">{question}</span>
-      <span class="inline-flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-muted shadow-raised transition group-open:shadow-inset">
+      <span class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--btn-grey)] transition group-open:bg-ink group-open:[&_svg]:text-ink-foreground">
         <i
           data-lucide="chevron-down"
           class="h-4 w-4 text-muted-foreground transition-transform duration-200 group-open:rotate-180"
@@ -420,7 +431,7 @@ export const Disclosure: FC<{ question: string; children?: Child }> = ({ questio
         ></i>
       </span>
     </summary>
-    <div class="mt-3 pb-1 leading-relaxed text-muted-foreground text-pretty">{children}</div>
+    <div class="px-1 pb-5 leading-relaxed text-muted-foreground text-pretty">{children}</div>
   </details>
 );
 
@@ -484,4 +495,127 @@ export const ZoomTrigger: FC<{ children?: Child }> = ({ children }) => (
   >
     {children}
   </button>
+);
+
+/**
+ * A screenshot that runs off the edge of the page: drawn wider than its
+ * column, so part of it sits on the page and the rest is clipped by the
+ * section (which must carry `overflow-x-clip`). Clicking it still opens the
+ * whole picture in the viewer.
+ *
+ * `spill` is how wide the picture is against its column — "150%" puts a third
+ * of it past the edge.
+ */
+export const EdgeShot: FC<{
+  id: ScreenshotId;
+  edge?: "left" | "right";
+  spill?: "130%" | "150%" | "170%";
+  eager?: boolean;
+  class?: string;
+}> = ({ id, edge = "right", spill = "150%", eager = false, class: className = "" }) => (
+  <div class={`edge-shot ${className}`} data-edge={edge} style={`--spill: ${spill};`}>
+    <Screenshot id={id} eager={eager} />
+  </div>
+);
+
+/**
+ * A horizontal marquee: its items slide across the page and off it, on a
+ * loop, and can be grabbed and dragged — let go, and it carries on. The
+ * motion is `lib/marquee.ts`; without JavaScript this is an ordinary
+ * horizontal scroller, and with reduced motion it does not move by itself.
+ *
+ * `direction` is the way the content travels.
+ */
+export const Marquee: FC<{
+  label: string;
+  direction?: "left" | "right";
+  /** Pixels per second. */
+  speed?: number;
+  gap?: string;
+  class?: string;
+  children?: Child;
+}> = ({
+  label,
+  direction = "left",
+  speed = 36,
+  gap = "1.25rem",
+  class: className = "",
+  children,
+}) => (
+  <div
+    class={`marquee relative ${className}`}
+    data-marquee
+    data-direction={direction}
+    data-speed={String(speed)}
+    style={`--gap: ${gap};`}
+  >
+    <div
+      class="marquee-viewport"
+      data-marquee-viewport
+      role="region"
+      aria-label={label}
+      tabindex={0}
+    >
+      <ul class="marquee-track" data-marquee-track>
+        {children}
+      </ul>
+    </div>
+  </div>
+);
+
+/** A row of screenshots in a marquee, each one opening in the viewer. */
+export const ScreenshotMarquee: FC<{
+  ids: ScreenshotId[];
+  label: string;
+  direction?: "left" | "right";
+  speed?: number;
+}> = ({ ids, label, direction = "right", speed = 30 }) => (
+  <Marquee label={label} direction={direction} speed={speed} gap="1.5rem">
+    {ids.map((id) => (
+      <li class="marquee-shot">
+        <Screenshot id={id} />
+      </li>
+    ))}
+  </Marquee>
+);
+
+/**
+ * Product video that behaves like a GIF: centred, muted, on a loop, starting
+ * by itself — `playsinline` so a phone does not hijack it into full screen,
+ * and no controls, because there is nothing to control. One file per theme,
+ * shown the way the screenshots are. The poster is the first frame, so the
+ * picture is right before the first byte arrives and stays right for anyone
+ * whose browser declines to autoplay. Each clip starts and ends on the same
+ * frame, so the loop has no seam.
+ */
+export const LoopVideo: FC<{
+  /** Base path without the theme or extension: `/media/editor-pan` serves
+   *  `editor-pan-light.webm`, `.mp4` and `.jpg`, and their dark twins. */
+  src: string;
+  width: number;
+  height: number;
+  label: string;
+  class?: string;
+}> = ({ src, width, height, label, class: className = "" }) => (
+  <div class={`mx-auto w-full max-w-4xl ${className}`}>
+    {(["light", "dark"] as const).map((theme) => (
+      <video
+        class={`loop-video shot-${theme}`}
+        poster={`${src}-${theme}.jpg`}
+        width={width}
+        height={height}
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        aria-label={label}
+      >
+        {/* WebM first: smaller, and the only one an open-source Chromium can
+            play. MP4 for Safari. */}
+        <source src={`${src}-${theme}.webm`} type="video/webm" />
+        <source src={`${src}-${theme}.mp4`} type="video/mp4" />
+      </video>
+    ))}
+  </div>
 );

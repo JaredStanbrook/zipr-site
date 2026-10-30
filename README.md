@@ -261,16 +261,16 @@ the tab, the nav bar and the footer; it is a four-by-four crop of the same
 grid, because the full mark is sixteen blocks wide and turns to mush in a
 32px box.
 
-Plus Jakarta Sans and JetBrains Mono are self-hosted in `public/fonts` (latin
-and latin-ext, ~92KB) so first paint owes nothing to a third party and the site
-still looks right on a network that blocks Google Fonts. Headings are Fraunces,
-self-hosted the same way (latin, both styles, ~130KB): a variable soft serif
-whose `SOFT` axis rounds every terminal, pinned at full softness so the
-headlines look moulded from the same material as the surfaces. The files are
-instanced to just the axis values the site uses; `public/fonts/OFL.txt` says
-exactly how. Body text stays
-Plus Jakarta so reading on the site matches reading in the app. All three are
-OFL 1.1; see `public/fonts/OFL.txt`.
+Space Grotesk (headings), Inter (body) and JetBrains Mono (technical content
+only) are self-hosted in `public/fonts` — latin and latin-ext subsets of each
+variable font — so first paint owes nothing to a third party and the site still
+looks right on a network that blocks Google Fonts. All three are OFL 1.1; see
+`public/fonts/OFL.txt`.
+
+The visual system is flat: paper, grey and ink layers, wells for emphasis,
+black buttons for links off the page and grey for actions on it, and a rotating
+glow on hover and focus. `/design` renders every piece of it from the real
+components; the header of `worker/index.css` explains the rules.
 
 ## Development
 

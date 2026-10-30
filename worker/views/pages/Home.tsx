@@ -4,7 +4,7 @@ import type { AppConfig } from "@server/config/app.config";
 import { HOW_IT_WORKS, TEAM_UNLOCKS, TRUST_POINTS } from "@server/content/features";
 import { ALL_STEPS_COUNT, STEP_GROUPS } from "@server/content/steps";
 import { ToolboxTiles } from "@views/components/Toolbox";
-import { ClayPebble, GalleryCarousel, ShortcutBuilder, ZapDemo } from "@views/components/Motion";
+import { GalleryCarousel, ShortcutBuilder, ZapDemo } from "@views/components/Motion";
 import { PRICING_FAQ } from "@server/content/pricing";
 import { ZAP_FAQ } from "@views/pages/Zap";
 import { TIERS } from "@server/content/pricing";
@@ -22,7 +22,8 @@ import {
   Eyebrow,
   CheckItem,
   LogoBricks,
-  Screenshot,
+  EdgeShot,
+  ScreenshotMarquee,
   Disclosure,
 } from "@views/components/Ui";
 
@@ -31,7 +32,9 @@ import {
  * what Zipr is, not just how it feels — so the order is the brand guide's,
  * which is also the order a first-time visitor's questions come in:
  *
- *   1. Hero         — what it is, who it's for, what to do next.
+ *   1. Hero         — what it is, who it's for, what to do next. The app
+ *                     itself runs off the right-hand edge.
+ *   1a. In use      — the real screens, sliding past; any one opens whole.
  *   2. Origin story — why it exists, in the maker's own words.
  *   3. How it works — build, run, share. Doubles as the pricing model.
  *   4. The toolbox  — the concrete proof: what a shortcut is made of.
@@ -46,60 +49,21 @@ import {
  */
 
 /**
- * The hero: the launcher itself, in its two layouts at once.
+ * The hero's picture: the app itself, drawn wider than its column so it runs
+ * off the right-hand edge of the page. Half on the page, half beyond — the
+ * layout is asymmetric on purpose, and the clip says "there is more of this"
+ * better than a framed thumbnail would. A click opens the whole of it.
  *
- * They used to take turns in one place, crossfading, which made the picture a
- * lottery to open: a click enlarged whichever was in front, and the other was
- * never in the viewer at all. Now each is its own picture, overlapping, so
- * either opens on its own, both are in the viewer's gallery, and the page says
- * at a glance that there are two ways to see your shortcuts.
- *
- * It used to be a drawing, because there was nothing to photograph.
- * Now there is, and a picture of the real thing answers "what is this?"
- * faster than a picture that says it is only an illustration. The loose clay
- * pieces stay: they are the site's own furniture, and they are what keeps a
- * flat screenshot from sitting on the page like a pasted-in rectangle.
+ * It used to be a pair of launcher pictures surrounded by floating clay
+ * pieces. The page is flat now, and nothing floats.
  */
 const HeroPanel: FC = () => (
-  <div class="relative mx-auto w-full max-w-xl lg:max-w-none">
-    <span data-parallax="0.09" class="absolute -left-5 -top-6 z-10 hidden sm:block">
-      <span class="float block" style="--r: -10deg; --d: -2s;" aria-hidden="true">
-        <IconTile icon="key-round" tone="brand" size="lg" />
-      </span>
-    </span>
-    <span data-parallax="-0.07" class="absolute -right-4 top-1/3 z-10 hidden sm:block">
-      <span class="float block" style="--r: 8deg; --d: -4s;" aria-hidden="true">
-        <IconTile icon="share-2" size="lg" />
-      </span>
-    </span>
-    <span data-parallax="0.14" class="absolute -bottom-3 left-[18%] z-10">
-      <span
-        class="brick float block h-6 w-6"
-        style="--r: 14deg; --d: -1s;"
-        aria-hidden="true"
-      ></span>
-    </span>
-    <span data-parallax="-0.12" class="absolute -top-3 right-[22%] z-10">
-      <span
-        class="brick float block h-4 w-4"
-        style="--r: -20deg; --d: -5s;"
-        aria-hidden="true"
-      ></span>
-    </span>
-
-    <div class="shot-stack relative">
-      <div>
-        <Screenshot id="overlay-grid" />
-      </div>
-      <div>
-        <Screenshot id="overlay-list" eager />
-      </div>
-    </div>
-
-    <p class="-mt-6 text-center text-xs text-muted-foreground">
-      The Zipr launcher as a list and as a grid, with some example shortcuts.
-    </p>
-  </div>
+  <figure>
+    <EdgeShot id="editor-tour" edge="right" spill="170%" eager />
+    <figcaption class="mt-3 text-xs text-muted-foreground">
+      The Zipr editor, open on a shortcut that checks the VPN and starts by itself on weekdays.
+    </figcaption>
+  </figure>
 );
 
 const PROOF = [
@@ -123,28 +87,30 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
 
   return (
     <Page>
-      {/* ================= HERO ================= */}
-      <Section class="pt-8 sm:pt-16">
+      {/* ================= HERO =================
+          Asymmetric: the words take seven columns on the left, the app takes
+          the rest and keeps going past the edge of the page. */}
+      <Section class="overflow-x-clip pt-6 sm:pt-12">
         <Container size="wide">
-          <div class="grid items-center gap-14 [&>*]:min-w-0 lg:grid-cols-[1.1fr_1fr] lg:gap-16">
-            <div class="text-center">
+          <div class="grid items-center gap-12 [&>*]:min-w-0 lg:grid-cols-12 lg:gap-10">
+            <div class="lg:col-span-6 xl:col-span-5">
+              <Eyebrow class="rise">For Windows and macOS · Free</Eyebrow>
               <h1
-                class="rise text-[2.9rem] leading-[0.98] text-balance sm:text-7xl lg:text-[5.25rem]"
+                class="rise text-[2.9rem] leading-[0.98] text-balance sm:text-7xl lg:text-[5rem]"
                 style="--i: 1;"
               >
                 Your computer tricks, in <em>one click.</em>
               </h1>
 
               <p
-                class="rise mx-auto mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty sm:text-xl"
+                class="rise mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty sm:text-xl"
                 style="--i: 2;"
               >
                 Zipr turns the clever things you do on your computer into shortcuts you can run
-                again and share with anyone who's ever asked, “How did you do that?” No code
-                needed.
+                again and share with anyone who's ever asked, “How did you do that?” No code needed.
               </p>
 
-              <div class="rise mt-9 flex flex-wrap justify-center gap-3" style="--i: 3;">
+              <div class="rise mt-9 flex flex-wrap gap-3" style="--i: 3;">
                 <LinkButton href="/downloads" size="lg">
                   <i data-lucide="download" class="h-4 w-4" aria-hidden="true"></i>
                   Download Zipr
@@ -155,7 +121,7 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
               </div>
             </div>
 
-            <div class="rise" style="--i: 2;">
+            <div class="rise lg:col-span-6 xl:col-span-7" style="--i: 2;">
               <HeroPanel />
             </div>
           </div>
@@ -165,15 +131,16 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
       {/* ================= PROOF =================
           There are no customer logos or testimonials on this site yet, and none
           are invented to fill the gap. What a first-time visitor can verify is
-          shorter and truer: what it runs on, what it costs, where it runs. */}
+          shorter and truer: what it runs on, what it costs, where it runs.
+          Flat, ruled, in a row: facts, not badges. */}
       <section class="pb-4" aria-label="Facts about Zipr">
         <Container size="wide">
-          <ul class="grid gap-3 sm:grid-cols-2 lg:grid-cols-4">
+          <ul class="grid border-y border-border sm:grid-cols-2 lg:grid-cols-4">
             {PROOF.map((fact, i) => (
               <li
                 data-reveal
                 style={`--i: ${i};`}
-                class="clay-raised flex items-center gap-3 rounded-full py-2.5 pl-2.5 pr-5"
+                class="flex items-center gap-3 border-border py-5 sm:px-5 sm:[&:nth-child(even)]:border-l lg:[&:not(:first-child)]:border-l"
               >
                 <IconTile icon={fact.icon} tone="brand" />
                 <span class="text-sm font-semibold leading-snug text-balance">{fact.text}</span>
@@ -184,6 +151,42 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
       </section>
 
       {/* =================================================================
+          IN USE
+
+          The real screens, sliding past left to right and off the page. Each
+          one can be grabbed, and any one — whole or half-way off the edge —
+          opens on its own in the viewer.
+         ================================================================= */}
+      <Section id="in-use" class="overflow-x-clip">
+        <Container size="wide">
+          <div class="mb-10 grid gap-6 lg:grid-cols-12 lg:items-end">
+            <div class="lg:col-span-7">
+              <Eyebrow>In use</Eyebrow>
+              <h2 class="text-3xl leading-[1.05] text-balance sm:text-[2.75rem]">
+                The real app, <em>not a mock-up.</em>
+              </h2>
+            </div>
+            <p class="leading-relaxed text-muted-foreground text-pretty lg:col-span-5">
+              The launcher, the editor, a shortcut's run history and Zap at work. Drag the row to
+              look along it, or open any picture to see the whole screen.
+            </p>
+          </div>
+        </Container>
+        <ScreenshotMarquee
+          label="Screenshots of the Zipr app"
+          direction="right"
+          ids={[
+            "overlay-list",
+            "editor-steps",
+            "run-history",
+            "zap",
+            "app-shortcuts",
+            "overlay-grid",
+          ]}
+        />
+      </Section>
+
+      {/* =================================================================
           ORIGIN STORY
 
           One beat of quiet between the pitch and the detail. The hero says
@@ -192,35 +195,35 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
           motion on the site that means something.
          ================================================================= */}
       <Section id="origin">
-        <Container size="default">
-          <div class="text-center">
-            <LogoBricks cell="clamp(0.7rem, 2.6vw, 1.05rem)" class="mx-auto mb-12" />
-            <Eyebrow>Why Zipr exists</Eyebrow>
-            <h2 class="font-display mx-auto max-w-4xl text-[2rem] leading-[1.08] text-balance sm:text-5xl lg:text-6xl">
-              Everyone has something <em>worth sharing.</em>
-            </h2>
-          </div>
-          <div class="mx-auto mt-10 max-w-2xl space-y-5 text-lg leading-relaxed text-muted-foreground text-pretty">
-            <p>
-              At work, I noticed that people often had their own ways of doing the same things on a
-              computer. Some methods were outdated. Others were inefficient or simply different.
-              Often there was a better way, but that knowledge stayed with the person who had
-              discovered it.
-            </p>
-            <p>
-              That's why I built Zipr: a toolbox anyone can use to turn the way they work into a
-              single button press. It saves time, cuts out repetitive tasks, and makes it easy to
-              share useful shortcuts with friends and colleagues.
-            </p>
+        <Container size="wide">
+          <div class="grid gap-10 lg:grid-cols-12 lg:gap-16">
+            <div class="lg:col-span-6">
+              <LogoBricks cell="clamp(0.7rem, 2.2vw, 1rem)" class="mb-12" />
+              <Eyebrow>Why Zipr exists</Eyebrow>
+              <h2 class="font-display max-w-3xl text-[2rem] leading-[1.04] text-balance sm:text-5xl lg:text-6xl">
+                Everyone has something <em>worth sharing.</em>
+              </h2>
+            </div>
+            <div class="space-y-5 self-end text-lg leading-relaxed text-muted-foreground text-pretty lg:col-span-6 lg:col-start-7">
+              <p>
+                At work, I noticed that people often had their own ways of doing the same things on
+                a computer. Some methods were outdated. Others were inefficient or simply different.
+                Often there was a better way, but that knowledge stayed with the person who had
+                discovered it.
+              </p>
+              <p>
+                That's why I built Zipr: a toolbox anyone can use to turn the way they work into a
+                single button press. It saves time, cuts out repetitive tasks, and makes it easy to
+                share useful shortcuts with friends and colleagues.
+              </p>
+            </div>
           </div>
         </Container>
       </Section>
 
       {/* ================= HOW IT WORKS ================= */}
-      <Section id="how-it-works" class="relative overflow-x-clip">
-        <ClayPebble speed={0.1} class="-left-6 top-24" size="h-28 w-28" />
-        <ClayPebble speed={-0.08} class="-right-4 top-[38rem]" size="h-20 w-20" delay="-3s" />
-        <Container class="relative z-10">
+      <Section id="how-it-works" tone="muted">
+        <Container>
           <SectionHeading
             align="center"
             eyebrow="How it works"
@@ -233,12 +236,6 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
           />
 
           <div class="relative">
-            {/* The groove the three steps sit along. Outside the list, because
-                an `<ol>` may only hold list items. */}
-            <span
-              class="absolute left-[8%] right-[8%] top-16 hidden h-2 rounded-full bg-muted shadow-inset md:block"
-              aria-hidden="true"
-            ></span>
             <ol class="relative grid gap-6 md:grid-cols-3">
               {HOW_IT_WORKS.map((step, i) => (
                 <li class="relative" data-reveal style={`--i: ${i};`}>
@@ -275,40 +272,56 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
       {/* =================================================================
           THE TOOLBOX
 
-          The built-in steps as keys on a keyboard, because that is what they
-          are: the keys a shortcut is typed out of. This is the concrete
-          answer to "what can it actually do", so it stays on the home page.
-          Advanced steps sit behind their own toggle on the toolbox page.
+          The groups of built-in steps slide past on their own — this is the
+          concrete answer to "what can it actually do" — and can be grabbed
+          and pulled either way; let go and they carry on. Every step is one
+          click away on the toolbox page. Below, one shortcut built from them,
+          run off the left-hand edge.
          ================================================================= */}
-      <Section id="toolbox">
+      <Section id="toolbox" class="overflow-x-clip">
         <Container size="wide">
-          <div class="grid gap-12 lg:grid-cols-[0.8fr_1.4fr] lg:gap-16">
-            <div class="lg:sticky lg:top-28 lg:self-start">
+          <div class="mb-6 grid gap-6 lg:grid-cols-12 lg:items-end">
+            <div class="lg:col-span-7">
               <Eyebrow>The toolbox</Eyebrow>
-              <h2 class="text-3xl leading-[1.08] text-balance sm:text-[2.75rem]">
+              <h2 class="text-3xl leading-[1.05] text-balance sm:text-[2.75rem]">
                 Here’s what <em>Zipr</em> can do
               </h2>
-              <p class="mt-5 leading-relaxed text-muted-foreground text-pretty">
-                Each step does one job. Combine them into a shortcut and make <em>magic.</em>
+            </div>
+            <div class="lg:col-span-5">
+              <p class="leading-relaxed text-muted-foreground text-pretty">
+                Each step does one job. Combine them into a shortcut and make magic.{" "}
+                <span translate="no" class="tabular">
+                  {ALL_STEPS_COUNT}
+                </span>{" "}
+                steps in{" "}
+                <span translate="no" class="tabular">
+                  {STEP_GROUP_COUNT}
+                </span>{" "}
+                groups.
               </p>
-              <p class="mt-4 text-sm text-muted-foreground text-pretty">
-                <span translate="no">{ALL_STEPS_COUNT}</span> steps in{" "}
-                <span translate="no">{STEP_GROUP_COUNT}</span> groups.{" "}
-              </p>
-              <LinkButton href="/toolbox" variant="outline" class="mt-6">
+              <LinkButton href="/toolbox" variant="outline" class="mt-5">
                 See every step
                 <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
               </LinkButton>
             </div>
-
-            <ToolboxTiles />
           </div>
+        </Container>
 
-          <figure class="mt-12 lg:mt-16">
-            <Screenshot id="editor-tour" class="mx-auto max-w-5xl" />
-            <figcaption class="mt-4 text-center text-sm text-muted-foreground text-pretty">
-              One shortcut: it checks the VPN, takes the path that fits, and starts by itself every
-              weekday at 8:30.
+        <ToolboxTiles />
+
+        <Container size="wide" class="mt-16">
+          <figure class="grid items-center gap-8 [&>*]:min-w-0 lg:grid-cols-12">
+            <div class="lg:col-span-7">
+              <EdgeShot id="editor-branches" edge="left" spill="150%" />
+            </div>
+            <figcaption class="leading-relaxed text-muted-foreground text-pretty lg:col-span-4 lg:col-start-9">
+              <span class="block font-display text-xl font-semibold text-foreground">
+                One shortcut, two paths.
+              </span>
+              <span class="mt-2 block">
+                It checks the VPN, then an If step takes the path that fits: open the intranet, or
+                ask what to do.
+              </span>
             </figcaption>
           </figure>
         </Container>
@@ -405,24 +418,21 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
               </div>
             </div>
 
-            <Card class="flex flex-col justify-center p-6 sm:p-8">
-              {/* Three teams, each in its own tray, with a copy crossing the
-                  groove between two of them. The trays never merge — which is
-                  the point being drawn. */}
+            <Card tone="well" class="flex flex-col justify-center p-6 sm:p-8">
+              {/* Three teams, each its own pill, with a copy crossing the line
+                  between two of them. The pills never merge — which is the
+                  point being drawn. */}
               <div class="mb-8 flex items-center gap-2" aria-hidden="true">
                 {["Platform", "Support", "Yours"].map((team, i) => (
                   <>
                     {i > 0 ? (
-                      <span class="relative h-2 flex-1 rounded-full bg-muted shadow-inset">
+                      <span class="relative h-0.5 flex-1 bg-border-strong/50">
                         {i === 1 ? (
-                          <span
-                            class="brick float absolute left-1/2 top-1/2 -ml-2 -mt-2 h-4 w-4"
-                            style="--r: 8deg;"
-                          ></span>
+                          <span class="brick absolute left-1/2 top-1/2 -ml-2 -mt-2 h-4 w-4"></span>
                         ) : null}
                       </span>
                     ) : null}
-                    <span class="clay-well rounded-full px-3 py-1.5 text-xs font-semibold text-brand-subtle-foreground sm:px-4">
+                    <span class="rounded-full bg-background px-3 py-1.5 text-xs font-semibold sm:px-4">
                       {team}
                     </span>
                   </>
@@ -522,14 +532,17 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
       </Section>
 
       {/* ================= FAQ ================= */}
-      <Section id="faq" class="relative overflow-x-clip">
-        <ClayPebble speed={0.1} class="-right-6 top-16" size="h-24 w-24" delay="-2s" />
-        <Container size="prose" class="relative z-10">
-          <SectionHeading align="center" eyebrow="Questions" title="Asked and answered" />
-          <div>
-            {HOME_FAQ.map((item) => (
-              <Disclosure question={item.q}>{item.a}</Disclosure>
-            ))}
+      <Section id="faq">
+        <Container size="wide">
+          <div class="grid gap-10 lg:grid-cols-12">
+            <div class="lg:col-span-4">
+              <SectionHeading eyebrow="Questions" title="Asked and answered" />
+            </div>
+            <div class="lg:col-span-8">
+              {HOME_FAQ.map((item) => (
+                <Disclosure question={item.q}>{item.a}</Disclosure>
+              ))}
+            </div>
           </div>
         </Container>
       </Section>

@@ -8,6 +8,7 @@ import "htmx.org";
 
 import { renderIcons } from "./lib/icons";
 import { initCarousels, initMotion, initReplay } from "./lib/motion";
+import { initMarquees } from "./lib/marquee";
 import "./lib/lightbox";
 
 import "./ui/AppToaster";
@@ -61,6 +62,7 @@ window.renderIcons = renderIcons;
 const startMotion = () => {
   initCarousels();
   initReplay();
+  initMarquees();
   initMotion();
 };
 

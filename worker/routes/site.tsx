@@ -26,6 +26,7 @@ import { LicencePage } from "@views/pages/Licence";
 import { DownloadsPage } from "@views/pages/Downloads";
 import { ContactPage } from "@views/pages/Contact";
 import { ReportPage, ReportForm, ReportSuccess } from "@views/pages/Report";
+import { DesignSystemPage } from "@views/pages/DesignSystem";
 
 /**
  * Every page a signed-out visitor can reach.
@@ -64,6 +65,17 @@ siteRoute.get("/", (c) =>
       faqSchema(HOME_FAQ),
     ],
     type: "website",
+  }),
+);
+
+// The design system as a working mock. A reference for whoever builds the next
+// page, not a page for visitors: out of the sitemap, and noindex.
+siteRoute.get("/design", (c) =>
+  c.render(<DesignSystemPage />, {
+    title: "Design system",
+    description:
+      "The Zipr site's flat design system on one page: layers, wells, type, buttons, the rotating glow, and media.",
+    noindex: true,
   }),
 );
 

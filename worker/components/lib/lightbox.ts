@@ -14,6 +14,12 @@
  * latest on the click — so a page nobody zooms on pays nothing for it. If it
  * cannot be loaded (a dropped connection, a stale deploy), the click opens the
  * picture itself instead.
+ *
+ * However a picture is drawn on the page — clipped off its edge, small in a
+ * stack, sliding past in a marquee — the viewer shows the whole of it, on its
+ * own. A marquee's clones (`data-lightbox-dup`, see lib/marquee.ts) are not
+ * extra pictures: clicking one opens its original, and they are left out of
+ * the gallery so each picture appears in it once.
  */
 
 import type PhotoSwipe from "photoswipe";
@@ -68,13 +74,27 @@ let open: PhotoSwipe | null = null;
 /** Between the click and the viewer existing, while PhotoSwipe downloads. */
 let opening = false;
 
-const openLightbox = async (trigger: HTMLElement) => {
-  // Every trigger on the page showing a picture right now, in page order.
-  const triggers = Array.from(document.querySelectorAll<HTMLElement>("[data-lightbox]")).filter(
-    (candidate) => shownImage(candidate),
+/** The trigger a marquee clone stands in for. */
+const originalOf = (trigger: HTMLElement) => {
+  if (!trigger.hasAttribute("data-lightbox-dup")) return trigger;
+  const key = trigger.dataset.lightboxKey;
+  return (
+    (key &&
+      document.querySelector<HTMLElement>(
+        `[data-lightbox][data-lightbox-key="${key}"]:not([data-lightbox-dup])`,
+      )) ||
+    trigger
   );
+};
+
+const openLightbox = async (clicked: HTMLElement) => {
+  const trigger = originalOf(clicked);
+  // Every trigger on the page showing a picture right now, in page order.
+  const triggers = Array.from(
+    document.querySelectorAll<HTMLElement>("[data-lightbox]:not([data-lightbox-dup])"),
+  ).filter((candidate) => shownImage(candidate));
   const index = triggers.indexOf(trigger);
-  const source = shownImage(trigger);
+  const source = shownImage(clicked) ?? shownImage(trigger);
   if (!source || index < 0 || open || opening) return;
 
   let Viewer: typeof PhotoSwipe;
@@ -88,8 +108,13 @@ const openLightbox = async (trigger: HTMLElement) => {
     opening = false;
   }
 
+  const slides = triggers.map((each) => slideFor(shownImage(each)!));
+  // Zoom out of the copy that was actually clicked, not an original that may
+  // be off screen.
+  slides[index] = slideFor(source);
+
   const viewer = new Viewer({
-    dataSource: triggers.map((each) => slideFor(shownImage(each)!)),
+    dataSource: slides,
     index,
     bgOpacity: 0.72,
     // Fits the screen first; the zoom button and a double tap go to full size.
@@ -135,6 +160,7 @@ const openLightbox = async (trigger: HTMLElement) => {
 
   viewer.on("destroy", () => {
     open = null;
+    document.documentElement.classList.remove("lightbox-open");
     // Safari does not focus a clicked button, so there is nothing for
     // PhotoSwipe to hand focus back to; put it on the trigger instead.
     const active = document.activeElement;
@@ -144,6 +170,8 @@ const openLightbox = async (trigger: HTMLElement) => {
   });
 
   open = viewer;
+  // Marquees hold still while the viewer is over them.
+  document.documentElement.classList.add("lightbox-open");
   viewer.init();
 };
 
@@ -151,6 +179,8 @@ document.addEventListener("click", (event) => {
   const trigger = (event.target as Element | null)?.closest<HTMLElement>("[data-lightbox]");
   if (!trigger) return;
   event.preventDefault();
+  // The trigger that was clicked, which may be a marquee's clone; the
+  // original is looked up when the viewer opens.
   void openLightbox(trigger);
 });
 

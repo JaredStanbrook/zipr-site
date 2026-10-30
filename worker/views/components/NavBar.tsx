@@ -33,7 +33,7 @@ const menuConfig: Record<string, Array<{ to: string; name: string }>> = {
 export const ThemeToggle = () => html`
   <button
     type="button"
-    class="theme-toggle-btn clay-press inline-flex h-10 w-10 items-center justify-center rounded-full bg-muted text-muted-foreground shadow-inset hover:text-foreground"
+    class="theme-toggle-btn btn btn-grey inline-flex h-11 w-11 items-center justify-center rounded-full"
     aria-label="Toggle theme"
   >
     <i data-theme-icon="light" data-lucide="sun" class="hidden w-5 h-5"></i>
@@ -128,7 +128,7 @@ const LanguageMenu = () => html`
     <button
       type="button"
       popovertarget="language-menu"
-      class="clay-press inline-flex h-10 items-center justify-center gap-1.5 rounded-full bg-muted px-3 text-muted-foreground shadow-inset hover:text-foreground"
+      class="btn btn-grey inline-flex h-11 items-center justify-center gap-1.5 rounded-full px-3"
       aria-label="Choose a language"
     >
       <i data-lucide="languages" class="h-5 w-5" aria-hidden="true"></i>
@@ -183,7 +183,7 @@ const UserMenu = ({ user }: { user: PropsUser }) => html`
   <div class="relative">
     <details class="group relative">
       <summary
-        class="flex h-11 w-11 cursor-pointer items-center justify-center rounded-full bg-primary/10 hover:bg-primary/20 transition-colors list-none marker:hidden [&::-webkit-details-marker]:hidden border border-transparent focus:border-ring ring-offset-background"
+        class="btn btn-grey flex h-11 w-11 cursor-pointer items-center justify-center rounded-full list-none marker:hidden [&::-webkit-details-marker]:hidden"
       >
         <span class="font-bold text-sm text-primary"
           >${(user.email || "??").substring(0, 2).toUpperCase()}</span
@@ -257,25 +257,16 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
 
   return html`
     <!--
-      The header is a clay bar floating just below the top edge rather than a
-      strip glued to it: raised, rounded, and translucent enough that the page
-      scrolling under it reads as passing beneath an object. The active page is
-      the one link pressed in.
+      The header is flat: a paper bar fixed to the top edge, ruled off from the
+      page by a hairline. Nothing floats, nothing blurs. The active page is the
+      one link in ink.
     -->
-    <header class="fixed inset-x-0 top-0 z-40 px-6 pt-2 sm:px-12 sm:pt-3">
-      <div
-        class="mx-auto flex h-14 max-w-6xl items-center justify-between rounded-full bg-card/80 pl-4 pr-2 shadow-raised backdrop-blur-md supports-[backdrop-filter]:bg-card/70"
-      >
+    <header class="fixed inset-x-0 top-0 z-40 border-b border-border bg-background">
+      <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
         <div class="flex items-center gap-4">
           <a href="/" class="group mr-2 flex items-center gap-2 no-underline">
-            <img
-              src="/favicon.svg"
-              alt=""
-              width="28"
-              height="28"
-              class="h-7 w-7 transition-transform duration-300 group-hover:-rotate-6"
-            />
-            <span class="font-display text-xl">${appName}</span>
+            <img src="/favicon.svg" alt="" width="28" height="28" class="h-7 w-7" />
+            <span class="font-display text-xl font-semibold tracking-tight">${appName}</span>
           </a>
 
           <nav class="hidden items-center gap-1 lg:flex">
@@ -284,10 +275,10 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
                 <a
                   href="${item.to}"
                   aria-current="${isActive(item.to) ? "page" : "false"}"
-                  class="rounded-full px-3.5 py-1.5 text-sm font-medium no-underline transition ${
+                  class="btn rounded-full px-3.5 py-1.5 text-sm font-medium no-underline transition-colors ${
                     isActive(item.to)
-                      ? "bg-muted text-foreground shadow-inset"
-                      : "text-muted-foreground hover:bg-accent/70 hover:text-foreground"
+                      ? "bg-ink text-ink-foreground"
+                      : "bg-background text-muted-foreground hover:bg-accent hover:text-foreground"
                   }"
                 >
                   ${item.name}
@@ -314,7 +305,7 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
                     -->
                     <a
                       href="/downloads"
-                      class="clay-primary inline-flex h-10 items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold no-underline transition"
+                      class="btn btn-ink inline-flex h-11 items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold no-underline transition-colors"
                       ><i data-lucide="download" class="h-4 w-4" aria-hidden="true"></i> Download</a
                     >
                   `
@@ -324,7 +315,7 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
 
           <button
             id="mobile-menu-toggle"
-            class="clay-press inline-flex h-10 w-10 items-center justify-center rounded-full bg-muted text-foreground shadow-raised lg:hidden"
+            class="btn btn-grey inline-flex h-11 w-11 items-center justify-center rounded-full lg:hidden"
             aria-label="Open menu"
             aria-controls="mobile-menu"
             aria-expanded="false"
@@ -342,17 +333,15 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
       aria-label="Menu"
       class="hidden fixed inset-0 z-[100] bg-background text-foreground lg:hidden flex flex-col animate-in fade-in slide-in-from-top-4 duration-200"
     >
-      <div class="px-2 pt-2">
-        <div
-          class="flex h-14 items-center justify-between rounded-full bg-card pl-4 pr-2 shadow-raised"
-        >
+      <div class="border-b border-border">
+        <div class="flex h-16 items-center justify-between px-5">
           <span class="flex items-center gap-2 font-display text-xl font-semibold">
             <img src="/favicon.svg" alt="" width="28" height="28" class="h-7 w-7" />
             Menu
           </span>
           <button
             id="mobile-menu-close"
-            class="clay-press inline-flex h-10 w-10 items-center justify-center rounded-full bg-muted shadow-inset"
+            class="btn btn-grey inline-flex h-11 w-11 items-center justify-center rounded-full"
             aria-label="Close menu"
           >
             <i data-lucide="x" class="h-5 w-5"></i>
@@ -369,8 +358,8 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
                 aria-current="${isActive(item.to) ? "page" : "false"}"
                 class="flex items-center rounded-[var(--radius-lg)] px-5 py-3.5 font-display text-2xl font-semibold no-underline transition ${
                   isActive(item.to)
-                    ? "bg-muted text-foreground shadow-inset"
-                    : "text-muted-foreground hover:text-foreground"
+                    ? "bg-ink text-ink-foreground"
+                    : "text-muted-foreground hover:bg-accent hover:text-foreground"
                 }"
               >
                 ${item.name}
@@ -397,13 +386,13 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
               ? html`
                   <a
                     href="/downloads"
-                    class="clay-primary inline-flex h-12 w-full items-center justify-center rounded-full px-4 text-base font-semibold no-underline transition"
+                    class="btn btn-ink inline-flex h-12 w-full items-center justify-center rounded-full px-4 text-base font-semibold no-underline transition-colors"
                   >
                     Download
                   </a>
                 `
               : html`
-                  <div class="rounded-xl border bg-card text-card-foreground shadow-sm">
+                  <div class="flat text-card-foreground">
                     <div class="p-4 flex items-center gap-3 border-b">
                       <div
                         class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary font-bold"

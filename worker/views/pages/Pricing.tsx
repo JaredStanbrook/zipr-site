@@ -37,13 +37,9 @@ const TierCard: FC<{ tier: PricingTier; app: AppConfig }> = ({ tier, app }) => {
 
   return (
     <Card
-      tone={tier.featured ? "floating" : "raised"}
-      lift
-      class={`relative flex h-full flex-col p-7 ${
-        tier.featured
-          ? "outline-2 outline-offset-4 outline-primary/40 outline-dashed lg:-my-4 lg:py-11"
-          : ""
-      }`}
+      tone={tier.featured ? "well" : "raised"}
+      lift={!tier.featured}
+      class={`relative flex h-full flex-col p-7 ${tier.featured ? "lg:-my-4 lg:py-11" : ""}`}
     >
       {tier.featured ? (
         <span class="absolute -top-3.5 left-7">
@@ -59,9 +55,11 @@ const TierCard: FC<{ tier: PricingTier; app: AppConfig }> = ({ tier, app }) => {
         {tier.summary}
       </p>
 
-      {/* The price sits in a well cut into the card: the number is the thing
-          being held, and the card is holding it. */}
-      <div class="clay-well mt-6 rounded-[1.1rem] p-5">
+      {/* The price is set apart: a well on a flat card, a paper panel on the
+          featured card, which is itself the well. */}
+      <div
+        class={`mt-6 p-5 ${tier.featured ? "rounded-[var(--radius-lg)] bg-background" : "well"}`}
+      >
         {tier.annualMonthlyCents === null ? (
           <p class="font-display text-4xl font-semibold">Let's talk</p>
         ) : tier.annualMonthlyCents === 0 ? (

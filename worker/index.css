@@ -6,60 +6,93 @@
 
 /*
  * ---------------------------------------------------------------------------
- * The Zipr clay palette, ported from the desktop client.
+ * The Zipr flat system.
  *
- * The source of truth is `packages/ui-kit/src/styles/tokens.css` in
- * zipr-client, and the values below are that file's, verbatim — with one
- * exception, noted under Brand. The site and the app a visitor downloads
- * should not be two different products, and the cheapest way to guarantee
- * that is to copy the hexes rather than to approximate them.
+ * Four colours, three layers, no floating.
  *
- * The look is clay: warm stone surfaces lifted by a paired highlight and
- * shadow rather than by a border. The depth tokens near the bottom are what
- * make that a system instead of a per-component guess.
+ *   Warm paper  #F8F6F2   the body, and everything that sits on it
+ *   Near-black  #242321   text, and the top layer
+ *   Vivid orange #F36B3B  the brand: fills, marks, the logo
+ *   Clay        #B85F46   the supporting accent, deepened where it is text
  *
- * Two rules came across with the palette:
+ * Depth is a strict order of flat paint, bottom to top:
+ *
+ *   1. White (paper)   — `--background`. The body. Content lives here, flat.
+ *   2. Grey            — `--muted`. A band, or a *well*: a tray cut into the
+ *                        page, used sparingly to emphasise one piece of
+ *                        content. The only place content may sit "inside".
+ *   3. Black (ink)     — `--ink`. Never more than this. Black buttons, the
+ *                        odd tile, the raised logo.
+ *
+ * Nothing in the body is raised above it. There is one exception, and it is
+ * deliberate: the logo in the footer well stands up out of it.
+ *
+ * Buttons follow where they go, not how important they are:
+ *
+ *   Black (`.btn-ink`)   leaves the page — another page, a download, a site.
+ *   Grey  (`.btn-grey`)  stays on it — a toggle, a replay, a pause, a jump.
+ *                        On a grey surface a grey button would vanish, so
+ *                        every grey surface re-points it at paper (white).
+ *
+ * Hover and focus share one signal: a colourful glow rotating around the
+ * control (`.btn`, `.glow`). It is the only colour on the page that moves.
+ *
+ * Two rules came across from the client and still hold:
  *
  * 1. Semantic, never literal. A component asks for `--destructive` because of
  *    what the action means. It never asks for a red.
  * 2. Organisation-neutral. Nothing here belongs to any organisation.
  *
- * Three names differ from the client's on purpose, because this template's
- * components already consume them with a different meaning:
- *
- *   --accent   Here it is the subtle hover fill (`hover:bg-accent`), which is
- *              what every nav item, menu row and ghost button in this template
- *              reaches for. The client's brand teal — its `--accent` — is
- *              `--brand` below, so a hover does not paint a menu row solid.
- *   --input    Here it is a border colour (`border-input`), so it carries the
- *              client's `--input-border`, not its `--input` fill.
- *   --shadow-* The template's scale is mapped onto the clay elevations, so the
- *              `shadow-sm` / `shadow-md` already written through the template's
- *              components render as clay instead of as flat drop shadows.
+ * `--accent` is this template's subtle hover fill (`hover:bg-accent`), not a
+ * brand colour, and `--input` is a border colour (`border-input`).
  * ---------------------------------------------------------------------------
  */
 
 /* Self-hosted so first paint owes nothing to a third party, and so the site
    keeps working if fonts.gstatic.com is blocked — which it is, on a good
    number of the corporate networks this product is sold into. Variable
-   weights, latin and latin-ext only: ~92KB for both families. Both are SIL
-   Open Font License 1.1; see public/fonts/OFL.txt. */
+   weights, latin and latin-ext only. All three families are SIL Open Font
+   License 1.1; see public/fonts/OFL.txt.
+
+   Space Grotesk sets the headings, Inter the body, and JetBrains Mono anything
+   technical — step names, versions, paths, keys. Nothing else is monospace. */
 @font-face {
-  font-family: "Plus Jakarta Sans";
+  font-family: "Inter";
   font-style: normal;
-  font-weight: 200 800;
+  font-weight: 100 900;
   font-display: swap;
-  src: url("/fonts/plus-jakarta-sans-latin.woff2") format("woff2");
+  src: url("/fonts/inter-latin.woff2") format("woff2");
   unicode-range:
     U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
     U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 @font-face {
-  font-family: "Plus Jakarta Sans";
+  font-family: "Inter";
   font-style: normal;
-  font-weight: 200 800;
+  font-weight: 100 900;
   font-display: swap;
-  src: url("/fonts/plus-jakarta-sans-latin-ext.woff2") format("woff2");
+  src: url("/fonts/inter-latin-ext.woff2") format("woff2");
+  unicode-range:
+    U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
+    U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
+    U+A720-A7FF;
+}
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/space-grotesk-latin.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
+@font-face {
+  font-family: "Space Grotesk";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/space-grotesk-latin-ext.woff2") format("woff2");
   unicode-range:
     U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329,
     U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F,
@@ -87,85 +120,82 @@
     U+A720-A7FF;
 }
 
-/* The display face. Fraunces is a variable "soft serif" with a SOFT axis that
-   rounds every terminal and bracket as it climbs — at SOFT 100 the letters
-   look pressed out of the same material as the surfaces around them, which is
-   the whole reason it was picked over a geometric sans. Headings only; body
-   text stays Plus Jakarta so reading matches the app. Latin only, both styles.
-   The files are instanced rather than the full upstream variable font: SOFT is
-   pinned at 100, WONK at 0 upright and 1 italic, weight trimmed to 400–700,
-   and optical size kept live. That halves them to ~130KB for the pair, and
-   every setting this site uses survives. OFL 1.1, see public/fonts/OFL.txt. */
-@font-face {
-  font-family: "Fraunces";
-  font-style: normal;
-  font-weight: 400 700;
-  font-display: swap;
-  src: url("/fonts/fraunces-latin-soft.woff2") format("woff2");
-  unicode-range:
-    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
-    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
-@font-face {
-  font-family: "Fraunces";
-  font-style: italic;
-  font-weight: 400 700;
-  font-display: swap;
-  src: url("/fonts/fraunces-latin-soft-italic.woff2") format("woff2");
-  unicode-range:
-    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
-    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+/* The rotating glow's angle. Registered so it can be animated: an
+   unregistered custom property only flips between keyframes, it never turns. */
+@property --glow-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
 }
 
 /* ===========================================================================
-   LIGHT — warm stone. The client's `:root`.
+   LIGHT — paper.
    =========================================================================== */
 :root {
   /* Renders native controls (checkboxes, scrollbars, date pickers) in the
      matching scheme. Without it a native checkbox stays light-on-dark. */
   color-scheme: light;
 
-  /* --- Surfaces ------------------------------------------------------- */
-  --background: #f1ede6;
-  --foreground: #292520;
-  --card: #fbf8f3;
-  --card-foreground: #292520;
-  --popover: #fffdf9;
-  --popover-foreground: #292520;
-  --scrim: #29252099;
+  /* --- The palette, by name. Components use the roles below, not these. -- */
+  --paper: #f8f6f2;
+  --near-black: #242321;
+  --orange: #f36b3b;
+  --orange-foreground: #242321;
+  --clay: #b85f46;
+
+  /* --- The three layers ------------------------------------------------ */
+  --background: #f8f6f2;
+  --foreground: #242321;
+  /* Cards are the body: same paper, told apart by a hairline, never lifted. */
+  --card: #f8f6f2;
+  --card-foreground: #242321;
+  --popover: #f8f6f2;
+  --popover-foreground: #242321;
+  --scrim: #242321b3;
+  /* Layer 2. Bands and wells. */
+  --muted: #ece8e1;
+  --muted-foreground: #5f5952;
+  /* Layer 3. */
+  --ink: #242321;
+  --ink-foreground: #f8f6f2;
+  --ink-hover: #3a3936;
+
+  /* What the surface under a control is painted in. Every layer sets it, so a
+     control that needs to "match the floor" (a ghost button on hover, a
+     transparent screenshot's margin) can ask for it. */
+  --surface: var(--background);
+  /* A grey button's fill. Grey surfaces re-point it at paper; paper surfaces
+     point it back here. */
+  --grey-fill: #e4dfd7;
+  --grey-fill-hover: #d9d3c9;
+  --btn-grey: var(--grey-fill);
+  --btn-grey-hover: var(--grey-fill-hover);
 
   /* --- Brand -----------------------------------------------------------
-     The one deliberate departure from the client's tokens. The Zipr logo is
-     orange (#ff5722, see public/logo.svg), so the brand's primary is orange
-     and the client's clay purple is gone from the site.
-
-     Not the logo's orange, though: `--primary` is a fill that carries white
-     text and is also what `text-primary` links are painted in, and #ff5722
-     manages 3.2:1 against white and 2.5:1 as a link on the muted sections,
-     both well under AA. This is that hue taken deeper until it clears 4.5:1
-     in every place the token is actually used, which leaves the logo reading
-     as the bright member of one family rather than as a second colour.
-
-     The client still ships purple. Until its tokens.css follows, this file
-     and that one disagree on the primary ramp and nowhere else. */
-  --primary: #b83a0a;
+     `--primary` is both a fill under white text and the colour of
+     `text-primary` links and labels, so it has to clear 4.5:1 in both jobs.
+     Vivid orange manages 2.8:1 on paper — fine for a mark, not for words —
+     so the text-bearing primary is the clay, taken a step deeper (5.4:1 on
+     paper, 4.6:1 on grey, 5.8:1 under white). Orange itself is `--orange`,
+     and carries near-black, never white (5.2:1). */
+  --primary: #a04e37;
   --primary-foreground: #ffffff;
-  --primary-subtle: #f9e4dc;
-  --primary-subtle-foreground: #8c3717;
-  /* The client's `--accent`: its second brand colour, used for the teal
-     emphases. Renamed so this template's `hover:bg-accent` stays subtle. */
-  --brand: #0e6f76;
-  --brand-foreground: #ffffff;
-  --brand-subtle: #d6ebec;
-  --brand-subtle-foreground: #0a5257;
+  --primary-subtle: #f6e2d9;
+  --primary-subtle-foreground: #7e3b29;
+  /* The headline flourish. Large text only, where 3:1 is the bar (4.1:1). */
+  --emphasis: #b85f46;
+  /* The client's second brand colour has no place in a four-colour palette;
+     its slot is kept, as ink, so every `brand` utility still resolves. */
+  --brand: #242321;
+  --brand-foreground: #f8f6f2;
+  --brand-subtle: #ece8e1;
+  --brand-subtle-foreground: #242321;
 
   /* --- Neutral --------------------------------------------------------- */
-  --secondary: #e4ded3;
-  --secondary-foreground: #3b352e;
-  --muted: #e8e3db;
-  --muted-foreground: #665f56;
-  --accent: #e4ded3;
-  --accent-foreground: #3b352e;
+  --secondary: #e4dfd7;
+  --secondary-foreground: #242321;
+  --accent: #e9e5de;
+  --accent-foreground: #242321;
 
   /* --- Status ---------------------------------------------------------- */
   --destructive: #b5372f;
@@ -186,179 +216,108 @@
   --info-subtle-foreground: #1c4562;
 
   /* --- Lines and fields ------------------------------------------------ */
-  --border: #d9d2c6;
-  --border-strong: #847d70;
-  /* This template's `--input` is consumed as `border-input`, so it carries
-     the client's input *border*, not its field fill. The fill it does not have
-     a slot for is `--field`, which is the client's own `--input`. A clay field
-     is a well cut into the surface: the fill sits slightly below the card and
-     the inset shadow does the rest. */
-  --input: #8b8478;
-  --field: #fbf8f3;
-  --ring: #b83a0a;
+  --border: #ddd8cf;
+  --border-strong: #8f887d;
+  --input: #8f887d;
+  --field: #f8f6f2;
+  --ring: #f36b3b;
 
-  /* --- Sidebar ---------------------------------------------------------
-     The client has only `--sidebar` and `--sidebar-foreground`; the rest are
-     this template's, derived from the same palette so a sidebar is a dimmer
-     page rather than a second theme. */
-  --sidebar: #e9e4da;
-  --sidebar-foreground: #46403a;
-  --sidebar-primary: #b83a0a;
+  /* --- Sidebar --------------------------------------------------------- */
+  --sidebar: #ece8e1;
+  --sidebar-foreground: #3b3936;
+  --sidebar-primary: #a04e37;
   --sidebar-primary-foreground: #ffffff;
-  --sidebar-accent: #ded7cb;
-  --sidebar-accent-foreground: #3b352e;
-  --sidebar-border: #d0c8ba;
-  --sidebar-ring: #b83a0a;
+  --sidebar-accent: #e4dfd7;
+  --sidebar-accent-foreground: #242321;
+  --sidebar-border: #ddd8cf;
+  --sidebar-ring: #f36b3b;
 
-  /* --- Clay depth -------------------------------------------------------
-     Clay is a light from the upper left: a warm highlight on the lit edge, a
-     soft shadow on the other, and no hard line between them. Both halves are
-     tokens because both invert in dark mode — a highlight that stays white on
-     a dark surface reads as a scratch, not a bevel. */
-  --clay-highlight: #fffdf9;
-  /* The client's highlight is #fffdf9 against a #fbf8f3 card — a difference of
-     four values, which reads as a crisp 1px rim on a 28px control and as
-     nothing at all on a 600px card. Page-scale surfaces need a lit edge with
-     some actual light in it, so this is the same idea at a strength that
-     survives being blurred across twenty pixels. */
-  --clay-highlight-strong: #ffffffe6;
-  --clay-shadow: #a2927740;
-  --clay-shadow-deep: #6f624d59;
-  --clay-rim: #ffffff59;
+  /* --- Depth ------------------------------------------------------------
+     Flat. The scale Tailwind's `shadow-*` utilities read is zeroed, so a
+     `shadow-md` left anywhere in the template renders as nothing rather than
+     as a float. Two depths remain, and both are named for what they are. */
+  --shadow-2xs: none;
+  --shadow-xs: none;
+  --shadow-sm: none;
+  --shadow: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-xl: none;
+  --shadow-2xl: none;
+  --shadow-raised: none;
+  --shadow-raised-lg: none;
+  --shadow-floating: none;
+  --shadow-pressed: none;
+  --shadow-tray: none;
+  --shadow-keycap: none;
+  /* A well: the grey sitting a hair below the paper. One soft line of shade
+     along the top lip and nothing else — enough to read as cut in, not enough
+     to read as a shadow. */
+  --shadow-well: inset 0 1px 2px #2423211a, inset 0 0 0 1px #2423210d;
+  --shadow-inset: var(--shadow-well);
+  /* The one raised thing on the site: the logo standing in the footer well. */
+  --shadow-logo: 0 2px 0 0 #00000040, 0 14px 28px -12px #24232173;
 
-  --shadow-raised:
-    0 1px 2px var(--clay-shadow), 0 4px 6px -2px var(--clay-shadow),
-    0 12px 20px -10px var(--clay-shadow-deep), inset 0 1px 0 0 var(--clay-highlight),
-    inset 0 -2px 3px -2px var(--clay-shadow-deep);
-  --shadow-floating:
-    0 2px 4px var(--clay-shadow), 0 12px 20px -6px var(--clay-shadow),
-    0 32px 56px -20px var(--clay-shadow-deep), inset 0 1px 0 0 var(--clay-highlight),
-    inset 0 -2px 4px -2px var(--clay-shadow-deep);
-  /* The client's elevations are tuned for controls thirty pixels tall. On a
-     card six hundred pixels wide the same shadow reads as a smudge, so page
-     surfaces get a wider, softer version of the identical recipe — the same
-     paired highlight and shadow, cast further. Without this the marketing
-     pages drift back towards flat the larger they get. */
-  --shadow-raised-lg:
-    /* The object sitting on the page. */
-    0 2px 4px var(--clay-shadow), 0 10px 18px -6px var(--clay-shadow),
-    0 30px 48px -22px var(--clay-shadow-deep),
-    /* The lit edge, blurred inward — this is the half that makes a rounded
-       rectangle read as a soft solid rather than a card with a drop shadow. */
-    inset 0 2px 1px -1px var(--clay-highlight-strong),
-    inset 3px 6px 12px -6px var(--clay-highlight-strong),
-    /* And the edge turned away from the light. */ inset 0 -2px 1px -1px var(--clay-shadow),
-    inset -3px -8px 14px -8px var(--clay-shadow-deep);
+  /* The glow's colours. Bright on purpose: it is the one signal that says
+     "this responds", and it has to read on paper, grey and ink alike. */
+  --glow-colors: #f36b3b, #ffb547, #f9e04b, #4fd18b, #3fb6f2, #7b6cf6, #e85bc7, #f36b3b;
 
-  --shadow-pressed: inset 0 3px 6px var(--clay-shadow-deep), inset 0 -1px 0 0 var(--clay-rim);
-  --shadow-inset:
-    inset 0 2px 4px var(--clay-shadow), inset 0 8px 12px -8px var(--clay-shadow-deep),
-    inset 0 -1px 0 0 var(--clay-rim);
-
-  /* A section-sized well: the page itself pressed in, so a band of content
-     sits in a tray rather than on a stripe of different paint. Shallower than
-     `--shadow-inset` per pixel because it is spread over a much larger shape;
-     the outer highlight is the lip of the tray catching the light. */
-  --shadow-tray:
-    inset 0 3px 6px var(--clay-shadow), inset 0 24px 48px -32px var(--clay-shadow-deep),
-    inset 0 -2px 0 0 var(--clay-rim), 0 1px 0 0 var(--clay-highlight-strong);
-
-  /* A key on a keyboard: the raised surface plus a solid lip underneath it,
-     so pressing it has somewhere to travel. */
-  --keycap-edge: #d3c9b9;
-  --shadow-keycap:
-    0 4px 0 0 var(--keycap-edge), 0 6px 14px -4px var(--clay-shadow-deep),
-    inset 0 2px 1px -1px var(--clay-highlight-strong), inset 0 -2px 3px -2px var(--clay-shadow);
-
-  /* --- Lit clay ----------------------------------------------------------
-     A filled control is a lump of coloured clay, lit from above: lighter at
-     the top, the token colour through the middle where its label sits, and a
-     darker lip underneath. `--primary-lit` is chosen so white text still
-     clears 4.5:1 where the gradient is lightest behind it. */
-  --primary-lit: #cf4a14;
-  --primary-edge: #8a2a05;
-
-  /* --- Atmosphere --------------------------------------------------------
-     Two soft lights in the room — the logo's orange and the brand teal —
-     that the hero and the closing slab stand in. Low alpha so they tint the
-     stone rather than paint over it. */
-  --glow-warm: #ff57222e;
-  --glow-cool: #0e6f761f;
-  /* Grain. Clay is never perfectly smooth; a faint noise keeps large flat
-     surfaces from reading as vector plastic. */
-  --grain-opacity: 0.32;
-  --grain-blend: multiply;
-
-  /* The template's own scale, mapped onto clay so the `shadow-sm` and
-     `shadow-md` already written through its components read as clay. */
-  --shadow-2xs: 0 1px 1px var(--clay-shadow);
-  --shadow-xs: 0 1px 2px var(--clay-shadow);
-  --shadow-sm: 0 1px 2px var(--clay-shadow), 0 2px 4px -2px var(--clay-shadow);
-  --shadow: var(--shadow-raised);
-  --shadow-md: var(--shadow-raised);
-  --shadow-lg: var(--shadow-floating);
-  --shadow-xl: var(--shadow-floating);
-  --shadow-2xl: var(--shadow-floating);
-
-  /* --- Shape ------------------------------------------------------------
-     Clay is round, but the client is a dense management tool and its scale
-     tops out well short of the 24px the style is usually drawn at. A website
-     has more room than a 28px table row, so `--radius` is the client's `md`
-     and the larger steps are used for the page's own cards. */
   --radius: 0.75rem;
 
   /* --- Type ------------------------------------------------------------- */
-  --font-sans: "Plus Jakarta Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: "Space Grotesk", "Inter", system-ui, sans-serif;
   --font-mono: "JetBrains Mono", ui-monospace, "Cascadia Mono", monospace;
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
-  --font-display: "Fraunces", ui-serif, Georgia, serif;
 
-  /* --- Charts -----------------------------------------------------------
-     Ordered so neighbours differ in lightness as well as hue: a series read
-     in greyscale, or by someone who cannot separate the hues, is still a
-     series. */
-  --chart-1: #b83a0a;
-  --chart-2: #0e6f76;
-  --chart-3: #8a6008;
-  --chart-4: #8d4a86;
+  /* --- Charts ----------------------------------------------------------- */
+  --chart-1: #f36b3b;
+  --chart-2: #242321;
+  --chart-3: #b85f46;
+  --chart-4: #8f887d;
   --chart-5: #2f7350;
-  --chart-grid: #d9d2c6;
+  --chart-grid: #ddd8cf;
 }
 
 /* ===========================================================================
-   DARK — the client's `.dark`. Inverted, not reused.
+   DARK — the same three layers, inverted. The top layer becomes paper, so a
+   "black" button is still the strongest thing on the page.
    =========================================================================== */
 .dark {
   color-scheme: dark;
 
-  /* --- Surfaces ------------------------------------------------------- */
-  --background: #191713;
-  --foreground: #eee9e0;
-  --card: #221f1a;
-  --card-foreground: #eee9e0;
-  --popover: #292520;
-  --popover-foreground: #eee9e0;
-  --scrim: #0d0c0acc;
+  --background: #1a1917;
+  --foreground: #f8f6f2;
+  --card: #1a1917;
+  --card-foreground: #f8f6f2;
+  --popover: #1a1917;
+  --popover-foreground: #f8f6f2;
+  --scrim: #0d0c0bcc;
 
-  /* --- Brand ----------------------------------------------------------- */
-  --primary: #ff9e66;
-  --primary-foreground: #3e1904;
-  --primary-subtle: #4f3222;
-  --primary-subtle-foreground: #fad0b7;
-  --brand: #6cc6cd;
-  --brand-foreground: #06282b;
-  --brand-subtle: #1d3c3f;
-  --brand-subtle-foreground: #97dade;
+  --muted: #2a2825;
+  --muted-foreground: #aaa297;
+  --ink: #f8f6f2;
+  --ink-foreground: #242321;
+  --ink-hover: #e4dfd7;
 
-  /* --- Neutral --------------------------------------------------------- */
-  --secondary: #302c25;
-  --secondary-foreground: #ddd6ca;
-  --muted: #2b2822;
-  --muted-foreground: #a49c8f;
-  --accent: #302c25;
-  --accent-foreground: #ddd6ca;
+  --grey-fill: #33312d;
+  --grey-fill-hover: #3e3b37;
 
-  /* --- Status ---------------------------------------------------------- */
+  --primary: #f36b3b;
+  --primary-foreground: #242321;
+  --primary-subtle: #4a2a1f;
+  --primary-subtle-foreground: #f9c3ad;
+  --emphasis: #f36b3b;
+  --brand: #f8f6f2;
+  --brand-foreground: #242321;
+  --brand-subtle: #2a2825;
+  --brand-subtle-foreground: #f8f6f2;
+
+  --secondary: #33312d;
+  --secondary-foreground: #f8f6f2;
+  --accent: #2f2d2a;
+  --accent-foreground: #f8f6f2;
+
   --destructive: #f08b81;
   --destructive-foreground: #3d100c;
   --destructive-subtle: #46201c;
@@ -376,52 +335,30 @@
   --info-subtle: #1c3243;
   --info-subtle-foreground: #b0d1ea;
 
-  /* --- Lines and fields ------------------------------------------------- */
-  --border: #36322b;
-  --border-strong: #787264;
-  --input: #736d5f;
-  --field: #1f1c17;
-  --ring: #ff9e66;
+  --border: #34322e;
+  --border-strong: #7b756b;
+  --input: #7b756b;
+  --field: #1a1917;
+  --ring: #f36b3b;
 
-  /* --- Sidebar ---------------------------------------------------------- */
-  --sidebar: #211e19;
-  --sidebar-foreground: #c8c1b5;
-  --sidebar-primary: #ff9e66;
-  --sidebar-primary-foreground: #3e1904;
-  --sidebar-accent: #2b2822;
-  --sidebar-accent-foreground: #ddd6ca;
-  --sidebar-border: #36322b;
-  --sidebar-ring: #ff9e66;
+  --sidebar: #2a2825;
+  --sidebar-foreground: #d9d3c9;
+  --sidebar-primary: #f36b3b;
+  --sidebar-primary-foreground: #242321;
+  --sidebar-accent: #33312d;
+  --sidebar-accent-foreground: #f8f6f2;
+  --sidebar-border: #34322e;
+  --sidebar-ring: #f36b3b;
 
-  /* --- Clay depth --------------------------------------------------------
-     On a dark surface the lit edge is a faint warm white at low alpha and the
-     shadow is near-black; light mode's values would give a plastic sheen and
-     no depth at all. The composite shadows above reference these, so they
-     re-resolve without being restated. */
-  --clay-highlight: #fff4dd1c;
-  --clay-highlight-strong: #fff4dd33;
-  --clay-shadow: #00000073;
-  --clay-shadow-deep: #000000bf;
-  --clay-rim: #ffffff12;
+  --shadow-well: inset 0 1px 2px #00000066, inset 0 0 0 1px #ffffff08;
+  --shadow-logo: 0 2px 0 0 #00000080, 0 16px 30px -12px #000000b3;
 
-  --keycap-edge: #0c0b09;
-  --primary-lit: #ffbb91;
-  --primary-edge: #b35a28;
-
-  /* In the dark the lights are dimmer and the grain lifts rather than
-     darkens — `multiply` on a near-black surface would do nothing at all. */
-  --glow-warm: #ff9e661c;
-  --glow-cool: #6cc6cd12;
-  --grain-opacity: 0.18;
-  --grain-blend: soft-light;
-
-  /* --- Charts ------------------------------------------------------------ */
-  --chart-1: #ff9e66;
-  --chart-2: #6cc6cd;
-  --chart-3: #ddab4b;
-  --chart-4: #d99ad2;
+  --chart-1: #f36b3b;
+  --chart-2: #f8f6f2;
+  --chart-3: #d98a70;
+  --chart-4: #7b756b;
   --chart-5: #74c495;
-  --chart-grid: #36322b;
+  --chart-grid: #34322e;
 }
 
 /* ===========================================================================
@@ -437,13 +374,17 @@
   --color-popover: var(--popover);
   --color-popover-foreground: var(--popover-foreground);
   --color-scrim: var(--scrim);
+  --color-ink: var(--ink);
+  --color-ink-foreground: var(--ink-foreground);
+  --color-orange: var(--orange);
+  --color-orange-foreground: var(--orange-foreground);
+  --color-emphasis: var(--emphasis);
+  --color-surface: var(--surface);
 
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
   --color-primary-subtle: var(--primary-subtle);
   --color-primary-subtle-foreground: var(--primary-subtle-foreground);
-  --color-primary-lit: var(--primary-lit);
-  --color-primary-edge: var(--primary-edge);
   --color-brand: var(--brand);
   --color-brand-foreground: var(--brand-foreground);
   --color-brand-subtle: var(--brand-subtle);
@@ -502,19 +443,13 @@
 
   --text-tiny: 0.625rem;
 
-  /* Controls keep the client's exact scale, because a control here and a
-     control there should feel like the same object.
-     
-     The two large steps are deliberately bigger than the client's. Its own
-     token file explains why it caps low — "a 24px radius on a 28px-tall table
-     row is a pill" — which is an argument about density, not about the style.
-     Clay is normally drawn at about 24px, and a marketing page is made of
-     surfaces with room for it. */
-  --radius-xs: 0.375rem;
-  --radius-sm: 0.5rem;
-  --radius-md: 0.75rem;
-  --radius-lg: 1.375rem;
-  --radius-xl: 1.75rem;
+  /* Precise geometry: a short, even ramp. Controls and cards share the small
+     steps; only wells and bands reach the large ones. */
+  --radius-xs: 0.25rem;
+  --radius-sm: 0.375rem;
+  --radius-md: 0.5rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.25rem;
 
   --shadow-2xs: var(--shadow-2xs);
   --shadow-xs: var(--shadow-xs);
@@ -531,6 +466,8 @@
   --shadow-inset: var(--shadow-inset);
   --shadow-tray: var(--shadow-tray);
   --shadow-keycap: var(--shadow-keycap);
+  --shadow-well: var(--shadow-well);
+  --shadow-logo: var(--shadow-logo);
 }
 
 @layer base {
@@ -538,60 +475,44 @@
     /* 1.5 minimum for body text; the density dial is spacing, not leading. */
     line-height: 1.55;
     text-rendering: optimizeLegibility;
-    /* The room the clay sits in: two soft lights, fixed so they stay put
-       while the surfaces scroll past them. */
-    background-image:
-      radial-gradient(60rem 40rem at 88% -8%, var(--glow-warm), transparent 70%),
-      radial-gradient(50rem 36rem at -10% 18%, var(--glow-cool), transparent 70%);
-    background-attachment: fixed;
-    background-repeat: no-repeat;
+    font-feature-settings:
+      "cv11" 1,
+      "ss01" 1;
   }
 
-  /* Grain, over everything and under nothing interactive. An inline SVG
-     turbulence rather than an image request; it tiles at 180px, which is
-     large enough that the repeat never reads as a pattern. */
-  body::before {
-    content: "";
-    position: fixed;
-    inset: 0;
-    z-index: 60;
-    pointer-events: none;
-    opacity: var(--grain-opacity);
-    mix-blend-mode: var(--grain-blend);
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .45 0 0 0 0 .38 0 0 0 0 .3 0 0 0 .55 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  }
-
-  /* Headings are pressed out of the same material: Fraunces at full softness,
-     optical size following the rendered size so a 64px headline gets the
-     display cut and a 20px card title the text cut. */
   h1,
   h2,
   h3,
   .font-display {
     font-family: var(--font-display);
-    font-optical-sizing: auto;
-    font-variation-settings:
-      "SOFT" 100,
-      "WONK" 0;
     font-weight: 600;
-    letter-spacing: -0.015em;
+    letter-spacing: -0.025em;
+  }
+  h1 {
+    letter-spacing: -0.035em;
   }
 
-  /* The one flourish: an italic, wonky, brand-coloured word inside a
-     headline. Used once per screen at most. */
+  /* The one flourish: a word in the headline set in the emphasis colour.
+     Space Grotesk has no italic, and a synthesised slant looks it. */
   .font-display em,
   h1 em,
-  h2 em {
-    font-style: italic;
-    font-variation-settings:
-      "SOFT" 100,
-      "WONK" 1;
-    color: var(--primary);
+  h2 em,
+  h3 em {
+    font-style: normal;
+    color: var(--emphasis);
   }
 
-  /* One focus ring for the whole site, defined once. Two offset pixels of the
-     surface behind it keep it legible on a clay surface, where the control's
-     own edge is a gradient rather than a line. */
+  /* Technical content is monospace, and only technical content is. */
+  code,
+  kbd,
+  samp,
+  pre {
+    font-family: var(--font-mono);
+    font-size: 0.92em;
+  }
+
+  /* The focus ring for anything that is not a `.btn`/`.glow` control, which
+     get the rotating glow instead (below). */
   :focus-visible {
     outline: 2px solid var(--ring);
     outline-offset: 2px;
@@ -599,8 +520,8 @@
   }
 
   ::selection {
-    background-color: var(--primary-subtle);
-    color: var(--primary-subtle-foreground);
+    background-color: var(--orange);
+    color: var(--orange-foreground);
   }
 
   /* Numbers that sit in a column — versions, sizes, counts — must not change
@@ -615,9 +536,9 @@
     overflow-wrap: anywhere;
   }
 
-  /* Motion is opt-out at the source. Clay leans on press and lift, and both
-     are decoration: with reduced motion the final state still renders, it
-     just arrives immediately. */
+  /* Motion is opt-out at the source. With reduced motion the final state
+     still renders, it just arrives immediately — and the glow still shows, it
+     simply holds still. */
   @media (prefers-reduced-motion: reduce) {
     *,
     ::before,
@@ -631,203 +552,342 @@
 }
 
 @layer components {
-  /* The clay primitives, as the client defines them. Three states of one idea
-     — a surface sitting above the page, a surface being pushed into it, and a
-     well cut into it — so depth is a vocabulary rather than a shadow value
-     guessed per component. */
-  .clay {
-    background-color: var(--card);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-raised-lg);
-  }
+  /* ======================================================================
+     Layers
+     ====================================================================== */
 
-  /* A control-sized raised surface: the client's original elevation, for
-     anything small enough that the page-scale one would swamp it. */
+  /* Layer 1 content: flat on the paper, told apart by a hairline. */
+  .flat,
+  .clay,
   .clay-raised {
+    --surface: var(--card);
+    --btn-grey: var(--grey-fill);
+    --btn-grey-hover: var(--grey-fill-hover);
     background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+  }
+  .clay-raised {
     border-radius: var(--radius-md);
-    box-shadow: var(--shadow-raised);
   }
 
-  /*
-   * A field. The client's Input is exactly this: the fill sits below the
-   * surface and an inset shadow cuts it in, so a form reads as holes in the
-   * clay rather than boxes drawn on top of it.
-   */
+  /* Layer 1 again, inside something grey: paper, and grey buttons are grey. */
+  .surface-paper {
+    --surface: var(--background);
+    --btn-grey: var(--grey-fill);
+    --btn-grey-hover: var(--grey-fill-hover);
+    background-color: var(--background);
+  }
+
+  /* Layer 2, as a band: a stretch of the page painted grey, edge to edge. */
+  .surface-grey,
+  .clay-tray {
+    --surface: var(--muted);
+    --btn-grey: var(--background);
+    --btn-grey-hover: var(--card);
+    background-color: var(--muted);
+  }
+
+  /* Layer 2, as a well: grey, cut a hair into the page. Sparingly — a well
+     says "this one", and a page of them says nothing. Everything that was an
+     orange card is one of these now. */
+  .well,
+  .clay-well,
+  .clay-slab {
+    --surface: var(--muted);
+    --btn-grey: var(--background);
+    --btn-grey-hover: var(--card);
+    background-color: var(--muted);
+    color: var(--foreground);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-well);
+  }
+
+  /* Layer 3. */
+  .surface-ink {
+    --surface: var(--ink);
+    --btn-grey: var(--background);
+    --btn-grey-hover: var(--card);
+    background-color: var(--ink);
+    color: var(--ink-foreground);
+  }
+
+  /* Popovers and menus sit over the page, so they need an edge — but a line,
+     not a shadow. */
+  .clay-floating {
+    background-color: var(--popover);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+  }
+
+  /* A field: paper, with a real border. */
   .clay-field {
     background-color: var(--field);
     border: 1px solid var(--input);
     border-radius: var(--radius-sm);
-    box-shadow: var(--shadow-inset);
   }
 
-  .clay-floating {
-    background-color: var(--popover);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-floating);
-  }
-
-  .clay-well {
-    background-color: var(--muted);
-    border-radius: var(--radius-lg);
-    box-shadow: var(--shadow-inset);
-  }
-
-  /* Press is the whole interaction language of clay: the control moves a
-     pixel and its shadow collapses inward, so a click reads as physical
-     rather than as a colour change. 120ms out, ~70% of that back in — the
-     exit-faster-than-enter rule applied to a press. */
-  .clay-press {
-    transition:
-      box-shadow 120ms ease-out,
-      transform 120ms ease-out,
-      background-color 120ms ease-out,
-      color 120ms ease-out;
-  }
-
-  .clay-press:active:not(:disabled):not([aria-disabled="true"]) {
-    transform: translateY(1px);
-    box-shadow: var(--shadow-pressed);
-    transition-duration: 80ms;
-  }
-
-  /*
-   * The primary button as a lump of lit clay: a top-lit gradient, a rim of
-   * highlight along its upper edge, and a solid lip beneath it. Hover lifts it
-   * a pixel onto that lip; press pushes it down past it. The three positions
-   * are the whole animation.
-   */
-  .clay-primary {
-    background-color: var(--primary);
-    background-image: linear-gradient(180deg, var(--primary-lit) 0%, var(--primary) 55%);
-    color: var(--primary-foreground);
-    box-shadow:
-      0 3px 0 0 var(--primary-edge),
-      0 8px 18px -6px var(--clay-shadow-deep),
-      inset 0 1px 0 0 #ffffff40,
-      inset 0 -2px 4px -2px #00000040;
-  }
-  .clay-primary:hover {
-    transform: translateY(-1px);
-    box-shadow:
-      0 4px 0 0 var(--primary-edge),
-      0 12px 22px -6px var(--clay-shadow-deep),
-      inset 0 1px 0 0 #ffffff4d,
-      inset 0 -2px 4px -2px #00000040;
-  }
-  .clay-primary:active:not(:disabled):not([aria-disabled="true"]) {
-    transform: translateY(2px);
-    box-shadow:
-      0 1px 0 0 var(--primary-edge),
-      inset 0 3px 6px #00000047;
-  }
-
-  /* The same lit clay at the scale of a page section — the closing call to
-     action. The highlight is a soft pool towards the upper left rather than
-     a band, because at this size a linear sheen reads as a gradient fill. */
-  .clay-slab {
-    background-color: var(--primary);
-    background-image:
-      radial-gradient(90% 120% at 12% 0%, var(--primary-lit), transparent 60%),
-      radial-gradient(70% 90% at 100% 100%, var(--primary-edge), transparent 70%);
-    color: var(--primary-foreground);
-    box-shadow:
-      0 6px 0 0 var(--primary-edge),
-      0 40px 70px -30px var(--clay-shadow-deep),
-      inset 0 2px 1px -1px #ffffff59,
-      inset 6px 10px 24px -12px #ffffff40,
-      inset -6px -12px 28px -14px #00000059;
-  }
-
-  /* A card that answers the pointer: it rises a little towards the light. */
+  /* A card that answers the pointer does it with its edge, not by lifting. */
   .clay-lift {
-    transition:
-      transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1),
-      box-shadow 220ms ease-out;
+    transition: border-color 160ms ease-out;
   }
   @media (hover: hover) {
     .clay-lift:hover {
-      transform: translateY(-4px) rotate(-0.25deg);
-      box-shadow:
-        var(--shadow-raised-lg),
-        0 24px 40px -24px var(--clay-shadow-deep);
+      border-color: var(--border-strong);
     }
   }
 
-  /* A keyboard key. Used for the twelve verbs, because they are exactly
-     that: the keys an item is built from. */
+  /* The toolbox tiles: flat keys with a hairline. */
   .keycap {
     background-color: var(--card);
-    background-image: linear-gradient(180deg, var(--clay-highlight-strong) -40%, transparent 60%);
-    border-radius: var(--radius-md);
-    box-shadow: var(--shadow-keycap);
-    transition:
-      transform 120ms ease-out,
-      box-shadow 120ms ease-out;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    transition: border-color 160ms ease-out;
   }
   @media (hover: hover) {
     .keycap:hover {
-      transform: translateY(3px);
-      box-shadow:
-        0 1px 0 0 var(--keycap-edge),
-        0 2px 6px -2px var(--clay-shadow-deep),
-        inset 0 2px 1px -1px var(--clay-highlight-strong),
-        inset 0 -2px 3px -2px var(--clay-shadow);
+      border-color: var(--border-strong);
     }
   }
 
-  /* A section-sized tray pressed into the page. */
-  .clay-tray {
-    background-color: color-mix(in oklab, var(--muted) 70%, transparent);
-    box-shadow: var(--shadow-tray);
+  /* Legacy names the template's admin views still use. Flat now. */
+  .clay-press {
+    transition:
+      background-color 140ms ease-out,
+      color 140ms ease-out,
+      border-color 140ms ease-out;
+  }
+  .clay-squish,
+  .float {
+    animation: none;
+  }
+  .emboss {
+    color: var(--muted-foreground);
   }
 
-  /* Type stamped into the surface: a highlight below, a shadow above, the
-     way a letter pressed into clay catches the light on its lower lip. */
-  .emboss {
-    color: var(--background);
-    text-shadow:
-      0 1px 0 var(--clay-highlight-strong),
-      0 -1px 1px var(--clay-shadow-deep);
+  /* ======================================================================
+     Buttons
+     ====================================================================== */
+
+  /* Black: leaves the page. */
+  .btn-ink,
+  .clay-primary {
+    background-color: var(--ink);
+    color: var(--ink-foreground);
+    border: 1px solid var(--ink);
   }
+  .btn-ink:hover,
+  .clay-primary:hover {
+    background-color: var(--ink-hover);
+  }
+
+  /* Black, quieter: a second way off the page beside a first. */
+  .btn-ink-outline {
+    background-color: var(--surface);
+    color: var(--foreground);
+    border: 1px solid var(--ink);
+  }
+  .btn-ink-outline:hover {
+    background-color: var(--accent);
+  }
+
+  /* Grey: stays on the page. White on a grey surface (see `--btn-grey`). */
+  .btn-grey {
+    background-color: var(--btn-grey);
+    color: var(--foreground);
+    border: 1px solid transparent;
+  }
+  .btn-grey:hover {
+    background-color: var(--btn-grey-hover);
+  }
+  .btn-grey[aria-pressed="true"],
+  .btn-grey[aria-selected="true"] {
+    background-color: var(--ink);
+    color: var(--ink-foreground);
+  }
+
+  /* Ghost: no fill until it is touched — then the floor's own colour, so the
+     glow has something solid to ring. */
+  .btn-ghost {
+    background-color: transparent;
+    color: var(--foreground);
+    border: 1px solid transparent;
+  }
+  .btn-ghost:hover,
+  .btn-ghost:focus-visible {
+    background-color: var(--accent);
+  }
+
+  /* The tab chips and small round controls. Grey: they never leave the page. */
+  .clay-chip {
+    background-color: var(--btn-grey);
+    color: var(--foreground);
+    border-radius: 9999px;
+    transition:
+      background-color 140ms ease-out,
+      color 140ms ease-out;
+  }
+  @media (hover: hover) {
+    .clay-chip:hover {
+      background-color: var(--btn-grey-hover);
+    }
+  }
+  .clay-chip[aria-selected="true"] {
+    background-color: var(--ink);
+    color: var(--ink-foreground);
+  }
+
+  /* ======================================================================
+     The rotating glow — hover and focus, on every control.
+
+     Two layers behind the control: a crisp two-pixel ring of the full colour
+     wheel, and the same wheel blurred into a halo. Both sit at z-index -1, so
+     they paint *behind* the control's own (opaque) fill — the fill covers the
+     middle, and what is left is a ring. That is why every surface that can
+     hold a control isolates itself: the glow then paints just above that
+     surface, instead of disappearing beneath it.
+     ====================================================================== */
+  .btn,
+  .glow,
+  .clay-chip,
+  .zoom-trigger {
+    position: relative;
+  }
+  .btn::before,
+  .btn::after,
+  .glow::before,
+  .glow::after,
+  .clay-chip::before,
+  .clay-chip::after,
+  .zoom-trigger::before,
+  .zoom-trigger::after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    border-radius: inherit;
+    background: conic-gradient(from var(--glow-angle), var(--glow-colors));
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 180ms ease-out;
+    animation: glow-turn 2.6s linear infinite;
+    animation-play-state: paused;
+  }
+  .btn::before,
+  .glow::before,
+  .clay-chip::before,
+  .zoom-trigger::before {
+    inset: -2px;
+  }
+  .btn::after,
+  .glow::after,
+  .clay-chip::after,
+  .zoom-trigger::after {
+    inset: -3px;
+    filter: blur(10px);
+  }
+  @media (hover: hover) {
+    :is(.btn, .glow, .clay-chip, .zoom-trigger):hover::before,
+    :is(.btn, .glow, .clay-chip, .zoom-trigger):hover::after {
+      opacity: 1;
+      animation-play-state: running;
+    }
+    :is(.btn, .glow, .clay-chip, .zoom-trigger):hover::after {
+      opacity: 0.55;
+    }
+  }
+  :is(.btn, .glow, .clay-chip, .zoom-trigger):focus-visible {
+    outline: none;
+  }
+  :is(.btn, .glow, .clay-chip, .zoom-trigger):focus-visible::before {
+    opacity: 1;
+    animation-play-state: running;
+  }
+  :is(.btn, .glow, .clay-chip, .zoom-trigger):focus-visible::after {
+    opacity: 0.7;
+    animation-play-state: running;
+  }
+  /* The design page's "show every glow" switch. */
+  .glow-all :is(.btn, .glow, .clay-chip)::before {
+    opacity: 1;
+    animation-play-state: running;
+  }
+  .glow-all :is(.btn, .glow, .clay-chip)::after {
+    opacity: 0.55;
+    animation-play-state: running;
+  }
+  /* Forced colours paint no gradients; fall back to a plain outline. */
+  @media (forced-colors: active) {
+    :is(.btn, .glow, .clay-chip, .zoom-trigger):focus-visible {
+      outline: 2px solid CanvasText;
+    }
+  }
+
+  /* The surfaces a control can sit on, isolated so the glow paints above
+     them (see above). */
+  .flat,
+  .clay,
+  .clay-raised,
+  .clay-floating,
+  .surface-grey,
+  .clay-tray,
+  .well,
+  .clay-well,
+  .clay-slab,
+  .surface-ink,
+  .surface-paper,
+  .marquee {
+    isolation: isolate;
+  }
+
+  /* ======================================================================
+     The logo
+     ====================================================================== */
 
   /*
-   * One brick of the logo. The mark is a 16x4 grid of square blocks, so it
-   * can be built out of clay rather than printed on it — each block a little
-   * raised tile in the logo's own orange.
+   * One brick of the logo. The mark is a 16x4 grid of square blocks, so it is
+   * built from them rather than printed: flat orange squares, square-cornered
+   * enough to stay a grid.
    */
   .brick {
-    border-radius: 22%;
-    background-color: #ff5722;
-    background-image: linear-gradient(160deg, #ff8a5c 0%, #ff5722 45%, #d9400f 100%);
-    box-shadow:
-      0 1px 0 0 #a8300a,
-      0 3px 5px -2px var(--clay-shadow-deep),
-      inset 0 1px 0 0 #ffffff59;
+    border-radius: 12%;
+    background-color: var(--orange);
   }
 
-  /* A small clay pebble that drifts, for the decorative objects around the
-     hero. Slow and out of phase with its neighbours via `--d`. */
-  .float {
-    animation: clay-float 7s ease-in-out infinite;
-    animation-delay: var(--d, 0s);
+  /* The raised logo. The only object on the site that stands up off its
+     surface: an ink plinth in the footer well, carrying the bricks. */
+  .logo-raised {
+    background-color: var(--ink);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-logo);
+    transform: translateY(-2px);
   }
 
   /* Page-load choreography: each block rises in turn. `--i` is its place in
      the queue, set inline by the view. */
   .rise {
-    animation: clay-rise 700ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
-    animation-delay: calc(var(--i, 0) * 90ms);
+    animation: page-rise 600ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+    animation-delay: calc(var(--i, 0) * 80ms);
   }
 
   /* The logo's bricks zip shut left to right. */
   .zip-in {
-    animation: clay-zip 520ms cubic-bezier(0.3, 1.4, 0.5, 1) both;
+    animation: brick-zip 420ms cubic-bezier(0.3, 1.2, 0.5, 1) both;
     animation-delay: calc(var(--i, 0) * 22ms + 200ms);
   }
-}
 
-@layer components {
+  /* An eyebrow's marker: one orange square, the logo's unit. */
+  .eyebrow-mark {
+    display: inline-block;
+    width: 0.55em;
+    height: 0.55em;
+    background-color: var(--orange);
+    border-radius: 1px;
+  }
+
+  /* ======================================================================
+     Media
+     ====================================================================== */
+
   /* Product screenshots, one image per theme. With no class on <html> yet
      (before the theme script runs) the operating system decides; once the
      script has set `light` or `dark` that wins, so the header toggle and the
@@ -852,10 +912,8 @@
 
   /* The hero's two launcher pictures, overlapping: the grid behind and to the
      right, the list in front and lower. One grid cell, so the box is as tall
-     as the two together and nothing is positioned out of flow. Each is its
-     own picture to open, so the one under the pointer or the focus comes
-     forward — the back one can be read before it is opened. The pictures
-     carry their own shadow margin, so the overlap looks smaller than it is. */
+     as the two together and nothing is positioned out of flow. The one under
+     the pointer or the focus comes forward. */
   .shot-stack {
     display: grid;
   }
@@ -876,12 +934,95 @@
   .shot-stack > :focus-within {
     z-index: 2;
   }
+
+  /* A screenshot that runs off the edge of the page: it is drawn wider than
+     its column and the section clips it, so half of it sits on the page and
+     half beyond. The viewer always shows the whole picture. */
+  .edge-shot {
+    width: var(--spill, 150%);
+  }
+  .edge-shot[data-edge="left"] {
+    margin-left: calc(100% - var(--spill, 150%));
+  }
+
+  /* A video that plays like a GIF: in the middle, on a loop, no controls. */
+  /* No `display` here: the theme rules above decide which of the pair shows. */
+  .loop-video {
+    vertical-align: top;
+    width: 100%;
+    height: auto;
+    border-radius: var(--radius-lg);
+  }
+
+  /* ======================================================================
+     Marquee — screenshots and the toolbox, sliding on and off the page.
+
+     Without JavaScript it is a plain horizontal scroller. `lib/marquee.ts`
+     adds `is-live`, clones the set so it loops, and moves the track with a
+     transform; it can be grabbed and thrown, and carries on when let go.
+     ====================================================================== */
+  .marquee-viewport {
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scrollbar-width: none;
+    /* Fades the ends, so pictures slide on and off rather than being cut. */
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+  .marquee-viewport::-webkit-scrollbar {
+    display: none;
+  }
+  .marquee-track {
+    display: flex;
+    width: max-content;
+  }
+  .marquee-track > * {
+    flex: none;
+    padding-inline: calc(var(--gap, 1.25rem) / 2);
+  }
+  .marquee.is-live .marquee-viewport {
+    overflow: hidden;
+    cursor: grab;
+    touch-action: pan-y;
+  }
+  .marquee.is-live .marquee-viewport:active {
+    cursor: grabbing;
+  }
+  .marquee.is-dragging .marquee-track {
+    user-select: none;
+  }
+  .marquee.is-live .marquee-track {
+    will-change: transform;
+  }
+  /* Screenshots in a marquee share one height, whatever their shape, so the
+     row reads as a strip rather than a skyline. */
+  .marquee-shot {
+    height: clamp(15rem, 44vw, 26rem);
+  }
+  /* Important because the picture's own utilities (`h-auto w-full`, which
+     size it everywhere else) sit in a later layer and would otherwise win. */
+  .marquee-shot .zoom-trigger,
+  .marquee-shot .shot,
+  .marquee-shot img {
+    height: 100% !important;
+    width: auto !important;
+  }
+
+  /* The glow needs room inside the clipped viewport. */
+  .marquee-track {
+    padding-block: 0.875rem;
+  }
 }
 
-@keyframes clay-rise {
+@keyframes glow-turn {
+  to {
+    --glow-angle: 360deg;
+  }
+}
+
+@keyframes page-rise {
   from {
     opacity: 0;
-    transform: translateY(18px) scale(0.985);
+    transform: translateY(14px);
   }
   to {
     opacity: 1;
@@ -889,20 +1030,10 @@
   }
 }
 
-@keyframes clay-float {
-  0%,
-  100% {
-    transform: translateY(0) rotate(var(--r, 0deg));
-  }
-  50% {
-    transform: translateY(-10px) rotate(calc(var(--r, 0deg) + 3deg));
-  }
-}
-
-@keyframes clay-zip {
+@keyframes brick-zip {
   from {
     opacity: 0;
-    transform: translateY(-14px) scale(0.6);
+    transform: translateY(-10px) scale(0.7);
   }
   to {
     opacity: 1;
@@ -926,21 +1057,12 @@
   /* --- Entrance: fade, rise, settle ------------------------------------- */
   html.motion:not(.motion-failsafe) [data-reveal]:not(.is-in):not([data-reveal="done"]) {
     opacity: 0;
-    transform: translateY(26px) rotate(var(--rot, 0deg)) scale(0.97);
-    /* The raised shadow arrives with the element and softens in behind it. */
-    box-shadow: none !important;
+    transform: translateY(20px);
   }
   html.motion:not(.motion-failsafe) [data-reveal]:not([data-reveal="done"]) {
     transition:
       opacity 640ms cubic-bezier(0.2, 0.8, 0.2, 1) calc(var(--i, 0) * 80ms),
-      transform 820ms cubic-bezier(0.2, 0.9, 0.25, 1.1) calc(var(--i, 0) * 80ms),
-      box-shadow 1100ms ease-out calc(var(--i, 0) * 80ms + 140ms);
-  }
-  [data-reveal]:nth-child(odd) {
-    --rot: -1.4deg;
-  }
-  [data-reveal]:nth-child(even) {
-    --rot: 1.4deg;
+      transform 720ms cubic-bezier(0.2, 0.8, 0.2, 1) calc(var(--i, 0) * 80ms);
   }
 
   /* --- Parallax: a wrapper drifts, its child keeps its own float -------- */
@@ -949,54 +1071,10 @@
     will-change: transform;
   }
 
-  /* --- A clay pebble: a soft background object that gives depth --------- */
+  /* The drifting pebbles were decoration that floated. Flat pages have none;
+     the class stays so older markup renders as nothing rather than as a blob. */
   .clay-pebble {
-    background-color: var(--brand-subtle);
-    background-image: linear-gradient(160deg, var(--clay-highlight-strong), transparent 65%);
-    box-shadow: var(--shadow-raised);
-  }
-
-  /* --- Tab chips that press in when active ------------------------------ */
-  .clay-chip {
-    background-color: var(--card);
-    border-radius: 9999px;
-    box-shadow: var(--shadow-raised);
-    color: var(--muted-foreground);
-    transition:
-      box-shadow 140ms ease-out,
-      transform 140ms ease-out,
-      color 140ms ease-out,
-      background-color 140ms ease-out;
-  }
-  @media (hover: hover) {
-    .clay-chip:hover {
-      color: var(--foreground);
-      transform: translateY(-1px);
-    }
-  }
-  .clay-chip[aria-selected="true"] {
-    background-color: var(--muted);
-    box-shadow: var(--shadow-pressed);
-    color: var(--primary);
-    transform: translateY(1px);
-  }
-
-  /* --- Squish: pills and cards that give under the pointer -------------- */
-  .clay-squish {
-    transition:
-      transform 220ms cubic-bezier(0.3, 1.5, 0.5, 1),
-      box-shadow 220ms ease-out;
-  }
-  @media (hover: hover) {
-    .clay-squish:hover {
-      transform: scale(1.035, 0.955) translateY(1px);
-      box-shadow:
-        var(--shadow-raised),
-        0 14px 20px -12px var(--clay-shadow-deep);
-    }
-  }
-  .clay-squish:focus-visible {
-    transform: scale(1.02, 0.97);
+    display: none;
   }
 
   /* ======================================================================
@@ -1014,8 +1092,7 @@
     position: relative;
     flex: none;
     border-radius: 9999px;
-    background-color: var(--muted);
-    box-shadow: var(--shadow-inset);
+    background-color: var(--border);
     overflow: hidden;
   }
   .bstring::after {
@@ -1023,19 +1100,16 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background-image: linear-gradient(90deg, var(--primary-lit), var(--primary));
+    background-color: var(--orange);
     transform-origin: left center;
-  }
-  .brun {
-    background-color: var(--primary);
   }
   .bbar {
     transform-origin: left center;
-    background-image: linear-gradient(90deg, var(--primary-lit), var(--primary));
+    background-color: var(--orange);
     border-radius: inherit;
   }
   .brow-glow {
-    background-color: var(--brand-subtle);
+    background-color: var(--primary-subtle);
     border-radius: inherit;
     opacity: 1;
   }
@@ -1060,13 +1134,8 @@
   }
   html.motion:not(.motion-failsafe) .brun {
     transform: scale(calc(0.94 + var(--g) * 0.08));
-    box-shadow:
-      0 3px 0 0 var(--primary-edge),
-      0 8px 18px -6px var(--clay-shadow-deep),
-      0 0 0 calc(var(--g) * 10px) color-mix(in oklab, var(--primary) 18%, transparent),
-      0 0 calc(var(--g) * 34px) calc(var(--g) * 4px)
-        color-mix(in oklab, var(--primary) 45%, transparent),
-      inset 0 1px 0 0 #ffffff40;
+    /* Lighting up is a flat orange ring growing round it, not a glow cast. */
+    box-shadow: 0 0 0 calc(var(--g) * 6px) color-mix(in oklab, var(--orange) 35%, transparent);
   }
   html.motion:not(.motion-failsafe) .bbar {
     transform: scaleX(var(--r));
@@ -1095,7 +1164,6 @@
       transform: scaleY(var(--t));
     }
     .bstring::after {
-      background-image: linear-gradient(180deg, var(--primary-lit), var(--primary));
       transform-origin: center top;
     }
   }
@@ -1154,7 +1222,7 @@
     position: absolute;
     inset: 0;
     border-radius: inherit;
-    background-image: linear-gradient(180deg, var(--primary-lit), var(--primary));
+    background-color: var(--orange);
     transform-origin: center top;
   }
   .zd-caret {
@@ -1244,24 +1312,16 @@
 @keyframes zd-glow {
   0%,
   100% {
-    box-shadow:
-      0 3px 0 0 var(--primary-edge),
-      0 8px 18px -6px var(--clay-shadow-deep),
-      inset 0 1px 0 0 #ffffff40;
+    box-shadow: 0 0 0 0 transparent;
   }
   45% {
-    box-shadow:
-      0 3px 0 0 var(--primary-edge),
-      0 8px 18px -6px var(--clay-shadow-deep),
-      0 0 0 9px color-mix(in oklab, var(--primary) 18%, transparent),
-      0 0 30px 4px color-mix(in oklab, var(--primary) 45%, transparent),
-      inset 0 1px 0 0 #ffffff40;
+    box-shadow: 0 0 0 6px color-mix(in oklab, var(--orange) 35%, transparent);
   }
 }
 @keyframes carousel-settle {
   from {
     opacity: 0;
-    transform: translateY(30px) rotate(2.2deg) scale(0.96);
+    transform: translateY(20px);
   }
   to {
     opacity: 1;
@@ -1280,12 +1340,12 @@
     border: 0;
     background: none;
     color: inherit;
-    transition: transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
   }
-  @media (hover: hover) {
-    .zoom-trigger:hover {
-      transform: translateY(-3px);
-    }
+  /* The screenshots carry a transparent margin, so a glowing trigger is
+     painted the floor's colour or the wheel would show through it. */
+  .zoom-trigger:focus-visible,
+  .zoom-trigger:hover {
+    background-color: var(--surface);
   }
   /* PhotoSwipe (lib/lightbox.ts). Its controls are restyled as the site's:
      round, solid dark whatever the theme, since the screenshots are pale and a
@@ -1293,7 +1353,7 @@
      bare white glyphs. */
   .pswp {
     /* A fixed warm dark, not a token: in dark mode the foreground is light. */
-    --pswp-bg: #191713;
+    --pswp-bg: #1a1917;
     --pswp-placeholder-bg: transparent;
     --pswp-root-z-index: 300;
     --pswp-preloader-color: #ffffff33;
@@ -1316,15 +1376,13 @@
   .pswp__counter {
     height: 2.75rem;
     margin: 0;
-    border: 1.5px solid #ffffffd9;
+    border: 1px solid #ffffff59;
     border-radius: 9999px;
-    background: #191713;
+    background: #242321;
     color: #fff;
     opacity: 1;
     text-shadow: none;
-    box-shadow:
-      0 2px 6px #0000005c,
-      0 10px 28px #00000066;
+    box-shadow: none;
   }
   .pswp .pswp__button {
     width: 2.75rem;
@@ -1333,7 +1391,7 @@
       transform 150ms ease;
   }
   .pswp .pswp__button:hover {
-    background: #36312a;
+    background: #3a3936;
   }
   .pswp .pswp__button:active {
     transform: scale(0.97);
@@ -1393,7 +1451,7 @@
     padding: 1rem 1.5rem;
     border-radius: var(--radius-lg);
     background: var(--popover);
-    box-shadow: var(--shadow-floating);
+    border: 1px solid var(--border);
     font-size: 0.9375rem;
     color: var(--pswp-error-text-color);
   }

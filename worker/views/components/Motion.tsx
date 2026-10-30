@@ -46,7 +46,7 @@ const BUILD_STEPS = [
  * Build it, then run it.
  *
  * One scroll position, `--p`, drives the whole sequence (see `.builder` in the
- * stylesheet): the steps float in one by one, clay strings connect them, they
+ * stylesheet): the steps float in one by one, strings connect them, they
  * compress into the Run button, which lights, and then the shortcut runs — a
  * bar fills and each step lights in turn.
  */
@@ -58,7 +58,7 @@ export const ShortcutBuilder: FC = () => (
     aria-label="A shortcut being built from three steps, then run"
   >
     {/* ----- The build ----- */}
-    <div class="clay-floating relative p-5 sm:p-7">
+    <div class="well relative p-5 sm:p-7">
       <div class="mb-5 flex items-center gap-3">
         <IconTile icon="layers" tone="brand" />
         <div>
@@ -71,7 +71,7 @@ export const ShortcutBuilder: FC = () => (
         {BUILD_STEPS.map((step, k) => (
           <>
             <li class="bstep lg:shrink-0" style={`--k: ${k};`}>
-              <div class="clay-raised clay-squish flex items-center gap-3 rounded-full py-2.5 pl-2.5 pr-5">
+              <div class="flex items-center gap-3 rounded-full bg-background py-2.5 pl-2.5 pr-5">
                 <IconTile icon={step.icon} tone={k === 1 ? "primary" : "brand"} />
                 <div class="min-w-0">
                   <p class="text-sm font-bold leading-tight">{step.label}</p>
@@ -96,7 +96,7 @@ export const ShortcutBuilder: FC = () => (
     </div>
 
     {/* ----- The run ----- */}
-    <div class="clay-raised rounded-[1.75rem] p-5 sm:p-7">
+    <div class="flat p-5 sm:p-7">
       <div class="mb-4 flex items-center justify-between gap-3">
         <p class="text-sm font-bold">Running Open a client</p>
         <span class="bdone inline-flex items-center gap-1.5 text-xs font-semibold text-success">
@@ -104,7 +104,7 @@ export const ShortcutBuilder: FC = () => (
           Done
         </span>
       </div>
-      <div class="h-3 overflow-hidden rounded-full bg-muted shadow-inset" aria-hidden="true">
+      <div class="h-2 overflow-hidden rounded-full bg-muted" aria-hidden="true">
         <div class="bbar h-full w-full"></div>
       </div>
       <ul class="mt-5 grid gap-3 sm:grid-cols-3">
@@ -114,7 +114,7 @@ export const ShortcutBuilder: FC = () => (
             style={`--a2: ${(0.1 + j * 0.3).toFixed(2)};`}
           >
             <span class="brow-glow absolute inset-0" aria-hidden="true"></span>
-            <span class="brow-icon relative inline-flex h-9 w-9 items-center justify-center rounded-xl bg-card text-primary shadow-raised">
+            <span class="brow-icon relative inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius-md)] bg-background text-primary">
               <i data-lucide={step.icon} class="h-4 w-4" aria-hidden="true"></i>
             </span>
             <span class="relative min-w-0">
@@ -138,13 +138,13 @@ const ZAP_NODES = [
 ];
 
 /**
- * Zap in action: a soft clay chat that plays once as it scrolls into view.
+ * Zap in action: a chat, set in a well, that plays once as it scrolls into view.
  * A request is typed, Zap thinks, answers, and its three steps connect into a
  * draft shortcut ready to test. Purely a picture — nothing here calls anything.
  */
 export const ZapDemo: FC = () => (
   <figure
-    class="zapdemo clay-floating relative overflow-hidden p-4 sm:p-6"
+    class="zapdemo well relative overflow-hidden p-4 sm:p-6"
     data-play
     translate="no"
     aria-label="A demo of Zap turning a request into a shortcut"
@@ -160,7 +160,7 @@ export const ZapDemo: FC = () => (
       <button
         type="button"
         data-replay
-        class="clay-chip clay-press inline-flex h-11 items-center gap-2 px-4 text-xs font-semibold"
+        class="btn btn-grey inline-flex h-11 items-center gap-2 rounded-full px-4 text-xs font-semibold"
         aria-label="Replay the demo"
       >
         <i data-lucide="rotate-ccw" class="h-3.5 w-3.5" aria-hidden="true"></i>
@@ -172,7 +172,7 @@ export const ZapDemo: FC = () => (
       {/* The request, typed. */}
       <div class="flex justify-end">
         <div
-          class="zd clay-slab max-w-[88%] rounded-[1.4rem] rounded-br-md px-4 py-3 text-sm leading-relaxed"
+          class="zd surface-ink max-w-[88%] rounded-[1.25rem] rounded-br-sm px-4 py-3 text-sm leading-relaxed"
           style={`--at: ${AT.user}s;`}
         >
           <span class="zd-type inline-block" style={`--at: ${AT.type}s;`}>
@@ -184,7 +184,7 @@ export const ZapDemo: FC = () => (
       {/* Zap: thinking, then the answer, in the same bubble. */}
       <div class="flex">
         <div
-          class="zd clay-raised grid max-w-[88%] rounded-[1.4rem] rounded-bl-md px-4 py-3 text-sm leading-relaxed"
+          class="zd grid max-w-[88%] rounded-[1.25rem] rounded-bl-sm bg-background px-4 py-3 text-sm leading-relaxed"
           style={`--at: ${AT.dots}s;`}
         >
           <span
@@ -203,7 +203,7 @@ export const ZapDemo: FC = () => (
       </div>
 
       {/* The steps connect into a draft shortcut. */}
-      <div class="clay-well rounded-[1.6rem] p-4 sm:p-5">
+      <div class="rounded-[var(--radius-lg)] border border-border bg-background p-4 sm:p-5">
         <p
           class="zd mb-3 text-[0.7rem] font-bold uppercase tracking-[0.16em] text-primary"
           style={`--at: ${AT.steps[0]}s;`}
@@ -214,7 +214,7 @@ export const ZapDemo: FC = () => (
           {ZAP_NODES.map((node, i) => (
             <>
               <li
-                class="zd clay-raised clay-squish flex items-center gap-3 rounded-full py-2 pl-2 pr-4"
+                class="zd flex items-center gap-3 rounded-full border border-border py-2 pl-2 pr-4"
                 style={`--at: ${AT.steps[i]}s;`}
               >
                 <IconTile icon={node.icon} tone={i === 1 ? "primary" : "brand"} />
@@ -226,7 +226,7 @@ export const ZapDemo: FC = () => (
               {i < ZAP_NODES.length - 1 ? (
                 <li
                   aria-hidden="true"
-                  class="zd zd-string mx-auto h-5 w-1.5 rounded-full bg-muted shadow-inset"
+                  class="zd zd-string mx-auto h-5 w-1 rounded-full bg-border"
                   style={`--at: ${AT.steps[i] + 0.35}s;`}
                 ></li>
               ) : null}
@@ -294,12 +294,12 @@ export const GalleryCarousel: FC = () => {
                   {example.does}
                 </p>
 
-                {/* A mini workflow: numbered clay nodes on a string. */}
-                <ol class="clay-well mt-5 flex flex-1 flex-col rounded-[1.25rem] p-4">
+                {/* A mini workflow: numbered orange squares down a hairline. */}
+                <ol class="mt-5 flex flex-1 flex-col border-t border-border pt-4">
                   {example.recipe.slice(0, 4).map((step, n, all) => (
                     <>
                       <li class="flex items-start gap-2.5 text-sm">
-                        <span class="clay-raised inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-xs font-bold text-primary tabular">
+                        <span class="inline-flex h-6 w-6 shrink-0 items-center justify-center rounded-[var(--radius-xs)] bg-orange font-mono text-xs font-bold text-orange-foreground tabular">
                           {n + 1}
                         </span>
                         <span class="pt-0.5 leading-snug">{step.sentence}</span>
@@ -324,7 +324,7 @@ export const GalleryCarousel: FC = () => {
           type="button"
           data-prev
           aria-label="Previous examples"
-          class="clay-chip clay-press inline-flex h-11 w-11 items-center justify-center disabled:opacity-40"
+          class="btn btn-grey inline-flex h-11 w-11 items-center justify-center rounded-full disabled:opacity-40"
         >
           <i data-lucide="chevron-down" class="h-5 w-5 rotate-90" aria-hidden="true"></i>
         </button>
@@ -332,7 +332,7 @@ export const GalleryCarousel: FC = () => {
           type="button"
           data-next
           aria-label="Next examples"
-          class="clay-chip clay-press inline-flex h-11 w-11 items-center justify-center disabled:opacity-40"
+          class="btn btn-grey inline-flex h-11 w-11 items-center justify-center rounded-full disabled:opacity-40"
         >
           <i data-lucide="chevron-down" class="h-5 w-5 -rotate-90" aria-hidden="true"></i>
         </button>

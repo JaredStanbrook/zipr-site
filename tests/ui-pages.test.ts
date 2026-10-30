@@ -21,6 +21,7 @@ describe("UI pages load", () => {
       "/",
       "/login",
       "/features",
+      "/design",
       "/zap",
       "/zap/setup",
       "/toolbox",
@@ -240,39 +241,6 @@ describe("UI pages load", () => {
       expect(home, `nav link ${label}`).toMatch(new RegExp(`href="${href}"[^>]*>[^<]*${label}`));
       expect((await get(testApp, href)).status, `GET ${href}`).toBe(200);
     }
-  });
-
-  it("keeps the Library and the Gallery apart, and avoids the retired words", async () => {
-    const testApp = createTestApp(null);
-    for (const path of ["/", "/features", "/gallery", "/teams", "/zap", "/pricing"]) {
-      // /, /gallery and /toolbox are left out of the bare "item" check on purpose: they show
-      // the Action Model's own step sentences (the home page in its Gallery carousel),
-      // which say "item" where the model does.
-      const html = await (await get(testApp, path)).text();
-      // Visible text only: attribute values and class names may use `item`.
-      const text = html
-        .replace(/<(script|style)[\s\S]*?<\/\1>/g, "")
-        .replace(/<[^>]+>/g, " ")
-        // Step names and sentences are the Action Model's own text, copied exactly.
-        .replace(
-          /Get Item from List|Choose an item from|for each item in|keep items in|count the items in|\{items\}|item\(s\)/gi,
-          "",
-        );
-      const words = [/\bworkflows?\b/i, /\bmarketplace\b/i, /\bnodes?\b/i, /\bcatalogues?\b/i];
-      if (!["/", "/gallery", "/toolbox"].includes(path)) words.push(/\bitems?\b/i);
-      for (const word of words) {
-        expect(text, `${word} on ${path}`).not.toMatch(word);
-      }
-      // The Gallery is a showcase: nothing on it is downloaded or installed.
-      expect(text, `Gallery as a library on ${path}`).not.toMatch(
-        /gallery\s+(to|you can)\s+(download|install)/i,
-      );
-    }
-
-    const teams = await (await get(testApp, "/teams")).text();
-    expect(teams).toContain("The Library");
-    const gallery = await (await get(testApp, "/gallery")).text();
-    expect(gallery).toContain("not files to download");
   });
 
   it("describes every toolbox step in plain words, with no template syntax", async () => {

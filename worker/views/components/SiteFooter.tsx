@@ -2,6 +2,7 @@ import { html } from "hono/html";
 
 import { CONTACT } from "@server/content/site";
 import { operatorName } from "@server/content/legal";
+import { LOGO_ROWS } from "@views/components/Ui";
 
 /**
  * The site footer.
@@ -48,53 +49,84 @@ const COLUMNS: Array<{ heading: string; links: Array<{ to: string; name: string 
 ];
 
 /**
- * The footer is the last tray on the page, with the name stamped into it at
- * the full width of the viewport — pressed in rather than printed, so it only
- * shows where the light catches its edges.
+ * The raised logo: the one object on the site that stands up off its
+ * surface. An ink plinth carrying the mark's sixteen-by-four bricks, built
+ * from the same rows as `LogoBricks` so it cannot drift from the artwork.
+ */
+const RaisedLogo = (appName: string) => html`
+  <a
+    href="/"
+    class="logo-raised glow inline-block p-[clamp(0.9rem,2.4vw,1.5rem)] no-underline"
+    aria-label="${appName} home"
+  >
+    <span
+      class="grid w-max"
+      style="grid-template-columns: repeat(16, var(--cell)); gap: calc(var(--cell) * 0.14); --cell: clamp(0.55rem, 2.1vw, 1.05rem);"
+      aria-hidden="true"
+    >
+      ${LOGO_ROWS.flatMap((row) =>
+        row
+          .split("")
+          .map((c) =>
+            c === "O"
+              ? html`<span class="brick" style="height: var(--cell);"></span>`
+              : html`<span style="height: var(--cell);"></span>`,
+          ),
+      )}
+    </span>
+  </a>
+`;
+
+const linkClass =
+  "inline-block py-1.5 text-sm text-muted-foreground no-underline transition-colors hover:text-foreground hover:underline underline-offset-4";
+
+/**
+ * The footer sits in a well — the last piece of the page, cut into it — and
+ * the logo stands raised inside it. Columns of links on the left, the logo
+ * holding the right: asymmetric, like the hero it answers.
  */
 export const SiteFooter = ({ appName, tagline }: { appName: string; tagline: string }) => html`
-  <footer class="mt-auto px-2 pb-2 pt-8 sm:px-4 sm:pb-4">
-    <div class="clay-tray mx-auto max-w-[96rem] overflow-hidden rounded-[2rem] sm:rounded-[3rem]">
-      <div class="mx-auto w-full max-w-6xl px-6 pt-14 sm:px-10">
-        <div class="grid gap-10 sm:grid-cols-2 lg:grid-cols-[1.4fr_repeat(3,1fr)]">
-          <div>
-            <a href="/" class="flex items-center gap-2 no-underline">
-              <img src="/favicon.svg" alt="" width="28" height="28" class="h-7 w-7" />
-              <span class="font-display text-2xl font-semibold">${appName}</span>
-            </a>
-            <p class="mt-3 max-w-xs text-sm leading-relaxed text-muted-foreground">
+  <footer class="mt-auto px-3 pb-3 pt-8 sm:px-5 sm:pb-5">
+    <div class="well mx-auto max-w-[96rem] overflow-hidden">
+      <div class="mx-auto w-full max-w-7xl px-6 py-14 sm:px-10">
+        <div class="grid gap-12 lg:grid-cols-12">
+          <div class="lg:col-span-5">
+            ${RaisedLogo(appName)}
+            <p class="mt-6 max-w-xs text-sm leading-relaxed text-muted-foreground">
               ${tagline || "Your computer tricks, in one click."}
             </p>
           </div>
 
-          ${COLUMNS.map(
-            (column) => html`
-              <div>
-                <h2
-                  class="font-sans text-xs font-bold uppercase tracking-[0.16em] text-muted-foreground"
-                >
-                  ${column.heading}
-                </h2>
-                <ul class="mt-3 space-y-0.5">
-                  ${column.links.map(
-                    (link) => html`
-                      <li>
-                        <a
-                          href="${link.to}"
-                          class="inline-block py-1.5 text-sm text-muted-foreground no-underline transition-colors hover:text-primary"
-                          >${link.name}</a
-                        >
-                      </li>
-                    `,
-                  )}
-                </ul>
-              </div>
-            `,
-          )}
+          <div class="grid gap-10 sm:grid-cols-3 lg:col-span-7">
+            ${COLUMNS.map(
+              (column) => html`
+                <div>
+                  <h2
+                    class="font-sans text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground"
+                  >
+                    ${column.heading}
+                  </h2>
+                  <ul class="mt-3 space-y-0.5">
+                    ${column.links.map(
+                      (link) => html`
+                        <li>
+                          <a
+                            href="${link.to}"
+                            class="inline-block py-1.5 text-sm text-foreground no-underline underline-offset-4 hover:underline"
+                            >${link.name}</a
+                          >
+                        </li>
+                      `,
+                    )}
+                  </ul>
+                </div>
+              `,
+            )}
+          </div>
         </div>
 
         <div
-          class="mt-12 flex flex-col gap-3 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between"
+          class="mt-14 flex flex-col gap-3 border-t border-border pt-6 text-sm text-muted-foreground sm:flex-row sm:items-center sm:justify-between"
         >
           <p>
             <span translate="no">© ${new Date().getFullYear()} ${operatorName()}.</span> All rights
@@ -104,46 +136,24 @@ export const SiteFooter = ({ appName, tagline }: { appName: string; tagline: str
           <!-- On every page, because the privacy notice has to be reachable
                from wherever information is collected, not just from one. -->
           <ul class="flex flex-wrap items-center gap-x-5 gap-y-2">
+            <li><a href="/licence" class="${linkClass}">Licence</a></li>
+            <li><a href="/privacy" class="${linkClass}">Privacy</a></li>
             <li>
-              <a
-                href="/licence"
-                class="inline-block py-1.5 text-muted-foreground no-underline hover:text-primary"
-                >Licence</a
-              >
+              <a href="/third-party-notices.txt" class="${linkClass}">Open-source licences</a>
             </li>
             <li>
-              <a
-                href="/privacy"
-                class="inline-block py-1.5 text-muted-foreground no-underline hover:text-primary"
-                >Privacy</a
-              >
-            </li>
-            <li>
+              <!-- Stays on the page, so grey — which, in this well, is white. -->
               <a
                 href="#top"
-                class="clay-chip clay-press inline-flex h-11 items-center gap-2 px-4 text-xs font-semibold no-underline"
+                class="btn btn-grey inline-flex h-11 items-center gap-2 rounded-full px-4 text-xs font-semibold no-underline"
                 aria-label="Back to top"
                 ><i data-lucide="chevron-down" class="h-4 w-4 rotate-180" aria-hidden="true"></i>
                 Top</a
               >
             </li>
-            <li>
-              <a
-                href="/third-party-notices.txt"
-                class="inline-block py-1.5 text-muted-foreground no-underline hover:text-primary"
-                >Open-source licences</a
-              >
-            </li>
           </ul>
         </div>
       </div>
-
-      <p
-        class="emboss -mb-[0.06em] mt-6 select-none text-center font-display text-[31vw] font-bold leading-[0.8] tracking-[-0.04em] sm:text-[26vw] 2xl:text-[24rem]"
-        aria-hidden="true"
-      >
-        ${appName}
-      </p>
     </div>
   </footer>
 `;

@@ -89,23 +89,23 @@ export const Layout: FC<LayoutProps> = (props) => {
         )}
 
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="theme-color" content="#f1ede6" media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="#191713" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#f8f6f2" media="(prefers-color-scheme: light)" />
+        <meta name="theme-color" content="#1a1917" media="(prefers-color-scheme: dark)" />
 
-        <!-- The two faces above the fold: the display face every H1 is set
-             in (the largest text on most pages, so usually the LCP element)
-             and the body face. Preloaded so the headline paints in its real
-             font instead of swapping late and shifting. -->
+        <!-- The two faces above the fold: Space Grotesk, which every H1 is set
+             in (the largest text on most pages, so usually the LCP element),
+             and Inter for the body. Preloaded so the headline paints in its
+             real font instead of swapping late and shifting. -->
         <link
           rel="preload"
-          href="/fonts/fraunces-latin-soft.woff2"
+          href="/fonts/space-grotesk-latin.woff2"
           as="font"
           type="font/woff2"
           crossorigin
         />
         <link
           rel="preload"
-          href="/fonts/plus-jakarta-sans-latin.woff2"
+          href="/fonts/inter-latin.woff2"
           as="font"
           type="font/woff2"
           crossorigin
@@ -166,7 +166,7 @@ export const Layout: FC<LayoutProps> = (props) => {
              past the navigation (WCAG 2.4.1). Visible only when focused. -->
         <a
           href="#main-content"
-          class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-full focus:bg-card focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-foreground focus:shadow-floating"
+          class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-full focus:bg-ink focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-ink-foreground"
           >Skip to content</a
         >
         <theme-provider defaultTheme="system"></theme-provider>

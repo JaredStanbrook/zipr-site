@@ -53,11 +53,31 @@ rather than raw colors, so every theme stays consistent automatically.
 
 ## 4. Typography
 
-- **Sans**: `Montserrat` — UI, buttons, headings.
-- **Serif**: `Domine` — long-form content and stylistic accents.
-- **Mono**: `Source Code Pro` — code and technical data.
+- **Headings**: `Space Grotesk` — every `h1`–`h3` and `.font-display`.
+- **Body**: `Inter` — UI, buttons, prose.
+- **Mono**: `JetBrains Mono` — technical content only (step names, versions,
+  paths, keys). Nothing else is monospace.
 
 Set in the `--font-*` variables in `index.css`.
+
+## 4a. Flat layers, wells and buttons
+
+- Three flat layers, bottom to top: paper (`bg-background`), grey (`bg-muted`,
+  `.surface-grey`), ink (`bg-ink`, `.surface-ink`). Never a fourth, and
+  nothing in the body is raised — no shadows.
+- A **well** (`.well`, `<Well>`, `Card tone="well"`) is the one way to set
+  content apart. Use sparingly. The footer is one, and its logo is the only
+  raised object on the site.
+- **Buttons by destination**: black (`btn-ink`) leaves the page; grey
+  (`btn-grey`) stays on it, and turns white on any grey surface. `LinkButton`
+  picks grey for `#fragment` links automatically.
+- **Hover and focus** are a rotating colourful glow: add `.btn` or `.glow` to
+  any control. Surfaces that can hold controls are `isolation: isolate` so the
+  glow paints above them.
+- **Media**: `EdgeShot` clips a screenshot off one edge, `ScreenshotMarquee`
+  and `Marquee` slide content past (draggable, `lib/marquee.ts`), `LoopVideo`
+  plays centred like a GIF. Every screenshot opens whole in the lightbox.
+- `/design` shows all of it.
 
 ## 5. Layout
 
