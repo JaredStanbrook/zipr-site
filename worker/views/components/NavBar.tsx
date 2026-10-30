@@ -266,7 +266,7 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
         <div class="flex items-center gap-4">
           <a href="/" class="group mr-2 flex items-center gap-2 no-underline">
             <img src="/favicon.svg" alt="" width="28" height="28" class="h-7 w-7" />
-            <span class="font-display text-xl font-semibold tracking-tight">${appName}</span>
+            <span class="wordmark text-xl">${appName}</span>
           </a>
 
           <nav class="hidden items-center gap-1 lg:flex">

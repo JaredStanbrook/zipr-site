@@ -120,9 +120,10 @@
     U+A720-A7FF;
 }
 
-/* The footer's embossed name, and nowhere else: the old display face, Fraunces
-   with its SOFT axis, pulled from a CDN rather than self-hosted because it
-   carries one word on the page. Pinned to a version so it never changes under
+/* The wordmark face, and nowhere else: Fraunces with its SOFT axis, used for
+   the Zipr name in the header, the mobile menu and the footer's embossed
+   copy. Pulled from a CDN rather than self-hosted because it carries one word
+   on the page. Pinned to a version so it never changes under
    us; `swap` so the footer never waits on it. OFL 1.1. */
 @font-face {
   font-family: "Fraunces";
@@ -682,6 +683,17 @@
   .float {
     animation: none;
   }
+  /* The Zipr name wherever it is set as text. */
+  .wordmark {
+    font-family: "Fraunces", var(--font-display);
+    font-optical-sizing: auto;
+    font-variation-settings:
+      "SOFT" 100,
+      "WONK" 0;
+    font-weight: 600;
+    letter-spacing: -0.015em;
+  }
+
   /* Type stamped into the well: the surface's own colour, a highlight on its
      lower lip and a shadow on its upper, so it only shows where the light
      catches its edges. Fraunces at full softness, as it always was. */

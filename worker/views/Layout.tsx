@@ -110,6 +110,16 @@ export const Layout: FC<LayoutProps> = (props) => {
           type="font/woff2"
           crossorigin
         />
+        <!-- The wordmark face lives on a CDN (see index.css), and the header
+             uses it above the fold, so connect early and fetch it now. -->
+        <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+        <link
+          rel="preload"
+          href="https://cdn.jsdelivr.net/npm/@fontsource-variable/fraunces@5.2.9/files/fraunces-latin-full-normal.woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin
+        />
         ${
           isProd
             ? html`<link rel="stylesheet" href="/static/main.css?v=${props.assetVersion}" />`
