@@ -90,12 +90,6 @@ export const SiteFooter = ({ appName, tagline }: { appName: string; tagline: str
     <div class="well mx-auto max-w-[96rem] overflow-hidden">
       <div class="mx-auto w-full max-w-7xl px-6 py-14 sm:px-10">
         <div class="grid gap-12 lg:grid-cols-12">
-          <p
-            class="emboss -mb-[0.06em] mt-6 select-none text-center font-display text-[31vw] font-bold leading-[0.8] tracking-[-0.04em] sm:text-[26vw] 2xl:text-[24rem]"
-            aria-hidden="true"
-          >
-            ${appName}
-          </p>
           <div class="grid gap-10 sm:grid-cols-3 lg:col-span-7">
             ${COLUMNS.map(
               (column) => html`
@@ -153,6 +147,13 @@ export const SiteFooter = ({ appName, tagline }: { appName: string; tagline: str
           </ul>
         </div>
       </div>
+
+      <p
+        class="emboss -mb-[0.06em] mt-6 select-none text-center text-[31vw] font-bold leading-[0.8] sm:text-[26vw] 2xl:text-[24rem]"
+        aria-hidden="true"
+      >
+        ${appName}
+      </p>
     </div>
   </footer>
 `;
