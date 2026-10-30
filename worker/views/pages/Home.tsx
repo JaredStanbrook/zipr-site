@@ -17,7 +17,6 @@ import {
   Card,
   IconTile,
   LinkButton,
-  Badge,
   CtaBand,
   Eyebrow,
   CheckItem,
@@ -70,7 +69,6 @@ const PROOF = [
   { icon: "monitor", text: "Windows and macOS" },
   { icon: "wifi-off", text: "Works offline" },
   { icon: "shield", text: "Nothing runs on a server" },
-  { icon: "circle-check", text: "No account. No card. No expiry." },
 ];
 
 /**
@@ -94,7 +92,6 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
         <Container size="wide">
           <div class="grid items-center gap-12 [&>*]:min-w-0 lg:grid-cols-12 lg:gap-10">
             <div class="lg:col-span-6 xl:col-span-5">
-              <Eyebrow class="rise">For Windows and macOS · Free</Eyebrow>
               <h1
                 class="rise text-[2.9rem] leading-[0.98] text-balance sm:text-7xl lg:text-[5rem]"
                 style="--i: 1;"
@@ -149,42 +146,6 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
           </ul>
         </Container>
       </section>
-
-      {/* =================================================================
-          IN USE
-
-          The real screens, sliding past left to right and off the page. Each
-          one can be grabbed, and any one — whole or half-way off the edge —
-          opens on its own in the viewer.
-         ================================================================= */}
-      <Section id="in-use" class="overflow-x-clip">
-        <Container size="wide">
-          <div class="mb-10 grid gap-6 lg:grid-cols-12 lg:items-end">
-            <div class="lg:col-span-7">
-              <Eyebrow>In use</Eyebrow>
-              <h2 class="text-3xl leading-[1.05] text-balance sm:text-[2.75rem]">
-                The real app, <em>not a mock-up.</em>
-              </h2>
-            </div>
-            <p class="leading-relaxed text-muted-foreground text-pretty lg:col-span-5">
-              The launcher, the editor, a shortcut's run history and Zap at work. Drag the row to
-              look along it, or open any picture to see the whole screen.
-            </p>
-          </div>
-        </Container>
-        <ScreenshotMarquee
-          label="Screenshots of the Zipr app"
-          direction="right"
-          ids={[
-            "overlay-list",
-            "editor-steps",
-            "run-history",
-            "zap",
-            "app-shortcuts",
-            "overlay-grid",
-          ]}
-        />
-      </Section>
 
       {/* =================================================================
           ORIGIN STORY
@@ -251,7 +212,6 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
                       >
                         {step.step}
                       </span>
-                      <Badge tone={step.cost === "Free" ? "success" : "primary"}>{step.cost}</Badge>
                     </div>
                     <h3 class="mt-5 text-2xl text-balance">{step.title}</h3>
                     <p class="mt-2 text-sm leading-relaxed text-muted-foreground text-pretty">
@@ -325,6 +285,38 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
             </figcaption>
           </figure>
         </Container>
+      </Section>
+
+      {/* =================================================================
+          IN USE
+
+          The real screens, sliding past left to right and off the page. Each
+          one can be grabbed, and any one — whole or half-way off the edge —
+          opens on its own in the viewer.
+         ================================================================= */}
+      <Section id="in-use" class="overflow-x-clip">
+        <Container size="wide">
+          <div class="mb-10 grid gap-6 lg:grid-cols-12 lg:items-end">
+            <div class="lg:col-span-7">
+              <Eyebrow>In use</Eyebrow>
+              <h2 class="text-3xl leading-[1.05] text-balance sm:text-[2.75rem]">
+                Make it <em>yours.</em>
+              </h2>
+            </div>
+          </div>
+        </Container>
+        <ScreenshotMarquee
+          label="Screenshots of the Zipr app"
+          direction="right"
+          ids={[
+            "overlay-list",
+            "editor-steps",
+            "run-history",
+            "zap",
+            "app-shortcuts",
+            "overlay-grid",
+          ]}
+        />
       </Section>
 
       {/* =================================================================
@@ -492,7 +484,6 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
             <Card lift class="flex h-full flex-col p-7">
               <div class="flex items-center justify-between">
                 <h3 class="text-2xl">Zipr for you</h3>
-                <Badge tone="success">Free</Badge>
               </div>
               <p class="mt-4 font-display text-5xl font-semibold tabular">{money(0)}</p>
               <p class="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
@@ -507,7 +498,6 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
             <Card lift class="flex h-full flex-col p-7">
               <div class="flex items-center justify-between">
                 <h3 class="text-2xl">Team plan</h3>
-                <Badge tone="primary">Team</Badge>
               </div>
               {hosted?.annualMonthlyCents ? (
                 <p class="mt-4 flex flex-wrap items-baseline gap-1.5">
