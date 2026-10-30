@@ -79,9 +79,8 @@ export const Eyebrow: FC<{ children?: Child; class?: string }> = ({
   class: className = "",
 }) => (
   <p
-    class={`mb-5 flex items-center gap-2.5 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground text-balance ${className}`}
+    class={`mb-5 text-xs font-semibold uppercase tracking-[0.18em] text-muted-foreground text-balance ${className}`}
   >
-    <span class="eyebrow-mark" aria-hidden="true"></span>
     {children}
   </p>
 );
@@ -94,7 +93,9 @@ export const SectionHeading: FC<{
   as?: "h1" | "h2";
 }> = ({ eyebrow, title, lede, align = "left", as: Heading = "h2" }) => (
   <div class={`${align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl"} mb-12`}>
-    {eyebrow ? <Eyebrow>{eyebrow}</Eyebrow> : null}
+    {eyebrow ? <Eyebrow class={align === "center" ? "text-center" : undefined}>
+      {eyebrow}
+    </Eyebrow> : null}
     <Heading
       class={
         Heading === "h1"
