@@ -10,13 +10,16 @@
  *     order (a screen reader hears the list once);
  *   - the track moves by a transform, not by scrolling, so it is smooth at
  *     fractions of a pixel per frame;
- *   - a pointer (mouse, pen or finger) can grab it and drag it either way. Let
- *     go and it carries on from wherever it was left;
+ *   - a pointer (mouse, pen or finger) can grab it and drag it either way.
+ *     Let go mid-swipe and it is thrown: it coasts on at the speed it was let
+ *     go at, slows, and settles back into its own pace. Grab it while it
+ *     coasts to catch it;
  *   - a horizontal wheel or trackpad swipe moves it too, and the arrow keys do
  *     when it has focus;
  *   - it holds still while it has keyboard focus, while the picture viewer is
  *     open over it, and while it is off screen;
- *   - with reduced motion it never moves by itself; it can still be dragged.
+ *   - with reduced motion it never moves by itself, and is not thrown; it can
+ *     still be dragged.
  *
  * A drag must not also be a click, or letting go of a screenshot would open
  * it in the viewer: a click that ends a drag is swallowed before the
@@ -29,6 +32,16 @@ const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)"
 const DRAG_THRESHOLD = 5;
 /** How long a wheel or key nudge holds off the automatic motion. */
 const NUDGE_HOLD_MS = 1200;
+/** Seconds for a throw to lose about two thirds of its extra speed. Lower is
+ *  more friction. */
+const COAST_TIME = 0.45;
+/** The fastest a throw may travel, in pixels per second. */
+const MAX_THROW = 5000;
+/** Only the pointer's last stretch of travel sets the throw: a long slow drag
+ *  ended with a flick is a flick. */
+const SAMPLE_MS = 100;
+/** A pointer that sat still this long before letting go has not thrown. */
+const STILL_MS = 60;
 
 type State = {
   root: HTMLElement;
@@ -37,6 +50,9 @@ type State = {
   /** Width of one set of items, the distance after which the loop repeats. */
   period: number;
   pos: number;
+  /** Current velocity in pixels per second. Eases towards the automatic pace,
+   *  so a throw coasts down into it rather than stopping dead. */
+  vel: number;
   /** +1: content travels left (the default); -1: it travels right. */
   dir: 1 | -1;
   speed: number;
@@ -45,7 +61,16 @@ type State = {
   visible: boolean;
   focused: boolean;
   heldUntil: number;
-  drag: { id: number; startX: number; startPos: number; moved: boolean } | null;
+  drag: {
+    id: number;
+    startX: number;
+    startPos: number;
+    moved: boolean;
+    /** Pressed while coasting fast: this press catches it, it is not a click. */
+    caught: boolean;
+    /** Recent unwrapped positions, for the throw's speed. */
+    samples: Array<{ t: number; pos: number }>;
+  } | null;
   swallowClick: boolean;
 };
 
@@ -74,14 +99,20 @@ const tick = (now: number) => {
       marquees.delete(s);
       continue;
     }
-    const moving =
-      !s.stopped && s.visible && !s.focused && !s.drag && now >= s.heldUntil && !viewerOpen();
-    if (moving) {
-      s.pos += s.dir * s.speed * dt;
-      wrap(s);
-      paint(s);
-    }
     if (s.visible) running = true;
+    if (s.drag || !s.visible) continue;
+    const auto = !s.stopped && !s.focused && now >= s.heldUntil && !viewerOpen();
+    const target = auto ? s.dir * s.speed : 0;
+    // Exponential ease towards the target: a throw bleeds off smoothly and
+    // hands over to the automatic pace with no visible seam.
+    s.vel = target + (s.vel - target) * Math.exp(-dt / COAST_TIME);
+    if (target === 0 && Math.abs(s.vel) < 2) {
+      s.vel = 0;
+      continue;
+    }
+    s.pos += s.vel * dt;
+    wrap(s);
+    paint(s);
   }
   if (running) schedule();
   else last = 0;
@@ -153,6 +184,7 @@ const setup = (root: HTMLElement) => {
     track,
     period: 0,
     pos: 0,
+    vel: 0,
     dir: root.dataset.direction === "right" ? -1 : 1,
     speed: Number(root.dataset.speed) || 36,
     stopped: reducedMotion(),
@@ -162,6 +194,7 @@ const setup = (root: HTMLElement) => {
     drag: null,
     swallowClick: false,
   };
+  s.vel = s.stopped ? 0 : s.dir * s.speed;
   root.classList.add("is-live");
   viewport.scrollLeft = 0;
   fill(s);
@@ -197,7 +230,15 @@ const setup = (root: HTMLElement) => {
   // so an ordinary click still lands on the button under it.
   viewport.addEventListener("pointerdown", (event) => {
     if (event.button !== 0) return;
-    s.drag = { id: event.pointerId, startX: event.clientX, startPos: s.pos, moved: false };
+    s.drag = {
+      id: event.pointerId,
+      startX: event.clientX,
+      startPos: s.pos,
+      moved: false,
+      caught: Math.abs(s.vel) > s.speed * 2 + 60,
+      samples: [{ t: event.timeStamp, pos: s.pos }],
+    };
+    s.vel = 0;
   });
   viewport.addEventListener("pointermove", (event) => {
     const drag = s.drag;
@@ -209,7 +250,12 @@ const setup = (root: HTMLElement) => {
       viewport.setPointerCapture(event.pointerId);
     }
     if (drag.moved) {
-      s.pos = drag.startPos - dx;
+      const raw = drag.startPos - dx;
+      drag.samples.push({ t: event.timeStamp, pos: raw });
+      while (drag.samples.length > 2 && event.timeStamp - drag.samples[0].t > SAMPLE_MS) {
+        drag.samples.shift();
+      }
+      s.pos = raw;
       wrap(s);
       paint(s);
     }
@@ -217,10 +263,19 @@ const setup = (root: HTMLElement) => {
   const release = (event: PointerEvent) => {
     const drag = s.drag;
     if (!drag || drag.id !== event.pointerId) return;
-    if (drag.moved) s.swallowClick = true;
+    if (drag.moved || drag.caught) s.swallowClick = true;
     s.drag = null;
     root.classList.remove("is-dragging");
-    // And it carries on from wherever it was let go.
+    // Thrown: leave at the speed the pointer was travelling. The tick then
+    // eases it back into the automatic pace from wherever it was let go.
+    s.vel = 0;
+    const first = drag.samples[0];
+    const lastSample = drag.samples[drag.samples.length - 1];
+    const span = lastSample.t - first.t;
+    if (drag.moved && !reducedMotion() && span > 0 && event.timeStamp - lastSample.t < STILL_MS) {
+      const v = ((lastSample.pos - first.pos) / span) * 1000;
+      s.vel = Math.max(-MAX_THROW, Math.min(MAX_THROW, v));
+    }
     schedule();
   };
   viewport.addEventListener("pointerup", release);
@@ -245,6 +300,7 @@ const setup = (root: HTMLElement) => {
     (event) => {
       if (Math.abs(event.deltaX) <= Math.abs(event.deltaY)) return;
       event.preventDefault();
+      s.vel = 0;
       s.pos += event.deltaX;
       wrap(s);
       paint(s);
