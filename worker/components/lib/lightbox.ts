@@ -118,6 +118,20 @@ const openLightbox = async (clicked: HTMLElement) => {
     index,
     bgOpacity: 0.72,
     // Fits the screen first; the zoom button and a double tap go to full size.
+    // Click off the picture to close. A mouse already does (`bgClickAction`
+    // defaults to "close"), but a touch tap is a different action that
+    // defaults to toggling the controls: make a tap on the empty area close
+    // too, and keep the toggle for a tap on the picture itself.
+    bgClickAction: "close",
+    tapAction: (point, originalEvent) => {
+      const onPicture = (originalEvent.target as HTMLElement).classList.contains("pswp__img");
+      if (onPicture) viewer.element?.classList.toggle("pswp--ui-visible");
+      else viewer.close();
+    },
+    // Always leave a margin round the picture, so there is somewhere to click
+    // to close even on a wide screenshot that fits edge to edge. The top is
+    // deeper: the controls sit there and must not cover the picture.
+    padding: { top: 72, bottom: 24, left: 24, right: 24 },
     initialZoomLevel: "fit",
     secondaryZoomLevel: 1,
     maxZoomLevel: 1,
