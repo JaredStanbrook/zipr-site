@@ -262,8 +262,18 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
       one link in ink. On small screens the links drop down from it in a panel
       of the same glass, rather than taking over the screen.
     -->
-    <header class="fixed inset-x-0 top-0 z-40 px-3 pt-3 sm:px-5">
-      <div class="nav-glass mx-auto flex h-14 max-w-7xl items-center justify-between pl-4 pr-2">
+    <!--
+      The header element is only a positioning frame: it spans the width and
+      carries the gutter, so it must not take taps itself. Only the bar and the
+      open menu do. The menu is positioned below the bar, out of the header's
+      flow — inside it, a hidden menu still made the header as tall as the
+      menu, and on a phone that invisible box swallowed every tap in the top
+      two thirds of the screen.
+    -->
+    <header class="pointer-events-none fixed inset-x-0 top-0 z-40 px-3 pt-3 sm:px-5">
+      <div
+        class="nav-glass pointer-events-auto mx-auto flex h-14 max-w-7xl items-center justify-between pl-4 pr-2"
+      >
         <div class="flex items-center gap-4">
           <a href="/" class="group mr-2 flex items-center gap-2 no-underline">
             <img src="/favicon.svg" alt="" width="28" height="28" class="h-7 w-7" />
@@ -327,7 +337,7 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
       <!-- The small-screen menu: a frosted panel dropping from the bar. -->
       <div
         id="mobile-menu"
-        class="nav-dropdown nav-glass mx-auto mt-2 max-h-[calc(100svh-5.5rem)] max-w-7xl overflow-y-auto p-2 lg:hidden"
+        class="nav-dropdown nav-glass pointer-events-auto absolute inset-x-3 top-full mx-auto mt-2 max-h-[calc(100svh-5.5rem)] max-w-7xl overflow-y-auto p-2 sm:inset-x-5 lg:hidden"
       >
         <nav class="flex flex-col gap-0.5" aria-label="Main">
           ${menuItems.map(
