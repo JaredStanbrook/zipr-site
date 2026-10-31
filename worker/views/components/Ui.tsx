@@ -443,20 +443,16 @@ export const Disclosure: FC<{ question: string; children?: Child }> = ({ questio
 );
 
 /**
- * A product screenshot that follows the site's theme.
+ * A product screenshot.
  *
- * Two images, one per theme, and the stylesheet shows the one that matches
- * (`.shot-light` / `.shot-dark` in index.css). A `<picture>` with a
- * `prefers-color-scheme` source would follow the operating system only, and
- * the theme toggle in the header would then disagree with the pictures.
+ * The site is light only (see `<theme-provider locked>` in Layout.tsx), so
+ * there is one picture, the light render. The dark renders were deleted to
+ * keep the deploy small; the client's capture script still makes them, and
+ * bringing them back is a second `<img>` and the theme rules it needs.
  *
  * The image carries its own corners and shadow (transparent PNG), so nothing
- * here rounds, clips or shades it.
- *
- * The hidden image is lazy, so a browser does not download it. `eager` is for
- * the picture at the top of the page, where lazy loading would delay the
- * largest paint; it costs the hidden variant too, which is the price of not
- * knowing the theme on the server.
+ * here rounds, clips or shades it. `eager` is for the picture at the top of
+ * the page, where lazy loading would delay the largest paint.
  */
 export const Screenshot: FC<{
   id: ScreenshotId;
@@ -466,21 +462,17 @@ export const Screenshot: FC<{
   zoom?: boolean;
 }> = ({ id, eager = false, class: className = "", zoom = true }) => {
   const shot = SCREENSHOTS[id];
-  const image = (theme: "light" | "dark") => (
-    <img
-      class={`shot-${theme} h-auto w-full`}
-      src={`${SCREENSHOT_BASE}/${id}-${theme}.png`}
-      width={shot.width}
-      height={shot.height}
-      alt={shot.alt}
-      loading={eager ? "eager" : "lazy"}
-      decoding="async"
-    />
-  );
   const pictures = (
     <span class={`shot block ${className}`}>
-      {image("light")}
-      {image("dark")}
+      <img
+        class="h-auto w-full"
+        src={`${SCREENSHOT_BASE}/${id}-light.png`}
+        width={shot.width}
+        height={shot.height}
+        alt={shot.alt}
+        loading={eager ? "eager" : "lazy"}
+        decoding="async"
+      />
     </span>
   );
   return zoom ? <ZoomTrigger>{pictures}</ZoomTrigger> : pictures;
@@ -589,15 +581,15 @@ export const ScreenshotMarquee: FC<{
 /**
  * Product video that behaves like a GIF: centred, muted, on a loop, starting
  * by itself — `playsinline` so a phone does not hijack it into full screen,
- * and no controls, because there is nothing to control. One file per theme,
- * shown the way the screenshots are. The poster is the first frame, so the
+ * and no controls, because there is nothing to control. Light only, like the
+ * screenshots. The poster is the first frame, so the
  * picture is right before the first byte arrives and stays right for anyone
  * whose browser declines to autoplay. Each clip starts and ends on the same
  * frame, so the loop has no seam.
  */
 export const LoopVideo: FC<{
   /** Base path without the theme or extension: `/media/editor-pan` serves
-   *  `editor-pan-light.webm`, `.mp4` and `.jpg`, and their dark twins. */
+   *  `editor-pan-light.webm`, `.mp4` and `.jpg`. */
   src: string;
   width: number;
   height: number;
@@ -605,9 +597,9 @@ export const LoopVideo: FC<{
   class?: string;
 }> = ({ src, width, height, label, class: className = "" }) => (
   <div class={`mx-auto w-full max-w-4xl ${className}`}>
-    {(["light", "dark"] as const).map((theme) => (
+    {(["light"] as const).map((theme) => (
       <video
-        class={`loop-video shot-${theme}`}
+        class="loop-video"
         poster={`${src}-${theme}.jpg`}
         width={width}
         height={height}

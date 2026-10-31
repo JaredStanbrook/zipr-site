@@ -101,8 +101,10 @@ export const PUBLIC_NAV = [
 /**
  * Product screenshots, served from `public/screenshots/`.
  *
- * Each is rendered from the app's own screen gallery in both themes and named
- * `<id>-light.png` / `<id>-dark.png`. They are transparent PNGs of the window
+ * Each is rendered from the app's own screen gallery
+ * (`scripts/capture-marketing.mjs` in zipr-client) and named `<id>-light.png`.
+ * The site is light only, so the dark renders are not kept here. They are
+ * transparent PNGs of the window
  * alone, with its own rounded corners and a margin that holds its shadow, so
  * the page adds no frame, radius or shadow of its own. Width and height are the rendered
  * pixels, kept here so the page reserves the right box before the file
@@ -160,7 +162,7 @@ export const SCREENSHOTS = {
   },
   "overlay-home": {
     width: 1992,
-    height: 1152,
+    height: 1486,
     alt: "A Zipr launcher at home in the largest text size, as big tiles with short names: Family call pinned, then My photos, The news, My radio, Weather and New letter.",
   },
   "editor-steps": {

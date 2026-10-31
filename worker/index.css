@@ -982,28 +982,6 @@
      Media
      ====================================================================== */
 
-  /* Product screenshots, one image per theme. With no class on <html> yet
-     (before the theme script runs) the operating system decides; once the
-     script has set `light` or `dark` that wins, so the header toggle and the
-     pictures never disagree. */
-  .shot-dark {
-    display: none;
-  }
-  .dark .shot-light {
-    display: none;
-  }
-  .dark .shot-dark {
-    display: block;
-  }
-  @media (prefers-color-scheme: dark) {
-    html:not(.light):not(.dark) .shot-light {
-      display: none;
-    }
-    html:not(.light):not(.dark) .shot-dark {
-      display: block;
-    }
-  }
-
   /* The hero's two launcher pictures, overlapping: the grid behind and to the
      right, the list in front and lower. One grid cell, so the box is as tall
      as the two together and nothing is positioned out of flow. The one under
