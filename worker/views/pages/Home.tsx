@@ -4,7 +4,7 @@ import type { AppConfig } from "@server/config/app.config";
 import { HOW_IT_WORKS, TEAM_UNLOCKS, TRUST_POINTS } from "@server/content/features";
 import { ALL_STEPS_COUNT, STEP_GROUPS } from "@server/content/steps";
 import { ToolboxTiles } from "@views/components/Toolbox";
-import { GalleryCarousel, ShortcutBuilder, ZapDemo } from "@views/components/Motion";
+import { GalleryCarousel, OneClickStory, ZapDemo } from "@views/components/Motion";
 import { PRICING_FAQ } from "@server/content/pricing";
 import { ZAP_FAQ } from "@views/pages/Zap";
 import { TIERS } from "@server/content/pricing";
@@ -222,12 +222,16 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
               ))}
             </ol>
           </div>
-
-          <div class="mx-auto mt-16 max-w-4xl">
-            <ShortcutBuilder />
-          </div>
         </Container>
       </Section>
+
+      {/* =================================================================
+          FOUR STEPS. ONE CLICK.
+
+          The whole idea in one scroll: four real steps, half off the page,
+          come together and become the one button that runs them.
+         ================================================================= */}
+      <OneClickStory />
 
       {/* =================================================================
           THE TOOLBOX

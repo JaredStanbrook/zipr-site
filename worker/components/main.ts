@@ -9,6 +9,7 @@ import "htmx.org";
 import { renderIcons } from "./lib/icons";
 import { initCarousels, initMotion, initReplay } from "./lib/motion";
 import { initMarquees } from "./lib/marquee";
+import { initOneClick } from "./lib/oneclick";
 import "./lib/lightbox";
 
 import "./ui/AppToaster";
@@ -63,6 +64,7 @@ const startMotion = () => {
   initCarousels();
   initReplay();
   initMarquees();
+  initOneClick();
   initMotion();
 };
 

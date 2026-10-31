@@ -1123,94 +1123,163 @@
   }
 
   /* ======================================================================
-     Shortcut builder: steps float in, connect, compress into Run, and the
-     shortcut then runs. One number, `--p`, drives all of it.
+     One click: four steps become one button (lib/oneclick.ts, GSAP).
+
+     The base rules are the still version — a column of steps, the button,
+     the caption — which is what a visitor gets with no JavaScript or with
+     reduced motion. The pinned stage hangs off `html.motion`, which is set in
+     the head before first paint, so the layout does not jump when the script
+     arrives; `.is-static` (the script could not load GSAP) and the failsafe
+     both fall back to the still version.
      ====================================================================== */
-  .builder {
-    --n: 3;
-    --p: 1;
+  .oneclick {
+    --oc-card-w: min(22rem, 80vw);
+    --oc-card-h: 5.25rem;
+    padding-block: 6rem;
   }
-  .bstep {
-    --a: calc(0.02 + var(--k) * 0.13);
+  @media (min-width: 640px) {
+    .oneclick {
+      --oc-card-w: 24rem;
+      --oc-card-h: 5.75rem;
+    }
   }
-  .bstring {
+  .oneclick-stage {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2.5rem;
+    padding-inline: 1.25rem;
+    text-align: center;
+  }
+  .oneclick-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+  .oc-card {
     position: relative;
-    flex: none;
-    border-radius: 9999px;
-    background-color: var(--border);
+    width: var(--oc-card-w);
+    height: var(--oc-card-h);
     overflow: hidden;
+    background-color: var(--card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    text-align: left;
   }
-  .bstring::after {
-    content: "";
+  .oc-fill {
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    background-color: var(--ink);
+    opacity: 0;
+  }
+  .oc-face {
     position: absolute;
     inset: 0;
-    border-radius: inherit;
-    background-color: var(--orange);
-    transform-origin: left center;
+    display: flex;
+    align-items: center;
+    gap: 0.875rem;
+    padding-inline: 1rem;
   }
-  .bbar {
-    transform-origin: left center;
-    background-color: var(--orange);
-    border-radius: inherit;
+  .oc-face[data-oc-face="mirrored"],
+  .oc-label,
+  .oneclick-hint {
+    opacity: 0;
   }
-  .brow-glow {
-    background-color: var(--primary-subtle);
-    border-radius: inherit;
-    opacity: 1;
+  .oc-label {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    color: var(--ink-foreground);
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .oneclick-caption {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
   }
 
-  html.motion:not(.motion-failsafe) .builder {
-    --p: 0;
-    --c: clamp(0, calc((var(--p) - 0.55) * 7), 1); /* compress into Run */
-    --g: clamp(0, calc((var(--p) - 0.6) * 6), 1); /* Run lights up */
-    --r: clamp(0, calc((var(--p) - 0.72) / 0.26), 1); /* the run itself */
+  /* --- Pinned ---------------------------------------------------------- */
+  html.motion:not(.motion-failsafe) .oneclick:not(.is-static) {
+    /* The track: about four screens of scroll for one screen of stage. */
+    height: 420vh;
+    padding-block: 0;
   }
-  html.motion:not(.motion-failsafe) .bstep {
-    --s: clamp(0, calc((var(--p) - var(--a)) * 7), 1);
-    opacity: calc(var(--s) * (1 - var(--cs, var(--c)) * 0.55));
-    transform: translateY(calc((1 - var(--s)) * 36px))
-      translateX(calc(var(--cs, var(--c)) * (var(--n) - var(--k)) * 4%))
-      scale(calc((0.88 + var(--s) * 0.12) * (1 - var(--cs, var(--c)) * 0.1)));
+  html.motion:not(.motion-failsafe) .oneclick:not(.is-static) .oneclick-stage {
+    position: sticky;
+    top: 0;
+    display: block;
+    height: 100vh;
+    height: 100svh;
+    overflow: hidden;
+    padding: 0;
   }
-  html.motion:not(.motion-failsafe) .bstring::after {
-    --t: clamp(0, calc((var(--p) - var(--a) - 0.1) * 8), 1);
-    transform: scaleX(var(--t));
-    opacity: calc(1 - var(--c) * 0.55);
+  html.motion:not(.motion-failsafe) .oneclick:not(.is-static) .oneclick-head {
+    position: absolute;
+    inset-inline: 1.25rem;
+    top: max(5.5rem, 11vh);
   }
-  html.motion:not(.motion-failsafe) .brun {
-    transform: scale(calc(0.94 + var(--g) * 0.08));
-    /* Lighting up is a flat orange ring growing round it, not a glow cast. */
-    box-shadow: 0 0 0 calc(var(--g) * 6px) color-mix(in oklab, var(--orange) 35%, transparent);
+  html.motion:not(.motion-failsafe) .oneclick:not(.is-static) .oneclick-cards {
+    position: absolute;
+    inset: 0;
+    display: block;
+    pointer-events: none;
   }
-  html.motion:not(.motion-failsafe) .bbar {
-    transform: scaleX(var(--r));
+  /* Each card is centred on the stage and placed by its transform. The start
+     pose is written here too — centred on the left or right edge, staggered
+     down the screen — so the first paint already matches the first frame. */
+  html.motion:not(.motion-failsafe) .oneclick:not(.is-static) .oc-card {
+    position: absolute;
+    left: 50%;
+    top: 54%;
+    /* Centred on the edge, nudged in by EDGE_INSET (lib/oneclick.ts). */
+    --sx: calc(50vw - var(--oc-card-w) * 0.2);
+    --sy: calc((var(--k) - 1.5) * 15vh);
+    transform: translate(-50%, -50%) translate(var(--sx), var(--sy));
   }
-  html.motion:not(.motion-failsafe) .brow {
-    --l: clamp(0, calc((var(--r) - var(--a2)) * 9), 1);
+  html.motion:not(.motion-failsafe) .oneclick:not(.is-static) .oc-card[data-side="left"] {
+    --sx: calc(-50vw + var(--oc-card-w) * 0.2);
   }
-  html.motion:not(.motion-failsafe) .brow-glow {
-    opacity: var(--l);
+  html.motion:not(.motion-failsafe)
+    .oneclick:not(.is-static)
+    .oc-card[data-side="left"]
+    [data-oc-face="mirrored"] {
+    opacity: 1;
   }
-  html.motion:not(.motion-failsafe) .brow-icon {
-    opacity: calc(0.35 + var(--l) * 0.65);
-    transform: scale(calc(0.85 + var(--l) * 0.15));
+  html.motion:not(.motion-failsafe)
+    .oneclick:not(.is-static)
+    .oc-card[data-side="left"]
+    [data-oc-face="normal"] {
+    opacity: 0;
   }
-  html.motion:not(.motion-failsafe) .bdone {
-    opacity: clamp(0, calc((var(--r) - 0.92) * 14), 1);
+  html.motion:not(.motion-failsafe) .oneclick:not(.is-static) .oc-static-result {
+    display: none;
   }
-  @media (max-width: 1023.98px) {
-    html.motion:not(.motion-failsafe) .bstep {
-      transform: translateY(calc((1 - var(--s)) * 36px))
-        translateY(calc(var(--cs, var(--c)) * (var(--n) - var(--k)) * 6%))
-        scale(calc((0.88 + var(--s) * 0.12) * (1 - var(--cs, var(--c)) * 0.1)));
-    }
-    html.motion:not(.motion-failsafe) .bstring::after {
-      transform-origin: center top;
-      transform: scaleY(var(--t));
-    }
-    .bstring::after {
-      transform-origin: center top;
-    }
+  html.motion:not(.motion-failsafe) .oneclick:not(.is-static) .oneclick-caption {
+    position: absolute;
+    inset-inline: 1.25rem;
+    bottom: max(3rem, 12vh);
+    opacity: 0;
+  }
+  html.motion:not(.motion-failsafe) .oneclick:not(.is-static) .oneclick-hint {
+    position: absolute;
+    inset-inline: 0;
+    bottom: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.25rem;
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted-foreground);
+    opacity: 1;
   }
 
   /* ======================================================================

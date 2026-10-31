@@ -1,10 +1,10 @@
 import type { FC } from "hono/jsx";
 
 import { GALLERY_ROLES } from "@server/content/gallery";
-import { Card, IconTile } from "@views/components/Ui";
+import { Card, Eyebrow, IconTile } from "@views/components/Ui";
 
 /**
- * The scroll-driven showpieces: a shortcut being built and run, a chat with
+ * The scroll-driven showpieces: four steps becoming one click, a chat with
  * Zap, and a role-tabbed carousel of Gallery ideas.
  *
  * Each is ordinary server-rendered markup in its *finished* state. The motion
@@ -36,96 +36,119 @@ export const ClayPebble: FC<{
   </span>
 );
 
-const BUILD_STEPS = [
-  { icon: "circle-help", label: "Choose from List", line: "Choose a client" },
-  { icon: "link", label: "Open Link", line: "Open their CRM page" },
-  { icon: "folder", label: "Open Folder", line: "Open their shared folder" },
-];
+const ONE_CLICK_STEPS = [
+  { icon: "message-square", label: "Ask for Input", line: "Ask what went wrong", side: "left" },
+  { icon: "camera", label: "Take Screenshot", line: "Capture the screen as it is", side: "right" },
+  {
+    icon: "sparkles",
+    label: "Generate Text",
+    tag: "AI",
+    line: "Write it up as a clear report",
+    side: "left",
+  },
+  { icon: "mail", label: "Create Email", line: "Draft it to the IT helpdesk", side: "right" },
+] as const;
+
+type OneClickStep = (typeof ONE_CLICK_STEPS)[number];
+
+/** One step card's contents. `mirrored` puts the icon and name on the right,
+ *  for a card that starts half off the left-hand edge of the screen. */
+const OneClickFace: FC<{ step: OneClickStep; mirrored?: boolean }> = ({
+  step,
+  mirrored = false,
+}) => (
+  <span
+    class={`oc-face ${mirrored ? "flex-row-reverse text-right" : ""}`}
+    data-oc-face={mirrored ? "mirrored" : "normal"}
+    aria-hidden={mirrored ? "true" : undefined}
+  >
+    <IconTile icon={step.icon} tone={step.icon === "sparkles" ? "primary" : "brand"} />
+    <span class="min-w-0">
+      <span
+        class={`flex items-center gap-2 font-mono text-sm font-semibold leading-tight ${
+          mirrored ? "justify-end" : ""
+        }`}
+      >
+        {step.label}
+        {"tag" in step ? (
+          <span class="rounded-[var(--radius-xs)] bg-orange px-1.5 py-px font-sans text-[0.65rem] font-bold text-orange-foreground">
+            {step.tag}
+          </span>
+        ) : null}
+      </span>
+      <span class="mt-0.5 block truncate text-xs text-muted-foreground">{step.line}</span>
+    </span>
+  </span>
+);
 
 /**
- * Build it, then run it.
+ * Four steps. One click.
  *
- * One scroll position, `--p`, drives the whole sequence (see `.builder` in the
- * stylesheet): the steps float in one by one, strings connect them, they
- * compress into the Run button, which lights, and then the shortcut runs — a
- * bar fills and each step lights in turn.
+ * A pinned, scroll-driven story (`lib/oneclick.ts`, GSAP). A tall track holds
+ * a sticky, screen-high stage. The four steps of one real shortcut start half
+ * off the page — the first and third centred on the left-hand edge, the
+ * second and fourth on the right, staggered down the screen, the left ones
+ * laid out mirrored so their icon and name are the half that shows. Scrolling
+ * slides them into a column, draws them together into a loose stack, snaps
+ * them flush, and then the stack becomes the one button that runs them.
+ * Scrolling back plays it backwards.
+ *
+ * This markup is the finished, still version: with no JavaScript, or with
+ * reduced motion, it is the four steps in a column, the button they become,
+ * and the caption. The pinned layout hangs off `html.motion` (see "One click"
+ * in index.css), so it is in place before the script arrives.
+ *
+ * The step names are the app's own, so they stay untranslated and monospace.
  */
-export const ShortcutBuilder: FC = () => (
-  <figure
-    class="builder space-y-5"
-    data-scrub
-    translate="no"
-    aria-label="A shortcut being built from three steps, then run"
-  >
-    {/* ----- The build ----- */}
-    <div class="well relative p-5 sm:p-7">
-      <div class="mb-5 flex items-center gap-3">
-        <IconTile icon="layers" tone="brand" />
-        <div>
-          <p class="text-sm font-bold leading-tight">Open a client</p>
-          <p class="text-xs text-muted-foreground">Three steps</p>
-        </div>
+export const OneClickStory: FC = () => (
+  <section id="one-click" class="oneclick" data-oneclick aria-labelledby="one-click-title">
+    <div class="oneclick-stage" data-oc-stage>
+      <div class="oneclick-head">
+        <Eyebrow class="justify-center">One shortcut</Eyebrow>
+        <h2 id="one-click-title" class="text-4xl leading-[1.0] text-balance sm:text-6xl">
+          Four steps. <em>One click.</em>
+        </h2>
       </div>
 
-      <ol class="flex flex-col items-stretch gap-0 lg:flex-row lg:items-center">
-        {BUILD_STEPS.map((step, k) => (
-          <>
-            <li class="bstep lg:shrink-0" style={`--k: ${k};`}>
-              <div class="flex items-center gap-3 rounded-full bg-background py-2.5 pl-2.5 pr-5">
-                <IconTile icon={step.icon} tone={k === 1 ? "primary" : "brand"} />
-                <div class="min-w-0">
-                  <p class="text-sm font-bold leading-tight">{step.label}</p>
-                  <p class="truncate text-xs text-muted-foreground">{step.line}</p>
-                </div>
-              </div>
-            </li>
-            <li
-              aria-hidden="true"
-              class="bstring mx-auto h-7 w-1.5 lg:mx-0 lg:h-1.5 lg:w-auto lg:min-w-6 lg:flex-1"
-              style={`--k: ${k}; --a: calc(0.02 + ${k} * 0.13);`}
-            ></li>
-          </>
-        ))}
-        <li class="bstep mx-auto lg:mx-0 lg:shrink-0" style="--k: 3; --cs: 0;">
-          <span class="brun clay-primary clay-press inline-flex h-14 items-center gap-2 rounded-full px-7 text-base font-bold">
-            <i data-lucide="play" class="h-5 w-5" aria-hidden="true"></i>
-            Run
-          </span>
-        </li>
-      </ol>
-    </div>
-
-    {/* ----- The run ----- */}
-    <div class="flat p-5 sm:p-7">
-      <div class="mb-4 flex items-center justify-between gap-3">
-        <p class="text-sm font-bold">Running Open a client</p>
-        <span class="bdone inline-flex items-center gap-1.5 text-xs font-semibold text-success">
-          <i data-lucide="circle-check" class="h-4 w-4" aria-hidden="true"></i>
-          Done
-        </span>
-      </div>
-      <div class="h-2 overflow-hidden rounded-full bg-muted" aria-hidden="true">
-        <div class="bbar h-full w-full"></div>
-      </div>
-      <ul class="mt-5 grid gap-3 sm:grid-cols-3">
-        {BUILD_STEPS.map((step, j) => (
-          <li
-            class="brow relative flex items-center gap-3 rounded-2xl bg-muted p-3"
-            style={`--a2: ${(0.1 + j * 0.3).toFixed(2)};`}
-          >
-            <span class="brow-glow absolute inset-0" aria-hidden="true"></span>
-            <span class="brow-icon relative inline-flex h-9 w-9 items-center justify-center rounded-[var(--radius-md)] bg-background text-primary">
-              <i data-lucide={step.icon} class="h-4 w-4" aria-hidden="true"></i>
-            </span>
-            <span class="relative min-w-0">
-              <span class="block text-sm font-semibold leading-tight">{step.label}</span>
-              <span class="block truncate text-xs text-muted-foreground">{step.line}</span>
-            </span>
+      <ol
+        class="oneclick-cards"
+        aria-label="The steps in the Report IT problem shortcut"
+        translate="no"
+      >
+        {ONE_CLICK_STEPS.map((step, k) => (
+          <li class="oc-card" data-oc-card data-side={step.side} style={`--k: ${k};`}>
+            <span class="oc-fill" data-oc-fill aria-hidden="true"></span>
+            <OneClickFace step={step} mirrored />
+            <OneClickFace step={step} />
+            {k === ONE_CLICK_STEPS.length - 1 ? (
+              <span class="oc-label" data-oc-label aria-hidden="true">
+                <i data-lucide="play" class="h-4 w-4" aria-hidden="true"></i>
+                Report IT problem
+              </span>
+            ) : null}
           </li>
         ))}
-      </ul>
+      </ol>
+
+      {/* The button they become, for the still version. The moving version
+          grows it out of the front card instead. */}
+      <p class="oc-static-result" translate="no">
+        <span class="inline-flex h-14 items-center gap-2 rounded-full bg-ink px-7 font-semibold text-ink-foreground">
+          <i data-lucide="play" class="h-4 w-4" aria-hidden="true"></i>
+          Report IT problem
+        </span>
+      </p>
+
+      <p class="oneclick-caption" data-oc-caption>
+        These four steps are now one click.
+      </p>
+
+      <p class="oneclick-hint" data-oc-hint aria-hidden="true">
+        <i data-lucide="chevron-down" class="h-4 w-4" aria-hidden="true"></i>
+        Scroll
+      </p>
     </div>
-  </figure>
+  </section>
 );
 
 /** Timings for the Zap demo, in seconds, so the sequence reads in one place. */
