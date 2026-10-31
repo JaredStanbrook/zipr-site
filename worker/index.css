@@ -1134,7 +1134,8 @@
      ====================================================================== */
   .oneclick {
     --oc-card-w: min(22rem, 80vw);
-    --oc-card-h: 5.25rem;
+    /* Shorter on a phone, so four of them and the heading fit with room. */
+    --oc-card-h: 4.75rem;
     padding-block: 6rem;
   }
   @media (min-width: 640px) {
@@ -1205,6 +1206,13 @@
   }
 
   /* --- Pinned ---------------------------------------------------------- */
+  /* On a short screen the start pose fills the stage to its foot, and the
+     scroll hint would sit behind the last card. */
+  @media (max-height: 760px) {
+    .oneclick .oneclick-hint {
+      display: none;
+    }
+  }
   html.motion:not(.motion-failsafe) .oneclick:not(.is-static) {
     /* The track: about four screens of scroll for one screen of stage. */
     height: 420vh;
@@ -1239,7 +1247,9 @@
     top: 54%;
     /* Centred on the edge, nudged in by EDGE_INSET (lib/oneclick.ts). */
     --sx: calc(50vw - var(--oc-card-w) * 0.2);
-    --sy: calc((var(--k) - 1.5) * 15vh);
+    /* Approximates the script's start (centred in the room under the
+       heading, 16vh apart) to within a few pixels on common screens. */
+    --sy: calc(8vh + (var(--k) - 1.5) * 16vh);
     transform: translate(-50%, -50%) translate(var(--sx), var(--sy));
   }
   html.motion:not(.motion-failsafe) .oneclick:not(.is-static) .oc-card[data-side="left"] {

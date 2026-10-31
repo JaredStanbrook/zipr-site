@@ -116,23 +116,30 @@ const build = (gsap: Gsap, s: Story) => {
   const cardH = cards[0].offsetHeight;
   const gap = 12;
 
-  // The cards are centred at 54% of the stage by the stylesheet; their column
-  // is centred in the room between the heading and the caption, so a short
-  // screen does not put the top card under the heading.
+  // The cards are centred at 54% of the stage by the stylesheet. Everything
+  // they do happens in the room under the heading, which runs to the foot of
+  // the stage: the caption is invisible until the button has formed, so it
+  // needs no room reserved. On a phone with its browser bars showing (about
+  // 660px tall) that room is what keeps the column from overlapping.
   const head = stage.querySelector<HTMLElement>(".oneclick-head");
   const caption = stage.querySelector<HTMLElement>("[data-oc-caption]");
-  const roomTop = head ? head.offsetTop + head.offsetHeight + 16 : 0;
-  const roomBottom = caption ? caption.offsetTop - 16 : H;
+  const roomTop = head ? head.offsetTop + head.offsetHeight + 20 : 0;
+  const roomBottom = H - 20;
+  const room = roomBottom - roomTop;
   const anchor = H * 0.54;
   const centre = (roomTop + roomBottom) / 2 - anchor;
-  const step = Math.min(cardH + gap, Math.max(cardH * 0.7, (roomBottom - roomTop) / cards.length));
+  // The column: full spacing whenever it fits, squeezed only as a last resort.
+  const step = Math.min(cardH + gap, Math.max(cardH * 0.7, (room - cardH) / (cards.length - 1)));
+  // The start: spread out further than the column, within the same room, so
+  // the staggered cards neither overlap each other nor reach the heading.
+  const startStep = Math.max(step, Math.min(H * 0.16, (room - cardH) / (cards.length - 1)));
 
   const sideOf = (card: HTMLElement) => (card.dataset.side === "left" ? -1 : 1);
   // Centred on the screen edge, then nudged in by `EDGE_INSET` of a card, so
   // the half that shows carries the whole icon and name. Matches `--sx` in
   // the stylesheet, which draws the first frame.
   const startX = W / 2 - cards[0].offsetWidth * EDGE_INSET;
-  const startY = (k: number) => (k - 1.5) * 0.15 * H;
+  const startY = (k: number) => centre + (k - 1.5) * startStep;
   const columnY = (k: number) => centre + (k - 1.5) * step;
 
   // The pill: the size of a real primary button, a little larger.
