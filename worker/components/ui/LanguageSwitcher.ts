@@ -1,7 +1,8 @@
 /**
  * The language button's behaviour: remember a choice, and apply it.
  *
- * The button and its menu are server-rendered by `NavBar.tsx`, so they exist
+ * The button and its menu are server-rendered (`LanguageMenu` in `NavBar.tsx`,
+ * placed in the footer by `SiteFooter.tsx`), so they exist
  * before any script runs and need nothing here to open — the menu is a native
  * popover. This file does the rest: it marks the current language, and when a
  * language other than English is chosen it loads that language's catalogue
@@ -116,17 +117,52 @@ document.addEventListener("keydown", (event) => {
   event.preventDefault();
 });
 
-// Open on the current language, so a keyboard user starts where they are.
+/**
+ * Place the open menu against its button. The button lives in the footer, so
+ * the menu opens upwards from it, right-aligned, and drops below only if
+ * there is no room above. A popover sits in the top layer and is positioned
+ * against the viewport, so this is done on open rather than in CSS.
+ */
+const place = (menu: HTMLElement) => {
+  const button = document.querySelector<HTMLElement>('[popovertarget="language-menu"]');
+  if (!button) return;
+  const margin = 8;
+  const at = button.getBoundingClientRect();
+  const width = menu.offsetWidth;
+  const height = menu.offsetHeight;
+  const left = Math.min(window.innerWidth - width - margin, Math.max(margin, at.right - width));
+  const above = at.top - height - margin;
+  const top =
+    above >= margin ? above : Math.min(at.bottom + margin, window.innerHeight - height - margin);
+  menu.style.left = `${Math.round(left)}px`;
+  menu.style.top = `${Math.round(top)}px`;
+};
+
+// Open against the button, on the current language, so a keyboard user
+// starts where they are.
 document.addEventListener(
   "toggle",
   (event) => {
     const menu = event.target as HTMLElement | null;
     if (menu?.id === "language-menu" && menu.matches(":popover-open")) {
+      place(menu);
       (menu.querySelector("[aria-current]") as HTMLElement | null)?.focus();
     }
   },
   true,
 );
+
+// It is fixed to the viewport, so a scroll or resize would leave it behind.
+for (const type of ["scroll", "resize"]) {
+  window.addEventListener(
+    type,
+    () => {
+      const menu = document.getElementById("language-menu");
+      if (menu?.matches(":popover-open")) menu.hidePopover();
+    },
+    { passive: true },
+  );
+}
 
 const start = () => {
   showCurrent();

@@ -34,7 +34,11 @@ export const Layout: FC<LayoutProps> = (props) => {
 
   return html`
     <!DOCTYPE html>
+    <!-- Light, always: the site has no theme control (see the locked
+         <theme-provider> below). Set here as well so nothing — not even the
+         operating system's dark preference — shows before the script runs. -->
     <html
+      class="light"
       lang="${props.meta.locale}"
       data-i18n="${isTranslatablePath(props.currentPath) ? "on" : "off"}"
       data-i18n-v="${props.assetVersion}"
@@ -89,8 +93,7 @@ export const Layout: FC<LayoutProps> = (props) => {
         )}
 
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-        <meta name="theme-color" content="#f8f6f2" media="(prefers-color-scheme: light)" />
-        <meta name="theme-color" content="#1a1917" media="(prefers-color-scheme: dark)" />
+        <meta name="theme-color" content="#f8f6f2" />
 
         <!-- The two faces above the fold: Space Grotesk, which every H1 is set
              in (the largest text on most pages, so usually the LCP element),
@@ -179,7 +182,7 @@ export const Layout: FC<LayoutProps> = (props) => {
           class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[200] focus:rounded-full focus:bg-ink focus:px-5 focus:py-2.5 focus:text-sm focus:font-semibold focus:text-ink-foreground"
           >Skip to content</a
         >
-        <theme-provider defaultTheme="system"></theme-provider>
+        <theme-provider defaultTheme="light" locked></theme-provider>
 
         ${
           props.meta.bare

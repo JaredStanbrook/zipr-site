@@ -286,6 +286,12 @@ export const DesignSystemPage: FC = () => (
           data-glow-demo
           class="grid gap-px overflow-hidden rounded-[var(--radius-xl)] border border-border"
         >
+          <ButtonStage label="Important — once per screen" class="surface-paper">
+            <LinkButton href="/downloads" variant="important" size="lg">
+              <i data-lucide="download" class="h-4 w-4" aria-hidden="true"></i>
+              Download Zipr
+            </LinkButton>
+          </ButtonStage>
           <ButtonStage label="On paper" class="surface-paper">
             <LinkButton href="/downloads">
               <i data-lucide="download" class="h-4 w-4" aria-hidden="true"></i>
@@ -318,7 +324,7 @@ export const DesignSystemPage: FC = () => (
           <button
             type="button"
             aria-pressed="false"
-            class="btn btn-grey inline-flex h-11 items-center gap-2 rounded-full px-5 text-sm font-semibold"
+            class="btn btn-grey inline-flex h-11 items-center gap-2 rounded-[var(--radius-btn)] px-5 text-sm font-semibold"
             onclick="var on=this.getAttribute('aria-pressed')!=='true';this.setAttribute('aria-pressed',String(on));document.querySelector('[data-glow-demo]').classList.toggle('glow-all',on);"
           >
             <i data-lucide="sparkles" class="h-4 w-4" aria-hidden="true"></i>

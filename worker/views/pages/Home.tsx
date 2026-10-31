@@ -108,7 +108,7 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
               </p>
 
               <div class="rise mt-9 flex flex-wrap gap-3" style="--i: 3;">
-                <LinkButton href="/downloads" size="lg">
+                <LinkButton href="/downloads" variant="important" size="lg">
                   <i data-lucide="download" class="h-4 w-4" aria-hidden="true"></i>
                   Download Zipr
                 </LinkButton>

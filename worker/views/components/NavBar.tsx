@@ -33,7 +33,7 @@ const menuConfig: Record<string, Array<{ to: string; name: string }>> = {
 export const ThemeToggle = () => html`
   <button
     type="button"
-    class="theme-toggle-btn btn btn-grey inline-flex h-11 w-11 items-center justify-center rounded-full"
+    class="theme-toggle-btn btn btn-grey inline-flex h-11 w-11 items-center justify-center rounded-[var(--radius-btn)]"
     aria-label="Toggle theme"
   >
     <i data-theme-icon="light" data-lucide="sun" class="hidden w-5 h-5"></i>
@@ -123,12 +123,12 @@ export const ThemeToggle = () => html`
  * screen reader pronounce it. The note at the bottom is translated like any
  * other text, and is honest about what these translations are.
  */
-const LanguageMenu = () => html`
+export const LanguageMenu = () => html`
   <div class="relative">
     <button
       type="button"
       popovertarget="language-menu"
-      class="btn btn-grey inline-flex h-11 items-center justify-center gap-1.5 rounded-full px-3"
+      class="btn btn-grey inline-flex h-11 items-center justify-center gap-1.5 rounded-[var(--radius-btn)] px-3"
       aria-label="Choose a language"
     >
       <i data-lucide="languages" class="h-5 w-5" aria-hidden="true"></i>
@@ -144,7 +144,7 @@ const LanguageMenu = () => html`
     <div
       id="language-menu"
       popover
-      class="clay-floating fixed inset-auto right-2 top-[4.5rem] m-0 w-72 max-w-[calc(100vw-1rem)] bg-popover p-1.5 text-popover-foreground sm:right-4"
+      class="nav-glass fixed inset-auto m-0 max-h-[70svh] w-72 max-w-[calc(100vw-1rem)] overflow-y-auto p-1.5 text-popover-foreground"
     >
       <p
         class="px-3 pb-1 pt-2 text-[0.7rem] font-bold uppercase tracking-[0.16em] text-muted-foreground"
@@ -183,7 +183,7 @@ const UserMenu = ({ user }: { user: PropsUser }) => html`
   <div class="relative">
     <details class="group relative">
       <summary
-        class="btn btn-grey flex h-11 w-11 cursor-pointer items-center justify-center rounded-full list-none marker:hidden [&::-webkit-details-marker]:hidden"
+        class="btn btn-grey flex h-11 w-11 cursor-pointer items-center justify-center rounded-[var(--radius-btn)] list-none marker:hidden [&::-webkit-details-marker]:hidden"
       >
         <span class="font-bold text-sm text-primary"
           >${(user.email || "??").substring(0, 2).toUpperCase()}</span
@@ -257,12 +257,13 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
 
   return html`
     <!--
-      The header is flat: a paper bar fixed to the top edge, ruled off from the
-      page by a hairline. Nothing floats, nothing blurs. The active page is the
-      one link in ink.
+      The header floats: a frosted, rounded rectangle held a little off the top
+      edge, with the page blurred as it scrolls beneath. The active page is the
+      one link in ink. On small screens the links drop down from it in a panel
+      of the same glass, rather than taking over the screen.
     -->
-    <header class="fixed inset-x-0 top-0 z-40 border-b border-border bg-background">
-      <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-5 sm:px-8">
+    <header class="fixed inset-x-0 top-0 z-40 px-3 pt-3 sm:px-5">
+      <div class="nav-glass mx-auto flex h-14 max-w-7xl items-center justify-between pl-4 pr-2">
         <div class="flex items-center gap-4">
           <a href="/" class="group mr-2 flex items-center gap-2 no-underline">
             <img src="/favicon.svg" alt="" width="28" height="28" class="h-7 w-7" />
@@ -275,10 +276,10 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
                 <a
                   href="${item.to}"
                   aria-current="${isActive(item.to) ? "page" : "false"}"
-                  class="btn rounded-full px-3.5 py-1.5 text-sm font-medium no-underline transition-colors ${
+                  class="btn rounded-[var(--radius-btn)] px-3.5 py-1.5 text-sm font-medium no-underline transition-colors ${
                     isActive(item.to)
                       ? "bg-ink text-ink-foreground"
-                      : "bg-background text-muted-foreground hover:bg-accent hover:text-foreground"
+                      : "bg-transparent text-muted-foreground hover:bg-accent hover:text-foreground"
                   }"
                 >
                   ${item.name}
@@ -289,10 +290,6 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
         </div>
 
         <div class="flex items-center gap-2">
-          ${LanguageMenu()}
-
-          <div class="hidden lg:block">${ThemeToggle()}</div>
-
           <div class="hidden lg:block">
             ${
               !user
@@ -305,7 +302,8 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
                     -->
                     <a
                       href="/downloads"
-                      class="btn btn-ink inline-flex h-11 items-center justify-center gap-2 rounded-full px-5 text-sm font-semibold no-underline transition-colors"
+                      class="btn btn-important inline-flex h-10 items-center justify-center gap-2 rounded-[var(--radius-btn)] px-4 text-sm font-semibold no-underline transition-colors"
+                      ><span class="glass-glow" aria-hidden="true"></span
                       ><i data-lucide="download" class="h-4 w-4" aria-hidden="true"></i> Download</a
                     >
                   `
@@ -315,143 +313,134 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
 
           <button
             id="mobile-menu-toggle"
-            class="btn btn-grey inline-flex h-11 w-11 items-center justify-center rounded-full lg:hidden"
-            aria-label="Open menu"
+            type="button"
+            class="btn btn-grey inline-flex h-10 w-10 items-center justify-center rounded-[var(--radius-btn)] lg:hidden"
+            aria-label="Menu"
             aria-controls="mobile-menu"
             aria-expanded="false"
           >
-            <i data-lucide="menu" class="h-5 w-5"></i>
-          </button>
-        </div>
-      </div>
-    </header>
-
-    <div
-      id="mobile-menu"
-      role="dialog"
-      aria-modal="true"
-      aria-label="Menu"
-      class="hidden fixed inset-0 z-[100] bg-background text-foreground lg:hidden flex flex-col animate-in fade-in slide-in-from-top-4 duration-200"
-    >
-      <div class="border-b border-border">
-        <div class="flex h-16 items-center justify-between px-5">
-          <span class="flex items-center gap-2 font-display text-xl font-semibold">
-            <img src="/favicon.svg" alt="" width="28" height="28" class="h-7 w-7" />
-            Menu
-          </span>
-          <button
-            id="mobile-menu-close"
-            class="btn btn-grey inline-flex h-11 w-11 items-center justify-center rounded-full"
-            aria-label="Close menu"
-          >
-            <i data-lucide="x" class="h-5 w-5"></i>
+            <i data-lucide="menu" data-menu-icon="closed" class="h-5 w-5" aria-hidden="true"></i>
+            <i data-lucide="x" data-menu-icon="open" class="hidden h-5 w-5" aria-hidden="true"></i>
           </button>
         </div>
       </div>
 
-      <div class="flex-1 overflow-y-auto p-4 flex flex-col gap-6">
-        <nav class="flex flex-col gap-2">
+      <!-- The small-screen menu: a frosted panel dropping from the bar. -->
+      <div
+        id="mobile-menu"
+        class="nav-dropdown nav-glass mx-auto mt-2 max-h-[calc(100svh-5.5rem)] max-w-7xl overflow-y-auto p-2 lg:hidden"
+      >
+        <nav class="flex flex-col gap-0.5" aria-label="Main">
           ${menuItems.map(
             (item) => html`
               <a
                 href="${item.to}"
                 aria-current="${isActive(item.to) ? "page" : "false"}"
-                class="flex items-center rounded-[var(--radius-lg)] px-5 py-3.5 font-display text-2xl font-semibold no-underline transition ${
+                class="btn flex items-center rounded-[var(--radius-btn)] px-4 py-3 font-display text-lg font-semibold no-underline transition-colors ${
                   isActive(item.to)
                     ? "bg-ink text-ink-foreground"
-                    : "text-muted-foreground hover:bg-accent hover:text-foreground"
+                    : "bg-transparent text-foreground hover:bg-accent"
                 }"
               >
                 ${item.name}
-                ${
-                  isActive(item.to)
-                    ? html`<i data-lucide="chevron-right" class="ml-auto h-5 w-5 opacity-50"></i>`
-                    : ""
-                }
+                <i
+                  data-lucide="chevron-right"
+                  class="ml-auto h-4 w-4 opacity-40"
+                  aria-hidden="true"
+                ></i>
               </a>
             `,
           )}
         </nav>
 
-        <hr class="border-border/50" />
-
-        <div class="mt-auto flex flex-col gap-6">
-          <div class="flex items-center justify-between px-2">
-            <span class="text-sm font-medium">Appearance</span>
-            ${ThemeToggle()}
-          </div>
-
+        <div class="mt-2 border-t border-border/70 p-2 pt-3">
           ${
             !user
               ? html`
                   <a
                     href="/downloads"
-                    class="btn btn-ink inline-flex h-12 w-full items-center justify-center rounded-full px-4 text-base font-semibold no-underline transition-colors"
+                    class="btn btn-important inline-flex h-12 w-full items-center justify-center gap-2 rounded-[var(--radius-btn)] px-4 text-base font-semibold no-underline transition-colors"
+                    ><span class="glass-glow" aria-hidden="true"></span
+                    ><i data-lucide="download" class="h-4 w-4" aria-hidden="true"></i> Download</a
                   >
-                    Download
-                  </a>
                 `
               : html`
-                  <div class="flat text-card-foreground">
-                    <div class="p-4 flex items-center gap-3 border-b">
-                      <div
-                        class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary font-bold"
-                      >
-                        ${(user.email || "??").substring(0, 2).toUpperCase()}
-                      </div>
-                      <div class="flex flex-col min-w-0">
-                        <span class="font-medium truncate">${user.displayName || "User"}</span>
-                        <span class="text-xs text-muted-foreground truncate">${user.email}</span>
-                      </div>
+                  <div class="flex items-center gap-3 px-2 pb-3">
+                    <div
+                      class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary font-bold"
+                    >
+                      ${(user.email || "??").substring(0, 2).toUpperCase()}
                     </div>
-                    <div class="p-2 grid grid-cols-2 gap-2">
-                      <a
-                        href="/profile"
-                        class="flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-medium hover:bg-accent transition-colors"
-                      >
-                        <i data-lucide="user" class="h-4 w-4"></i> Profile
-                      </a>
-                      <button
-                        hx-post="/web/auth/logout"
-                        class="flex items-center justify-center gap-2 rounded-md px-3 py-2 text-sm font-medium text-destructive hover:bg-destructive/10 transition-colors"
-                      >
-                        <i data-lucide="log-out" class="h-4 w-4"></i> Log out
-                      </button>
+                    <div class="flex flex-col min-w-0">
+                      <span class="font-medium truncate">${user.displayName || "User"}</span>
+                      <span class="text-xs text-muted-foreground truncate">${user.email}</span>
                     </div>
+                  </div>
+                  <div class="grid grid-cols-2 gap-2">
+                    <a
+                      href="/profile"
+                      class="flex items-center justify-center gap-2 rounded-[var(--radius-btn)] px-3 py-2 text-sm font-medium hover:bg-accent transition-colors"
+                    >
+                      <i data-lucide="user" class="h-4 w-4"></i> Profile
+                    </a>
+                    <button
+                      hx-post="/web/auth/logout"
+                      class="flex items-center justify-center gap-2 rounded-[var(--radius-btn)] px-3 py-2 text-sm font-medium text-destructive hover:bg-destructive/10 transition-colors"
+                    >
+                      <i data-lucide="log-out" class="h-4 w-4"></i> Log out
+                    </button>
                   </div>
                 `
           }
         </div>
       </div>
-    </div>
+    </header>
 
     <script>
       (function () {
-        const toggleBtn = document.getElementById("mobile-menu-toggle");
-        const closeBtn = document.getElementById("mobile-menu-close");
-        const menu = document.getElementById("mobile-menu");
+        // The small-screen menu drops down from the bar. It closes on a second
+        // press, on Escape, on a click anywhere outside the header, and once a
+        // link in it is followed (the header survives boosted navigation).
+        var toggle = document.getElementById("mobile-menu-toggle");
+        var menu = document.getElementById("mobile-menu");
+        if (!toggle || !menu) return;
+        var header = toggle.closest("header");
 
-        function openMenu() {
-          menu.classList.remove("hidden");
-          document.body.style.overflow = "hidden"; // Prevent background scroll
-          if (toggleBtn) toggleBtn.setAttribute("aria-expanded", "true");
-          if (closeBtn) closeBtn.focus();
-        }
-
-        function closeMenu() {
-          menu.classList.add("hidden");
-          document.body.style.overflow = "";
-          if (toggleBtn) {
-            toggleBtn.setAttribute("aria-expanded", "false");
-            toggleBtn.focus();
+        function setOpen(open, restoreFocus) {
+          menu.classList.toggle("is-open", open);
+          toggle.setAttribute("aria-expanded", String(open));
+          toggle.setAttribute("aria-label", open ? "Close menu" : "Menu");
+          toggle.querySelectorAll("[data-menu-icon]").forEach(function (icon) {
+            icon.classList.toggle(
+              "hidden",
+              icon.getAttribute("data-menu-icon") !== (open ? "open" : "closed"),
+            );
+          });
+          if (open) {
+            var first = menu.querySelector("a, button");
+            if (first) first.focus({ preventScroll: true });
+          } else if (restoreFocus) {
+            toggle.focus();
           }
         }
+        var isOpen = function () {
+          return menu.classList.contains("is-open");
+        };
 
-        if (toggleBtn) toggleBtn.addEventListener("click", openMenu);
-        if (closeBtn) closeBtn.addEventListener("click", closeMenu);
-        // A dialog a keyboard user can open must be one they can close.
+        toggle.addEventListener("click", function () {
+          setOpen(!isOpen(), true);
+        });
         document.addEventListener("keydown", function (e) {
-          if (e.key === "Escape" && menu && !menu.classList.contains("hidden")) closeMenu();
+          if (e.key === "Escape" && isOpen()) setOpen(false, true);
+        });
+        document.addEventListener("click", function (e) {
+          if (isOpen() && header && !header.contains(e.target)) setOpen(false, false);
+        });
+        menu.addEventListener("click", function (e) {
+          if (e.target.closest("a[href]")) setOpen(false, false);
+        });
+        window.matchMedia("(min-width: 1024px)").addEventListener("change", function (e) {
+          if (e.matches) setOpen(false, false);
         });
       })();
     </script>

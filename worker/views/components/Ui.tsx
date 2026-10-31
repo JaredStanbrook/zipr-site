@@ -93,9 +93,9 @@ export const SectionHeading: FC<{
   as?: "h1" | "h2";
 }> = ({ eyebrow, title, lede, align = "left", as: Heading = "h2" }) => (
   <div class={`${align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl"} mb-12`}>
-    {eyebrow ? <Eyebrow class={align === "center" ? "text-center" : undefined}>
-      {eyebrow}
-    </Eyebrow> : null}
+    {eyebrow ? (
+      <Eyebrow class={align === "center" ? "text-center" : undefined}>{eyebrow}</Eyebrow>
+    ) : null}
     <Heading
       class={
         Heading === "h1"
@@ -143,10 +143,13 @@ export const Card: FC<{
  *                          swaps in place. White on any grey surface.
  *   ghost                  a quiet in-page control.
  *   inverse                the old name for a button on a slab; now grey.
+ *   important              the one call to action on a screen that matters
+ *                          most: frosted glass with a slow orange-to-clay
+ *                          glow turning round its rim. Use once per screen.
  *
  * Every one of them glows on hover and focus (`.btn` in index.css).
  */
-type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "inverse";
+type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "inverse" | "important";
 
 const BUTTON_VARIANTS: Record<ButtonVariant, string> = {
   primary: "btn-ink",
@@ -154,10 +157,14 @@ const BUTTON_VARIANTS: Record<ButtonVariant, string> = {
   secondary: "btn-grey",
   inverse: "btn-grey",
   ghost: "btn-ghost",
+  important: "btn-important",
 };
 
+/** The rotating inner glow an `important` button carries. */
+const GlassGlow: FC = () => <span class="glass-glow" aria-hidden="true"></span>;
+
 const buttonClass = (variant: ButtonVariant, size: "default" | "lg", extra: string) =>
-  `btn inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-full font-semibold no-underline transition-colors [&_svg]:size-4 [&_svg]:shrink-0 ${
+  `btn inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-[var(--radius-btn)] font-semibold no-underline transition-colors [&_svg]:size-4 [&_svg]:shrink-0 ${
     size === "lg" ? "h-12 px-6 text-base" : "h-11 px-5 text-sm"
   } ${BUTTON_VARIANTS[variant]} ${extra}`;
 
@@ -179,11 +186,15 @@ export const LinkButton: FC<{
   rel?: string;
   target?: string;
   children?: Child;
-}> = ({ href, variant, size = "default", class: className = "", children, ...rest }) => (
-  <a href={href} class={buttonClass(variant ?? variantFor(href), size, className)} {...rest}>
-    {children}
-  </a>
-);
+}> = ({ href, variant, size = "default", class: className = "", children, ...rest }) => {
+  const resolved = variant ?? variantFor(href);
+  return (
+    <a href={href} class={buttonClass(resolved, size, className)} {...rest}>
+      {resolved === "important" ? <GlassGlow /> : null}
+      {children}
+    </a>
+  );
+};
 
 /** Same shape, for a real `<button>` inside a form. A submit that swaps its
  *  result in place stays on the page, so it is grey unless told otherwise. */
@@ -396,7 +407,7 @@ export const CtaBand: FC<{
           </p>
         </div>
         <div class="flex flex-wrap items-center gap-3 lg:col-span-5 lg:justify-end">
-          <LinkButton href={primary.href} size="lg">
+          <LinkButton href={primary.href} variant="important" size="lg">
             {primary.label}
             <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
           </LinkButton>
@@ -424,7 +435,7 @@ export const Disclosure: FC<{ question: string; children?: Child }> = ({ questio
   <details class="group border-b border-border py-1 first:border-t">
     <summary class="glow flex cursor-pointer list-none items-center justify-between gap-4 rounded-[var(--radius-md)] bg-surface px-1 py-4 font-display text-lg font-semibold marker:hidden [&::-webkit-details-marker]:hidden">
       <span class="text-pretty">{question}</span>
-      <span class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[var(--btn-grey)] transition group-open:bg-ink group-open:[&_svg]:text-ink-foreground">
+      <span class="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-[var(--radius-btn)] bg-[var(--btn-grey)] transition group-open:bg-ink group-open:[&_svg]:text-ink-foreground">
         <i
           data-lucide="chevron-down"
           class="h-4 w-4 text-muted-foreground transition-transform duration-200 group-open:rotate-180"

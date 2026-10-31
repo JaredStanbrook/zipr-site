@@ -3,6 +3,7 @@ import { html } from "hono/html";
 import { CONTACT } from "@server/content/site";
 import { operatorName } from "@server/content/legal";
 import { LOGO_ROWS } from "@views/components/Ui";
+import { LanguageMenu } from "@views/components/NavBar";
 
 /**
  * The site footer.
@@ -135,10 +136,15 @@ export const SiteFooter = ({ appName, tagline }: { appName: string; tagline: str
               <a href="/third-party-notices.txt" class="${linkClass}">Open-source licences</a>
             </li>
             <li>
+              <!-- Choosing a language stays on the page (it reloads it), so
+                   it is a grey control like the one beside it. -->
+              ${LanguageMenu()}
+            </li>
+            <li>
               <!-- Stays on the page, so grey — which, in this well, is white. -->
               <a
                 href="#top"
-                class="btn btn-grey inline-flex h-11 items-center gap-2 rounded-full px-4 text-xs font-semibold no-underline"
+                class="btn btn-grey inline-flex h-11 items-center gap-2 rounded-[var(--radius-btn)] px-4 text-xs font-semibold no-underline"
                 aria-label="Back to top"
                 ><i data-lucide="chevron-down" class="h-4 w-4 rotate-180" aria-hidden="true"></i>
                 Top</a

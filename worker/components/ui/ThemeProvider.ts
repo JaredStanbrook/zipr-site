@@ -8,6 +8,14 @@ export type Theme = "dark" | "light" | "system";
 export class ThemeProvider extends LitElement {
   @property({ type: String }) storageKey = "vite-ui-theme";
   @property({ type: String }) defaultTheme: Theme = "system";
+  /**
+   * Hold the page on `defaultTheme`, ignoring any choice saved in storage and
+   * any `theme-change` event. For a site with no theme control on it: a
+   * visitor who once chose dark would otherwise be kept in dark with no way
+   * back. The toggle and the dark palette stay in the code, so unlocking it
+   * is one attribute.
+   */
+  @property({ type: Boolean }) locked = false;
 
   @state() private theme: Theme = "system";
 
@@ -17,6 +25,11 @@ export class ThemeProvider extends LitElement {
 
   connectedCallback() {
     super.connectedCallback();
+    if (this.locked) {
+      this.theme = this.defaultTheme;
+      this.applyThemeToDocument(this.defaultTheme);
+      return;
+    }
     const stored = (localStorage.getItem(this.storageKey) as Theme) || this.defaultTheme;
     this.setTheme(stored);
 

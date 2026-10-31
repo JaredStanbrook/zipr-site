@@ -183,7 +183,7 @@ export const ZapDemo: FC = () => (
       <button
         type="button"
         data-replay
-        class="btn btn-grey inline-flex h-11 items-center gap-2 rounded-full px-4 text-xs font-semibold"
+        class="btn btn-grey inline-flex h-11 items-center gap-2 rounded-[var(--radius-btn)] px-4 text-xs font-semibold"
         aria-label="Replay the demo"
       >
         <i data-lucide="rotate-ccw" class="h-3.5 w-3.5" aria-hidden="true"></i>
@@ -347,7 +347,7 @@ export const GalleryCarousel: FC = () => {
           type="button"
           data-prev
           aria-label="Previous examples"
-          class="btn btn-grey inline-flex h-11 w-11 items-center justify-center rounded-full disabled:opacity-40"
+          class="btn btn-grey inline-flex h-11 w-11 items-center justify-center rounded-[var(--radius-btn)] disabled:opacity-40"
         >
           <i data-lucide="chevron-down" class="h-5 w-5 rotate-90" aria-hidden="true"></i>
         </button>
@@ -355,7 +355,7 @@ export const GalleryCarousel: FC = () => {
           type="button"
           data-next
           aria-label="Next examples"
-          class="btn btn-grey inline-flex h-11 w-11 items-center justify-center rounded-full disabled:opacity-40"
+          class="btn btn-grey inline-flex h-11 w-11 items-center justify-center rounded-[var(--radius-btn)] disabled:opacity-40"
         >
           <i data-lucide="chevron-down" class="h-5 w-5 -rotate-90" aria-hidden="true"></i>
         </button>

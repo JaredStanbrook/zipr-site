@@ -139,6 +139,11 @@
 
 /* The rotating glow's angle. Registered so it can be animated: an
    unregistered custom property only flips between keyframes, it never turns. */
+@property --glass-angle {
+  syntax: "<angle>";
+  inherits: false;
+  initial-value: 0deg;
+}
 @property --glow-angle {
   syntax: "<angle>";
   inherits: false;
@@ -283,6 +288,9 @@
   --glow-colors: #f36b3b, #ffb547, #f9e04b, #4fd18b, #3fb6f2, #7b6cf6, #e85bc7, #f36b3b;
 
   --radius: 0.75rem;
+  /* Buttons: softened to sit with the cards (radius-lg, 14px) rather than
+     rounded into pills. One value, so every control agrees. */
+  --radius-btn: 0.75rem;
 
   /* --- Type ------------------------------------------------------------- */
   --font-sans: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
@@ -767,7 +775,7 @@
   .clay-chip {
     background-color: var(--btn-grey);
     color: var(--foreground);
-    border-radius: 9999px;
+    border-radius: var(--radius-btn);
     transition:
       background-color 140ms ease-out,
       color 140ms ease-out;
@@ -780,6 +788,126 @@
   .clay-chip[aria-selected="true"] {
     background-color: var(--ink);
     color: var(--ink-foreground);
+  }
+
+  /* ======================================================================
+     Important: the one button on a screen that matters most.
+
+     Frosted glass — the page blurred behind a pane tinted with the brand —
+     with a slow, rotating inner glow running orange to clay round its edge.
+     It replaces black for the main call to action; everything else keeps
+     the black/grey rule. The glow lives in a child span (`.glass-glow`), so
+     the hover/focus glow on `::before`/`::after` is still free to use.
+     ====================================================================== */
+  .btn-important {
+    color: var(--foreground);
+    background-color: color-mix(
+      in oklab,
+      var(--orange) 9%,
+      color-mix(in oklab, var(--background) 58%, transparent)
+    );
+    border: 1px solid color-mix(in oklab, var(--orange) 40%, transparent);
+    -webkit-backdrop-filter: blur(14px) saturate(1.6);
+    backdrop-filter: blur(14px) saturate(1.6);
+  }
+  .btn-important:hover {
+    background-color: color-mix(
+      in oklab,
+      var(--orange) 15%,
+      color-mix(in oklab, var(--background) 58%, transparent)
+    );
+  }
+  /* Its hover and focus are its own, not the shared rainbow ring: behind
+     glass that ring would show through the pane and flood it (the backdrop
+     blur makes the button its own layer, so anything "behind" it paints
+     inside). Instead the rim brightens and widens, and an orange-to-clay
+     light spills round the outside. */
+  .btn.btn-important::before,
+  .btn.btn-important::after {
+    display: none;
+  }
+  .btn-important:hover,
+  .btn-important:focus-visible {
+    box-shadow:
+      0 0 0 1px color-mix(in oklab, var(--orange) 55%, transparent),
+      0 0 22px -4px color-mix(in oklab, var(--orange) 70%, transparent),
+      0 0 30px -8px color-mix(in oklab, var(--clay) 80%, transparent);
+  }
+  .btn-important:focus-visible {
+    box-shadow:
+      0 0 0 2px var(--background),
+      0 0 0 4px var(--orange),
+      0 0 26px -4px color-mix(in oklab, var(--orange) 70%, transparent);
+  }
+  .glass-glow {
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    overflow: hidden;
+    border-radius: inherit;
+    pointer-events: none;
+    /* Only the rim: clear in the middle, lit towards every edge. */
+    -webkit-mask-image: radial-gradient(farthest-side, transparent 70%, #000 100%);
+    mask-image: radial-gradient(farthest-side, transparent 70%, #000 100%);
+    opacity: 0.7;
+  }
+  .glass-glow::before {
+    content: "";
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    /* A square wider than the button, so its corners never show as it turns. */
+    width: 260%;
+    aspect-ratio: 1;
+    background: conic-gradient(
+      from var(--glass-angle),
+      var(--orange) 0deg,
+      var(--clay) 120deg,
+      color-mix(in oklab, var(--orange) 40%, transparent) 200deg,
+      var(--clay) 280deg,
+      var(--orange) 360deg
+    );
+    translate: -50% -50%;
+    animation: glass-turn 7s linear infinite;
+  }
+  .btn-important:hover .glass-glow,
+  .btn-important:focus-visible .glass-glow {
+    opacity: 1;
+    -webkit-mask-image: radial-gradient(farthest-side, transparent 58%, #000 100%);
+    mask-image: radial-gradient(farthest-side, transparent 58%, #000 100%);
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .glass-glow::before {
+      animation: none;
+    }
+  }
+
+  /* ======================================================================
+     The floating nav: a blurred, rounded rectangle over the page, and the
+     menu that drops below it on small screens.
+     ====================================================================== */
+  .nav-glass {
+    background-color: color-mix(in oklab, var(--background) 72%, transparent);
+    border: 1px solid color-mix(in oklab, var(--border) 85%, transparent);
+    border-radius: var(--radius-xl);
+    -webkit-backdrop-filter: blur(18px) saturate(1.5);
+    backdrop-filter: blur(18px) saturate(1.5);
+  }
+  .nav-dropdown {
+    transform-origin: top center;
+    transition:
+      opacity 160ms ease-out,
+      transform 160ms ease-out,
+      visibility 0s linear 160ms;
+  }
+  .nav-dropdown:not(.is-open) {
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+    pointer-events: none;
+  }
+  .nav-dropdown.is-open {
+    transition-delay: 0s;
   }
 
   /* ======================================================================
@@ -1055,6 +1183,12 @@
   /* The glow needs room inside the clipped viewport. */
   .marquee-track {
     padding-block: 0.875rem;
+  }
+}
+
+@keyframes glass-turn {
+  to {
+    --glass-angle: 360deg;
   }
 }
 
@@ -1501,7 +1635,7 @@
     height: 2.75rem;
     margin: 0;
     border: 1px solid #ffffff59;
-    border-radius: 9999px;
+    border-radius: var(--radius-btn);
     background: #242321;
     color: #fff;
     opacity: 1;
