@@ -144,8 +144,7 @@ export const Card: FC<{
  *   ghost                  a quiet in-page control.
  *   inverse                the old name for a button on a slab; now grey.
  *   important              the one call to action on a screen that matters
- *                          most: frosted glass with a slow orange-to-clay
- *                          glow turning round its rim. Use once per screen.
+ *                          most: a solid orange fill. Use once per screen.
  *
  * Every one of them glows on hover and focus (`.btn` in index.css).
  */
@@ -159,9 +158,6 @@ const BUTTON_VARIANTS: Record<ButtonVariant, string> = {
   ghost: "btn-ghost",
   important: "btn-important",
 };
-
-/** The rotating inner glow an `important` button carries. */
-const GlassGlow: FC = () => <span class="glass-glow" aria-hidden="true"></span>;
 
 const buttonClass = (variant: ButtonVariant, size: "default" | "lg", extra: string) =>
   `btn inline-flex shrink-0 cursor-pointer items-center justify-center gap-2 whitespace-nowrap rounded-[var(--radius-btn)] font-semibold no-underline transition-colors [&_svg]:size-4 [&_svg]:shrink-0 ${
@@ -190,7 +186,6 @@ export const LinkButton: FC<{
   const resolved = variant ?? variantFor(href);
   return (
     <a href={href} class={buttonClass(resolved, size, className)} {...rest}>
-      {resolved === "important" ? <GlassGlow /> : null}
       {children}
     </a>
   );

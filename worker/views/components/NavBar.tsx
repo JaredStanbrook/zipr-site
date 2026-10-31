@@ -303,7 +303,6 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
                     <a
                       href="/downloads"
                       class="btn btn-important inline-flex h-10 items-center justify-center gap-2 rounded-[var(--radius-btn)] px-4 text-sm font-semibold no-underline transition-colors"
-                      ><span class="glass-glow" aria-hidden="true"></span
                       ><i data-lucide="download" class="h-4 w-4" aria-hidden="true"></i> Download</a
                     >
                   `
@@ -360,7 +359,6 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
                   <a
                     href="/downloads"
                     class="btn btn-important inline-flex h-12 w-full items-center justify-center gap-2 rounded-[var(--radius-btn)] px-4 text-base font-semibold no-underline transition-colors"
-                    ><span class="glass-glow" aria-hidden="true"></span
                     ><i data-lucide="download" class="h-4 w-4" aria-hidden="true"></i> Download</a
                   >
                 `
