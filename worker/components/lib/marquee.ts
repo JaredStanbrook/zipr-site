@@ -19,7 +19,12 @@
  *   - it holds still while it has keyboard focus, while the picture viewer is
  *     open over it, and while it is off screen;
  *   - with reduced motion it never moves by itself, and is not thrown; it can
- *     still be dragged.
+ *     still be dragged;
+ *   - it says it can be moved, quietly: the first time a row is mostly on
+ *     screen it glides back a little, as if flicked, and settles into its own
+ *     pace; and a muted "Drag to explore" sits under it. Once a person has
+ *     moved any row the hint fades from all of them, and stays gone (a flag
+ *     in local storage), and no row nudges again.
  *
  * A drag must not also be a click, or letting go of a screenshot would open
  * it in the viewer: a click that ends a drag is swallowed before the
@@ -30,6 +35,30 @@ const reducedMotion = () => window.matchMedia("(prefers-reduced-motion: reduce)"
 
 /** Beyond this many pixels of travel a press is a drag, not a click. */
 const DRAG_THRESHOLD = 5;
+/** The speed of the first-sight glide, against the row's own direction. */
+const NUDGE_SPEED = 340;
+/** How long the row sits in view before it glides, so the glide is seen. */
+const NUDGE_DELAY_MS = 500;
+const EXPLORED_KEY = "zipr.marquee.explored";
+
+const explored = () => {
+  try {
+    return localStorage.getItem(EXPLORED_KEY) === "1";
+  } catch {
+    return false;
+  }
+};
+
+/** Somebody has moved a row by hand: they know. Drop every hint and nudge. */
+const markExplored = () => {
+  document.querySelectorAll("[data-marquee]").forEach((root) => root.classList.add("is-explored"));
+  try {
+    localStorage.setItem(EXPLORED_KEY, "1");
+  } catch {
+    // Blocked storage only means the hint comes back next visit.
+  }
+};
+
 /** How long a wheel or key nudge holds off the automatic motion. */
 const NUDGE_HOLD_MS = 1200;
 /** Seconds for a throw to lose about two thirds of its extra speed. Lower is
@@ -59,6 +88,8 @@ type State = {
   /** Never moves by itself (reduced motion). */
   stopped: boolean;
   visible: boolean;
+  /** Has had its first-sight glide. */
+  nudged: boolean;
   focused: boolean;
   heldUntil: number;
   drag: {
@@ -168,6 +199,22 @@ const fill = (s: State) => {
   paint(s);
 };
 
+/**
+ * The first-sight glide: a flick against the row's own direction, which the
+ * tick then eases back into its pace — the same physics as a real throw, so
+ * it reads as "this moves under your hand". Once per row, and never for a
+ * visitor who has already moved one or asked for less motion.
+ */
+const nudge = (s: State) => {
+  if (s.nudged || s.stopped || explored() || reducedMotion()) return;
+  s.nudged = true;
+  window.setTimeout(() => {
+    if (!s.root.isConnected || s.drag || s.focused) return;
+    s.vel = -s.dir * NUDGE_SPEED;
+    schedule();
+  }, NUDGE_DELAY_MS);
+};
+
 let visibility: IntersectionObserver | null = null;
 let resizing: ResizeObserver | null = null;
 const byElement = new WeakMap<Element, State>();
@@ -189,6 +236,7 @@ const setup = (root: HTMLElement) => {
     speed: Number(root.dataset.speed) || 36,
     stopped: reducedMotion(),
     visible: true,
+    nudged: false,
     focused: false,
     heldUntil: 0,
     drag: null,
@@ -196,6 +244,7 @@ const setup = (root: HTMLElement) => {
   };
   s.vel = s.stopped ? 0 : s.dir * s.speed;
   root.classList.add("is-live");
+  if (explored()) root.classList.add("is-explored");
   viewport.scrollLeft = 0;
   fill(s);
   marquees.add(s);
@@ -247,6 +296,7 @@ const setup = (root: HTMLElement) => {
     if (!drag.moved && Math.abs(dx) > DRAG_THRESHOLD) {
       drag.moved = true;
       root.classList.add("is-dragging");
+      markExplored();
       viewport.setPointerCapture(event.pointerId);
     }
     if (drag.moved) {
@@ -300,6 +350,7 @@ const setup = (root: HTMLElement) => {
     (event) => {
       if (Math.abs(event.deltaX) <= Math.abs(event.deltaY)) return;
       event.preventDefault();
+      markExplored();
       s.vel = 0;
       s.pos += event.deltaX;
       wrap(s);
@@ -315,6 +366,7 @@ const setup = (root: HTMLElement) => {
     const step = event.key === "ArrowRight" ? 1 : event.key === "ArrowLeft" ? -1 : 0;
     if (!step) return;
     event.preventDefault();
+    markExplored();
     s.pos += step * Math.max(120, viewport.clientWidth * 0.4);
     wrap(s);
     paint(s);
@@ -327,14 +379,18 @@ const setup = (root: HTMLElement) => {
 export function initMarquees(root: ParentNode = document) {
   visibility ??=
     "IntersectionObserver" in window
-      ? new IntersectionObserver((entries) => {
-          for (const entry of entries) {
-            const s = byElement.get(entry.target);
-            if (!s) continue;
-            s.visible = entry.isIntersecting;
-            if (s.visible) schedule();
-          }
-        })
+      ? new IntersectionObserver(
+          (entries) => {
+            for (const entry of entries) {
+              const s = byElement.get(entry.target);
+              if (!s) continue;
+              s.visible = entry.isIntersecting;
+              if (s.visible) schedule();
+              if (entry.intersectionRatio >= 0.5) nudge(s);
+            }
+          },
+          { threshold: [0, 0.5] },
+        )
       : null;
   resizing ??=
     "ResizeObserver" in window

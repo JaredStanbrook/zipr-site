@@ -1065,6 +1065,39 @@
     width: auto !important;
   }
 
+  /* "Drag to explore": muted, small, and gone once somebody has. The words
+     follow the pointer: a finger swipes, a mouse drags. */
+  .marquee-hint {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.4rem;
+    margin-top: 0.25rem;
+    font-size: 0.75rem;
+    letter-spacing: 0.02em;
+    color: var(--muted-foreground);
+    opacity: 0;
+    transition: opacity 400ms ease-out;
+    pointer-events: none;
+  }
+  .marquee.is-live .marquee-hint {
+    opacity: 0.85;
+  }
+  .marquee.is-live.is-explored .marquee-hint {
+    opacity: 0;
+  }
+  .marquee-hint-touch {
+    display: none;
+  }
+  @media (pointer: coarse) {
+    .marquee-hint-touch {
+      display: inline;
+    }
+    .marquee-hint-mouse {
+      display: none;
+    }
+  }
+
   /* The glow needs room inside the clipped viewport. */
   .marquee-track {
     padding-block: 0.875rem;

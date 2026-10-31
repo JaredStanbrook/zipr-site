@@ -588,6 +588,15 @@ export const Marquee: FC<{
         {children}
       </ul>
     </div>
+    {/* That it can be moved, said quietly. Shown only once the script has
+        made the row a live marquee, and faded for good once somebody has
+        moved one (lib/marquee.ts). Hidden from screen readers: the row is a
+        focusable region the arrow keys move, which they already announce. */}
+    <p class="marquee-hint" aria-hidden="true">
+      <i data-lucide="move-horizontal" class="h-3.5 w-3.5" aria-hidden="true"></i>
+      <span class="marquee-hint-mouse">Drag to explore</span>
+      <span class="marquee-hint-touch">Swipe to explore</span>
+    </p>
   </div>
 );
 
