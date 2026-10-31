@@ -173,24 +173,31 @@ export function initCarousels(root: ParentNode = document) {
       if (next) next.disabled = track.scrollLeft >= max;
     };
 
-    const select = (tab: HTMLElement, focus = false) => {
+    const select = (tab: HTMLElement, focus = false, animate = true) => {
       const role = tab.dataset.tab;
       for (const t of tabs) {
         const on = t === tab;
         t.setAttribute("aria-selected", String(on));
         t.tabIndex = on ? 0 : -1;
       }
-      let n = 0;
+      // Every write first, then one forced layout, then the entrance class.
+      // Reading `offsetWidth` per card inside the loop forced a full layout
+      // for each of them — half a second of a phone's main thread on load.
+      const shown: HTMLElement[] = [];
       for (const card of cards) {
         const match = card.dataset.role === role;
         card.hidden = !match;
-        // Restart the entrance so a new set of cards settles in, one by one.
         card.classList.remove("carousel-in");
         if (match) {
-          card.style.setProperty("--i", String(n++));
-          void card.offsetWidth;
-          card.classList.add("carousel-in");
+          card.style.setProperty("--i", String(shown.length));
+          shown.push(card);
         }
+      }
+      // Restart the entrance so a new set of cards settles in, one by one.
+      // Not on the first selection: nothing has been seen yet to replace.
+      if (animate && shown.length > 0) {
+        void track.offsetWidth;
+        for (const card of shown) card.classList.add("carousel-in");
       }
       track.scrollTo({ left: 0, behavior: "auto" });
       track.setAttribute("aria-labelledby", tab.id);
@@ -225,7 +232,7 @@ export function initCarousels(root: ParentNode = document) {
     track.addEventListener("scroll", edges, { passive: true });
     window.addEventListener("resize", edges, { passive: true });
 
-    select(tabs.find((t) => t.getAttribute("aria-selected") === "true") ?? tabs[0]);
+    select(tabs.find((t) => t.getAttribute("aria-selected") === "true") ?? tabs[0], false, false);
   });
 }
 

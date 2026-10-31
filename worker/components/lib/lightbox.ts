@@ -39,14 +39,15 @@ const shownImage = (trigger: HTMLElement) =>
   ) ?? null;
 
 const slideFor = (img: HTMLImageElement): SlideData => {
-  const src = img.currentSrc || img.src;
+  // The whole capture, not whichever narrower copy `srcset` put on the page.
+  const src = img.dataset.full || img.currentSrc || img.src;
   const width = Number(img.getAttribute("width")) || img.naturalWidth;
   const height = Number(img.getAttribute("height")) || img.naturalHeight;
   return {
     src,
-    // Shown stretched while the full picture loads; it is the same file, so
-    // usually already in the cache and the swap is invisible.
-    msrc: src,
+    // Shown stretched while the full picture loads: the copy already on the
+    // page, so there is something to see at once.
+    msrc: img.currentSrc || src,
     width: width / PIXELS_PER_POINT,
     height: height / PIXELS_PER_POINT,
     alt: img.alt,
@@ -102,7 +103,7 @@ const openLightbox = async (clicked: HTMLElement) => {
   try {
     Viewer = await load();
   } catch {
-    window.location.assign(source.currentSrc || source.src);
+    window.location.assign(source.dataset.full || source.currentSrc || source.src);
     return;
   } finally {
     opening = false;

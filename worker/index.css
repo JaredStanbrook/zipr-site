@@ -120,22 +120,8 @@
     U+A720-A7FF;
 }
 
-/* The wordmark face, and nowhere else: Fraunces with its SOFT axis, used for
-   the Zipr name in the header, the mobile menu and the footer's embossed
-   copy. Pulled from a CDN rather than self-hosted because it carries one word
-   on the page. Pinned to a version so it never changes under
-   us; `swap` so the footer never waits on it. OFL 1.1. */
-@font-face {
-  font-family: "Fraunces";
-  font-style: normal;
-  font-weight: 100 900;
-  font-display: swap;
-  src: url("https://cdn.jsdelivr.net/npm/@fontsource-variable/fraunces@5.2.9/files/fraunces-latin-full-normal.woff2")
-    format("woff2");
-  unicode-range:
-    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
-    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
-}
+/* The wordmark face, Fraunces, is loaded in Layout.tsx from Google Fonts,
+   subset to the app name's letters. See `.wordmark` and `.emboss`. */
 
 /* The rotating glow's angle. Registered so it can be animated: an
    unregistered custom property only flips between keyframes, it never turns. */

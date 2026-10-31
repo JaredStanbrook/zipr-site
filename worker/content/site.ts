@@ -102,9 +102,11 @@ export const PUBLIC_NAV = [
  * Product screenshots, served from `public/screenshots/`.
  *
  * Each is rendered from the app's own screen gallery
- * (`scripts/capture-marketing.mjs` in zipr-client) and named `<id>-light.png`.
- * The site is light only, so the dark renders are not kept here. They are
- * transparent PNGs of the window
+ * (`scripts/capture-marketing.mjs` in zipr-client), which writes
+ * `<id>-light.png`, and turned into the WebP files served here by
+ * `node scripts/screenshots.mjs <that folder>`: `<id>.webp` at full size and
+ * `<id>-640.webp` / `<id>-1280.webp` where the capture is wider. They are
+ * transparent pictures of the window
  * alone, with its own rounded corners and a margin that holds its shadow, so
  * the page adds no frame, radius or shadow of its own. Width and height are the rendered
  * pixels, kept here so the page reserves the right box before the file
@@ -115,6 +117,9 @@ export const PUBLIC_NAV = [
  * only way a screen-reader user learns what the launcher looks like.
  */
 export const SCREENSHOT_BASE = "/screenshots";
+
+/** The narrower copies `scripts/screenshots.mjs` makes, below full size. */
+export const SCREENSHOT_WIDTHS = [640, 1280] as const;
 
 export const SCREENSHOTS = {
   "overlay-list": {

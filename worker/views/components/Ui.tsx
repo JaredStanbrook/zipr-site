@@ -1,6 +1,11 @@
 import type { FC, Child } from "hono/jsx";
 
-import { SCREENSHOTS, SCREENSHOT_BASE, type ScreenshotId } from "@server/content/site";
+import {
+  SCREENSHOTS,
+  SCREENSHOT_BASE,
+  SCREENSHOT_WIDTHS,
+  type ScreenshotId,
+} from "@server/content/site";
 
 /**
  * The site's layout vocabulary.
@@ -445,14 +450,17 @@ export const Disclosure: FC<{ question: string; children?: Child }> = ({ questio
 /**
  * A product screenshot.
  *
- * The site is light only (see `<theme-provider locked>` in Layout.tsx), so
- * there is one picture, the light render. The dark renders were deleted to
- * keep the deploy small; the client's capture script still makes them, and
- * bringing them back is a second `<img>` and the theme rules it needs.
+ * WebP in up to three widths (`scripts/screenshots.mjs`), offered through
+ * `srcset` so a phone downloads the 640 or 1280 copy rather than a capture
+ * made for a 2x desktop screen. `sizes` says how wide the picture is drawn,
+ * which is what the browser chooses by: the default suits a picture in a
+ * column, and the hero and the marquee pass their own. The picture viewer
+ * opens `data-full`, the whole capture, whichever copy is on the page.
  *
- * The image carries its own corners and shadow (transparent PNG), so nothing
- * here rounds, clips or shades it. `eager` is for the picture at the top of
- * the page, where lazy loading would delay the largest paint.
+ * Light only, like the site. The image carries its own corners and shadow
+ * (transparent), so nothing here rounds, clips or shades it. `eager` is for
+ * the picture at the top of the page, where lazy loading would delay the
+ * largest paint.
  */
 export const Screenshot: FC<{
   id: ScreenshotId;
@@ -460,17 +468,36 @@ export const Screenshot: FC<{
   class?: string;
   /** Wrap in the lightbox trigger. Off only where a parent already is one. */
   zoom?: boolean;
-}> = ({ id, eager = false, class: className = "", zoom = true }) => {
+  /** How wide the picture is drawn, for choosing a copy. */
+  sizes?: string;
+}> = ({
+  id,
+  eager = false,
+  class: className = "",
+  zoom = true,
+  sizes = "(max-width: 1024px) 100vw, 60vw",
+}) => {
   const shot = SCREENSHOTS[id];
+  const full = `${SCREENSHOT_BASE}/${id}.webp`;
+  const srcset = [
+    ...SCREENSHOT_WIDTHS.filter((step) => step < shot.width).map(
+      (step) => `${SCREENSHOT_BASE}/${id}-${step}.webp ${step}w`,
+    ),
+    `${full} ${shot.width}w`,
+  ].join(", ");
   const pictures = (
     <span class={`shot block ${className}`}>
       <img
         class="h-auto w-full"
-        src={`${SCREENSHOT_BASE}/${id}-light.png`}
+        src={full}
+        srcset={srcset}
+        sizes={sizes}
+        data-full={full}
         width={shot.width}
         height={shot.height}
         alt={shot.alt}
         loading={eager ? "eager" : "lazy"}
+        fetchpriority={eager ? "high" : undefined}
         decoding="async"
       />
     </span>
@@ -513,7 +540,9 @@ export const EdgeShot: FC<{
   class?: string;
 }> = ({ id, edge = "right", spill = "150%", eager = false, class: className = "" }) => (
   <div class={`edge-shot ${className}`} data-edge={edge} style={`--spill: ${spill};`}>
-    <Screenshot id={id} eager={eager} />
+    {/* Drawn at `spill` times a column: about one and a half screens wide on
+        a phone, and most of one on a desktop. */}
+    <Screenshot id={id} eager={eager} sizes="(max-width: 1024px) 150vw, 75vw" />
   </div>
 );
 
@@ -572,7 +601,9 @@ export const ScreenshotMarquee: FC<{
   <Marquee label={label} direction={direction} speed={speed} gap="1.5rem">
     {ids.map((id) => (
       <li class="marquee-shot">
-        <Screenshot id={id} />
+        {/* One height for all, 15 to 26rem, so each is at most about twice
+            that wide. */}
+        <Screenshot id={id} sizes="(max-width: 640px) 80vw, 46rem" />
       </li>
     ))}
   </Marquee>
