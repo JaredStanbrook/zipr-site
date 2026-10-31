@@ -309,16 +309,19 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
             </div>
           </div>
         </Container>
+        {/* Seven people's launchers, each set up their own way — the point
+            of "make it yours". */}
         <ScreenshotMarquee
-          label="Screenshots of the Zipr app"
+          label="Seven people's Zipr launchers, each set up differently"
           direction="right"
           ids={[
-            "overlay-list",
-            "editor-steps",
-            "run-history",
-            "zap",
-            "app-shortcuts",
-            "overlay-grid",
+            "overlay-developer",
+            "overlay-designer",
+            "overlay-helpdesk",
+            "overlay-sales",
+            "overlay-teacher",
+            "overlay-finance",
+            "overlay-home",
           ]}
         />
       </Section>

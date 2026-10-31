@@ -125,6 +125,44 @@ export const SCREENSHOTS = {
     height: 1060,
     alt: "The Zipr launcher in its grid layout: a search box above tiles for Start my workday, Start my day connected, Join my next meeting, Present my screen, Fill in my timesheet and Book a meeting room, each with an icon and a one-line description.",
   },
+  // Seven other people's launchers, for the home page's "In use" strip: each
+  // their own shortcuts, with the launcher set up their own way. Rendered from
+  // the client's `persona-*` gallery scenarios (fixtures/personas.ts).
+  "overlay-developer": {
+    width: 1232,
+    height: 1372,
+    alt: "A developer's Zipr launcher as a dense list in small text, without colours: Start the dev stack and Open my review queue pinned, then Tail the API logs, Run the tests, Deploy to staging, Who is on call?, Open the staging database and Clear the build cache.",
+  },
+  "overlay-designer": {
+    width: 1632,
+    height: 1064,
+    alt: "A designer's Zipr launcher as a roomy grid of large, colourful tiles with names only: Export for review, Open the brand kit, Start a moodboard, Resize for social, Open the type library and Send to the client.",
+  },
+  "overlay-helpdesk": {
+    width: 1392,
+    height: 1350,
+    alt: "An IT support person's Zipr launcher with no search field, grouped under headings: their own shortcuts — Open my ticket queue, Start a remote session, Search the knowledge base — then the Acme IT team's, from Check certificate expiry to Page the on-call engineer.",
+  },
+  "overlay-sales": {
+    width: 1392,
+    height: 1132,
+    alt: "A salesperson's Zipr launcher in large, roomy text, opened over a selected company name, Northwind Traders, ready to run with it: Look up the account pinned, then Log this call, Send the proposal, Book a follow-up and Open my pipeline.",
+  },
+  "overlay-teacher": {
+    width: 2192,
+    height: 1128,
+    alt: "A teacher's Zipr launcher as a grid that scrolls sideways: Take the register, Start the class timer, Mark homework, Show my screen, Open today's lesson, Share the worksheet, Email parents and Open the seating plan, each with a short description.",
+  },
+  "overlay-finance": {
+    width: 1312,
+    height: 1342,
+    alt: "A finance person's Zipr launcher as a plain list of words, with no icons or colours: Reconcile yesterday's payments pinned, then Approve pending invoices, Export the month-end report, Open the budget, Check exchange rates, File an expense and Prepare the supplier run.",
+  },
+  "overlay-home": {
+    width: 1992,
+    height: 1152,
+    alt: "A Zipr launcher at home in the largest text size, as big tiles with short names: Family call pinned, then My photos, The news, My radio, Weather and New letter.",
+  },
   "editor-steps": {
     width: 2592,
     height: 1808,
