@@ -132,6 +132,14 @@ const openLightbox = async (clicked: HTMLElement) => {
     // to close even on a wide screenshot that fits edge to edge. The top is
     // deeper: the controls sit there and must not cover the picture.
     padding: { top: 72, bottom: 24, left: 24, right: 24 },
+    // Closing should feel instant: PhotoSwipe's 333ms zoom-out is the slowest
+    // part of it. Opening keeps a little more time, so the picture is seen
+    // arriving. Double-tap is switched off because waiting 300ms to tell a tap
+    // from the first half of one delays every tap, closing included; the zoom
+    // button and pinch still zoom.
+    hideAnimationDuration: 140,
+    showAnimationDuration: 240,
+    doubleTapAction: false,
     initialZoomLevel: "fit",
     secondaryZoomLevel: 1,
     maxZoomLevel: 1,
