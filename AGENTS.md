@@ -26,6 +26,12 @@ Path aliases: `@server/*` → `worker/*`, `@views/*` → `worker/views/*`,
 
 ## Build, Test, and Development Commands
 
+- `scripts/ci.sh` — **the whole of CI**: install, lint, format, the
+  third-party notices, build and tests. Run it by hand on the build VM, or
+  through the CI workflow, which only runs this script. Every GitHub workflow
+  here is manual (`workflow_dispatch`) and self-hosted (`SITE_RUNNER`,
+  default `["self-hosted","linux"]`); nothing runs on a push or on GitHub's
+  machines. Deploys are Cloudflare's, below.
 - `npm run dev` — Vite dev server with hot reload on `:3000`.
 - `npm run build` — generate types, typecheck, build client and server bundles.
 - `npm run deploy` — migrate then deploy; this is the dashboard's Deploy command.

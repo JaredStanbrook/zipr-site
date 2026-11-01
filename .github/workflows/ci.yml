@@ -1,83 +1,36 @@
 name: CI
 
-# Checks only. Deployment is handled by Cloudflare's Git integration
-# (Workers & Pages -> your Worker -> Settings -> Builds), which runs
-# `npm run build` then `npm run deploy` on every push.
-
+# Run by hand, on your own machine. Nothing here starts on a push or a pull
+# request, and nothing runs on GitHub's hosted runners: the job needs a
+# self-hosted runner (the build VM), so a run with no VM online waits rather
+# than costing anything.
+#
+# The checks are scripts/ci.sh, and this only runs it — so `scripts/ci.sh` on
+# the VM by hand is the same CI.
+#
+# Deployment is not here either: Cloudflare's Git integration (Workers & Pages
+# → the Worker → Settings → Builds) builds and deploys on push, on
+# Cloudflare's machines.
+#
+# The runner is the repository variable SITE_RUNNER, a JSON value, default
+# ["self-hosted","linux"]. Node (.node-version) must be on the machine.
 on:
-  push:
-    branches:
-      - main
-  pull_request:
+  workflow_dispatch:
+    inputs:
+      keep_going:
+        description: "Run every step and list what failed, rather than stopping at the first"
+        required: false
+        default: false
+        type: boolean
 
 concurrency:
   group: ci-${{ github.ref }}
   cancel-in-progress: true
 
 jobs:
-  lint-typecheck-test:
-    runs-on: ubuntu-latest
+  ci:
+    name: scripts/ci.sh
+    runs-on: ${{ fromJSON(vars.SITE_RUNNER || '["self-hosted","linux"]') }}
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: .node-version
-          cache: npm
-
-      - name: Install
-        run: npm ci
-
-      # Runs only in the template repository, so it disappears in repos made
-      # from it. The template once got configured for a real site by mistake,
-      # which meant the next site inherited a live database id and its first
-      # deploy migrated someone else's data.
-      - name: Template placeholders intact
-        if: github.repository == 'JaredStanbrook/frug-template'
-        run: |
-          missing=0
-          for token in \
-            '"name": "frug-app"' \
-            '"database_name": "change-me-db"' \
-            '"database_id": "00000000-0000-0000-0000-000000000000"' \
-            '"id": "00000000000000000000000000000000"' \
-            '"bucket_name": "change-me-files"'
-          do
-            if ! grep -qF "$token" wrangler.jsonc; then
-              echo "::error::Missing placeholder in wrangler.jsonc: $token"
-              missing=1
-            fi
-          done
-          if [ "$missing" -ne 0 ]; then
-            echo "::error::The template must ship placeholders only. Configure the repo made FROM the template, not the template itself — otherwise the next site inherits a live database id."
-            exit 1
-          fi
-          echo "Placeholders intact."
-
-      - name: Lint
-        run: npm run lint
-
-      - name: Format check
-        run: npm run format
-
-      # The licences of everything shipped to the browser, served at
-      # /third-party-notices.txt. Regenerated from node_modules and compared,
-      # so a dependency change that forgets `npm run notices` fails here
-      # rather than shipping code without its licence.
-      - name: Third-party notices up to date
-        run: |
-          npm run notices
-          git diff --exit-code -- public/third-party-notices.txt || {
-            echo "::error::public/third-party-notices.txt is stale. Run 'npm run notices' and commit the result."
-            exit 1
-          }
-
-      # `npm run build` runs `wrangler types` first, so the generated
-      # worker-configuration.d.ts exists before tsc needs it.
-      - name: Typecheck and build
-        run: npm run build
-
-      - name: Test
-        run: npm run test
+      - uses: actions/checkout@v4
+      - run: scripts/ci.sh ${{ inputs.keep_going && '--keep-going' || '' }}
