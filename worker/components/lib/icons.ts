@@ -95,9 +95,15 @@ import {
   WifiOff,
   X,
   Zap,
+  FlaskConical,
+  ArchiveRestore,
+  RefreshCwOff,
 } from "lucide";
 
 export const ICONS = {
+  FlaskConical,
+  ArchiveRestore,
+  RefreshCwOff,
   ArrowUpRight,
   ShieldAlert,
   Hand,

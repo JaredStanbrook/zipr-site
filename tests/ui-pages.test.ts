@@ -29,6 +29,7 @@ describe("UI pages load", () => {
       "/teams",
       "/pricing",
       "/downloads",
+      "/downloads/experimental",
       "/security",
       "/privacy",
       "/licence",

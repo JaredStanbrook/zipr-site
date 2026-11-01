@@ -14,12 +14,9 @@ import { users } from "./auth.schema";
 import { timestampColumns } from "./common";
 
 /**
- * The platforms the client is built for.
- *
- * `linux` is here although the client's Tauri config names only `nsis`, `app`
- * and `dmg` under `bundle.targets` — so no Linux installer is produced today
- * and the Downloads page says "build from source" for it. The value exists so
- * that shipping one later is an upload rather than a migration.
+ * The platforms the client is built for. Linux ships three files per build —
+ * an AppImage, a .deb and an .rpm — so a release can hold several assets for
+ * one platform, told apart by their filenames.
  */
 export const PLATFORMS = ["windows", "macos", "linux"] as const;
 export type Platform = (typeof PLATFORMS)[number];
@@ -27,8 +24,26 @@ export type Platform = (typeof PLATFORMS)[number];
 export const ARCHITECTURES = ["x64", "arm64", "universal"] as const;
 export type Architecture = (typeof ARCHITECTURES)[number];
 
-export const CHANNELS = ["stable", "beta"] as const;
+/**
+ * Where a release is offered.
+ *
+ * `stable` is what /downloads leads with, and is only ever created by a
+ * person at /admin/releases. `experimental` is everything else: a build off a
+ * branch, unsigned, made by the release pipeline through /api/releases, and
+ * shown only at /downloads/experimental — never as *the* version of Zipr.
+ * The column is plain text, so any value that is not `stable` is treated as
+ * experimental wherever the site reads it.
+ */
+export const CHANNELS = ["stable", "experimental"] as const;
 export type Channel = (typeof CHANNELS)[number];
+
+/**
+ * A version an experimental build may carry: semver with a pre-release part
+ * (`0.2.0-experimental.14`). Required so that a pipeline can never take a
+ * plain version number — the version column is unique, and an experimental
+ * `0.2.0` would leave the real 0.2.0 nowhere to go.
+ */
+export const EXPERIMENTAL_VERSION = /^\d+\.\d+\.\d+-[0-9A-Za-z.-]+(?:\+[0-9A-Za-z.-]+)?$/;
 
 export const release = sqliteTable(
   "release",
@@ -118,7 +133,10 @@ export const releaseFormSchema = z.object({
     .trim()
     .min(1, "Version is required")
     .max(40)
-    .regex(/^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$/, "Use a semver like 1.2.0 or 1.2.0-beta.1"),
+    .regex(
+      /^\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?$/,
+      "Use a semver like 1.2.0 or 1.2.0-experimental.1",
+    ),
   channel: z.enum(CHANNELS).optional().default("stable"),
   notes: z.string().max(10_000).optional().default(""),
 });

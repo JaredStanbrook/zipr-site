@@ -11,6 +11,12 @@
 #   openssl rand -base64 48
 JWT_SECRET="replace-with-a-long-random-string"
 
+# Lets the client's release pipeline upload experimental builds to
+# /api/releases. Optional: unset, that API refuses everything. In production
+# it is a Secret, like JWT_SECRET. Generate one with:
+#   openssl rand -base64 48
+# RELEASE_TOKEN="replace-with-a-long-random-string"
+
 # --- Local-only auth overrides ---------------------------------------
 # WebAuthn requires RP_ID to match the hostname exactly, and ORIGIN to
 # match the full origin including port. `bun dev` serves on :3000.

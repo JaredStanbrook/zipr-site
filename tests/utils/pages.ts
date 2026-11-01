@@ -27,6 +27,7 @@ export const TRANSLATED_PAGES = [
   "/teams",
   "/pricing",
   "/downloads",
+  "/downloads/experimental",
   "/security",
   "/report",
   "/contact",
@@ -71,9 +72,9 @@ const notFoundApp = () => {
 /**
  * Each page's HTML, signed out, as production configures it.
  *
- * The downloads page says different things with a release published and
+ * The download pages say different things with a release published and
  * without one, and a visitor sees whichever is true today, so both are
- * rendered; a catalogue that covered only one would leave the other in English
+ * rendered for each; a catalogue that covered only one would leave the other in English
  * the day the state changes.
  */
 export const renderPages = async (paths: string[] = TRANSLATED_PAGES) => {
@@ -97,7 +98,7 @@ export const renderPages = async (paths: string[] = TRANSLATED_PAGES) => {
       continue;
     }
     pages[path] = await (await get(site, path)).text();
-    if (path === "/downloads") {
+    if (path.startsWith("/downloads")) {
       pages[`${path} (no releases yet)`] = await (await get(noReleases, path)).text();
     }
   }

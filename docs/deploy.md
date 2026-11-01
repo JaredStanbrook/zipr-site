@@ -92,6 +92,18 @@ The Worker must exist before it has a Settings page. If you have not deployed
 yet, do Step 4 first and come back — the first build will fail on the missing
 secret, then succeed once you set it and re-run.
 
+### Optional — `RELEASE_TOKEN`, for experimental builds
+
+The client's release pipeline uploads experimental builds to `/api/releases`
+with a bearer token, held here as a second **Secret** named `RELEASE_TOKEN`
+and in the client repository as the Actions secret `ZIPR_RELEASE_TOKEN`. Both
+must hold the same value. Generate it with `openssl rand -base64 48`.
+
+Leave it unset and the API refuses every request, which is the right state for
+a site with no pipeline. The token can only create, fill and publish
+experimental builds; it cannot touch a stable release or delete anything (see
+the README's "Publishing a release"). Changing it is the way to revoke it.
+
 ---
 
 ## Step 4 — Connect the repo (dashboard)
