@@ -244,48 +244,70 @@ describe("the download pages", () => {
     await call("POST", `/api/releases/${VERSION}/publish`);
   };
 
-  it("keeps an experimental build off the stable page, pointing at it instead", async () => {
+  /** The page split where the experimental section starts. */
+  const halves = (html: string) => {
+    const at = html.indexOf('id="experimental"');
+    expect(at, "the page has an experimental section").toBeGreaterThan(-1);
+    return { stable: html.slice(0, at), experimental: html.slice(at) };
+  };
+  const experimentalIds = async () => {
+    const assets: SelectReleaseAsset[] = await db.select().from(releaseAsset);
+    return assets.filter((asset) => asset.filename.includes("experimental")).map((a) => a.id);
+  };
+
+  it("offers an experimental build only in its own section, below the stable one", async () => {
     await publishStable();
     await publishExperimental();
 
-    const stable = await page("/downloads");
+    const { stable, experimental } = halves(await page("/downloads"));
+    // Stable leads, and the switch under the heading jumps to the section.
     expect(stable).toContain("0.1.0");
     expect(stable).toContain('href="/downloads/1"');
-    expect(stable).toContain('href="/downloads/experimental"');
-    expect(stable).toContain(VERSION); // named in the pointer, as a build to try
-    // But none of its files is offered there.
-    const assets: SelectReleaseAsset[] = await db.select().from(releaseAsset);
-    const experimentalIds = assets
-      .filter((asset) => asset.filename.includes("experimental"))
-      .map((asset) => asset.id);
-    expect(experimentalIds).toHaveLength(4);
-    for (const id of experimentalIds) expect(stable).not.toContain(`href="/downloads/${id}"`);
+    expect(stable).toContain('href="#experimental"');
+    const ids = await experimentalIds();
+    expect(ids).toHaveLength(4);
+    for (const id of ids) {
+      // None of its files is in the cards at the top…
+      expect(stable).not.toContain(`href="/downloads/${id}"`);
+      // …and every one is in its section.
+      expect(experimental).toContain(`href="/downloads/${id}"`);
+    }
+    // The stable build is not offered as an experimental one.
+    expect(experimental).not.toContain('href="/downloads/1"');
   });
 
-  it("lists every file of an experimental build on its own page, out of search", async () => {
+  it("lists every file of an experimental build, with what each one is", async () => {
     await publishStable();
     await publishExperimental();
 
-    const html = await page("/downloads/experimental");
-    expect(html).toContain(VERSION);
-    expect(html).toContain("noindex");
-    expect(html).toContain("AppImage — any distribution");
-    expect(html).toContain("Debian and Ubuntu (.deb)");
-    expect(html).toContain("Fedora and openSUSE (.rpm)");
+    const { experimental } = halves(await page("/downloads"));
+    expect(experimental).toContain(VERSION);
+    expect(experimental).toContain("AppImage — any distribution");
+    expect(experimental).toContain("Debian and Ubuntu (.deb)");
+    expect(experimental).toContain("Fedora and openSUSE (.rpm)");
     // An Apple-silicon image says so, rather than failing on an Intel Mac.
-    expect(html).toContain("Apple silicon");
-    expect(html).toContain(sha256(bytes("deb")));
-    expect(html).toContain("Built from abc1234");
-    // The stable build is not offered as an experimental one.
-    expect(html).not.toContain('href="/downloads/1"');
+    expect(experimental).toContain("Apple silicon");
+    expect(experimental).toContain(sha256(bytes("deb")));
+    expect(experimental).toContain("Built from abc1234");
+    // What to know first comes before the files.
+    expect(experimental.indexOf("No upgrade path yet")).toBeLessThan(
+      experimental.indexOf("AppImage — any distribution"),
+    );
   });
 
-  it("says plainly when there is no experimental build, and the stable page does not point at one", async () => {
+  it("keeps the old experimental page as a redirect to the section", async () => {
+    const res = await site.fetch(new Request("http://localhost/downloads/experimental"), env);
+    expect(res.status).toBe(301);
+    expect(res.headers.get("location")).toBe("/downloads#experimental");
+  });
+
+  it("says plainly when there is no experimental build, and offers no switch to one", async () => {
     await publishStable();
     // A draft does not count.
     await call("PUT", `/api/releases/${VERSION}`, { json: {} });
 
-    expect(await page("/downloads/experimental")).toContain("No experimental build right now");
-    expect(await page("/downloads")).not.toContain('href="/downloads/experimental"');
+    const { stable, experimental } = halves(await page("/downloads"));
+    expect(experimental).toContain("No experimental build right now");
+    expect(stable).not.toContain('href="#experimental"');
   });
 });

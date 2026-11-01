@@ -104,7 +104,8 @@ export const MAC_ARCH_LABELS: Record<string, string> = {
 };
 
 /**
- * Shown on /downloads/experimental before anything else. Each one is true of
+ * Shown at the top of the experimental section of /downloads, before any of
+ * its files. Each one is true of
  * every experimental build, and is the thing a person would be annoyed to
  * learn afterwards. The second is the client's own rule: nothing has shipped,
  * so nothing it stores is migrated between builds yet.
