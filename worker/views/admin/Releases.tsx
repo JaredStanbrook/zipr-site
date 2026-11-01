@@ -25,7 +25,7 @@ export const ReleaseCard: FC<{ item: ReleaseWithAssets; app: AppConfig }> = ({ i
     <div class="flex flex-wrap items-center gap-3 border-b border-border bg-muted/50 px-5 py-4">
       <h2 class="font-mono text-lg font-bold tabular">{item.version}</h2>
 
-      <Badge tone={item.channel === "beta" ? "warning" : "neutral"}>{item.channel}</Badge>
+      <Badge tone={item.channel === "stable" ? "neutral" : "warning"}>{item.channel}</Badge>
 
       {item.publishedAt ? (
         <Badge tone="success">

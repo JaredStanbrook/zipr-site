@@ -7,6 +7,7 @@ import { ProfilePage } from "./views/pages/Profile";
 import type { SafeUser } from "./schema/auth.schema.ts";
 
 import { apiAuth } from "./routes/api/auth";
+import { apiReleases } from "./routes/api/releases";
 import { webAuth } from "./routes/web/auth";
 import { logsRoute } from "./routes/admin/logs";
 import { releasesRoute } from "./routes/admin/releases.tsx";
@@ -74,7 +75,9 @@ const app = new Hono<AppEnv>()
   // 3. JSON API
   // ==========================================
   .basePath("/api")
-  .route("/auth", apiAuth);
+  .route("/auth", apiAuth)
+  // The release pipeline: experimental builds only, by token. See the file.
+  .route("/releases", apiReleases);
 
 export type AppType = typeof app;
 export default app;

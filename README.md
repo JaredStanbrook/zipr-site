@@ -76,19 +76,21 @@ the same list as a comment over the data it governs.
 
 ## What is here
 
-| Path              |                                                                      |
-| ----------------- | -------------------------------------------------------------------- |
-| `/`               | The argument, top to bottom, ending at the commercial line           |
-| `/features`       | Five moments where an idea travels or dies, and the twelve verbs     |
-| `/downloads`      | Installers, served from R2 through the worker, with checksums        |
-| `/pricing`        | Free, Hosted and Self-hosted, the full comparison, and running costs |
-| `/security`       | The short answers a security review wants                            |
-| `/contact`        | Four `mailto:` routes, each with a subject already written           |
-| `/report`         | Bug reports, straight into D1. The site is the tracker               |
-| `/admin`          | Where signing in lands you: what is published, and where to go       |
-| `/admin/releases` | Create a release, upload installers, publish                         |
-| `/admin/issues`   | The bug tracker — triage, reply, close                               |
-| `/admin/logs`     | The authentication audit trail                                       |
+| Path                      |                                                                      |
+| ------------------------- | -------------------------------------------------------------------- |
+| `/`                       | The argument, top to bottom, ending at the commercial line           |
+| `/features`               | Five moments where an idea travels or dies, and the twelve verbs     |
+| `/downloads`              | Installers, served from R2 through the worker, with checksums        |
+| `/downloads/experimental` | Builds from development, apart from the stable page, out of search   |
+| `/pricing`                | Free, Hosted and Self-hosted, the full comparison, and running costs |
+| `/security`               | The short answers a security review wants                            |
+| `/contact`                | Four `mailto:` routes, each with a subject already written           |
+| `/report`                 | Bug reports, straight into D1. The site is the tracker               |
+| `/admin`                  | Where signing in lands you: what is published, and where to go       |
+| `/admin/releases`         | Create a release, upload installers, publish                         |
+| `/admin/issues`           | The bug tracker — triage, reply, close                               |
+| `/admin/logs`             | The authentication audit trail                                       |
+| `/api/releases`           | The client's release pipeline: experimental builds only, by token    |
 
 ## Accounts
 
@@ -124,7 +126,8 @@ Those resource ids are not secrets — they are useless without an API token for
 the account — which is why they live in version control rather than in a
 variable.
 
-Three things are left, all in the Cloudflare dashboard:
+Three things are left, all in the Cloudflare dashboard, and a fourth once
+there is a pipeline to publish experimental builds:
 
 1. **`JWT_SECRET`**, under **Settings → Variables and Secrets**, type
    **Secret**. It signs every session cookie. It is deliberately not in
@@ -138,31 +141,80 @@ Three things are left, all in the Cloudflare dashboard:
    account is granted `admin` on sign-up — and both the bootstrap and the page
    close behind you (see [Accounts](#accounts)). After that, sign in at
    `/admin`.
+4. **`RELEASE_TOKEN`**, a **Secret** like `JWT_SECRET`: the token the
+   client's release pipeline uploads experimental builds with
+   (`openssl rand -base64 48`). The same value goes into the client
+   repository as the Actions secret `ZIPR_RELEASE_TOKEN`. Unset, the release
+   API refuses everything; rotating it is setting a new value in both places.
 
 D1 migrations are forward-only, so a destructive change needs a forward fix
 rather than a rollback. `docs/deploy.md` covers failures and rollback.
 
 ## Publishing a release
 
+There are two channels, and they never share a page.
+
+- **Stable** is what `/downloads` leads with. It is only ever made by a person,
+  here, at `/admin/releases`.
+- **Experimental** is a build off a branch, made by the client's release
+  pipeline and shown only at `/downloads/experimental` — with what a person
+  should know first (unfinished, no upgrade path, unsigned, no auto-update)
+  above the buttons, and the page kept out of search. `/downloads` mentions
+  the newest one in a single line, and never offers its files.
+
+Any channel value other than `stable` is treated as experimental, so a build
+on a channel this code does not know lands on the page that warns about it.
+
+### Stable, by hand
+
 The downloads page renders whatever the database holds, and shows an honest
 "nothing published yet" state when that is nothing.
 
 1. **Create** the release at `/admin/releases` — version and channel. It starts
    as a draft that no visitor can see.
-2. **Upload** an installer per platform. The worker checksums the bytes as they
-   arrive and stores the file in R2; the hash shown on the downloads page is
-   the one it computed, never one supplied with the upload.
+2. **Upload** the installers. The worker checksums the bytes as they arrive and
+   stores the file in R2; the hash shown on the downloads page is the one it
+   computed, never one supplied with the upload. A platform can have several
+   files — Linux has an AppImage, a `.deb` and an `.rpm` — and the card lists
+   each with its own size and checksum; a Mac build says which processor it is
+   for.
 3. **Publish.** Publishing is refused while a release has no installers, since
    that would offer visitors a version number and no button.
+
+### Experimental, by the pipeline
+
+The client repository's `Experimental release` workflow (or
+`pnpm release:experimental` on any build machine) talks to `/api/releases`
+with the `RELEASE_TOKEN` bearer token:
+
+| Request                                       | Does                                              |
+| --------------------------------------------- | ------------------------------------------------- |
+| `PUT /api/releases/:version`                  | Creates the draft, or finds it (idempotent)       |
+| `PUT /api/releases/:version/assets/:filename` | One installer as the raw body, `?platform=&arch=` |
+| `POST /api/releases/:version/publish`         | Makes it visible; refused with no installers      |
+| `GET /api/releases/:version`                  | What the site holds                               |
+
+The token is narrower than an admin on purpose. It creates only experimental
+releases, and only under a pre-release version (`0.2.0-experimental.14`) — the
+version column is unique, so an experimental `0.2.0` would leave the real one
+nowhere to go. It cannot see, change or publish a stable release, cannot change
+a published build, and cannot delete anything. Uploading a file again to a
+draft replaces it, row and object together, so a re-run of a failed job is
+safe.
+
+Uploads are streamed: hashed with a `DigestStream` and written to R2 through a
+`FixedLengthStream`, never held whole, because an AppImage alone is most of a
+Worker's 128 MB. The admin form above still reads the file into memory, which
+is fine for an `.exe` and not for an AppImage — upload those through the API.
+A single request body is capped by Cloudflare's plan (100 MB on Free and Pro);
+today's largest file, the AppImage, is about 92 MB.
+
+To take an experimental build down, delete or unpublish it at
+`/admin/releases` — that is a person's act too.
 
 Installers are streamed back through the worker rather than served from a
 public bucket, so downloads can be counted, a draft cannot be fetched by
 guessing an id, and the storage layout stays private.
-
-Windows and macOS are the platforms the client currently bundles. Linux is
-listed and marked "build from source", because the client's Tauri config names
-only `nsis`, `app` and `dmg` — an Ubuntu runner would compile the binary and
-have nothing to upload.
 
 ## Where the content lives
 

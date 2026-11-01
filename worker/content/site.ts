@@ -66,10 +66,65 @@ export const PLATFORM_INFO = [
     id: "linux" as const,
     name: "Linux",
     icon: "terminal",
-    requirement: "Not yet — tell us if you want it",
-    format: "Coming later",
-    available: false,
+    requirement: "64-bit, with a desktop such as GNOME or KDE Plasma",
+    format: "AppImage, .deb or .rpm",
+    available: true,
     uaMatch: /linux|x11|ubuntu/i,
+  },
+];
+
+/**
+ * What each installer file is, by extension — a platform can have several
+ * (Linux has three), and the card has to say which is which. Listed in the
+ * order a card offers them: the one that runs anywhere first.
+ */
+export const FILE_FORMATS = [
+  { extension: "exe", label: "Installer (.exe)" },
+  { extension: "msi", label: "Installer (.msi)" },
+  { extension: "dmg", label: "Disk image (.dmg)" },
+  { extension: "appimage", label: "AppImage — any distribution" },
+  { extension: "deb", label: "Debian and Ubuntu (.deb)" },
+  { extension: "rpm", label: "Fedora and openSUSE (.rpm)" },
+];
+
+/**
+ * Which processor a build is for, where it matters to the person choosing:
+ * an Apple-silicon disk image will not open on an Intel Mac, and the card
+ * must not let that be a surprise.
+ */
+export const ARCH_LABELS: Record<string, string> = {
+  x64: "64-bit Intel or AMD",
+  arm64: "ARM",
+  universal: "Apple silicon and Intel",
+};
+export const MAC_ARCH_LABELS: Record<string, string> = {
+  x64: "Intel",
+  arm64: "Apple silicon",
+  universal: "Apple silicon and Intel",
+};
+
+/**
+ * Shown on /downloads/experimental before anything else. Each one is true of
+ * every experimental build, and is the thing a person would be annoyed to
+ * learn afterwards. The second is the client's own rule: nothing has shipped,
+ * so nothing it stores is migrated between builds yet.
+ */
+export const EXPERIMENTAL_NOTES = [
+  {
+    icon: "flask-conical",
+    text: "Built straight from development, as it happens. Expect unfinished corners, and things that change or break from one build to the next.",
+  },
+  {
+    icon: "archive-restore",
+    text: "No upgrade path yet. A newer build may not read what an older one saved, so export anything you want to keep before installing another.",
+  },
+  {
+    icon: "shield-alert",
+    text: "Unsigned, like every Zipr installer for now: Windows and macOS will warn you. Check the SHA-256 beside each file.",
+  },
+  {
+    icon: "refresh-cw-off",
+    text: "Nothing updates itself. When you want the next build, come back here for it.",
   },
 ];
 

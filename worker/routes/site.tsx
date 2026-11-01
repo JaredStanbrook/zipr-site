@@ -1,11 +1,11 @@
 import { Hono } from "hono";
-import { and, desc, eq, inArray, isNotNull, isNull, sql } from "drizzle-orm";
+import { and, desc, eq, inArray, isNotNull, isNull, ne, sql } from "drizzle-orm";
 import { zValidator } from "@hono/zod-validator";
 import { z } from "zod";
 
 import type { AppEnv } from "@server/types";
 import { release, releaseAsset } from "@server/schema/release.schema";
-import type { Platform, ReleaseWithAssets } from "@server/schema/release.schema";
+import type { Channel, Platform, ReleaseWithAssets } from "@server/schema/release.schema";
 import { issue, issueFormSchema } from "@server/schema/issue.schema";
 import { PLATFORM_INFO } from "@server/content/site";
 import { PRICING_FAQ, TIERS } from "@server/content/pricing";
@@ -23,7 +23,7 @@ import { PricingPage } from "@views/pages/Pricing";
 import { SecurityPage, REVIEW_FAQ } from "@views/pages/Security";
 import { PrivacyPage } from "@views/pages/Privacy";
 import { LicencePage } from "@views/pages/Licence";
-import { DownloadsPage } from "@views/pages/Downloads";
+import { DownloadsPage, ExperimentalDownloadsPage } from "@views/pages/Downloads";
 import { ContactPage } from "@views/pages/Contact";
 import { ReportPage, ReportForm, ReportSuccess } from "@views/pages/Report";
 import { DesignSystemPage } from "@views/pages/DesignSystem";
@@ -183,7 +183,12 @@ const detectPlatform = (userAgent: string | undefined): Platform | null => {
 };
 
 /**
- * Published releases, newest first, with their installers attached.
+ * Published releases on one channel, newest first, with their installers
+ * attached.
+ *
+ * `experimental` means anything that is not `stable`: the column is plain
+ * text, and a build on a channel this code does not know must land on the
+ * page that warns about it, never on the one that offers it as Zipr.
  *
  * Two queries rather than a join: D1 charges per row read, a join would repeat
  * the release columns once per asset, and stitching two small result sets in
@@ -191,12 +196,19 @@ const detectPlatform = (userAgent: string | undefined): Platform | null => {
  */
 const listPublishedReleases = async (
   db: AppEnv["Variables"]["db"],
+  channel: Channel,
   limit: number,
 ): Promise<ReleaseWithAssets[]> => {
   const releases = await db
     .select()
     .from(release)
-    .where(and(isNotNull(release.publishedAt), isNull(release.deletedAt)))
+    .where(
+      and(
+        isNotNull(release.publishedAt),
+        isNull(release.deletedAt),
+        channel === "stable" ? eq(release.channel, "stable") : ne(release.channel, "stable"),
+      ),
+    )
     .orderBy(desc(release.publishedAt))
     .limit(limit);
 
@@ -220,13 +232,16 @@ const listPublishedReleases = async (
 
 siteRoute.get("/downloads", async (c) => {
   // One more than we show, so "is there an archive" needs no second query.
-  const releases = await listPublishedReleases(c.var.db, 11);
+  const releases = await listPublishedReleases(c.var.db, "stable", 11);
   const [latest, ...previous] = releases;
+  // Only for the pointer to its page: an experimental build never leads here.
+  const [experimental] = await listPublishedReleases(c.var.db, "experimental", 1);
 
   return c.render(
     <DownloadsPage
       latest={latest ?? null}
       previous={previous}
+      experimental={experimental ?? null}
       detected={detectPlatform(c.req.header("User-Agent"))}
       app={c.var.app}
     />,
@@ -234,6 +249,31 @@ siteRoute.get("/downloads", async (c) => {
       title: "Download for Windows and macOS",
       description:
         "Download the free Zipr desktop app for Windows 10+ or macOS 12+. No account needed, and no network requests until you connect it to a team server.",
+    },
+  );
+});
+
+/**
+ * Builds from development, apart from the stable page. Registered before
+ * `/downloads/:assetId` so it is never read as an asset id, and kept out of
+ * search results: nobody should arrive at an experimental build looking for
+ * Zipr.
+ */
+siteRoute.get("/downloads/experimental", async (c) => {
+  const [latest, ...previous] = await listPublishedReleases(c.var.db, "experimental", 21);
+
+  return c.render(
+    <ExperimentalDownloadsPage
+      latest={latest ?? null}
+      previous={previous}
+      detected={detectPlatform(c.req.header("User-Agent"))}
+      app={c.var.app}
+    />,
+    {
+      title: "Experimental builds of Zipr",
+      description:
+        "Unfinished builds of the Zipr desktop app, straight from development, for trying what is next and reporting what broke. Not the stable version.",
+      noindex: true,
     },
   );
 });

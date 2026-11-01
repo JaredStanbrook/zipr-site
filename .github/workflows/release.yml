@@ -1,37 +1,31 @@
 name: Release
 
-# Tags a GitHub release. Deployment is separate — Cloudflare's Git integration
+# Tags a GitHub release for the site, with notes generated from the commits
+# since the last one. Deployment is separate — Cloudflare's Git integration
 # deploys on push, not on tag.
-
+#
+# Run by hand only, on a self-hosted runner: push the tag, then Actions →
+# Release → Run workflow, choosing the tag under "Use workflow from". It runs
+# CI first and refuses anything that is not a `v*` tag.
 on:
-  push:
-    tags:
-      - "v*"
+  workflow_dispatch:
 
 jobs:
   build-and-release:
-    runs-on: ubuntu-latest
+    runs-on: ${{ fromJSON(vars.SITE_RUNNER || '["self-hosted","linux"]') }}
+    permissions:
+      contents: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - name: A tag, not a branch
+        if: ${{ !startsWith(github.ref, 'refs/tags/v') }}
+        run: |
+          echo "::error::Run this from a v* tag (Use workflow from → Tags), not from ${GITHUB_REF}."
+          exit 1
 
-      - name: Setup Node
-        uses: actions/setup-node@v4
-        with:
-          node-version-file: .node-version
-          cache: npm
+      - uses: actions/checkout@v4
 
-      - name: Install
-        run: npm ci
-
-      - name: Lint
-        run: npm run lint
-
-      - name: Typecheck and build
-        run: npm run build
-
-      - name: Test
-        run: npm run test
+      - name: CI
+        run: scripts/ci.sh
 
       - name: Create Release
         uses: softprops/action-gh-release@v2
