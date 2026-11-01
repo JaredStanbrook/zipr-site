@@ -21,6 +21,7 @@ import {
   Badge,
   LinkButton,
   CtaBand,
+  Disclosure,
   IconTile,
   TableFrame,
 } from "@views/components/Ui";
@@ -28,19 +29,15 @@ import {
 type Asset = ReleaseWithAssets["assets"][number];
 
 interface DownloadsProps {
-  /** The newest **stable** release. Experimental builds never lead here. */
+  /** The newest **stable** release: the one the page leads with. */
   latest: ReleaseWithAssets | null;
   previous: ReleaseWithAssets[];
-  /** The newest experimental build, if any, for the pointer to its page. */
-  experimental: ReleaseWithAssets | null;
+  /**
+   * Published experimental builds, newest first. Shown in their own section
+   * further down, never in the cards at the top.
+   */
+  experimental: ReleaseWithAssets[];
   /** Guessed from the user-agent so the right card leads. Never trusted. */
-  detected: Platform | null;
-  app: AppConfig;
-}
-
-interface ExperimentalProps {
-  latest: ReleaseWithAssets | null;
-  previous: ReleaseWithAssets[];
   detected: Platform | null;
   app: AppConfig;
 }
@@ -250,38 +247,309 @@ const NoReleases: FC = () => (
 );
 
 /**
- * The way from the stable page to the experimental one: only when there is an
- * experimental build to go to, and worded so nobody mistakes it for the
- * version they should install.
+ * Which build to have, as a switch under the heading — the way a distribution
+ * offers its long-term release and its latest one side by side. Only when
+ * there is an experimental build to switch to, and stable is the one already
+ * chosen: the other is a jump to its section, not a second page.
  */
-const ExperimentalPointer: FC<{ build: ReleaseWithAssets; app: AppConfig }> = ({ build, app }) => (
-  <Card class="mt-10 flex flex-col gap-4 p-6 sm:flex-row sm:items-center sm:justify-between">
-    <div class="flex items-start gap-4">
-      <IconTile icon="flask-conical" />
-      <div>
-        <p class="font-semibold">Want to try what’s next?</p>
-        <p class="mt-1 text-sm leading-relaxed text-muted-foreground text-pretty">
-          Experimental build{" "}
-          <span class="font-mono tabular" translate="no">
-            {build.version}
-          </span>{" "}
-          is up
-          {build.publishedAt ? (
-            <>
-              {" "}
-              since <span translate="no">{formatDateShort(build.publishedAt, app.locale)}</span>
-            </>
-          ) : null}
-          . It’s unfinished, and not for work you can’t afford to lose.
-        </p>
-      </div>
-    </div>
-    <LinkButton href="/downloads/experimental" variant="outline" class="shrink-0">
-      See experimental builds
-      <i data-lucide="chevron-right" class="h-4 w-4" aria-hidden="true"></i>
-    </LinkButton>
-  </Card>
+const ChannelSwitch: FC<{ stable: ReleaseWithAssets | null; experimental: ReleaseWithAssets }> = ({
+  stable,
+  experimental,
+}) => (
+  <nav
+    aria-label="Which build"
+    class="mx-auto mb-8 grid w-full max-w-md grid-cols-2 gap-1 rounded-[1.25rem] bg-muted p-1 text-sm shadow-inset"
+  >
+    <span
+      aria-current="true"
+      class="flex min-w-0 flex-col items-center rounded-2xl bg-surface px-3 py-2 shadow-sm"
+    >
+      <span class="inline-flex items-center gap-2 font-semibold">
+        <i data-lucide="circle-check" class="h-3.5 w-3.5 text-success" aria-hidden="true"></i>
+        Stable
+      </span>
+      {stable ? (
+        <span
+          class="max-w-full truncate font-mono text-xs text-muted-foreground tabular"
+          translate="no"
+        >
+          {stable.version}
+        </span>
+      ) : null}
+    </span>
+    <a
+      href="#experimental"
+      class="flex min-w-0 flex-col items-center rounded-2xl px-3 py-2 text-muted-foreground transition hover:bg-surface/60 hover:text-foreground"
+    >
+      <span class="inline-flex items-center gap-2 font-medium">
+        <i data-lucide="flask-conical" class="h-3.5 w-3.5 text-warning" aria-hidden="true"></i>
+        Experimental
+      </span>
+      <span class="max-w-full truncate font-mono text-xs tabular" translate="no">
+        {experimental.version}
+      </span>
+    </a>
+  </nav>
 );
+
+/**
+ * An experimental build's files as a table — platform, file, size, checksum,
+ * a button — the way a project that ships many files lists them. Denser than
+ * the stable cards on purpose: someone here knows what they want, and the
+ * page should not make an experimental build look like the main event.
+ */
+const FileTable: FC<{ build: ReleaseWithAssets }> = ({ build }) => (
+  <>
+    {/* A table from tablet width up; a phone gets the same files as a stack
+        of rows instead, because five columns do not fit in 390 pixels and a
+        table that scrolls sideways hides the button. */}
+    <div class="hidden md:block">
+      <TableFrame>
+        <table class="w-full min-w-[44rem] border-collapse text-left text-sm">
+          <thead>
+            <tr class="border-b border-border bg-muted/60">
+              <th scope="col" class="px-5 py-3 font-semibold">
+                Platform
+              </th>
+              <th scope="col" class="px-5 py-3 font-semibold">
+                File
+              </th>
+              <th scope="col" class="px-5 py-3 font-semibold">
+                Size
+              </th>
+              <th scope="col" class="px-5 py-3 font-semibold">
+                SHA-256
+              </th>
+              <th scope="col" class="px-5 py-3">
+                <span class="sr-only">Download</span>
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            {PLATFORM_INFO.flatMap((info) =>
+              assetsFor(build.assets, info.id).map((asset, index) => {
+                const { format, arch } = describeFile(asset);
+                return (
+                  <tr class="border-b border-border align-top last:border-0">
+                    {index === 0 ? (
+                      <th scope="row" class="px-5 py-3.5 font-semibold">
+                        <span class="inline-flex items-center gap-2">
+                          <i
+                            data-lucide={info.icon}
+                            class="h-4 w-4 text-muted-foreground"
+                            aria-hidden="true"
+                          ></i>
+                          {info.name}
+                        </span>
+                      </th>
+                    ) : (
+                      <td class="px-5 py-3.5">
+                        <span class="sr-only">{info.name}</span>
+                      </td>
+                    )}
+                    <td class="px-5 py-3.5">
+                      <div class="font-medium">{format}</div>
+                      {arch ? <div class="text-xs text-muted-foreground">{arch}</div> : null}
+                      <div class="mt-0.5 font-mono text-xs text-muted-foreground" translate="no">
+                        {asset.filename}
+                      </div>
+                    </td>
+                    <td
+                      class="whitespace-nowrap px-5 py-3.5 tabular text-muted-foreground"
+                      translate="no"
+                    >
+                      {formatBytes(asset.sizeBytes)}
+                    </td>
+                    <td class="px-5 py-3.5">
+                      {asset.sha256 ? (
+                        <code
+                          class="block max-w-[16rem] wrap-anywhere font-mono text-xs leading-relaxed text-muted-foreground"
+                          translate="no"
+                        >
+                          {asset.sha256}
+                        </code>
+                      ) : null}
+                    </td>
+                    <td class="px-5 py-3.5 text-right">
+                      <LinkButton href={`/downloads/${asset.id}`} variant="outline">
+                        <i data-lucide="download" class="h-4 w-4" aria-hidden="true"></i>
+                        Download
+                        {/* Which file, for a screen reader: its own name, which says
+                          platform, version and format, and needs no translating. */}
+                        <span class="sr-only" translate="no">
+                          {" "}
+                          {asset.filename}
+                        </span>
+                      </LinkButton>
+                    </td>
+                  </tr>
+                );
+              }),
+            )}
+          </tbody>
+        </table>
+      </TableFrame>
+    </div>
+    <ul class="grid gap-3 md:hidden">
+      {PLATFORM_INFO.flatMap((info) =>
+        assetsFor(build.assets, info.id).map((asset) => {
+          const { format, arch } = describeFile(asset);
+          return (
+            <li>
+              <Card class="p-4">
+                {/* Name and format as separate elements, so each is translated
+                    once rather than as a sentence per file. */}
+                <div class="flex flex-wrap items-center gap-x-2 text-sm">
+                  <i
+                    data-lucide={info.icon}
+                    class="h-4 w-4 text-muted-foreground"
+                    aria-hidden="true"
+                  ></i>
+                  <div class="font-semibold">{info.name}</div>
+                  <div class="text-muted-foreground">{format}</div>
+                </div>
+                {arch ? <div class="mt-1 text-xs text-muted-foreground">{arch}</div> : null}
+                <div class="mt-2 break-all font-mono text-xs text-muted-foreground" translate="no">
+                  {asset.filename}
+                </div>
+                <dl class="mt-3 space-y-1 text-xs">
+                  <div class="flex justify-between gap-3">
+                    <dt class="text-muted-foreground">Size</dt>
+                    <dd class="font-medium tabular" translate="no">
+                      {formatBytes(asset.sizeBytes)}
+                    </dd>
+                  </div>
+                  {asset.sha256 ? (
+                    <div>
+                      <dt class="text-muted-foreground">SHA-256</dt>
+                      <dd
+                        class="mt-0.5 wrap-anywhere font-mono leading-relaxed text-muted-foreground"
+                        translate="no"
+                      >
+                        {asset.sha256}
+                      </dd>
+                    </div>
+                  ) : null}
+                </dl>
+                <LinkButton href={`/downloads/${asset.id}`} variant="outline" class="mt-3 w-full">
+                  <i data-lucide="download" class="h-4 w-4" aria-hidden="true"></i>
+                  Download
+                  <span class="sr-only" translate="no">
+                    {" "}
+                    {asset.filename}
+                  </span>
+                </LinkButton>
+              </Card>
+            </li>
+          );
+        }),
+      )}
+    </ul>
+  </>
+);
+
+/**
+ * Experimental builds, as a section of the downloads page rather than a page
+ * of their own. What a person should know before installing one comes before
+ * the files, not after; earlier builds fold away; and when there is none, the
+ * section says so in a line rather than disappearing, so a link to
+ * `#experimental` always lands somewhere.
+ */
+const ExperimentalSection: FC<{ builds: ReleaseWithAssets[]; app: AppConfig }> = ({
+  builds,
+  app,
+}) => {
+  const [latest, ...earlier] = builds;
+  return (
+    <Section id="experimental" tone="muted">
+      <Container size="wide">
+        <SectionHeading
+          eyebrow="Experimental builds"
+          title="Try what’s next"
+          lede="Builds straight from development, put up as they’re made. They’re for trying things early and telling us what broke — the stable version at the top of this page is the one to install."
+        />
+
+        <ul class="mb-8 grid gap-x-8 gap-y-4 sm:grid-cols-2">
+          {EXPERIMENTAL_NOTES.map((note) => (
+            <li class="flex items-start gap-3">
+              <i
+                data-lucide={note.icon}
+                class="mt-0.5 h-5 w-5 shrink-0 text-warning"
+                aria-hidden="true"
+              ></i>
+              <p class="text-sm leading-relaxed text-muted-foreground text-pretty">{note.text}</p>
+            </li>
+          ))}
+        </ul>
+
+        {latest ? (
+          <>
+            <div class="mb-4 flex flex-wrap items-center gap-3">
+              <Badge tone="warning">
+                <i data-lucide="flask-conical" class="h-3 w-3" aria-hidden="true"></i>
+                Experimental{" "}
+                <span class="tabular" translate="no">
+                  {latest.version}
+                </span>
+              </Badge>
+              {latest.publishedAt ? (
+                <span class="text-sm text-muted-foreground">
+                  Built{" "}
+                  <span translate="no">{formatDateShort(latest.publishedAt, app.locale)}</span>
+                </span>
+              ) : null}
+              {/* Written by the pipeline or whoever published it, and not the
+                  site's own copy: left as written. */}
+              {latest.notes ? (
+                <span class="text-sm text-muted-foreground" translate="no">
+                  {latest.notes}
+                </span>
+              ) : null}
+            </div>
+
+            <FileTable build={latest} />
+
+            {earlier.length > 0 ? (
+              <div class="mt-8">
+                <Disclosure question="Earlier experimental builds">
+                  <p class="mb-4 text-sm">
+                    Kept so a problem can be traced to the build that brought it. Install the newest
+                    unless you’re doing exactly that.
+                  </p>
+                  <ReleaseArchive releases={earlier} app={app} />
+                </Disclosure>
+              </div>
+            ) : null}
+
+            <p class="mt-8 text-sm text-muted-foreground text-pretty">
+              Found something broken? That’s what these builds are for.{" "}
+              <a
+                href="/contact?topic=support"
+                class="font-medium text-primary underline underline-offset-4"
+              >
+                Tell us
+              </a>{" "}
+              which build, which platform, and what you did. Settings in the app can save a
+              diagnostics file that says exactly which build you’re running.
+            </p>
+          </>
+        ) : (
+          <Card class="flex items-center gap-4 p-6">
+            <i
+              data-lucide="flask-conical"
+              class="h-6 w-6 text-muted-foreground"
+              aria-hidden="true"
+            ></i>
+            <p class="text-sm leading-relaxed text-muted-foreground text-pretty">
+              No experimental build right now. The stable version at the top of this page is the one
+              to install.
+            </p>
+          </Card>
+        )}
+      </Container>
+    </Section>
+  );
+};
 
 export const DownloadsPage: FC<DownloadsProps> = ({
   latest,
@@ -300,6 +568,8 @@ export const DownloadsPage: FC<DownloadsProps> = ({
           title="Install Zipr"
           lede="Free, no account, about a minute. Everything you make stays on your machine until you decide otherwise."
         />
+
+        {experimental[0] ? <ChannelSwitch stable={latest} experimental={experimental[0]} /> : null}
 
         {latest ? (
           <>
@@ -347,8 +617,6 @@ export const DownloadsPage: FC<DownloadsProps> = ({
         ) : (
           <NoReleases />
         )}
-
-        {experimental ? <ExperimentalPointer build={experimental} app={app} /> : null}
       </Container>
     </Section>
 
@@ -395,7 +663,7 @@ export const DownloadsPage: FC<DownloadsProps> = ({
 
     {/* ================= OLDER ================= */}
     {previous.length > 0 ? (
-      <Section tone={latest?.notes ? "muted" : "default"}>
+      <Section>
         <Container>
           <SectionHeading
             eyebrow="Archive"
@@ -408,157 +676,14 @@ export const DownloadsPage: FC<DownloadsProps> = ({
       </Section>
     ) : null}
 
+    {/* ================= EXPERIMENTAL ================= */}
+    <ExperimentalSection builds={experimental} app={app} />
+
     <CtaBand
       title="That’s it. Nothing else to do."
       body="No sign-up, no licence key, no clock counting down. Come back the day your team wants what you’ve built."
       primary={{ href: "/features", label: "What it can do" }}
       secondary={{ href: "/pricing", label: "What a team costs" }}
-    />
-  </Page>
-);
-
-/**
- * /downloads/experimental: builds from development, kept apart from the
- * stable page on purpose.
- *
- * What a person needs to know before installing one comes before the button,
- * not after it — that it is unfinished, that nothing carries over between
- * builds yet, that it is unsigned, and that nothing updates it. The page is
- * kept out of search results: nobody should land on an experimental build
- * looking for Zipr.
- */
-export const ExperimentalDownloadsPage: FC<ExperimentalProps> = ({
-  latest,
-  previous,
-  detected,
-  app,
-}) => (
-  <Page>
-    <Section class="pt-12 sm:pt-20">
-      <Container size="wide">
-        <SectionHeading
-          as="h1"
-          align="center"
-          eyebrow="Experimental builds"
-          title="Try what’s next"
-          lede="Builds straight from development, put up as they’re made. They’re for trying things early and telling us what broke — the stable version is on the main downloads page."
-        />
-
-        <div class="mb-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
-          {EXPERIMENTAL_NOTES.map((note) => (
-            <Card class="p-5">
-              <i data-lucide={note.icon} class="h-5 w-5 text-warning" aria-hidden="true"></i>
-              <p class="mt-3 text-sm leading-relaxed text-muted-foreground text-pretty">
-                {note.text}
-              </p>
-            </Card>
-          ))}
-        </div>
-
-        {latest ? (
-          <>
-            <div class="mb-8 flex flex-wrap items-center justify-center gap-3">
-              <Badge tone="warning">
-                <i data-lucide="flask-conical" class="h-3 w-3" aria-hidden="true"></i>
-                Experimental{" "}
-                <span class="tabular" translate="no">
-                  {latest.version}
-                </span>
-              </Badge>
-              {latest.publishedAt ? (
-                <span class="text-sm text-muted-foreground">
-                  Built{" "}
-                  <span translate="no">{formatDateShort(latest.publishedAt, app.locale)}</span>
-                </span>
-              ) : null}
-            </div>
-
-            <div class="grid gap-6 md:grid-cols-3">
-              {PLATFORM_INFO.map((info) => (
-                <PlatformCard
-                  info={info}
-                  assets={assetsFor(latest.assets, info.id)}
-                  highlighted={detected === info.id}
-                />
-              ))}
-            </div>
-
-            {LEGAL.licenceUrl ? (
-              <p class="mt-6 text-center text-sm text-muted-foreground text-pretty">
-                Zipr is licensed to you under the{" "}
-                <a
-                  href={LEGAL.licenceUrl}
-                  class="font-medium text-primary underline underline-offset-4"
-                >
-                  Zipr licence
-                </a>
-                . By downloading or installing it, you agree to its terms.
-              </p>
-            ) : null}
-          </>
-        ) : (
-          <Card class="px-6 py-14 text-center">
-            <span class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-muted text-muted-foreground shadow-inset">
-              <i data-lucide="flask-conical" class="h-7 w-7" aria-hidden="true"></i>
-            </span>
-            <h2 class="mt-5 text-3xl">No experimental build right now</h2>
-            <p class="mx-auto mt-3 max-w-lg leading-relaxed text-muted-foreground text-pretty">
-              There’s nothing between releases up at the moment. The stable version is the one to
-              install.
-            </p>
-            <div class="mt-6 flex justify-center">
-              <LinkButton href="/downloads" size="lg">
-                Go to downloads
-              </LinkButton>
-            </div>
-          </Card>
-        )}
-      </Container>
-    </Section>
-
-    {latest?.notes ? (
-      <Section tone="muted">
-        <Container size="prose">
-          <SectionHeading
-            eyebrow="What’s in it"
-            title={
-              <>
-                Notes for <span translate="no">{latest.version}</span>
-              </>
-            }
-          />
-          <Card class="p-7">
-            {/* Written by the pipeline or whoever published it, and not the
-                site's own copy: left as written. */}
-            <div
-              class="whitespace-pre-wrap text-sm leading-relaxed text-muted-foreground"
-              translate="no"
-            >
-              {latest.notes}
-            </div>
-          </Card>
-        </Container>
-      </Section>
-    ) : null}
-
-    {previous.length > 0 ? (
-      <Section tone={latest?.notes ? "default" : "muted"}>
-        <Container>
-          <SectionHeading
-            eyebrow="Archive"
-            title="Earlier experimental builds"
-            lede="Kept so a problem can be traced to the build that brought it. Install the newest unless you’re doing exactly that."
-          />
-          <ReleaseArchive releases={previous} app={app} />
-        </Container>
-      </Section>
-    ) : null}
-
-    <CtaBand
-      title="Found something broken?"
-      body="That’s what these builds are for. Tell us which build, which platform, and what you did. Settings in the app can save a diagnostics file that says exactly which build you’re running."
-      primary={{ href: "/contact?topic=support", label: "Report a problem" }}
-      secondary={{ href: "/downloads", label: "Back to the stable version" }}
     />
   </Page>
 );

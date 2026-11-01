@@ -30,7 +30,8 @@ export type Architecture = (typeof ARCHITECTURES)[number];
  * `stable` is what /downloads leads with, and is only ever created by a
  * person at /admin/releases. `experimental` is everything else: a build off a
  * branch, unsigned, made by the release pipeline through /api/releases, and
- * shown only at /downloads/experimental — never as *the* version of Zipr.
+ * shown only in the experimental section of /downloads — never as *the*
+ * version of Zipr.
  * The column is plain text, so any value that is not `stable` is treated as
  * experimental wherever the site reads it.
  */

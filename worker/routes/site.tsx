@@ -23,7 +23,7 @@ import { PricingPage } from "@views/pages/Pricing";
 import { SecurityPage, REVIEW_FAQ } from "@views/pages/Security";
 import { PrivacyPage } from "@views/pages/Privacy";
 import { LicencePage } from "@views/pages/Licence";
-import { DownloadsPage, ExperimentalDownloadsPage } from "@views/pages/Downloads";
+import { DownloadsPage } from "@views/pages/Downloads";
 import { ContactPage } from "@views/pages/Contact";
 import { ReportPage, ReportForm, ReportSuccess } from "@views/pages/Report";
 import { DesignSystemPage } from "@views/pages/DesignSystem";
@@ -234,14 +234,14 @@ siteRoute.get("/downloads", async (c) => {
   // One more than we show, so "is there an archive" needs no second query.
   const releases = await listPublishedReleases(c.var.db, "stable", 11);
   const [latest, ...previous] = releases;
-  // Only for the pointer to its page: an experimental build never leads here.
-  const [experimental] = await listPublishedReleases(c.var.db, "experimental", 1);
+  // Their own section further down the same page, never the cards at the top.
+  const experimental = await listPublishedReleases(c.var.db, "experimental", 21);
 
   return c.render(
     <DownloadsPage
       latest={latest ?? null}
       previous={previous}
-      experimental={experimental ?? null}
+      experimental={experimental}
       detected={detectPlatform(c.req.header("User-Agent"))}
       app={c.var.app}
     />,
@@ -254,29 +254,11 @@ siteRoute.get("/downloads", async (c) => {
 });
 
 /**
- * Builds from development, apart from the stable page. Registered before
- * `/downloads/:assetId` so it is never read as an asset id, and kept out of
- * search results: nobody should arrive at an experimental build looking for
- * Zipr.
+ * Experimental builds had a page of their own before they became a section
+ * of /downloads. Kept as a permanent redirect so a link to it still lands on
+ * them. Registered before `/downloads/:assetId`, which would read it as an id.
  */
-siteRoute.get("/downloads/experimental", async (c) => {
-  const [latest, ...previous] = await listPublishedReleases(c.var.db, "experimental", 21);
-
-  return c.render(
-    <ExperimentalDownloadsPage
-      latest={latest ?? null}
-      previous={previous}
-      detected={detectPlatform(c.req.header("User-Agent"))}
-      app={c.var.app}
-    />,
-    {
-      title: "Experimental builds of Zipr",
-      description:
-        "Unfinished builds of the Zipr desktop app, straight from development, for trying what is next and reporting what broke. Not the stable version.",
-      noindex: true,
-    },
-  );
-});
+siteRoute.get("/downloads/experimental", (c) => c.redirect("/downloads#experimental", 301));
 
 /**
  * Hand over an installer.
