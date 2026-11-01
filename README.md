@@ -76,21 +76,20 @@ the same list as a comment over the data it governs.
 
 ## What is here
 
-| Path                      |                                                                      |
-| ------------------------- | -------------------------------------------------------------------- |
-| `/`                       | The argument, top to bottom, ending at the commercial line           |
-| `/features`               | Five moments where an idea travels or dies, and the twelve verbs     |
-| `/downloads`              | Installers, served from R2 through the worker, with checksums        |
-| `/downloads/experimental` | Builds from development, apart from the stable page, out of search   |
-| `/pricing`                | Free, Hosted and Self-hosted, the full comparison, and running costs |
-| `/security`               | The short answers a security review wants                            |
-| `/contact`                | Four `mailto:` routes, each with a subject already written           |
-| `/report`                 | Bug reports, straight into D1. The site is the tracker               |
-| `/admin`                  | Where signing in lands you: what is published, and where to go       |
-| `/admin/releases`         | Create a release, upload installers, publish                         |
-| `/admin/issues`           | The bug tracker — triage, reply, close                               |
-| `/admin/logs`             | The authentication audit trail                                       |
-| `/api/releases`           | The client's release pipeline: experimental builds only, by token    |
+| Path              |                                                                      |
+| ----------------- | -------------------------------------------------------------------- |
+| `/`               | The argument, top to bottom, ending at the commercial line           |
+| `/features`       | Five moments where an idea travels or dies, and the twelve verbs     |
+| `/downloads`      | Installers with checksums; stable first, experimental builds below   |
+| `/pricing`        | Free, Hosted and Self-hosted, the full comparison, and running costs |
+| `/security`       | The short answers a security review wants                            |
+| `/contact`        | Four `mailto:` routes, each with a subject already written           |
+| `/report`         | Bug reports, straight into D1. The site is the tracker               |
+| `/admin`          | Where signing in lands you: what is published, and where to go       |
+| `/admin/releases` | Create a release, upload installers, publish                         |
+| `/admin/issues`   | The bug tracker — triage, reply, close                               |
+| `/admin/logs`     | The authentication audit trail                                       |
+| `/api/releases`   | The client's release pipeline: experimental builds only, by token    |
 
 ## Accounts
 
@@ -152,18 +151,21 @@ rather than a rollback. `docs/deploy.md` covers failures and rollback.
 
 ## Publishing a release
 
-There are two channels, and they never share a page.
+There are two channels, on one page — the way a distribution offers its
+long-term release and its latest one.
 
-- **Stable** is what `/downloads` leads with. It is only ever made by a person,
-  here, at `/admin/releases`.
+- **Stable** is what `/downloads` leads with: the big platform cards at the
+  top. It is only ever made by a person, here, at `/admin/releases`.
 - **Experimental** is a build off a branch, made by the client's release
-  pipeline and shown only at `/downloads/experimental` — with what a person
-  should know first (unfinished, no upgrade path, unsigned, no auto-update)
-  above the buttons, and the page kept out of search. `/downloads` mentions
-  the newest one in a single line, and never offers its files.
+  pipeline. It has its own section further down (`/downloads#experimental`):
+  what a person should know first (unfinished, no upgrade path, unsigned, no
+  auto-update), then the newest build's files as a table, with earlier builds
+  folded away. A switch under the heading jumps there when there is one. Its
+  files are never in the cards at the top. `/downloads/experimental`, where
+  the section used to be a page of its own, redirects to it.
 
 Any channel value other than `stable` is treated as experimental, so a build
-on a channel this code does not know lands on the page that warns about it.
+on a channel this code does not know lands in the section that warns about it.
 
 ### Stable, by hand
 
