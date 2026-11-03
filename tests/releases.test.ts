@@ -260,7 +260,7 @@ describe("the download pages", () => {
     await publishExperimental();
 
     const { stable, experimental } = halves(await page("/downloads"));
-    // Stable leads, and the switch under the heading jumps to the section.
+    // Stable leads, and a link under it jumps to the section.
     expect(stable).toContain("0.1.0");
     expect(stable).toContain('href="/downloads/1"');
     expect(stable).toContain('href="#experimental"');
@@ -287,10 +287,9 @@ describe("the download pages", () => {
     expect(experimental).toContain("Fedora and openSUSE (.rpm)");
     // An Apple-silicon image says so, rather than failing on an Intel Mac.
     expect(experimental).toContain("Apple silicon");
-    expect(experimental).toContain(sha256(bytes("deb")));
-    expect(experimental).toContain("Built from abc1234");
-    // What to know first comes before the files.
-    expect(experimental.indexOf("No upgrade path yet")).toBeLessThan(
+    // Plain language, before the buttons: what these builds are and who
+    // should not pick one.
+    expect(experimental.indexOf("they may have bugs")).toBeLessThan(
       experimental.indexOf("AppImage (any distribution)"),
     );
   });
@@ -301,7 +300,7 @@ describe("the download pages", () => {
     expect(res.headers.get("location")).toBe("/downloads#experimental");
   });
 
-  it("says plainly when there is no experimental build, and offers no switch to one", async () => {
+  it("says plainly when there is no experimental build, and offers no link to one", async () => {
     await publishStable();
     // A draft does not count.
     await call("PUT", `/api/releases/${VERSION}`, { json: {} });

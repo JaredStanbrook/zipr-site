@@ -2,14 +2,7 @@ import type { FC } from "hono/jsx";
 
 import type { AppConfig } from "@server/config/app.config";
 import type { ReleaseWithAssets, Platform } from "@server/schema/release.schema";
-import {
-  PLATFORM_INFO,
-  INSTALL_NOTES,
-  FILE_FORMATS,
-  ARCH_LABELS,
-  MAC_ARCH_LABELS,
-  EXPERIMENTAL_NOTES,
-} from "@server/content/site";
+import { PLATFORM_INFO, FILE_FORMATS, ARCH_LABELS, MAC_ARCH_LABELS } from "@server/content/site";
 import { LEGAL } from "@server/content/legal";
 import { formatBytes, formatDateShort } from "@views/lib/utils";
 import {
@@ -21,7 +14,6 @@ import {
   Badge,
   LinkButton,
   CtaBand,
-  Disclosure,
   IconTile,
   TableFrame,
 } from "@views/components/Ui";
@@ -70,81 +62,59 @@ const describeFile = (asset: Asset) => {
 };
 
 /**
- * The download card for one platform.
+ * The download card for one platform: its name, what it runs on, and a
+ * button per file, each with one short line saying what the file is. Written
+ * for someone who just wants the app, so no checksums or file names here;
+ * those are in the "Earlier versions" table for anyone who wants them.
  *
- * The checksum is shown rather than hidden behind a "verify" link, because the
- * installers are unsigned: the hash is the only way a person can tell they got
- * what we published, and a verification step nobody can see is one nobody does.
- *
- * A platform can have more than one file — Linux has an AppImage, a .deb and
- * an .rpm — and each gets its own size, checksum and button, the first one
- * loudest. A Mac build says which processor it is for, because an
- * Apple-silicon disk image will not open on an Intel Mac.
+ * Linux can have more than one file (AppImage, .deb, .rpm); the first is the
+ * loud button. A Mac build says which processor it is for, because an
+ * Apple-silicon disk image will not open on an Intel Mac. `quiet` makes every
+ * button an outline one, for the experimental builds.
  */
 const PlatformCard: FC<{
   info: (typeof PLATFORM_INFO)[number];
   assets: Asset[];
   highlighted: boolean;
-}> = ({ info, assets, highlighted }) => (
-  <Card
-    tone={highlighted ? "floating" : "raised"}
-    lift
-    class={`flex h-full flex-col p-7 ${
-      highlighted ? "outline-2 outline-offset-4 outline-primary/40 outline-dashed" : ""
-    }`}
-  >
+  quiet?: boolean;
+}> = ({ info, assets, highlighted, quiet = false }) => (
+  <Card class="flex h-full flex-col p-7">
     <div class="flex items-start justify-between gap-3">
       <IconTile icon={info.icon} size="lg" />
-      {highlighted ? <Badge tone="primary">Looks like your system</Badge> : null}
+      {highlighted ? <Badge tone="primary">Your system</Badge> : null}
     </div>
 
     <h2 class="mt-5 text-2xl">{info.name}</h2>
     <p class="mt-1 text-sm text-muted-foreground">{info.requirement}</p>
 
     {assets.length > 0 ? (
-      <ul class="mt-5 flex flex-1 flex-col gap-4">
+      <ul class="mt-6 flex flex-1 flex-col justify-end gap-4">
         {assets.map((asset, index) => {
           const { format, arch } = describeFile(asset);
           return (
-            <li class="flex flex-col gap-3">
-              <dl class="clay-well space-y-1.5 rounded-[1.1rem] p-4 text-sm">
-                <div class="flex justify-between gap-3">
-                  <dt class="text-muted-foreground">Format</dt>
-                  <dd class="text-right font-medium">{format}</dd>
-                </div>
-                {arch ? (
-                  <div class="flex justify-between gap-3">
-                    <dt class="text-muted-foreground">For</dt>
-                    <dd class="text-right font-medium">{arch}</dd>
-                  </div>
-                ) : null}
-                <div class="flex justify-between gap-3">
-                  <dt class="text-muted-foreground">Size</dt>
-                  <dd class="font-medium tabular" translate="no">
-                    {formatBytes(asset.sizeBytes)}
-                  </dd>
-                </div>
-                {asset.sha256 ? (
-                  <div class="pt-2">
-                    <dt class="text-xs text-muted-foreground">SHA-256</dt>
-                    <dd
-                      class="mt-1 wrap-anywhere font-mono text-xs leading-relaxed text-muted-foreground"
-                      translate="no"
-                    >
-                      {asset.sha256}
-                    </dd>
-                  </div>
-                ) : null}
-              </dl>
+            <li>
               <LinkButton
                 href={`/downloads/${asset.id}`}
-                size={index === 0 ? "lg" : "default"}
-                variant={index === 0 ? undefined : "outline"}
+                size={index === 0 && !quiet ? "lg" : "default"}
+                variant={index === 0 && !quiet ? undefined : "outline"}
                 class="w-full"
               >
                 <i data-lucide="download" class="h-4 w-4" aria-hidden="true"></i>
                 {assets.length === 1 ? <>Download for {info.name}</> : <>Download {format}</>}
               </LinkButton>
+              <p class="mt-1.5 text-center text-xs text-muted-foreground">
+                {assets.length === 1 ? <span>{format}</span> : null}
+                {arch ? (
+                  <>
+                    {assets.length === 1 ? " · " : null}
+                    <span>{arch}</span>
+                  </>
+                ) : null}
+                {assets.length === 1 || arch ? " · " : null}
+                <span class="tabular" translate="no">
+                  {formatBytes(asset.sizeBytes)}
+                </span>
+              </p>
             </li>
           );
         })}
@@ -152,7 +122,7 @@ const PlatformCard: FC<{
     ) : (
       <>
         <p class="mt-5 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
-          No build up for this one yet.
+          Not available yet.
         </p>
         <LinkButton href="/contact?topic=support" variant="outline" class="mt-6 w-full">
           Tell us you need it
@@ -247,309 +217,66 @@ const NoReleases: FC = () => (
 );
 
 /**
- * Which build to have, as a switch under the heading — the way a distribution
- * offers its long-term release and its latest one side by side. Only when
- * there is an experimental build to switch to, and stable is the one already
- * chosen: the other is a jump to its section, not a second page.
- */
-const ChannelSwitch: FC<{ stable: ReleaseWithAssets | null; experimental: ReleaseWithAssets }> = ({
-  stable,
-  experimental,
-}) => (
-  <nav
-    aria-label="Which build"
-    class="mx-auto mb-8 grid w-full max-w-md grid-cols-2 gap-1 rounded-[1.25rem] bg-muted p-1 text-sm shadow-inset"
-  >
-    <span
-      aria-current="true"
-      class="flex min-w-0 flex-col items-center rounded-2xl bg-surface px-3 py-2 shadow-sm"
-    >
-      <span class="inline-flex items-center gap-2 font-semibold">
-        <i data-lucide="circle-check" class="h-3.5 w-3.5 text-success" aria-hidden="true"></i>
-        Stable
-      </span>
-      {stable ? (
-        <span
-          class="max-w-full truncate font-mono text-xs text-muted-foreground tabular"
-          translate="no"
-        >
-          {stable.version}
-        </span>
-      ) : null}
-    </span>
-    <a
-      href="#experimental"
-      class="flex min-w-0 flex-col items-center rounded-2xl px-3 py-2 text-muted-foreground transition hover:bg-surface/60 hover:text-foreground"
-    >
-      <span class="inline-flex items-center gap-2 font-medium">
-        <i data-lucide="flask-conical" class="h-3.5 w-3.5 text-warning" aria-hidden="true"></i>
-        Experimental
-      </span>
-      <span class="max-w-full truncate font-mono text-xs tabular" translate="no">
-        {experimental.version}
-      </span>
-    </a>
-  </nav>
-);
-
-/**
- * An experimental build's files as a table — platform, file, size, checksum,
- * a button — the way a project that ships many files lists them. Denser than
- * the stable cards on purpose: someone here knows what they want, and the
- * page should not make an experimental build look like the main event.
- */
-const FileTable: FC<{ build: ReleaseWithAssets }> = ({ build }) => (
-  <>
-    {/* A table from tablet width up; a phone gets the same files as a stack
-        of rows instead, because five columns do not fit in 390 pixels and a
-        table that scrolls sideways hides the button. */}
-    <div class="hidden md:block">
-      <TableFrame>
-        <table class="w-full min-w-[44rem] border-collapse text-left text-sm">
-          <thead>
-            <tr class="border-b border-border bg-muted/60">
-              <th scope="col" class="px-5 py-3 font-semibold">
-                Platform
-              </th>
-              <th scope="col" class="px-5 py-3 font-semibold">
-                File
-              </th>
-              <th scope="col" class="px-5 py-3 font-semibold">
-                Size
-              </th>
-              <th scope="col" class="px-5 py-3 font-semibold">
-                SHA-256
-              </th>
-              <th scope="col" class="px-5 py-3">
-                <span class="sr-only">Download</span>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            {PLATFORM_INFO.flatMap((info) =>
-              assetsFor(build.assets, info.id).map((asset, index) => {
-                const { format, arch } = describeFile(asset);
-                return (
-                  <tr class="border-b border-border align-top last:border-0">
-                    {index === 0 ? (
-                      <th scope="row" class="px-5 py-3.5 font-semibold">
-                        <span class="inline-flex items-center gap-2">
-                          <i
-                            data-lucide={info.icon}
-                            class="h-4 w-4 text-muted-foreground"
-                            aria-hidden="true"
-                          ></i>
-                          {info.name}
-                        </span>
-                      </th>
-                    ) : (
-                      <td class="px-5 py-3.5">
-                        <span class="sr-only">{info.name}</span>
-                      </td>
-                    )}
-                    <td class="px-5 py-3.5">
-                      <div class="font-medium">{format}</div>
-                      {arch ? <div class="text-xs text-muted-foreground">{arch}</div> : null}
-                      <div class="mt-0.5 font-mono text-xs text-muted-foreground" translate="no">
-                        {asset.filename}
-                      </div>
-                    </td>
-                    <td
-                      class="whitespace-nowrap px-5 py-3.5 tabular text-muted-foreground"
-                      translate="no"
-                    >
-                      {formatBytes(asset.sizeBytes)}
-                    </td>
-                    <td class="px-5 py-3.5">
-                      {asset.sha256 ? (
-                        <code
-                          class="block max-w-[16rem] wrap-anywhere font-mono text-xs leading-relaxed text-muted-foreground"
-                          translate="no"
-                        >
-                          {asset.sha256}
-                        </code>
-                      ) : null}
-                    </td>
-                    <td class="px-5 py-3.5 text-right">
-                      <LinkButton href={`/downloads/${asset.id}`} variant="outline">
-                        <i data-lucide="download" class="h-4 w-4" aria-hidden="true"></i>
-                        Download
-                        {/* Which file, for a screen reader: its own name, which says
-                          platform, version and format, and needs no translating. */}
-                        <span class="sr-only" translate="no">
-                          {" "}
-                          {asset.filename}
-                        </span>
-                      </LinkButton>
-                    </td>
-                  </tr>
-                );
-              }),
-            )}
-          </tbody>
-        </table>
-      </TableFrame>
-    </div>
-    <ul class="grid gap-3 md:hidden">
-      {PLATFORM_INFO.flatMap((info) =>
-        assetsFor(build.assets, info.id).map((asset) => {
-          const { format, arch } = describeFile(asset);
-          return (
-            <li>
-              <Card class="p-4">
-                {/* Name and format as separate elements, so each is translated
-                    once rather than as a sentence per file. */}
-                <div class="flex flex-wrap items-center gap-x-2 text-sm">
-                  <i
-                    data-lucide={info.icon}
-                    class="h-4 w-4 text-muted-foreground"
-                    aria-hidden="true"
-                  ></i>
-                  <div class="font-semibold">{info.name}</div>
-                  <div class="text-muted-foreground">{format}</div>
-                </div>
-                {arch ? <div class="mt-1 text-xs text-muted-foreground">{arch}</div> : null}
-                <div class="mt-2 break-all font-mono text-xs text-muted-foreground" translate="no">
-                  {asset.filename}
-                </div>
-                <dl class="mt-3 space-y-1 text-xs">
-                  <div class="flex justify-between gap-3">
-                    <dt class="text-muted-foreground">Size</dt>
-                    <dd class="font-medium tabular" translate="no">
-                      {formatBytes(asset.sizeBytes)}
-                    </dd>
-                  </div>
-                  {asset.sha256 ? (
-                    <div>
-                      <dt class="text-muted-foreground">SHA-256</dt>
-                      <dd
-                        class="mt-0.5 wrap-anywhere font-mono leading-relaxed text-muted-foreground"
-                        translate="no"
-                      >
-                        {asset.sha256}
-                      </dd>
-                    </div>
-                  ) : null}
-                </dl>
-                <LinkButton href={`/downloads/${asset.id}`} variant="outline" class="mt-3 w-full">
-                  <i data-lucide="download" class="h-4 w-4" aria-hidden="true"></i>
-                  Download
-                  <span class="sr-only" translate="no">
-                    {" "}
-                    {asset.filename}
-                  </span>
-                </LinkButton>
-              </Card>
-            </li>
-          );
-        }),
-      )}
-    </ul>
-  </>
-);
-
-/**
- * Experimental builds, as a section of the downloads page rather than a page
- * of their own. What a person should know before installing one comes before
- * the files, not after; earlier builds fold away; and when there is none, the
+ * Experimental builds: one sentence on what they are, then the same plain
+ * cards as the stable build, with quieter buttons. When there is none, the
  * section says so in a line rather than disappearing, so a link to
  * `#experimental` always lands somewhere.
  */
-const ExperimentalSection: FC<{ builds: ReleaseWithAssets[]; app: AppConfig }> = ({
-  builds,
+const ExperimentalSection: FC<{ build: ReleaseWithAssets | undefined; app: AppConfig }> = ({
+  build,
   app,
-}) => {
-  const [latest, ...earlier] = builds;
-  return (
-    <Section id="experimental" tone="muted">
-      <Container size="wide">
-        <SectionHeading
-          eyebrow="Experimental builds"
-          title="Try what’s next"
-          lede="Builds straight from development, put up as they’re made. They’re for trying things early and telling us what broke. The stable version at the top of this page is the one to install."
-        />
+}) => (
+  <Section id="experimental" tone="muted">
+    <Container size="wide">
+      <SectionHeading
+        eyebrow="Experimental"
+        title="Try new features early"
+        lede="These builds have the newest features, but they may have bugs. If you’re not sure, use the version at the top of this page."
+      />
 
-        <ul class="mb-8 grid gap-x-8 gap-y-4 sm:grid-cols-2">
-          {EXPERIMENTAL_NOTES.map((note) => (
-            <li class="flex items-start gap-3">
-              <i
-                data-lucide={note.icon}
-                class="mt-0.5 h-5 w-5 shrink-0 text-warning"
-                aria-hidden="true"
-              ></i>
-              <p class="text-sm leading-relaxed text-muted-foreground text-pretty">{note.text}</p>
-            </li>
-          ))}
-        </ul>
-
-        {latest ? (
-          <>
-            <div class="mb-4 flex flex-wrap items-center gap-3">
-              <Badge tone="warning">
-                <i data-lucide="flask-conical" class="h-3 w-3" aria-hidden="true"></i>
-                Experimental{" "}
-                <span class="tabular" translate="no">
-                  {latest.version}
-                </span>
-              </Badge>
-              {latest.publishedAt ? (
-                <span class="text-sm text-muted-foreground">
-                  Built{" "}
-                  <span translate="no">{formatDateShort(latest.publishedAt, app.locale)}</span>
-                </span>
-              ) : null}
-              {/* Written by the pipeline or whoever published it, and not the
-                  site's own copy: left as written. */}
-              {latest.notes ? (
-                <span class="text-sm text-muted-foreground" translate="no">
-                  {latest.notes}
-                </span>
-              ) : null}
-            </div>
-
-            <FileTable build={latest} />
-
-            {earlier.length > 0 ? (
-              <div class="mt-8">
-                <Disclosure question="Earlier experimental builds">
-                  <p class="mb-4 text-sm">
-                    Kept so a problem can be traced to the build that brought it. Install the newest
-                    unless you’re doing exactly that.
-                  </p>
-                  <ReleaseArchive releases={earlier} app={app} />
-                </Disclosure>
-              </div>
+      {build ? (
+        <>
+          <p class="mb-6 text-sm text-muted-foreground">
+            Version{" "}
+            <span class="tabular" translate="no">
+              {build.version}
+            </span>
+            {build.publishedAt ? (
+              <>
+                {" · "}
+                <span translate="no">{formatDateShort(build.publishedAt, app.locale)}</span>
+              </>
             ) : null}
+          </p>
 
-            <p class="mt-8 text-sm text-muted-foreground text-pretty">
-              Found something broken? That’s what these builds are for.{" "}
-              <a
-                href="/contact?topic=support"
-                class="font-medium text-primary underline underline-offset-4"
-              >
-                Tell us
-              </a>{" "}
-              which build, which platform, and what you did. Settings in the app can save a
-              diagnostics file that says exactly which build you’re running.
-            </p>
-          </>
-        ) : (
-          <Card class="flex items-center gap-4 p-6">
-            <i
-              data-lucide="flask-conical"
-              class="h-6 w-6 text-muted-foreground"
-              aria-hidden="true"
-            ></i>
-            <p class="text-sm leading-relaxed text-muted-foreground text-pretty">
-              No experimental build right now. The stable version at the top of this page is the one
-              to install.
-            </p>
-          </Card>
-        )}
-      </Container>
-    </Section>
-  );
-};
+          <div class="grid gap-6 md:grid-cols-3">
+            {PLATFORM_INFO.map((info) => (
+              <PlatformCard
+                info={info}
+                assets={assetsFor(build.assets, info.id)}
+                highlighted={false}
+                quiet
+              />
+            ))}
+          </div>
+
+          <p class="mt-8 text-sm text-muted-foreground">
+            Found a problem?{" "}
+            <a
+              href="/contact?topic=support"
+              class="font-medium text-primary underline underline-offset-4"
+            >
+              Tell us
+            </a>
+            .
+          </p>
+        </>
+      ) : (
+        <p class="text-sm text-muted-foreground">No experimental build right now.</p>
+      )}
+    </Container>
+  </Section>
+);
 
 export const DownloadsPage: FC<DownloadsProps> = ({
   latest,
@@ -566,10 +293,8 @@ export const DownloadsPage: FC<DownloadsProps> = ({
           align="center"
           eyebrow="Downloads"
           title="Install Zipr"
-          lede="Free, no account, about a minute. Everything you make stays on your machine until you decide otherwise."
+          lede="Free, with no account needed. It takes about a minute."
         />
-
-        {experimental[0] ? <ChannelSwitch stable={latest} experimental={experimental[0]} /> : null}
 
         {latest ? (
           <>
@@ -599,6 +324,15 @@ export const DownloadsPage: FC<DownloadsProps> = ({
               ))}
             </div>
 
+            {/* The one thing worth saying before someone opens it: the
+                installers are not signed yet, so the first launch shows a
+                warning, and someone who is not technical will stop there
+                unless told it is expected. */}
+            <p class="mt-8 text-center text-sm text-muted-foreground text-pretty">
+              The first time you open Zipr, your computer may ask if you’re sure. That’s normal:
+              choose to open it.
+            </p>
+
             {/* Shown only once a licence exists — see LEGAL.licenceUrl. An
                 acceptance line pointing at nothing would be worse than none. */}
             {LEGAL.licenceUrl ? (
@@ -613,25 +347,21 @@ export const DownloadsPage: FC<DownloadsProps> = ({
                 . By downloading or installing it, you agree to its terms.
               </p>
             ) : null}
+
+            {experimental[0] ? (
+              <p class="mt-4 text-center text-sm">
+                <a
+                  href="#experimental"
+                  class="font-medium text-primary underline underline-offset-4"
+                >
+                  Want new features early? Try an experimental build.
+                </a>
+              </p>
+            ) : null}
           </>
         ) : (
           <NoReleases />
         )}
-      </Container>
-    </Section>
-
-    {/* ================= BEFORE YOU INSTALL ================= */}
-    <Section tone="muted">
-      <Container>
-        <SectionHeading eyebrow="Before you install" title="Three things worth knowing" />
-        <div class="grid gap-5 md:grid-cols-3">
-          {INSTALL_NOTES.map((note) => (
-            <Card class="p-6">
-              <i data-lucide="info" class="h-5 w-5 text-info" aria-hidden="true"></i>
-              <p class="mt-3 text-sm leading-relaxed text-muted-foreground text-pretty">{note}</p>
-            </Card>
-          ))}
-        </div>
       </Container>
     </Section>
 
@@ -668,7 +398,7 @@ export const DownloadsPage: FC<DownloadsProps> = ({
           <SectionHeading
             eyebrow="Archive"
             title="Earlier versions"
-            lede="In case you need to go back. Run the newest unless you have a reason not to."
+            lede="Only if you need to go back to an older version."
           />
 
           <ReleaseArchive releases={previous} app={app} />
@@ -677,7 +407,7 @@ export const DownloadsPage: FC<DownloadsProps> = ({
     ) : null}
 
     {/* ================= EXPERIMENTAL ================= */}
-    <ExperimentalSection builds={experimental} app={app} />
+    <ExperimentalSection build={experimental[0]} app={app} />
 
     <CtaBand
       title="That’s it. Nothing else to do."

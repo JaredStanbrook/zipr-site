@@ -104,43 +104,6 @@ export const MAC_ARCH_LABELS: Record<string, string> = {
 };
 
 /**
- * Shown at the top of the experimental section of /downloads, before any of
- * its files. Each one is true of
- * every experimental build, and is the thing a person would be annoyed to
- * learn afterwards. The second is the client's own rule: nothing has shipped,
- * so nothing it stores is migrated between builds yet.
- */
-export const EXPERIMENTAL_NOTES = [
-  {
-    icon: "flask-conical",
-    text: "Built straight from development, as it happens. Expect unfinished corners, and things that change or break from one build to the next.",
-  },
-  {
-    icon: "archive-restore",
-    text: "No upgrade path yet. A newer build may not read what an older one saved, so export anything you want to keep before installing another.",
-  },
-  {
-    icon: "shield-alert",
-    text: "Unsigned, like every Zipr installer for now: Windows and macOS will warn you. Check the SHA-256 beside each file.",
-  },
-  {
-    icon: "refresh-cw-off",
-    text: "Nothing updates itself. When you want the next build, come back here for it.",
-  },
-];
-
-/**
- * Shown on the downloads page whatever is in the database, because it is true
- * of every build and a person deciding whether to install something wants it
- * before the button, not after.
- */
-export const INSTALL_NOTES = [
-  "We haven't signed the installers yet, so Windows and macOS will both warn you the first time. Every download lists a checksum so you can confirm you got what we published.",
-  "No account, and no network request until you point it at a team server. Installing it does not sign you up for anything.",
-  "Uninstalling leaves your work on disk. Export it first if you want to keep it.",
-];
-
-/**
  * The header's links, in the brand guide's order. Download is the button at the
  * end of the bar (and the last item on the phone menu) rather than a link in
  * this list, so it stays the loudest thing in the header. Security and Contact
