@@ -12,7 +12,7 @@
  *
  *   Warm paper  #F8F6F2   the body, and everything that sits on it
  *   Near-black  #242321   text, and the top layer
- *   Vivid orange #F36B3B  the brand: fills, marks, the logo
+ *   Vivid orange #E85D32  the brand: fills, marks, the logo
  *   Clay        #B85F46   the supporting accent, deepened where it is text
  *
  * Depth is a strict order of flat paint, bottom to top:
@@ -153,7 +153,7 @@
   /* --- The palette, by name. Components use the roles below, not these. -- */
   --paper: #f8f6f2;
   --near-black: #242321;
-  --orange: #f36b3b;
+  --orange: #e85d32;
   --orange-foreground: #242321;
   --clay: #b85f46;
 
@@ -188,10 +188,10 @@
   /* --- Brand -----------------------------------------------------------
      `--primary` is both a fill under white text and the colour of
      `text-primary` links and labels, so it has to clear 4.5:1 in both jobs.
-     Vivid orange manages 2.8:1 on paper — fine for a mark, not for words —
+     Vivid orange manages 3.2:1 on paper — fine for a mark, not for words —
      so the text-bearing primary is the clay, taken a step deeper (5.4:1 on
      paper, 4.6:1 on grey, 5.8:1 under white). Orange itself is `--orange`,
-     and carries near-black, never white (5.2:1). */
+     and carries near-black, never white (4.5:1). */
   --primary: #a04e37;
   --primary-foreground: #ffffff;
   --primary-subtle: #f6e2d9;
@@ -238,7 +238,7 @@
   --border-strong: #8f887d;
   --input: #8f887d;
   --field: #f8f6f2;
-  --ring: #f36b3b;
+  --ring: #e85d32;
 
   /* --- Sidebar --------------------------------------------------------- */
   --sidebar: #ece8e1;
@@ -248,7 +248,7 @@
   --sidebar-accent: #e4dfd7;
   --sidebar-accent-foreground: #242321;
   --sidebar-border: #ddd8cf;
-  --sidebar-ring: #f36b3b;
+  --sidebar-ring: #e85d32;
 
   /* --- Depth ------------------------------------------------------------
      Flat. The scale Tailwind's `shadow-*` utilities read is zeroed, so a
@@ -281,7 +281,7 @@
 
   /* The glow's colours. Bright on purpose: it is the one signal that says
      "this responds", and it has to read on paper, grey and ink alike. */
-  --glow-colors: #f36b3b, #ffb547, #f9e04b, #4fd18b, #3fb6f2, #7b6cf6, #e85bc7, #f36b3b;
+  --glow-colors: #e85d32, #ffb547, #f9e04b, #4fd18b, #3fb6f2, #7b6cf6, #e85bc7, #e85d32;
 
   --radius: 0.75rem;
   /* Buttons: softened to sit with the cards (radius-lg, 14px) rather than
@@ -295,7 +295,7 @@
   --font-serif: ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
 
   /* --- Charts ----------------------------------------------------------- */
-  --chart-1: #f36b3b;
+  --chart-1: #e85d32;
   --chart-2: #242321;
   --chart-3: #b85f46;
   --chart-4: #8f887d;
@@ -327,11 +327,11 @@
   --grey-fill: #33312d;
   --grey-fill-hover: #3e3b37;
 
-  --primary: #f36b3b;
+  --primary: #e85d32;
   --primary-foreground: #242321;
   --primary-subtle: #4a2a1f;
   --primary-subtle-foreground: #f9c3ad;
-  --emphasis: #f36b3b;
+  --emphasis: #e85d32;
   --brand: #f8f6f2;
   --brand-foreground: #242321;
   --brand-subtle: #2a2825;
@@ -364,23 +364,23 @@
   --border-strong: #7b756b;
   --input: #7b756b;
   --field: #1a1917;
-  --ring: #f36b3b;
+  --ring: #e85d32;
 
   --sidebar: #2a2825;
   --sidebar-foreground: #d9d3c9;
-  --sidebar-primary: #f36b3b;
+  --sidebar-primary: #e85d32;
   --sidebar-primary-foreground: #242321;
   --sidebar-accent: #33312d;
   --sidebar-accent-foreground: #f8f6f2;
   --sidebar-border: #34322e;
-  --sidebar-ring: #f36b3b;
+  --sidebar-ring: #e85d32;
 
   --shadow-well: inset 0 1px 2px #00000066, inset 0 0 0 1px #ffffff08;
   --shadow-logo: 0 2px 0 0 #00000080, 0 16px 30px -12px #000000b3;
   --emboss-light: #fff4dd33;
   --emboss-dark: #000000bf;
 
-  --chart-1: #f36b3b;
+  --chart-1: #e85d32;
   --chart-2: #f8f6f2;
   --chart-3: #d98a70;
   --chart-4: #7b756b;
@@ -789,8 +789,8 @@
   /* ======================================================================
      Important: the one button on a screen that matters most.
 
-     A solid fill of the brand orange, carrying near-black (5.2:1; white
-     would manage 2.8:1). It is the only filled-orange control, which is what
+     A solid fill of the brand orange, carrying near-black (4.5:1; white
+     would manage 3.5:1). It is the only filled-orange control, which is what
      makes it the important one. It keeps the shared rotating glow on hover
      and focus. Use it once per screen.
      ====================================================================== */

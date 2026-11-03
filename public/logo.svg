@@ -10,11 +10,12 @@
     A Z: two bars offset by one cell, and between them the two interleaved
     combs that close into a solid block at the right. Zipper teeth.
 
-    #ff5722 is the raster's exact fill. It is the logo's colour and it is
-    deliberately brighter than the `primary` token, which has to carry white
-    text and so sits a few steps deeper; see worker/index.css.
+    #E85D32 is the brand orange, the same as the site's orange token. (The
+    original raster was #ff5722.) It is brighter than the `primary` token,
+    which has to carry white text and so sits a few steps deeper; see
+    worker/index.css.
   -->
-  <g fill="#ff5722">
+  <g fill="#e85d32">
     <rect x="16" y="0" width="176" height="16" />
     <rect x="32" y="16" width="16" height="16" />
     <rect x="64" y="16" width="16" height="16" />
