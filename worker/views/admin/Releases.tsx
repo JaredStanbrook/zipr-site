@@ -33,7 +33,7 @@ export const ReleaseCard: FC<{ item: ReleaseWithAssets; app: AppConfig }> = ({ i
           Live since {formatDateShort(item.publishedAt, app.locale)}
         </Badge>
       ) : (
-        <Badge tone="neutral">Draft — nobody can see this</Badge>
+        <Badge tone="neutral">Draft: nobody can see this</Badge>
       )}
 
       <div class="ml-auto flex flex-wrap items-center gap-2">

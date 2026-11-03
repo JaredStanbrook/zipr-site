@@ -31,10 +31,6 @@ interface LayoutProps {
 
 export const Layout: FC<LayoutProps> = (props) => {
   const isProd = import.meta.env ? import.meta.env.PROD : true;
-  // Only the glyphs the wordmark uses, so a rename needs no change here.
-  const wordmarkFont = `https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght,SOFT,WONK@9..144,100..900,0..100,0..1&text=${encodeURIComponent(
-    Array.from(new Set(props.app.name)).join(""),
-  )}&display=swap`;
 
   return html`
     <!DOCTYPE html>
@@ -117,21 +113,15 @@ export const Layout: FC<LayoutProps> = (props) => {
           type="font/woff2"
           crossorigin
         />
-        <!-- The wordmark face (Fraunces, SOFT axis) from Google Fonts, cut down
-             to the letters of the app's name by \`text=\`: about 6KB with every
-             axis, where the whole latin file was 119KB for one word. It is
-             the header's largest text, so it was the page's LCP element and
-             waited on that download. Loaded without blocking render; the
-             fallback face shows until it lands (display=swap). -->
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <!-- The wordmark face, self-hosted (12KB). The header's name is above
+             the fold on every page, so fetch it with the other two. -->
         <link
           rel="preload"
-          as="style"
-          href="${wordmarkFont}"
-          onload="this.onload=null;this.rel='stylesheet'"
+          href="/fonts/press-start-2p-latin.woff2"
+          as="font"
+          type="font/woff2"
+          crossorigin
         />
-        <noscript><link rel="stylesheet" href="${wordmarkFont}" /></noscript>
         ${
           isProd
             ? html`<link rel="stylesheet" href="/static/main.css?v=${props.assetVersion}" />`

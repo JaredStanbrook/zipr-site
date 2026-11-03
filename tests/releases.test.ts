@@ -282,7 +282,7 @@ describe("the download pages", () => {
 
     const { experimental } = halves(await page("/downloads"));
     expect(experimental).toContain(VERSION);
-    expect(experimental).toContain("AppImage — any distribution");
+    expect(experimental).toContain("AppImage (any distribution)");
     expect(experimental).toContain("Debian and Ubuntu (.deb)");
     expect(experimental).toContain("Fedora and openSUSE (.rpm)");
     // An Apple-silicon image says so, rather than failing on an Intel Mac.
@@ -291,7 +291,7 @@ describe("the download pages", () => {
     expect(experimental).toContain("Built from abc1234");
     // What to know first comes before the files.
     expect(experimental.indexOf("No upgrade path yet")).toBeLessThan(
-      experimental.indexOf("AppImage — any distribution"),
+      experimental.indexOf("AppImage (any distribution)"),
     );
   });
 

@@ -138,7 +138,7 @@ export const GalleryPage: FC = () => (
       title="Build your first shortcut."
       body="Start with the task you do most. Free, and no account needed."
       primary={{ href: "/downloads", label: "Download Zipr" }}
-      secondary={{ href: "/features", label: "Explore what Zipr can do" }}
+      secondary={{ href: "/toolbox", label: "See every step" }}
     />
   </Page>
 );

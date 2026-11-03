@@ -20,7 +20,6 @@ describe("UI pages load", () => {
     for (const path of [
       "/",
       "/login",
-      "/features",
       "/design",
       "/zap",
       "/zap/setup",
@@ -119,7 +118,6 @@ describe("UI pages load", () => {
       [signedOut, "/register"],
       [multiMethod, "/login"],
       [multiMethod, "/register"],
-      [signedOut, "/features"],
       [signedOut, "/zap"],
       [signedOut, "/zap/setup"],
       [signedOut, "/pricing"],
@@ -176,7 +174,7 @@ describe("UI pages load", () => {
     // Removed on purpose: the page says what the app costs today and does not
     // promise what it will cost later.
     const testApp = createTestApp(null);
-    for (const path of ["/", "/features", "/zap", "/pricing", "/downloads", "/security"]) {
+    for (const path of ["/", "/zap", "/pricing", "/downloads", "/security"]) {
       const html = await (await get(testApp, path)).text();
       for (const phrase of [
         "Always will be",
@@ -231,7 +229,6 @@ describe("UI pages load", () => {
     const testApp = createTestApp(null);
     const home = await (await get(testApp, "/")).text();
     for (const [href, label] of [
-      ["/features", "Features"],
       ["/gallery", "Gallery"],
       ["/zap", "Build with Zap"],
       ["/teams", "For teams"],
@@ -267,7 +264,7 @@ describe("UI pages load", () => {
 
   it("opens every screenshot in the lightbox", async () => {
     const testApp = createTestApp(null);
-    for (const path of ["/", "/features", "/zap", "/toolbox", "/teams"]) {
+    for (const path of ["/", "/zap", "/toolbox", "/teams"]) {
       const html = await (await get(testApp, path)).text();
       // The viewer's labels, once per page, for the translator to find.
       expect(html.match(/id="lightbox-text"/g)?.length ?? 0, `labels on ${path}`).toBe(1);
@@ -281,8 +278,8 @@ describe("UI pages load", () => {
       expect(outside, `unwrapped screenshot on ${path}`).not.toMatch(/class="shot-(light|dark)/);
     }
 
-    const features = await (await get(testApp, "/features")).text();
-    expect(features).toMatch(/<button[^>]*data-lightbox[^>]*aria-haspopup="dialog"/);
+    const home = await (await get(testApp, "/")).text();
+    expect(home).toMatch(/<button[^>]*data-lightbox[^>]*aria-haspopup="dialog"/);
   });
 
   it("explains Zap where it is first named", async () => {
@@ -413,5 +410,13 @@ describe("UI pages load", () => {
       env,
     );
     expect(posted.status).not.toBe(200);
+  });
+});
+
+describe("retired pages", () => {
+  it("sends /features home with a permanent redirect", async () => {
+    const res = await get(createTestApp(null), "/features");
+    expect(res.status).toBe(301);
+    expect(res.headers.get("location")).toBe("/");
   });
 });

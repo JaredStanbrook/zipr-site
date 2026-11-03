@@ -77,7 +77,7 @@ export const ZAP_SETUP_PROVIDERS: SetupProvider[] = [
       },
       {
         title: "Copy the key straight away",
-        body: "The key starts with sk-ant- and is shown only once. Copy it now. If you lose it, delete it and create another — it can't be shown again.",
+        body: "The key starts with sk-ant- and is shown only once. Copy it now. If you lose it, delete it and create another. It can't be shown again.",
       },
     ],
     models: [

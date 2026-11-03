@@ -123,7 +123,7 @@ export const describePasswordPolicy = (policy?: PasswordPolicy) => {
 
   const base = `At least ${policy.minLength} characters`;
   if (extras.length === 0) {
-    return `${base}. Length matters more than punctuation — a passphrase works well.`;
+    return `${base}. Length matters more than punctuation: a passphrase works well.`;
   }
   return `${base}, including ${extras.join(", ")}.`;
 };

@@ -66,7 +66,7 @@ const HeroPanel: FC = () => (
 );
 
 const PROOF = [
-  { icon: "monitor", text: "Windows and macOS" },
+  { icon: "monitor", text: "Windows, macOS and Linux" },
   { icon: "wifi-off", text: "Works offline" },
   { icon: "shield", text: "Nothing runs on a server" },
 ];
@@ -86,12 +86,12 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
   return (
     <Page>
       {/* ================= HERO =================
-          Asymmetric: the words take seven columns on the left, the app takes
+          Asymmetric: the words, centred, take the left columns; the app takes
           the rest and keeps going past the edge of the page. */}
       <Section class="overflow-x-clip pt-6 sm:pt-12">
         <Container size="wide">
           <div class="grid items-center gap-12 [&>*]:min-w-0 lg:grid-cols-12 lg:gap-10">
-            <div class="lg:col-span-6 xl:col-span-5">
+            <div class="text-center lg:col-span-6 xl:col-span-5">
               <h1
                 class="rise text-[2.9rem] leading-[0.98] text-balance sm:text-7xl lg:text-[5rem]"
                 style="--i: 1;"
@@ -100,14 +100,14 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
               </h1>
 
               <p
-                class="rise mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty sm:text-xl"
+                class="rise mx-auto mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty sm:text-xl"
                 style="--i: 2;"
               >
                 Zipr turns the clever things you do on your computer into shortcuts you can run
                 again and share with anyone who's ever asked, “How did you do that?” No code needed.
               </p>
 
-              <div class="rise mt-9 flex flex-wrap gap-3" style="--i: 3;">
+              <div class="rise mt-9 flex flex-wrap justify-center gap-3" style="--i: 3;">
                 <LinkButton href="/downloads" variant="important" size="lg">
                   <i data-lucide="download" class="h-4 w-4" aria-hidden="true"></i>
                   Download Zipr

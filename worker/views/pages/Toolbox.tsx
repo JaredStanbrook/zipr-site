@@ -153,7 +153,7 @@ export const ToolboxPage: FC = () => (
       title="Build your first shortcut."
       body="Free, no account, and every step is one click away once you've built it."
       primary={{ href: "/downloads", label: "Download Zipr" }}
-      secondary={{ href: "/features", label: "Explore what Zipr can do" }}
+      secondary={{ href: "/gallery", label: "Browse the Gallery" }}
     />
   </Page>
 );

@@ -277,7 +277,9 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
         <div class="flex items-center gap-4">
           <a href="/" class="group mr-2 flex items-center gap-2 no-underline">
             <img src="/favicon.svg" alt="" width="28" height="28" class="h-7 w-7" />
-            <span class="wordmark text-xl">${appName}</span>
+            <!-- The name in its own face and the brand orange. Press Start 2P
+                 runs wide, so it is set smaller than a heading would be. -->
+            <span class="wordmark text-[0.95rem] text-orange">${appName}</span>
           </a>
 
           <nav class="hidden items-center gap-1 lg:flex">
@@ -323,7 +325,7 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
           <button
             id="mobile-menu-toggle"
             type="button"
-            class="btn btn-grey inline-flex h-10 w-10 items-center justify-center rounded-[var(--radius-btn)] lg:hidden"
+            class="inline-flex h-10 w-10 items-center justify-center rounded-[var(--radius-btn)] text-foreground lg:hidden"
             aria-label="Menu"
             aria-controls="mobile-menu"
             aria-expanded="false"
@@ -334,13 +336,14 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
         </div>
       </div>
 
-      <!-- The small-screen menu: a frosted panel dropping from the bar. -->
+      <!-- The small-screen menu: a narrow frosted grey panel dropping from the
+           bar, under the button that opens it. -->
       <div
         id="mobile-menu"
-        class="nav-dropdown nav-glass pointer-events-auto absolute inset-x-3 top-full mx-auto mt-2 max-h-[calc(100svh-5.5rem)] max-w-7xl overflow-y-auto p-2 sm:inset-x-5 lg:hidden"
+        class="nav-dropdown nav-menu-glass pointer-events-auto absolute right-3 top-full mt-2 max-h-[calc(100svh-5.5rem)] w-56 max-w-[calc(100vw-1.5rem)] overflow-y-auto p-2 sm:right-5 lg:hidden"
       >
         <nav class="flex flex-col gap-0.5" aria-label="Main">
-          ${menuItems.map(
+          ${[...menuItems, ...(user ? [] : [{ to: "/downloads", name: "Download" }])].map(
             (item) => html`
               <a
                 href="${item.to}"
@@ -362,17 +365,10 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
           )}
         </nav>
 
-        <div class="mt-2 border-t border-border/70 p-2 pt-3">
-          ${
-            !user
-              ? html`
-                  <a
-                    href="/downloads"
-                    class="btn btn-important inline-flex h-12 w-full items-center justify-center gap-2 rounded-[var(--radius-btn)] px-4 text-base font-semibold no-underline transition-colors"
-                    ><i data-lucide="download" class="h-4 w-4" aria-hidden="true"></i> Download</a
-                  >
-                `
-              : html`
+        ${
+          user
+            ? html`
+                <div class="mt-2 border-t border-border/70 p-2 pt-3">
                   <div class="flex items-center gap-3 px-2 pb-3">
                     <div
                       class="flex h-10 w-10 items-center justify-center rounded-full bg-primary/10 text-primary font-bold"
@@ -398,9 +394,10 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
                       <i data-lucide="log-out" class="h-4 w-4"></i> Log out
                     </button>
                   </div>
-                `
-          }
-        </div>
+                </div>
+              `
+            : ""
+        }
       </div>
     </header>
 

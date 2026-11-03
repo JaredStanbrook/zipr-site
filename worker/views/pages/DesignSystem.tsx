@@ -36,17 +36,17 @@ import {
  */
 
 const PALETTE = [
-  { name: "Warm paper", hex: "#F8F6F2", role: "Layer 1 — the body", swatch: "bg-[#F8F6F2]" },
+  { name: "Warm paper", hex: "#F8F6F2", role: "Layer 1: the body", swatch: "bg-[#F8F6F2]" },
   {
     name: "Near-black",
     hex: "#242321",
-    role: "Layer 3 — text, black buttons",
+    role: "Layer 3: text, black buttons",
     swatch: "bg-[#242321]",
   },
   {
     name: "Vivid orange",
     hex: "#F36B3B",
-    role: "The brand — marks and fills",
+    role: "The brand: marks and fills",
     swatch: "bg-[#F36B3B]",
   },
   {
@@ -139,7 +139,7 @@ export const DesignSystemPage: FC = () => (
               Three layers, <em>flat,</em> in order.
             </>
           }
-          lede="White, then grey, then black — and never a fourth. Content in the body sits on the paper, never above it. The one way in is a well."
+          lede="White, then grey, then black, and never a fourth. Content in the body sits on the paper, never above it. The one way in is a well."
         />
 
         {/* The hierarchy, drawn as itself: paper holding a grey well holding
@@ -147,15 +147,15 @@ export const DesignSystemPage: FC = () => (
         <div class="grid gap-6 lg:grid-cols-12">
           <div class="flat p-6 sm:p-8 lg:col-span-7">
             <p class="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground">
-              1 · White — the body
+              1 · White: the body
             </p>
             <Well class="mt-6 p-6 sm:p-8">
               <p class="font-mono text-xs uppercase tracking-[0.14em] text-muted-foreground">
-                2 · Grey — a well, cut in
+                2 · Grey: a well, cut in
               </p>
               <div class="surface-ink mt-6 rounded-[var(--radius-lg)] p-6">
                 <p class="font-mono text-xs uppercase tracking-[0.14em] opacity-70">
-                  3 · Black — the top. Nothing above it.
+                  3 · Black: the top. Nothing above it.
                 </p>
               </div>
             </Well>
@@ -200,7 +200,7 @@ export const DesignSystemPage: FC = () => (
         </Rule>
         <Rule
           name="Technical"
-          note="JetBrains Mono — and only for what is technical: step names, versions, paths, keys."
+          note="JetBrains Mono, and only for what is technical: step names, versions, paths, keys."
         >
           <p class="flex flex-wrap gap-2 text-sm">
             <code class="rounded-[var(--radius-sm)] bg-background px-2 py-1">Open Link</code>
@@ -221,7 +221,7 @@ export const DesignSystemPage: FC = () => (
         <SectionHeading
           eyebrow="Emphasis"
           title="The orange cards are wells now."
-          lede="A well is how one thing is set apart: grey, cut a hair into the page. Use them sparingly — everything else stays flat, with a hairline."
+          lede="A well is how one thing is set apart: grey, cut a hair into the page. Use them sparingly; everything else stays flat, with a hairline."
         />
         <div class="grid gap-6 lg:grid-cols-3">
           <Card lift class="flex flex-col p-7">
@@ -233,8 +233,8 @@ export const DesignSystemPage: FC = () => (
               The default. Paper on paper, told apart by its edge, which sharpens under the pointer.
               It never lifts.
             </p>
-            <LinkButton href="/features" variant="outline" class="mt-6 self-start">
-              See the features
+            <LinkButton href="/toolbox" variant="outline" class="mt-6 self-start">
+              See the toolbox
             </LinkButton>
           </Card>
 
@@ -244,7 +244,7 @@ export const DesignSystemPage: FC = () => (
               <Badge tone="primary">Was orange</Badge>
             </div>
             <p class="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground text-pretty">
-              The featured card. Its emphasis is now depth, not paint — and a grey button inside a
+              The featured card. Its emphasis is now depth, not paint, and a grey button inside a
               well turns white.
             </p>
             <div class="mt-6 flex flex-wrap gap-3">
@@ -277,7 +277,7 @@ export const DesignSystemPage: FC = () => (
             </h2>
           </div>
           <p class="leading-relaxed text-muted-foreground text-pretty lg:col-span-5">
-            Black leaves the page. Grey stays on it — and on a grey surface, grey turns white. Hover
+            Black leaves the page. Grey stays on it, and on a grey surface, grey turns white. Hover
             or tab to any of them for the rotating glow, or switch it on for all of them.
           </p>
         </div>
@@ -286,7 +286,7 @@ export const DesignSystemPage: FC = () => (
           data-glow-demo
           class="grid gap-px overflow-hidden rounded-[var(--radius-xl)] border border-border"
         >
-          <ButtonStage label="Important — once per screen" class="surface-paper">
+          <ButtonStage label="Important: once per screen" class="surface-paper">
             <LinkButton href="/downloads" variant="important" size="lg">
               <i data-lucide="download" class="h-4 w-4" aria-hidden="true"></i>
               Download Zipr
@@ -306,7 +306,7 @@ export const DesignSystemPage: FC = () => (
               Replay
             </ActionButton>
           </ButtonStage>
-          <ButtonStage label="On grey — grey buttons turn white" class="surface-grey">
+          <ButtonStage label="On grey: grey buttons turn white" class="surface-grey">
             <LinkButton href="/pricing">See pricing</LinkButton>
             <LinkButton href="#type">Back to type</LinkButton>
             <ActionButton>
@@ -343,7 +343,7 @@ export const DesignSystemPage: FC = () => (
         <SectionHeading
           eyebrow="Media"
           title="Real screens, sliding past."
-          lede="Authentic screenshots only. They slide left to right, on and off the page; grab the row to pull it, let go and it carries on. Click any picture — wherever it is clipped — to open the whole of it."
+          lede="Authentic screenshots only. They slide left to right, on and off the page; grab the row to pull it, let go and it carries on. Click any picture, wherever it is clipped, to open the whole of it."
         />
       </Container>
 
@@ -370,7 +370,7 @@ export const DesignSystemPage: FC = () => (
             <h3 class="text-3xl leading-[1.05] text-balance">Half on the page, half beyond it.</h3>
             <p class="mt-4 leading-relaxed text-muted-foreground text-pretty">
               A picture drawn wider than its column runs off the edge, and the section clips it. It
-              says “there is more of this” better than a framed thumbnail — and the viewer always
+              says “there is more of this” better than a framed thumbnail, and the viewer always
               shows all of it.
             </p>
           </div>
@@ -396,8 +396,8 @@ export const DesignSystemPage: FC = () => (
           <Eyebrow class="justify-center">Video</Eyebrow>
           <h3 class="text-3xl leading-[1.05] text-balance">In the middle, on a loop.</h3>
           <p class="mt-4 leading-relaxed text-muted-foreground text-pretty">
-            Video sits centred and plays by itself, muted, like a GIF — no controls, because there
-            is nothing to control. It starts and ends on the same frame, so the loop has no seam.
+            Video sits centred and plays by itself, muted, like a GIF: no controls, because there is
+            nothing to control. It starts and ends on the same frame, so the loop has no seam.
           </p>
         </div>
         <LoopVideo
@@ -431,7 +431,7 @@ export const DesignSystemPage: FC = () => (
           <div class="lg:col-span-8">
             <Disclosure question="Why is nothing raised?">
               Because a flat page reads faster. Depth is kept for one thing: a well, which sets
-              content apart by cutting it in — and the footer logo, which is the one object allowed
+              content apart by cutting it in, and the footer logo, which is the one object allowed
               to stand up.
             </Disclosure>
             <Disclosure question="Why does the glow rotate?">
@@ -441,7 +441,7 @@ export const DesignSystemPage: FC = () => (
             </Disclosure>
             <Disclosure question="When is a button black?">
               When it takes you off the page: another page, a download, another site. Anything that
-              stays on the page — a toggle, a replay, a jump to a section — is grey.
+              stays on the page (a toggle, a replay, a jump to a section) is grey.
             </Disclosure>
           </div>
         </div>

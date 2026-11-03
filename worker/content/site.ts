@@ -82,7 +82,7 @@ export const FILE_FORMATS = [
   { extension: "exe", label: "Installer (.exe)" },
   { extension: "msi", label: "Installer (.msi)" },
   { extension: "dmg", label: "Disk image (.dmg)" },
-  { extension: "appimage", label: "AppImage — any distribution" },
+  { extension: "appimage", label: "AppImage (any distribution)" },
   { extension: "deb", label: "Debian and Ubuntu (.deb)" },
   { extension: "rpm", label: "Fedora and openSUSE (.rpm)" },
 ];
@@ -147,7 +147,6 @@ export const INSTALL_NOTES = [
  * live in the footer.
  */
 export const PUBLIC_NAV = [
-  { to: "/features", name: "Features" },
   { to: "/gallery", name: "Gallery" },
   { to: "/zap", name: "Build with Zap" },
   { to: "/teams", name: "For teams" },
@@ -181,7 +180,7 @@ export const SCREENSHOTS = {
   "overlay-list": {
     width: 1232,
     height: 1304,
-    alt: "The Zipr launcher: a search box above a list of shortcuts — Start my workday pinned at the top, then the recent ones, Join my next meeting, Focus for an hour, Check the VPN and Start my day connected, then Present my screen, Fill in my timesheet and more — each with its own icon and colour.",
+    alt: "The Zipr launcher: a search box above a list of shortcuts, with Start my workday pinned at the top, then the recent ones, Join my next meeting, Focus for an hour, Check the VPN and Start my day connected, then Present my screen, Fill in my timesheet and more, each with its own icon and colour.",
   },
   "overlay-grid": {
     width: 1232,
@@ -204,7 +203,7 @@ export const SCREENSHOTS = {
   "overlay-helpdesk": {
     width: 1392,
     height: 1350,
-    alt: "An IT support person's Zipr launcher with no search field, grouped under headings: their own shortcuts — Open my ticket queue, Start a remote session, Search the knowledge base — then the Acme IT team's, from Check certificate expiry to Page the on-call engineer.",
+    alt: "An IT support person's Zipr launcher with no search field, grouped under headings. First their own shortcuts (Open my ticket queue, Start a remote session, Search the knowledge base), then the Acme IT team's, from Check certificate expiry to Page the on-call engineer.",
   },
   "overlay-sales": {
     width: 1392,
@@ -229,37 +228,37 @@ export const SCREENSHOTS = {
   "editor-steps": {
     width: 2592,
     height: 1808,
-    alt: "The Zipr shortcut editor open on Start my workday, a personal shortcut that starts on its own at 08:45 on weekdays. Its trigger sits above its steps, switched on, with its next run. Three steps run in order — open my email, open my calendar, open the stand-up notes — each ticked from its last run, and the last is selected, with its web address and what to do if it fails in the panel beside it.",
+    alt: "The Zipr shortcut editor open on Start my workday, a personal shortcut that starts on its own at 08:45 on weekdays. Its trigger sits above its steps, switched on, with its next run. Three steps run in order: open my email, open my calendar, open the stand-up notes, each ticked from its last run, and the last is selected, with its web address and what to do if it fails in the panel beside it.",
   },
   "editor-branches": {
     width: 2992,
     height: 1928,
-    alt: "The Zipr shortcut editor open on Check the VPN. After a check, an If step sends the shortcut down two paths: when the VPN is connected it opens the intranet, otherwise it asks what to do — connect, open the help page or leave it. The If is selected, and its condition is set out in the panel beside it.",
+    alt: "The Zipr shortcut editor open on Check the VPN. After a check, an If step sends the shortcut down two paths: when the VPN is connected it opens the intranet, otherwise it asks what to do (connect, open the help page or leave it). The If is selected, and its condition is set out in the panel beside it.",
   },
   "editor-tour": {
     width: 3392,
     height: 2168,
-    alt: "The Zipr app with the shortcut editor open on Start my day connected. At the top of its steps sits its trigger, weekdays at 08:30, switched on, with its next run. The shortcut checks the VPN, then an If sends it down one of two paths — open the intranet when it is connected, or connect to the VPN and give it a moment — and both paths join again to open email and the stand-up notes. A line shows the If reading the check's result, each step is ticked from its last run, an overview map sits in the corner, and the If is selected with its condition in the panel beside it.",
+    alt: "The Zipr app with the shortcut editor open on Start my day connected. At the top of its steps sits its trigger, weekdays at 08:30, switched on, with its next run. The shortcut checks the VPN, then an If sends it down one of two paths: open the intranet when it is connected, or connect to the VPN and give it a moment, and both paths join again to open email and the stand-up notes. A line shows the If reading the check's result, each step is ticked from its last run, an overview map sits in the corner, and the If is selected with its condition in the panel beside it.",
   },
   "run-history": {
     width: 3072,
     height: 1568,
-    alt: "Run history for Start my day connected: five runs, each with whether it worked, when, how long it took and what started it. The failed one is open, listing each step in order with its time — the VPN check and the If done, then Connect to the VPN failed, because the program could not be started.",
+    alt: "Run history for Start my day connected: five runs, each with whether it worked, when, how long it took and what started it. The failed one is open, listing each step in order with its time: the VPN check and the If done, then Connect to the VPN failed, because the program could not be started.",
   },
   "app-shortcuts": {
     width: 2752,
     height: 1808,
-    alt: "The Zipr app's Library: a sidebar grouping Library, Teams and Zap, plugins, insights and settings, with your account at its foot; a search box with a filter; and your personal shortcuts — Book a meeting room, Check the VPN, Fill in my timesheet, Start my workday and more — each with its number of steps and when it last changed, above the shortcuts of your team, Acme IT, in its Helpdesk group.",
+    alt: "The Zipr app's Library: a sidebar grouping Library, Teams and Zap, plugins, insights and settings, with your account at its foot; a search box with a filter; and your personal shortcuts: Book a meeting room, Check the VPN, Fill in my timesheet, Start my workday and more, each with its number of steps and when it last changed, above the shortcuts of your team, Acme IT, in its Helpdesk group.",
   },
   zap: {
     width: 2392,
     height: 2910,
-    alt: "Zap building a shortcut called Friday tidy-up. The request asks for screenshots to go into Pictures and anything untouched for a month to be zipped into an archive. Zap builds it, then, asked not to make an empty zip, counts the old files first and wraps the archiving in an If. The steps: get today's date, go back 30 days, find and move the screenshots, find and count the old files, then, if there are any, zip them under today's date, send the originals to the bin and say what was archived — otherwise say it was already tidy. A test shows every step succeeded.",
+    alt: "Zap building a shortcut called Friday tidy-up. The request asks for screenshots to go into Pictures and anything untouched for a month to be zipped into an archive. Zap builds it, then, asked not to make an empty zip, counts the old files first and wraps the archiving in an If. The steps: get today's date, go back 30 days, find and move the screenshots, find and count the old files, then, if there are any, zip them under today's date, send the originals to the bin and say what was archived; otherwise say it was already tidy. A test shows every step succeeded.",
   },
   "zap-release": {
     width: 2392,
     height: 3506,
-    alt: "Zap building a shortcut called Release notes, after checking git is on this computer. It runs a git script for the commits since the last tag, splits them into lines, leaves out merge commits, joins them back up and has an AI model write customer-friendly release notes. A menu then offers three paths: copy the notes, draft an email to the team, or post them to the changelog — where an If shows a notification when the changelog accepts them and its answer when it does not. A panel lists the three steps that need allowing before a test: the script, the AI step and the post.",
+    alt: "Zap building a shortcut called Release notes, after checking git is on this computer. It runs a git script for the commits since the last tag, splits them into lines, leaves out merge commits, joins them back up and has an AI model write customer-friendly release notes. A menu then offers three paths: copy the notes, draft an email to the team, or post them to the changelog, where an If shows a notification when the changelog accepts them and its answer when it does not. A panel lists the three steps that need allowing before a test: the script, the AI step and the post.",
   },
 } as const;
 

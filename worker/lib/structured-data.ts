@@ -47,7 +47,7 @@ export const softwareSchema = (app: AppConfig, description: string) => ({
   url: abs(app, "/"),
   downloadUrl: abs(app, "/downloads"),
   applicationCategory: "BusinessApplication",
-  operatingSystem: "Windows 10 or later, macOS 12 or later",
+  operatingSystem: "Windows 10 or later, macOS 12 or later, Linux (64-bit)",
   offers: {
     "@type": "Offer",
     price: "0",

@@ -19,7 +19,6 @@ import { createTestApp, get } from "./testApp";
  */
 export const TRANSLATED_PAGES = [
   "/",
-  "/features",
   "/zap",
   "/zap/setup",
   "/toolbox",

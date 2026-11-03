@@ -1,4 +1,4 @@
-The three typefaces in this directory are bundled with the site so that first
+The four typefaces in this directory are bundled with the site so that first
 paint owes nothing to a third party. All are licensed under the SIL Open Font
 License, Version 1.1, whose full text follows the notices below.
 
@@ -8,9 +8,11 @@ License, Version 1.1, whose full text follows the notices below.
                     https://github.com/rsms/inter
   JetBrains Mono  — Copyright 2020 The JetBrains Mono Project Authors
                     https://github.com/JetBrains/JetBrainsMono
+  Press Start 2P  — Copyright 2012 The Press Start 2P Project Authors
+                    (cody@zone38.net), with Reserved Font Name "Press Start 2P"
 
 Each file here is the latin or latin-ext subset of the upstream variable font,
-as packaged by Fontsource (Space Grotesk and Inter) or served by Google Fonts
+as packaged by Fontsource (Space Grotesk, Inter and Press Start 2P) or served by Google Fonts
 (JetBrains Mono), unmodified.
 
 -------------------------------------------------------------------------------

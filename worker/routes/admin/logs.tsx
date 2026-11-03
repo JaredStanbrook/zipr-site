@@ -21,7 +21,7 @@ logsRoute.get("/", async (c) => {
     .limit(200);
 
   const formatMetadata = (value: unknown) => {
-    if (!value) return "—";
+    if (!value) return "None";
     try {
       return JSON.stringify(value, null, 2);
     } catch {
@@ -81,8 +81,8 @@ logsRoute.get("/", async (c) => {
                         ) : null}
                       </div>
                     </td>
-                    <td class="p-4 text-sm text-muted-foreground">{log.method || "—"}</td>
-                    <td class="p-4 text-sm text-muted-foreground">{log.ipAddress || "—"}</td>
+                    <td class="p-4 text-sm text-muted-foreground">{log.method || "None"}</td>
+                    <td class="p-4 text-sm text-muted-foreground">{log.ipAddress || "None"}</td>
                     <td class="p-4">
                       <pre class="max-w-md overflow-auto whitespace-pre-wrap break-words rounded-md bg-muted/30 p-3 text-xs text-muted-foreground">
                         {formatMetadata(log.metadata)}

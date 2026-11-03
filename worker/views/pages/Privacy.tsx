@@ -65,7 +65,7 @@ export const PrivacyPage: FC<{ app: AppConfig }> = ({ app }) => {
             <ul class="mt-4 space-y-3">
               <CheckItem>No analytics, advertising or tracking cookies on this site.</CheckItem>
               <CheckItem>
-                No third-party scripts or fonts — everything is served from our own domain.
+                No third-party scripts or fonts: everything is served from our own domain.
               </CheckItem>
               <CheckItem>
                 We only hold what you choose to send us: a bug report, or an email.
@@ -88,7 +88,7 @@ export const PrivacyPage: FC<{ app: AppConfig }> = ({ app }) => {
                 report form
               </a>
               , we store what you type: where the problem happened, your summary and description,
-              and — only if you fill them in — the version, your platform and your email address. We
+              and (only if you fill them in) the version, your platform and your email address. We
               use it to investigate and fix the problem, and to reply if you left an address.
               Reports are not published.
             </p>
@@ -141,14 +141,14 @@ export const PrivacyPage: FC<{ app: AppConfig }> = ({ app }) => {
               <li>an audit trail of who changed what, and when;</li>
               <li>
                 usage records of who ran which shortcut, when, and from which device and app version
-                — the basis of the team usage figures. These are kept for 180 days by default.
+                : the basis of the team usage figures. These are kept for 180 days by default.
               </li>
             </ul>
             <p>
               Your organisation decides who is a member and who can see what, so questions about
-              that data are best sent to your administrator first — we will help them answer.
-              Billing is handled through our payment provider, Stripe, which holds your
-              organisation's billing details.
+              that data are best sent to your administrator first; we will help them answer. Billing
+              is handled through our payment provider, Stripe, which holds your organisation's
+              billing details.
             </p>
           </Block>
 
@@ -180,10 +180,10 @@ export const PrivacyPage: FC<{ app: AppConfig }> = ({ app }) => {
           <Block title="Your rights">
             <p>
               You can ask us for a copy of the information we hold about you, and ask us to correct
-              or delete it or to stop using it. Depending on where you live — for example the EU,
-              UK, Australia or California — you may have further rights, including the right to
-              complain to your data-protection regulator. Email <Mail /> and we will answer within a
-              month. We will never treat you differently for asking.
+              or delete it or to stop using it. Depending on where you live (for example the EU, UK,
+              Australia or California) you may have further rights, including the right to complain
+              to your data-protection regulator. Email <Mail /> and we will answer within a month.
+              We will never treat you differently for asking.
             </p>
           </Block>
 
@@ -212,7 +212,7 @@ export const PrivacyPage: FC<{ app: AppConfig }> = ({ app }) => {
               {PRIVACY_VERSIONS.map((v) => (
                 <li>
                   <span class="font-semibold text-foreground tabular">{v.version}</span> ·{" "}
-                  <time datetime={v.date}>{formatDateShort(v.date, app.locale)}</time> — {v.summary}
+                  <time datetime={v.date}>{formatDateShort(v.date, app.locale)}</time>: {v.summary}
                 </li>
               ))}
             </ul>

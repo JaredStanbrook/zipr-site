@@ -239,7 +239,7 @@ export function validateAuthConfig(env: any): { valid: boolean; errors: string[]
     errors.push(
       `SESSION_DURATION is ${config.session.duration}ms (~${Math.round(
         config.session.duration / 1000,
-      )}s), which signs users out almost immediately. It is in milliseconds — 86400000 is a day.`,
+      )}s), which signs users out almost immediately. It is in milliseconds: 86400000 is a day.`,
     );
   }
 

@@ -193,7 +193,7 @@ const ReleaseArchive: FC<{ releases: ReleaseWithAssets[]; app: AppConfig }> = ({
               {rel.version}
             </th>
             <td class="px-5 py-3.5 text-sm text-muted-foreground" translate="no">
-              {rel.publishedAt ? formatDateShort(rel.publishedAt, app.locale) : "—"}
+              {rel.publishedAt ? formatDateShort(rel.publishedAt, app.locale) : "Not yet"}
             </td>
             <td class="px-5 py-3.5">
               <div class="flex flex-wrap gap-3">
@@ -233,13 +233,13 @@ const NoReleases: FC = () => (
     </h2>
     <p class="mx-auto mt-3 max-w-lg leading-relaxed text-muted-foreground text-pretty">
       Zipr is early and the installers aren't up here yet. Leave us a line and we'll tell you the
-      moment there's something to install — no list, no newsletter, just the one email.
+      moment there's something to install: no list, no newsletter, just the one email.
     </p>
     <div class="mt-7 flex flex-wrap justify-center gap-3">
       <LinkButton href="/contact?topic=support" size="lg">
         Tell me when it's ready
       </LinkButton>
-      <LinkButton href="/features" variant="outline" size="lg">
+      <LinkButton href="/toolbox" variant="outline" size="lg">
         See what it does
       </LinkButton>
     </div>
@@ -466,7 +466,7 @@ const ExperimentalSection: FC<{ builds: ReleaseWithAssets[]; app: AppConfig }> =
         <SectionHeading
           eyebrow="Experimental builds"
           title="Try what’s next"
-          lede="Builds straight from development, put up as they’re made. They’re for trying things early and telling us what broke — the stable version at the top of this page is the one to install."
+          lede="Builds straight from development, put up as they’re made. They’re for trying things early and telling us what broke. The stable version at the top of this page is the one to install."
         />
 
         <ul class="mb-8 grid gap-x-8 gap-y-4 sm:grid-cols-2">
@@ -682,7 +682,7 @@ export const DownloadsPage: FC<DownloadsProps> = ({
     <CtaBand
       title="That’s it. Nothing else to do."
       body="No sign-up, no licence key, no clock counting down. Come back the day your team wants what you’ve built."
-      primary={{ href: "/features", label: "What it can do" }}
+      primary={{ href: "/toolbox", label: "What it can do" }}
       secondary={{ href: "/pricing", label: "What a team costs" }}
     />
   </Page>

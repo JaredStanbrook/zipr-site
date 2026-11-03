@@ -81,7 +81,7 @@ export const ReportForm: FC<{
           class="flex items-start gap-3 rounded-[var(--radius-sm)] bg-destructive-subtle px-4 py-3 text-sm font-medium text-destructive-subtle-foreground"
         >
           <i data-lucide="circle-x" class="mt-0.5 h-4 w-4 shrink-0" aria-hidden="true"></i>
-          <span>Almost — a couple of fields need another look.</span>
+          <span>Almost: a couple of fields need another look.</span>
         </div>
       ) : null}
 
@@ -212,7 +212,7 @@ export const ReportSuccess: FC = () => (
     </span>
     <h2 class="mt-5 text-2xl font-bold">Got it. Thank you.</h2>
     <p class="mx-auto mt-3 max-w-md leading-relaxed text-muted-foreground text-pretty">
-      Genuinely — a good bug report is worth more than most feature requests. If you left an address
+      Genuinely: a good bug report is worth more than most feature requests. If you left an address
       we will write back once we know what happened.
     </p>
     <p class="mt-6 text-sm text-muted-foreground">

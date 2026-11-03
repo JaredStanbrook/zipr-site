@@ -108,7 +108,7 @@ const inZipr = (provider: SetupProvider) => [
   },
   {
     title: "Paste the key and press Check and save",
-    body: "Zipr sends one small request asking the model to call a tool. If it does, the key is saved to your operating system's keychain and is never shown again. If not, the message says why — see Troubleshooting below.",
+    body: "Zipr sends one small request asking the model to call a tool. If it does, the key is saved to your operating system's keychain and is never shown again. If not, the message says why: see Troubleshooting below.",
   },
 ];
 
@@ -158,7 +158,7 @@ const ProviderSection: FC<{ provider: SetupProvider; app: AppConfig; muted: bool
               aria-hidden="true"
             ></i>
             <span class="text-sm leading-relaxed">
-              <Code>{model.id}</Code> — <span class="text-muted-foreground">{model.note}</span>
+              <Code>{model.id}</Code>: <span class="text-muted-foreground">{model.note}</span>
             </span>
           </li>
         ))}
@@ -171,7 +171,7 @@ const ProviderSection: FC<{ provider: SetupProvider; app: AppConfig; muted: bool
             ></i>
             <span class="text-sm leading-relaxed">
               <span class="sr-only">Doesn't work: </span>
-              <Code>{model.id}</Code> — <span class="text-muted-foreground">{model.note}</span>
+              <Code>{model.id}</Code>: <span class="text-muted-foreground">{model.note}</span>
             </span>
           </li>
         ))}
@@ -299,7 +299,7 @@ export const ZapSetupPage: FC<{ app: AppConfig }> = ({ app }) => (
         <ul class="mt-3 space-y-2 text-sm text-muted-foreground">
           {ZAP_SETUP_HISTORY.map((entry) => (
             <li>
-              <time datetime={entry.date}>{formatDateShort(entry.date, app.locale)}</time> —{" "}
+              <time datetime={entry.date}>{formatDateShort(entry.date, app.locale)}</time>:{" "}
               {entry.summary}
             </li>
           ))}

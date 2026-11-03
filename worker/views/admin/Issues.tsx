@@ -119,8 +119,8 @@ export const IssuesPage: FC<IssuesProps> = ({ items, counts, filter, app }) => {
           <div>
             <h1 class="text-3xl font-bold tracking-tight">Bug reports</h1>
             <p class="mt-1 text-muted-foreground">
-              Everything the public report form has taken. This is the tracker — the repositories
-              are private.
+              Everything the public report form has taken. This is the tracker; the repositories are
+              private.
             </p>
           </div>
           <a href="/admin" class="text-sm font-medium text-primary underline underline-offset-4">

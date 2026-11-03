@@ -164,7 +164,7 @@ export const ContactPage: FC<{ topic?: string }> = ({ topic }) => (
           align="center"
           eyebrow="Contact"
           title="Talk to a person"
-          lede="Pick whichever fits. Each one opens a message with the subject already written — and where it helps, the questions we'd have asked anyway."
+          lede="Pick whichever fits. Each one opens a message with the subject already written, and where it helps, the questions we'd have asked anyway."
         />
 
         <div class="grid gap-5 sm:grid-cols-2">
@@ -181,7 +181,7 @@ export const ContactPage: FC<{ topic?: string }> = ({ topic }) => (
           >
             {CONTACT.address}
           </a>
-          — a real inbox, not an autoresponder, so give us a working day. No form, no list, no
+          , a real inbox, not an autoresponder, so give us a working day. No form, no list, no
           follow-up sequence. We use your address to answer you; the{" "}
           <a href="/privacy" class="font-medium text-primary underline underline-offset-4">
             privacy notice

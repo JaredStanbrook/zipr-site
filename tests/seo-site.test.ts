@@ -67,11 +67,11 @@ describe("canonical URL enforcement", () => {
 
   it("strips a trailing slash with a 301, keeping the query", async () => {
     const res = await redirectApp().fetch(
-      new Request("https://zipr.example/features/?a=b"),
+      new Request("https://zipr.example/toolbox/?a=b"),
       prodEnv,
     );
     expect(res.status).toBe(301);
-    expect(res.headers.get("Location")).toBe("/features?a=b");
+    expect(res.headers.get("Location")).toBe("/toolbox?a=b");
   });
 
   it("never redirects the home page or a POST", async () => {
@@ -107,7 +107,7 @@ describe("not-found page", () => {
 
 describe("page metadata", () => {
   it("gives every page the site's share image, unless it sets its own", () => {
-    const url = new URL("https://zipr.example/features");
+    const url = new URL("https://zipr.example/toolbox");
     expect(resolveMeta({}, appConfig as any, url).image).toBe("https://zipr.example/og.png");
     expect(resolveMeta({ image: "/x.png" }, appConfig as any, url).image).toBe(
       "https://zipr.example/x.png",
@@ -166,7 +166,6 @@ describe("rendered pages", () => {
     const titles = new Set<string>();
     for (const path of [
       "/",
-      "/features",
       "/toolbox",
       "/gallery",
       "/teams",

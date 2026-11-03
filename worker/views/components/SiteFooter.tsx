@@ -16,7 +16,6 @@ const COLUMNS: Array<{ heading: string; links: Array<{ to: string; name: string 
   {
     heading: "Product",
     links: [
-      { to: "/features", name: "Features" },
       { to: "/toolbox", name: "Toolbox" },
       { to: "/gallery", name: "Gallery" },
       { to: "/zap", name: "Build with Zap" },
@@ -155,7 +154,7 @@ export const SiteFooter = ({ appName, tagline }: { appName: string; tagline: str
       </div>
 
       <p
-        class="emboss -mb-[0.06em] mt-6 select-none text-center text-[31vw] font-bold leading-[0.8] sm:text-[26vw] 2xl:text-[24rem]"
+        class="emboss mb-[0.2em] mt-10 select-none text-center text-[20vw] leading-none sm:text-[19vw] 2xl:text-[17rem]"
         aria-hidden="true"
       >
         ${appName}

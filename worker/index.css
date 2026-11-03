@@ -120,8 +120,19 @@
     U+A720-A7FF;
 }
 
-/* The wordmark face, Fraunces, is loaded in Layout.tsx from Google Fonts,
-   subset to the app name's letters. See `.wordmark` and `.emboss`. */
+/* The wordmark face: Press Start 2P, the official face of the Zipr name and
+   used for nothing else (`.wordmark`, `.emboss`). Self-hosted like the
+   others, latin only, 12KB. OFL 1.1. */
+@font-face {
+  font-family: "Press Start 2P";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/press-start-2p-latin.woff2") format("woff2");
+  unicode-range:
+    U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
+    U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}
 
 /* The rotating glow's angle. Registered so it can be animated: an
    unregistered custom property only flips between keyframes, it never turns. */
@@ -217,6 +228,10 @@
   --info-foreground: #ffffff;
   --info-subtle: #d8e6f1;
   --info-subtle-foreground: #1c4562;
+
+  /* The shade across the very top of the page: a step darker than the band
+     grey, fading into the paper (see `body`). */
+  --top-shade: #e2ddd3;
 
   /* --- Lines and fields ------------------------------------------------ */
   --border: #ddd8cf;
@@ -344,6 +359,7 @@
   --info-subtle: #1c3243;
   --info-subtle-foreground: #b0d1ea;
 
+  --top-shade: #22201d;
   --border: #34322e;
   --border-strong: #7b756b;
   --input: #7b756b;
@@ -489,6 +505,13 @@
     font-feature-settings:
       "cv11" 1,
       "ss01" 1;
+    /* A slight grey shade at the very top of the page, darker than the band
+       grey, fading into the paper over a quarter of the screen's height. It
+       belongs to the page, so it scrolls away with the top rather than
+       following the reader down. */
+    background-image: linear-gradient(to bottom, var(--top-shade), var(--background));
+    background-size: 100% 25vh;
+    background-repeat: no-repeat;
   }
 
   h1,
@@ -672,27 +695,20 @@
   .float {
     animation: none;
   }
-  /* The Zipr name wherever it is set as text. */
+  /* The Zipr name wherever it is set as text: Press Start 2P, a pixel face
+     at its one weight. Its glyphs are wide and tall for their size, so it is
+     set smaller than the text around it, with the line closed up. */
   .wordmark {
-    font-family: "Fraunces", var(--font-display);
-    font-optical-sizing: auto;
-    font-variation-settings:
-      "SOFT" 100,
-      "WONK" 0;
-    font-weight: 600;
-    letter-spacing: -0.015em;
+    font-family: "Press Start 2P", var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0;
+    line-height: 1;
   }
 
-  /* Type stamped into the well: the surface's own colour, a highlight on its
-     lower lip and a shadow on its upper, so it only shows where the light
-     catches its edges. Fraunces at full softness, as it always was. */
   .emboss {
-    font-family: "Fraunces", var(--font-display);
-    font-optical-sizing: auto;
-    font-variation-settings:
-      "SOFT" 100,
-      "WONK" 0;
-    letter-spacing: -0.04em;
+    font-family: "Press Start 2P", var(--font-display);
+    font-weight: 400;
+    letter-spacing: 0;
     color: var(--muted);
     text-shadow:
       0 1px 0 var(--emboss-light),
@@ -796,6 +812,13 @@
   .nav-glass {
     background-color: color-mix(in oklab, var(--background) 72%, transparent);
     border: 1px solid color-mix(in oklab, var(--border) 85%, transparent);
+    border-radius: var(--radius-xl);
+    -webkit-backdrop-filter: blur(18px) saturate(1.5);
+    backdrop-filter: blur(18px) saturate(1.5);
+  }
+  /* The small-screen menu: grey glass, no edge. */
+  .nav-menu-glass {
+    background-color: color-mix(in oklab, var(--muted) 82%, transparent);
     border-radius: var(--radius-xl);
     -webkit-backdrop-filter: blur(18px) saturate(1.5);
     backdrop-filter: blur(18px) saturate(1.5);

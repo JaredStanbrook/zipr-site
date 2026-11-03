@@ -190,7 +190,7 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
               Free for you. <em>Paid</em> for your team.
             </>
           }
-          lede="The whole app is free for one person. A team server adds teams that share their shortcuts — and you choose who runs it."
+          lede="The whole app is free for one person. A team server adds teams that share their shortcuts, and you choose who runs it."
         />
       </Container>
     </Section>
@@ -250,7 +250,7 @@ export const PricingPage: FC<{ app: AppConfig }> = ({ app }) => (
 
         <p class="mx-auto mt-8 max-w-2xl text-center text-sm text-muted-foreground text-pretty">
           The agreement covers the software and support. The server is yours, on whichever cloud or
-          rack you already use — and because a deployment counts nobody, the price doesn't move when
+          rack you already use, and because a deployment counts nobody, the price doesn't move when
           the team grows.
         </p>
       </Container>

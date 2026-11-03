@@ -28,8 +28,8 @@ const NotFoundPage: FC = () => (
         />
         <div class="flex flex-wrap justify-center gap-3">
           <LinkButton href="/">Home</LinkButton>
-          <LinkButton href="/features" variant="outline">
-            Features
+          <LinkButton href="/toolbox" variant="outline">
+            Toolbox
           </LinkButton>
           <LinkButton href="/downloads" variant="outline">
             Download Zipr

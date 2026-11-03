@@ -29,7 +29,7 @@ const PROPERTIES = [
   {
     icon: "server",
     title: "Your data, where you choose",
-    body: "Self-hosted, it never leaves your infrastructure and we have no copy. Hosted, it sits in a database belonging to your organisation alone — we operate it, so access is governed by contract and policy.",
+    body: "Self-hosted, it never leaves your infrastructure and we have no copy. Hosted, it sits in a database belonging to your organisation alone; we operate it, so access is governed by contract and policy.",
   },
   {
     icon: "wifi-off",
@@ -44,7 +44,7 @@ const PROPERTIES = [
   {
     icon: "key-round",
     title: "Sharing doesn't loosen access",
-    body: "A shortcut leaves its team only when someone the team allows shares it with the organisation or copies it to another team. Roles, membership and single sign-on stay yours — and people can't tell whether a team they can't see exists.",
+    body: "A shortcut leaves its team only when someone the team allows shares it with the organisation or copies it to another team. Roles, membership and single sign-on stay yours, and people can't tell whether a team they can't see exists.",
   },
   {
     icon: "download",
@@ -64,11 +64,11 @@ export const REVIEW_FAQ = [
   },
   {
     q: "Can we run it somewhere with no internet access?",
-    a: "Yes, self-hosted. The licence verifies offline, so air-gapped is a supported configuration, not a workaround — and we'll help you set it up. The hosted service can't be air-gapped.",
+    a: "Yes, self-hosted. The licence verifies offline, so air-gapped is a supported configuration, not a workaround, and we'll help you set it up. The hosted service can't be air-gapped.",
   },
   {
     q: "How do we sign in?",
-    a: "In your browser — the app opens the sign-in page and never handles your Zipr password itself. Google, Microsoft Entra and Okta are supported, so people join and leave wherever you already manage that.",
+    a: "In your browser: the app opens the sign-in page and never handles your Zipr password itself. Google, Microsoft Entra and Okta are supported, so people join and leave wherever you already manage that.",
   },
   {
     q: "What happens to our data if we stop paying?",
@@ -84,7 +84,7 @@ export const REVIEW_FAQ = [
   },
   {
     q: "Are the installers signed?",
-    a: "Not yet — signing is on the way. Every download is published with a SHA-256 checksum so you can verify exactly what you got.",
+    a: "Not yet. Signing is on the way. Every download is published with a SHA-256 checksum so you can verify exactly what you got.",
   },
 ];
 
@@ -163,7 +163,7 @@ export const SecurityPage: FC = () => (
 
     <CtaBand
       title="Need this in writing?"
-      body="We'll complete a security questionnaire, sign a DPA, or talk to whoever needs convincing — hosted or self-hosted."
+      body="We'll complete a security questionnaire, sign a DPA, or talk to whoever needs convincing, hosted or self-hosted."
       primary={{ href: "/contact?topic=licence", label: "Talk to us" }}
       secondary={{ href: "/downloads", label: "Try it first" }}
     />

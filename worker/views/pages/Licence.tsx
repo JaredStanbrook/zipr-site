@@ -65,7 +65,7 @@ export const LicencePage: FC<{ app: AppConfig }> = ({ app }) => {
             >
               {LEGAL.contact}
             </a>
-            . Using a Zipr server for a team is covered separately — see{" "}
+            . Using a Zipr server for a team is covered separately: see{" "}
             <a href="/pricing" class="font-medium text-primary underline underline-offset-4">
               pricing
             </a>

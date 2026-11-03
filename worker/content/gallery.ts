@@ -567,7 +567,7 @@ export const GALLERY_ROLES: GalleryRole[] = [
           },
           {
             action: "Copy to Clipboard",
-            sentence: "Copy Break finished — time to return to my next task. to your clipboard",
+            sentence: "Copy Break finished. Time to return to my next task. to your clipboard",
           },
         ],
       },

@@ -115,7 +115,7 @@ const SENT_TO_MODEL = [
   "Your operating system, version, processor type and app language",
   "The plugins Zap is allowed to use",
   "The results of your tests",
-  "Whether an app or program is installed — yes or no, unless your organisation disables this check",
+  "Whether an app or program is installed: yes or no, unless your organisation disables this check",
 ];
 
 const NOT_SENT_TO_MODEL = [
@@ -199,7 +199,7 @@ export const ZapPage: FC = () => (
               Describe it. <em>Zap builds it.</em>
             </>
           }
-          lede="Say what you want done in your own words. Zap builds it from every kind of step Zipr has — files, text, web requests, AI, menus, loops and branches — and you test it before anything is saved."
+          lede="Say what you want done in your own words. Zap builds it from every kind of step Zipr has (files, text, web requests, AI, menus, loops and branches), and you test it before anything is saved."
         />
 
         <div class="mx-auto grid max-w-3xl gap-3 sm:grid-cols-3">
@@ -439,7 +439,7 @@ export const ZapPage: FC = () => (
       title="Bring your idea to Zap."
       body="Download Zipr, connect a model and describe the shortcut you want. You test it, and you decide when it's saved."
       primary={{ href: "/downloads", label: "Download Zipr" }}
-      secondary={{ href: "/features", label: "Explore Zipr" }}
+      secondary={{ href: "/toolbox", label: "See the toolbox" }}
     />
   </Page>
 );

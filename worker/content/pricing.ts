@@ -62,7 +62,7 @@ export const TIERS: PricingTier[] = [
     minimumSeats: null,
     priceNote: "No account. No card. No expiry.",
     features: [
-      "Windows and macOS",
+      "Windows, macOS and Linux",
       "Unlimited shortcuts",
       "Every built-in step, chained however you like",
       "Steps that differ per operating system",
@@ -76,7 +76,7 @@ export const TIERS: PricingTier[] = [
   {
     id: "cloud",
     name: "Hosted",
-    summary: "Everything above, shared between people — on our servers, not yours.",
+    summary: "Everything above, shared between people, on our servers, not yours.",
     monthlyCents: 700,
     annualMonthlyCents: 600,
     minimumSeats: 5,
@@ -90,7 +90,7 @@ export const TIERS: PricingTier[] = [
       "Audit trail and usage figures",
       "Sign in with Google, Microsoft or Okta",
       "Your own database, not a shared one",
-      "Export everything, any time — even if your account lapses",
+      "Export everything, any time, even if your account lapses",
     ],
     cta: { label: "Request access", href: "/contact?topic=cloud" },
     featured: true,
@@ -106,7 +106,7 @@ export const TIERS: PricingTier[] = [
     features: [
       "Everything in Hosted",
       "Runs on your servers, or in your own cloud account",
-      "No user limit — the hardware you chose is the only one",
+      "No user limit: the hardware you chose is the only one",
       "Nothing leaves your network, including the licence check",
       "Runs air-gapped",
       "Settings you can lock down centrally",
@@ -188,7 +188,7 @@ export const COMPARISON: ComparisonGroup[] = [
       },
       {
         feature: "Export everything",
-        note: "Never held against a bill — the hosted export works even while an account is suspended.",
+        note: "Never held against a bill: the hosted export works even while an account is suspended.",
         free: "One file",
         cloud: "One file",
         selfHosted: "It's your database",
@@ -314,7 +314,7 @@ export const COMPARISON: ComparisonGroup[] = [
       { feature: "Runs air-gapped", free: true, cloud: false, selfHosted: true },
       {
         feature: "What you're billed for",
-        note: "Self-hosting counts nobody — your hardware is the limit.",
+        note: "Self-hosting counts nobody: your hardware is the limit.",
         free: "Nothing",
         cloud: "Per person",
         selfHosted: "Per deployment",
@@ -376,16 +376,16 @@ export const PRICING_FAQ: Faq[] = [
     a: "Because the app is complete on its own: it stores and runs everything on your machine, so it would keep working whatever we did. Sharing needs a server, and that is the part you pay for.",
   },
   {
-    q: "Hosted or self-hosted — which should we pick?",
+    q: "Hosted or self-hosted: which should we pick?",
     a: "It is the same software, so choose on operations. Hosted: we run, patch and back it up, and you pay per person. Self-hosted: your data never leaves your infrastructure, it can run with no internet, and you pay per deployment. Teams with a platform group and a data-residency policy usually self-host; everyone else is better served hosted.",
   },
   {
     q: "What counts as a person?",
-    a: "On the hosted service, anyone an administrator adds to your organisation — from the moment they are added, whether or not they sign in. Remove them and they stop counting at the next renewal. Self-hosting doesn't count people at all.",
+    a: "On the hosted service, anyone an administrator adds to your organisation, from the moment they are added, whether or not they sign in. Remove them and they stop counting at the next renewal. Self-hosting doesn't count people at all.",
   },
   {
     q: "Can we try it first?",
-    a: "The free app is the trial — the same build a paying team runs, with no time limit. There's no separate trial of the shared version, because setting one up is the paid work itself. Talk to us and we'll work out a sensible pilot.",
+    a: "The free app is the trial: the same build a paying team runs, with no time limit. There's no separate trial of the shared version, because setting one up is the paid work itself. Talk to us and we'll work out a sensible pilot.",
   },
   {
     q: "What happens if we stop paying?",
@@ -393,7 +393,7 @@ export const PRICING_FAQ: Faq[] = [
   },
   {
     q: "Can we start hosted and move to our own servers later?",
-    a: "Yes — your content exports as one file whenever you want it. There is no one-click conversion that carries accounts and history across yet, so plan the move as a piece of work, and tell us early so we can help.",
+    a: "Yes, your content exports as one file whenever you want it. There is no one-click conversion that carries accounts and history across yet, so plan the move as a piece of work, and tell us early so we can help.",
   },
   {
     q: "How do we pay?",

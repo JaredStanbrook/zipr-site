@@ -51,7 +51,7 @@ export const LICENCE_SECTIONS: LicenceSection[] = [
     title: "What you may not do",
     body: ["You may not:"],
     list: [
-      "sell, rent, sublicense or redistribute the App, or offer it for download anywhere other than from us — point people to our downloads page instead;",
+      "sell, rent, sublicense or redistribute the App, or offer it for download anywhere other than from us: point people to our downloads page instead;",
       "modify, reverse engineer, decompile or disassemble the App, except to the extent the law allows you to despite this restriction;",
       "remove or change any copyright, licence or trademark notice in the App;",
       "get around any technical limit or licence check in the App or in a Zipr server.",

@@ -13,7 +13,6 @@ import { formatPrice } from "@views/lib/utils";
 import { faqSchema, softwareSchema, websiteSchema } from "@server/lib/structured-data";
 
 import { HomePage, HOME_FAQ } from "@views/pages/Home";
-import { FeaturesPage } from "@views/pages/Features";
 import { GalleryPage } from "@views/pages/Gallery";
 import { TeamsPage } from "@views/pages/Teams";
 import { ToolboxPage } from "@views/pages/Toolbox";
@@ -39,7 +38,7 @@ import { DesignSystemPage } from "@views/pages/DesignSystem";
  */
 /** Shared by the home page's meta description and its SoftwareApplication. */
 const HOME_DESCRIPTION =
-  "Zipr turns the clever things you do on your computer into one-click shortcuts you can use yourself or share with anyone. Free for Windows and macOS.";
+  "Zipr turns the clever things you do on your computer into one-click shortcuts you can use yourself or share with anyone. Free for Windows, macOS and Linux.";
 
 /** The hosted per-person price, from the pricing data rather than retyped. */
 const hostedFrom = (app: AppEnv["Variables"]["app"]) => {
@@ -79,13 +78,10 @@ siteRoute.get("/design", (c) =>
   }),
 );
 
-siteRoute.get("/features", (c) =>
-  c.render(<FeaturesPage />, {
-    title: "Features: shortcuts, steps, sharing and history",
-    description:
-      "What the free Zipr app does on its own, what a team server adds, and the steps every shortcut is built from.",
-  }),
-);
+// The features page was retired: everything it said is on the home page, the
+// toolbox or the gallery. Kept as a permanent redirect so old links and
+// search results still land somewhere useful.
+siteRoute.get("/features", (c) => c.redirect("/", 301));
 
 siteRoute.get("/toolbox", (c) =>
   c.render(<ToolboxPage />, {
@@ -246,9 +242,9 @@ siteRoute.get("/downloads", async (c) => {
       app={c.var.app}
     />,
     {
-      title: "Download for Windows and macOS",
+      title: "Download for Windows, macOS and Linux",
       description:
-        "Download the free Zipr desktop app for Windows 10+ or macOS 12+. No account needed, and no network requests until you connect it to a team server.",
+        "Download the free Zipr desktop app for Windows 10+, macOS 12+ or 64-bit Linux. No account needed, and no network requests until you connect it to a team server.",
     },
   );
 });

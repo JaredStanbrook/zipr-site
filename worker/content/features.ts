@@ -45,7 +45,7 @@ export const PILLARS: Feature[] = [
   {
     icon: "zap",
     title: "One click instead of a walkthrough",
-    body: "The steps you worked out become one named shortcut. A colleague clicks it and it runs — no document to follow, no one talking them through it.",
+    body: "The steps you worked out become one named shortcut. A colleague clicks it and it runs: no document to follow, no one talking them through it.",
     tier: "client",
   },
   {
@@ -57,7 +57,7 @@ export const PILLARS: Feature[] = [
   {
     icon: "shield",
     title: "Runs only where you click",
-    body: "Every step runs on the computer of the person who clicked — never on our servers or yours. That is the short answer to your security team's first question.",
+    body: "Every step runs on the computer of the person who clicked, never on our servers or yours. That is the short answer to your security team's first question.",
     tier: "client",
   },
   {
@@ -81,7 +81,7 @@ export const PILLARS: Feature[] = [
   {
     icon: "history",
     title: "Undo anything",
-    body: "Every change is kept. Put any shortcut back how it was in one click, and see who changed what — so trying the strange version costs nothing.",
+    body: "Every change is kept. Put any shortcut back how it was in one click, and see who changed what, so trying the strange version costs nothing.",
     tier: "api",
   },
   {
