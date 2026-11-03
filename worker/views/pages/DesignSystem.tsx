@@ -45,9 +45,9 @@ const PALETTE = [
   },
   {
     name: "Vivid orange",
-    hex: "#E85D32",
+    hex: "#FF5722",
     role: "The brand: marks and fills",
-    swatch: "bg-[#E85D32]",
+    swatch: "bg-[#FF5722]",
   },
   {
     name: "Supporting clay",

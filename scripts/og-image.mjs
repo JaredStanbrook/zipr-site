@@ -39,7 +39,7 @@ const html = `<!doctype html>
   h1 em { color: #b85f46; font-style: normal; }
   p { font-size: 30px; color: #5f5952; margin: 0; }
   .row { display: flex; justify-content: space-between; align-items: flex-end; }
-  .pill { font-size: 24px; font-weight: 700; color: #242321; background: #e85d32; padding: 10px 22px; border-radius: 999px; }
+  .pill { font-size: 24px; font-weight: 700; color: #242321; background: #ff5722; padding: 10px 22px; border-radius: 999px; }
 </style></head>
 <body>
   <div class="logo">${logo}<span>Zipr</span></div>
