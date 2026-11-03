@@ -120,15 +120,15 @@
     U+A720-A7FF;
 }
 
-/* The wordmark face: Press Start 2P, the official face of the Zipr name and
+/* The wordmark face: Silkscreen Bold, the official face of the Zipr name and
    used for nothing else (`.wordmark`, `.emboss`). Self-hosted like the
-   others, latin only, 12KB. OFL 1.1. */
+   others, latin only, 7.5KB. OFL 1.1. */
 @font-face {
-  font-family: "Press Start 2P";
+  font-family: "Silkscreen";
   font-style: normal;
-  font-weight: 400;
+  font-weight: 700;
   font-display: swap;
-  src: url("/fonts/press-start-2p-latin.woff2") format("woff2");
+  src: url("/fonts/silkscreen-bold-latin.woff2") format("woff2");
   unicode-range:
     U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329,
     U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
@@ -695,19 +695,18 @@
   .float {
     animation: none;
   }
-  /* The Zipr name wherever it is set as text: Press Start 2P, a pixel face
-     at its one weight. Its glyphs are wide and tall for their size, so it is
-     set smaller than the text around it, with the line closed up. */
+  /* The Zipr name wherever it is set as text: Silkscreen Bold, a pixel face.
+     Set with the line closed up, so it sits square beside the mark. */
   .wordmark {
-    font-family: "Press Start 2P", var(--font-display);
-    font-weight: 400;
+    font-family: "Silkscreen", var(--font-display);
+    font-weight: 700;
     letter-spacing: 0;
     line-height: 1;
   }
 
   .emboss {
-    font-family: "Press Start 2P", var(--font-display);
-    font-weight: 400;
+    font-family: "Silkscreen", var(--font-display);
+    font-weight: 700;
     letter-spacing: 0;
     color: var(--muted);
     text-shadow:

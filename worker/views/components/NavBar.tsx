@@ -277,9 +277,8 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
         <div class="flex items-center gap-4">
           <a href="/" class="group mr-2 flex items-center gap-2 no-underline">
             <img src="/favicon.svg" alt="" width="28" height="28" class="h-7 w-7" />
-            <!-- The name in its own face and the brand orange. Press Start 2P
-                 runs wide, so it is set smaller than a heading would be. -->
-            <span class="wordmark text-[0.95rem] text-orange">${appName}</span>
+            <!-- The name in its own face, Silkscreen Bold, in the brand orange. -->
+            <span class="wordmark text-[1.3rem] text-orange">${appName}</span>
           </a>
 
           <nav class="hidden items-center gap-1 lg:flex">

@@ -154,7 +154,7 @@ export const SiteFooter = ({ appName, tagline }: { appName: string; tagline: str
       </div>
 
       <p
-        class="emboss mb-[0.2em] mt-10 select-none text-center text-[20vw] leading-none sm:text-[19vw] 2xl:text-[17rem]"
+        class="emboss mb-[0.2em] mt-10 select-none text-center text-[25vw] leading-none sm:text-[24vw] 2xl:text-[22rem]"
         aria-hidden="true"
       >
         ${appName}
