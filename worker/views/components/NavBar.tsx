@@ -257,10 +257,12 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
 
   return html`
     <!--
-      The header floats: a frosted, rounded rectangle held a little off the top
-      edge, with the page blurred as it scrolls beneath. The active page is the
-      one link in ink. On small screens the links drop down from it in a panel
-      of the same glass, rather than taking over the screen.
+      The header floats: a centred, frosted grey rectangle with no edge, held a
+      little off the top and narrower than the page (about 60% of the screen on
+      a phone, 48rem at most on a desktop), with the page blurred as it
+      scrolls beneath. The active page is the one link in ink. On small
+      screens the links drop down from it in a panel of the same glass and
+      the same width, rather than taking over the screen.
     -->
     <!--
       The header element is only a positioning frame: it spans the width and
@@ -272,7 +274,7 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
     -->
     <header class="pointer-events-none fixed inset-x-0 top-0 z-40 px-3 pt-3 sm:px-5">
       <div
-        class="nav-glass pointer-events-auto mx-auto flex h-14 max-w-7xl items-center justify-between pl-4 pr-2"
+        class="nav-menu-glass pointer-events-auto mx-auto flex h-14 w-[calc(60vw-1rem)] min-w-[13.5rem] items-center justify-between pl-4 pr-2 lg:w-full lg:max-w-3xl"
       >
         <div class="flex items-center gap-4">
           <a href="/" class="group mr-2 flex items-center gap-2 no-underline">
@@ -335,11 +337,11 @@ export const NavBar = ({ appName, user, currentPath }: NavBarProps) => {
         </div>
       </div>
 
-      <!-- The small-screen menu: a narrow frosted grey panel dropping from the
-           bar, under the button that opens it. -->
+      <!-- The small-screen menu: a frosted grey panel dropping from the bar,
+           centred under it and exactly as wide (the same width rule). -->
       <div
         id="mobile-menu"
-        class="nav-dropdown nav-menu-glass pointer-events-auto absolute right-3 top-full mt-2 max-h-[calc(100svh-5.5rem)] w-56 max-w-[calc(100vw-1.5rem)] overflow-y-auto p-2 sm:right-5 lg:hidden"
+        class="nav-dropdown nav-menu-glass pointer-events-auto absolute inset-x-0 top-full mx-auto mt-2 max-h-[calc(100svh-5.5rem)] w-[calc(60vw-1rem)] min-w-[13.5rem] overflow-y-auto p-2 lg:hidden"
       >
         <nav class="flex flex-col gap-0.5" aria-label="Main">
           ${[...menuItems, ...(user ? [] : [{ to: "/downloads", name: "Download" }])].map(
