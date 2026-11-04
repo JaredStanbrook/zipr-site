@@ -1,4 +1,4 @@
-import type { FC } from "hono/jsx";
+#import type { FC } from "hono/jsx";
 
 import { GALLERY_ROLES } from "@server/content/gallery";
 import { Card, Eyebrow, IconTile } from "@views/components/Ui";
@@ -226,7 +226,7 @@ export const ZapDemo: FC = () => (
       </div>
 
       {/* The steps connect into a draft shortcut. */}
-      <div class="rounded-[var(--radius-lg)] border border-border bg-background p-4 sm:p-5">
+      <div class="rounded-[var(--radius-xs)] border border-border bg-background p-4 sm:p-5">
         <p
           class="zd mb-3 text-[0.7rem] font-bold uppercase tracking-[0.16em] text-primary"
           style={`--at: ${AT.steps[0]}s;`}
