@@ -418,25 +418,6 @@ export const HomePage: FC<{ app: AppConfig }> = ({ app }) => {
             </div>
 
             <Card tone="well" class="flex flex-col justify-center p-6 sm:p-8">
-              {/* Three teams, each its own pill, with a copy crossing the line
-                  between two of them. The pills never merge — which is the
-                  point being drawn. */}
-              <div class="mb-8 flex items-center gap-2" aria-hidden="true">
-                {["Platform", "Support", "Yours"].map((team, i) => (
-                  <>
-                    {i > 0 ? (
-                      <span class="relative h-0.5 flex-1 bg-border-strong/50">
-                        {i === 1 ? (
-                          <span class="brick absolute left-1/2 top-1/2 -ml-2 -mt-2 h-4 w-4"></span>
-                        ) : null}
-                      </span>
-                    ) : null}
-                    <span class="rounded-full bg-background px-3 py-1.5 text-xs font-semibold sm:px-4">
-                      {team}
-                    </span>
-                  </>
-                ))}
-              </div>
               <ul class="space-y-3.5">
                 {TEAM_UNLOCKS.map((unlock) => (
                   <CheckItem>{unlock}</CheckItem>
