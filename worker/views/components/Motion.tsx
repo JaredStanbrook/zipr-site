@@ -226,7 +226,7 @@ export const ZapDemo: FC = () => (
       </div>
 
       {/* The steps connect into a draft shortcut. */}
-      <div class="rounded-[var(--radius-xs)] border border-border bg-background p-4 sm:p-5">
+      <div class="rounded-[var(--radius-lg)] border border-border bg-background p-4 sm:p-5">
         <p
           class="zd mb-3 text-[0.7rem] font-bold uppercase tracking-[0.16em] text-primary"
           style={`--at: ${AT.steps[0]}s;`}
@@ -237,7 +237,7 @@ export const ZapDemo: FC = () => (
           {ZAP_NODES.map((node, i) => (
             <>
               <li
-                class="zd flex items-center gap-3 rounded-full border border-border py-2 pl-2 pr-4"
+                class="zd flex items-center gap-3 rounded-[1.25rem] border border-border py-2 pl-2 pr-4"
                 style={`--at: ${AT.steps[i]}s;`}
               >
                 <IconTile icon={node.icon} tone={i === 1 ? "primary" : "brand"} />
