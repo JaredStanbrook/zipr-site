@@ -1,4 +1,4 @@
-#import type { FC } from "hono/jsx";
+import type { FC } from "hono/jsx";
 
 import { GALLERY_ROLES } from "@server/content/gallery";
 import { Card, Eyebrow, IconTile } from "@views/components/Ui";

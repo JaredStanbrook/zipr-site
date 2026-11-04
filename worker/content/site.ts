@@ -170,7 +170,7 @@ export const SCREENSHOTS = {
   },
   "overlay-sales": {
     width: 1392,
-    height: 1132,
+    height: 1292,
     alt: "A salesperson's Zipr launcher in large, roomy text, opened over a selected company name, Northwind Traders, ready to run with it: Look up the account pinned, then Log this call, Send the proposal, Book a follow-up and Open my pipeline.",
   },
   "overlay-teacher": {
