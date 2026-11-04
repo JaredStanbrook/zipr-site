@@ -113,15 +113,6 @@ export const Layout: FC<LayoutProps> = (props) => {
           type="font/woff2"
           crossorigin
         />
-        <!-- The wordmark face, Silkscreen Bold, self-hosted (7.5KB). The header's name is above
-             the fold on every page, so fetch it with the other two. -->
-        <link
-          rel="preload"
-          href="/fonts/silkscreen-bold-latin.woff2"
-          as="font"
-          type="font/woff2"
-          crossorigin
-        />
         ${
           isProd
             ? html`<link rel="stylesheet" href="/static/main.css?v=${props.assetVersion}" />`

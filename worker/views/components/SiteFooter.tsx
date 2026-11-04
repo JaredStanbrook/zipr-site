@@ -4,6 +4,7 @@ import { CONTACT } from "@server/content/site";
 import { operatorName } from "@server/content/legal";
 import { LOGO_ROWS } from "@views/components/Ui";
 import { LanguageMenu } from "@views/components/NavBar";
+import { wordmark } from "./Wordmark";
 
 /**
  * The site footer.
@@ -153,12 +154,8 @@ export const SiteFooter = ({ appName, tagline }: { appName: string; tagline: str
         </div>
       </div>
 
-      <p
-        class="emboss mb-[0.2em] mt-10 select-none text-center text-[25vw] leading-none sm:text-[24vw] 2xl:text-[22rem]"
-        aria-hidden="true"
-      >
-        ${appName}
-      </p>
+      <!-- The wordmark stamped into the well: decoration, the name is above. -->
+      ${wordmark({ class: "emboss mx-auto mb-[4vw] mt-10 block h-auto w-[70%] max-w-[60rem]" })}
     </div>
   </footer>
 `;

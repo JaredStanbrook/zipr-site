@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="500" height="80" viewBox="0 0 25 4" shape-rendering="crispEdges">
+  <title>Zipr</title>
+  <desc>The Zipr wordmark: pixel letters on a 25 by 4 grid, transparent background.</desc>
+  <g fill="#ff5722">
+    <rect x="0" y="0" width="4" height="1"/>
+    <rect x="5" y="0" width="2" height="1"/>
+    <rect x="8" y="0" width="4" height="1"/>
+    <rect x="14" y="0" width="5" height="1"/>
+    <rect x="2" y="1" width="2" height="1"/>
+    <rect x="8" y="1" width="2" height="1"/>
+    <rect x="11" y="1" width="2" height="1"/>
+    <rect x="14" y="1" width="2" height="1"/>
+    <rect x="17" y="1" width="2" height="1"/>
+    <rect x="0" y="2" width="2" height="1"/>
+    <rect x="5" y="2" width="2" height="1"/>
+    <rect x="8" y="2" width="5" height="1"/>
+    <rect x="14" y="2" width="4" height="1"/>
+    <rect x="0" y="3" width="4" height="1"/>
+    <rect x="5" y="3" width="2" height="1"/>
+    <rect x="8" y="3" width="2" height="1"/>
+    <rect x="14" y="3" width="2" height="1"/>
+    <rect x="17" y="3" width="2" height="1"/>
+  </g>
+</svg>
