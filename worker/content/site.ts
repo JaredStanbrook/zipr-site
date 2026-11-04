@@ -214,14 +214,14 @@ export const SCREENSHOTS = {
     alt: "The Zipr app's Library: a sidebar grouping Library, Teams and Zap, plugins, insights and settings, with your account at its foot; a search box with a filter; and your personal shortcuts: Book a meeting room, Check the VPN, Fill in my timesheet, Start my workday and more, each with its number of steps and when it last changed, above the shortcuts of your team, Acme IT, in its Helpdesk group.",
   },
   zap: {
-    width: 2392,
-    height: 2910,
-    alt: "Zap building a shortcut called Friday tidy-up. The request asks for screenshots to go into Pictures and anything untouched for a month to be zipped into an archive. Zap builds it, then, asked not to make an empty zip, counts the old files first and wraps the archiving in an If. The steps: get today's date, go back 30 days, find and move the screenshots, find and count the old files, then, if there are any, zip them under today's date, send the originals to the bin and say what was archived; otherwise say it was already tidy. A test shows every step succeeded.",
+    width: 2752,
+    height: 1888,
+    alt: "Zap with a draft called Friday tidy-up, which moves screenshots into Pictures and archives anything in Downloads untouched for a month. Its steps are drawn on a canvas, the one that finds files untouched since a date showing its settings. Over it, the Zap Assistant's conversation is open at revision 2, tested, listing each step of the test as succeeded except one notification that was not run. Beside it, the draft's assumption that the archive folder is Documents/Archive, the one step that needs allowing, already allowed, and buttons to test it, explain it and save it as a shortcut.",
   },
   "zap-release": {
-    width: 2392,
-    height: 3506,
-    alt: "Zap building a shortcut called Release notes, after checking git is on this computer. It runs a git script for the commits since the last tag, splits them into lines, leaves out merge commits, joins them back up and has an AI model write customer-friendly release notes. A menu then offers three paths: copy the notes, draft an email to the team, or post them to the changelog, where an If shows a notification when the changelog accepts them and its answer when it does not. A panel lists the three steps that need allowing before a test: the script, the AI step and the post.",
+    width: 2752,
+    height: 1888,
+    alt: "Zap with a draft called Release notes, generated and not yet tested. On the canvas, the commits since the last tag are filtered, joined back up and handed to an AI step that writes customer-friendly release notes; a menu then offers three paths: copy the notes, draft an email to the team, or post them to the changelog. Beside it, what Zap assumed about the changelog and the team's address, and a panel listing the three steps that need allowing before the draft runs: collecting the commits, writing the notes, and posting them.",
   },
 } as const;
 
