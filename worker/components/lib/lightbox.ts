@@ -15,6 +15,12 @@
  * cannot be loaded (a dropped connection, a stale deploy), the click opens the
  * picture itself instead.
  *
+ * A video is a trigger too (`LoopVideo` with `zoom`). The viewer shows it as an
+ * HTML slide, from the start and with controls: on the page it loops with
+ * none, because there is nothing to control; enlarged, it is something to
+ * watch, so it can be paused and scrubbed. The page's copy is paused while the
+ * viewer is over it, so two do not play at once.
+ *
  * However a picture is drawn on the page — clipped off its edge, small in a
  * stack, sliding past in a marquee — the viewer shows the whole of it, on its
  * own. A marquee's clones (`data-lightbox-dup`, see lib/marquee.ts) are not
@@ -32,13 +38,42 @@ import { ChevronLeft, ChevronRight, createElement, X, ZoomIn, ZoomOut } from "lu
  *  high-density screen then shows every pixel and no more. */
 const PIXELS_PER_POINT = 2;
 
-/** The picture a trigger is showing: the current theme's. */
+type Media = HTMLImageElement | HTMLVideoElement;
+
+/** The picture (or video) a trigger is showing: the current theme's. */
 const shownImage = (trigger: HTMLElement) =>
-  Array.from(trigger.querySelectorAll<HTMLImageElement>("img")).find(
-    (img) => img.getClientRects().length > 0,
+  Array.from(trigger.querySelectorAll<Media>("img, video")).find(
+    (media) => media.getClientRects().length > 0,
   ) ?? null;
 
-const slideFor = (img: HTMLImageElement): SlideData => {
+/** A video as an HTML slide: the page's own sources, with controls, from the start. */
+const videoSlide = (video: HTMLVideoElement): SlideData => {
+  const copy = document.createElement("video");
+  copy.setAttribute("controls", "");
+  copy.setAttribute("autoplay", "");
+  copy.setAttribute("muted", "");
+  copy.setAttribute("loop", "");
+  copy.setAttribute("playsinline", "");
+  copy.setAttribute("preload", "auto");
+  copy.setAttribute("poster", video.poster);
+  copy.setAttribute("aria-label", video.getAttribute("aria-label") ?? "");
+  copy.className = "pswp-video";
+  for (const source of video.querySelectorAll("source")) {
+    const next = document.createElement("source");
+    next.setAttribute("src", source.src);
+    next.setAttribute("type", source.type);
+    copy.append(next);
+  }
+  return {
+    html: copy.outerHTML,
+    width: Number(video.getAttribute("width")) || video.videoWidth,
+    height: Number(video.getAttribute("height")) || video.videoHeight,
+    alt: video.getAttribute("aria-label") ?? "",
+  };
+};
+
+const slideFor = (img: Media): SlideData => {
+  if (img instanceof HTMLVideoElement) return videoSlide(img);
   // The whole capture, not whichever narrower copy `srcset` put on the page.
   const src = img.dataset.full || img.currentSrc || img.src;
   const width = Number(img.getAttribute("width")) || img.naturalWidth;
@@ -97,6 +132,8 @@ const openLightbox = async (clicked: HTMLElement) => {
   const index = triggers.indexOf(trigger);
   const source = shownImage(clicked) ?? shownImage(trigger);
   if (!source || index < 0 || open || opening) return;
+  // The page's copy of a video holds still while its enlarged one plays.
+  const paused = source instanceof HTMLVideoElement && !source.paused ? source : null;
 
   let Viewer: typeof PhotoSwipe;
   opening = true;
@@ -109,6 +146,7 @@ const openLightbox = async (clicked: HTMLElement) => {
     opening = false;
   }
 
+  paused?.pause();
   const slides = triggers.map((each) => slideFor(shownImage(each)!));
   // Zoom out of the copy that was actually clicked, not an original that may
   // be off screen.
@@ -181,8 +219,23 @@ const openLightbox = async (clicked: HTMLElement) => {
     viewer.element?.setAttribute("aria-label", text("dialog", "Enlarged picture"));
   });
 
+  // Inserted as markup, `autoplay` is not honoured, so a video starts once its
+  // slide is in view: when the viewer has opened on it, and on each step to it.
+  const playCurrent = () =>
+    void viewer.currSlide?.content.element
+      ?.querySelector("video")
+      ?.play()
+      .catch(() => {});
+  viewer.on("openingAnimationEnd", playCurrent);
+  viewer.on("change", playCurrent);
+  // Stepping off a video pauses it; stepping back to it plays on from there.
+  viewer.on("contentDeactivate", ({ content }) => {
+    content.element?.querySelector("video")?.pause();
+  });
+
   viewer.on("destroy", () => {
     open = null;
+    void paused?.play().catch(() => {});
     document.documentElement.classList.remove("lightbox-open");
     // Safari does not focus a clicked button, so there is nothing for
     // PhotoSwipe to hand focus back to; put it on the trigger instead.

@@ -635,26 +635,31 @@ export const LoopVideo: FC<{
   height: number;
   label: string;
   class?: string;
-}> = ({ src, width, height, label, class: className = "" }) => (
-  <div class={`mx-auto w-full max-w-4xl ${className}`}>
-    {(["light"] as const).map((theme) => (
-      <video
-        class="loop-video"
-        poster={`${src}-${theme}.jpg`}
-        width={width}
-        height={height}
-        autoplay
-        muted
-        loop
-        playsinline
-        preload="metadata"
-        aria-label={label}
-      >
-        {/* WebM first: smaller, and the only one an open-source Chromium can
+  /** Opens in the picture viewer, with controls, from the start (lib/lightbox.ts). */
+  zoom?: boolean;
+}> = ({ src, width, height, label, class: className = "", zoom = false }) => {
+  const clip = (["light"] as const).map((theme) => (
+    <video
+      class="loop-video"
+      poster={`${src}-${theme}.jpg`}
+      width={width}
+      height={height}
+      autoplay
+      muted
+      loop
+      playsinline
+      preload="metadata"
+      aria-label={label}
+    >
+      {/* WebM first: smaller, and the only one an open-source Chromium can
             play. MP4 for Safari. */}
-        <source src={`${src}-${theme}.webm`} type="video/webm" />
-        <source src={`${src}-${theme}.mp4`} type="video/mp4" />
-      </video>
-    ))}
-  </div>
-);
+      <source src={`${src}-${theme}.webm`} type="video/webm" />
+      <source src={`${src}-${theme}.mp4`} type="video/mp4" />
+    </video>
+  ));
+  return (
+    <div class={`mx-auto w-full max-w-4xl ${className}`}>
+      {zoom ? <ZoomTrigger>{clip}</ZoomTrigger> : clip}
+    </div>
+  );
+};

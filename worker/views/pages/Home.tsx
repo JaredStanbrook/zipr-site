@@ -61,6 +61,7 @@ const HeroPanel: FC = () => (
       width={1280}
       height={720}
       class="max-w-none"
+      zoom
       label="Alex asks Jared how to get set up again. Jared makes a shortcut in Zipr. Alex runs it from the launcher, and the VPN and the ticket queue open."
     />
     <figcaption class="mt-3 text-xs text-muted-foreground">

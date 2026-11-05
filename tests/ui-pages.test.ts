@@ -280,6 +280,8 @@ describe("UI pages load", () => {
 
     const home = await (await get(testApp, "/")).text();
     expect(home).toMatch(/<button[^>]*data-lightbox[^>]*aria-haspopup="dialog"/);
+    // The hero film opens in the viewer too: its video sits inside a trigger.
+    expect(home).toMatch(/<button[^>]*data-lightbox[^>]*>\s*<video[^>]*class="loop-video"/);
   });
 
   it("explains Zap where it is first named", async () => {

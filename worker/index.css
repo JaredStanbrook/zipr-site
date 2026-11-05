@@ -1520,6 +1520,14 @@
   .zoom-trigger:hover {
     background-color: var(--surface);
   }
+  /* A video enlarged in the viewer fills its slide, which is sized to the clip. */
+  .pswp__content > .pswp-video {
+    display: block;
+    width: 100%;
+    height: 100%;
+    border-radius: var(--radius-lg);
+    background: #000;
+  }
   /* PhotoSwipe (lib/lightbox.ts). Its controls are restyled as the site's:
      round, solid dark whatever the theme, since the screenshots are pale and a
      pale button over one disappears. Its own defaults are a black page and
