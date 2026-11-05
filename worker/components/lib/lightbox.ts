@@ -62,7 +62,7 @@ const videoSlide = (video: HTMLVideoElement): SlideData => {
     const next = document.createElement("source");
     next.setAttribute("src", source.src);
     next.setAttribute("type", source.type);
-    copy.append(next);
+    copy.appendChild(next);
   }
   return {
     html: copy.outerHTML,
