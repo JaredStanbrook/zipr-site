@@ -163,7 +163,11 @@ const openLightbox = async (clicked: HTMLElement) => {
     // too, and keep the toggle for a tap on the picture itself.
     bgClickAction: "close",
     tapAction: (point, originalEvent) => {
-      const onPicture = (originalEvent.target as HTMLElement).classList.contains("pswp__img");
+      const target = originalEvent.target as HTMLElement;
+      // A tap on a video, its controls included, is the video's: play, pause,
+      // scrub. It must not close the viewer, as a tap on the empty area does.
+      if (target.closest(".pswp-video")) return;
+      const onPicture = target.classList.contains("pswp__img");
       if (onPicture) viewer.element?.classList.toggle("pswp--ui-visible");
       else viewer.close();
     },
