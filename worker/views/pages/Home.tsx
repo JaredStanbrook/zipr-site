@@ -22,6 +22,7 @@ import {
   CheckItem,
   LogoBricks,
   EdgeShot,
+  LoopVideo,
   ScreenshotMarquee,
   Disclosure,
 } from "@views/components/Ui";
@@ -48,19 +49,22 @@ import {
  */
 
 /**
- * The hero's picture: the app itself, drawn wider than its column so it runs
- * off the right-hand edge of the page. Half on the page, half beyond — the
- * layout is asymmetric on purpose, and the clip says "there is more of this"
- * better than a framed thumbnail would. A click opens the whole of it.
- *
- * It used to be a pair of launcher pictures surrounded by floating clay
- * pieces. The page is flat now, and nothing floats.
+ * The hero's picture: the film. Alex asks Jared how to do something he has
+ * already explained; Jared makes it a shortcut once; Alex runs it from the
+ * launcher. Muted and looping like every clip on the site, so the story has to
+ * read without sound, which is how it was made. The poster is the title frame.
  */
 const HeroPanel: FC = () => (
   <figure>
-    <EdgeShot id="editor-tour" edge="right" spill="170%" eager />
+    <LoopVideo
+      src="/media/one-click"
+      width={1280}
+      height={720}
+      class="max-w-none"
+      label="Alex asks Jared how to get set up again. Jared makes a shortcut in Zipr. Alex runs it from the launcher, and the VPN and the ticket queue open."
+    />
     <figcaption class="mt-3 text-xs text-muted-foreground">
-      The Zipr editor, open on a shortcut that checks the VPN and starts by itself on weekdays.
+      Explain it once, as a shortcut. Everyone on the team gets it.
     </figcaption>
   </figure>
 );

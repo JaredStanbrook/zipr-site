@@ -11,6 +11,10 @@ runs underneath. Changes to the site itself go above them.
 
 ### The site
 
+- **The home page hero plays a film.** In place of the editor screenshot, a 60-second
+  silent loop: Alex asks Jared the same question again, Jared makes a shortcut once, and Alex runs
+  it from the launcher. It uses the site's `LoopVideo` (WebM and MP4, 1280 by 720, muted, poster
+  from the title frame). Made with zipr-client's `marketing/demo-studio`.
 - **The Zap page shows Zap at work.** The six illustrative request cards,
   each a single command or link with a caveat beneath it, are gone. "From
   words to shortcut" now shows Zap building a Friday tidy-up from one
