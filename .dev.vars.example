@@ -26,6 +26,10 @@ RP_ID="localhost"
 # actually loading, because it is the base for canonical URLs and sitemap.xml.
 ORIGIN="http://localhost:5173"
 
+# The access gate: "false" shows every page without an invitation link.
+# Set "true" to try the locked site locally.
+ACCESS_GATE="false"
+
 # Loosen registration while developing.
 ALLOWED_EMAILS=""
 REQUIRE_EMAIL_VERIFICATION="false"

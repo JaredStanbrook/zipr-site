@@ -50,6 +50,13 @@
       "when": 1790795096460,
       "tag": "0006_revocable_sessions",
       "breakpoints": true
+    },
+    {
+      "idx": 7,
+      "version": "6",
+      "when": 1794005150061,
+      "tag": "0007_access_links",
+      "breakpoints": true
     }
   ]
 }

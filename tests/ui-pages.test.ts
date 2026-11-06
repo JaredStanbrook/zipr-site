@@ -35,6 +35,7 @@ describe("UI pages load", () => {
       "/contact",
       "/contact?topic=licence",
       "/contact?topic=security",
+      "/gone",
     ]) {
       const res = await get(testApp, path);
       expect(res.status, `GET ${path}`).toBe(200);
@@ -68,7 +69,14 @@ describe("UI pages load", () => {
   it("redirects signed-out visitors away from protected pages", async () => {
     const testApp = createTestApp(null);
 
-    for (const path of ["/profile", "/admin", "/admin/logs", "/admin/releases", "/admin/issues"]) {
+    for (const path of [
+      "/profile",
+      "/admin",
+      "/admin/logs",
+      "/admin/releases",
+      "/admin/issues",
+      "/admin/access",
+    ]) {
       const res = await get(testApp, path);
       expect(res.status, `GET ${path}`).toBe(302);
       expect(res.headers.get("location"), `GET ${path}`).toBe("/login");
@@ -86,6 +94,7 @@ describe("UI pages load", () => {
       "/admin/releases",
       "/admin/issues",
       "/admin/issues?status=new",
+      "/admin/access",
     ]) {
       const res = await get(testApp, path);
       expect(res.status, `GET ${path}`).toBe(200);

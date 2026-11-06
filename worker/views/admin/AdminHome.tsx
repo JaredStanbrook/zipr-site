@@ -34,6 +34,12 @@ const DESTINATIONS = [
     body: "Create a version, upload an installer per platform, publish it. The downloads page renders whatever is published here.",
   },
   {
+    href: "/admin/access",
+    icon: "link",
+    title: "Access links",
+    body: "Invite someone to see the site while it is locked. Each link expires a set time after it is first opened.",
+  },
+  {
     href: "/admin/logs",
     icon: "shield-check",
     title: "Sign-in log",
@@ -104,7 +110,7 @@ export const AdminHome: FC<AdminHomeProps> = ({
         ) : null}
       </div>
 
-      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+      <div class="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {DESTINATIONS.map((destination) => (
           <Card class="flex h-full flex-col p-6">
             <span class="flex h-11 w-11 items-center justify-center rounded-[var(--radius-md)] bg-primary-subtle text-primary-subtle-foreground shadow-raised">

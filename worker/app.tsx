@@ -13,6 +13,9 @@ import { logsRoute } from "./routes/admin/logs";
 import { releasesRoute } from "./routes/admin/releases.tsx";
 import { adminHomeRoute } from "./routes/admin/home.tsx";
 import { issuesRoute } from "./routes/admin/issues.tsx";
+import { accessAdminRoute } from "./routes/admin/access.tsx";
+import { accessRoute } from "./routes/access.tsx";
+import { accessGate } from "./middleware/access-gate.middleware.ts";
 import { siteRoute } from "./routes/site.tsx";
 import { seoRoute } from "./routes/seo";
 import devRouter from "./routes/dev.tsx";
@@ -33,6 +36,7 @@ admin.route("/", adminHomeRoute);
 admin.route("/logs", logsRoute);
 admin.route("/releases", releasesRoute);
 admin.route("/issues", issuesRoute);
+admin.route("/access", accessAdminRoute);
 
 // ==========================================
 // 2. MAIN APP
@@ -51,6 +55,13 @@ const app = new Hono<AppEnv>()
 
   // Sign in, register, sign out.
   .route("/", webAuth)
+
+  // Invitation links (/a/:token) and the page the gate sends everyone else to.
+  .route("/", accessRoute)
+
+  // ACCESS_GATE: everything registered below needs an invitation link or an
+  // admin session. Everything above stays reachable. See the middleware.
+  .use("*", accessGate)
 
   // Every public page: home, features, downloads, pricing, docs, contact.
   // Mounted last of the "/" routers so its catch-all-shaped paths cannot

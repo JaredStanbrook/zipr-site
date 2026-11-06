@@ -1,0 +1,36 @@
+import { Hono } from "hono";
+import { setCookie } from "hono/cookie";
+
+import type { AppEnv } from "@server/types";
+import { ACCESS_COOKIE, linkState, openLink } from "@server/services/access-gate.service";
+import { GonePage } from "@views/pages/Gone";
+
+/**
+ * The two public ends of the access gate: the invitation link itself, and
+ * the page everyone without one is sent to. Mounted before the gate.
+ */
+export const accessRoute = new Hono<AppEnv>();
+
+accessRoute.get("/a/:token", async (c) => {
+  const link = await openLink(c.var.db, c.req.param("token"));
+  if (!link || linkState(link) !== "active") return c.redirect("/gone");
+
+  const remaining = Math.floor((Date.parse(link.expiresAt!) - Date.now()) / 1000);
+  setCookie(c, ACCESS_COOKIE, link.token, {
+    httpOnly: true,
+    secure: c.req.url.startsWith("https://") || c.req.header("x-forwarded-proto") === "https",
+    sameSite: "Lax",
+    path: "/",
+    maxAge: remaining,
+  });
+  return c.redirect("/");
+});
+
+accessRoute.get("/gone", (c) =>
+  c.render(<GonePage />, {
+    title: "Nothing to see here",
+    description: "This site is not open to the public yet.",
+    noindex: true,
+    bare: true,
+  }),
+);

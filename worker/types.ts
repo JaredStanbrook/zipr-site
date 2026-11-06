@@ -39,6 +39,11 @@ export type Vars = {
   /** "true" closes sign-up for good once the owner's account exists. */
   SINGLE_ACCOUNT: string;
   /**
+   * "true" locks the public pages to visitors holding an invitation link from
+   * /admin/access. Anything else, or unset, leaves the site open.
+   */
+  ACCESS_GATE?: string;
+  /**
    * A Wrangler secret, never a var: the bearer token the client's release
    * pipeline uploads experimental builds with (/api/releases). Unset, that
    * API refuses everything. Generate one with `openssl rand -base64 48`.

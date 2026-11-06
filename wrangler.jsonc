@@ -117,6 +117,13 @@
     // public/). Rendered from the brand by `scripts/og-image.mjs`.
     "APP_OG_IMAGE": "/og.png",
 
+    // --- ACCESS GATE ---
+    // "true": the public pages are visible only to someone who opened an
+    // invitation link made at /admin/access (or a signed-in admin). Everyone
+    // else is sent to /gone. Set "false" to open the site to the public.
+    // Turn it off locally with ACCESS_GATE="false" in .dev.vars.
+    "ACCESS_GATE": "true",
+
     // --- CORE AUTH ---
     // Enabled methods: passkey, password, pin, totp, email, sms
     //
@@ -182,7 +189,7 @@
     // Roles that cannot be self-assigned at registration. Get your first
     // admin with BOOTSTRAP_ADMIN_EMAIL below — no terminal needed.
     "ROLES_RESTRICTED": "admin",
-    "PERMISSIONS_AVAILABLE": "releases.read,releases.create,releases.update,releases.delete,issues.read,issues.update,issues.delete",
+    "PERMISSIONS_AVAILABLE": "releases.read,releases.create,releases.update,releases.delete,issues.read,issues.update,issues.delete,access.read,access.create,access.update",
     // `user` is the default role and holds no permissions: signing in grants
     // nothing on its own. Every staff surface is admin-only, and a narrower
     // grant is available per user through the user_permissions table.

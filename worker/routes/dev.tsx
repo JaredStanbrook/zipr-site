@@ -10,6 +10,7 @@ import { users, credentials, verificationCodes, authLogs } from "../schema/auth.
 import { userRoles, rolePermissions, userPermissions } from "../schema/roles.schema";
 import { release, releaseAsset } from "../schema/release.schema";
 import { issue } from "../schema/issue.schema";
+import { accessLink } from "../schema/access.schema";
 import { requireRole } from "../middleware/guard.middleware";
 import { AppEnv } from "@server/types";
 
@@ -52,6 +53,7 @@ devRouter.get("/", async (c) => {
     fetchTableData(db, release, "release"),
     fetchTableData(db, releaseAsset, "release_asset"),
     fetchTableData(db, issue, "issue"),
+    fetchTableData(db, accessLink, "access_link"),
   ]);
 
   // Build HTML response
@@ -356,6 +358,7 @@ devRouter.get("/json", async (c) => {
     fetchTableData(db, release, "release"),
     fetchTableData(db, releaseAsset, "release_asset"),
     fetchTableData(db, issue, "issue"),
+    fetchTableData(db, accessLink, "access_link"),
   ]);
 
   return c.json({
