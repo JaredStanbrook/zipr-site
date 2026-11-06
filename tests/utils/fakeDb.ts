@@ -102,6 +102,7 @@ export const createFakeDb = (data: MockData) => ({
     return {
       values() {
         return {
+          onConflictDoUpdate: () => Promise.resolve([]),
           returning() {
             return Promise.resolve([]);
           },

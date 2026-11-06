@@ -11,6 +11,7 @@ import { userRoles, rolePermissions, userPermissions } from "../schema/roles.sch
 import { release, releaseAsset } from "../schema/release.schema";
 import { issue } from "../schema/issue.schema";
 import { accessLink } from "../schema/access.schema";
+import { pageViewDaily } from "../schema/analytics.schema";
 import { requireRole } from "../middleware/guard.middleware";
 import { AppEnv } from "@server/types";
 
@@ -54,6 +55,7 @@ devRouter.get("/", async (c) => {
     fetchTableData(db, releaseAsset, "release_asset"),
     fetchTableData(db, issue, "issue"),
     fetchTableData(db, accessLink, "access_link"),
+    fetchTableData(db, pageViewDaily, "page_view_daily"),
   ]);
 
   // Build HTML response
@@ -359,6 +361,7 @@ devRouter.get("/json", async (c) => {
     fetchTableData(db, releaseAsset, "release_asset"),
     fetchTableData(db, issue, "issue"),
     fetchTableData(db, accessLink, "access_link"),
+    fetchTableData(db, pageViewDaily, "page_view_daily"),
   ]);
 
   return c.json({

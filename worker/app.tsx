@@ -14,6 +14,8 @@ import { releasesRoute } from "./routes/admin/releases.tsx";
 import { adminHomeRoute } from "./routes/admin/home.tsx";
 import { issuesRoute } from "./routes/admin/issues.tsx";
 import { accessAdminRoute } from "./routes/admin/access.tsx";
+import { analyticsRoute } from "./routes/admin/analytics.tsx";
+import { countPageViews } from "./middleware/analytics.middleware.ts";
 import { accessRoute } from "./routes/access.tsx";
 import { accessGate } from "./middleware/access-gate.middleware.ts";
 import { siteRoute } from "./routes/site.tsx";
@@ -37,6 +39,7 @@ admin.route("/logs", logsRoute);
 admin.route("/releases", releasesRoute);
 admin.route("/issues", issuesRoute);
 admin.route("/access", accessAdminRoute);
+admin.route("/analytics", analyticsRoute);
 
 // ==========================================
 // 2. MAIN APP
@@ -47,6 +50,9 @@ const app = new Hono<AppEnv>()
 
   // Database inspector. Dev-only — see routes/dev.tsx.
   .route("/dev", devRouter)
+
+  // Cookieless page-view counts, taken after each page is served.
+  .use("*", countPageViews)
 
   // Global renderer (wraps SSR responses in Layout).
   .use("*", globalRenderer)

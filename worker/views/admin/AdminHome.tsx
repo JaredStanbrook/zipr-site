@@ -40,6 +40,12 @@ const DESTINATIONS = [
     body: "Invite someone to see the site while it is locked. Each link expires a set time after it is first opened.",
   },
   {
+    href: "/admin/analytics",
+    icon: "chart-column",
+    title: "Analytics",
+    body: "Page views, where visits came from, countries, devices and downloads. Cookieless counts only.",
+  },
+  {
     href: "/admin/logs",
     icon: "shield-check",
     title: "Sign-in log",

@@ -22,6 +22,7 @@ const menuConfig: Record<string, Array<{ to: string; name: string }>> = {
     { to: "/admin/releases", name: "Releases" },
     { to: "/admin/issues", name: "Bug reports" },
     { to: "/admin/access", name: "Access links" },
+    { to: "/admin/analytics", name: "Analytics" },
     { to: "/admin/logs", name: "System Logs" },
   ],
 };

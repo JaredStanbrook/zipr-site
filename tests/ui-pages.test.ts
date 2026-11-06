@@ -76,6 +76,7 @@ describe("UI pages load", () => {
       "/admin/releases",
       "/admin/issues",
       "/admin/access",
+      "/admin/analytics",
     ]) {
       const res = await get(testApp, path);
       expect(res.status, `GET ${path}`).toBe(302);
@@ -95,6 +96,8 @@ describe("UI pages load", () => {
       "/admin/issues",
       "/admin/issues?status=new",
       "/admin/access",
+      "/admin/analytics",
+      "/admin/analytics?days=7",
     ]) {
       const res = await get(testApp, path);
       expect(res.status, `GET ${path}`).toBe(200);

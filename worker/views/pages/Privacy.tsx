@@ -21,7 +21,9 @@ import { Page, Section, Container, SectionHeading, Card, CheckItem } from "@view
  *     invited visitors only, while ACCESS_GATE is on.
  *   - Invitations: `access_link` table — a staff-written label, first-opened time.
  *   - Local storage: theme preference only.
- *   - No analytics, no third-party scripts, fonts self-hosted.
+ *   - Analytics: `page_view_daily`, cookieless daily counters (page, source,
+ *     country, device). No IP, user agent string, cookie or ID is stored.
+ *   - No third-party scripts, fonts self-hosted.
  *   - Processor: Cloudflare (Workers, D1, R2, request logs via observability).
  *   - Hosted service (zipr-api): identity traits email + name, teams and shortcuts,
  *     audit_events, analytics_events per person (ANALYTICS_RETENTION_DAYS,
@@ -65,7 +67,10 @@ export const PrivacyPage: FC<{ app: AppConfig }> = ({ app }) => {
           <Card class="mt-10 p-7">
             <h2 class="text-lg font-bold">The short version</h2>
             <ul class="mt-4 space-y-3">
-              <CheckItem>No analytics, advertising or tracking cookies on this site.</CheckItem>
+              <CheckItem>
+                No advertising or tracking cookies. We count page views without cookies or anything
+                that identifies you.
+              </CheckItem>
               <CheckItem>
                 No third-party scripts or fonts: everything is served from our own domain.
               </CheckItem>
@@ -108,6 +113,14 @@ export const PrivacyPage: FC<{ app: AppConfig }> = ({ app }) => {
               public, we send some people a personal link to view it. For each link we keep a note
               of who we sent it to, when it was first opened and when it expires, so we know it
               reached you and can switch it off. We use this only to manage access.
+            </p>
+            <p>
+              <strong class="text-foreground">Page views.</strong> We count visits to each page to
+              learn what is useful. For each view we add one to a daily total for that page,
+              alongside the site that linked you here (just its name, such as google.com), your
+              country and whether you are on a phone, tablet or computer. We store no cookie, IP
+              address, browser details or ID with it, so the totals cannot be traced back to you or
+              tell one visit from another.
             </p>
             <p>
               <strong class="text-foreground">Technical data.</strong> Like any website, the servers

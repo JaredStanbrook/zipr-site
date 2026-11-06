@@ -64,6 +64,12 @@ export const PRIVACY_VERSIONS: LegalVersion[] = [
     summary:
       "Added invitation links: who we sent one to, when it was first opened, and the cookie that keeps you let in until it expires.",
   },
+  {
+    version: "1.4",
+    date: "2026-11-06",
+    summary:
+      "Added cookieless page-view counts: page, day, referring site, country and device type, with nothing that identifies you.",
+  },
 ];
 
 /** "Zipr" or "Zipr (ABN 12 345 678 901)". */
