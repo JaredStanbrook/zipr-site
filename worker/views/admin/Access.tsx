@@ -62,8 +62,21 @@ export const AccessLinkRow: FC<{ link: SelectAccessLink; app: AppConfig }> = ({ 
             readonly
             value={url}
             onfocus="this.select()"
-            class={`${FIELD_CLASS} min-w-0 flex-1 font-mono text-xs`}
+            class={`${FIELD_CLASS} min-w-0 basis-full font-mono text-xs sm:basis-0 sm:flex-1`}
           />
+          {/* Inline rather than a Lit element: one write, then a two-second label. */}
+          <button
+            type="button"
+            data-url={url}
+            aria-label={`Copy link for ${link.label}`}
+            onclick="navigator.clipboard.writeText(this.dataset.url).then(() => { const l = this.querySelector('[data-label]'); l.textContent = 'Copied'; setTimeout(() => { l.textContent = 'Copy'; }, 2000); })"
+            class="clay-press inline-flex h-11 cursor-pointer items-center gap-1.5 rounded-[var(--radius-sm)] border border-border-strong bg-card px-3 text-sm font-semibold hover:bg-muted"
+          >
+            <i data-lucide="copy" class="h-4 w-4" aria-hidden="true"></i>
+            <span data-label aria-live="polite">
+              Copy
+            </span>
+          </button>
           <button
             type="button"
             hx-post={`/admin/access/${link.id}/revoke`}
