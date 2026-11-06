@@ -26,6 +26,13 @@
     // by the worker's own notFound, not by an SPA shell. "none" keeps the
     // asset layer from swallowing 404s that should reach your router.
     "not_found_handling": "none",
+    // Send every request through the worker first, so the access gate (see
+    // ACCESS_GATE) covers files in public/ — screenshots, media, og.png — and
+    // not only pages. Without this Cloudflare serves those files directly and
+    // anyone with the URL can fetch them. The CSS/JS bundle, fonts and the
+    // favicon skip the worker: the locked page needs them and they reveal
+    // nothing. Keep in step with OPEN_PREFIXES in access-gate.middleware.ts.
+    "run_worker_first": ["/*", "!/static/*", "!/fonts/*", "!/favicon.svg"],
   },
 
   // A new id on every deploy, read at runtime. Layout.tsx appends it to the

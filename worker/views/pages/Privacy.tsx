@@ -17,7 +17,9 @@ import { Page, Section, Container, SectionHeading, Card, CheckItem } from "@view
  *   - Bug reports: `issue` table, POST /report. Email optional.
  *   - Rate limiting: POST /report keys the RATE_LIMITER binding on the IP.
  *   - Downloads: a per-installer counter, no visitor data stored.
- *   - Cookies: `auth_token` and `flash-toast`, staff sign-in only.
+ *   - Cookies: `auth_token` and `flash-toast`, staff sign-in only; `site_access`,
+ *     invited visitors only, while ACCESS_GATE is on.
+ *   - Invitations: `access_link` table — a staff-written label, first-opened time.
  *   - Local storage: theme preference only.
  *   - No analytics, no third-party scripts, fonts self-hosted.
  *   - Processor: Cloudflare (Workers, D1, R2, request logs via observability).
@@ -68,7 +70,8 @@ export const PrivacyPage: FC<{ app: AppConfig }> = ({ app }) => {
                 No third-party scripts or fonts: everything is served from our own domain.
               </CheckItem>
               <CheckItem>
-                We only hold what you choose to send us: a bug report, or an email.
+                We only hold what you choose to send us — a bug report, or an email — and, if we
+                invited you, when you first opened your link.
               </CheckItem>
               <CheckItem>We don't sell or share your information for marketing.</CheckItem>
             </ul>
@@ -101,6 +104,12 @@ export const PrivacyPage: FC<{ app: AppConfig }> = ({ app }) => {
               installer is downloaded. The count is a number per file and is not linked to you.
             </p>
             <p>
+              <strong class="text-foreground">Invitation links.</strong> While the site is not yet
+              public, we send some people a personal link to view it. For each link we keep a note
+              of who we sent it to, when it was first opened and when it expires, so we know it
+              reached you and can switch it off. We use this only to manage access.
+            </p>
+            <p>
               <strong class="text-foreground">Technical data.</strong> Like any website, the servers
               that deliver this one receive your IP address and browser details with each request.
               Cloudflare, which hosts the site, uses them to deliver pages and protect the site, and
@@ -111,13 +120,16 @@ export const PrivacyPage: FC<{ app: AppConfig }> = ({ app }) => {
 
           <Block title="Cookies and browser storage">
             <p>
-              Visitors get no cookies. The site remembers whether you chose light or dark mode, and
-              which language you chose if you used the translate button, in your browser's local
-              storage; neither leaves your device. Translation happens in your browser from files
-              served by this site, so the text of the page is not sent to any translation service.
-              The only cookies are a sign-in cookie and a one-off notification cookie used by our
-              own staff when they sign in to publish releases. Because nothing here tracks you,
-              there is no cookie banner to accept.
+              If you opened an invitation link, your browser keeps one cookie,{" "}
+              <code>site_access</code>, holding that link's code so you stay let in until it
+              expires; it is deleted when the link ends. Otherwise visitors get no cookies. The site
+              remembers whether you chose light or dark mode, and which language you chose if you
+              used the translate button, in your browser's local storage; neither leaves your
+              device. Translation happens in your browser from files served by this site, so the
+              text of the page is not sent to any translation service. The only other cookies are a
+              sign-in cookie and a one-off notification cookie used by our own staff when they sign
+              in to publish releases. Every cookie is needed for the site to work and none tracks
+              you, so there is no cookie banner to accept.
             </p>
           </Block>
 

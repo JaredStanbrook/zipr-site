@@ -5,6 +5,8 @@ import type { AppEnv } from "../types";
 import { htmxRedirect } from "@server/lib/htmx-helpers";
 import { ACCESS_COOKIE, isGateEnabled, liveLink } from "@server/services/access-gate.service";
 
+const OPEN_PREFIXES = ["/api/", "/static/", "/fonts/"];
+
 /**
  * Lock the public site to invited visitors while ACCESS_GATE is "true".
  *
@@ -16,10 +18,12 @@ export const accessGate = createMiddleware<AppEnv>(async (c, next) => {
   if (!isGateEnabled(c.env)) return next();
   if (c.var.auth.user?.roles.includes("admin")) return next();
 
-  // The JSON API has its own auth, and files (CSS, the client bundle, images)
-  // are needed to render the "nothing to see here" page itself.
+  // The JSON API has its own auth. Only the files the "nothing to see here"
+  // page itself needs stay open; screenshots, media, the share image and the
+  // translation catalogues are gated like the pages. Keep this in step with
+  // `run_worker_first` in wrangler.jsonc.
   const path = c.req.path;
-  if (path.startsWith("/api/") || path.startsWith("/static/") || /\.[a-z0-9]+$/i.test(path)) {
+  if (OPEN_PREFIXES.some((prefix) => path.startsWith(prefix)) || path === "/favicon.svg") {
     return next();
   }
 

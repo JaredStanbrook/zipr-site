@@ -58,6 +58,12 @@ export const PRIVACY_VERSIONS: LegalVersion[] = [
     summary:
       "Says teams and shortcuts where it said catalogues and items, as the app now does. What is collected and why is unchanged.",
   },
+  {
+    version: "1.3",
+    date: "2026-11-06",
+    summary:
+      "Added invitation links: who we sent one to, when it was first opened, and the cookie that keeps you let in until it expires.",
+  },
 ];
 
 /** "Zipr" or "Zipr (ABN 12 345 678 901)". */

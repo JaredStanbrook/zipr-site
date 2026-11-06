@@ -108,7 +108,31 @@ describe("the gate", () => {
     expect((await fetchAs("/login")).status).toBe(200);
   });
 
+  it("gates files in public/, but not what the locked page needs", async () => {
+    for (const path of ["/screenshots/home.png", "/og.png", "/media/hero.mp4", "/i18n/de.json"]) {
+      expect((await fetchAs(path)).headers.get("location"), path).toBe("/gone");
+    }
+    for (const path of ["/static/main.css", "/fonts/inter-latin.woff2", "/favicon.svg"]) {
+      expect((await fetchAs(path)).headers.get("location"), path).toBeNull();
+    }
+  });
+
+  it("asks crawlers to stay out and lists no pages while locked", async () => {
+    const robots = await (await fetchAs("/robots.txt")).text();
+    expect(robots).toContain("Disallow: /\n");
+    expect(robots).not.toContain("Sitemap:");
+    expect((await fetchAs("/sitemap.xml")).status).toBe(404);
+  });
+
+  it("sends public/ through the worker, except what the gate leaves open", async () => {
+    const { readFileSync } = await import("node:fs");
+    expect(readFileSync("wrangler.jsonc", "utf8")).toContain(
+      '"run_worker_first": ["/*", "!/static/*", "!/fonts/*", "!/favicon.svg"]',
+    );
+  });
+
   it('is open when ACCESS_GATE is not "true"', async () => {
     expect((await fetchAs("/pricing", { gate: "false" })).status).toBe(200);
+    expect((await fetchAs("/sitemap.xml", { gate: "false" })).status).toBe(200);
   });
 });
