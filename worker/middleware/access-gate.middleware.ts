@@ -28,7 +28,10 @@ export const accessGate = createMiddleware<AppEnv>(async (c, next) => {
   }
 
   const token = getCookie(c, ACCESS_COOKIE);
-  if (token && (await liveLink(c.var.db, token))) return next();
+  if (token && (await liveLink(c.var.db, token))) {
+    c.set("accessGranted", true);
+    return next();
+  }
 
   if (token) deleteCookie(c, ACCESS_COOKIE, { path: "/" });
   if (c.req.header("HX-Request")) return htmxRedirect(c, "/gone");

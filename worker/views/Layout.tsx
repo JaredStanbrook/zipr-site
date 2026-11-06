@@ -207,7 +207,7 @@ export const Layout: FC<LayoutProps> = (props) => {
 
         <app-toaster></app-toaster>
 
-        ${SiteFooter({ appName: props.app.name, tagline: props.app.tagline })}
+        ${props.meta.bare ? "" : SiteFooter({ appName: props.app.name, tagline: props.app.tagline })}
       </body>
     </html>
   `;

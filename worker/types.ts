@@ -89,6 +89,8 @@ export type Variables = {
   authConfig: AuthConfig;
   isMethodEnabled: (method: string) => boolean;
   auth: Auth;
+  /** Set by the access gate once a visitor's invitation link checks out. */
+  accessGranted?: boolean;
 };
 
 export type AppEnv = {

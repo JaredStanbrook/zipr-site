@@ -108,6 +108,20 @@ describe("the gate", () => {
     expect((await fetchAs("/login")).status).toBe(200);
   });
 
+  it("shows a locked-out visitor no nav or footer links", async () => {
+    for (const path of ["/gone", "/login"]) {
+      const html = await (await fetchAs(path)).text();
+      for (const href of ['href="/pricing"', 'href="/toolbox"', 'href="/zap"']) {
+        expect(html, `${path} ${href}`).not.toContain(href);
+      }
+      expect(html, `${path} tagline`).not.toContain("Testing");
+    }
+
+    await addLink("good");
+    const cookie = (await fetchAs("/a/good")).headers.get("set-cookie")!.split(";")[0];
+    expect(await (await fetchAs("/pricing", { cookie })).text()).toContain('href="/toolbox"');
+  });
+
   it("gates files in public/, but not what the locked page needs", async () => {
     for (const path of ["/screenshots/home.png", "/og.png", "/media/hero.mp4", "/i18n/de.json"]) {
       expect((await fetchAs(path)).headers.get("location"), path).toBe("/gone");
