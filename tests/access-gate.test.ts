@@ -36,6 +36,13 @@ const fetchAs = (path: string, { gate = "true", cookie = "", user = null as any 
     ACCESS_GATE: gate,
   } as any);
 
+/** Open a link the way a browser does: GET the button page, then POST it. */
+const openAsBrowser = (token: string) =>
+  makeApp().fetch(new Request(`http://localhost/a/${token}`, { method: "POST" }), {
+    ASSETS: {},
+    ACCESS_GATE: "true",
+  } as any);
+
 const addLink = async (token: string, over: Record<string, unknown> = {}) =>
   db
     .insert(accessLink)
@@ -82,7 +89,7 @@ describe("the gate", () => {
 
   it("lets a visitor in through a link, and out again once it expires", async () => {
     await addLink("good");
-    const open = await fetchAs("/a/good");
+    const open = await openAsBrowser("good");
     expect(open.headers.get("location")).toBe("/");
     const cookie = open.headers.get("set-cookie")!.split(";")[0];
     expect(cookie).toMatch(/^site_access=[0-9a-f-]{72}$/);
@@ -91,7 +98,7 @@ describe("the gate", () => {
     expect((await fetchAs("/pricing", { cookie })).status).toBe(200);
 
     // The link itself is spent, and the raw token is not a cookie.
-    expect((await fetchAs("/a/good")).headers.get("location")).toBe("/gone");
+    expect((await openAsBrowser("good")).headers.get("location")).toBe("/gone");
     expect(
       (await fetchAs("/pricing", { cookie: "site_access=good" })).headers.get("location"),
     ).toBe("/gone");
@@ -101,10 +108,18 @@ describe("the gate", () => {
     expect(expired.headers.get("location")).toBe("/gone");
   });
 
+  it("does not spend a link on a GET, so chat previews leave it for the recipient", async () => {
+    await addLink("good");
+    const preview = await fetchAs("/a/good");
+    expect(preview.status).toBe(200);
+    expect(preview.headers.get("set-cookie")).toBeNull();
+    expect((await openAsBrowser("good")).headers.get("location")).toBe("/");
+  });
+
   it("refuses an unknown or revoked token", async () => {
-    expect((await fetchAs("/a/nope")).headers.get("location")).toBe("/gone");
+    expect((await openAsBrowser("nope")).headers.get("location")).toBe("/gone");
     await addLink("rev", { revokedAt: "2026-01-01T00:00:00Z" });
-    expect((await fetchAs("/a/rev")).headers.get("location")).toBe("/gone");
+    expect((await openAsBrowser("rev")).headers.get("location")).toBe("/gone");
     expect((await fetchAs("/", { cookie: "site_access=rev" })).headers.get("location")).toBe(
       "/gone",
     );
@@ -126,7 +141,7 @@ describe("the gate", () => {
     }
 
     await addLink("good");
-    const cookie = (await fetchAs("/a/good")).headers.get("set-cookie")!.split(";")[0];
+    const cookie = (await openAsBrowser("good")).headers.get("set-cookie")!.split(";")[0];
     expect(await (await fetchAs("/pricing", { cookie })).text()).toContain('href="/toolbox"');
   });
 

@@ -3,7 +3,7 @@ import { setCookie } from "hono/cookie";
 
 import type { AppEnv } from "@server/types";
 import { ACCESS_COOKIE, linkState, openLink } from "@server/services/access-gate.service";
-import { GonePage } from "@views/pages/Gone";
+import { EnterPage, GonePage } from "@views/pages/Gone";
 
 /**
  * The two public ends of the access gate: the invitation link itself, and
@@ -11,7 +11,16 @@ import { GonePage } from "@views/pages/Gone";
  */
 export const accessRoute = new Hono<AppEnv>();
 
-accessRoute.get("/a/:token", async (c) => {
+// GET only shows a button: link previews and crawlers GET, and must not spend the link.
+accessRoute.get("/a/:token", (c) =>
+  c.render(<EnterPage token={c.req.param("token")} />, {
+    title: "You're invited",
+    noindex: true,
+    bare: true,
+  }),
+);
+
+accessRoute.post("/a/:token", async (c) => {
   const link = await openLink(c.var.db, c.req.param("token"));
   if (!link || linkState(link) !== "active") return c.redirect("/gone");
 
