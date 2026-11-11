@@ -46,7 +46,7 @@ beforeEach(() => {
 });
 
 describe("access links", () => {
-  it("starts the clock on first visit, not on creation, and never restarts it", async () => {
+  it("opens once: starts the clock on first visit, mints a session token, refuses a second", async () => {
     await addLink("tok");
     const [created] = await db.select().from(accessLink);
     expect(linkState(created)).toBe("unused");
@@ -55,18 +55,20 @@ describe("access links", () => {
     const opened = await openLink(db, "tok", first);
     expect(opened!.firstVisitedAt).toBe(first.toISOString());
     expect(opened!.expiresAt).toBe(new Date(first.getTime() + 24 * HOUR).toISOString());
+    expect(opened!.sessionToken).toBeTruthy();
+    expect(opened!.sessionToken).not.toBe("tok");
     expect(linkState(opened!, new Date(first.getTime() + HOUR))).toBe("active");
+    expect(linkState(opened!, new Date(first.getTime() + 25 * HOUR))).toBe("expired");
 
-    const again = await openLink(db, "tok", new Date(first.getTime() + 2 * HOUR));
-    expect(again!.expiresAt).toBe(opened!.expiresAt);
-    expect(linkState(again!, new Date(first.getTime() + 25 * HOUR))).toBe("expired");
+    expect(await openLink(db, "tok", new Date(first.getTime() + 2 * HOUR))).toBeNull();
   });
 
   it("does not start a revoked link", async () => {
     await addLink("tok", { revokedAt: "2026-01-01T00:00:00Z" });
-    const link = await openLink(db, "tok");
-    expect(link!.firstVisitedAt).toBeNull();
-    expect(linkState(link!)).toBe("revoked");
+    expect(await openLink(db, "tok")).toBeNull();
+    const [link] = await db.select().from(accessLink);
+    expect(link.firstVisitedAt).toBeNull();
+    expect(linkState(link)).toBe("revoked");
   });
 });
 
@@ -83,14 +85,20 @@ describe("the gate", () => {
     const open = await fetchAs("/a/good");
     expect(open.headers.get("location")).toBe("/");
     const cookie = open.headers.get("set-cookie")!.split(";")[0];
-    expect(cookie).toBe("site_access=good");
+    expect(cookie).toMatch(/^site_access=[0-9a-f-]{72}$/);
+    expect(cookie).not.toContain("good");
 
     expect((await fetchAs("/pricing", { cookie })).status).toBe(200);
+
+    // The link itself is spent, and the raw token is not a cookie.
+    expect((await fetchAs("/a/good")).headers.get("location")).toBe("/gone");
+    expect(
+      (await fetchAs("/pricing", { cookie: "site_access=good" })).headers.get("location"),
+    ).toBe("/gone");
 
     await db.update(accessLink).set({ expiresAt: "2000-01-01T00:00:00.000Z" });
     const expired = await fetchAs("/pricing", { cookie });
     expect(expired.headers.get("location")).toBe("/gone");
-    expect((await fetchAs("/a/good")).headers.get("location")).toBe("/gone");
   });
 
   it("refuses an unknown or revoked token", async () => {

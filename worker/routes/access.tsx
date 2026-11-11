@@ -16,7 +16,7 @@ accessRoute.get("/a/:token", async (c) => {
   if (!link || linkState(link) !== "active") return c.redirect("/gone");
 
   const remaining = Math.floor((Date.parse(link.expiresAt!) - Date.now()) / 1000);
-  setCookie(c, ACCESS_COOKIE, link.token, {
+  setCookie(c, ACCESS_COOKIE, link.sessionToken!, {
     httpOnly: true,
     secure: c.req.url.startsWith("https://") || c.req.header("x-forwarded-proto") === "https",
     sameSite: "Lax",

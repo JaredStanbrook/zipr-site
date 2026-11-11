@@ -1,0 +1,1 @@
+ALTER TABLE `access_link` ADD `session_token` text;

@@ -1,4 +1,4 @@
-import { and, eq, gt, isNull } from "drizzle-orm";
+import { and, eq, gt, isNull, sql } from "drizzle-orm";
 
 import type { AppEnv } from "@server/types";
 import { accessLink } from "@server/schema/access.schema";
@@ -19,35 +19,42 @@ export const linkState = (link: SelectAccessLink, now = new Date()): AccessLinkS
 };
 
 /**
- * Open a link: the first visit starts its clock, later visits leave it alone.
+ * Open a link once. The first visit starts its clock and mints the session
+ * token that goes in the browser's cookie; any later visit gets null.
  *
- * The `isNull(firstVisitedAt)` in the update is what keeps a second visit from
- * restarting the timer, including two visits racing each other.
+ * The `isNull(firstVisitedAt)` in the update makes the claim atomic, so two
+ * visits racing each other cannot both win.
  */
 export async function openLink(db: Db, token: string, now = new Date()) {
-  const [current] = await db.select().from(accessLink).where(eq(accessLink.token, token));
-  if (!current) return null;
-
-  if (!current.firstVisitedAt && !current.revokedAt) {
-    const expiresAt = new Date(now.getTime() + current.durationHours * 3_600_000).toISOString();
-    await db
-      .update(accessLink)
-      .set({ firstVisitedAt: now.toISOString(), expiresAt, updatedAt: now.toISOString() })
-      .where(and(eq(accessLink.id, current.id), isNull(accessLink.firstVisitedAt)));
-  }
-
-  const [link] = await db.select().from(accessLink).where(eq(accessLink.id, current.id));
+  const sessionToken = crypto.randomUUID() + crypto.randomUUID();
+  const [link] = await db
+    .update(accessLink)
+    .set({
+      firstVisitedAt: now.toISOString(),
+      // The duration is read in SQL so the clock matches what the admin set.
+      expiresAt: sql`strftime('%Y-%m-%dT%H:%M:%fZ', ${now.toISOString()}, '+' || ${accessLink.durationHours} || ' hours')`,
+      sessionToken,
+      updatedAt: now.toISOString(),
+    })
+    .where(
+      and(
+        eq(accessLink.token, token),
+        isNull(accessLink.firstVisitedAt),
+        isNull(accessLink.revokedAt),
+      ),
+    )
+    .returning();
   return link ?? null;
 }
 
-/** A token that is opened, not revoked and not expired. */
-export async function liveLink(db: Db, token: string, now = new Date()) {
+/** A session cookie whose link is not revoked and not expired. */
+export async function liveLink(db: Db, sessionToken: string, now = new Date()) {
   const [link] = await db
     .select()
     .from(accessLink)
     .where(
       and(
-        eq(accessLink.token, token),
+        eq(accessLink.sessionToken, sessionToken),
         isNull(accessLink.revokedAt),
         gt(accessLink.expiresAt, now.toISOString()),
       ),

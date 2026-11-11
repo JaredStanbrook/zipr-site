@@ -23,6 +23,8 @@ export const accessLink = sqliteTable(
     /** Null until the first visit, which also sets `expiresAt`. */
     firstVisitedAt: text("first_visited_at"),
     expiresAt: text("expires_at"),
+    /** The cookie value minted when the link is opened. Only this opens the site. */
+    sessionToken: text("session_token"),
     /** Set to end a link early. A revoked link refuses its holder at once. */
     revokedAt: text("revoked_at"),
     createdBy: text("created_by").references(() => users.id, { onDelete: "set null" }),
